@@ -6,7 +6,7 @@ import {
   rpcResponse,
   JsonRpcRequest,
 } from './common.ts';
-import { assert } from '@/utils/functions.ts';
+import { assert } from '@/utils/assertion.ts';
 
 export default abstract class Client {
   constructor(protected readonly url: string) {}

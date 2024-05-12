@@ -33,7 +33,7 @@ describe(Queue, () => {
   it('runs the functions in order', async () => {
     const queue = new Queue();
 
-    const mock = vi.fn(async (letter: string, repeat: number) => letter.repeat(repeat));
+    const mock = vi.fn((letter: string, repeat: number) => Promise.resolve(letter.repeat(repeat)));
 
     const a = queue.enqueue(mock, 'a', 1);
     const b = queue.enqueue(mock, 'b', 2);
@@ -61,14 +61,16 @@ describe(RateLimiter, () => {
   });
 
   it('limits the function to the given concurrency and rate', async () => {
-    const mock = vi.fn(async (base: number) => base ** 2);
+    const mock = vi.fn((base: number) => Promise.resolve(base ** 2));
 
     const limiter = new RateLimiter({ fn: mock, debounce: 100, maxConcurrency: 3 });
 
     const results: number[] = [];
     const push = (value: number) => results.push(value);
 
-    Array.from({ length: 10 }).forEach((_, i) => limiter.request(i + 1).then(push));
+    Array.from({ length: 10 }).forEach((_, i) => {
+      limiter.request(i + 1).then(push);
+    });
 
     await vi.advanceTimersByTimeAsync(0);
     expect(mock).toHaveBeenCalledTimes(3);

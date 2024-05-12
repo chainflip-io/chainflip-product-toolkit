@@ -1,5 +1,4 @@
 import { z } from 'zod';
-import { toUpperCase } from '@/utils/string.ts';
 
 type Nullish<T> = T | null | undefined;
 
@@ -28,12 +27,11 @@ export type RpcRequest = WithHash<{
   cf_swap_rate: [from: Asset, to: Asset, amount: `0x${string}`];
 }>;
 
-const asset = z.object({ chain: z.string(), asset: z.string() }).refine((value): value is Asset => {
-  if (!isChain(value.chain)) return false;
-  const assets = chainAssets[value.chain];
-  if (!assets) return false;
-  return (assets as unknown as string[]).includes(value.asset as any);
-}, 'invalid asset and chain combination');
+// const asset = z.object({ chain: z.string(), asset: z.string() }).refine((value): value is Asset => {
+//   if (!isChain(value.chain)) return false;
+//   const assets = chainAssets[value.chain];
+//   return (assets as unknown as string[]).includes(value.asset);
+// }, 'invalid asset and chain combination');
 
 const u256 = z
   .string()

@@ -16,16 +16,16 @@ export const deferredPromise = <T>(): {
 
 export type DeferredPromise<T> = ReturnType<typeof deferredPromise<T>>;
 
-export const sleep = (ms: number, opts: { signal?: AbortSignal } = {}): Promise<void> =>
+export const sleep = (ms: number, { signal }: { signal?: AbortSignal } = {}): Promise<void> =>
   new Promise<void>((resolve) => {
     const timeout = setTimeout(resolve, ms);
-    if (opts.signal) {
+    if (signal) {
       const clear = () => {
         clearTimeout(timeout);
         resolve();
-        opts.signal!.removeEventListener('abort', clear);
+        signal.removeEventListener('abort', clear);
       };
-      opts.signal.addEventListener('abort', clear);
+      signal.addEventListener('abort', clear);
     }
   });
 
@@ -34,7 +34,7 @@ export class Queue {
 
   constructor(private readonly debounce?: number) {}
 
-  enqueue<T, Args extends any[]>(fn: (...args: Args) => Promise<T>, ...args: Args): Promise<T> {
+  enqueue<T, Args extends unknown[]>(fn: (...args: Args) => Promise<T>, ...args: Args): Promise<T> {
     return new Promise((resolve, reject) => {
       this.promise = this.promise.then(async () => {
         const sleepPromise = this.debounce ? sleep(this.debounce) : Promise.resolve();
@@ -44,7 +44,7 @@ export class Queue {
   }
 }
 
-export class RateLimiter<T, Args extends any[]> {
+export class RateLimiter<T, Args extends unknown[]> {
   fn;
   debounce;
   queues: Queue[];

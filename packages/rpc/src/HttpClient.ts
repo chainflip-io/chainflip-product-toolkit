@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { RpcMethod, JsonRpcRequest } from './common.ts';
 import Client from './Client.ts';
+import { JsonRpcRequest, RpcMethod } from './common.ts';
 
 export default class HttpClient extends Client {
   private readonly client;
@@ -11,8 +11,8 @@ export default class HttpClient extends Client {
   }
 
   async send<const T extends RpcMethod>(request: JsonRpcRequest<T>): Promise<unknown> {
-    const { data } = await this.client({ data: request });
+    const res = await this.client({ data: request });
 
-    return data;
+    return res.data as unknown;
   }
 }

@@ -1,8 +1,8 @@
 import { deferredPromise, DeferredPromise, sleep } from '@/utils/async.ts';
-import Client from './Client.ts';
-import { RpcMethod, JsonRpcRequest, rpcResponse } from './common.ts';
-import { assert } from '@/utils/functions.ts';
 import { randomUUID } from 'crypto';
+import Client from './Client.ts';
+import { JsonRpcRequest, RpcMethod, rpcResponse } from './common.ts';
+import { assertType } from '@/utils/assertion.ts';
 
 const once = <T extends EventTarget, K extends string>(
   target: T,
@@ -10,15 +10,12 @@ const once = <T extends EventTarget, K extends string>(
   opts?: { signal?: AbortSignal },
 ): Promise<void> =>
   new Promise((resolve, reject) => {
-    let onSuccess: () => void;
-    let onError: (ev: Event) => void;
-
-    onSuccess = () => {
+    const onSuccess = () => {
       target.removeEventListener('error', onError);
       resolve();
     };
 
-    onError = (ev: Event) => {
+    const onError = () => {
       target.removeEventListener(event, onSuccess);
       reject(new Error('error'));
     };
@@ -37,12 +34,10 @@ const onceWithTimeout = <T extends EventTarget, K extends string>(
       reject(new Error('timeout'));
     }, timeout);
 
-    once(target, event)
-      .then(() => {
-        clearTimeout(timer);
-        resolve();
-      })
-      .catch(reject);
+    once(target, event).then(() => {
+      clearTimeout(timer);
+      resolve();
+    }, reject);
   });
 
 const READY = 'READY';
@@ -57,7 +52,6 @@ export default class WsClient extends Client {
   constructor(
     url: string,
     private readonly WebSocket: typeof globalThis.WebSocket = globalThis.WebSocket,
-    private readonly logger?: typeof console,
   ) {
     super(url);
   }
@@ -79,17 +73,24 @@ export default class WsClient extends Client {
     }
   }
 
-  private async connectionReady(): Promise<void> {
+  private async connectionReady(): Promise<WebSocket> {
     if (!this.ws) {
-      await this.connect();
-      return;
+      return this.connect();
     }
-    if (this.ws.readyState === this.WebSocket.OPEN) return;
-    await onceWithTimeout(this.emitter, READY, 30_000);
+    if (this.ws.readyState !== this.WebSocket.OPEN) {
+      await onceWithTimeout(this.emitter, READY, 30_000);
+    }
+    return this.ws;
   }
 
   private handleDisconnect = async () => {
     this.emitter.dispatchEvent(new Event(DISCONNECT));
+
+    this.requestMap.forEach((request) => {
+      request.reject(new Error('disconnected'));
+    });
+
+    this.requestMap.clear();
 
     const backoff = 250 * 2 ** this.reconnectAttempts;
 
@@ -100,8 +101,9 @@ export default class WsClient extends Client {
     });
   };
 
-  private handleMessage = (data: MessageEvent<any>) => {
-    const parsedData = JSON.parse(data.data);
+  private handleMessage = (data: MessageEvent<unknown>) => {
+    assertType('string', data.data);
+    const parsedData = JSON.parse(data.data) as unknown;
 
     const response = rpcResponse.safeParse(parsedData);
 
@@ -116,8 +118,9 @@ export default class WsClient extends Client {
     request.resolve(response.data);
   };
 
-  private async connect(): Promise<void> {
-    this.ws = new this.WebSocket(this.url);
+  private async connect(): Promise<WebSocket> {
+    const socket = new this.WebSocket(this.url);
+    this.ws = socket;
 
     this.ws.addEventListener('message', this.handleMessage);
 
@@ -130,13 +133,14 @@ export default class WsClient extends Client {
     }
 
     this.ws.addEventListener('error', () => {
-      this.ws!.close();
+      socket.close();
     });
 
     this.emitter.dispatchEvent(new Event(READY));
 
     this.reconnectAttempts = 0;
-    // this.requestId = 0;
+
+    return socket;
   }
 
   protected async send<const T extends RpcMethod>(data: JsonRpcRequest<T>): Promise<unknown> {
@@ -144,32 +148,22 @@ export default class WsClient extends Client {
 
     for (let i = 0; i < 5; i += 1) {
       try {
-        await this.connectionReady();
+        const socket = await this.connectionReady();
 
-        this.ws!.send(JSON.stringify({ ...data, id: requestId }));
+        socket.send(JSON.stringify({ ...data, id: requestId }));
 
         const request = deferredPromise<unknown>();
 
         this.requestMap.set(requestId, request);
 
-        const controller = new AbortController();
+        const timeout = setTimeout(() => {
+          request.reject(new Error('timeout'));
+        }, 30_000);
 
-        const timeout = sleep(30_000, { signal: controller.signal }).then(() => {
-          throw new Error('timeout');
-        });
-
-        const disconnected = once(this.emitter, DISCONNECT, {
-          signal: controller.signal,
-        }).then(() => {
-          throw new Error('disconnected');
-        });
-
-        request.promise.finally(() => {
+        return await request.promise.finally(() => {
           this.requestMap.delete(requestId);
-          controller.abort();
+          clearTimeout(timeout);
         });
-
-        return await Promise.race([request.promise, disconnected, timeout]);
       } catch (err) {
         if (err instanceof Error) {
           // console.error('promise rejected', err.id());

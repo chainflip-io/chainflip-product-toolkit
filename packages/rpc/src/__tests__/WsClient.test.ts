@@ -1,7 +1,7 @@
 import { once } from 'events';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { AddressInfo, WebSocket, WebSocketServer } from 'ws';
 import WsClient from '../WsClient';
-import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 
 describe(WsClient, () => {
   let serverClosed = false;
@@ -25,7 +25,7 @@ describe(WsClient, () => {
 
     server.on('connection', (ws) => {
       ws.on('message', (data) => {
-        const rpcRequest = JSON.parse(data.toString());
+        const rpcRequest = JSON.parse(data.toString()) as { id: number };
 
         ws.send(
           JSON.stringify({
