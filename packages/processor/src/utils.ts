@@ -1,0 +1,127 @@
+import * as path from 'path';
+import * as prettier from 'prettier';
+import * as fs from 'fs/promises';
+import { z } from 'zod';
+import { ParsedMetadata } from './parser';
+
+export const capitalize = <const T extends string>(str: T): Capitalize<T> =>
+  (str.charAt(0).toUpperCase() + str.slice(1)) as Capitalize<T>;
+
+export const uncapitalize = <const T extends string>(str: T): Uncapitalize<T> =>
+  (str.charAt(0).toLowerCase() + str.slice(1)) as Uncapitalize<T>;
+
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+// a function to deep diff two metadata objects
+function* diff(
+  a: any,
+  b: any,
+  path: string[] = [],
+): Generator<{ path: string[]; type: 'added' | 'removed' | 'changed' }> {
+  const addedKeys = Object.keys(b)
+    .filter((key) => b[key] !== undefined)
+    .filter((key) => !a[key]);
+  const removedKeys = Object.keys(a)
+    .filter((key) => a[key] !== undefined)
+    .filter((key) => !b[key]);
+  const commonKeys = Object.keys(a)
+    .filter((key) => a[key] !== undefined)
+    .filter((key) => b[key]);
+
+  for (const key of addedKeys) {
+    yield { path: [...path, key], type: 'added' };
+  }
+
+  for (const key of removedKeys) {
+    yield { path: [...path, key], type: 'removed' };
+  }
+
+  for (const key of commonKeys) {
+    if (typeof a[key] === 'object' && typeof b[key] === 'object') {
+      yield* diff(a[key], b[key], [...path, key]);
+    } else if (a[key] !== b[key]) {
+      yield { path: [...path, key], type: 'changed' };
+    }
+  }
+}
+/* eslint-enable @typescript-eslint/no-explicit-any */
+/* eslint-enable @typescript-eslint/no-unsafe-member-access */
+/* eslint-enable @typescript-eslint/no-unsafe-argument */
+
+export const diffSpecs = (a: ParsedMetadata, b: ParsedMetadata) => {
+  const seenEvents = new Set<string>();
+
+  for (const change of diff(a, b)) {
+    const [pallet, event, field] = change.path;
+    if (event && (field || change.type === 'added')) {
+      // if a field changed or a new event was added
+      seenEvents.add(`${pallet}.${event}`);
+    } else if (change.type === 'added') {
+      // if a new pallet was added
+      Object.keys(b[pallet])
+        .map((e) => `${pallet}.${e}`)
+        .forEach((ev) => seenEvents.add(ev), seenEvents);
+    }
+  }
+
+  return seenEvents;
+};
+
+export const unreachable = (x: never, message = 'unreachable'): never => {
+  throw new Error(message);
+};
+
+export const formatCode = (code: string) =>
+  prettier.format(code, {
+    parser: 'typescript',
+    singleQuote: true,
+    trailingComma: 'all',
+    printWidth: 100,
+  });
+
+class Queue {
+  #queue = Promise.resolve();
+
+  enqueue<T>(fn: () => Promise<T>) {
+    return new Promise<T>((resolve, reject) => {
+      this.#queue = this.#queue.then(fn).then(resolve, reject);
+    });
+  }
+}
+
+const cacheQueue = new Queue();
+const cachePath = path.join(import.meta.dirname, '..', 'metadata', 'specVersion.json');
+const cacheSchema = z.record(
+  z.object({
+    hash: z.string(),
+    network: z.enum(['mainnet', 'perseverance', 'sisyphos', 'backspin']),
+  }),
+);
+export type Network = z.output<typeof cacheSchema>[string]['network'];
+
+export const specVersionCache = {
+  async read() {
+    return cacheSchema.parse(JSON.parse(await fs.readFile(cachePath, 'utf8')));
+  },
+  async write(id: number, hash: string, network: Network): Promise<void> {
+    return cacheQueue.enqueue(async () => {
+      const data = await specVersionCache.read();
+      data[id] = { hash, network };
+      await fs.writeFile(cachePath, JSON.stringify(data, null, 2));
+    });
+  },
+  async getVersion(hash: string, network: Network) {
+    const data = await specVersionCache.read();
+    const [version] =
+      Object.entries(data).find(([, d]) => d.hash === hash && d.network === network) ?? [];
+    return version !== undefined ? Number(version) : undefined;
+  },
+};
+
+export const networkToRpcUrl: Record<Network, string> = {
+  mainnet: 'https://mainnet-archive.chainflip.io',
+  perseverance: 'https://archive.perseverance.chainflip.io',
+  sisyphos: 'https://archive.sisyphos.chainflip.io',
+  backspin: 'https://backspin-rpc.staging',
+};

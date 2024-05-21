@@ -10,7 +10,7 @@ export default class HttpClient extends Client {
     this.client = axios.create({ baseURL: this.url, method: 'POST' });
   }
 
-  async send<const T extends RpcMethod>(request: JsonRpcRequest<T>): Promise<unknown> {
+  protected async send<const T extends RpcMethod>(request: JsonRpcRequest<T>): Promise<unknown> {
     const res = await this.client({ data: request });
 
     return res.data as unknown;

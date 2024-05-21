@@ -25,7 +25,11 @@ export type Asset = {
 
 export type RpcRequest = WithHash<{
   cf_swap_rate: [from: Asset, to: Asset, amount: `0x${string}`];
-}>;
+  state_getMetadata: [];
+  state_getRuntimeVersion: [];
+}> & {
+  chain_getBlockHash: [blockNumber?: number];
+};
 
 // const asset = z.object({ chain: z.string(), asset: z.string() }).refine((value): value is Asset => {
 //   if (!isChain(value.chain)) return false;
@@ -45,6 +49,9 @@ export const rpcResult = {
     intermediary: numberOrHex.nullable(),
     output: numberOrHex,
   }),
+  chain_getBlockHash: z.string(),
+  state_getMetadata: z.string(),
+  state_getRuntimeVersion: z.object({ specVersion: z.number() }),
 } as const satisfies { [K in keyof RpcRequest]: z.ZodTypeAny };
 
 export type RpcMethod = keyof RpcRequest;

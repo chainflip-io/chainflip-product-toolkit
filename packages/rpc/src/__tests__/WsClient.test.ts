@@ -53,31 +53,34 @@ describe(WsClient, () => {
   });
 
   it('resends messages if a disconnection happens while awaiting a response', async () => {
-    const response = await client.sendRequest('cf_swap_rate', [
+    const response = await client.sendRequest(
+      'cf_swap_rate',
       { asset: 'USDC', chain: 'Ethereum' },
       { asset: 'FLIP', chain: 'Ethereum' },
       '0x1',
-    ]);
+    );
 
     expect(response).toEqual({ intermediary: null, output: 1n });
 
     killConnections();
 
-    const response2 = await client.sendRequest('cf_swap_rate', [
+    const response2 = await client.sendRequest(
+      'cf_swap_rate',
       { asset: 'USDC', chain: 'Ethereum' },
       { asset: 'FLIP', chain: 'Ethereum' },
       '0x1',
-    ]);
+    );
     expect(response2).toEqual({ intermediary: null, output: 1n });
   });
 
   it("doesn't spam the reconnect", async () => {
     vi.useFakeTimers();
-    const response = await client.sendRequest('cf_swap_rate', [
+    const response = await client.sendRequest(
+      'cf_swap_rate',
       { asset: 'USDC', chain: 'Ethereum' },
       { asset: 'FLIP', chain: 'Ethereum' },
       '0x1',
-    ]);
+    );
     expect(response).toEqual({ intermediary: null, output: 1n });
 
     killConnections();

@@ -23,7 +23,7 @@ export default abstract class Client {
 
   async sendRequest<const T extends RpcMethod>(
     method: T,
-    params: RpcRequest[T],
+    ...params: RpcRequest[T]
   ): Promise<RpcResult<T>> {
     const response = await this.send(this.formatRequest(method, params));
 

@@ -1,0 +1,16 @@
+{
+  "name": "@chainflip/processor",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@polkadot/types": "^10.11.2",
+    "@polkadot/util-crypto": "^12.6.2",
+    "axios": "^1.6.7",
+    "prettier": "^3.2.5",
+    "zod": "^3.22.4"
+  }
+}

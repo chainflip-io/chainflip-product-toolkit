@@ -1,0 +1,46 @@
+{
+  "100": {
+    "hash": "0x8b8c140b0af9db70686583e3f6bf2a59052bfe9584b97d20c45068281e976eb9",
+    "network": "mainnet"
+  },
+  "102": {
+    "hash": "0xc0b473cf7102e9eaceb01e420ee0f942b54e566b332f2d31a8fe9047953935f9",
+    "network": "mainnet"
+  },
+  "103": {
+    "hash": "0x70afda3bd6c2d15079453aa46159d7e48cfa7c5795559c812ed23dc217a52a6c",
+    "network": "mainnet"
+  },
+  "111": {
+    "hash": "0x6cffeeca580d227a286adc6b067b501c9c529085c5b99d0887d227e805dffb61",
+    "network": "mainnet"
+  },
+  "114": {
+    "hash": "0x52d5cc5b19476347998b86691c585d1bf7994630d18ab60dd6a6e65e875eb878",
+    "network": "mainnet"
+  },
+  "120": {
+    "hash": "0xdeb9486e5461c6eb958d7899831d696a4eede6603f65519fc2d7d1f74469b9fd",
+    "network": "mainnet"
+  },
+  "121": {
+    "hash": "0x173eb2c8220a2905a8397b607a5af44474c72e74e004236e510d034149d08670",
+    "network": "mainnet"
+  },
+  "131": {
+    "hash": "0x16c7bee82620ebb9c002aaf9a7508f7d1cf62117d2b8c214db011006a5c42ff3",
+    "network": "mainnet"
+  },
+  "135": {
+    "hash": "0xadcb476066e78d12d4068ce457a2f121409ebfeebc3ef6d7fbd6122668e80409",
+    "network": "mainnet"
+  },
+  "137": {
+    "hash": "0xcee730a618adf94d4298203d80ae5969ee0a5368e0510b15ab3136f627c02b45",
+    "network": "mainnet"
+  },
+  "141": {
+    "hash": "0xd516b8489f250dc5749d0d96a7bb907c606f33d33b991fe615619a226df25103",
+    "network": "backspin"
+  }
+}
