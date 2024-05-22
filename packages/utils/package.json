@@ -9,8 +9,7 @@
     "coverage": "vitest run --coverage"
   },
   "peerDependencies": {
-    "@noble/hashes": "^1.4.0",
-    "zod": "^3.23.8"
+    "@noble/hashes": "^1.4.0"
   },
   "files": [
     "dist",
