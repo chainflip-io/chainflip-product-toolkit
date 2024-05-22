@@ -6,12 +6,29 @@
     "test": "vitest"
   },
   "dependencies": {
+    "@chainflip/utils": "file:../utils",
     "axios": "^1.6.8",
     "ws": "^8.17.0",
-    "zod": "^3.22.4"
+    "zod": "^3.22.8"
   },
   "devDependencies": {
     "@types/node": "^20.12.7",
     "@types/ws": "^8.5.10"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "exports": {
+    "./*": {
+      "require": "./dist/*.cjs",
+      "import": "./dist/*.js",
+      "types": "./dist/*.d.ts"
+    },
+    ".": {
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
   }
 }

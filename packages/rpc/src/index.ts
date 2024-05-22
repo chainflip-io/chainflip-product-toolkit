@@ -1,1 +1,1 @@
-export { default as HttpClient } from './HttpClient.ts';
+export { default as HttpClient } from './HttpClient';

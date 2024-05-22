@@ -1,6 +1,6 @@
 import axios from 'axios';
-import Client from './Client.ts';
-import { JsonRpcRequest, RpcMethod } from './common.ts';
+import Client from './Client';
+import { JsonRpcRequest, RpcMethod } from './common';
 
 export default class HttpClient extends Client {
   private readonly client;

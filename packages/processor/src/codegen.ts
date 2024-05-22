@@ -12,7 +12,9 @@ import {
   type StructType,
   type TupleType,
 } from './parser';
-import { formatCode, uncapitalize, unreachable } from './utils';
+import { uncapitalize } from '@chainflip/utils/string';
+import { unreachable } from '@chainflip/utils/assertion';
+import { formatCode } from './utils';
 
 type PalletName = string;
 type EventName = string;

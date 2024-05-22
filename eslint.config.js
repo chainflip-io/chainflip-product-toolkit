@@ -3,7 +3,7 @@ import pluginJs from '@eslint/js';
 import tseslint from 'typescript-eslint';
 
 export default [
-  { ignores: ['**/coverage', '**/dist', '**/generated'] },
+  { ignores: ['**/coverage', '**/dist', '**/generated', '**/wasm/built'] },
   {
     languageOptions: {
       globals: { ...globals.browser, ...globals.node },
@@ -31,6 +31,12 @@ export default [
         'error',
         {
           allowNumber: true,
+        },
+      ],
+      '@typescript-eslint/no-invalid-void-type': [
+        'error',
+        {
+          allowInGenericTypeArguments: true,
         },
       ],
     },

@@ -1,8 +1,8 @@
-import { deferredPromise, DeferredPromise, sleep } from '@/utils/async.ts';
 import { randomUUID } from 'crypto';
-import Client from './Client.ts';
-import { JsonRpcRequest, RpcMethod, rpcResponse } from './common.ts';
-import { assertType } from '@/utils/assertion.ts';
+import { deferredPromise, DeferredPromise, sleep } from '@chainflip/utils/async';
+import { assertType } from '@chainflip/utils/assertion';
+import Client from './Client';
+import { JsonRpcRequest, RpcMethod, rpcResponse } from './common';
 
 const once = <T extends EventTarget, K extends string>(
   target: T,

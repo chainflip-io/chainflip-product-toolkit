@@ -1,12 +1,5 @@
-import {
-  RpcRequest,
-  RpcMethod,
-  RpcResult,
-  rpcResult,
-  rpcResponse,
-  JsonRpcRequest,
-} from './common.ts';
-import { assert } from '@/utils/assertion.ts';
+import { RpcRequest, RpcMethod, RpcResult, rpcResult, rpcResponse, JsonRpcRequest } from './common';
+import { assert } from '@chainflip/utils/assertion';
 
 export default abstract class Client {
   constructor(protected readonly url: string) {}

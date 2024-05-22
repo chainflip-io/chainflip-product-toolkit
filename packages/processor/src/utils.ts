@@ -4,12 +4,6 @@ import * as fs from 'fs/promises';
 import { z } from 'zod';
 import { ParsedMetadata } from './parser';
 
-export const capitalize = <const T extends string>(str: T): Capitalize<T> =>
-  (str.charAt(0).toUpperCase() + str.slice(1)) as Capitalize<T>;
-
-export const uncapitalize = <const T extends string>(str: T): Uncapitalize<T> =>
-  (str.charAt(0).toLowerCase() + str.slice(1)) as Uncapitalize<T>;
-
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
@@ -66,10 +60,6 @@ export const diffSpecs = (a: ParsedMetadata, b: ParsedMetadata) => {
   }
 
   return seenEvents;
-};
-
-export const unreachable = (x: never, message = 'unreachable'): never => {
-  throw new Error(message);
 };
 
 export const formatCode = (code: string) =>

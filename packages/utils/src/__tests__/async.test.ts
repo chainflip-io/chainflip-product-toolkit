@@ -1,5 +1,5 @@
 import { describe, it, vi, expect, beforeEach, afterEach } from 'vitest';
-import { Queue, RateLimiter, sleep } from '../async.ts';
+import { Queue, RateLimiter, deferredPromise, sleep } from '../async';
 
 describe(sleep, () => {
   beforeEach(() => {
@@ -84,5 +84,19 @@ describe(RateLimiter, () => {
     await vi.advanceTimersByTimeAsync(100);
     expect(mock).toHaveBeenCalledTimes(10);
     expect(results).toEqual([1, 4, 9, 16, 25, 36, 49, 64, 81, 100]);
+  });
+});
+
+describe(deferredPromise, () => {
+  it('resolves the promise when the resolve function is called', async () => {
+    const { promise, resolve } = deferredPromise<number>();
+    resolve(42);
+    expect(await promise).toBe(42);
+  });
+
+  it('rejects the promise when the reject function is called', async () => {
+    const { promise, reject } = deferredPromise<number>();
+    reject(new Error('error'));
+    await expect(promise).rejects.toThrow('error');
   });
 });

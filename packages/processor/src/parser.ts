@@ -5,57 +5,13 @@ import * as path from 'path';
 import { TypeRegistry, Metadata, TypeDefInfo } from '@polkadot/types';
 import { TypeDef } from '@polkadot/types/types';
 import { Network, networkToRpcUrl, specVersionCache } from './utils';
-import { HttpClient } from '@/rpc';
+import { HttpClient } from '@chainflip/rpc';
 
 const metadataDir = path.join(import.meta.dirname, '..', 'metadata');
 
 export type MetadataOpts = {
   network?: Network;
   hash?: string;
-};
-
-const fetchSpecVersion = async ({ network = 'backspin', hash }: MetadataOpts = {}) => {
-  const client = new HttpClient(networkToRpcUrl[network]);
-
-  let specVersion = hash && (await specVersionCache.getVersion(hash, network));
-
-  if (specVersion) return specVersion;
-
-  ({ specVersion } = await client.sendRequest('state_getRuntimeVersion', hash));
-
-  await specVersionCache.write(
-    specVersion,
-    hash ?? (await client.sendRequest('chain_getBlockHash')),
-    network,
-  );
-
-  return specVersion;
-};
-
-const fetchMetadata = async (
-  specVersion: number,
-  { network = 'backspin', hash }: MetadataOpts = {},
-) => {
-  const filePath = path.join(metadataDir, `${specVersion}.scale`);
-
-  let bytes = await fs.readFile(filePath).catch(() => null);
-
-  if (!bytes) {
-    const metadata = await new HttpClient(networkToRpcUrl[network]).sendRequest(
-      'state_getMetadata',
-      hash,
-    );
-
-    bytes = Buffer.from(metadata.slice(2), 'hex');
-
-    await fs.mkdir(path.dirname(filePath), { recursive: true });
-    await fs.writeFile(filePath, bytes);
-  }
-
-  const registry = new TypeRegistry();
-  const metadata = new Metadata(registry, bytes);
-  registry.setMetadata(metadata);
-  return metadata;
 };
 
 const hasSubs = <T extends TypeDef>(type: T, count?: number): type is T & { sub: TypeDef[] } =>
@@ -240,53 +196,105 @@ const hasName = <T extends { name?: string }>(obj: T): obj is T & { name: string
 
 export type ParsedMetadata = Record<string, Record<string, ResolvedType>>;
 
-export const parseMetadata = async (
-  specVersion: number,
-  opts?: MetadataOpts,
-): Promise<ParsedMetadata> => {
-  const metadata = await fetchMetadata(specVersion, opts);
+export default class Parser {
+  private readonly hash?: string;
+  private readonly client: HttpClient;
+  private readonly network: Network;
+  private specVersion?: number;
 
-  return Object.fromEntries(
-    metadata.asV14.pallets
-      .filter((pallet) => pallet.events.isSome)
-      .map((pallet) => {
-        const palletMetadata = pallet.events.unwrap();
-        const events = metadata.registry.lookup.getTypeDef(palletMetadata.type);
-        const palletName = pallet.name.toString();
-
-        assert(hasSubs(events));
-
-        return [palletName, events] as const;
-      })
-      .map(
-        ([palletName, events]) =>
-          [
-            palletName,
-            Object.fromEntries(
-              events.sub
-                .filter(hasName)
-                .map((event) => [event.name, resolveType(metadata, event, palletName)] as const),
-            ),
-          ] as const,
-      ),
-  );
-};
-
-export const fetchAndParseSpec = async (opts?: MetadataOpts) => {
-  const specVersion = await fetchSpecVersion(opts);
-  const outfile = path.join(import.meta.dirname, '..', 'generated', `types-${specVersion}.json`);
-
-  let metadata = await fs
-    .readFile(outfile, 'utf8')
-    .then((data) => JSON.parse(data) as ParsedMetadata)
-    .catch(() => null);
-
-  if (!metadata) {
-    metadata = await parseMetadata(specVersion, opts);
-
-    await fs.mkdir(path.dirname(outfile), { recursive: true });
-    await fs.writeFile(outfile, JSON.stringify(metadata, null, 2));
+  constructor(opts?: MetadataOpts) {
+    this.hash = opts?.hash;
+    this.network = opts?.network ?? 'backspin';
+    this.client = new HttpClient(networkToRpcUrl[this.network]);
   }
 
-  return { metadata, specVersion };
-};
+  private async fetchMetadata() {
+    const specVersion = await this.fetchSpecVersion();
+    const filePath = path.join(metadataDir, `${specVersion}.scale`);
+
+    let bytes = await fs.readFile(filePath).catch(() => null);
+
+    if (!bytes) {
+      const metadata = await this.client.sendRequest('state_getMetadata', this.hash);
+
+      bytes = Buffer.from(metadata.slice(2), 'hex');
+
+      await fs.mkdir(path.dirname(filePath), { recursive: true });
+      await fs.writeFile(filePath, bytes);
+    }
+
+    const registry = new TypeRegistry();
+    const metadata = new Metadata(registry, bytes);
+    registry.setMetadata(metadata);
+    return metadata;
+  }
+
+  private async parseMetadata(): Promise<ParsedMetadata> {
+    const metadata = await this.fetchMetadata();
+
+    return Object.fromEntries(
+      metadata.asV14.pallets
+        .filter((pallet) => pallet.events.isSome)
+        .map((pallet) => {
+          const palletMetadata = pallet.events.unwrap();
+          const events = metadata.registry.lookup.getTypeDef(palletMetadata.type);
+          const palletName = pallet.name.toString();
+
+          assert(hasSubs(events));
+
+          return [palletName, events] as const;
+        })
+        .map(
+          ([palletName, events]) =>
+            [
+              palletName,
+              Object.fromEntries(
+                events.sub
+                  .filter(hasName)
+                  .map((event) => [event.name, resolveType(metadata, event, palletName)] as const),
+              ),
+            ] as const,
+        ),
+    );
+  }
+
+  private async fetchSpecVersion() {
+    if (this.specVersion) return this.specVersion;
+
+    let specVersion = this.hash && (await specVersionCache.getVersion(this.hash, this.network));
+
+    if (specVersion) return specVersion;
+
+    ({ specVersion } = await this.client.sendRequest('state_getRuntimeVersion', this.hash));
+
+    await specVersionCache.write(
+      specVersion,
+      this.hash ?? (await this.client.sendRequest('chain_getBlockHash')),
+      this.network,
+    );
+
+    this.specVersion = specVersion;
+
+    return specVersion;
+  }
+
+  async fetchAndParseSpec() {
+    const specVersion = await this.fetchSpecVersion();
+
+    const outfile = path.join(import.meta.dirname, '..', 'generated', `types-${specVersion}.json`);
+
+    let metadata = await fs
+      .readFile(outfile, 'utf8')
+      .then((data) => JSON.parse(data) as ParsedMetadata)
+      .catch(() => null);
+
+    if (!metadata) {
+      metadata = await this.parseMetadata();
+
+      await fs.mkdir(path.dirname(outfile), { recursive: true });
+      await fs.writeFile(outfile, JSON.stringify(metadata, null, 2));
+    }
+
+    return { metadata, specVersion };
+  }
+}

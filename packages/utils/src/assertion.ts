@@ -1,6 +1,10 @@
-export function assert(condition: unknown, message = 'assertion failed'): asserts condition {
+export function assert(
+  condition: unknown,
+  message = 'assertion failed',
+  Constructor = Error,
+): asserts condition {
   if (!condition) {
-    throw new Error(message);
+    throw new Constructor(message);
   }
 }
 
@@ -17,6 +21,11 @@ type TypeMap = {
 export function assertType<T extends keyof TypeMap>(
   type: T,
   value: unknown,
+  message?: string,
 ): asserts value is TypeMap[T] {
-  assert(typeof value === type, `expected a "${type}"`);
+  assert(typeof value === type, message ?? `expected a "${type}"`);
 }
+
+export const unreachable = (x: never, message = 'unreachable'): never => {
+  throw new Error(message);
+};

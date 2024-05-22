@@ -16,18 +16,27 @@ export const deferredPromise = <T>(): {
 
 export type DeferredPromise<T> = ReturnType<typeof deferredPromise<T>>;
 
-export const sleep = (ms: number, { signal }: { signal?: AbortSignal } = {}): Promise<void> =>
-  new Promise<void>((resolve) => {
-    const timeout = setTimeout(resolve, ms);
-    if (signal) {
-      const clear = () => {
-        clearTimeout(timeout);
-        resolve();
-        signal.removeEventListener('abort', clear);
-      };
-      signal.addEventListener('abort', clear);
-    }
-  });
+export const sleep = (ms: number, { signal }: { signal?: AbortSignal } = {}): Promise<void> => {
+  // eslint-disable-next-line @typescript-eslint/no-invalid-void-type
+  const deferred = deferredPromise<void>();
+
+  const timeout = setTimeout(deferred.resolve, ms);
+
+  if (signal) {
+    const abort = () => {
+      clearTimeout(timeout);
+      deferred.resolve();
+    };
+
+    signal.addEventListener('abort', abort);
+
+    deferred.promise = deferred.promise.finally(() => {
+      signal.removeEventListener('abort', abort);
+    });
+  }
+
+  return deferred.promise;
+};
 
 export class Queue {
   private promise = Promise.resolve();

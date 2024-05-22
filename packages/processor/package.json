@@ -7,10 +7,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@chainflip/rpc": "file:../rpc",
+    "@chainflip/utils": "file:../utils",
     "@polkadot/types": "^10.11.2",
     "@polkadot/util-crypto": "^12.6.2",
     "axios": "^1.6.7",
     "prettier": "^3.2.5",
-    "zod": "^3.22.4"
+    "zod": "^3.22.8"
   }
 }

@@ -29,7 +29,6 @@ fn to_varint(value: u64) -> Vec<u8> {
     result
 }
 
-#[wasm_bindgen]
 pub enum BitcoinNetwork {
     Mainnet,
     Testnet,

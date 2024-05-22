@@ -1,16 +1,16 @@
 #!/usr/bin/env -S pnpm tsx
-import { MetadataOpts, fetchAndParseSpec } from '../src/parser';
+import Parser, { MetadataOpts } from '../src/parser';
 import CodeGenerator from '../src/codegen';
 import { diffSpecs, specVersionCache } from '../src/utils';
 
 const generateAllCode = async () => {
   const info = await specVersionCache.read();
 
-  const hashes: MetadataOpts[] = Object.values(info);
+  const opts: MetadataOpts[] = Object.values(info);
 
-  const metadataForHashes = (await Promise.all(hashes.map((hash) => fetchAndParseSpec(hash)))).sort(
-    (a, b) => a.specVersion - b.specVersion,
-  );
+  const metadataForHashes = (
+    await Promise.all(opts.map((opts) => new Parser(opts).fetchAndParseSpec()))
+  ).sort((a, b) => a.specVersion - b.specVersion);
 
   let previousMetadata = {};
 
