@@ -1,3 +1,5 @@
+import type { HexString } from './types';
+
 export const toUpperCase = <const T extends string>(str: T) => str.toUpperCase() as Uppercase<T>;
 
 export const toLowerCase = <const T extends string>(str: T) => str.toLowerCase() as Lowercase<T>;
@@ -14,3 +16,5 @@ export const capitalize = <const T extends string>(str: T) =>
 
 export const uncapitalize = <const T extends string>(str: T): Uncapitalize<T> =>
   `${str.charAt(0).toLowerCase()}${str.slice(1)}` as Uncapitalize<T>;
+
+export const isHex = (str: string): str is HexString => /^0x[\da-f]+$/i.test(str);
