@@ -24,10 +24,7 @@
       }
     }
   },
-  "dependencies": {
+  "devDependencies": {
     "@noble/hashes": "^1.4.0"
-  },
-  "bundledDependencies": [
-    "@noble/hashes"
-  ]
+  }
 }

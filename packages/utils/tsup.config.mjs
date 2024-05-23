@@ -6,7 +6,7 @@ export default defineConfig({
   bundle: true,
   format: ['cjs', 'esm'],
   external: ['*'],
-  noExternal: ['@noble/hashes/blake2b'],
+  noExternal: ['@noble/hashes/*'],
   entry: ['./src/*.ts'],
   target: 'es2022',
 });
