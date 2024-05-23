@@ -48,4 +48,8 @@ describe(decodeBytesWithCharset, () => {
     expect(decodeBytesWithCharset('65535', '0123456789')).toEqual([0xff, 0xff]);
     expect(decodeBytesWithCharset('1000000', '01')).toEqual([64]);
   });
+
+  it('throws if the input contains invalid characters', () => {
+    expect(() => decodeBytesWithCharset('1000002', '01')).toThrow('Invalid input');
+  });
 });

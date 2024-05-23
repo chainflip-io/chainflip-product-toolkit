@@ -55,10 +55,12 @@ export const encodeBytesWithCharset = (bytes: Uint8Array | number[], charset: st
     .map((charCode) => charset.charAt(charCode))
     .join('');
 
-export const decodeBytesWithCharset = (input: string, charset: string): number[] => {
+export const decodeBytesWithCharset = (input: string, charset: string): Uint8Array => {
+  assert(new RegExp(`^[${charset}]*$`).test(input), 'Invalid input');
+
   const charMap = Object.fromEntries([...charset].map((char, index) => [char, index]));
 
   const bytes = input.split('').map((char) => charMap[char]);
 
-  return convertBase(bytes, charset.length, 256);
+  return new Uint8Array(convertBase(bytes, charset.length, 256));
 };
