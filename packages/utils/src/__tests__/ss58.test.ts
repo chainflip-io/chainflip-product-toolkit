@@ -47,6 +47,15 @@ describe(encode, () => {
       }),
     ).toEqual('cFNyy169p7yCy3F9p4bb7mW27Tse3F1v8hw8yTv21Qzwq23xW');
   });
+
+  it('encodes a hex string', () => {
+    expect(
+      encode({
+        ss58Format: 2112,
+        data: '0xe21f7b11f35d7c6b381564b91db0e65c24c0680bfc707e0a308244704138116f',
+      }),
+    ).toEqual('cFNyy169p7yCy3F9p4bb7mW27Tse3F1v8hw8yTv21Qzwq23xW');
+  });
 });
 
 describe('ss58', () => {
