@@ -3,8 +3,10 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
-    "prepublish": "pnpm test run && pnpm build",
+    "clean": "rm -rf dist",
+    "prepublish": "pnpm test run && pnpm build:clean",
     "build": "tsup",
+    "build:clean": "pnpm clean && pnpm build",
     "test": "vitest",
     "coverage": "vitest run --coverage"
   },
