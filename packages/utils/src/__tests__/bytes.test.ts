@@ -44,9 +44,9 @@ describe(encodeBytesWithCharset, () => {
 
 describe(decodeBytesWithCharset, () => {
   it('decodes a number from a charset', () => {
-    expect(decodeBytesWithCharset('255', '0123456789')).toEqual([0xff]);
-    expect(decodeBytesWithCharset('65535', '0123456789')).toEqual([0xff, 0xff]);
-    expect(decodeBytesWithCharset('1000000', '01')).toEqual([64]);
+    expect(decodeBytesWithCharset('255', '0123456789')).toEqual(new Uint8Array([0xff]));
+    expect(decodeBytesWithCharset('65535', '0123456789')).toEqual(new Uint8Array([0xff, 0xff]));
+    expect(decodeBytesWithCharset('1000000', '01')).toEqual(new Uint8Array([64]));
   });
 
   it('throws if the input contains invalid characters', () => {

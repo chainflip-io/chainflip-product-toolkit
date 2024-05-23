@@ -33,12 +33,12 @@ export const decode = (input: string): { data: Uint8Array; ss58Format: number } 
 
   assert(!RESERVED_PREFIXES.includes(ss58Format), `Reserved prefix: ${ss58Format}`);
 
-  const checksumBytes = decodedBytes.splice(-CHECKSUM_BYTE_LENGTH);
-  const data = decodedBytes.slice(ss58FormatLen);
+  const checksumBytes = decodedBytes.slice(-CHECKSUM_BYTE_LENGTH);
+  const data = decodedBytes.slice(ss58FormatLen, -CHECKSUM_BYTE_LENGTH);
 
   assert(data.length === DATA_LENGTH, `Invalid data length: ${data.length}`);
 
-  const checksum = computeChecksum(decodedBytes);
+  const checksum = computeChecksum(decodedBytes.slice(0, -CHECKSUM_BYTE_LENGTH));
 
   assert(
     checksumBytes[0] === checksum[0],
