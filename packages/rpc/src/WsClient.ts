@@ -1,6 +1,6 @@
 import { randomUUID } from 'crypto';
 import { deferredPromise, DeferredPromise, sleep } from '@chainflip/utils/async';
-import { assertType } from '@chainflip/utils/assertion';
+import { assertString } from '@chainflip/utils/assertion';
 import Client from './Client';
 import { JsonRpcRequest, RpcMethod, rpcResponse } from './common';
 
@@ -102,7 +102,7 @@ export default class WsClient extends Client {
   };
 
   private handleMessage = (data: MessageEvent<unknown>) => {
-    assertType('string', data.data);
+    assertString(data.data);
     const parsedData = JSON.parse(data.data) as unknown;
 
     const response = rpcResponse.safeParse(parsedData);
