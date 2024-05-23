@@ -1,6 +1,6 @@
 {
   "name": "@chainflip/utils",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "type": "module",
   "scripts": {
     "prepublish": "pnpm test run && pnpm build",
