@@ -1,4 +1,5 @@
 import { assert } from './assertion';
+import { HexString } from './types';
 
 export const bytesToHex = (input: Uint8Array | number[]): `0x${string}` => {
   const bytes = new Uint8Array(input);
@@ -8,7 +9,7 @@ export const bytesToHex = (input: Uint8Array | number[]): `0x${string}` => {
     .join('')}`;
 };
 
-export const hexToBytes = (input: `0x${string}`): Uint8Array => {
+export const hexToBytes = (input: HexString): Uint8Array => {
   assert(/^0x[\da-f]*$/i.test(input) && input.length % 2 === 0, 'Invalid hex string');
 
   const hex = input.slice(2);

@@ -8,21 +8,26 @@
     "test": "vitest",
     "coverage": "vitest run --coverage"
   },
-  "peerDependencies": {
-    "@noble/hashes": "^1.4.0"
-  },
   "files": [
     "dist",
     "README.md"
   ],
   "exports": {
     "./*": {
-      "require": "./dist/*.cjs",
-      "import": "./dist/*.js",
-      "types": "./dist/*.d.ts"
+      "require": {
+        "default": "./dist/*.cjs",
+        "types": "./dist/*.d.cts"
+      },
+      "import": {
+        "default": "./dist/*.js",
+        "types": "./dist/*.d.ts"
+      }
     }
   },
-  "devDependencies": {
+  "dependencies": {
     "@noble/hashes": "^1.4.0"
-  }
+  },
+  "bundledDependencies": [
+    "@noble/hashes"
+  ]
 }

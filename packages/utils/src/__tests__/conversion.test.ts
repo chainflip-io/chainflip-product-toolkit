@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { bytesToHex, hexToBytes } from '../conversion';
+import { HexString } from '../types';
 
 describe(bytesToHex, () => {
   it('converts bytes to hex', () => {
@@ -21,7 +22,7 @@ describe(hexToBytes, () => {
   });
 
   it('throws if the prefix is missing', () => {
-    expect(() => hexToBytes('cafebabe' as `0x${string}`)).toThrow('Invalid hex string');
+    expect(() => hexToBytes('cafebabe' as HexString)).toThrow('Invalid hex string');
   });
 
   it('throws if the hex string contains invalid characters', () => {

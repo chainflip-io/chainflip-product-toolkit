@@ -1,6 +1,8 @@
 import { assert } from './assertion';
 import { blake2b } from '@noble/hashes/blake2b';
 import * as base58 from './base58';
+import { HexString } from './types';
+import { hexToBytes } from './conversion';
 
 const CHECKSUM_BYTE_LENGTH = 2;
 const DATA_LENGTH = 32;
@@ -14,9 +16,7 @@ const computeChecksum = (data: Uint8Array | number[]) => {
   return checksum.slice(0, CHECKSUM_BYTE_LENGTH);
 };
 
-type Address = { data: Uint8Array; ss58Format: number };
-
-export const decode = (input: string): Address => {
+export const decode = (input: string): { data: Uint8Array; ss58Format: number } => {
   const decodedBytes = base58.decode(input);
 
   let ss58FormatLen: number;
@@ -55,7 +55,14 @@ export const decode = (input: string): Address => {
   };
 };
 
-export const encode = ({ data, ss58Format }: Address): string => {
+export const encode = ({
+  data: input,
+  ss58Format,
+}: {
+  data: Uint8Array | HexString;
+  ss58Format: number;
+}): string => {
+  const data = typeof input === 'string' ? hexToBytes(input) : input;
   assert(data.length === DATA_LENGTH, `Invalid data length: ${data.length}`, RangeError);
   assert(ss58Format >= 0 && ss58Format <= MAX_PREFIX, `Invalid prefix: ${ss58Format}`, RangeError);
   assert(!RESERVED_PREFIXES.includes(ss58Format), `Reserved prefix: ${ss58Format}`);
