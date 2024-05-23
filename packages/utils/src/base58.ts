@@ -1,7 +1,8 @@
-import { decodeWithCharset, encodeWithCharset } from './encoding';
+import { decodeBytesWithCharset, encodeBytesWithCharset } from './bytes';
 
 const charset = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz';
 
-export const encode = (bytes: Uint8Array | number[]): string => encodeWithCharset(bytes, charset);
+export const encode = (bytes: Uint8Array | number[]): string =>
+  encodeBytesWithCharset(bytes, charset);
 
-export const decode = (input: string): number[] => decodeWithCharset(input, charset);
+export const decode = (input: string): number[] => decodeBytesWithCharset(input, charset);

@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { bytesToHex, hexToBytes } from '../conversion';
+import { bytesToHex, decodeBytesWithCharset, encodeBytesWithCharset, hexToBytes } from '../bytes';
 import { HexString } from '../types';
 
 describe(bytesToHex, () => {
@@ -31,5 +31,21 @@ describe(hexToBytes, () => {
 
   it('throws if the hex string is the incorrect length', () => {
     expect(() => hexToBytes('0xcafebab')).toThrow('Invalid hex string');
+  });
+});
+
+describe(encodeBytesWithCharset, () => {
+  it('encodes a number in a charset', () => {
+    expect(encodeBytesWithCharset([0xff], '0123456789')).toBe('255');
+    expect(encodeBytesWithCharset([0xff, 0xff], '0123456789')).toBe('65535');
+    expect(encodeBytesWithCharset([0x8], '01')).toBe('1000');
+  });
+});
+
+describe(decodeBytesWithCharset, () => {
+  it('decodes a number from a charset', () => {
+    expect(decodeBytesWithCharset('255', '0123456789')).toEqual([0xff]);
+    expect(decodeBytesWithCharset('65535', '0123456789')).toEqual([0xff, 0xff]);
+    expect(decodeBytesWithCharset('1000000', '01')).toEqual([64]);
   });
 });
