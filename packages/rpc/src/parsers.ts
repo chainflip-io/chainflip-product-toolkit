@@ -80,9 +80,9 @@ export const cfSwapRateV2 = z.object({
   output: u256,
 });
 
-export const chainGetBlockHash = z.string();
+export const chainGetBlockHash = hexString;
 
-export const stateGetMetadata = z.string();
+export const stateGetMetadata = hexString;
 
 export const stateGetRuntimeVersion = z.object({
   specName: z.string(),

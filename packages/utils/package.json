@@ -17,12 +17,12 @@
   "exports": {
     "./*": {
       "require": {
-        "default": "./dist/*.cjs",
-        "types": "./dist/*.d.cts"
+        "types": "./dist/*.d.cts",
+        "default": "./dist/*.cjs"
       },
       "import": {
-        "default": "./dist/*.js",
-        "types": "./dist/*.d.ts"
+        "types": "./dist/*.d.ts",
+        "default": "./dist/*.js"
       }
     }
   },
