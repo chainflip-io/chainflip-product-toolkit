@@ -1,4 +1,19 @@
-import { z } from 'zod';
+import type { z } from 'zod';
+import {
+  AssetAndChain,
+  cfBoostPoolsDepth,
+  cfEnvironment,
+  cfFundingEnvironment,
+  cfIngressEgressEnvironment,
+  cfSupportedAsssets,
+  cfSwapRate,
+  cfSwapRateV2,
+  cfSwappingEnvironment,
+  chainGetBlockHash,
+  rpcResponse,
+  stateGetMetadata,
+  stateGetRuntimeVersion,
+} from './parsers';
 
 type Nullish<T> = T | null | undefined;
 
@@ -6,73 +21,63 @@ type WithHash<T> = {
   [K in keyof T]: T[K] extends unknown[] ? [...T[K], at?: Nullish<string>] : never;
 };
 
-const chainAssets = {
-  Ethereum: ['ETH', 'USDC', 'USDT', 'FLIP'],
-  Arbitrum: ['ETH', 'USDC'],
-  Polkadot: ['DOT'],
-  Bitcoin: ['BTC'],
-} as const;
+export type Chain = AssetAndChain['chain'];
 
-type Chain = keyof typeof chainAssets;
+type AssetSymbol = AssetAndChain['asset'];
 
-export const isChain = (value: string): value is Chain => value in chainAssets;
+type UncheckedAssetAndChain = { asset: AssetSymbol; chain: Chain };
 
-export type Asset = {
-  [K in Chain]: {
-    [A in (typeof chainAssets)[K][number]]: { chain: K; asset: A };
-  }[(typeof chainAssets)[K][number]];
-}[Chain];
+type AdditionalOrder = {
+  LimitOrder: {
+    base_asset: UncheckedAssetAndChain;
+    quote_asset: UncheckedAssetAndChain;
+    side: 'buy' | 'sell';
+    tick: number;
+    sell_amount: `0x${string}`;
+  };
+};
 
 export type RpcRequest = WithHash<{
-  cf_swap_rate: [from: Asset, to: Asset, amount: `0x${string}`];
+  cf_environment: [];
+  cf_supported_assets: [];
+  cf_swapping_environment: [];
+  cf_ingress_egress_environment: [];
+  cf_funding_environment: [];
+  cf_swap_rate: [
+    fromAsset: UncheckedAssetAndChain,
+    toAsset: UncheckedAssetAndChain,
+    amount: `0x${string}`,
+  ];
+  cf_swap_rate_v2: [
+    fromAsset: UncheckedAssetAndChain,
+    toAsset: UncheckedAssetAndChain,
+    amount: `0x${string}`,
+    additionalOrders?: Nullish<AdditionalOrder[]>,
+  ];
+  cf_boost_pools_depth: [];
   state_getMetadata: [];
   state_getRuntimeVersion: [];
 }> & {
-  chain_getBlockHash: [blockNumber?: number];
+  chain_getBlockHash: [blockHeight?: number];
 };
 
-// const asset = z.object({ chain: z.string(), asset: z.string() }).refine((value): value is Asset => {
-//   if (!isChain(value.chain)) return false;
-//   const assets = chainAssets[value.chain];
-//   return (assets as unknown as string[]).includes(value.asset);
-// }, 'invalid asset and chain combination');
-
-const u256 = z
-  .string()
-  .regex(/^0x[0-9a-f]+$/i)
-  .transform((value) => BigInt(value));
-
-const numberOrHex = z.union([z.number().transform((n) => BigInt(n)), u256]);
-
 export const rpcResult = {
-  cf_swap_rate: z.object({
-    intermediary: numberOrHex.nullable(),
-    output: numberOrHex,
-  }),
-  chain_getBlockHash: z.string(),
-  state_getMetadata: z.string(),
-  state_getRuntimeVersion: z.object({ specVersion: z.number() }),
+  cf_boost_pools_depth: cfBoostPoolsDepth,
+  cf_environment: cfEnvironment,
+  cf_funding_environment: cfFundingEnvironment,
+  cf_ingress_egress_environment: cfIngressEgressEnvironment,
+  cf_supported_assets: cfSupportedAsssets,
+  cf_swap_rate: cfSwapRate,
+  cf_swap_rate_v2: cfSwapRateV2,
+  cf_swapping_environment: cfSwappingEnvironment,
+  chain_getBlockHash: chainGetBlockHash,
+  state_getMetadata: stateGetMetadata,
+  state_getRuntimeVersion: stateGetRuntimeVersion,
 } as const satisfies { [K in keyof RpcRequest]: z.ZodTypeAny };
 
 export type RpcMethod = keyof RpcRequest;
 
 export type RpcResult<T extends RpcMethod> = z.output<(typeof rpcResult)[T]>;
-
-const rpcBaseResponse = z.object({
-  id: z.string(),
-  jsonrpc: z.literal('2.0'),
-});
-
-const rpcSuccessResponse = rpcBaseResponse.extend({ result: z.unknown() });
-
-const rpcErrorResponse = rpcBaseResponse.extend({
-  error: z.object({
-    code: z.number(),
-    message: z.string(),
-  }),
-});
-
-export const rpcResponse = z.union([rpcSuccessResponse, rpcErrorResponse]);
 
 export type JsonRpcRequest<T extends RpcMethod> = {
   jsonrpc: '2.0';
@@ -82,3 +87,5 @@ export type JsonRpcRequest<T extends RpcMethod> = {
 };
 
 export type JsonRpcResponse = z.output<typeof rpcResponse>;
+
+export { rpcResponse } from './parsers';

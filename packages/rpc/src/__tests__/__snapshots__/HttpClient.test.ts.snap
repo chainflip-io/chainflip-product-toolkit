@@ -1,0 +1,206 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`HttpClient > with server > gets the environment 1`] = `
+{
+  "funding": {
+    "minimum_funding_amount": 10000000000000000000n,
+    "redemption_tax": 5000000000000000000n,
+  },
+  "ingress_egress": {
+    "channel_opening_fees": {
+      "Arbitrum": 0n,
+      "Bitcoin": 0n,
+      "Ethereum": 0n,
+      "Polkadot": 0n,
+    },
+    "egress_fees": {
+      "Arbitrum": {
+        "ETH": 7998400000000n,
+        "USDC": 9985n,
+      },
+      "Bitcoin": {
+        "BTC": 176n,
+      },
+      "Ethereum": {
+        "ETH": 490000n,
+        "FLIP": 0n,
+        "USDC": 0n,
+        "USDT": 0n,
+      },
+      "Polkadot": {
+        "DOT": 197450000n,
+      },
+    },
+    "ingress_fees": {
+      "Arbitrum": {
+        "ETH": 5998800000000n,
+        "USDC": 8987n,
+      },
+      "Bitcoin": {
+        "BTC": 78n,
+      },
+      "Ethereum": {
+        "ETH": 350000n,
+        "FLIP": 0n,
+        "USDC": 0n,
+        "USDT": 0n,
+      },
+      "Polkadot": {
+        "DOT": 197300000n,
+      },
+    },
+    "minimum_deposit_amounts": {
+      "Arbitrum": {
+        "ETH": 0n,
+        "USDC": 0n,
+      },
+      "Bitcoin": {
+        "BTC": 0n,
+      },
+      "Ethereum": {
+        "ETH": 0n,
+        "FLIP": 0n,
+        "USDC": 0n,
+        "USDT": 0n,
+      },
+      "Polkadot": {
+        "DOT": 0n,
+      },
+    },
+    "minimum_egress_amounts": {
+      "Arbitrum": {
+        "ETH": 1n,
+        "USDC": 1n,
+      },
+      "Bitcoin": {
+        "BTC": 600n,
+      },
+      "Ethereum": {
+        "ETH": 1n,
+        "FLIP": 1n,
+        "USDC": 1n,
+        "USDT": 1n,
+      },
+      "Polkadot": {
+        "DOT": 1n,
+      },
+    },
+    "witness_safety_margins": {
+      "Arbitrum": 1,
+      "Bitcoin": 2,
+      "Ethereum": 2,
+      "Polkadot": null,
+    },
+  },
+  "swapping": {
+    "maximum_swap_amounts": {
+      "Arbitrum": {
+        "ETH": null,
+        "USDC": null,
+      },
+      "Bitcoin": {
+        "BTC": null,
+      },
+      "Ethereum": {
+        "ETH": 65536n,
+        "FLIP": null,
+        "USDC": null,
+        "USDT": null,
+      },
+      "Polkadot": {
+        "DOT": null,
+      },
+    },
+    "network_fee_hundredth_pips": 1000,
+  },
+}
+`;
+
+exports[`HttpClient > with server > gets the ingress/egress environment 1`] = `
+{
+  "channel_opening_fees": {
+    "Arbitrum": 0n,
+    "Bitcoin": 0n,
+    "Ethereum": 0n,
+    "Polkadot": 0n,
+  },
+  "egress_fees": {
+    "Arbitrum": {
+      "ETH": 7998400000000n,
+      "USDC": 9985n,
+    },
+    "Bitcoin": {
+      "BTC": 176n,
+    },
+    "Ethereum": {
+      "ETH": 490000n,
+      "FLIP": 0n,
+      "USDC": 0n,
+      "USDT": 0n,
+    },
+    "Polkadot": {
+      "DOT": 197450000n,
+    },
+  },
+  "ingress_fees": {
+    "Arbitrum": {
+      "ETH": 5998800000000n,
+      "USDC": 8987n,
+    },
+    "Bitcoin": {
+      "BTC": 78n,
+    },
+    "Ethereum": {
+      "ETH": 350000n,
+      "FLIP": 0n,
+      "USDC": 0n,
+      "USDT": 0n,
+    },
+    "Polkadot": {
+      "DOT": 197300000n,
+    },
+  },
+  "minimum_deposit_amounts": {
+    "Arbitrum": {
+      "ETH": 0n,
+      "USDC": 0n,
+    },
+    "Bitcoin": {
+      "BTC": 0n,
+    },
+    "Ethereum": {
+      "ETH": 0n,
+      "FLIP": 0n,
+      "USDC": 0n,
+      "USDT": 0n,
+    },
+    "Polkadot": {
+      "DOT": 0n,
+    },
+  },
+  "minimum_egress_amounts": {
+    "Arbitrum": {
+      "ETH": 1n,
+      "USDC": 1n,
+    },
+    "Bitcoin": {
+      "BTC": 600n,
+    },
+    "Ethereum": {
+      "ETH": 1n,
+      "FLIP": 1n,
+      "USDC": 1n,
+      "USDT": 1n,
+    },
+    "Polkadot": {
+      "DOT": 1n,
+    },
+  },
+  "witness_safety_margins": {
+    "Arbitrum": 1,
+    "Bitcoin": 2,
+    "Ethereum": 2,
+    "Polkadot": null,
+  },
+}
+`;

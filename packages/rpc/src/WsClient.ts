@@ -1,44 +1,7 @@
+import { DeferredPromise, deferredPromise, once, sleep } from '@chainflip/utils/async';
 import { randomUUID } from 'crypto';
-import { deferredPromise, DeferredPromise, sleep } from '@chainflip/utils/async';
-import { assertString } from '@chainflip/utils/assertion';
 import Client from './Client';
 import { JsonRpcRequest, RpcMethod, rpcResponse } from './common';
-
-const once = <T extends EventTarget, K extends string>(
-  target: T,
-  event: K,
-  opts?: { signal?: AbortSignal },
-): Promise<void> =>
-  new Promise((resolve, reject) => {
-    const onSuccess = () => {
-      target.removeEventListener('error', onError);
-      resolve();
-    };
-
-    const onError = () => {
-      target.removeEventListener(event, onSuccess);
-      reject(new Error('error'));
-    };
-
-    target.addEventListener(event, onSuccess, { once: true, signal: opts?.signal });
-    target.addEventListener('error', onError, { once: true, signal: opts?.signal });
-  });
-
-const onceWithTimeout = <T extends EventTarget, K extends string>(
-  target: T,
-  event: K,
-  timeout: number,
-): Promise<void> =>
-  new Promise((resolve, reject) => {
-    const timer = setTimeout(() => {
-      reject(new Error('timeout'));
-    }, timeout);
-
-    once(target, event).then(() => {
-      clearTimeout(timer);
-      resolve();
-    }, reject);
-  });
 
 const READY = 'READY';
 const DISCONNECT = 'DISCONNECT';
@@ -78,7 +41,7 @@ export default class WsClient extends Client {
       return this.connect();
     }
     if (this.ws.readyState !== this.WebSocket.OPEN) {
-      await onceWithTimeout(this.emitter, READY, 30_000);
+      await once(this.emitter, READY, { timeout: 30_000 });
     }
     return this.ws;
   }
@@ -101,8 +64,7 @@ export default class WsClient extends Client {
     });
   };
 
-  private handleMessage = (data: MessageEvent<unknown>) => {
-    assertString(data.data);
+  private handleMessage = (data: MessageEvent<string>) => {
     const parsedData = JSON.parse(data.data) as unknown;
 
     const response = rpcResponse.safeParse(parsedData);
@@ -111,11 +73,7 @@ export default class WsClient extends Client {
 
     const { id } = response.data;
 
-    const request = this.requestMap.get(id);
-
-    if (!request) return;
-
-    request.resolve(response.data);
+    this.requestMap.get(id)?.resolve(response.data);
   };
 
   private async connect(): Promise<WebSocket> {
@@ -128,9 +86,7 @@ export default class WsClient extends Client {
     // logic will be funnelled through here
     this.ws.addEventListener('close', this.handleDisconnect, { once: true });
 
-    if (this.ws.readyState !== this.WebSocket.OPEN) {
-      await onceWithTimeout(this.ws, 'open', 30000);
-    }
+    await once(this.ws, 'open', { timeout: 30_000 });
 
     this.ws.addEventListener('error', () => {
       socket.close();
@@ -143,36 +99,45 @@ export default class WsClient extends Client {
     return socket;
   }
 
-  protected async send<const T extends RpcMethod>(data: JsonRpcRequest<T>): Promise<unknown> {
+  protected async send<const T extends RpcMethod>(
+    data: JsonRpcRequest<T>,
+  ): Promise<{ success: true; result: unknown } | { success: false; error: Error }> {
     let requestId = data.id;
 
     for (let i = 0; i < 5; i += 1) {
+      let socket;
       try {
-        const socket = await this.connectionReady();
-
-        socket.send(JSON.stringify({ ...data, id: requestId }));
-
-        const request = deferredPromise<unknown>();
-
-        this.requestMap.set(requestId, request);
-
-        const timeout = setTimeout(() => {
-          request.reject(new Error('timeout'));
-        }, 30_000);
-
-        return await request.promise.finally(() => {
-          this.requestMap.delete(requestId);
-          clearTimeout(timeout);
-        });
+        socket = await this.connectionReady();
       } catch (err) {
-        if (err instanceof Error) {
-          // console.error('promise rejected', err.id());
-        }
-        requestId = this.getRequestId();
         // retry
+        continue;
       }
+
+      socket.send(JSON.stringify({ ...data, id: requestId }));
+
+      const request = deferredPromise<unknown>();
+
+      this.requestMap.set(requestId, request);
+
+      const controller = new AbortController();
+      const result = await Promise.race([
+        sleep(30_000, { signal: controller.signal }).then(
+          () => ({ success: false, retry: false, error: new Error('timeout') }) as const,
+        ),
+        request.promise.then(
+          (result) => ({ success: true, result }) as const,
+          (error) => ({ success: false, error: error as Error, retry: true }) as const,
+        ),
+      ]).finally(() => {
+        this.requestMap.delete(requestId);
+        controller.abort();
+      });
+
+      if (result.success || !result.retry) return result;
+
+      requestId = this.getRequestId();
     }
 
-    throw new Error('max retries exceeded');
+    return { success: false, error: new Error('max retries exceeded') };
   }
 }

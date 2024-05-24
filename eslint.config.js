@@ -51,6 +51,7 @@ export default [
       '@typescript-eslint/no-floating-promises': 'off',
       '@typescript-eslint/no-explicit-any': 'off',
       '@typescript-eslint/no-base-to-string': 'off',
+      '@typescript-eslint/no-non-null-assertion': 'off',
     },
   },
 ];

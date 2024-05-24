@@ -1,11 +1,13 @@
 import { once } from 'events';
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { Mock, afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { AddressInfo, WebSocket, WebSocketServer } from 'ws';
 import WsClient from '../WsClient';
+import { JsonRpcRequest, RpcMethod } from '../common';
 
 describe(WsClient, () => {
   let serverClosed = false;
   let server: WebSocketServer;
+  let serverFn: Mock | undefined;
 
   const closeServer = () => {
     server.close();
@@ -25,15 +27,35 @@ describe(WsClient, () => {
 
     server.on('connection', (ws) => {
       ws.on('message', (data) => {
-        const rpcRequest = JSON.parse(data.toString()) as { id: number };
+        const rpcRequest = JSON.parse(data.toString()) as JsonRpcRequest<RpcMethod>;
 
-        ws.send(
-          JSON.stringify({
-            id: rpcRequest.id,
-            jsonrpc: '2.0',
-            result: { intermediary: null, output: '0x1' },
-          }),
-        );
+        if (rpcRequest.method === 'cf_swap_rate') {
+          ws.send(
+            JSON.stringify({
+              id: rpcRequest.id,
+              jsonrpc: '2.0',
+              result: { intermediary: null, output: '0x1' },
+            }),
+          );
+        }
+
+        // tests the retry logic
+        if (rpcRequest.method === 'cf_environment') {
+          ws.close();
+          serverFn?.();
+        }
+
+        // tests the timeout logic
+        if (rpcRequest.method === 'cf_supported_assets') {
+          serverFn?.();
+          // do nothing
+        }
+
+        // tests malformed response handling
+        if (rpcRequest.method === 'cf_swapping_environment') {
+          serverFn?.();
+          ws.send(JSON.stringify({}));
+        }
       });
     });
 
@@ -46,6 +68,7 @@ describe(WsClient, () => {
   });
 
   afterEach(async () => {
+    serverFn = undefined;
     await client.close();
     server.close();
     if (!serverClosed) await once(server, 'close');
@@ -98,5 +121,101 @@ describe(WsClient, () => {
     }
 
     expect(connectSpy).toHaveBeenCalledTimes(7);
+  });
+
+  it('only retries 5 times', async () => {
+    serverFn = vi.fn();
+
+    await expect(client.sendRequest('cf_environment')).rejects.toThrowError('max retries exceeded');
+
+    expect(serverFn).toHaveBeenCalledTimes(5);
+  });
+
+  it('reconnects if the socket emits an error', async () => {
+    await expect(
+      client.sendRequest(
+        'cf_swap_rate',
+        { asset: 'USDC', chain: 'Ethereum' },
+        { asset: 'FLIP', chain: 'Ethereum' },
+        '0x1',
+      ),
+    ).resolves.not.toThrow();
+    expect(client['ws']).toBeDefined();
+    (client['ws'] as unknown as WebSocket).emit('error', new Error('test'));
+    await once(client['emitter'], 'DISCONNECT');
+    await expect(
+      client.sendRequest(
+        'cf_swap_rate',
+        { asset: 'USDC', chain: 'Ethereum' },
+        { asset: 'FLIP', chain: 'Ethereum' },
+        '0x1',
+      ),
+    ).resolves.not.toThrow();
+  });
+
+  it('rejects if no response is received', async () => {
+    await expect(
+      client.sendRequest(
+        'cf_swap_rate',
+        { asset: 'USDC', chain: 'Ethereum' },
+        { asset: 'FLIP', chain: 'Ethereum' },
+        '0x1',
+      ),
+    ).resolves.not.toThrow();
+
+    vi.useFakeTimers();
+    serverFn = vi.fn();
+
+    const request = client.sendRequest('cf_supported_assets');
+
+    await Promise.all([
+      vi.advanceTimersToNextTimerAsync(),
+      expect(request).rejects.toThrowError('timeout'),
+    ]);
+
+    expect(serverFn).toHaveBeenCalledTimes(1);
+  });
+
+  it('tries 5 times to reconnect', async () => {
+    const spy = vi
+      .spyOn(WsClient.prototype, 'connectionReady' as any)
+      .mockRejectedValue(new Error('test'));
+
+    await expect(
+      client.sendRequest(
+        'cf_swap_rate',
+        { asset: 'USDC', chain: 'Ethereum' },
+        { asset: 'FLIP', chain: 'Ethereum' },
+        '0x1',
+      ),
+    ).rejects.toThrow();
+
+    expect(spy).toBeCalledTimes(5);
+  });
+
+  it('times out on a malformed response', async () => {
+    await expect(
+      client.sendRequest(
+        'cf_swap_rate',
+        { asset: 'USDC', chain: 'Ethereum' },
+        { asset: 'FLIP', chain: 'Ethereum' },
+        '0x1',
+      ),
+    ).resolves.not.toThrow();
+
+    vi.useFakeTimers();
+    serverFn = vi.fn();
+    const request = client.sendRequest('cf_swapping_environment');
+
+    await Promise.all([
+      vi.advanceTimersToNextTimerAsync(),
+      expect(request).rejects.toThrowError('timeout'),
+    ]);
+
+    expect(serverFn).toHaveBeenCalledTimes(1);
+  });
+
+  it('uses the global websocket if none is provided', () => {
+    expect(new WsClient('ws://hello.world')['WebSocket']).toBe(globalThis.WebSocket);
   });
 });

@@ -18,6 +18,7 @@ export default defineConfig({
     }),
   ],
   test: {
+    restoreMocks: true,
     exclude,
     include: ['**/*.test.ts', '**/*.test.tsx'],
     coverage: {
