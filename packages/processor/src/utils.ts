@@ -2,7 +2,8 @@ import * as path from 'path';
 import * as prettier from 'prettier';
 import * as fs from 'fs/promises';
 import { z } from 'zod';
-import { ParsedMetadata } from './parser';
+import { ParsedMetadata } from './Parser';
+import { Queue } from '@chainflip/utils/async';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
@@ -44,22 +45,22 @@ function* diff(
 /* eslint-enable @typescript-eslint/no-unsafe-argument */
 
 export const diffSpecs = (a: ParsedMetadata, b: ParsedMetadata) => {
-  const seenEvents = new Set<string>();
+  const changedOrAddedEvents = new Set<string>();
 
   for (const change of diff(a, b)) {
     const [pallet, event, field] = change.path;
     if (event && (field || change.type === 'added')) {
       // if a field changed or a new event was added
-      seenEvents.add(`${pallet}.${event}`);
+      changedOrAddedEvents.add(`${pallet}.${event}`);
     } else if (change.type === 'added') {
       // if a new pallet was added
       Object.keys(b[pallet])
         .map((e) => `${pallet}.${e}`)
-        .forEach((ev) => seenEvents.add(ev), seenEvents);
+        .forEach((ev) => changedOrAddedEvents.add(ev), changedOrAddedEvents);
     }
   }
 
-  return seenEvents;
+  return changedOrAddedEvents;
 };
 
 export const formatCode = (code: string) =>
@@ -70,18 +71,6 @@ export const formatCode = (code: string) =>
     printWidth: 100,
   });
 
-class Queue {
-  #queue = Promise.resolve();
-
-  enqueue<T>(fn: () => Promise<T>) {
-    return new Promise<T>((resolve, reject) => {
-      this.#queue = this.#queue.then(fn).then(resolve, reject);
-    });
-  }
-}
-
-const cacheQueue = new Queue();
-const cachePath = path.join(import.meta.dirname, '..', 'metadata', 'specVersion.json');
 const cacheSchema = z.record(
   z.object({
     hash: z.string(),
@@ -90,24 +79,45 @@ const cacheSchema = z.record(
 );
 export type Network = z.output<typeof cacheSchema>[string]['network'];
 
-export const specVersionCache = {
-  async read() {
-    return cacheSchema.parse(JSON.parse(await fs.readFile(cachePath, 'utf8')));
-  },
+export class SpecVersionCache {
+  private contents?: z.output<typeof cacheSchema>;
+
+  private readonly queue = new Queue();
+
+  constructor(private readonly path: string) {}
+
+  async read(): Promise<z.output<typeof cacheSchema>> {
+    const contents = JSON.parse(
+      await fs.readFile(this.path, 'utf8').catch(async () => {
+        await fs.mkdir(path.dirname(this.path), { recursive: true });
+        return '{}';
+      }),
+    ) as unknown;
+
+    this.contents ??= cacheSchema.parse(contents);
+
+    return this.contents;
+  }
+
   async write(id: number, hash: string, network: Network): Promise<void> {
-    return cacheQueue.enqueue(async () => {
-      const data = await specVersionCache.read();
+    return this.queue.enqueue(async () => {
+      const data = await this.read();
       data[id] = { hash, network };
-      await fs.writeFile(cachePath, JSON.stringify(data, null, 2));
+      await fs.writeFile(this.path, JSON.stringify(data, null, 2));
     });
-  },
+  }
+
   async getVersion(hash: string, network: Network) {
-    const data = await specVersionCache.read();
+    const data = await this.read();
     const [version] =
       Object.entries(data).find(([, d]) => d.hash === hash && d.network === network) ?? [];
     return version !== undefined ? Number(version) : undefined;
-  },
-};
+  }
+}
+
+export const specVersionCache = new SpecVersionCache(
+  path.join(import.meta.dirname, '..', 'metadata', 'specVersion.json'),
+);
 
 export const networkToRpcUrl: Record<Network, string> = {
   mainnet: 'https://mainnet-archive.chainflip.io',

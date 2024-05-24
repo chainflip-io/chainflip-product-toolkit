@@ -45,11 +45,7 @@ importers:
         specifier: ^1.6.0
         version: 1.6.0(@types/node@20.12.7)
 
-  packages/bitcoin:
-    dependencies:
-      '@chainflip/utils':
-        specifier: file:../utils
-        version: link:../utils
+  packages/bitcoin: {}
 
   packages/processor:
     dependencies:

@@ -1,8 +1,7 @@
-use anyhow::Chain;
 use base58::{FromBase58, ToBase58};
 use bech32::{u5, FromBase32, ToBase32, Variant};
 use itertools;
-use std::convert::{TryFrom, TryInto};
+use std::convert::TryInto;
 use utils::{sha2_256, SliceToArray};
 use wasm_bindgen::prelude::*;
 
@@ -29,6 +28,7 @@ fn to_varint(value: u64) -> Vec<u8> {
     result
 }
 
+#[wasm_bindgen]
 pub enum BitcoinNetwork {
     Mainnet,
     Testnet,
@@ -65,24 +65,6 @@ impl std::fmt::Display for BitcoinNetwork {
             BitcoinNetwork::Mainnet => write!(f, "main"),
             BitcoinNetwork::Testnet => write!(f, "test"),
             BitcoinNetwork::Regtest => write!(f, "regtest"),
-        }
-    }
-}
-
-#[wasm_bindgen]
-pub enum ChainflipNetwork {
-    Mainnet,
-    Perseverance,
-    Sisyphos,
-    Backspin,
-}
-
-impl From<ChainflipNetwork> for BitcoinNetwork {
-    fn from(value: ChainflipNetwork) -> Self {
-        match value {
-            ChainflipNetwork::Mainnet => BitcoinNetwork::Mainnet,
-            ChainflipNetwork::Perseverance | ChainflipNetwork::Sisyphos => BitcoinNetwork::Testnet,
-            ChainflipNetwork::Backspin => BitcoinNetwork::Regtest,
         }
     }
 }
@@ -164,7 +146,7 @@ impl ScriptPubkey {
         self.program().raw()
     }
 
-    pub fn to_address(&self, network: &BitcoinNetwork) -> String {
+    pub fn to_address(&self, network: &BitcoinNetwork) -> Result<String, JsError> {
         let (data, maybe_bech, version) = match self {
             ScriptPubkey::P2PKH(data) => (&data[..], None, network.p2pkh_address_version()),
             ScriptPubkey::P2SH(data) => (&data[..], None, network.p2sh_address_version()),
@@ -184,7 +166,7 @@ impl ScriptPubkey {
                 itertools::chain!(version, data.to_base32()).collect::<Vec<_>>(),
                 variant,
             )
-            .expect("Can only fail on invalid hrp.")
+            .or(Err(JsError::new("Failed to encode bech32 address.")))
         } else {
             const CHECKSUM_LENGTH: usize = 4;
             let mut buf = Vec::with_capacity(1 + data.len() + CHECKSUM_LENGTH);
@@ -193,7 +175,7 @@ impl ScriptPubkey {
             let checksum =
                 sha2_256(&sha2_256(&buf))[..CHECKSUM_LENGTH].as_array::<CHECKSUM_LENGTH>();
             buf.extend(checksum);
-            buf.to_base58()
+            Ok(buf.to_base58())
         }
     }
 
@@ -460,8 +442,11 @@ pub enum AddressEncoding {
 }
 
 #[wasm_bindgen]
-pub fn decode(address: &str, encoding: AddressEncoding, network: ChainflipNetwork) -> String {
-    let network = network.into();
+pub fn decode(
+    address: &str,
+    encoding: AddressEncoding,
+    network: BitcoinNetwork,
+) -> Result<String, JsError> {
     match encoding {
         AddressEncoding::P2WPKH => ScriptPubkey::P2WPKH(decode_hex(address)).to_address(&network),
         AddressEncoding::P2SH => ScriptPubkey::P2SH(decode_hex(address)).to_address(&network),

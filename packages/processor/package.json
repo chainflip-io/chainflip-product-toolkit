@@ -14,5 +14,8 @@
     "axios": "^1.6.7",
     "prettier": "^3.2.5",
     "zod": "^3.22.8"
+  },
+  "scripts": {
+    "test": "vitest"
   }
 }

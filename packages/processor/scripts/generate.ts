@@ -1,6 +1,6 @@
 #!/usr/bin/env -S pnpm tsx
-import Parser, { MetadataOpts } from '../src/parser';
-import CodeGenerator from '../src/codegen';
+import Parser, { MetadataOpts } from '../src/Parser';
+import CodeGenerator from '../src/CodeGenerator';
 import { diffSpecs, specVersionCache } from '../src/utils';
 
 const generateAllCode = async () => {

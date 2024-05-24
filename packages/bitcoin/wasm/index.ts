@@ -1,19 +1,36 @@
-import { capitalize } from '@chainflip/utils/string';
-import { assert, assertNumber } from '@chainflip/utils/assertion';
-import { decode, ChainflipNetwork as WasmChainflipNetwork, AddressEncoding } from './built/bitcoin';
+import { decode, BitcoinNetwork as WasmBitcoinNetwork, AddressEncoding } from './built/bitcoin';
 
 type BitcoinAddressType = keyof typeof AddressEncoding;
 type ChainflipNetwork = 'mainnet' | 'perseverance' | 'sisyphos' | 'backspin';
+type BitcoinNetwork = 'mainnet' | 'testnet' | 'regtest';
+
+export const networkToBitcoinNetwork = (
+  network: ChainflipNetwork | BitcoinNetwork,
+): Capitalize<BitcoinNetwork> | null => {
+  switch (network) {
+    case 'mainnet':
+      return 'Mainnet';
+    case 'perseverance':
+    case 'sisyphos':
+    case 'testnet':
+      return 'Testnet';
+    case 'backspin':
+    case 'regtest':
+      return 'Regtest';
+    default:
+      return null;
+  }
+};
 
 export const decodeAddress = (
-  address: string,
+  address: `0x${string}`,
   type: BitcoinAddressType,
-  network: ChainflipNetwork,
+  chainflipOrBitcoinNetwork: ChainflipNetwork | BitcoinNetwork,
 ) => {
-  const capitalizedNetwork = capitalize(network);
-  assert(address.startsWith('0x'), 'Address must start with 0x');
-  assert(address.length % 2 === 0, 'Address must have an even number of characters');
-  assertNumber(AddressEncoding[type], `Invalid address type: ${type}`);
-  assertNumber(WasmChainflipNetwork[capitalizedNetwork], `Invalid network: ${network}`);
-  return decode(address, AddressEncoding[type], WasmChainflipNetwork[capitalizedNetwork]);
+  const network = networkToBitcoinNetwork(chainflipOrBitcoinNetwork);
+  if (!network) throw new Error(`Invalid network: ${chainflipOrBitcoinNetwork}`);
+  if (!/^0x[\da-f]+$/i.test(address)) throw new Error('bytes must be hex-encoded with a 0x prefix');
+  if (address.length % 2 !== 0) throw new Error('bytes must have an even number of characters');
+  if (!(type in AddressEncoding)) throw new Error(`Invalid address type: ${type}`);
+  return decode(address, AddressEncoding[type], WasmBitcoinNetwork[network]);
 };

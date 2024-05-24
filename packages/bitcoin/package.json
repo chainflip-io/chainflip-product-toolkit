@@ -1,6 +1,7 @@
 {
   "name": "@chainflip/bitcoin",
   "version": "0.1.0",
+  "type": "module",
   "scripts": {
     "wasm-pack": "wasm-pack build --release --target nodejs --out-dir 'wasm/built' --no-pack",
     "postinstall": "pnpm wasm-pack",
@@ -11,8 +12,5 @@
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
     "access": "public"
-  },
-  "dependencies": {
-    "@chainflip/utils": "file:../utils"
   }
 }

@@ -11,7 +11,7 @@ import {
   type ResolvedType,
   type StructType,
   type TupleType,
-} from './parser';
+} from './Parser';
 import { uncapitalize } from '@chainflip/utils/string';
 import { unreachable } from '@chainflip/utils/assertion';
 import { formatCode } from './utils';
