@@ -4,6 +4,11 @@ import tseslint from 'typescript-eslint';
 
 export default [
   { ignores: ['**/coverage', '**/dist', '**/generated', '**/wasm/built'] },
+  { files: ['**/*.ts'], rules: { 'no-console': 'error' } },
+  {
+    files: ['packages/processor/**/*.ts'],
+    rules: { 'no-console': 'off' },
+  },
   {
     languageOptions: {
       globals: { ...globals.browser, ...globals.node },
@@ -54,6 +59,7 @@ export default [
       '@typescript-eslint/no-non-null-assertion': 'off',
       '@typescript-eslint/unbound-method': 'off',
       '@typescript-eslint/no-unsafe-argument': 'off',
+      'no-console': 'off',
     },
   },
 ];

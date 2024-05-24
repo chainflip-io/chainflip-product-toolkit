@@ -29,5 +29,9 @@ export default function lint(files) {
     commands.push(`pnpm eslint --max-warnings 0 ${tsFiles.join(' ')}`);
   }
 
+  if (micromatch(files, '**/eslint.config.js').length) {
+    commands.push('pnpm eslint --max-warnings 0 .');
+  }
+
   return commands;
 }
