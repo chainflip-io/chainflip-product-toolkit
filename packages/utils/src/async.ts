@@ -75,3 +75,49 @@ export class RateLimiter<T, Args extends unknown[]> {
     return this.queues[nextIndex].enqueue(this.fn, ...args);
   }
 }
+
+export const once = async <T extends EventTarget, K extends string>(
+  target: T,
+  event: K,
+  opts?: { signal?: AbortSignal; timeout?: number },
+): Promise<void> => {
+  // eslint-disable-next-line @typescript-eslint/no-invalid-void-type
+  const deferred = deferredPromise<void>();
+  const onSuccess = () => {
+    target.removeEventListener('error', onError);
+    deferred.resolve();
+  };
+
+  const onError = () => {
+    target.removeEventListener(event, onSuccess);
+    deferred.reject(new Error('error'));
+  };
+
+  target.addEventListener(event, onSuccess, { once: true, signal: opts?.signal });
+  target.addEventListener('error', onError, { once: true, signal: opts?.signal });
+
+  if (opts?.signal) {
+    const signal = opts.signal;
+    const abort = () => {
+      deferred.reject(new Error('aborted'));
+    };
+
+    signal.addEventListener('abort', abort);
+
+    deferred.promise = deferred.promise.finally(() => {
+      signal.removeEventListener('abort', abort);
+    });
+  }
+
+  if (opts?.timeout) {
+    const timer = setTimeout(() => {
+      deferred.reject(new Error('timeout'));
+    }, opts.timeout);
+
+    deferred.promise = deferred.promise.finally(() => {
+      clearTimeout(timer);
+    });
+  }
+
+  await deferred.promise;
+};

@@ -1,5 +1,5 @@
 import { describe, it, vi, expect, beforeEach, afterEach } from 'vitest';
-import { Queue, RateLimiter, deferredPromise, sleep } from '../async';
+import { Queue, RateLimiter, deferredPromise, once, sleep } from '../async';
 
 describe(sleep, () => {
   beforeEach(() => {
@@ -98,5 +98,35 @@ describe(deferredPromise, () => {
     const { promise, reject } = deferredPromise<number>();
     reject(new Error('error'));
     await expect(promise).rejects.toThrow('error');
+  });
+});
+
+describe(once, () => {
+  it('resolves when the event is emitted', async () => {
+    const target = new EventTarget();
+    const promise = once(target, 'event');
+    target.dispatchEvent(new Event('event'));
+    await expect(promise).resolves.toBeUndefined();
+  });
+
+  it('rejects when the error event is emitted', async () => {
+    const target = new EventTarget();
+    const promise = once(target, 'event');
+    target.dispatchEvent(new Event('error'));
+    await expect(promise).rejects.toThrow('error');
+  });
+
+  it('can be aborted', async () => {
+    const target = new EventTarget();
+    const controller = new AbortController();
+    const promise = once(target, 'event', { signal: controller.signal });
+    controller.abort();
+    await expect(promise).rejects.toThrowError('aborted');
+  });
+
+  it('can be timed out', async () => {
+    const target = new EventTarget();
+    const promise = once(target, 'event', { timeout: 100 });
+    await expect(promise).rejects.toThrowError('timeout');
   });
 });
