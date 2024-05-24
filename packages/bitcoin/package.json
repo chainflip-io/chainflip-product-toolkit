@@ -6,6 +6,8 @@
     "wasm-pack": "wasm-pack build --release --target nodejs --out-dir 'wasm/built' --no-pack",
     "postinstall": "pnpm wasm-pack",
     "prepublish": "pnpm wasm-pack && pnpm test run",
+    "clean": "rm -rf wasm/built dist",
+    "build": "pnpm clean && pnpm wasm-pack && pnpm tsup && cp -R wasm/built dist",
     "test": "vitest"
   },
   "repository": "https://github.com/chainflip-io/chainflip-product-toolkit.git",
