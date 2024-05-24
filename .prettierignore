@@ -1,0 +1,6 @@
+packages/bitcoin/target
+packages/bitcoin/wasm/built
+**/generated
+**/coverage
+pnpm-lock.yaml
+**/tsconfig.json
