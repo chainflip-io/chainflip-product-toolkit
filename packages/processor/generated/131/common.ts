@@ -1,9 +1,9 @@
 import { z } from 'zod';
-import { encodeAddress } from '@polkadot/util-crypto';
+import { encode } from '@chainflip/utils/ss58';
 
 export const hexString = z
   .string()
-  .refine((v) => /^0x[\da-f]*$/i.test(v), { message: 'Invalid hex string' });
+  .refine((v): v is `0x${string}` => /^0x[\da-f]*$/i.test(v), { message: 'Invalid hex string' });
 
 export const simpleEnum = <U extends string, T extends readonly [U, ...U[]]>(values: T) =>
   z.object({ __kind: z.enum(values) }).transform(({ __kind }) => __kind!);
@@ -138,9 +138,9 @@ export const accountId = z
     z
       .string()
       .regex(/^[0-9a-f]+$/)
-      .transform((v) => `0x${v}`),
+      .transform<`0x${string}`>((v) => `0x${v}`),
   ])
-  .transform((value) => encodeAddress(value, 2112));
+  .transform((value) => encode({ data: value, ss58Format: 2112 }));
 
 export const stateChainRuntimeChainflipOffencesOffence = simpleEnum([
   'ParticipateSigningFailed',

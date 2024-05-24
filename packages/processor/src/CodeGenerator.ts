@@ -79,7 +79,7 @@ class Identifier extends CodegenResult {
 class Code extends CodegenResult {}
 
 const hexString = new Code(
-  "z.string().refine((v) => /^0x[\\da-f]*$/i.test(v), { message: 'Invalid hex string' })",
+  "z.string().refine((v): v is `0x${string}` => /^0x[\\da-f]*$/i.test(v), { message: 'Invalid hex string' })",
 );
 const numericString = new Code(
   "z.string().refine((v) => /^\\d+$/.test(v), { message: 'Invalid numeric string' })",
@@ -88,8 +88,8 @@ const numberOrHex = new Code(
   'z.union([z.number(), hexString, numericString]).transform((n) => BigInt(n))',
 );
 const accountId = new Code(
-  'z.union([hexString, z.string().regex(/^[0-9a-f]+$/).transform((v) => `0x${v}`)]).transform((value) => encodeAddress(value, 2112))',
-  [new Identifier('encodeAddress', '@polkadot/util-crypto')],
+  'z.union([hexString, z.string().regex(/^[0-9a-f]+$/).transform<`0x${string}`>((v) => `0x${v}`)]).transform((value) => encode({ data: value, ss58Format: 2112 }))',
+  [new Identifier('encode', '@chainflip/utils/ss58')],
 );
 const simpleEnum = new Code(
   '<U extends string, T extends readonly [U, ...U[]]>(values: T) => z.object({ __kind: z.enum(values) }).transform(({ __kind }) => __kind!)',

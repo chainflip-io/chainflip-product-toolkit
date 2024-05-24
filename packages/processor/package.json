@@ -7,15 +7,21 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "zod": "^3.22.8"
+  },
+  "devDependencies": {
     "@chainflip/rpc": "file:../rpc",
     "@chainflip/utils": "file:../utils",
     "@polkadot/types": "^10.11.2",
-    "@polkadot/util-crypto": "^12.6.2",
     "axios": "^1.6.7",
-    "prettier": "^3.2.5",
-    "zod": "^3.22.8"
+    "prettier": "^3.2.5"
   },
   "scripts": {
     "test": "vitest"
+  },
+  "repository": "https://github.com/chainflip-io/chainflip-product-toolkit.git",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
   }
 }
