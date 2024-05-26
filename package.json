@@ -7,6 +7,7 @@
   "scripts": {
     "prettier:check": "prettier --check .",
     "test": "vitest",
+    "test:ci": "CI=1 pnpm -r t run",
     "prepare": "husky"
   },
   "keywords": [],
