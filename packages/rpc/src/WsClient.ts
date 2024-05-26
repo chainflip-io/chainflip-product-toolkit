@@ -10,7 +10,7 @@ export default class WsClient extends Client {
   private ws?: WebSocket;
   private reconnectAttempts = 0;
   private emitter = new EventTarget();
-  private requestMap: Map<string, DeferredPromise<unknown>> = new Map();
+  private requestMap: Map<string | number, DeferredPromise<unknown>> = new Map();
 
   constructor(
     url: string,

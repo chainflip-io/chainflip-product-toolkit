@@ -5,6 +5,7 @@ import { describe, expect, it, afterEach, beforeEach } from 'vitest';
 import { z } from 'zod';
 import HttpClient from '../HttpClient';
 import {
+  brokerRequestSwapDepositAddress,
   cfEnvironment,
   cfIngressEgressEnvironment,
   cfSwapRateV2,
@@ -132,6 +133,14 @@ const swapRateV2: z.input<typeof cfSwapRateV2> = {
   egress_fee: { chain: 'Ethereum', asset: 'USDC', amount: '0x0' },
 };
 
+const swapDepositAddress: z.input<typeof brokerRequestSwapDepositAddress> = {
+  channel_id: 1,
+  address: '0x1234',
+  issued_block: 1,
+  channel_opening_fee: '0x0',
+  source_chain_expiry_block: 1,
+};
+
 const isHexString = (value: unknown): value is HexString =>
   typeof value === 'string' && value.startsWith('0x');
 
@@ -139,6 +148,7 @@ describe(HttpClient, () => {
   it('returns all methods', () => {
     expect(new HttpClient('http://localhost:8080').methods()).toMatchInlineSnapshot(`
       [
+        "broker_requestSwapDepositAddress",
         "cf_boost_pools_depth",
         "cf_environment",
         "cf_funding_environment",
@@ -181,7 +191,7 @@ describe(HttpClient, () => {
         const specialMethod = body.method as string;
 
         if (specialMethod === 'malformed_response') {
-          return res.end(JSON.stringify({ id: 1, jsonrpc: '2.0', result: 1 }));
+          return res.end(JSON.stringify({ jsonrpc: '2.0', result: 1 }));
         } else if (specialMethod === 'non_200') {
           return res.writeHead(404).end();
         } else if (specialMethod === 'malformed_json') {
@@ -237,6 +247,8 @@ describe(HttpClient, () => {
             return respond(boostPoolsDepth);
           case 'cf_swap_rate_v2':
             return respond(swapRateV2);
+          case 'broker_requestSwapDepositAddress':
+            return respond(swapDepositAddress);
           default:
             console.error('Method not found:', body.method);
             return res.writeHead(200).end(
@@ -414,10 +426,35 @@ describe(HttpClient, () => {
       `);
     });
 
+    it('requests deposit addresses', async () => {
+      expect(
+        await client.sendRequest(
+          'broker_requestSwapDepositAddress',
+          { asset: 'BTC', chain: 'Bitcoin' },
+          { asset: 'ETH', chain: 'Ethereum' },
+          '0x4567',
+          100,
+          { gas_budget: '0x0', message: '0x0' },
+          30,
+          [{ account: '0x1234', bps: 0 }],
+        ),
+      ).toMatchInlineSnapshot(`
+        {
+          "address": "0x1234",
+          "channel_id": 1,
+          "channel_opening_fee": 0n,
+          "issued_block": 1,
+          "source_chain_expiry_block": 1n,
+        }
+      `);
+    });
+
     it('throws on invalid response', async () => {
       const method = 'malformed_response' as RpcMethod;
 
-      await expect(client.sendRequest(method)).rejects.toThrow('Invalid response');
+      await expect(client.sendRequest(method)).rejects.toThrowErrorMatchingInlineSnapshot(
+        `[Error: Malformed RPC response received]`,
+      );
     });
 
     it('throws on a non-200 response', async () => {
@@ -434,7 +471,9 @@ describe(HttpClient, () => {
           '0x1',
           1 as unknown as HexString,
         ),
-      ).rejects.toThrowErrorMatchingInlineSnapshot(`[Error: invalid parameter type]`);
+      ).rejects.toThrowErrorMatchingInlineSnapshot(
+        `[Error: RPC error [-32602]: invalid parameter type]`,
+      );
     });
 
     it('handles malformed json', async () => {

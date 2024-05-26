@@ -1,6 +1,7 @@
 import type { z } from 'zod';
 import {
   AssetAndChain,
+  brokerRequestSwapDepositAddress,
   cfBoostPoolsDepth,
   cfEnvironment,
   cfFundingEnvironment,
@@ -14,6 +15,7 @@ import {
   stateGetMetadata,
   stateGetRuntimeVersion,
 } from './parsers';
+import { HexString } from '@chainflip/utils/types';
 
 type Nullish<T> = T | null | undefined;
 
@@ -38,6 +40,18 @@ type AdditionalOrder = {
 };
 
 export type RpcRequest = WithHash<{
+  broker_requestSwapDepositAddress: [
+    sourceAsset: UncheckedAssetAndChain,
+    destinationAsset: UncheckedAssetAndChain,
+    destinationAddress: string,
+    brokerCommission: number,
+    ccmMetadata?: Nullish<{
+      message: HexString;
+      gas_budget: HexString;
+    }>,
+    boostFee?: Nullish<number>,
+    affiliateFees?: Nullish<{ account: string; bps: number }[]>,
+  ];
   cf_environment: [];
   cf_supported_assets: [];
   cf_swapping_environment: [];
@@ -62,6 +76,7 @@ export type RpcRequest = WithHash<{
 };
 
 export const rpcResult = {
+  broker_requestSwapDepositAddress: brokerRequestSwapDepositAddress,
   cf_boost_pools_depth: cfBoostPoolsDepth,
   cf_environment: cfEnvironment,
   cf_funding_environment: cfFundingEnvironment,
@@ -77,6 +92,7 @@ export const rpcResult = {
 
 export type RpcMethod = keyof RpcRequest;
 
+export type RpcResponse<T extends RpcMethod> = z.input<(typeof rpcResult)[T]>;
 export type RpcResult<T extends RpcMethod> = z.output<(typeof rpcResult)[T]>;
 
 export type JsonRpcRequest<T extends RpcMethod> = {

@@ -1,6 +1,7 @@
 import { defineConfig } from 'tsup';
 
 export default defineConfig({
+  splitting: true,
   minify: false,
   dts: true,
   bundle: false,

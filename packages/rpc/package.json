@@ -4,9 +4,8 @@
   "type": "module",
   "scripts": {
     "clean": "rm -rf dist",
-    "prepublish": "pnpm test run && pnpm build:clean",
-    "build": "tsup",
-    "build:clean": "pnpm clean && pnpm build",
+    "prepublish": "pnpm test run && pnpm build",
+    "build": "pnpm clean && pnpm tsup",
     "test": "vitest",
     "coverage": "vitest run --coverage"
   },

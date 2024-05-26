@@ -49,7 +49,7 @@ const rename =
     ) as Rename<T, U>;
 
 const rpcBaseResponse = z.object({
-  id: z.string(),
+  id: z.union([z.string(), z.number()]),
   jsonrpc: z.literal('2.0'),
 });
 
@@ -127,3 +127,11 @@ export const cfBoostPoolsDepth = z.array(
 );
 
 export const cfSupportedAsssets = z.array(rpcAssetSchema);
+
+export const brokerRequestSwapDepositAddress = z.object({
+  address: z.string(),
+  issued_block: z.number(),
+  channel_id: z.number(),
+  source_chain_expiry_block: numberOrHex,
+  channel_opening_fee: u256,
+});

@@ -26,9 +26,13 @@ export default abstract class Client {
 
     const parseResult = rpcResponse.safeParse(response.result);
 
-    assert(parseResult.success, 'Invalid response');
+    assert(parseResult.success, 'Malformed RPC response received');
 
-    if ('error' in parseResult.data) throw new Error(parseResult.data.error.message);
+    if ('error' in parseResult.data) {
+      throw new Error(
+        `RPC error [${parseResult.data.error.code}]: ${parseResult.data.error.message}`,
+      );
+    }
 
     return rpcResult[method].parse(parseResult.data.result);
   }
