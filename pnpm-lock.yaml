@@ -20,6 +20,9 @@ importers:
       '@vitest/coverage-v8':
         specifier: ^1.6.0
         version: 1.6.0(vitest@1.6.0(@types/node@20.12.7))
+      esbuild-plugin-file-path-extensions:
+        specifier: ^2.1.1
+        version: 2.1.1
       eslint:
         specifier: ^9.2.0
         version: 9.2.0
@@ -58,27 +61,25 @@ importers:
 
   packages/processor:
     dependencies:
+      zod:
+        specifier: ^3.22.8
+        version: 3.23.8
+    devDependencies:
       '@chainflip/rpc':
         specifier: file:../rpc
-        version: link:../rpc
+        version: file:packages/rpc
       '@chainflip/utils':
         specifier: file:../utils
         version: link:../utils
       '@polkadot/types':
         specifier: ^10.11.2
         version: 10.13.1
-      '@polkadot/util-crypto':
-        specifier: ^12.6.2
-        version: 12.6.2(@polkadot/util@12.6.2)
       axios:
         specifier: ^1.6.7
         version: 1.6.8
       prettier:
         specifier: ^3.2.5
         version: 3.2.5
-      zod:
-        specifier: ^3.22.8
-        version: 3.23.8
 
   packages/rpc:
     dependencies:
@@ -201,8 +202,14 @@ packages:
   '@bcoe/v8-coverage@0.2.3':
     resolution: {integrity: sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==}
 
+  '@chainflip/rpc@file:packages/rpc':
+    resolution: {directory: packages/rpc, type: directory}
+
   '@chainflip/utils@0.1.3':
     resolution: {integrity: sha512-/KhTlttOO5OKJFtCdG6s2YSjeyzOCNNvuyFn+Gs+SbAy8Xm2hj4xDiKfH5N6gKL4VOv1auKlGrJ8RH9XEFdm/A==}
+
+  '@chainflip/utils@0.1.5':
+    resolution: {integrity: sha512-k3YxNjQnyube95N1tFKcfzVASYtiE53iIYcPmz9G/db+dKdxU39TTaHT40pjnpYedPqh8CBiA5ltiBR+Zap5yw==}
 
   '@esbuild/aix-ppc64@0.19.12':
     resolution: {integrity: sha512-bmoCYyWdEL3wDQIVbcyzRyeKLgk2WtWLTWz1ZIAZF/EGbNOwSA6ew3PftJ1PqMiOOGu0OyFMzG53L0zqIpPeNA==}
@@ -1083,6 +1090,10 @@ packages:
 
   emoji-regex@9.2.2:
     resolution: {integrity: sha512-L18DaJsXSUk2+42pv8mLs5jJT2hqFkFE4j21wOmgbUqsZ2hL72NsUU785g9RXgo3s0ZNgVl42TiHp3ZtOv/Vyg==}
+
+  esbuild-plugin-file-path-extensions@2.1.1:
+    resolution: {integrity: sha512-MEvK6bh84ywHy0L9/r3tUsqtXL+svJ0Wni/mVcoU1+RF7XQdoRXWQ2YhSDsEWH2oaO8OFM52GrRHb4wvYt6Ktg==}
+    engines: {node: '>=v14.0.0', npm: '>=7.0.0'}
 
   esbuild@0.19.12:
     resolution: {integrity: sha512-aARqgq8roFBj054KvQr5f1sFu0D65G+miZRCuJyJ0G13Zwx7vRar5Zhn2tkQNzIXcBrNVsv/8stehpj+GAjgbg==}
@@ -2228,7 +2239,14 @@ snapshots:
 
   '@bcoe/v8-coverage@0.2.3': {}
 
+  '@chainflip/rpc@file:packages/rpc':
+    dependencies:
+      '@chainflip/utils': 0.1.5
+      zod: 3.23.8
+
   '@chainflip/utils@0.1.3': {}
+
+  '@chainflip/utils@0.1.5': {}
 
   '@esbuild/aix-ppc64@0.19.12':
     optional: true
@@ -3021,6 +3039,8 @@ snapshots:
 
   emoji-regex@9.2.2: {}
 
+  esbuild-plugin-file-path-extensions@2.1.1: {}
+
   esbuild@0.19.12:
     optionalDependencies:
       '@esbuild/aix-ppc64': 0.19.12
@@ -3641,7 +3661,7 @@ snapshots:
   postcss@8.4.38:
     dependencies:
       nanoid: 3.3.7
-      picocolors: 1.0.0
+      picocolors: 1.0.1
       source-map-js: 1.2.0
 
   prelude-ls@1.2.1: {}
