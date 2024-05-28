@@ -49,18 +49,12 @@ export interface IProcessorStore {
   ): Promise<number | undefined>;
   updateStates(processorName: string, height: number): Promise<number>;
   getCurrentState(processorName: string): State;
-  $transaction(
-    fn: (store: IProcessorStore) => Promise<void>,
-    options: { timeout?: number },
-  ): Promise<IProcessorStore>;
+  $transaction(fn: (store: this) => Promise<void>, options: { timeout?: number }): Promise<this>;
 }
 
 export interface IIndexerStore {
   fetchBlocks(height: number, batchSize: number): Promise<Block[]>;
-  $transaction(
-    fn: (store: IIndexerStore) => Promise<void>,
-    options: { timeout?: number },
-  ): Promise<IIndexerStore>;
+  $transaction(fn: (store: this) => Promise<void>, options: { timeout?: number }): Promise<this>;
 }
 
 export interface ILogger {
