@@ -15,7 +15,6 @@ export function timedMethod(
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const method = descriptor.value;
   assert(typeof method === 'function');
-  // eslint-disable-next-line func-names
   descriptor.value = async function (
     this: Processor<IProcessorStore, IIndexerStore>,
     ...args: unknown[]
@@ -23,7 +22,6 @@ export function timedMethod(
     const start = performance.now();
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
     const result = await method.apply(this, args);
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     this.timings[propertyKey as TimedMethodName] = performance.now() - start;
     // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     return result;
