@@ -29,15 +29,19 @@ export function timedMethod(
 }
 
 type Handler = () => Promise<void> | void;
-export const handlers = new Set<Handler>();
-export const handleExit = (handler: Handler) => {
+const handlers = new Set<Handler>();
+const handleExit = (handler: Handler) => {
   handlers.add(handler);
   return () => {
     handlers.delete(handler);
   };
 };
 
-export interface IProcessorStore {
+interface IStore {
+  $transaction(fn: (store: this) => Promise<void>, options: { timeout?: number }): Promise<this>;
+}
+
+export interface IProcessorStore extends IStore {
   getEventId(blockId: number, indexInBlock: number): Promise<bigint>;
   initializeState(endHeight?: number): Promise<State>;
   findEventByBlock(blockId: number, indexInBlock: number): Promise<Event>;
@@ -47,12 +51,10 @@ export interface IProcessorStore {
   ): Promise<number | undefined>;
   updateStates(processorName: string, height: number): Promise<number>;
   getCurrentState(processorName: string): State;
-  $transaction(fn: (store: this) => Promise<void>, options: { timeout?: number }): Promise<this>;
 }
 
 export interface IIndexerStore {
   fetchBlocks(height: number, batchSize: number): Promise<Block[]>;
-  $transaction(fn: (store: this) => Promise<void>, options: { timeout?: number }): Promise<this>;
 }
 
 export interface ILogger {
