@@ -41,4 +41,10 @@ describe('bitcoin', () => {
       decodeAddress('0x63b7cc4432bba5c51fd09428c47abaf2d52f937g', 'P2WPKH', 'mainnet'),
     ).toThrowErrorMatchingInlineSnapshot(`[Error: bytes must be hex-encoded with a 0x prefix]`);
   });
+
+  it('throws on bad addresses', () => {
+    expect(() => decodeAddress('0x00', 'Taproot', 'mainnet')).toThrowErrorMatchingInlineSnapshot(
+      `[Error: Invalid address]`,
+    );
+  });
 });
