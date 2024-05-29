@@ -10,16 +10,21 @@ export const u256 = hexString.transform((value) => BigInt(value));
 
 export const numberOrHex = z.union([z.number().transform((n) => BigInt(n)), u256]);
 
-const chainAssetMapFactory = <Z extends z.ZodTypeAny>(parser: Z) =>
+const chainAssetMapFactory = <Z extends z.ZodTypeAny>(parser: Z, defaultValue: z.input<Z>) =>
   z.object({
     Bitcoin: z.object({ BTC: parser }),
     Ethereum: z.object({ ETH: parser, USDC: parser, FLIP: parser, USDT: parser }),
     Polkadot: z.object({ DOT: parser }),
-    Arbitrum: z.object({ ETH: parser, USDC: parser }),
+    Arbitrum: z.object({ ETH: parser.default(defaultValue), USDC: parser.default(defaultValue) }),
   });
 
-const chainMapFactory = <Z extends z.ZodTypeAny>(parser: Z) =>
-  z.object({ Bitcoin: parser, Ethereum: parser, Polkadot: parser, Arbitrum: parser });
+const chainMapFactory = <Z extends z.ZodTypeAny>(parser: Z, defaultValue: z.input<Z>) =>
+  z.object({
+    Bitcoin: parser,
+    Ethereum: parser,
+    Polkadot: parser,
+    Arbitrum: parser.default(defaultValue),
+  });
 
 const rpcAssetSchema = z.union([
   z.object({ chain: z.literal('Bitcoin'), asset: z.literal('BTC') }),
@@ -97,17 +102,17 @@ export const stateGetRuntimeVersion = z.object({
 
 export const cfIngressEgressEnvironment = z
   .object({
-    minimum_deposit_amounts: chainAssetMapFactory(numberOrHex),
-    ingress_fees: chainAssetMapFactory(numberOrHex.nullable()),
-    egress_fees: chainAssetMapFactory(numberOrHex.nullable()),
-    witness_safety_margins: chainMapFactory(z.number().nullable()),
-    egress_dust_limits: chainAssetMapFactory(numberOrHex),
-    channel_opening_fees: chainMapFactory(numberOrHex),
+    minimum_deposit_amounts: chainAssetMapFactory(numberOrHex, 0),
+    ingress_fees: chainAssetMapFactory(numberOrHex.nullable(), null),
+    egress_fees: chainAssetMapFactory(numberOrHex.nullable(), null),
+    witness_safety_margins: chainMapFactory(z.number().nullable(), null),
+    egress_dust_limits: chainAssetMapFactory(numberOrHex, 0),
+    channel_opening_fees: chainMapFactory(numberOrHex, 0),
   })
   .transform(rename({ egress_dust_limits: 'minimum_egress_amounts' }));
 
 export const cfSwappingEnvironment = z.object({
-  maximum_swap_amounts: chainAssetMapFactory(numberOrHex.nullable()),
+  maximum_swap_amounts: chainAssetMapFactory(numberOrHex.nullable(), null),
   network_fee_hundredth_pips: z.number(),
 });
 
