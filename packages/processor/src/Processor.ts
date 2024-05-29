@@ -7,8 +7,8 @@ const sum = (arr: number[]) => arr.reduce((a, b) => a + b, 0);
 const average = (arr: number[]) => sum(arr) / arr.length;
 
 type TimedMethodName = Exclude<keyof (typeof Processor.prototype)['timings'], 'eventHandlers'>;
-export function timedMethod(
-  target: Processor<IProcessorStore, IIndexerStore>,
+export function timedMethod<P extends ProcessorStore, I extends IndexerStore>(
+  target: Processor<P, I>,
   propertyKey: string,
   descriptor: PropertyDescriptor,
 ) {
@@ -16,7 +16,7 @@ export function timedMethod(
   const method = descriptor.value;
   assert(typeof method === 'function');
   descriptor.value = async function (
-    this: Processor<IProcessorStore, IIndexerStore>,
+    this: Processor<ProcessorStore, IndexerStore>,
     ...args: unknown[]
   ) {
     const start = performance.now();
@@ -28,20 +28,14 @@ export function timedMethod(
   };
 }
 
-type Handler = () => Promise<void> | void;
-const handlers = new Set<Handler>();
-const handleExit = (handler: Handler) => {
-  handlers.add(handler);
-  return () => {
-    handlers.delete(handler);
-  };
-};
-
-interface IStore {
-  $transaction(fn: (store: this) => Promise<void>, options: { timeout?: number }): Promise<this>;
+interface Store {
+  $transaction<R>(
+    fn: (store: Exclude<this, '$transaction'>) => Promise<R>,
+    options: { timeout?: number },
+  ): Promise<this>;
 }
 
-export interface IProcessorStore extends IStore {
+export interface ProcessorStore extends Store {
   getEventId(blockId: number, indexInBlock: number): Promise<bigint>;
   initializeState(endHeight?: number): Promise<State>;
   findEventByBlock(blockId: number, indexInBlock: number): Promise<Event>;
@@ -53,11 +47,11 @@ export interface IProcessorStore extends IStore {
   getCurrentState(processorName: string): State;
 }
 
-export interface IIndexerStore {
+export interface IndexerStore {
   fetchBlocks(height: number, batchSize: number): Promise<Block[]>;
 }
 
-export interface ILogger {
+export interface Logger {
   info(message: string, data?: Record<string, unknown>): void;
   error(message: string, data?: Record<string, unknown>): void;
   customError(
@@ -67,7 +61,7 @@ export interface ILogger {
   ): void;
 }
 
-export default abstract class Processor<P extends IProcessorStore, I extends IIndexerStore> {
+export default abstract class Processor<P extends ProcessorStore, I extends IndexerStore> {
   batchSize = 50;
 
   transactionTimeout = 10_000;
@@ -76,7 +70,7 @@ export default abstract class Processor<P extends IProcessorStore, I extends IIn
 
   protected abstract readonly name: string;
 
-  protected readonly eventHandlerMap: HandlerMap<string, EventHandler>;
+  protected readonly eventHandlerMap: HandlerMap<string, EventHandler<P>>;
 
   protected readonly handledEvents: Set<string>;
 
@@ -98,10 +92,10 @@ export default abstract class Processor<P extends IProcessorStore, I extends IIn
   };
 
   constructor(
-    { batchSize, transactionTimeout, eventHandlers }: ProcessorOptions,
+    { batchSize, transactionTimeout, eventHandlers }: ProcessorOptions<P>,
     private processorStore: P,
     private indexerStore: I,
-    private logger: ILogger,
+    private logger: Logger,
   ) {
     if (batchSize) this.batchSize = batchSize;
     if (transactionTimeout) this.transactionTimeout = transactionTimeout;
@@ -178,7 +172,7 @@ export default abstract class Processor<P extends IProcessorStore, I extends IIn
       const start = performance.now();
       await handler(args);
       this.timings.eventHandlers[name].push(performance.now() - start);
-    }) as EventHandler;
+    }) as EventHandler<P>;
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -285,14 +279,15 @@ export default abstract class Processor<P extends IProcessorStore, I extends IIn
     return true;
   }
 
+  protected handleExit() {
+    // To be implemented by the child class
+  }
+
   async start() {
     this.logger.info('processing blocks');
     this.running = true;
 
-    handleExit(() => {
-      this.logger.info('stopping processing of blocks');
-      this.running = false;
-    });
+    this.handleExit();
 
     this.logger.info('getting latest state');
     let { height: lastBlock } = await this.initialize();

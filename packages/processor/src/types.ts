@@ -1,4 +1,4 @@
-import { IProcessorStore } from './Processor';
+import { ProcessorStore } from './Processor';
 
 export type JsonObject = { [Key in string]?: JsonValue };
 export interface JsonArray extends Array<JsonValue> {}
@@ -71,15 +71,15 @@ export type Block = IndexerBlock & {
 
 export type NonEmptyArray<T> = readonly [T, ...T[]];
 
-export type SpecEventHandlers = {
+export type SpecEventHandlers<T extends ProcessorStore> = {
   spec: number;
-  handlers: NonEmptyArray<{ name: string; handler: EventHandler }>;
+  handlers: NonEmptyArray<{ name: string; handler: EventHandler<T> }>;
 };
 
-export type ProcessorOptions = {
+export type ProcessorOptions<T extends ProcessorStore> = {
   batchSize?: number;
   transactionTimeout?: number;
-  eventHandlers: NonEmptyArray<SpecEventHandlers>;
+  eventHandlers: NonEmptyArray<SpecEventHandlers<T>>;
 };
 
 export type State = {
@@ -89,8 +89,8 @@ export type State = {
   name: string;
 };
 
-export type EventHandler = (args: {
-  prisma: IProcessorStore;
+export type EventHandler<T extends ProcessorStore> = (args: {
+  prisma: T;
   event: Event;
   block: Block;
   eventId: bigint;
