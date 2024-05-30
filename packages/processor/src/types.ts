@@ -1,21 +1,21 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ProcessorStore } from './Processor';
 
 export type JsonObject = { [Key in string]?: JsonValue };
 export interface JsonArray extends Array<JsonValue> {}
 export type JsonValue = string | number | boolean | JsonObject | JsonArray | null;
-export type Decimal = number;
 
 export type IndexerExtrinsic = {
   id: string;
   blockId: string;
   indexInBlock: number;
   version: number;
-  signature: JsonValue;
+  signature: JsonValue | null;
   callId: string;
-  fee: Decimal | null;
-  tip: Decimal | null;
+  fee: any; // Prisma.Decimal
+  tip: any; // Prisma.Decimal
   success: boolean;
-  error: JsonValue;
+  error: JsonValue | null;
   pos: number;
   hash: string;
 };
@@ -30,6 +30,7 @@ export type IndexerEvent = {
   name: string;
   args: JsonValue;
   pos: number;
+  extrinsic: IndexerExtrinsic | null;
 };
 
 export type IndexerCall = {
@@ -57,16 +58,24 @@ export type IndexerBlock = {
   specId: string;
 };
 
-export type Extrinsic = IndexerExtrinsic;
-export type Event<T = unknown> = Omit<IndexerEvent, 'args'> & {
-  extrinsic: Extrinsic | null;
-  args: T;
-};
-export type Call = IndexerCall & { extrinsic: Extrinsic };
+export type Call = IndexerCall & { extrinsic: IndexerExtrinsic };
 export type Block = IndexerBlock & {
-  extrinsics: Extrinsic[];
-  events: Event[];
+  extrinsics: IndexerExtrinsic[];
+  events: IndexerEvent[];
   calls: Call[];
+};
+
+export type Event = {
+  id: bigint;
+  args: JsonValue;
+  blockId: number;
+  indexInBlock: number;
+  extrinsicId: bigint | null;
+  metadataId: number;
+};
+export type Extrinsic = {
+  id: bigint;
+  submitterId: number | null;
 };
 
 export type NonEmptyArray<T> = readonly [T, ...T[]];
@@ -91,7 +100,7 @@ export type State = {
 
 export type EventHandler<T extends ProcessorStore> = (args: {
   prisma: T;
-  event: Event;
+  event: IndexerEvent;
   block: Block;
   eventId: bigint;
   submitterId?: number;

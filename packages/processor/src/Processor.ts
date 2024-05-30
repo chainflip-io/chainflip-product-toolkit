@@ -1,7 +1,16 @@
 import assert from 'assert';
 import { setTimeout as sleep } from 'timers/promises';
 import HandlerMap from './HandlerMap';
-import { Extrinsic, State, Block, Call, Event, EventHandler, ProcessorOptions } from './types';
+import {
+  State,
+  Block,
+  Call,
+  Event,
+  EventHandler,
+  ProcessorOptions,
+  IndexerExtrinsic,
+  Extrinsic,
+} from './types';
 
 const sum = (arr: number[]) => arr.reduce((a, b) => a + b, 0);
 const average = (arr: number[]) => sum(arr) / arr.length;
@@ -29,22 +38,28 @@ export function timedMethod<P extends ProcessorStore, I extends IndexerStore>(
 }
 
 interface Store {
-  $transaction<R>(
-    fn: (store: Exclude<this, '$transaction'>) => Promise<R>,
+  // // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // $transaction(...arg: any[]): any;
+
+  // $transaction<R>(
+  //   fn: (store: Exclude<this, '$transaction'>) => Promise<R>,
+  //   options: { timeout?: number },
+  // ): Promise<this>;
+
+  transaction<R>(
+    fn: (store: Exclude<this, 'transaction'>) => Promise<R>,
     options: { timeout?: number },
   ): Promise<this>;
 }
 
 export interface ProcessorStore extends Store {
+  initializeState(processorName: string, startHeight: number, endHeight?: number): Promise<State>;
   getEventId(blockId: number, indexInBlock: number): Promise<bigint>;
-  initializeState(endHeight?: number): Promise<State>;
-  findEventByBlock(blockId: number, indexInBlock: number): Promise<Event>;
-  getExtrinsicSubmitterId(
-    blockHeight: number,
-    extrinsic: Extrinsic | null,
-  ): Promise<number | undefined>;
-  updateStates(processorName: string, height: number): Promise<number>;
-  getCurrentState(processorName: string): State;
+  getEvent(blockId: number, indexInBlock: number): Promise<Event>;
+  getExtrinsic(blockHeight: number, indexInBlock: number): Promise<Extrinsic | null>;
+  updateStates(processorName: string, height: number): Promise<{ count: number }>;
+  getCurrentState(processorName: string): Promise<State>;
+  // saveBlock(block: Block, validator?: { id: number }): Promise<void>;
 }
 
 export interface IndexerStore {
@@ -131,7 +146,7 @@ export default abstract class Processor<P extends ProcessorStore, I extends Inde
   }
 
   protected initialize(endHeight?: number): Promise<State> {
-    return this.processorStore.initializeState(endHeight);
+    return this.processorStore.initializeState(this.name, this.startHeight, endHeight);
   }
 
   @timedMethod
@@ -184,12 +199,11 @@ export default abstract class Processor<P extends ProcessorStore, I extends Inde
   protected async getSubmitterId(
     store: P,
     blockHeight: number,
-    extrinsic: Extrinsic | null,
+    extrinsic: IndexerExtrinsic | null,
   ): Promise<number | undefined> {
     if (extrinsic === null) return undefined;
-
-    const id = await store.getExtrinsicSubmitterId(blockHeight, extrinsic);
-    return id;
+    const e = await store.getExtrinsic(blockHeight, extrinsic.indexInBlock);
+    return e?.submitterId ?? undefined;
   }
 
   @timedMethod
@@ -269,9 +283,9 @@ export default abstract class Processor<P extends ProcessorStore, I extends Inde
   }
 
   private async updateState(store: P, block: Block) {
-    const count = await store.updateStates(this.name, block.height);
+    const result = await store.updateStates(this.name, block.height);
 
-    assert(count === 1, 'failed to update state, maybe another process is running');
+    assert(result.count === 1, 'failed to update state, maybe another process is running');
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -318,7 +332,7 @@ export default abstract class Processor<P extends ProcessorStore, I extends Inde
       );
 
       for (const block of blocks) {
-        const state = this.processorStore.getCurrentState(this.name);
+        const state = await this.processorStore.getCurrentState(this.name);
 
         assert(
           state.height === lastBlock,
@@ -334,7 +348,7 @@ export default abstract class Processor<P extends ProcessorStore, I extends Inde
         }
 
         if (this.shouldProcessBlock(block)) {
-          await this.processorStore.$transaction(
+          await this.processorStore.transaction(
             async (txClient) => {
               await this.preBlockHook(txClient, block);
               await this.handleBlock(txClient, block);
