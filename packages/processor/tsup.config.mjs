@@ -8,4 +8,14 @@ export default defineConfig({
   format: ['cjs', 'esm'],
   entry: ['./src/*.ts'],
   target: 'es2022',
+  outExtension: ({ format }) => ({
+    js: format === 'esm' ? '.mjs' : '.cjs',
+    dts: format === 'esm' ? '.d.mts' : '.d.cts',
+  }),
+  esbuildPlugins: [
+    esbuildPluginFilePathExtensions({
+      cjsExtension: 'cjs',
+      esmExtension: 'mjs',
+    }),
+  ],
 });
