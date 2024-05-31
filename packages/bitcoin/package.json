@@ -1,10 +1,10 @@
 {
   "name": "@chainflip/bitcoin",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "type": "module",
   "scripts": {
     "wasm-pack": "wasm-pack build --release --target nodejs --out-dir 'wasm/built' --no-pack",
-    "prepublish": "pnpm wasm-pack && pnpm test run",
+    "prepublish": "pnpm build && pnpm test run",
     "clean": "rm -rf wasm/built dist",
     "tsup:build": "tsup --config tsup.config.mts",
     "build": "pnpm clean && pnpm wasm-pack && pnpm tsup:build",
