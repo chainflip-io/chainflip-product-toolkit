@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { decodeAddress, getNetworkForAddress } from '../index';
+import { decodeAddress, isValidAddressForNetwork } from '../index';
 
 const networks = ['mainnet', 'perseverance', 'sisyphos', 'backspin', 'regtest', 'testnet'] as const;
 
@@ -49,7 +49,7 @@ describe('bitcoin', () => {
   });
 });
 
-describe(getNetworkForAddress, () => {
+describe(isValidAddressForNetwork, () => {
   const bitcoinAddresses = {
     mainnet: {
       P2PKH: ['1PYVSoeftFP4EVBN3ou8vZctkhDthJamvp'],
@@ -69,12 +69,14 @@ describe(getNetworkForAddress, () => {
   describe.each(Object.entries(bitcoinAddresses))('for %s', (network, addressTypes) => {
     describe.each(Object.entries(addressTypes))('for %s', (kind, addresses) => {
       it.each(addresses)('gets the network for %s', (address) => {
-        expect(getNetworkForAddress(address)).toBe(network);
+        expect(
+          isValidAddressForNetwork(address, network as 'mainnet' | 'testnet' | 'regtest'),
+        ).toBe(true);
       });
     });
   });
 
   it('returns null for invalid addresses', () => {
-    expect(getNetworkForAddress('invalid')).toBe(null);
+    expect(isValidAddressForNetwork('invalid', 'mainnet')).toBe(false);
   });
 });

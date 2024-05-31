@@ -6,19 +6,19 @@ type BitcoinNetwork = 'mainnet' | 'testnet' | 'regtest';
 
 export const networkToBitcoinNetwork = (
   network: ChainflipNetwork | BitcoinNetwork,
-): Capitalize<BitcoinNetwork> | null => {
+): Bitcoin.BitcoinNetwork => {
   switch (network) {
     case 'mainnet':
-      return 'Mainnet';
+      return Bitcoin.BitcoinNetwork.Mainnet;
     case 'perseverance':
     case 'sisyphos':
     case 'testnet':
-      return 'Testnet';
+      return Bitcoin.BitcoinNetwork.Testnet;
     case 'backspin':
     case 'regtest':
-      return 'Regtest';
+      return Bitcoin.BitcoinNetwork.Regtest;
     default:
-      return null;
+      throw new Error(`Invalid network: ${network as unknown as string}`);
   }
 };
 
@@ -28,7 +28,6 @@ export const decodeAddress = (
   chainflipOrBitcoinNetwork: ChainflipNetwork | BitcoinNetwork,
 ) => {
   const network = networkToBitcoinNetwork(chainflipOrBitcoinNetwork);
-  if (!network) throw new Error(`Invalid network: ${chainflipOrBitcoinNetwork}`);
   if (!/^0x[\da-f]+$/i.test(address)) {
     throw new Error('bytes must be hex-encoded with a 0x prefix');
   }
@@ -36,28 +35,13 @@ export const decodeAddress = (
   if (!(type in Bitcoin.AddressEncoding)) throw new Error(`Invalid address type: ${type}`);
 
   try {
-    return Bitcoin.decode(address, Bitcoin.AddressEncoding[type], Bitcoin.BitcoinNetwork[network]);
+    return Bitcoin.decode(address, Bitcoin.AddressEncoding[type], network);
   } catch {
     throw new Error('Invalid address');
   }
 };
 
-export const getNetworkForAddress = (address: string) => {
-  let network = null;
-  try {
-    network = Bitcoin.getNetworkForAddress(address);
-  } catch {
-    // pass
-  }
-
-  switch (network) {
-    case Bitcoin.BitcoinNetwork.Mainnet:
-      return 'mainnet';
-    case Bitcoin.BitcoinNetwork.Testnet:
-      return 'testnet';
-    case Bitcoin.BitcoinNetwork.Regtest:
-      return 'regtest';
-    default:
-      return null;
-  }
-};
+export const isValidAddressForNetwork = (
+  address: string,
+  network: ChainflipNetwork | BitcoinNetwork,
+) => Bitcoin.isValidAddressForNetwork(address, networkToBitcoinNetwork(network));
