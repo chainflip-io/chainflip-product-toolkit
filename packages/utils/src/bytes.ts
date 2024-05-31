@@ -64,3 +64,6 @@ export const decodeBytesWithCharset = (input: string, charset: string): Uint8Arr
 
   return new Uint8Array(convertBase(bytes, charset.length, 256));
 };
+
+export const reverseBytes = (input: HexString): HexString =>
+  bytesToHex(hexToBytes(input).reverse());

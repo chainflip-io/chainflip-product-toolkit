@@ -1,5 +1,11 @@
 import { describe, it, expect } from 'vitest';
-import { bytesToHex, decodeBytesWithCharset, encodeBytesWithCharset, hexToBytes } from '../bytes';
+import {
+  bytesToHex,
+  decodeBytesWithCharset,
+  encodeBytesWithCharset,
+  hexToBytes,
+  reverseBytes,
+} from '../bytes';
 import { HexString } from '../types';
 
 describe(bytesToHex, () => {
@@ -51,5 +57,11 @@ describe(decodeBytesWithCharset, () => {
 
   it('throws if the input contains invalid characters', () => {
     expect(() => decodeBytesWithCharset('1000002', '01')).toThrow('Invalid input');
+  });
+});
+
+describe(reverseBytes, () => {
+  it('reverse a byte string', () => {
+    expect(reverseBytes('0x0102030405')).toEqual('0x0504030201');
   });
 });
