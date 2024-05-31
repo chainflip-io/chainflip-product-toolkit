@@ -64,4 +64,12 @@ describe(reverseBytes, () => {
   it('reverse a byte string', () => {
     expect(reverseBytes('0x0102030405')).toEqual('0x0504030201');
   });
+
+  it('reverse a byte string without a 0x prefix', () => {
+    expect(reverseBytes('0102030405')).toEqual('0504030201');
+  });
+
+  it('throws if the input is not a valid hex string', () => {
+    expect(() => reverseBytes('0x01020304g5')).toThrow('Invalid hex string');
+  });
 });

@@ -65,5 +65,15 @@ export const decodeBytesWithCharset = (input: string, charset: string): Uint8Arr
   return new Uint8Array(convertBase(bytes, charset.length, 256));
 };
 
-export const reverseBytes = (input: HexString): HexString =>
-  bytesToHex(hexToBytes(input).reverse());
+const addPrefix = (input: string): HexString => {
+  const [, bytes] = /^(?:0x)?([a-f\d]*)$/i.exec(input) || [];
+  assert(bytes, 'Invalid hex string');
+  return `0x${bytes}`;
+};
+
+export function reverseBytes(input: HexString): HexString;
+export function reverseBytes(input: string): string;
+export function reverseBytes(input: string): string {
+  const reversed = bytesToHex(hexToBytes(addPrefix(input)).reverse());
+  return input.startsWith('0x') ? reversed : reversed.slice(2);
+}
