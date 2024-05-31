@@ -36,35 +36,25 @@ pub enum BitcoinNetwork {
 }
 
 impl BitcoinNetwork {
-    pub fn p2pkh_address_version(&self) -> u8 {
+    fn p2pkh_address_version(&self) -> u8 {
         match self {
             BitcoinNetwork::Mainnet => 0,
             BitcoinNetwork::Testnet | BitcoinNetwork::Regtest => 111,
         }
     }
 
-    pub fn p2sh_address_version(&self) -> u8 {
+    fn p2sh_address_version(&self) -> u8 {
         match self {
             BitcoinNetwork::Mainnet => 5,
             BitcoinNetwork::Testnet | BitcoinNetwork::Regtest => 196,
         }
     }
 
-    pub fn bech32_and_bech32m_address_hrp(&self) -> &'static str {
+    fn bech32_and_bech32m_address_hrp(&self) -> &'static str {
         match self {
             BitcoinNetwork::Mainnet => "bc",
             BitcoinNetwork::Testnet => "tb",
             BitcoinNetwork::Regtest => "bcrt",
-        }
-    }
-}
-
-impl std::fmt::Display for BitcoinNetwork {
-    fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
-        match self {
-            BitcoinNetwork::Mainnet => write!(f, "main"),
-            BitcoinNetwork::Testnet => write!(f, "test"),
-            BitcoinNetwork::Regtest => write!(f, "regtest"),
         }
     }
 }
@@ -142,11 +132,7 @@ impl ScriptPubkey {
         }
     }
 
-    pub fn bytes(&self) -> Vec<u8> {
-        self.program().raw()
-    }
-
-    pub fn to_address(&self, network: &BitcoinNetwork) -> Result<String, JsError> {
+    fn to_address(&self, network: &BitcoinNetwork) -> Result<String, JsError> {
         let (data, maybe_bech, version) = match self {
             ScriptPubkey::P2PKH(data) => (&data[..], None, network.p2pkh_address_version()),
             ScriptPubkey::P2SH(data) => (&data[..], None, network.p2sh_address_version()),
@@ -179,7 +165,7 @@ impl ScriptPubkey {
         }
     }
 
-    pub fn try_from_address(address: &str, network: &BitcoinNetwork) -> Result<Self, Error> {
+    fn try_from_address(address: &str, network: &BitcoinNetwork) -> Result<Self, Error> {
         // See https://en.bitcoin.it/wiki/Base58Check_encoding
         fn try_decode_as_base58(address: &str, network: &BitcoinNetwork) -> Option<ScriptPubkey> {
             const CHECKSUM_LENGTH: usize = 4;
@@ -298,7 +284,7 @@ pub struct BitcoinScript {
 }
 
 impl BitcoinScript {
-    pub fn new(ops: &[BitcoinOp]) -> Self {
+    fn new(ops: &[BitcoinOp]) -> Self {
         let mut bytes = Vec::with_capacity(ops.iter().map(|op| op.size()).sum::<usize>());
         for op in ops.iter() {
             op.btc_encode_to(&mut bytes);
@@ -306,10 +292,6 @@ impl BitcoinScript {
         Self {
             bytes: bytes.try_into().unwrap(),
         }
-    }
-
-    pub fn raw(self) -> Vec<u8> {
-        self.bytes
     }
 }
 
@@ -454,4 +436,19 @@ pub fn decode(
         AddressEncoding::P2WSH => ScriptPubkey::P2WSH(decode_hex(address)).to_address(&network),
         AddressEncoding::Taproot => ScriptPubkey::Taproot(decode_hex(address)).to_address(&network),
     }
+}
+
+#[wasm_bindgen(js_name = getNetworkForAddress)]
+pub fn get_network_for_address(address: &str) -> Result<BitcoinNetwork, JsError> {
+    for network in [
+        BitcoinNetwork::Mainnet,
+        BitcoinNetwork::Testnet,
+        BitcoinNetwork::Regtest,
+    ] {
+        if ScriptPubkey::try_from_address(address, &network).is_ok() {
+            return Ok(network);
+        }
+    }
+
+    Err(JsError::new("Address is not a valid Bitcoin address."))
 }

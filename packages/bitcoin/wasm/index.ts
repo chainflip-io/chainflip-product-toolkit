@@ -1,6 +1,6 @@
-import { decode, BitcoinNetwork as WasmBitcoinNetwork, AddressEncoding } from './built/bitcoin.js';
+import * as Bitcoin from './built/bitcoin.js';
 
-type BitcoinAddressType = keyof typeof AddressEncoding;
+type BitcoinAddressType = keyof typeof Bitcoin.AddressEncoding;
 type ChainflipNetwork = 'mainnet' | 'perseverance' | 'sisyphos' | 'backspin';
 type BitcoinNetwork = 'mainnet' | 'testnet' | 'regtest';
 
@@ -33,11 +33,31 @@ export const decodeAddress = (
     throw new Error('bytes must be hex-encoded with a 0x prefix');
   }
   if (address.length % 2 !== 0) throw new Error('bytes must have an even number of characters');
-  if (!(type in AddressEncoding)) throw new Error(`Invalid address type: ${type}`);
+  if (!(type in Bitcoin.AddressEncoding)) throw new Error(`Invalid address type: ${type}`);
 
   try {
-    return decode(address, AddressEncoding[type], WasmBitcoinNetwork[network]);
+    return Bitcoin.decode(address, Bitcoin.AddressEncoding[type], Bitcoin.BitcoinNetwork[network]);
   } catch {
     throw new Error('Invalid address');
+  }
+};
+
+export const getNetworkForAddress = (address: string) => {
+  let network = null;
+  try {
+    network = Bitcoin.getNetworkForAddress(address);
+  } catch {
+    // pass
+  }
+
+  switch (network) {
+    case Bitcoin.BitcoinNetwork.Mainnet:
+      return 'mainnet';
+    case Bitcoin.BitcoinNetwork.Testnet:
+      return 'testnet';
+    case Bitcoin.BitcoinNetwork.Regtest:
+      return 'regtest';
+    default:
+      return null;
   }
 };

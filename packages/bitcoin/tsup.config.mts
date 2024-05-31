@@ -19,10 +19,11 @@ export default defineConfig({
     {
       name: 'wasm',
       setup: (build) => {
-        build.onResolve({ filter: /(\.wasm|bitcoin\.js)$/ }, (args) => {
-          console.log(args);
-          return { path: args.path, namespace: 'wasm', pluginData: args.resolveDir };
-        });
+        build.onResolve({ filter: /(\.wasm|bitcoin\.js)$/ }, (args) => ({
+          path: args.path,
+          namespace: 'wasm',
+          pluginData: args.resolveDir,
+        }));
         build.onLoad({ filter: /.*/, namespace: 'wasm' }, async (args) => {
           const fullPath = path.join(args.pluginData as string, args.path);
 

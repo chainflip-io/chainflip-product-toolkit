@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { decodeAddress } from '../index';
+import { decodeAddress, getNetworkForAddress } from '../index';
 
 const networks = ['mainnet', 'perseverance', 'sisyphos', 'backspin', 'regtest', 'testnet'] as const;
 
@@ -46,5 +46,35 @@ describe('bitcoin', () => {
     expect(() => decodeAddress('0x00', 'Taproot', 'mainnet')).toThrowErrorMatchingInlineSnapshot(
       `[Error: Invalid address]`,
     );
+  });
+});
+
+describe(getNetworkForAddress, () => {
+  const bitcoinAddresses = {
+    mainnet: {
+      P2PKH: ['1PYVSoeftFP4EVBN3ou8vZctkhDthJamvp'],
+      P2SH: ['32k55FA93MYqbjhLk9hokD3P666Vz9QqKb'],
+      Taproot: ['bc1qwqdg6squsna38e46795at95yu9atm8azzmyvckulcc7kytlcckxswvvzej'],
+    },
+    testnet: {
+      P2PKH: ['mipcBbFg9gMiCh81Kj8tqqdgoZub1ZJRfn', 'n2ZtW11kqP6pf3umiU4NaSRgrL9aQJVuJV'],
+      P2SH: ['2MzQwSSnBHWHqSAqtTVQ6v47XtaisrJa1Vc'],
+      Taproot: ['tb1qw508d6qejxtdg4y5r3zarvary0c5xw7kxpjzsx'],
+    },
+    regtest: {
+      Taproot: ['bcrt1qs758ursh4q9z627kt3pp5yysm78ddny6txaqgw'],
+    },
+  };
+
+  describe.each(Object.entries(bitcoinAddresses))('for %s', (network, addressTypes) => {
+    describe.each(Object.entries(addressTypes))('for %s', (kind, addresses) => {
+      it.each(addresses)('gets the network for %s', (address) => {
+        expect(getNetworkForAddress(address)).toBe(network);
+      });
+    });
+  });
+
+  it('returns null for invalid addresses', () => {
+    expect(getNetworkForAddress('invalid')).toBe(null);
   });
 });
