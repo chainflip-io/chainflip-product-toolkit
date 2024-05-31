@@ -438,17 +438,7 @@ pub fn decode(
     }
 }
 
-#[wasm_bindgen(js_name = getNetworkForAddress)]
-pub fn get_network_for_address(address: &str) -> Result<BitcoinNetwork, JsError> {
-    for network in [
-        BitcoinNetwork::Mainnet,
-        BitcoinNetwork::Testnet,
-        BitcoinNetwork::Regtest,
-    ] {
-        if ScriptPubkey::try_from_address(address, &network).is_ok() {
-            return Ok(network);
-        }
-    }
-
-    Err(JsError::new("Address is not a valid Bitcoin address."))
+#[wasm_bindgen(js_name = isValidAddressForNetwork)]
+pub fn is_valid_address_for_network(address: &str, network: BitcoinNetwork) -> bool {
+    ScriptPubkey::try_from_address(address, &network).is_ok()
 }
