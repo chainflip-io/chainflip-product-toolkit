@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ProcessorStore } from './Processor';
 
 export type JsonObject = { [Key in string]?: JsonValue };

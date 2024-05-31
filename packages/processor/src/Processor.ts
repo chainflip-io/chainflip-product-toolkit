@@ -15,7 +15,6 @@ import {
 const sum = (arr: number[]) => arr.reduce((a, b) => a + b, 0);
 const average = (arr: number[]) => sum(arr) / arr.length;
 
-type TimedMethodName = Exclude<keyof (typeof Processor.prototype)['timings'], 'eventHandlers'>;
 export function timedMethod<P extends ProcessorStore, I extends IndexerStore>(
   target: Processor<P, I>,
   propertyKey: string,
@@ -31,21 +30,13 @@ export function timedMethod<P extends ProcessorStore, I extends IndexerStore>(
     const start = performance.now();
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
     const result = await method.apply(this, args);
-    this.timings[propertyKey as TimedMethodName] = performance.now() - start;
+    this.timings[propertyKey] = performance.now() - start;
     // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     return result;
   };
 }
 
 interface Store {
-  // // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  // $transaction(...arg: any[]): any;
-
-  // $transaction<R>(
-  //   fn: (store: Exclude<this, '$transaction'>) => Promise<R>,
-  //   options: { timeout?: number },
-  // ): Promise<this>;
-
   transaction<R>(
     fn: (store: Exclude<this, 'transaction'>) => Promise<R>,
     options: { timeout?: number },
@@ -59,7 +50,6 @@ export interface ProcessorStore extends Store {
   getExtrinsic(blockHeight: number, indexInBlock: number): Promise<Extrinsic | null>;
   updateStates(processorName: string, height: number): Promise<{ count: number }>;
   getCurrentState(processorName: string): Promise<State>;
-  // saveBlock(block: Block, validator?: { id: number }): Promise<void>;
 }
 
 export interface IndexerStore {
@@ -92,19 +82,9 @@ export default abstract class Processor<P extends ProcessorStore, I extends Inde
   protected readonly startHeight: number = -1;
 
   protected timings = {
-    buildAndSaveMetadata: 0,
-    shells: 0,
-    createExtrinsics: 0,
-    createEvents: 0,
     extrinsicHandlers: 0,
-    limitOrderHandlerPreBlockHook: 0,
-    limitOrderHandlerPostBlockHook: 0,
-    rangeOrderHandlerPreBlockHook: 0,
-    rangeOrderHandlerPostBlockHook: 0,
-    transactionFeePaidPostBlockHook: 0,
-    purgeNoFeeCollectedOrdersPostBlockHook: 0,
     eventHandlers: {} as Record<string, number[]>,
-  };
+  } as Record<string, number | Record<string, number[]>>;
 
   constructor(
     { batchSize, transactionTimeout, eventHandlers }: ProcessorOptions<P>,
@@ -123,17 +103,7 @@ export default abstract class Processor<P extends ProcessorStore, I extends Inde
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   protected async preBlockHook(_store: P, _block: Block): Promise<void> {
     this.timings = {
-      buildAndSaveMetadata: 0,
-      shells: 0,
-      createExtrinsics: 0,
-      createEvents: 0,
       extrinsicHandlers: 0,
-      limitOrderHandlerPreBlockHook: 0,
-      limitOrderHandlerPostBlockHook: 0,
-      rangeOrderHandlerPreBlockHook: 0,
-      rangeOrderHandlerPostBlockHook: 0,
-      transactionFeePaidPostBlockHook: 0,
-      purgeNoFeeCollectedOrdersPostBlockHook: 0,
       eventHandlers: {} as Record<string, number[]>,
     };
 
@@ -182,11 +152,13 @@ export default abstract class Processor<P extends ProcessorStore, I extends Inde
 
     if (handler === null) return null;
 
+    this.timings['eventHandlers'] ??= {};
+    const timing = this.timings['eventHandlers'] as Record<string, number[]>;
     return (async (args) => {
-      this.timings.eventHandlers[name] ??= [];
+      timing[name] ??= [];
       const start = performance.now();
       await handler(args);
-      this.timings.eventHandlers[name].push(performance.now() - start);
+      timing[name].push(performance.now() - start);
     }) as EventHandler<P>;
   }
 
@@ -260,7 +232,7 @@ export default abstract class Processor<P extends ProcessorStore, I extends Inde
       timings: {
         ...this.timings,
         eventHandlers: Object.fromEntries(
-          Object.entries(this.timings.eventHandlers)
+          Object.entries(this.timings.eventHandlers as Record<string, number[]>)
             .map(([key, value]) => {
               const total = sum(value);
               eventHandlerCount += value.length;
