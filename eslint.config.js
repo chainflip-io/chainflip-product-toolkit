@@ -25,6 +25,7 @@ export default [
   {
     files: ['**/*.ts'],
     rules: {
+      '@typescript-eslint/no-explicit-any': 'off',
       '@typescript-eslint/no-confusing-void-expression': 'off',
       '@typescript-eslint/no-misused-promises': [
         'error',

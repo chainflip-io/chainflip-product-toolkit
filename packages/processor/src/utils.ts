@@ -5,7 +5,6 @@ import { z } from 'zod';
 import { ParsedMetadata } from './Parser';
 import { Queue } from '@chainflip/utils/async';
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 // a function to deep diff two metadata objects
@@ -40,7 +39,6 @@ function* diff(
     }
   }
 }
-/* eslint-enable @typescript-eslint/no-explicit-any */
 /* eslint-enable @typescript-eslint/no-unsafe-member-access */
 /* eslint-enable @typescript-eslint/no-unsafe-argument */
 
