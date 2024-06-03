@@ -1,21 +1,22 @@
+import { average, sum } from '@chainflip/utils/math';
 import assert from 'assert';
 import { setTimeout as sleep } from 'timers/promises';
 import HandlerMap from './HandlerMap';
 import {
-  State,
   Block,
   Call,
-  Event,
   EventHandler,
-  ProcessorOptions,
+  EventInfo,
+  ExtrinsicInfo,
   IndexerExtrinsic,
-  Extrinsic,
+  IndexerStore,
+  Logger,
+  ProcessorOptions,
+  ProcessorStore,
+  State,
 } from './types';
 
-const sum = (arr: number[]) => arr.reduce((a, b) => a + b, 0);
-const average = (arr: number[]) => sum(arr) / arr.length;
-
-export function timedMethod<P extends ProcessorStore, I extends IndexerStore>(
+export function timedMethod<P extends ProcessorStore<any, any>, I extends IndexerStore>(
   target: Processor<P, I>,
   propertyKey: string,
   descriptor: PropertyDescriptor,
@@ -24,7 +25,7 @@ export function timedMethod<P extends ProcessorStore, I extends IndexerStore>(
   const method = descriptor.value;
   assert(typeof method === 'function');
   descriptor.value = async function (
-    this: Processor<ProcessorStore, IndexerStore>,
+    this: Processor<ProcessorStore<any, any>, IndexerStore>,
     ...args: unknown[]
   ) {
     const start = performance.now();
@@ -36,44 +37,14 @@ export function timedMethod<P extends ProcessorStore, I extends IndexerStore>(
   };
 }
 
-interface Store {
-  transaction<R>(
-    fn: (store: Exclude<this, 'transaction'>) => Promise<R>,
-    options: { timeout?: number },
-  ): Promise<this>;
-}
-
-export interface ProcessorStore extends Store {
-  initializeState(processorName: string, startHeight: number, endHeight?: number): Promise<State>;
-  getEventId(blockId: number, indexInBlock: number): Promise<bigint>;
-  getEvent(blockId: number, indexInBlock: number): Promise<Event>;
-  getExtrinsic(blockHeight: number, indexInBlock: number): Promise<Extrinsic | null>;
-  updateStates(processorName: string, height: number): Promise<{ count: number }>;
-  getCurrentState(processorName: string): Promise<State>;
-}
-
-export interface IndexerStore {
-  fetchBlocks(height: number, batchSize: number): Promise<Block[]>;
-}
-
-export interface Logger {
-  info(message: string, data?: Record<string, unknown>): void;
-  error(message: string, data?: Record<string, unknown>): void;
-  customError(
-    message: string,
-    data: Record<string, unknown>,
-    extraData?: Record<string, unknown>,
-  ): void;
-}
-
-export default abstract class Processor<P extends ProcessorStore, I extends IndexerStore> {
+export default class Processor<P extends ProcessorStore<unknown, unknown>, I extends IndexerStore> {
   batchSize = 50;
 
   transactionTimeout = 10_000;
 
   running = false;
 
-  protected abstract readonly name: string;
+  protected readonly name: string;
 
   protected readonly eventHandlerMap: HandlerMap<string, EventHandler<P>>;
 
@@ -87,7 +58,7 @@ export default abstract class Processor<P extends ProcessorStore, I extends Inde
   } as Record<string, number | Record<string, number[]>>;
 
   constructor(
-    { batchSize, transactionTimeout, eventHandlers }: ProcessorOptions<P>,
+    { batchSize, transactionTimeout, eventHandlers, name }: ProcessorOptions<P>,
     private processorStore: P,
     private indexerStore: I,
     private logger: Logger,
@@ -95,9 +66,8 @@ export default abstract class Processor<P extends ProcessorStore, I extends Inde
     if (batchSize) this.batchSize = batchSize;
     if (transactionTimeout) this.transactionTimeout = transactionTimeout;
     this.eventHandlerMap = new HandlerMap(eventHandlers);
-    this.handledEvents = new Set(
-      eventHandlers.flatMap(({ handlers }) => handlers.map(({ name }) => name)),
-    );
+    this.handledEvents = new Set(eventHandlers.flatMap(({ name }) => name));
+    this.name = name;
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -143,8 +113,12 @@ export default abstract class Processor<P extends ProcessorStore, I extends Inde
   }
 
   @timedMethod
-  protected async getEventId(store: P, blockId: number, indexInBlock: number): Promise<bigint> {
-    return store.getEventId(blockId, indexInBlock);
+  protected async getEventInfo(
+    store: P,
+    blockId: number,
+    indexInBlock: number,
+  ): Promise<EventInfo<P>> {
+    return store.getEventInfo(blockId, indexInBlock) as EventInfo<P>;
   }
 
   protected getEventHandler(name: string, specId: string) {
@@ -168,14 +142,13 @@ export default abstract class Processor<P extends ProcessorStore, I extends Inde
   }
 
   @timedMethod
-  protected async getSubmitterId(
+  protected async getExtrinsicInfo(
     store: P,
     blockHeight: number,
     extrinsic: IndexerExtrinsic | null,
-  ): Promise<number | undefined> {
+  ): Promise<ExtrinsicInfo<P> | undefined> {
     if (extrinsic === null) return undefined;
-    const e = await store.getExtrinsic(blockHeight, extrinsic.indexInBlock);
-    return e?.submitterId ?? undefined;
+    return store.getExtrinsicInfo(blockHeight, extrinsic.indexInBlock) as ExtrinsicInfo<P>;
   }
 
   @timedMethod
@@ -197,17 +170,17 @@ export default abstract class Processor<P extends ProcessorStore, I extends Inde
           continue;
         }
         try {
-          const [eventId, submitterId] = await Promise.all([
-            this.getEventId(store, block.height, event.indexInBlock),
-            this.getSubmitterId(store, block.height, event.extrinsic),
+          const [eventInfo, extrinsicInfo] = await Promise.all([
+            this.getEventInfo(store, block.height, event.indexInBlock),
+            this.getExtrinsicInfo(store, block.height, event.extrinsic),
           ]);
 
           await handler({
             prisma: store,
             block,
             event,
-            eventId,
-            submitterId,
+            eventInfo,
+            extrinsicInfo,
           });
         } catch (error) {
           this.logger.customError(
@@ -265,15 +238,13 @@ export default abstract class Processor<P extends ProcessorStore, I extends Inde
     return true;
   }
 
-  protected handleExit() {
-    // To be implemented by the child class
+  stop() {
+    this.running = false;
   }
 
   async start() {
     this.logger.info('processing blocks');
     this.running = true;
-
-    this.handleExit();
 
     this.logger.info('getting latest state');
     let { height: lastBlock } = await this.initialize();

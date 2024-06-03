@@ -61,16 +61,16 @@ importers:
 
   packages/processor:
     dependencies:
+      '@chainflip/rpc':
+        specifier: ^1.4.4
+        version: 1.4.4
+      '@chainflip/utils':
+        specifier: ^0.3.0
+        version: 0.3.0
       zod:
         specifier: ^3.22.8
         version: 3.23.8
     devDependencies:
-      '@chainflip/rpc':
-        specifier: file:../rpc
-        version: link:../rpc
-      '@chainflip/utils':
-        specifier: file:../utils
-        version: link:../utils
       '@polkadot/types':
         specifier: ^10.11.2
         version: 10.13.1
@@ -201,6 +201,9 @@ packages:
 
   '@bcoe/v8-coverage@0.2.3':
     resolution: {integrity: sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==}
+
+  '@chainflip/rpc@1.4.4':
+    resolution: {integrity: sha512-8f4s8secD6LQt/7C1FEPsZ92kVhH7B6iC3PMxHKPwDlaNM3+pF12Fx+JzS94sEwOrhNmWyn39Er2+xkcdTAAWg==}
 
   '@chainflip/utils@0.3.0':
     resolution: {integrity: sha512-csW8E3lRcSG1udN/kgsOhjZ7bfRrSbgv8Hdh/pzjM+VjQ6Hh46/LuiZHeQR0rQMimfG+lu2Afxk4jeRXRGFWTg==}
@@ -2232,6 +2235,11 @@ snapshots:
       to-fast-properties: 2.0.0
 
   '@bcoe/v8-coverage@0.2.3': {}
+
+  '@chainflip/rpc@1.4.4':
+    dependencies:
+      '@chainflip/utils': 0.3.0
+      zod: 3.23.8
 
   '@chainflip/utils@0.3.0': {}
 

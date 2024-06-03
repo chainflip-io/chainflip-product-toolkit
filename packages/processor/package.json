@@ -1,17 +1,17 @@
 {
   "name": "@chainflip/processor",
-  "version": "1.1.0",
+  "version": "1.4.0",
   "description": "",
   "type": "module",
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@chainflip/rpc": "^1.4.4",
+    "@chainflip/utils": "^0.3.0",
     "zod": "^3.22.8"
   },
   "devDependencies": {
-    "@chainflip/rpc": "file:../rpc",
-    "@chainflip/utils": "file:../utils",
     "@polkadot/types": "^10.11.2",
     "axios": "^1.6.7",
     "prettier": "^3.2.5"
@@ -26,5 +26,30 @@
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
     "access": "public"
+  },
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    "./*": {
+      "require": {
+        "types": "./dist/*.d.cts",
+        "default": "./dist/*.cjs"
+      },
+      "import": {
+        "types": "./dist/*.d.mts",
+        "default": "./dist/*.js"
+      }
+    },
+    ".": {
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      },
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.js"
+      }
+    }
   }
 }

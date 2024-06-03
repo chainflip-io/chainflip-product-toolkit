@@ -1,5 +1,3 @@
-import { ProcessorStore } from './Processor';
-
 export type JsonObject = { [Key in string]?: JsonValue };
 export interface JsonArray extends Array<JsonValue> {}
 export type JsonValue = string | number | boolean | JsonObject | JsonArray | null;
@@ -58,36 +56,50 @@ export type IndexerBlock = {
 };
 
 export type Call = IndexerCall & { extrinsic: IndexerExtrinsic };
+
 export type Block = IndexerBlock & {
   extrinsics: IndexerExtrinsic[];
   events: IndexerEvent[];
   calls: Call[];
 };
 
-export type Event = {
-  id: bigint;
-  args: JsonValue;
-  blockId: number;
-  indexInBlock: number;
-  extrinsicId: bigint | null;
-  metadataId: number;
-};
-export type Extrinsic = {
-  id: bigint;
-  submitterId: number | null;
-};
+interface Store {
+  transaction<R>(
+    fn: (store: Exclude<this, 'transaction'>) => Promise<R>,
+    options: { timeout?: number },
+  ): Promise<R>;
+}
 
-export type NonEmptyArray<T> = readonly [T, ...T[]];
+export interface ProcessorStore<Ev, Ex> extends Store {
+  initializeState(processorName: string, startHeight: number, endHeight?: number): Promise<State>;
+  getEventInfo(blockId: number, indexInBlock: number): Promise<Ev>;
+  getExtrinsicInfo(blockHeight: number, indexInBlock: number): Promise<Ex>;
+  updateStates(processorName: string, height: number): Promise<{ count: number }>;
+  getCurrentState(processorName: string): Promise<State>;
+}
 
-export type SpecEventHandlers<T extends ProcessorStore> = {
-  spec: number;
-  handlers: NonEmptyArray<{ name: string; handler: EventHandler<T> }>;
-};
+export interface IndexerStore {
+  fetchBlocks(height: number, batchSize: number): Promise<Block[]>;
+}
 
-export type ProcessorOptions<T extends ProcessorStore> = {
+export interface Logger {
+  info(message: string, data?: Record<string, unknown>): void;
+  error(message: string, data?: Record<string, unknown>): void;
+  customError(
+    message: string,
+    data: Record<string, unknown>,
+    extraData?: Record<string, unknown>,
+  ): void;
+}
+
+export type EventInfo<P extends ProcessorStore<any, any>> = ReturnType<P['getEventInfo']>;
+export type ExtrinsicInfo<P extends ProcessorStore<any, any>> = ReturnType<P['getExtrinsicInfo']>;
+
+export type ProcessorOptions<T extends ProcessorStore<any, any>> = {
   batchSize?: number;
   transactionTimeout?: number;
-  eventHandlers: NonEmptyArray<SpecEventHandlers<T>>;
+  eventHandlers: { name: string; handler: EventHandler<T>; spec: number }[];
+  name: string;
 };
 
 export type State = {
@@ -97,10 +109,10 @@ export type State = {
   name: string;
 };
 
-export type EventHandler<T extends ProcessorStore> = (args: {
+export type EventHandler<T extends ProcessorStore<any, any>> = (args: {
   prisma: T;
   event: IndexerEvent;
   block: Block;
-  eventId: bigint;
-  submitterId?: number;
+  eventInfo: Awaited<ReturnType<T['getEventInfo']>>;
+  extrinsicInfo?: Awaited<ReturnType<T['getExtrinsicInfo']>> | undefined;
 }) => Promise<void>;

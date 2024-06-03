@@ -1,9 +1,9 @@
+import { Queue } from '@chainflip/utils/async';
+import * as fs from 'fs/promises';
 import * as path from 'path';
 import * as prettier from 'prettier';
-import * as fs from 'fs/promises';
 import { z } from 'zod';
 import { ParsedMetadata } from './Parser';
-import { Queue } from '@chainflip/utils/async';
 
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
