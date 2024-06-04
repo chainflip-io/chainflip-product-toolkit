@@ -228,9 +228,9 @@ export default class Processor<P extends ProcessorStore<unknown, unknown>, I ext
   }
 
   private async updateState(store: P, block: Block) {
-    const result = await store.updateStates(this.name, block.height);
+    const updated = await store.updateState(this.name, block.height);
 
-    assert(result.count === 1, 'failed to update state, maybe another process is running');
+    assert(updated, 'failed to update state, maybe another process is running');
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

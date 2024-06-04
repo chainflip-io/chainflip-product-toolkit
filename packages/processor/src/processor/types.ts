@@ -74,7 +74,7 @@ export interface ProcessorStore<Ev, Ex> extends Store {
   initializeState(processorName: string, startHeight: number, endHeight?: number): Promise<State>;
   getEventInfo(blockId: number, indexInBlock: number): Promise<Ev>;
   getExtrinsicInfo(blockHeight: number, indexInBlock: number): Promise<Ex>;
-  updateStates(processorName: string, height: number): Promise<{ count: number }>;
+  updateState(processorName: string, height: number): Promise<boolean>;
   getCurrentState(processorName: string): Promise<State>;
 }
 
