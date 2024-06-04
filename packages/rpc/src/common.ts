@@ -1,11 +1,16 @@
+import { HexString } from '@chainflip/utils/types';
 import type { z } from 'zod';
 import {
   AssetAndChain,
   brokerRequestSwapDepositAddress,
+  cfAccountInfo,
   cfBoostPoolsDepth,
   cfEnvironment,
   cfFundingEnvironment,
   cfIngressEgressEnvironment,
+  cfPoolOrders,
+  cfPoolPriceV2,
+  cfPoolsEnvironment,
   cfSupportedAsssets,
   cfSwapRate,
   cfSwapRateV2,
@@ -15,7 +20,6 @@ import {
   stateGetMetadata,
   stateGetRuntimeVersion,
 } from './parsers';
-import { HexString } from '@chainflip/utils/types';
 
 type Nullish<T> = T | null | undefined;
 
@@ -52,11 +56,19 @@ export type RpcRequest = WithHash<{
     boostFee?: Nullish<number>,
     affiliateFees?: Nullish<{ account: string; bps: number }[]>,
   ];
+  cf_account_info: [accountId: string];
   cf_environment: [];
   cf_supported_assets: [];
   cf_swapping_environment: [];
   cf_ingress_egress_environment: [];
   cf_funding_environment: [];
+  cf_pool_orders: [
+    fromAsset: UncheckedAssetAndChain,
+    toAsset: UncheckedAssetAndChain,
+    accountId?: Nullish<string>,
+  ];
+  cf_pool_price_v2: [baseAssset: UncheckedAssetAndChain, quoteAsset: UncheckedAssetAndChain];
+  cf_pools_environment: [];
   cf_swap_rate: [
     fromAsset: UncheckedAssetAndChain,
     toAsset: UncheckedAssetAndChain,
@@ -77,10 +89,14 @@ export type RpcRequest = WithHash<{
 
 export const rpcResult = {
   broker_requestSwapDepositAddress: brokerRequestSwapDepositAddress,
+  cf_account_info: cfAccountInfo,
   cf_boost_pools_depth: cfBoostPoolsDepth,
   cf_environment: cfEnvironment,
   cf_funding_environment: cfFundingEnvironment,
   cf_ingress_egress_environment: cfIngressEgressEnvironment,
+  cf_pool_orders: cfPoolOrders,
+  cf_pool_price_v2: cfPoolPriceV2,
+  cf_pools_environment: cfPoolsEnvironment,
   cf_supported_assets: cfSupportedAsssets,
   cf_swap_rate: cfSwapRate,
   cf_swap_rate_v2: cfSwapRateV2,

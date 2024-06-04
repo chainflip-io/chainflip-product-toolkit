@@ -1,5 +1,124 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
+exports[`HttpClient > with server > gets broker account info 1`] = `
+{
+  "earned_fees": {
+    "Arbitrum": {
+      "ETH": 0n,
+      "USDC": 0n,
+    },
+    "Bitcoin": {
+      "BTC": 12369718n,
+    },
+    "Ethereum": {
+      "ETH": 1485755635703031110n,
+      "FLIP": 39432662616362382590n,
+      "USDC": 1922285993n,
+      "USDT": 729506182n,
+    },
+    "Polkadot": {
+      "DOT": 19519248600n,
+    },
+  },
+  "flip_balance": 21031117317233135625n,
+  "role": "broker",
+}
+`;
+
+exports[`HttpClient > with server > gets lp account info 1`] = `
+{
+  "balances": {
+    "Arbitrum": {
+      "ETH": 0n,
+      "USDC": 0n,
+    },
+    "Bitcoin": {
+      "BTC": 0n,
+    },
+    "Ethereum": {
+      "ETH": 0n,
+      "FLIP": 0n,
+      "USDC": 0n,
+      "USDT": 0n,
+    },
+    "Polkadot": {
+      "DOT": 0n,
+    },
+  },
+  "earned_fees": {
+    "Arbitrum": {
+      "ETH": 0n,
+      "USDC": 0n,
+    },
+    "Bitcoin": {
+      "BTC": 0n,
+    },
+    "Ethereum": {
+      "ETH": 0n,
+      "FLIP": 0n,
+      "USDC": 0n,
+      "USDT": 0n,
+    },
+    "Polkadot": {
+      "DOT": 0n,
+    },
+  },
+  "flip_balance": 4999847340286000000n,
+  "refund_addresses": {
+    "Arbitrum": null,
+    "Bitcoin": "bc1qqt3juqef9azhd0zeuamu9c30pg5xdllvmks2ja",
+    "Ethereum": "0xacd7c0481fc71dce9e3e8bd4cca5828ce8302629",
+    "Polkadot": null,
+  },
+  "role": "liquidity_provider",
+}
+`;
+
+exports[`HttpClient > with server > gets pools orders 1`] = `
+{
+  "limit_orders": {
+    "asks": [
+      {
+        "fees_earned": 0n,
+        "id": "0",
+        "lp": "cFLGvPhhrribWCx9id5kLVqwiFK4QiVNjQ6ViyaRFF2Nrgq7j",
+        "original_sell_amount": 2645327689967594500n,
+        "sell_amount": 2645327689967594500n,
+        "tick": -193955,
+        "type": "ask",
+      },
+    ],
+    "bids": [
+      {
+        "fees_earned": 0n,
+        "id": "1708299934639",
+        "lp": "cFLvCBxThPho4LP8iSP54B1iHdEtJhTHniUW5yyNcwDBGSe1X",
+        "original_sell_amount": 390425502n,
+        "sell_amount": 390425502n,
+        "tick": -196947,
+        "type": "bid",
+      },
+    ],
+  },
+  "range_orders": [
+    {
+      "fees_earned": {
+        "base": 35985487972100833n,
+        "quote": 130011380n,
+      },
+      "id": "1",
+      "liquidity": 4115587651042067n,
+      "lp": "cFM63NFq2MiujSSXUz1AfZgb4aZrkv5aWggdLkyufyTcpkrf2",
+      "range": {
+        "end": -192004,
+        "start": -198197,
+      },
+      "type": "range",
+    },
+  ],
+}
+`;
+
 exports[`HttpClient > with server > gets the environment 1`] = `
 {
   "funding": {
@@ -90,6 +209,186 @@ exports[`HttpClient > with server > gets the environment 1`] = `
       "Bitcoin": 2,
       "Ethereum": 2,
       "Polkadot": null,
+    },
+  },
+  "pools": {
+    "fees": {
+      "Arbitrum": {
+        "ETH": {
+          "limit_order_fee_hundredth_pips": 20,
+          "limit_order_total_fees_earned": {
+            "base": 0n,
+            "quote": 0n,
+          },
+          "limit_total_swap_inputs": {
+            "base": 0n,
+            "quote": 0n,
+          },
+          "quote_asset": {
+            "asset": "USDC",
+            "chain": "Ethereum",
+          },
+          "range_order_fee_hundredth_pips": 20,
+          "range_order_total_fees_earned": {
+            "base": 0n,
+            "quote": 0n,
+          },
+          "range_total_swap_inputs": {
+            "base": 0n,
+            "quote": 0n,
+          },
+        },
+        "USDC": {
+          "limit_order_fee_hundredth_pips": 20,
+          "limit_order_total_fees_earned": {
+            "base": 0n,
+            "quote": 0n,
+          },
+          "limit_total_swap_inputs": {
+            "base": 0n,
+            "quote": 0n,
+          },
+          "quote_asset": {
+            "asset": "USDC",
+            "chain": "Ethereum",
+          },
+          "range_order_fee_hundredth_pips": 20,
+          "range_order_total_fees_earned": {
+            "base": 0n,
+            "quote": 0n,
+          },
+          "range_total_swap_inputs": {
+            "base": 0n,
+            "quote": 0n,
+          },
+        },
+      },
+      "Bitcoin": {
+        "BTC": {
+          "limit_order_fee_hundredth_pips": 20,
+          "limit_order_total_fees_earned": {
+            "base": 0n,
+            "quote": 0n,
+          },
+          "limit_total_swap_inputs": {
+            "base": 0n,
+            "quote": 0n,
+          },
+          "quote_asset": {
+            "asset": "USDC",
+            "chain": "Ethereum",
+          },
+          "range_order_fee_hundredth_pips": 20,
+          "range_order_total_fees_earned": {
+            "base": 180n,
+            "quote": 19996n,
+          },
+          "range_total_swap_inputs": {
+            "base": 8996618n,
+            "quote": 999734320n,
+          },
+        },
+      },
+      "Ethereum": {
+        "ETH": {
+          "limit_order_fee_hundredth_pips": 20,
+          "limit_order_total_fees_earned": {
+            "base": 0n,
+            "quote": 0n,
+          },
+          "limit_total_swap_inputs": {
+            "base": 0n,
+            "quote": 0n,
+          },
+          "quote_asset": {
+            "asset": "USDC",
+            "chain": "Ethereum",
+          },
+          "range_order_fee_hundredth_pips": 20,
+          "range_order_total_fees_earned": {
+            "base": 20199999999986n,
+            "quote": 17964n,
+          },
+          "range_total_swap_inputs": {
+            "base": 1009979799999300014n,
+            "quote": 897936235n,
+          },
+        },
+        "FLIP": {
+          "limit_order_fee_hundredth_pips": 20,
+          "limit_order_total_fees_earned": {
+            "base": 0n,
+            "quote": 0n,
+          },
+          "limit_total_swap_inputs": {
+            "base": 0n,
+            "quote": 0n,
+          },
+          "quote_asset": {
+            "asset": "USDC",
+            "chain": "Ethereum",
+          },
+          "range_order_fee_hundredth_pips": 20,
+          "range_order_total_fees_earned": {
+            "base": 1263n,
+            "quote": 200n,
+          },
+          "range_total_swap_inputs": {
+            "base": 63099596n,
+            "quote": 9993489n,
+          },
+        },
+        "USDT": {
+          "limit_order_fee_hundredth_pips": 20,
+          "limit_order_total_fees_earned": {
+            "base": 0n,
+            "quote": 0n,
+          },
+          "limit_total_swap_inputs": {
+            "base": 0n,
+            "quote": 0n,
+          },
+          "quote_asset": {
+            "asset": "USDC",
+            "chain": "Ethereum",
+          },
+          "range_order_fee_hundredth_pips": 20,
+          "range_order_total_fees_earned": {
+            "base": 0n,
+            "quote": 0n,
+          },
+          "range_total_swap_inputs": {
+            "base": 0n,
+            "quote": 0n,
+          },
+        },
+      },
+      "Polkadot": {
+        "DOT": {
+          "limit_order_fee_hundredth_pips": 20,
+          "limit_order_total_fees_earned": {
+            "base": 0n,
+            "quote": 0n,
+          },
+          "limit_total_swap_inputs": {
+            "base": 0n,
+            "quote": 0n,
+          },
+          "quote_asset": {
+            "asset": "USDC",
+            "chain": "Ethereum",
+          },
+          "range_order_fee_hundredth_pips": 20,
+          "range_order_total_fees_earned": {
+            "base": 0n,
+            "quote": 0n,
+          },
+          "range_total_swap_inputs": {
+            "base": 0n,
+            "quote": 0n,
+          },
+        },
+      },
     },
   },
   "swapping": {
@@ -202,5 +501,34 @@ exports[`HttpClient > with server > gets the ingress/egress environment 1`] = `
     "Ethereum": 2,
     "Polkadot": null,
   },
+}
+`;
+
+exports[`HttpClient > with server > gets unregistered account info 1`] = `
+{
+  "flip_balance": 0n,
+  "role": "unregistered",
+}
+`;
+
+exports[`HttpClient > with server > gets validator account info 1`] = `
+{
+  "apy_bp": 970,
+  "bond": 225033425976807428934928n,
+  "bound_redeem_address": "0x9a449133c6a8b4e117840b69e2a1d43634f562d3",
+  "flip_balance": 252186205332783022058667n,
+  "is_bidding": true,
+  "is_current_authority": true,
+  "is_current_backup": false,
+  "is_online": true,
+  "is_qualified": true,
+  "keyholder_epochs": [
+    197,
+    198,
+  ],
+  "last_heartbeat": 2930096,
+  "reputation_points": 2880,
+  "restricted_balances": {},
+  "role": "validator",
 }
 `;

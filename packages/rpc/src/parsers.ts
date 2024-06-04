@@ -18,6 +18,14 @@ const chainAssetMapFactory = <Z extends z.ZodTypeAny>(parser: Z, defaultValue: z
     Arbitrum: z.object({ ETH: parser.default(defaultValue), USDC: parser.default(defaultValue) }),
   });
 
+const chainBaseAssetMapFactory = <Z extends z.ZodTypeAny>(parser: Z, defaultValue: z.input<Z>) =>
+  z.object({
+    Bitcoin: z.object({ BTC: parser }),
+    Ethereum: z.object({ ETH: parser, FLIP: parser, USDT: parser }),
+    Polkadot: z.object({ DOT: parser }),
+    Arbitrum: z.object({ ETH: parser.default(defaultValue), USDC: parser.default(defaultValue) }),
+  });
+
 const chainMapFactory = <Z extends z.ZodTypeAny>(parser: Z, defaultValue: z.input<Z>) =>
   z.object({
     Bitcoin: parser,
@@ -121,10 +129,34 @@ export const cfFundingEnvironment = z.object({
   minimum_funding_amount: numberOrHex,
 });
 
+export const cfPoolsEnvironment = z.object({
+  fees: chainBaseAssetMapFactory(
+    z.object({
+      limit_order_fee_hundredth_pips: z.number(),
+      range_order_fee_hundredth_pips: z.number(),
+      range_order_total_fees_earned: z.object({ base: u256, quote: u256 }),
+      limit_order_total_fees_earned: z.object({ base: u256, quote: u256 }),
+      range_total_swap_inputs: z.object({ base: u256, quote: u256 }),
+      limit_total_swap_inputs: z.object({ base: u256, quote: u256 }),
+      quote_asset: z.object({ chain: z.literal('Ethereum'), asset: z.literal('USDC') }),
+    }),
+    {
+      limit_order_fee_hundredth_pips: 0,
+      range_order_fee_hundredth_pips: 0,
+      range_order_total_fees_earned: { base: '0x0', quote: '0x0' },
+      limit_order_total_fees_earned: { base: '0x0', quote: '0x0' },
+      range_total_swap_inputs: { base: '0x0', quote: '0x0' },
+      limit_total_swap_inputs: { base: '0x0', quote: '0x0' },
+      quote_asset: { chain: 'Ethereum', asset: 'USDC' },
+    },
+  ),
+});
+
 export const cfEnvironment = z.object({
   ingress_egress: cfIngressEgressEnvironment,
   swapping: cfSwappingEnvironment,
   funding: cfFundingEnvironment,
+  pools: cfPoolsEnvironment,
 });
 
 export const cfBoostPoolsDepth = z.array(
@@ -139,4 +171,93 @@ export const brokerRequestSwapDepositAddress = z.object({
   channel_id: z.number(),
   source_chain_expiry_block: numberOrHex,
   channel_opening_fee: u256,
+});
+
+export const unregistered = z.object({
+  role: z.literal('unregistered'),
+  flip_balance: numberOrHex,
+});
+
+export const broker = z.object({
+  role: z.literal('broker'),
+  flip_balance: numberOrHex,
+  earned_fees: chainAssetMapFactory(numberOrHex, 0),
+});
+
+export const liquidityProvider = z.object({
+  role: z.literal('liquidity_provider'),
+  balances: chainAssetMapFactory(numberOrHex, '0x0'),
+  refund_addresses: chainMapFactory(z.string().nullable(), null),
+  flip_balance: numberOrHex,
+  earned_fees: chainAssetMapFactory(numberOrHex, 0),
+});
+
+export const validator = z.object({
+  role: z.literal('validator'),
+  flip_balance: numberOrHex,
+  bond: numberOrHex,
+  last_heartbeat: z.number(),
+  reputation_points: z.number(),
+  keyholder_epochs: z.array(z.number()),
+  is_current_authority: z.boolean(),
+  is_current_backup: z.boolean(),
+  is_qualified: z.boolean(),
+  is_online: z.boolean(),
+  is_bidding: z.boolean(),
+  bound_redeem_address: hexString.nullable(),
+  apy_bp: z.number().nullable(),
+  restricted_balances: z.record(hexString, numberOrHex),
+});
+
+export const cfAccountInfo = z.union([unregistered, broker, liquidityProvider, validator]);
+
+export const cfPoolPriceV2 = z.object({
+  sell: numberOrHex.nullable(),
+  buy: numberOrHex.nullable(),
+  range_order: numberOrHex,
+  base_asset: rpcAssetSchema,
+  quote_asset: rpcAssetSchema,
+});
+
+const orderId = numberOrHex.transform((n) => String(n));
+
+const limitOrder = z.object({
+  id: orderId,
+  tick: z.number(),
+  sell_amount: numberOrHex,
+  fees_earned: numberOrHex,
+  original_sell_amount: numberOrHex,
+  lp: z.string(),
+});
+
+const ask = limitOrder.transform((order) => ({
+  ...order,
+  type: 'ask' as const,
+}));
+
+const bid = limitOrder.transform((order) => ({
+  ...order,
+  type: 'bid' as const,
+}));
+
+export type RpcLimitOrder = z.infer<typeof ask> | z.infer<typeof bid>;
+
+export type RpcRangeOrder = z.infer<typeof rangeOrder>;
+
+const rangeOrder = z
+  .object({
+    id: orderId,
+    range: z.object({ start: z.number(), end: z.number() }),
+    liquidity: numberOrHex,
+    fees_earned: z.object({ base: numberOrHex, quote: numberOrHex }),
+    lp: z.string(),
+  })
+  .transform((order) => ({ ...order, type: 'range' as const }));
+
+export const cfPoolOrders = z.object({
+  limit_orders: z.object({
+    asks: z.array(ask),
+    bids: z.array(bid),
+  }),
+  range_orders: z.array(rangeOrder),
 });
