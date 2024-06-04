@@ -38,36 +38,18 @@ export const cfPrimitivesSemVer = z.object({
 });
 
 export const palletCfValidatorPalletConfigUpdate = z.union([
-  z.object({
-    __kind: z.literal('RegistrationBondPercentage'),
-    value: z.object({ percentage: z.number() }),
-  }),
-  z.object({
-    __kind: z.literal('AuctionBidCutoffPercentage'),
-    value: z.object({ percentage: z.number() }),
-  }),
-  z.object({
-    __kind: z.literal('RedemptionPeriodAsPercentage'),
-    value: z.object({ percentage: z.number() }),
-  }),
-  z.object({
-    __kind: z.literal('BackupRewardNodePercentage'),
-    value: z.object({ percentage: z.number() }),
-  }),
-  z.object({ __kind: z.literal('EpochDuration'), value: z.object({ blocks: z.number() }) }),
-  z.object({ __kind: z.literal('AuthoritySetMinSize'), value: z.object({ minSize: z.number() }) }),
+  z.object({ __kind: z.literal('RegistrationBondPercentage'), percentage: z.number() }),
+  z.object({ __kind: z.literal('AuctionBidCutoffPercentage'), percentage: z.number() }),
+  z.object({ __kind: z.literal('RedemptionPeriodAsPercentage'), percentage: z.number() }),
+  z.object({ __kind: z.literal('BackupRewardNodePercentage'), percentage: z.number() }),
+  z.object({ __kind: z.literal('EpochDuration'), blocks: z.number() }),
+  z.object({ __kind: z.literal('AuthoritySetMinSize'), minSize: z.number() }),
   z.object({
     __kind: z.literal('AuctionParameters'),
-    value: z.object({ parameters: palletCfValidatorAuctionResolverSetSizeParameters }),
+    parameters: palletCfValidatorAuctionResolverSetSizeParameters,
   }),
-  z.object({
-    __kind: z.literal('MinimumReportedCfeVersion'),
-    value: z.object({ version: cfPrimitivesSemVer }),
-  }),
-  z.object({
-    __kind: z.literal('MaxAuthoritySetContractionPercentage'),
-    value: z.object({ percentage: z.number() }),
-  }),
+  z.object({ __kind: z.literal('MinimumReportedCfeVersion'), version: cfPrimitivesSemVer }),
+  z.object({ __kind: z.literal('MaxAuthoritySetContractionPercentage'), percentage: z.number() }),
 ]);
 
 export const cfPrimitivesChainsAssetsAnyAsset = simpleEnum(['Eth', 'Flip', 'Usdc', 'Dot', 'Btc']);

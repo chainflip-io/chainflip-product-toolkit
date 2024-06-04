@@ -6,8 +6,9 @@ import { TypeRegistry, Metadata, TypeDefInfo } from '@polkadot/types';
 import { TypeDef } from '@polkadot/types/types';
 import { Network, networkToRpcUrl, specVersionCache } from './utils';
 import { HttpClient } from '@chainflip/rpc';
+import { uncapitalize } from '@chainflip/utils/string';
 
-const metadataDir = path.join(import.meta.dirname, '..', 'metadata');
+const metadataDir = path.join(import.meta.dirname, '..', '..', 'metadata');
 
 export type MetadataOpts = {
   network?: Network;
@@ -40,6 +41,7 @@ export type StructType = {
   type: 'struct';
   name?: string;
   fields: Record<string, ResolvedType>;
+  additionalFields?: Record<string, string>;
 };
 
 export type MapType = {
@@ -87,9 +89,13 @@ const resolveType = (metadata: Metadata, type: TypeDef, palletName: string): Res
       case TypeDefInfo.Enum: {
         assert(hasSubs(type));
 
+        assert(type.lookupName, 'Enum type must have a lookupName');
+
+        console.log(type.lookupName, uncapitalize(type.lookupName));
+
         const result: EnumType = {
           type: 'enum',
-          name: genericNamespace(type.namespace!, palletName),
+          name: uncapitalize(type.lookupName),
           values: [],
         };
 
@@ -153,7 +159,7 @@ const resolveType = (metadata: Metadata, type: TypeDef, palletName: string): Res
         assert(hasSubs(type));
         return {
           type: 'enum',
-          name: type.typeName!,
+          name: uncapitalize(type.typeName!),
           values: [
             {
               name: 'Ok',
@@ -281,7 +287,13 @@ export default class Parser {
   async fetchAndParseSpec() {
     const specVersion = await this.fetchSpecVersion();
 
-    const outfile = path.join(import.meta.dirname, '..', 'generated', `types-${specVersion}.json`);
+    const outfile = path.join(
+      import.meta.dirname,
+      '..',
+      '..',
+      'generated',
+      `types-${specVersion}.json`,
+    );
 
     let metadata = await fs
       .readFile(outfile, 'utf8')

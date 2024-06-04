@@ -4,7 +4,7 @@ import {
   cfAmmCommonPoolPairsMap,
   cfPrimitivesChainsAssetsAnyAsset,
   numberOrHex,
-  palletCfPoolsPalletIncreaseOrDecrease,
+  palletCfPoolsIncreaseOrDecreaseRangeOrderChange,
 } from '../common';
 
 export const liquidityPoolsRangeOrderUpdated = z.object({
@@ -13,7 +13,7 @@ export const liquidityPoolsRangeOrderUpdated = z.object({
   quoteAsset: cfPrimitivesChainsAssetsAnyAsset,
   id: numberOrHex,
   tickRange: z.object({ start: z.number(), end: z.number() }),
-  sizeChange: palletCfPoolsPalletIncreaseOrDecrease.nullish(),
+  sizeChange: palletCfPoolsIncreaseOrDecreaseRangeOrderChange.nullish(),
   liquidityTotal: numberOrHex,
   collectedFees: cfAmmCommonPoolPairsMap,
 });

@@ -211,32 +211,17 @@ export const palletCfValidatorAuctionResolverSetSizeParameters = z.object({
 });
 
 export const palletCfValidatorPalletConfigUpdate = z.union([
-  z.object({
-    __kind: z.literal('RegistrationBondPercentage'),
-    value: z.object({ percentage: z.number() }),
-  }),
-  z.object({
-    __kind: z.literal('AuctionBidCutoffPercentage'),
-    value: z.object({ percentage: z.number() }),
-  }),
-  z.object({
-    __kind: z.literal('RedemptionPeriodAsPercentage'),
-    value: z.object({ percentage: z.number() }),
-  }),
-  z.object({
-    __kind: z.literal('BackupRewardNodePercentage'),
-    value: z.object({ percentage: z.number() }),
-  }),
-  z.object({ __kind: z.literal('EpochDuration'), value: z.object({ blocks: z.number() }) }),
-  z.object({ __kind: z.literal('AuthoritySetMinSize'), value: z.object({ minSize: z.number() }) }),
+  z.object({ __kind: z.literal('RegistrationBondPercentage'), percentage: z.number() }),
+  z.object({ __kind: z.literal('AuctionBidCutoffPercentage'), percentage: z.number() }),
+  z.object({ __kind: z.literal('RedemptionPeriodAsPercentage'), percentage: z.number() }),
+  z.object({ __kind: z.literal('BackupRewardNodePercentage'), percentage: z.number() }),
+  z.object({ __kind: z.literal('EpochDuration'), blocks: z.number() }),
+  z.object({ __kind: z.literal('AuthoritySetMinSize'), minSize: z.number() }),
   z.object({
     __kind: z.literal('AuctionParameters'),
-    value: z.object({ parameters: palletCfValidatorAuctionResolverSetSizeParameters }),
+    parameters: palletCfValidatorAuctionResolverSetSizeParameters,
   }),
-  z.object({
-    __kind: z.literal('MinimumReportedCfeVersion'),
-    value: z.object({ version: cfPrimitivesSemVer }),
-  }),
+  z.object({ __kind: z.literal('MinimumReportedCfeVersion'), version: cfPrimitivesSemVer }),
 ]);
 
 export const cfPrimitivesChainsForeignChain = simpleEnum(['Ethereum', 'Polkadot', 'Bitcoin']);
@@ -377,7 +362,7 @@ export const cfChainsSwapOrigin = z.union([
       depositBlockHeight: numberOrHex,
     }),
   }),
-  z.object({ __kind: z.literal('Vault'), value: z.object({ txHash: hexString }) }),
+  z.object({ __kind: z.literal('Vault'), txHash: hexString }),
 ]);
 
 export const cfChainsAddressForeignChainAddress = z.union([
@@ -438,7 +423,12 @@ export const palletCfPoolsRangeOrderChange = z.object({
   amounts: palletCfPoolsAssetsMap,
 });
 
-export const palletCfPoolsPalletIncreaseOrDecrease = z.union([
+export const palletCfPoolsIncreaseOrDecreaseRangeOrderChange = z.union([
   z.object({ __kind: z.literal('Increase'), value: palletCfPoolsRangeOrderChange }),
   z.object({ __kind: z.literal('Decrease'), value: palletCfPoolsRangeOrderChange }),
+]);
+
+export const palletCfPoolsIncreaseOrDecreaseU128 = z.union([
+  z.object({ __kind: z.literal('Increase'), value: numberOrHex }),
+  z.object({ __kind: z.literal('Decrease'), value: numberOrHex }),
 ]);

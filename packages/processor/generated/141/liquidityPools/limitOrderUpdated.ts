@@ -4,7 +4,7 @@ import {
   cfAmmCommonSide,
   cfPrimitivesChainsAssetsAnyAsset,
   numberOrHex,
-  palletCfPoolsPalletIncreaseOrDecrease,
+  palletCfPoolsIncreaseOrDecreaseU128,
 } from '../common';
 
 export const liquidityPoolsLimitOrderUpdated = z.object({
@@ -14,7 +14,7 @@ export const liquidityPoolsLimitOrderUpdated = z.object({
   side: cfAmmCommonSide,
   id: numberOrHex,
   tick: z.number(),
-  sellAmountChange: palletCfPoolsPalletIncreaseOrDecrease.nullish(),
+  sellAmountChange: palletCfPoolsIncreaseOrDecreaseU128.nullish(),
   sellAmountTotal: numberOrHex,
   collectedFees: numberOrHex,
   boughtAmount: numberOrHex,

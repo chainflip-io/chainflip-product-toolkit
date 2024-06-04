@@ -36,7 +36,7 @@ abstract class CodegenResult {
     return this.code;
   }
 
-  getDirectDependencies() {
+  getImportStatements() {
     const depMap = this.dependencies.reduce<Record<string, Set<string>>>((acc, dep) => {
       if (dep instanceof Identifier) {
         acc[dep.pkg] ??= new Set();
@@ -69,7 +69,7 @@ class Identifier extends CodegenResult {
     super(identifier);
   }
 
-  getDirectDependencies(): string[] {
+  getImportStatements(): string[] {
     const pkg = this.pkg === 'common' ? '../common' : this.pkg;
 
     return [`import { ${this.toString()} } from '${pkg}';`];
@@ -153,9 +153,8 @@ export default class CodeGenerator {
   }
 
   private generateEnum(def: EnumType): Identifier {
-    const identifier = nameToIdentifier(def.name);
-
-    if (this.registry.types.has(identifier)) return new Identifier(identifier);
+    console.log(def.name);
+    if (this.registry.types.has(def.name)) return new Identifier(def.name);
 
     // "isSimple" means that none of the variants have any associated data, e.g.
     // `enum Foo { A, B, C }` and not `enum Foo { A(u32), B { field: u32 }, C }`
@@ -176,6 +175,19 @@ export default class CodeGenerator {
             return `z.object({ __kind: z.literal('${v.name}') })`;
           }
 
+          if (v.value.type === 'struct' && Object.keys(v.value.fields).length === 1) {
+            const value = this.generateStruct({
+              ...v.value,
+              additionalFields: {
+                __kind: `z.literal('${v.name}')`,
+              },
+            });
+
+            dependencies.push(value);
+
+            return value.toString();
+          }
+
           const value = this.generateResolvedType(v.value);
 
           dependencies.push(value);
@@ -185,9 +197,9 @@ export default class CodeGenerator {
         .join(', ')}])`;
     }
 
-    this.registry.types.set(identifier, new Code(generated, dependencies));
+    this.registry.types.set(def.name, new Code(generated, dependencies));
 
-    return new Identifier(identifier);
+    return new Identifier(def.name);
   }
 
   private generateStruct(def: StructType): CodegenResult {
@@ -200,22 +212,26 @@ export default class CodeGenerator {
     const dependencies: CodegenResult[] = [];
 
     const code = new Code(
-      `z.object({ ${Object.entries(def.fields)
-        .filter(([, value]) => !isNull(value))
-        .map(([key, value]) => {
-          const resolvedType = this.generateResolvedType(value);
-          dependencies.push(resolvedType);
+      `z.object({ ${Object.entries(def.additionalFields ?? {})
+        .map(([key, value]) => `${key}: ${value}`)
+        .concat(
+          Object.entries(def.fields)
+            .filter(([, value]) => !isNull(value))
+            .map(([key, value]) => {
+              const resolvedType = this.generateResolvedType(value);
+              dependencies.push(resolvedType);
 
-          if (resolvedType instanceof Identifier) {
-            const identifier = resolvedType.toString();
+              if (resolvedType instanceof Identifier) {
+                const identifier = resolvedType.toString();
 
-            if (identifier === key) return key;
+                if (identifier === key) return key;
 
-            return `${key}: ${identifier}`;
-          }
+                return `${key}: ${identifier}`;
+              }
 
-          return `${key}: ${resolvedType.toString()}`;
-        })
+              return `${key}: ${resolvedType.toString()}`;
+            }),
+        )
         .join(', ')} })`,
       dependencies,
     );
@@ -305,7 +321,7 @@ export default class CodeGenerator {
     specVersion: number,
     def: Record<PalletName, Record<EventName, ResolvedType>>,
   ): Promise<void> {
-    const generatedDir = path.join(import.meta.dirname, '..', 'generated');
+    const generatedDir = path.join(import.meta.dirname, '..', '..', 'generated');
     await fs.mkdir(generatedDir, { recursive: true });
     const specDir = path.join(generatedDir, String(specVersion));
     await fs.rm(specDir, { recursive: true }).catch(() => null);
@@ -340,7 +356,7 @@ export default class CodeGenerator {
         const generated = await formatCode(
           [
             "import { z } from 'zod';",
-            ...generatedEvent.getDirectDependencies(),
+            ...generatedEvent.getImportStatements(),
             '',
             `export const ${parserName} = ${generatedEvent.toString()};`,
             '',
@@ -368,7 +384,7 @@ export default class CodeGenerator {
     const generated: string[] = [];
 
     for (const [identifier, type] of this.registry.types.entries()) {
-      imports.push(...type.getDirectDependencies().filter((dep) => !dep.includes('../common')));
+      imports.push(...type.getImportStatements().filter((dep) => !dep.includes('../common')));
       generated.push(`export const ${identifier} = ${type.toString()};`);
       generated.push('');
     }

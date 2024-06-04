@@ -23,7 +23,7 @@
             },
             "class": {
               "type": "enum",
-              "name": "frame_support::dispatch::DispatchClass",
+              "name": "frameSupportDispatchDispatchClass",
               "values": [
                 {
                   "name": "Normal",
@@ -50,7 +50,7 @@
             },
             "paysFee": {
               "type": "enum",
-              "name": "frame_support::dispatch::Pays",
+              "name": "frameSupportDispatchPays",
               "values": [
                 {
                   "name": "Yes",
@@ -77,7 +77,7 @@
       "fields": {
         "dispatchError": {
           "type": "enum",
-          "name": "sp_runtime::DispatchError",
+          "name": "spRuntimeDispatchError",
           "values": [
             {
               "name": "Other",
@@ -146,7 +146,7 @@
               "name": "Token",
               "value": {
                 "type": "enum",
-                "name": "sp_runtime::TokenError",
+                "name": "spRuntimeTokenError",
                 "values": [
                   {
                     "name": "FundsUnavailable",
@@ -225,7 +225,7 @@
               "name": "Arithmetic",
               "value": {
                 "type": "enum",
-                "name": "sp_arithmetic::ArithmeticError",
+                "name": "spArithmeticArithmeticError",
                 "values": [
                   {
                     "name": "Underflow",
@@ -255,7 +255,7 @@
               "name": "Transactional",
               "value": {
                 "type": "enum",
-                "name": "sp_runtime::TransactionalError",
+                "name": "spRuntimeTransactionalError",
                 "values": [
                   {
                     "name": "LimitReached",
@@ -324,7 +324,7 @@
             },
             "class": {
               "type": "enum",
-              "name": "frame_support::dispatch::DispatchClass",
+              "name": "frameSupportDispatchDispatchClass",
               "values": [
                 {
                   "name": "Normal",
@@ -351,7 +351,7 @@
             },
             "paysFee": {
               "type": "enum",
-              "name": "frame_support::dispatch::Pays",
+              "name": "frameSupportDispatchPays",
               "values": [
                 {
                   "name": "Yes",
@@ -415,7 +415,7 @@
       "values": [
         {
           "type": "enum",
-          "name": "cf_primitives::chains::assets::eth::Asset",
+          "name": "cfPrimitivesChainsAssetsEthAsset",
           "values": [
             {
               "name": "Eth",
@@ -451,7 +451,7 @@
       "values": [
         {
           "type": "enum",
-          "name": "cf_primitives::chains::assets::eth::Asset",
+          "name": "cfPrimitivesChainsAssetsEthAsset",
           "values": [
             {
               "name": "Eth",
@@ -509,7 +509,7 @@
       "fields": {
         "safeMode": {
           "type": "enum",
-          "name": "pallet_cf_environment::SafeModeUpdate",
+          "name": "palletCfEnvironmentSafeModeUpdate",
           "values": [
             {
               "name": "CodeRed",
@@ -691,7 +691,7 @@
                   },
                   "witnesser": {
                     "type": "enum",
-                    "name": "pallet_cf_witnesser::PalletSafeMode",
+                    "name": "palletCfWitnesserPalletSafeMode",
                     "values": [
                       {
                         "name": "CodeGreen",
@@ -792,7 +792,7 @@
       "fields": {
         "who": {
           "type": "enum",
-          "name": "pallet_cf_flip::imbalances::ImbalanceSource",
+          "name": "palletCfFlipImbalancesImbalanceSource",
           "values": [
             {
               "name": "External",
@@ -805,7 +805,7 @@
               "name": "Internal",
               "value": {
                 "type": "enum",
-                "name": "pallet_cf_flip::imbalances::InternalSource",
+                "name": "palletCfFlipImbalancesInternalSource",
                 "values": [
                   {
                     "name": "Account",
@@ -1090,7 +1090,7 @@
         },
         "role": {
           "type": "enum",
-          "name": "cf_primitives::AccountRole",
+          "name": "cfPrimitivesAccountRole",
           "values": [
             {
               "name": "Unregistered",
@@ -1158,7 +1158,7 @@
         },
         "error": {
           "type": "enum",
-          "name": "sp_runtime::DispatchError",
+          "name": "spRuntimeDispatchError",
           "values": [
             {
               "name": "Other",
@@ -1227,7 +1227,7 @@
               "name": "Token",
               "value": {
                 "type": "enum",
-                "name": "sp_runtime::TokenError",
+                "name": "spRuntimeTokenError",
                 "values": [
                   {
                     "name": "FundsUnavailable",
@@ -1306,7 +1306,7 @@
               "name": "Arithmetic",
               "value": {
                 "type": "enum",
-                "name": "sp_arithmetic::ArithmeticError",
+                "name": "spArithmeticArithmeticError",
                 "values": [
                   {
                     "name": "Underflow",
@@ -1336,7 +1336,7 @@
               "name": "Transactional",
               "value": {
                 "type": "enum",
-                "name": "sp_runtime::TransactionalError",
+                "name": "spRuntimeTransactionalError",
                 "values": [
                   {
                     "name": "LimitReached",
@@ -1411,7 +1411,7 @@
       "fields": {
         "newPhase": {
           "type": "enum",
-          "name": "pallet_cf_validator::RotationPhase",
+          "name": "palletCfValidatorRotationPhase",
           "values": [
             {
               "name": "Idle",
@@ -1735,7 +1735,7 @@
       "fields": {
         "update": {
           "type": "enum",
-          "name": "pallet_cf_validator::PalletConfigUpdate",
+          "name": "palletCfValidatorPalletConfigUpdate",
           "values": [
             {
               "name": "RegistrationBondPercentage",
@@ -1943,7 +1943,7 @@
     },
     "FailedExecution": {
       "type": "enum",
-      "name": "sp_runtime::DispatchError",
+      "name": "spRuntimeDispatchError",
       "values": [
         {
           "name": "Other",
@@ -2012,7 +2012,7 @@
           "name": "Token",
           "value": {
             "type": "enum",
-            "name": "sp_runtime::TokenError",
+            "name": "spRuntimeTokenError",
             "values": [
               {
                 "name": "FundsUnavailable",
@@ -2091,7 +2091,7 @@
           "name": "Arithmetic",
           "value": {
             "type": "enum",
-            "name": "sp_arithmetic::ArithmeticError",
+            "name": "spArithmeticArithmeticError",
             "values": [
               {
                 "name": "Underflow",
@@ -2121,7 +2121,7 @@
           "name": "Transactional",
           "value": {
             "type": "enum",
-            "name": "sp_runtime::TransactionalError",
+            "name": "spRuntimeTransactionalError",
             "values": [
               {
                 "name": "LimitReached",
@@ -2213,7 +2213,7 @@
         },
         "error": {
           "type": "enum",
-          "name": "sp_runtime::DispatchError",
+          "name": "spRuntimeDispatchError",
           "values": [
             {
               "name": "Other",
@@ -2282,7 +2282,7 @@
               "name": "Token",
               "value": {
                 "type": "enum",
-                "name": "sp_runtime::TokenError",
+                "name": "spRuntimeTokenError",
                 "values": [
                   {
                     "name": "FundsUnavailable",
@@ -2361,7 +2361,7 @@
               "name": "Arithmetic",
               "value": {
                 "type": "enum",
-                "name": "sp_arithmetic::ArithmeticError",
+                "name": "spArithmeticArithmeticError",
                 "values": [
                   {
                     "name": "Underflow",
@@ -2391,7 +2391,7 @@
               "name": "Transactional",
               "value": {
                 "type": "enum",
-                "name": "sp_runtime::TransactionalError",
+                "name": "spRuntimeTransactionalError",
                 "values": [
                   {
                     "name": "LimitReached",
@@ -2449,7 +2449,7 @@
       "fields": {
         "proposal": {
           "type": "enum",
-          "name": "pallet_cf_tokenholder_governance::Proposal",
+          "name": "palletCfTokenholderGovernanceProposal",
           "values": [
             {
               "name": "SetGovernanceKey",
@@ -2458,7 +2458,7 @@
                 "values": [
                   {
                     "type": "enum",
-                    "name": "cf_primitives::chains::ForeignChain",
+                    "name": "cfPrimitivesChainsForeignChain",
                     "values": [
                       {
                         "name": "__Unused0",
@@ -2513,7 +2513,7 @@
       "fields": {
         "proposal": {
           "type": "enum",
-          "name": "pallet_cf_tokenholder_governance::Proposal",
+          "name": "palletCfTokenholderGovernanceProposal",
           "values": [
             {
               "name": "SetGovernanceKey",
@@ -2522,7 +2522,7 @@
                 "values": [
                   {
                     "type": "enum",
-                    "name": "cf_primitives::chains::ForeignChain",
+                    "name": "cfPrimitivesChainsForeignChain",
                     "values": [
                       {
                         "name": "__Unused0",
@@ -2577,7 +2577,7 @@
       "fields": {
         "proposal": {
           "type": "enum",
-          "name": "pallet_cf_tokenholder_governance::Proposal",
+          "name": "palletCfTokenholderGovernanceProposal",
           "values": [
             {
               "name": "SetGovernanceKey",
@@ -2586,7 +2586,7 @@
                 "values": [
                   {
                     "type": "enum",
-                    "name": "cf_primitives::chains::ForeignChain",
+                    "name": "cfPrimitivesChainsForeignChain",
                     "values": [
                       {
                         "name": "__Unused0",
@@ -2641,7 +2641,7 @@
       "fields": {
         "proposal": {
           "type": "enum",
-          "name": "pallet_cf_tokenholder_governance::Proposal",
+          "name": "palletCfTokenholderGovernanceProposal",
           "values": [
             {
               "name": "SetGovernanceKey",
@@ -2650,7 +2650,7 @@
                 "values": [
                   {
                     "type": "enum",
-                    "name": "cf_primitives::chains::ForeignChain",
+                    "name": "cfPrimitivesChainsForeignChain",
                     "values": [
                       {
                         "name": "__Unused0",
@@ -2705,7 +2705,7 @@
       "fields": {
         "chain": {
           "type": "enum",
-          "name": "cf_primitives::chains::ForeignChain",
+          "name": "cfPrimitivesChainsForeignChain",
           "values": [
             {
               "name": "__Unused0",
@@ -2748,7 +2748,7 @@
       "fields": {
         "chain": {
           "type": "enum",
-          "name": "cf_primitives::chains::ForeignChain",
+          "name": "cfPrimitivesChainsForeignChain",
           "values": [
             {
               "name": "__Unused0",
@@ -2797,7 +2797,7 @@
         },
         "offence": {
           "type": "enum",
-          "name": "state_chain_runtime::chainflip::offences::Offence",
+          "name": "stateChainRuntimeChainflipOffencesOffence",
           "values": [
             {
               "name": "ParticipateSigningFailed",
@@ -2883,7 +2883,7 @@
       "fields": {
         "offence": {
           "type": "enum",
-          "name": "state_chain_runtime::chainflip::offences::Offence",
+          "name": "stateChainRuntimeChainflipOffencesOffence",
           "values": [
             {
               "name": "ParticipateSigningFailed",
@@ -3126,7 +3126,7 @@
             },
             "pubKeyYParity": {
               "type": "enum",
-              "name": "cf_chains::evm::ParityBit",
+              "name": "cfChainsEvmParityBit",
               "values": [
                 {
                   "name": "Odd",
@@ -3174,7 +3174,7 @@
             },
             "pubKeyYParity": {
               "type": "enum",
-              "name": "cf_chains::evm::ParityBit",
+              "name": "cfChainsEvmParityBit",
               "values": [
                 {
                   "name": "Odd",
@@ -3218,7 +3218,7 @@
         },
         "pubKeyYParity": {
           "type": "enum",
-          "name": "cf_chains::evm::ParityBit",
+          "name": "cfChainsEvmParityBit",
           "values": [
             {
               "name": "Odd",
@@ -3288,7 +3288,7 @@
             },
             "pubKeyYParity": {
               "type": "enum",
-              "name": "cf_chains::evm::ParityBit",
+              "name": "cfChainsEvmParityBit",
               "values": [
                 {
                   "name": "Odd",
@@ -3327,7 +3327,7 @@
             },
             "pubKeyYParity": {
               "type": "enum",
-              "name": "cf_chains::evm::ParityBit",
+              "name": "cfChainsEvmParityBit",
               "values": [
                 {
                   "name": "Odd",
@@ -3410,7 +3410,7 @@
             },
             "pubKeyYParity": {
               "type": "enum",
-              "name": "cf_chains::evm::ParityBit",
+              "name": "cfChainsEvmParityBit",
               "values": [
                 {
                   "name": "Odd",
@@ -3998,7 +3998,7 @@
             },
             "pubKeyYParity": {
               "type": "enum",
-              "name": "cf_chains::evm::ParityBit",
+              "name": "cfChainsEvmParityBit",
               "values": [
                 {
                   "name": "Odd",
@@ -4077,7 +4077,7 @@
         },
         "result": {
           "type": "enum",
-          "name": "DispatchResult",
+          "name": "dispatchResult",
           "values": [
             {
               "name": "Ok",
@@ -4090,7 +4090,7 @@
               "name": "Err",
               "value": {
                 "type": "enum",
-                "name": "sp_runtime::DispatchError",
+                "name": "spRuntimeDispatchError",
                 "values": [
                   {
                     "name": "Other",
@@ -4159,7 +4159,7 @@
                     "name": "Token",
                     "value": {
                       "type": "enum",
-                      "name": "sp_runtime::TokenError",
+                      "name": "spRuntimeTokenError",
                       "values": [
                         {
                           "name": "FundsUnavailable",
@@ -4238,7 +4238,7 @@
                     "name": "Arithmetic",
                     "value": {
                       "type": "enum",
-                      "name": "sp_arithmetic::ArithmeticError",
+                      "name": "spArithmeticArithmeticError",
                       "values": [
                         {
                           "name": "Underflow",
@@ -4268,7 +4268,7 @@
                     "name": "Transactional",
                     "value": {
                       "type": "enum",
-                      "name": "sp_runtime::TransactionalError",
+                      "name": "spRuntimeTransactionalError",
                       "values": [
                         {
                           "name": "LimitReached",
@@ -4471,7 +4471,7 @@
         },
         "result": {
           "type": "enum",
-          "name": "DispatchResult",
+          "name": "dispatchResult",
           "values": [
             {
               "name": "Ok",
@@ -4484,7 +4484,7 @@
               "name": "Err",
               "value": {
                 "type": "enum",
-                "name": "sp_runtime::DispatchError",
+                "name": "spRuntimeDispatchError",
                 "values": [
                   {
                     "name": "Other",
@@ -4553,7 +4553,7 @@
                     "name": "Token",
                     "value": {
                       "type": "enum",
-                      "name": "sp_runtime::TokenError",
+                      "name": "spRuntimeTokenError",
                       "values": [
                         {
                           "name": "FundsUnavailable",
@@ -4632,7 +4632,7 @@
                     "name": "Arithmetic",
                     "value": {
                       "type": "enum",
-                      "name": "sp_arithmetic::ArithmeticError",
+                      "name": "spArithmeticArithmeticError",
                       "values": [
                         {
                           "name": "Underflow",
@@ -4662,7 +4662,7 @@
                     "name": "Transactional",
                     "value": {
                       "type": "enum",
-                      "name": "sp_runtime::TransactionalError",
+                      "name": "spRuntimeTransactionalError",
                       "values": [
                         {
                           "name": "LimitReached",
@@ -4837,7 +4837,7 @@
             "values": [
               {
                 "type": "enum",
-                "name": "cf_chains::btc::PreviousOrCurrent",
+                "name": "cfChainsBtcPreviousOrCurrent",
                 "values": [
                   {
                     "name": "Previous",
@@ -4914,7 +4914,7 @@
         },
         "result": {
           "type": "enum",
-          "name": "DispatchResult",
+          "name": "dispatchResult",
           "values": [
             {
               "name": "Ok",
@@ -4927,7 +4927,7 @@
               "name": "Err",
               "value": {
                 "type": "enum",
-                "name": "sp_runtime::DispatchError",
+                "name": "spRuntimeDispatchError",
                 "values": [
                   {
                     "name": "Other",
@@ -4996,7 +4996,7 @@
                     "name": "Token",
                     "value": {
                       "type": "enum",
-                      "name": "sp_runtime::TokenError",
+                      "name": "spRuntimeTokenError",
                       "values": [
                         {
                           "name": "FundsUnavailable",
@@ -5075,7 +5075,7 @@
                     "name": "Arithmetic",
                     "value": {
                       "type": "enum",
-                      "name": "sp_arithmetic::ArithmeticError",
+                      "name": "spArithmeticArithmeticError",
                       "values": [
                         {
                           "name": "Underflow",
@@ -5105,7 +5105,7 @@
                     "name": "Transactional",
                     "value": {
                       "type": "enum",
-                      "name": "sp_runtime::TransactionalError",
+                      "name": "spRuntimeTransactionalError",
                       "values": [
                         {
                           "name": "LimitReached",
@@ -5414,7 +5414,7 @@
         },
         "result": {
           "type": "enum",
-          "name": "DispatchResult",
+          "name": "dispatchResult",
           "values": [
             {
               "name": "Ok",
@@ -5427,7 +5427,7 @@
               "name": "Err",
               "value": {
                 "type": "enum",
-                "name": "sp_runtime::DispatchError",
+                "name": "spRuntimeDispatchError",
                 "values": [
                   {
                     "name": "Other",
@@ -5496,7 +5496,7 @@
                     "name": "Token",
                     "value": {
                       "type": "enum",
-                      "name": "sp_runtime::TokenError",
+                      "name": "spRuntimeTokenError",
                       "values": [
                         {
                           "name": "FundsUnavailable",
@@ -5575,7 +5575,7 @@
                     "name": "Arithmetic",
                     "value": {
                       "type": "enum",
-                      "name": "sp_arithmetic::ArithmeticError",
+                      "name": "spArithmeticArithmeticError",
                       "values": [
                         {
                           "name": "Underflow",
@@ -5605,7 +5605,7 @@
                     "name": "Transactional",
                     "value": {
                       "type": "enum",
-                      "name": "sp_runtime::TransactionalError",
+                      "name": "spRuntimeTransactionalError",
                       "values": [
                         {
                           "name": "LimitReached",
@@ -5810,7 +5810,7 @@
         },
         "result": {
           "type": "enum",
-          "name": "DispatchResult",
+          "name": "dispatchResult",
           "values": [
             {
               "name": "Ok",
@@ -5823,7 +5823,7 @@
               "name": "Err",
               "value": {
                 "type": "enum",
-                "name": "sp_runtime::DispatchError",
+                "name": "spRuntimeDispatchError",
                 "values": [
                   {
                     "name": "Other",
@@ -5892,7 +5892,7 @@
                     "name": "Token",
                     "value": {
                       "type": "enum",
-                      "name": "sp_runtime::TokenError",
+                      "name": "spRuntimeTokenError",
                       "values": [
                         {
                           "name": "FundsUnavailable",
@@ -5971,7 +5971,7 @@
                     "name": "Arithmetic",
                     "value": {
                       "type": "enum",
-                      "name": "sp_arithmetic::ArithmeticError",
+                      "name": "spArithmeticArithmeticError",
                       "values": [
                         {
                           "name": "Underflow",
@@ -6001,7 +6001,7 @@
                     "name": "Transactional",
                     "value": {
                       "type": "enum",
-                      "name": "sp_runtime::TransactionalError",
+                      "name": "spRuntimeTransactionalError",
                       "values": [
                         {
                           "name": "LimitReached",
@@ -6214,7 +6214,7 @@
         },
         "result": {
           "type": "enum",
-          "name": "DispatchResult",
+          "name": "dispatchResult",
           "values": [
             {
               "name": "Ok",
@@ -6227,7 +6227,7 @@
               "name": "Err",
               "value": {
                 "type": "enum",
-                "name": "sp_runtime::DispatchError",
+                "name": "spRuntimeDispatchError",
                 "values": [
                   {
                     "name": "Other",
@@ -6296,7 +6296,7 @@
                     "name": "Token",
                     "value": {
                       "type": "enum",
-                      "name": "sp_runtime::TokenError",
+                      "name": "spRuntimeTokenError",
                       "values": [
                         {
                           "name": "FundsUnavailable",
@@ -6375,7 +6375,7 @@
                     "name": "Arithmetic",
                     "value": {
                       "type": "enum",
-                      "name": "sp_arithmetic::ArithmeticError",
+                      "name": "spArithmeticArithmeticError",
                       "values": [
                         {
                           "name": "Underflow",
@@ -6405,7 +6405,7 @@
                     "name": "Transactional",
                     "value": {
                       "type": "enum",
-                      "name": "sp_runtime::TransactionalError",
+                      "name": "spRuntimeTransactionalError",
                       "values": [
                         {
                           "name": "LimitReached",
@@ -6464,7 +6464,7 @@
       "fields": {
         "beneficiary": {
           "type": "enum",
-          "name": "cf_chains::btc::ScriptPubkey",
+          "name": "cfChainsBtcScriptPubkey",
           "values": [
             {
               "name": "P2PKH",
@@ -6550,7 +6550,7 @@
       "fields": {
         "beneficiary": {
           "type": "enum",
-          "name": "cf_chains::btc::ScriptPubkey",
+          "name": "cfChainsBtcScriptPubkey",
           "values": [
             {
               "name": "P2PKH",
@@ -6634,7 +6634,7 @@
       "fields": {
         "depositAddress": {
           "type": "enum",
-          "name": "cf_chains::address::EncodedAddress",
+          "name": "cfChainsAddressEncodedAddress",
           "values": [
             {
               "name": "Eth",
@@ -6669,7 +6669,7 @@
         },
         "destinationAddress": {
           "type": "enum",
-          "name": "cf_chains::address::EncodedAddress",
+          "name": "cfChainsAddressEncodedAddress",
           "values": [
             {
               "name": "Eth",
@@ -6704,7 +6704,7 @@
         },
         "sourceAsset": {
           "type": "enum",
-          "name": "cf_primitives::chains::assets::any::Asset",
+          "name": "cfPrimitivesChainsAssetsAnyAsset",
           "values": [
             {
               "name": "__Unused0",
@@ -6752,7 +6752,7 @@
         },
         "destinationAsset": {
           "type": "enum",
-          "name": "cf_primitives::chains::assets::any::Asset",
+          "name": "cfPrimitivesChainsAssetsAnyAsset",
           "values": [
             {
               "name": "__Unused0",
@@ -6842,7 +6842,7 @@
         },
         "sourceAsset": {
           "type": "enum",
-          "name": "cf_primitives::chains::assets::any::Asset",
+          "name": "cfPrimitivesChainsAssetsAnyAsset",
           "values": [
             {
               "name": "__Unused0",
@@ -6894,7 +6894,7 @@
         },
         "destinationAsset": {
           "type": "enum",
-          "name": "cf_primitives::chains::assets::any::Asset",
+          "name": "cfPrimitivesChainsAssetsAnyAsset",
           "values": [
             {
               "name": "__Unused0",
@@ -6942,7 +6942,7 @@
         },
         "destinationAddress": {
           "type": "enum",
-          "name": "cf_chains::address::EncodedAddress",
+          "name": "cfChainsAddressEncodedAddress",
           "values": [
             {
               "name": "Eth",
@@ -6977,7 +6977,7 @@
         },
         "origin": {
           "type": "enum",
-          "name": "cf_chains::SwapOrigin",
+          "name": "cfChainsSwapOrigin",
           "values": [
             {
               "name": "DepositChannel",
@@ -6986,7 +6986,7 @@
                 "fields": {
                   "depositAddress": {
                     "type": "enum",
-                    "name": "cf_chains::address::EncodedAddress",
+                    "name": "cfChainsAddressEncodedAddress",
                     "values": [
                       {
                         "name": "Eth",
@@ -7050,13 +7050,13 @@
         },
         "swapType": {
           "type": "enum",
-          "name": "pallet_cf_swapping::SwapType",
+          "name": "palletCfSwappingSwapType",
           "values": [
             {
               "name": "Swap",
               "value": {
                 "type": "enum",
-                "name": "cf_chains::address::ForeignChainAddress",
+                "name": "cfChainsAddressForeignChainAddress",
                 "values": [
                   {
                     "name": "Eth",
@@ -7080,7 +7080,7 @@
                     "name": "Btc",
                     "value": {
                       "type": "enum",
-                      "name": "cf_chains::btc::ScriptPubkey",
+                      "name": "cfChainsBtcScriptPubkey",
                       "values": [
                         {
                           "name": "P2PKH",
@@ -7193,7 +7193,7 @@
         },
         "sourceAsset": {
           "type": "enum",
-          "name": "cf_primitives::chains::assets::any::Asset",
+          "name": "cfPrimitivesChainsAssetsAnyAsset",
           "values": [
             {
               "name": "__Unused0",
@@ -7245,7 +7245,7 @@
         },
         "destinationAsset": {
           "type": "enum",
-          "name": "cf_primitives::chains::assets::any::Asset",
+          "name": "cfPrimitivesChainsAssetsAnyAsset",
           "values": [
             {
               "name": "__Unused0",
@@ -7316,7 +7316,7 @@
           "values": [
             {
               "type": "enum",
-              "name": "cf_primitives::chains::ForeignChain",
+              "name": "cfPrimitivesChainsForeignChain",
               "values": [
                 {
                   "name": "__Unused0",
@@ -7356,7 +7356,7 @@
         },
         "asset": {
           "type": "enum",
-          "name": "cf_primitives::chains::assets::any::Asset",
+          "name": "cfPrimitivesChainsAssetsAnyAsset",
           "values": [
             {
               "name": "__Unused0",
@@ -7416,7 +7416,7 @@
           "values": [
             {
               "type": "enum",
-              "name": "cf_primitives::chains::ForeignChain",
+              "name": "cfPrimitivesChainsForeignChain",
               "values": [
                 {
                   "name": "__Unused0",
@@ -7460,7 +7460,7 @@
         },
         "destinationAddress": {
           "type": "enum",
-          "name": "cf_chains::address::EncodedAddress",
+          "name": "cfChainsAddressEncodedAddress",
           "values": [
             {
               "name": "Eth",
@@ -7500,7 +7500,7 @@
       "fields": {
         "asset": {
           "type": "enum",
-          "name": "cf_primitives::chains::assets::any::Asset",
+          "name": "cfPrimitivesChainsAssetsAnyAsset",
           "values": [
             {
               "name": "__Unused0",
@@ -7548,7 +7548,7 @@
         },
         "direction": {
           "type": "enum",
-          "name": "cf_primitives::SwapLeg",
+          "name": "cfPrimitivesSwapLeg",
           "values": [
             {
               "name": "FromStable",
@@ -7584,7 +7584,7 @@
           "values": [
             {
               "type": "enum",
-              "name": "cf_primitives::chains::ForeignChain",
+              "name": "cfPrimitivesChainsForeignChain",
               "values": [
                 {
                   "name": "__Unused0",
@@ -7651,7 +7651,7 @@
         },
         "destinationAddress": {
           "type": "enum",
-          "name": "cf_chains::address::EncodedAddress",
+          "name": "cfChainsAddressEncodedAddress",
           "values": [
             {
               "name": "Eth",
@@ -7690,7 +7690,7 @@
           "fields": {
             "sourceChain": {
               "type": "enum",
-              "name": "cf_primitives::chains::ForeignChain",
+              "name": "cfPrimitivesChainsForeignChain",
               "values": [
                 {
                   "name": "__Unused0",
@@ -7726,7 +7726,7 @@
               "type": "option",
               "value": {
                 "type": "enum",
-                "name": "cf_chains::address::ForeignChainAddress",
+                "name": "cfChainsAddressForeignChainAddress",
                 "values": [
                   {
                     "name": "Eth",
@@ -7750,7 +7750,7 @@
                     "name": "Btc",
                     "value": {
                       "type": "enum",
-                      "name": "cf_chains::btc::ScriptPubkey",
+                      "name": "cfChainsBtcScriptPubkey",
                       "values": [
                         {
                           "name": "P2PKH",
@@ -7856,7 +7856,7 @@
       "fields": {
         "asset": {
           "type": "enum",
-          "name": "cf_primitives::chains::assets::any::Asset",
+          "name": "cfPrimitivesChainsAssetsAnyAsset",
           "values": [
             {
               "name": "__Unused0",
@@ -7913,7 +7913,7 @@
       "fields": {
         "asset": {
           "type": "enum",
-          "name": "cf_primitives::chains::assets::any::Asset",
+          "name": "cfPrimitivesChainsAssetsAnyAsset",
           "values": [
             {
               "name": "__Unused0",
@@ -7965,7 +7965,7 @@
         },
         "destinationAddress": {
           "type": "enum",
-          "name": "cf_chains::address::EncodedAddress",
+          "name": "cfChainsAddressEncodedAddress",
           "values": [
             {
               "name": "Eth",
@@ -8000,7 +8000,7 @@
         },
         "origin": {
           "type": "enum",
-          "name": "cf_chains::SwapOrigin",
+          "name": "cfChainsSwapOrigin",
           "values": [
             {
               "name": "DepositChannel",
@@ -8009,7 +8009,7 @@
                 "fields": {
                   "depositAddress": {
                     "type": "enum",
-                    "name": "cf_chains::address::EncodedAddress",
+                    "name": "cfChainsAddressEncodedAddress",
                     "values": [
                       {
                         "name": "Eth",
@@ -8078,7 +8078,7 @@
       "fields": {
         "reason": {
           "type": "enum",
-          "name": "pallet_cf_swapping::CcmFailReason",
+          "name": "palletCfSwappingCcmFailReason",
           "values": [
             {
               "name": "UnsupportedForTargetChain",
@@ -8105,7 +8105,7 @@
         },
         "destinationAddress": {
           "type": "enum",
-          "name": "cf_chains::address::EncodedAddress",
+          "name": "cfChainsAddressEncodedAddress",
           "values": [
             {
               "name": "Eth",
@@ -8144,7 +8144,7 @@
           "fields": {
             "sourceChain": {
               "type": "enum",
-              "name": "cf_primitives::chains::ForeignChain",
+              "name": "cfPrimitivesChainsForeignChain",
               "values": [
                 {
                   "name": "__Unused0",
@@ -8180,7 +8180,7 @@
               "type": "option",
               "value": {
                 "type": "enum",
-                "name": "cf_chains::address::ForeignChainAddress",
+                "name": "cfChainsAddressForeignChainAddress",
                 "values": [
                   {
                     "name": "Eth",
@@ -8204,7 +8204,7 @@
                     "name": "Btc",
                     "value": {
                       "type": "enum",
-                      "name": "cf_chains::btc::ScriptPubkey",
+                      "name": "cfChainsBtcScriptPubkey",
                       "values": [
                         {
                           "name": "P2PKH",
@@ -8310,7 +8310,7 @@
       "fields": {
         "asset": {
           "type": "enum",
-          "name": "cf_primitives::chains::assets::any::Asset",
+          "name": "cfPrimitivesChainsAssetsAnyAsset",
           "values": [
             {
               "name": "__Unused0",
@@ -8374,7 +8374,7 @@
         },
         "sourceAsset": {
           "type": "enum",
-          "name": "cf_primitives::chains::assets::any::Asset",
+          "name": "cfPrimitivesChainsAssetsAnyAsset",
           "values": [
             {
               "name": "__Unused0",
@@ -8422,7 +8422,7 @@
         },
         "destinationAsset": {
           "type": "enum",
-          "name": "cf_primitives::chains::assets::any::Asset",
+          "name": "cfPrimitivesChainsAssetsAnyAsset",
           "values": [
             {
               "name": "__Unused0",
@@ -8489,7 +8489,7 @@
         },
         "asset": {
           "type": "enum",
-          "name": "cf_primitives::chains::assets::any::Asset",
+          "name": "cfPrimitivesChainsAssetsAnyAsset",
           "values": [
             {
               "name": "__Unused0",
@@ -8550,7 +8550,7 @@
         },
         "asset": {
           "type": "enum",
-          "name": "cf_primitives::chains::assets::any::Asset",
+          "name": "cfPrimitivesChainsAssetsAnyAsset",
           "values": [
             {
               "name": "__Unused0",
@@ -8611,7 +8611,7 @@
         },
         "asset": {
           "type": "enum",
-          "name": "cf_primitives::chains::assets::any::Asset",
+          "name": "cfPrimitivesChainsAssetsAnyAsset",
           "values": [
             {
               "name": "__Unused0",
@@ -8659,7 +8659,7 @@
         },
         "depositAddress": {
           "type": "enum",
-          "name": "cf_chains::address::EncodedAddress",
+          "name": "cfChainsAddressEncodedAddress",
           "values": [
             {
               "name": "Eth",
@@ -8710,7 +8710,7 @@
           "values": [
             {
               "type": "enum",
-              "name": "cf_primitives::chains::ForeignChain",
+              "name": "cfPrimitivesChainsForeignChain",
               "values": [
                 {
                   "name": "__Unused0",
@@ -8750,7 +8750,7 @@
         },
         "asset": {
           "type": "enum",
-          "name": "cf_primitives::chains::assets::any::Asset",
+          "name": "cfPrimitivesChainsAssetsAnyAsset",
           "values": [
             {
               "name": "__Unused0",
@@ -8802,7 +8802,7 @@
         },
         "destinationAddress": {
           "type": "enum",
-          "name": "cf_chains::address::EncodedAddress",
+          "name": "cfChainsAddressEncodedAddress",
           "values": [
             {
               "name": "Eth",
@@ -8846,7 +8846,7 @@
         },
         "chain": {
           "type": "enum",
-          "name": "cf_primitives::chains::ForeignChain",
+          "name": "cfPrimitivesChainsForeignChain",
           "values": [
             {
               "name": "__Unused0",
@@ -8880,7 +8880,7 @@
         },
         "address": {
           "type": "enum",
-          "name": "cf_chains::address::ForeignChainAddress",
+          "name": "cfChainsAddressForeignChainAddress",
           "values": [
             {
               "name": "Eth",
@@ -8904,7 +8904,7 @@
               "name": "Btc",
               "value": {
                 "type": "enum",
-                "name": "cf_chains::btc::ScriptPubkey",
+                "name": "cfChainsBtcScriptPubkey",
                 "values": [
                   {
                     "name": "P2PKH",
@@ -8995,7 +8995,7 @@
         },
         "asset": {
           "type": "enum",
-          "name": "cf_primitives::chains::assets::eth::Asset",
+          "name": "cfPrimitivesChainsAssetsEthAsset",
           "values": [
             {
               "name": "Eth",
@@ -9035,7 +9035,7 @@
       "fields": {
         "asset": {
           "type": "enum",
-          "name": "cf_primitives::chains::assets::eth::Asset",
+          "name": "cfPrimitivesChainsAssetsEthAsset",
           "values": [
             {
               "name": "Eth",
@@ -9074,7 +9074,7 @@
           "values": [
             {
               "type": "enum",
-              "name": "cf_primitives::chains::ForeignChain",
+              "name": "cfPrimitivesChainsForeignChain",
               "values": [
                 {
                   "name": "__Unused0",
@@ -9114,7 +9114,7 @@
         },
         "asset": {
           "type": "enum",
-          "name": "cf_primitives::chains::assets::eth::Asset",
+          "name": "cfPrimitivesChainsAssetsEthAsset",
           "values": [
             {
               "name": "Eth",
@@ -9161,7 +9161,7 @@
           "values": [
             {
               "type": "enum",
-              "name": "cf_primitives::chains::ForeignChain",
+              "name": "cfPrimitivesChainsForeignChain",
               "values": [
                 {
                   "name": "__Unused0",
@@ -9209,7 +9209,7 @@
           "values": [
             {
               "type": "enum",
-              "name": "cf_primitives::chains::ForeignChain",
+              "name": "cfPrimitivesChainsForeignChain",
               "values": [
                 {
                   "name": "__Unused0",
@@ -9249,7 +9249,7 @@
         },
         "error": {
           "type": "enum",
-          "name": "sp_runtime::DispatchError",
+          "name": "spRuntimeDispatchError",
           "values": [
             {
               "name": "Other",
@@ -9318,7 +9318,7 @@
               "name": "Token",
               "value": {
                 "type": "enum",
-                "name": "sp_runtime::TokenError",
+                "name": "spRuntimeTokenError",
                 "values": [
                   {
                     "name": "FundsUnavailable",
@@ -9397,7 +9397,7 @@
               "name": "Arithmetic",
               "value": {
                 "type": "enum",
-                "name": "sp_arithmetic::ArithmeticError",
+                "name": "spArithmeticArithmeticError",
                 "values": [
                   {
                     "name": "Underflow",
@@ -9427,7 +9427,7 @@
               "name": "Transactional",
               "value": {
                 "type": "enum",
-                "name": "sp_runtime::TransactionalError",
+                "name": "spRuntimeTransactionalError",
                 "values": [
                   {
                     "name": "LimitReached",
@@ -9487,7 +9487,7 @@
         },
         "asset": {
           "type": "enum",
-          "name": "cf_primitives::chains::assets::eth::Asset",
+          "name": "cfPrimitivesChainsAssetsEthAsset",
           "values": [
             {
               "name": "Eth",
@@ -9528,7 +9528,7 @@
             "values": [
               {
                 "type": "enum",
-                "name": "cf_primitives::chains::ForeignChain",
+                "name": "cfPrimitivesChainsForeignChain",
                 "values": [
                   {
                     "name": "__Unused0",
@@ -9574,7 +9574,7 @@
       "fields": {
         "asset": {
           "type": "enum",
-          "name": "cf_primitives::chains::assets::eth::Asset",
+          "name": "cfPrimitivesChainsAssetsEthAsset",
           "values": [
             {
               "name": "Eth",
@@ -9614,7 +9614,7 @@
         },
         "asset": {
           "type": "enum",
-          "name": "cf_primitives::chains::assets::eth::Asset",
+          "name": "cfPrimitivesChainsAssetsEthAsset",
           "values": [
             {
               "name": "Eth",
@@ -9654,7 +9654,7 @@
       "fields": {
         "asset": {
           "type": "enum",
-          "name": "cf_primitives::chains::assets::eth::Asset",
+          "name": "cfPrimitivesChainsAssetsEthAsset",
           "values": [
             {
               "name": "Eth",
@@ -9694,7 +9694,7 @@
       "fields": {
         "reason": {
           "type": "enum",
-          "name": "sp_runtime::DispatchError",
+          "name": "spRuntimeDispatchError",
           "values": [
             {
               "name": "Other",
@@ -9763,7 +9763,7 @@
               "name": "Token",
               "value": {
                 "type": "enum",
-                "name": "sp_runtime::TokenError",
+                "name": "spRuntimeTokenError",
                 "values": [
                   {
                     "name": "FundsUnavailable",
@@ -9842,7 +9842,7 @@
               "name": "Arithmetic",
               "value": {
                 "type": "enum",
-                "name": "sp_arithmetic::ArithmeticError",
+                "name": "spArithmeticArithmeticError",
                 "values": [
                   {
                     "name": "Underflow",
@@ -9872,7 +9872,7 @@
               "name": "Transactional",
               "value": {
                 "type": "enum",
-                "name": "sp_runtime::TransactionalError",
+                "name": "spRuntimeTransactionalError",
                 "values": [
                   {
                     "name": "LimitReached",
@@ -9931,7 +9931,7 @@
             },
             "asset": {
               "type": "enum",
-              "name": "cf_primitives::chains::assets::eth::Asset",
+              "name": "cfPrimitivesChainsAssetsEthAsset",
               "values": [
                 {
                   "name": "Eth",
@@ -9983,7 +9983,7 @@
         },
         "asset": {
           "type": "enum",
-          "name": "cf_primitives::chains::assets::dot::Asset",
+          "name": "cfPrimitivesChainsAssetsDotAsset",
           "values": [
             {
               "name": "Dot",
@@ -10009,7 +10009,7 @@
       "fields": {
         "asset": {
           "type": "enum",
-          "name": "cf_primitives::chains::assets::dot::Asset",
+          "name": "cfPrimitivesChainsAssetsDotAsset",
           "values": [
             {
               "name": "Dot",
@@ -10034,7 +10034,7 @@
           "values": [
             {
               "type": "enum",
-              "name": "cf_primitives::chains::ForeignChain",
+              "name": "cfPrimitivesChainsForeignChain",
               "values": [
                 {
                   "name": "__Unused0",
@@ -10074,7 +10074,7 @@
         },
         "asset": {
           "type": "enum",
-          "name": "cf_primitives::chains::assets::dot::Asset",
+          "name": "cfPrimitivesChainsAssetsDotAsset",
           "values": [
             {
               "name": "Dot",
@@ -10111,7 +10111,7 @@
           "values": [
             {
               "type": "enum",
-              "name": "cf_primitives::chains::ForeignChain",
+              "name": "cfPrimitivesChainsForeignChain",
               "values": [
                 {
                   "name": "__Unused0",
@@ -10159,7 +10159,7 @@
           "values": [
             {
               "type": "enum",
-              "name": "cf_primitives::chains::ForeignChain",
+              "name": "cfPrimitivesChainsForeignChain",
               "values": [
                 {
                   "name": "__Unused0",
@@ -10199,7 +10199,7 @@
         },
         "error": {
           "type": "enum",
-          "name": "sp_runtime::DispatchError",
+          "name": "spRuntimeDispatchError",
           "values": [
             {
               "name": "Other",
@@ -10268,7 +10268,7 @@
               "name": "Token",
               "value": {
                 "type": "enum",
-                "name": "sp_runtime::TokenError",
+                "name": "spRuntimeTokenError",
                 "values": [
                   {
                     "name": "FundsUnavailable",
@@ -10347,7 +10347,7 @@
               "name": "Arithmetic",
               "value": {
                 "type": "enum",
-                "name": "sp_arithmetic::ArithmeticError",
+                "name": "spArithmeticArithmeticError",
                 "values": [
                   {
                     "name": "Underflow",
@@ -10377,7 +10377,7 @@
               "name": "Transactional",
               "value": {
                 "type": "enum",
-                "name": "sp_runtime::TransactionalError",
+                "name": "spRuntimeTransactionalError",
                 "values": [
                   {
                     "name": "LimitReached",
@@ -10437,7 +10437,7 @@
         },
         "asset": {
           "type": "enum",
-          "name": "cf_primitives::chains::assets::dot::Asset",
+          "name": "cfPrimitivesChainsAssetsDotAsset",
           "values": [
             {
               "name": "Dot",
@@ -10464,7 +10464,7 @@
             "values": [
               {
                 "type": "enum",
-                "name": "cf_primitives::chains::ForeignChain",
+                "name": "cfPrimitivesChainsForeignChain",
                 "values": [
                   {
                     "name": "__Unused0",
@@ -10510,7 +10510,7 @@
       "fields": {
         "asset": {
           "type": "enum",
-          "name": "cf_primitives::chains::assets::dot::Asset",
+          "name": "cfPrimitivesChainsAssetsDotAsset",
           "values": [
             {
               "name": "Dot",
@@ -10540,7 +10540,7 @@
         },
         "asset": {
           "type": "enum",
-          "name": "cf_primitives::chains::assets::dot::Asset",
+          "name": "cfPrimitivesChainsAssetsDotAsset",
           "values": [
             {
               "name": "Dot",
@@ -10566,7 +10566,7 @@
       "fields": {
         "asset": {
           "type": "enum",
-          "name": "cf_primitives::chains::assets::dot::Asset",
+          "name": "cfPrimitivesChainsAssetsDotAsset",
           "values": [
             {
               "name": "Dot",
@@ -10596,7 +10596,7 @@
       "fields": {
         "reason": {
           "type": "enum",
-          "name": "sp_runtime::DispatchError",
+          "name": "spRuntimeDispatchError",
           "values": [
             {
               "name": "Other",
@@ -10665,7 +10665,7 @@
               "name": "Token",
               "value": {
                 "type": "enum",
-                "name": "sp_runtime::TokenError",
+                "name": "spRuntimeTokenError",
                 "values": [
                   {
                     "name": "FundsUnavailable",
@@ -10744,7 +10744,7 @@
               "name": "Arithmetic",
               "value": {
                 "type": "enum",
-                "name": "sp_arithmetic::ArithmeticError",
+                "name": "spArithmeticArithmeticError",
                 "values": [
                   {
                     "name": "Underflow",
@@ -10774,7 +10774,7 @@
               "name": "Transactional",
               "value": {
                 "type": "enum",
-                "name": "sp_runtime::TransactionalError",
+                "name": "spRuntimeTransactionalError",
                 "values": [
                   {
                     "name": "LimitReached",
@@ -10837,7 +10837,7 @@
             },
             "asset": {
               "type": "enum",
-              "name": "cf_primitives::chains::assets::dot::Asset",
+              "name": "cfPrimitivesChainsAssetsDotAsset",
               "values": [
                 {
                   "name": "Dot",
@@ -10867,7 +10867,7 @@
       "fields": {
         "depositAddress": {
           "type": "enum",
-          "name": "cf_chains::btc::ScriptPubkey",
+          "name": "cfChainsBtcScriptPubkey",
           "values": [
             {
               "name": "P2PKH",
@@ -10944,7 +10944,7 @@
         },
         "asset": {
           "type": "enum",
-          "name": "cf_primitives::chains::assets::btc::Asset",
+          "name": "cfPrimitivesChainsAssetsBtcAsset",
           "values": [
             {
               "name": "Btc",
@@ -10984,7 +10984,7 @@
       "fields": {
         "asset": {
           "type": "enum",
-          "name": "cf_primitives::chains::assets::btc::Asset",
+          "name": "cfPrimitivesChainsAssetsBtcAsset",
           "values": [
             {
               "name": "Btc",
@@ -11009,7 +11009,7 @@
           "values": [
             {
               "type": "enum",
-              "name": "cf_primitives::chains::ForeignChain",
+              "name": "cfPrimitivesChainsForeignChain",
               "values": [
                 {
                   "name": "__Unused0",
@@ -11049,7 +11049,7 @@
         },
         "asset": {
           "type": "enum",
-          "name": "cf_primitives::chains::assets::btc::Asset",
+          "name": "cfPrimitivesChainsAssetsBtcAsset",
           "values": [
             {
               "name": "Btc",
@@ -11066,7 +11066,7 @@
         },
         "destinationAddress": {
           "type": "enum",
-          "name": "cf_chains::btc::ScriptPubkey",
+          "name": "cfChainsBtcScriptPubkey",
           "values": [
             {
               "name": "P2PKH",
@@ -11155,7 +11155,7 @@
           "values": [
             {
               "type": "enum",
-              "name": "cf_primitives::chains::ForeignChain",
+              "name": "cfPrimitivesChainsForeignChain",
               "values": [
                 {
                   "name": "__Unused0",
@@ -11203,7 +11203,7 @@
           "values": [
             {
               "type": "enum",
-              "name": "cf_primitives::chains::ForeignChain",
+              "name": "cfPrimitivesChainsForeignChain",
               "values": [
                 {
                   "name": "__Unused0",
@@ -11243,7 +11243,7 @@
         },
         "error": {
           "type": "enum",
-          "name": "sp_runtime::DispatchError",
+          "name": "spRuntimeDispatchError",
           "values": [
             {
               "name": "Other",
@@ -11312,7 +11312,7 @@
               "name": "Token",
               "value": {
                 "type": "enum",
-                "name": "sp_runtime::TokenError",
+                "name": "spRuntimeTokenError",
                 "values": [
                   {
                     "name": "FundsUnavailable",
@@ -11391,7 +11391,7 @@
               "name": "Arithmetic",
               "value": {
                 "type": "enum",
-                "name": "sp_arithmetic::ArithmeticError",
+                "name": "spArithmeticArithmeticError",
                 "values": [
                   {
                     "name": "Underflow",
@@ -11421,7 +11421,7 @@
               "name": "Transactional",
               "value": {
                 "type": "enum",
-                "name": "sp_runtime::TransactionalError",
+                "name": "spRuntimeTransactionalError",
                 "values": [
                   {
                     "name": "LimitReached",
@@ -11481,7 +11481,7 @@
         },
         "asset": {
           "type": "enum",
-          "name": "cf_primitives::chains::assets::btc::Asset",
+          "name": "cfPrimitivesChainsAssetsBtcAsset",
           "values": [
             {
               "name": "Btc",
@@ -11508,7 +11508,7 @@
             "values": [
               {
                 "type": "enum",
-                "name": "cf_primitives::chains::ForeignChain",
+                "name": "cfPrimitivesChainsForeignChain",
                 "values": [
                   {
                     "name": "__Unused0",
@@ -11554,7 +11554,7 @@
       "fields": {
         "asset": {
           "type": "enum",
-          "name": "cf_primitives::chains::assets::btc::Asset",
+          "name": "cfPrimitivesChainsAssetsBtcAsset",
           "values": [
             {
               "name": "Btc",
@@ -11576,7 +11576,7 @@
       "fields": {
         "depositAddress": {
           "type": "enum",
-          "name": "cf_chains::btc::ScriptPubkey",
+          "name": "cfChainsBtcScriptPubkey",
           "values": [
             {
               "name": "P2PKH",
@@ -11653,7 +11653,7 @@
         },
         "asset": {
           "type": "enum",
-          "name": "cf_primitives::chains::assets::btc::Asset",
+          "name": "cfPrimitivesChainsAssetsBtcAsset",
           "values": [
             {
               "name": "Btc",
@@ -11693,7 +11693,7 @@
       "fields": {
         "asset": {
           "type": "enum",
-          "name": "cf_primitives::chains::assets::btc::Asset",
+          "name": "cfPrimitivesChainsAssetsBtcAsset",
           "values": [
             {
               "name": "Btc",
@@ -11710,7 +11710,7 @@
         },
         "destinationAddress": {
           "type": "enum",
-          "name": "cf_chains::btc::ScriptPubkey",
+          "name": "cfChainsBtcScriptPubkey",
           "values": [
             {
               "name": "P2PKH",
@@ -11792,7 +11792,7 @@
       "fields": {
         "reason": {
           "type": "enum",
-          "name": "sp_runtime::DispatchError",
+          "name": "spRuntimeDispatchError",
           "values": [
             {
               "name": "Other",
@@ -11861,7 +11861,7 @@
               "name": "Token",
               "value": {
                 "type": "enum",
-                "name": "sp_runtime::TokenError",
+                "name": "spRuntimeTokenError",
                 "values": [
                   {
                     "name": "FundsUnavailable",
@@ -11940,7 +11940,7 @@
               "name": "Arithmetic",
               "value": {
                 "type": "enum",
-                "name": "sp_arithmetic::ArithmeticError",
+                "name": "spArithmeticArithmeticError",
                 "values": [
                   {
                     "name": "Underflow",
@@ -11970,7 +11970,7 @@
               "name": "Transactional",
               "value": {
                 "type": "enum",
-                "name": "sp_runtime::TransactionalError",
+                "name": "spRuntimeTransactionalError",
                 "values": [
                   {
                     "name": "LimitReached",
@@ -12025,7 +12025,7 @@
           "fields": {
             "depositAddress": {
               "type": "enum",
-              "name": "cf_chains::btc::ScriptPubkey",
+              "name": "cfChainsBtcScriptPubkey",
               "values": [
                 {
                   "name": "P2PKH",
@@ -12102,7 +12102,7 @@
             },
             "asset": {
               "type": "enum",
-              "name": "cf_primitives::chains::assets::btc::Asset",
+              "name": "cfPrimitivesChainsAssetsBtcAsset",
               "values": [
                 {
                   "name": "Btc",
@@ -12155,7 +12155,7 @@
       "fields": {
         "baseAsset": {
           "type": "enum",
-          "name": "cf_primitives::chains::assets::any::Asset",
+          "name": "cfPrimitivesChainsAssetsAnyAsset",
           "values": [
             {
               "name": "__Unused0",
@@ -12203,7 +12203,7 @@
         },
         "pairAsset": {
           "type": "enum",
-          "name": "cf_primitives::chains::assets::any::Asset",
+          "name": "cfPrimitivesChainsAssetsAnyAsset",
           "values": [
             {
               "name": "__Unused0",
@@ -12260,7 +12260,7 @@
       "fields": {
         "baseAsset": {
           "type": "enum",
-          "name": "cf_primitives::chains::assets::any::Asset",
+          "name": "cfPrimitivesChainsAssetsAnyAsset",
           "values": [
             {
               "name": "__Unused0",
@@ -12308,7 +12308,7 @@
         },
         "pairAsset": {
           "type": "enum",
-          "name": "cf_primitives::chains::assets::any::Asset",
+          "name": "cfPrimitivesChainsAssetsAnyAsset",
           "values": [
             {
               "name": "__Unused0",
@@ -12373,7 +12373,7 @@
         },
         "baseAsset": {
           "type": "enum",
-          "name": "cf_primitives::chains::assets::any::Asset",
+          "name": "cfPrimitivesChainsAssetsAnyAsset",
           "values": [
             {
               "name": "__Unused0",
@@ -12421,7 +12421,7 @@
         },
         "pairAsset": {
           "type": "enum",
-          "name": "cf_primitives::chains::assets::any::Asset",
+          "name": "cfPrimitivesChainsAssetsAnyAsset",
           "values": [
             {
               "name": "__Unused0",
@@ -12482,7 +12482,7 @@
           "type": "option",
           "value": {
             "type": "enum",
-            "name": "pallet_cf_pools::pallet::IncreaseOrDecrease",
+            "name": "palletCfPoolsIncreaseOrDecreaseRangeOrderChange",
             "values": [
               {
                 "name": "Increase",
@@ -12570,7 +12570,7 @@
         },
         "sellAsset": {
           "type": "enum",
-          "name": "cf_primitives::chains::assets::any::Asset",
+          "name": "cfPrimitivesChainsAssetsAnyAsset",
           "values": [
             {
               "name": "__Unused0",
@@ -12618,7 +12618,7 @@
         },
         "buyAsset": {
           "type": "enum",
-          "name": "cf_primitives::chains::assets::any::Asset",
+          "name": "cfPrimitivesChainsAssetsAnyAsset",
           "values": [
             {
               "name": "__Unused0",
@@ -12676,7 +12676,7 @@
           "type": "option",
           "value": {
             "type": "enum",
-            "name": "pallet_cf_pools::pallet::IncreaseOrDecrease",
+            "name": "palletCfPoolsIncreaseOrDecreaseU128",
             "values": [
               {
                 "name": "Increase",
@@ -12723,7 +12723,7 @@
       "fields": {
         "from": {
           "type": "enum",
-          "name": "cf_primitives::chains::assets::any::Asset",
+          "name": "cfPrimitivesChainsAssetsAnyAsset",
           "values": [
             {
               "name": "__Unused0",
@@ -12771,7 +12771,7 @@
         },
         "to": {
           "type": "enum",
-          "name": "cf_primitives::chains::assets::any::Asset",
+          "name": "cfPrimitivesChainsAssetsAnyAsset",
           "values": [
             {
               "name": "__Unused0",
@@ -12832,7 +12832,7 @@
       "fields": {
         "baseAsset": {
           "type": "enum",
-          "name": "cf_primitives::chains::assets::any::Asset",
+          "name": "cfPrimitivesChainsAssetsAnyAsset",
           "values": [
             {
               "name": "__Unused0",
@@ -12880,7 +12880,7 @@
         },
         "pairAsset": {
           "type": "enum",
-          "name": "cf_primitives::chains::assets::any::Asset",
+          "name": "cfPrimitivesChainsAssetsAnyAsset",
           "values": [
             {
               "name": "__Unused0",

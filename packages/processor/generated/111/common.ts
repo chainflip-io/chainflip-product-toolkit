@@ -58,12 +58,17 @@ export const palletCfPoolsRangeOrderChange = z.object({
   amounts: palletCfPoolsAssetsMapU128,
 });
 
-export const palletCfPoolsPalletIncreaseOrDecrease = z.union([
+export const palletCfPoolsIncreaseOrDecreaseRangeOrderChange = z.union([
   z.object({ __kind: z.literal('Increase'), value: palletCfPoolsRangeOrderChange }),
   z.object({ __kind: z.literal('Decrease'), value: palletCfPoolsRangeOrderChange }),
 ]);
 
 export const cfAmmCommonOrder = simpleEnum(['Buy', 'Sell']);
+
+export const palletCfPoolsIncreaseOrDecreaseU128 = z.union([
+  z.object({ __kind: z.literal('Increase'), value: numberOrHex }),
+  z.object({ __kind: z.literal('Decrease'), value: numberOrHex }),
+]);
 
 export const spRuntimeModuleError = z.object({ index: z.number(), error: hexString });
 

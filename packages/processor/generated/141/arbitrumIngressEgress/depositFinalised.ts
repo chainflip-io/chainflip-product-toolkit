@@ -3,7 +3,7 @@ import {
   cfPrimitivesChainsAssetsArbAsset,
   hexString,
   numberOrHex,
-  palletCfArbitrumIngressEgressPalletDepositAction,
+  palletCfIngressEgressDepositAction,
 } from '../common';
 
 export const arbitrumIngressEgressDepositFinalised = z.object({
@@ -11,6 +11,6 @@ export const arbitrumIngressEgressDepositFinalised = z.object({
   asset: cfPrimitivesChainsAssetsArbAsset,
   amount: numberOrHex,
   ingressFee: numberOrHex,
-  action: palletCfArbitrumIngressEgressPalletDepositAction,
+  action: palletCfIngressEgressDepositAction,
   channelId: numberOrHex,
 });
