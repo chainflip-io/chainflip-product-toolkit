@@ -4,7 +4,7 @@ import {
   cfChainsBtcUtxoId,
   cfPrimitivesChainsAssetsBtcAsset,
   numberOrHex,
-  palletCfBitcoinIngressEgressDepositIgnoredReason,
+  palletCfIngressEgressDepositIgnoredReason,
 } from '../common';
 
 export const bitcoinIngressEgressDepositIgnored = z.object({
@@ -12,5 +12,5 @@ export const bitcoinIngressEgressDepositIgnored = z.object({
   asset: cfPrimitivesChainsAssetsBtcAsset,
   amount: numberOrHex,
   depositDetails: cfChainsBtcUtxoId,
-  reason: palletCfBitcoinIngressEgressDepositIgnoredReason,
+  reason: palletCfIngressEgressDepositIgnoredReason,
 });

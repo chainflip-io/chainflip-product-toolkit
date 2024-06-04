@@ -3,7 +3,7 @@ import {
   accountId,
   cfPrimitivesChainsAssetsAnyAsset,
   numberOrHex,
-  palletCfPoolsPalletIncreaseOrDecrease,
+  palletCfPoolsIncreaseOrDecreaseU128,
 } from '../common';
 
 export const liquidityPoolsLimitOrderUpdated = z.object({
@@ -12,7 +12,7 @@ export const liquidityPoolsLimitOrderUpdated = z.object({
   buyAsset: cfPrimitivesChainsAssetsAnyAsset,
   id: numberOrHex,
   tick: z.number(),
-  amountChange: palletCfPoolsPalletIncreaseOrDecrease.nullish(),
+  amountChange: palletCfPoolsIncreaseOrDecreaseU128.nullish(),
   amountTotal: numberOrHex,
   collectedFees: numberOrHex,
   boughtAmount: numberOrHex,

@@ -142,9 +142,9 @@ export const cfChainsCcmDepositMetadata = z.object({
 
 export const cfPrimitivesChainsAssetsEthAsset = simpleEnum(['Eth', 'Flip', 'Usdc']);
 
-export const palletCfEthereumIngressEgressPalletDepositAction = z.union([
-  z.object({ __kind: z.literal('Swap'), value: z.object({ swapId: numberOrHex }) }),
-  z.object({ __kind: z.literal('LiquidityProvision'), value: z.object({ lpAccount: accountId }) }),
+export const palletCfIngressEgressDepositAction = z.union([
+  z.object({ __kind: z.literal('Swap'), swapId: numberOrHex }),
+  z.object({ __kind: z.literal('LiquidityProvision'), lpAccount: accountId }),
   z.object({
     __kind: z.literal('CcmTransfer'),
     value: z.object({ principalSwapId: numberOrHex.nullish(), gasSwapId: numberOrHex.nullish() }),
@@ -152,43 +152,13 @@ export const palletCfEthereumIngressEgressPalletDepositAction = z.union([
   z.object({ __kind: z.literal('NoAction') }),
 ]);
 
-export const palletCfEthereumIngressEgressDepositIgnoredReason = simpleEnum([
+export const palletCfIngressEgressDepositIgnoredReason = simpleEnum([
   'BelowMinimumDeposit',
   'NotEnoughToPayFees',
 ]);
 
 export const cfPrimitivesChainsAssetsDotAsset = simpleEnum(['Dot']);
 
-export const palletCfPolkadotIngressEgressPalletDepositAction = z.union([
-  z.object({ __kind: z.literal('Swap'), value: z.object({ swapId: numberOrHex }) }),
-  z.object({ __kind: z.literal('LiquidityProvision'), value: z.object({ lpAccount: accountId }) }),
-  z.object({
-    __kind: z.literal('CcmTransfer'),
-    value: z.object({ principalSwapId: numberOrHex.nullish(), gasSwapId: numberOrHex.nullish() }),
-  }),
-  z.object({ __kind: z.literal('NoAction') }),
-]);
-
-export const palletCfPolkadotIngressEgressDepositIgnoredReason = simpleEnum([
-  'BelowMinimumDeposit',
-  'NotEnoughToPayFees',
-]);
-
 export const cfPrimitivesChainsAssetsBtcAsset = simpleEnum(['Btc']);
 
 export const cfChainsBtcUtxoId = z.object({ txId: hexString, vout: z.number() });
-
-export const palletCfBitcoinIngressEgressPalletDepositAction = z.union([
-  z.object({ __kind: z.literal('Swap'), value: z.object({ swapId: numberOrHex }) }),
-  z.object({ __kind: z.literal('LiquidityProvision'), value: z.object({ lpAccount: accountId }) }),
-  z.object({
-    __kind: z.literal('CcmTransfer'),
-    value: z.object({ principalSwapId: numberOrHex.nullish(), gasSwapId: numberOrHex.nullish() }),
-  }),
-  z.object({ __kind: z.literal('NoAction') }),
-]);
-
-export const palletCfBitcoinIngressEgressDepositIgnoredReason = simpleEnum([
-  'BelowMinimumDeposit',
-  'NotEnoughToPayFees',
-]);

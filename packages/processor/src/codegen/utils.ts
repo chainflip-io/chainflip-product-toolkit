@@ -114,7 +114,7 @@ export class SpecVersionCache {
 }
 
 export const specVersionCache = new SpecVersionCache(
-  path.join(import.meta.dirname, '..', 'metadata', 'specVersion.json'),
+  path.join(import.meta.dirname, '..', '..', 'metadata', 'specVersion.json'),
 );
 
 export const networkToRpcUrl: Record<Network, string> = {
