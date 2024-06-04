@@ -91,8 +91,6 @@ const resolveType = (metadata: Metadata, type: TypeDef, palletName: string): Res
 
         assert(type.lookupName, 'Enum type must have a lookupName');
 
-        console.log(type.lookupName, uncapitalize(type.lookupName));
-
         const result: EnumType = {
           type: 'enum',
           name: uncapitalize(type.lookupName),
