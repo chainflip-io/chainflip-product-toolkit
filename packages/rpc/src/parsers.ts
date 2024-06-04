@@ -186,7 +186,7 @@ export const broker = z.object({
 
 export const liquidityProvider = z.object({
   role: z.literal('liquidity_provider'),
-  balances: chainAssetMapFactory(numberOrHex.nullable(), null),
+  balances: chainAssetMapFactory(numberOrHex, '0x0'),
   refund_addresses: chainMapFactory(z.string().nullable(), null),
   flip_balance: numberOrHex,
   earned_fees: chainAssetMapFactory(numberOrHex, 0),
