@@ -1,20 +1,28 @@
 import { HexString } from '@chainflip/utils/types';
 import { Server } from 'http';
+import { AddressInfo } from 'net';
 import { promisify } from 'util';
-import { describe, expect, it, afterEach, beforeEach } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { z } from 'zod';
 import HttpClient from '../HttpClient';
+import { JsonRpcRequest, RpcMethod } from '../common';
 import {
+  AssetAndChain,
+  broker,
   brokerRequestSwapDepositAddress,
   cfEnvironment,
   cfIngressEgressEnvironment,
+  cfPoolOrders,
+  cfPoolPriceV2,
+  cfPoolsEnvironment,
   cfSwapRateV2,
   cfSwappingEnvironment,
+  liquidityProvider,
+  unregistered,
+  validator,
   type cfFundingEnvironment,
   type cfSwapRate,
 } from '../parsers';
-import { AddressInfo } from 'net';
-import { JsonRpcRequest, RpcMethod } from '../common';
 
 const supportedAssets = [
   { chain: 'Ethereum', asset: 'ETH' },
@@ -88,10 +96,197 @@ const fundingEnvironment: z.input<typeof cfFundingEnvironment> = {
   minimum_funding_amount: '0x8ac7230489e80000',
 };
 
+const poolsEnvironment: z.input<typeof cfPoolsEnvironment> = {
+  fees: {
+    Ethereum: {
+      ETH: {
+        limit_order_fee_hundredth_pips: 20,
+        range_order_fee_hundredth_pips: 20,
+        range_order_total_fees_earned: {
+          base: '0x125f2dd30ff2',
+          quote: '0x462c',
+        },
+        limit_order_total_fees_earned: {
+          base: '0x0',
+          quote: '0x0',
+        },
+        range_total_swap_inputs: {
+          base: '0xe042b46e94741ae',
+          quote: '0x35856b6b',
+        },
+        limit_total_swap_inputs: {
+          base: '0x0',
+          quote: '0x0',
+        },
+        quote_asset: {
+          chain: 'Ethereum',
+          asset: 'USDC',
+        },
+      },
+      FLIP: {
+        limit_order_fee_hundredth_pips: 20,
+        range_order_fee_hundredth_pips: 20,
+        range_order_total_fees_earned: {
+          base: '0x4ef',
+          quote: '0xc8',
+        },
+        limit_order_total_fees_earned: {
+          base: '0x0',
+          quote: '0x0',
+        },
+        range_total_swap_inputs: {
+          base: '0x3c2d2cc',
+          quote: '0x987d11',
+        },
+        limit_total_swap_inputs: {
+          base: '0x0',
+          quote: '0x0',
+        },
+        quote_asset: {
+          chain: 'Ethereum',
+          asset: 'USDC',
+        },
+      },
+      // @ts-expect-error we want to make sure we ignore this field
+      USDC: null,
+      USDT: {
+        limit_order_fee_hundredth_pips: 20,
+        range_order_fee_hundredth_pips: 20,
+        range_order_total_fees_earned: {
+          base: '0x0',
+          quote: '0x0',
+        },
+        limit_order_total_fees_earned: {
+          base: '0x0',
+          quote: '0x0',
+        },
+        range_total_swap_inputs: {
+          base: '0x0',
+          quote: '0x0',
+        },
+        limit_total_swap_inputs: {
+          base: '0x0',
+          quote: '0x0',
+        },
+        quote_asset: {
+          chain: 'Ethereum',
+          asset: 'USDC',
+        },
+      },
+    },
+    Polkadot: {
+      DOT: {
+        limit_order_fee_hundredth_pips: 20,
+        range_order_fee_hundredth_pips: 20,
+        range_order_total_fees_earned: {
+          base: '0x0',
+          quote: '0x0',
+        },
+        limit_order_total_fees_earned: {
+          base: '0x0',
+          quote: '0x0',
+        },
+        range_total_swap_inputs: {
+          base: '0x0',
+          quote: '0x0',
+        },
+        limit_total_swap_inputs: {
+          base: '0x0',
+          quote: '0x0',
+        },
+        quote_asset: {
+          chain: 'Ethereum',
+          asset: 'USDC',
+        },
+      },
+    },
+    Bitcoin: {
+      BTC: {
+        limit_order_fee_hundredth_pips: 20,
+        range_order_fee_hundredth_pips: 20,
+        range_order_total_fees_earned: {
+          base: '0xb4',
+          quote: '0x4e1c',
+        },
+        limit_order_total_fees_earned: {
+          base: '0x0',
+          quote: '0x0',
+        },
+        range_total_swap_inputs: {
+          base: '0x89470a',
+          quote: '0x3b96bc30',
+        },
+        limit_total_swap_inputs: {
+          base: '0x0',
+          quote: '0x0',
+        },
+        quote_asset: {
+          chain: 'Ethereum',
+          asset: 'USDC',
+        },
+      },
+    },
+    Arbitrum: {
+      ETH: {
+        limit_order_fee_hundredth_pips: 20,
+        range_order_fee_hundredth_pips: 20,
+        range_order_total_fees_earned: {
+          base: '0x0',
+          quote: '0x0',
+        },
+        limit_order_total_fees_earned: {
+          base: '0x0',
+          quote: '0x0',
+        },
+        range_total_swap_inputs: {
+          base: '0x0',
+          quote: '0x0',
+        },
+        limit_total_swap_inputs: {
+          base: '0x0',
+          quote: '0x0',
+        },
+        quote_asset: {
+          chain: 'Ethereum',
+          asset: 'USDC',
+        },
+      },
+      USDC: {
+        limit_order_fee_hundredth_pips: 20,
+        range_order_fee_hundredth_pips: 20,
+        range_order_total_fees_earned: {
+          base: '0x0',
+          quote: '0x0',
+        },
+        limit_order_total_fees_earned: {
+          base: '0x0',
+          quote: '0x0',
+        },
+        range_total_swap_inputs: {
+          base: '0x0',
+          quote: '0x0',
+        },
+        limit_total_swap_inputs: {
+          base: '0x0',
+          quote: '0x0',
+        },
+        quote_asset: {
+          chain: 'Ethereum',
+          asset: 'USDC',
+        },
+      },
+    },
+    Solana: {
+      SOL: null,
+    },
+  },
+};
+
 const environment: z.input<typeof cfEnvironment> = {
   ingress_egress: ingressEgressEnvironment,
   swapping: swappingEnvironment,
   funding: fundingEnvironment,
+  pools: poolsEnvironment,
 };
 
 const runtimeVersion = {
@@ -141,6 +336,127 @@ const swapDepositAddress: z.input<typeof brokerRequestSwapDepositAddress> = {
   source_chain_expiry_block: 1,
 };
 
+const unregisteredAccount: z.input<typeof unregistered> = {
+  role: 'unregistered',
+  flip_balance: '0x0',
+};
+
+const liquidityProviderAccount: z.input<typeof liquidityProvider> = {
+  role: 'liquidity_provider',
+  balances: {
+    Ethereum: { ETH: '0x0', FLIP: '0x0', USDC: '0x0', USDT: '0x0' },
+    Polkadot: { DOT: '0x0' },
+    Bitcoin: { BTC: '0x0' },
+    Arbitrum: { ETH: '0x0', USDC: '0x0' },
+  },
+  refund_addresses: {
+    Ethereum: '0xacd7c0481fc71dce9e3e8bd4cca5828ce8302629',
+    Polkadot: null,
+    Bitcoin: 'bc1qqt3juqef9azhd0zeuamu9c30pg5xdllvmks2ja',
+  },
+  flip_balance: '0x456306aa68edbb80',
+  earned_fees: {
+    Ethereum: { ETH: 0, FLIP: 0, USDC: 0, USDT: 0 },
+    Polkadot: { DOT: 0 },
+    Bitcoin: { BTC: 0 },
+    Arbitrum: { ETH: 0, USDC: 0 },
+  },
+};
+
+const brokerAccount: z.input<typeof broker> = {
+  role: 'broker',
+  flip_balance: '0x123dd89c5bb3f5009',
+  earned_fees: {
+    Ethereum: {
+      ETH: '0x149e76e0f91d2546',
+      FLIP: '0x2233cf5b9f41af4fe',
+      USDC: '0x7293c1a9',
+      USDT: '0x2b7b6186',
+    },
+    Polkadot: {
+      DOT: '0x48b7018d8',
+    },
+    Bitcoin: {
+      BTC: '0xbcbf36',
+    },
+    Arbitrum: {
+      ETH: 0,
+      USDC: 0,
+    },
+  },
+};
+
+const validatorAccount: z.input<typeof validator> = {
+  role: 'validator',
+  flip_balance: '0x35670aa54a62ccedacab',
+  bond: '0x2fa71622a7b77fdf4d10',
+  last_heartbeat: 2930096,
+  reputation_points: 2880,
+  keyholder_epochs: [197, 198],
+  is_current_authority: true,
+  is_current_backup: false,
+  is_qualified: true,
+  is_online: true,
+  is_bidding: true,
+  bound_redeem_address: '0x9a449133c6a8b4e117840b69e2a1d43634f562d3',
+  apy_bp: 970,
+  restricted_balances: {},
+};
+
+const poolOrders: z.input<typeof cfPoolOrders> = {
+  limit_orders: {
+    asks: [
+      {
+        lp: 'cFLGvPhhrribWCx9id5kLVqwiFK4QiVNjQ6ViyaRFF2Nrgq7j',
+        id: '0x0',
+        tick: -193955,
+        sell_amount: '0x24b61784bb05ec04',
+        fees_earned: '0x0',
+        original_sell_amount: '0x24b61784bb05ec04',
+      },
+    ],
+    bids: [
+      {
+        lp: 'cFLvCBxThPho4LP8iSP54B1iHdEtJhTHniUW5yyNcwDBGSe1X',
+        id: '0x18dbe9c5baf',
+        tick: -196947,
+        sell_amount: '0x17456b9e',
+        fees_earned: '0x0',
+        original_sell_amount: '0x17456b9e',
+      },
+    ],
+  },
+  range_orders: [
+    {
+      lp: 'cFM63NFq2MiujSSXUz1AfZgb4aZrkv5aWggdLkyufyTcpkrf2',
+      id: '0x1',
+      range: {
+        start: -198197,
+        end: -192004,
+      },
+      liquidity: 4115587651042067,
+      fees_earned: {
+        base: '0x7fd89c53a56ae1',
+        quote: '0x7bfd0f4',
+      },
+    },
+  ],
+};
+
+const poolPriceV2: z.input<typeof cfPoolPriceV2> = {
+  base_asset: {
+    chain: 'Ethereum',
+    asset: 'ETH',
+  },
+  quote_asset: {
+    chain: 'Ethereum',
+    asset: 'USDC',
+  },
+  sell: '0x406ee3d54ffe019efa326',
+  buy: '0x404979711cbb0b1702a0b',
+  range_order: '0x404979711cbb0b1702a0b',
+};
+
 const isHexString = (value: unknown): value is HexString =>
   typeof value === 'string' && value.startsWith('0x');
 
@@ -149,10 +465,14 @@ describe(HttpClient, () => {
     expect(new HttpClient('http://localhost:8080').methods()).toMatchInlineSnapshot(`
       [
         "broker_requestSwapDepositAddress",
+        "cf_account_info",
         "cf_boost_pools_depth",
         "cf_environment",
         "cf_funding_environment",
         "cf_ingress_egress_environment",
+        "cf_pool_orders",
+        "cf_pool_price_v2",
+        "cf_pools_environment",
         "cf_supported_assets",
         "cf_swap_rate",
         "cf_swap_rate_v2",
@@ -163,6 +483,10 @@ describe(HttpClient, () => {
       ]
     `);
   });
+
+  const LP_ACCOUNT_ID = 'cFMVtnPTJFYFvnHXK14HZ6XWDSCAByTPZDWrTeFEc2B8A3m7M';
+  const BROKER_ACCOUNT_ID = 'cFJjZKzA5rUTb9qkZMGfec7piCpiAQKr15B4nALzriMGQL8BE';
+  const VALIDATOR_ACCOUNT_ID = 'cFKzr7DwLCRtSkou5H5moKri7g9WwJ4tAbVJv6dZGhLb811Tc';
 
   describe('with server', () => {
     let server: Server;
@@ -208,7 +532,7 @@ describe(HttpClient, () => {
           );
 
         if (body.method === 'cf_swap_rate') {
-          const { chain, asset } = body.params[1]!;
+          const { chain, asset } = body.params[1] as AssetAndChain;
 
           if (!isHexString(body.params.at(-1))) {
             return res.end(
@@ -227,28 +551,45 @@ describe(HttpClient, () => {
         }
 
         switch (body.method) {
+          case 'cf_account_info':
+            switch (body.params[0]) {
+              case LP_ACCOUNT_ID:
+                return respond(liquidityProviderAccount);
+              case BROKER_ACCOUNT_ID:
+                return respond(brokerAccount);
+              case VALIDATOR_ACCOUNT_ID:
+                return respond(validatorAccount);
+              default:
+                return respond(unregisteredAccount);
+            }
+          case 'broker_requestSwapDepositAddress':
+            return respond(swapDepositAddress);
+          case 'cf_boost_pools_depth':
+            return respond(boostPoolsDepth);
+          case 'cf_environment':
+            return respond(environment);
           case 'cf_funding_environment':
             return respond(fundingEnvironment);
           case 'cf_ingress_egress_environment':
             return respond(ingressEgressEnvironment);
-          case 'cf_swapping_environment':
-            return respond(swappingEnvironment);
-          case 'cf_environment':
-            return respond(environment);
-          case 'state_getMetadata':
-            return respond('0x1234');
+          case 'cf_pool_orders':
+            return respond(poolOrders);
+          case 'cf_pool_price_v2':
+            return respond(poolPriceV2);
+          case 'cf_pools_environment':
+            return respond(poolsEnvironment);
           case 'cf_supported_assets':
             return respond(supportedAssets);
-          case 'chain_getBlockHash':
-            return respond('0x5678');
-          case 'state_getRuntimeVersion':
-            return respond(runtimeVersion);
-          case 'cf_boost_pools_depth':
-            return respond(boostPoolsDepth);
           case 'cf_swap_rate_v2':
             return respond(swapRateV2);
-          case 'broker_requestSwapDepositAddress':
-            return respond(swapDepositAddress);
+          case 'cf_swapping_environment':
+            return respond(swappingEnvironment);
+          case 'chain_getBlockHash':
+            return respond('0x5678');
+          case 'state_getMetadata':
+            return respond('0x1234');
+          case 'state_getRuntimeVersion':
+            return respond(runtimeVersion);
           default:
             console.error('Method not found:', body.method);
             return res.writeHead(200).end(
@@ -424,6 +765,37 @@ describe(HttpClient, () => {
           "output": 65468n,
         }
       `);
+    });
+
+    it('gets validator account info', async () => {
+      expect(await client.sendRequest('cf_account_info', VALIDATOR_ACCOUNT_ID)).toMatchSnapshot();
+    });
+
+    it('gets lp account info', async () => {
+      expect(await client.sendRequest('cf_account_info', LP_ACCOUNT_ID)).toMatchSnapshot();
+    });
+
+    it('gets broker account info', async () => {
+      expect(await client.sendRequest('cf_account_info', BROKER_ACCOUNT_ID)).toMatchSnapshot();
+    });
+
+    it('gets unregistered account info', async () => {
+      expect(
+        await client.sendRequest(
+          'cf_account_info',
+          'cFNz3kSjvCHubkrtfYtBkzY2WpACDmXqQ9YGxbMgRD2iu1LCc',
+        ),
+      ).toMatchSnapshot();
+    });
+
+    it('gets pools orders', async () => {
+      expect(
+        await client.sendRequest(
+          'cf_pool_orders',
+          { chain: 'Ethereum', asset: 'ETH' },
+          { asset: 'USDC', chain: 'Ethereum' },
+        ),
+      ).toMatchSnapshot();
     });
 
     it('requests deposit addresses', async () => {
