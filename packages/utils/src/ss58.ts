@@ -2,7 +2,7 @@ import { assert } from './assertion';
 import { blake2b } from '@noble/hashes/blake2b';
 import * as base58 from './base58';
 import { HexString } from './types';
-import { hexToBytes } from './bytes';
+import { hexToBytes, bytesToHex } from './bytes';
 
 const CHECKSUM_BYTE_LENGTH = 2;
 const DATA_LENGTH = 32;
@@ -82,3 +82,5 @@ export const encode = ({
 
   return base58.encode([...prefixBytes, ...data, ...checksum]);
 };
+
+export const toPublicKey = (address: string): HexString => bytesToHex(decode(address).data);

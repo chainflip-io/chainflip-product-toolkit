@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { decode, encode } from '../ss58';
+import { decode, encode, toPublicKey } from '../ss58';
 
 describe(decode, () => {
   it('decodes base58 with format 42', () => {
@@ -77,5 +77,13 @@ describe('ss58', () => {
 
     const polkadot = encode({ data, ss58Format: 0 });
     expect(polkadot).toEqual('167ZvRqc7V6HrEUSvtV8c3JRUtPjJhHXUpAwhmPktAGj1uzq');
+  });
+});
+
+describe(toPublicKey, () => {
+  it('encodes an address to a public key', () => {
+    expect(toPublicKey('cFNyy169p7yCy3F9p4bb7mW27Tse3F1v8hw8yTv21Qzwq23xW')).toEqual(
+      '0xe21f7b11f35d7c6b381564b91db0e65c24c0680bfc707e0a308244704138116f',
+    );
   });
 });
