@@ -1,0 +1,302 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`CodeGenerator > filters on selected events > EventOne 1`] = `
+"import { z } from 'zod';
+import { myEnum } from '../common';
+
+export const enumsEventOne = myEnum;
+"
+`;
+
+exports[`CodeGenerator > filters on selected events > common 1`] = `
+"import { z } from 'zod';
+
+export const simpleEnum = <U extends string, T extends readonly [U, ...U[]]>(values: T) =>
+  z.object({ __kind: z.enum(values) }).transform(({ __kind }) => __kind!);
+
+export const myEnum = simpleEnum(['Flip', 'Usdc', 'Eth']);
+"
+`;
+
+exports[`CodeGenerator > generates a lot of stuff > AccountId32 1`] = `
+"import { z } from 'zod';
+import { accountId } from '../common';
+
+export const primitivesAccountId32 = accountId;
+"
+`;
+
+exports[`CodeGenerator > generates a lot of stuff > Bytes 1`] = `
+"import { z } from 'zod';
+import { hexString } from '../common';
+
+export const primitivesBytes = hexString;
+"
+`;
+
+exports[`CodeGenerator > generates a lot of stuff > Call 1`] = `
+"import { z } from 'zod';
+
+export const primitivesCall = z.unknown();
+"
+`;
+
+exports[`CodeGenerator > generates a lot of stuff > EventOne 1`] = `
+"import { z } from 'zod';
+import {
+  accountId,
+  enumWithFlattenedField,
+  hexString,
+  mapValue,
+  moneySymbol,
+  numberOrHex,
+} from '../common';
+
+export const structsEventOne = z.object({
+  i8: z.number(),
+  u8: z.number(),
+  i16: z.number(),
+  u16: z.number(),
+  i32: z.number(),
+  u32: z.number(),
+  Percent: z.number(),
+  Permill: z.number(),
+  u64: numberOrHex,
+  u128: numberOrHex,
+  U256: numberOrHex,
+  AccountId32: accountId,
+  H160: hexString,
+  H256: hexString,
+  Call: z.unknown(),
+  Bytes: hexString,
+  bool: z.boolean(),
+  i8Nullable: z.number().nullish(),
+  u8Nullable: z.number().nullish(),
+  i16Nullable: z.number().nullish(),
+  u16Nullable: z.number().nullish(),
+  i32Nullable: z.number().nullish(),
+  u32Nullable: z.number().nullish(),
+  PercentNullable: z.number().nullish(),
+  PermillNullable: z.number().nullish(),
+  u64Nullable: numberOrHex.nullish(),
+  u128Nullable: numberOrHex.nullish(),
+  U256Nullable: numberOrHex.nullish(),
+  AccountId32Nullable: accountId.nullish(),
+  H160Nullable: hexString.nullish(),
+  H256Nullable: hexString.nullish(),
+  CallNullable: z.unknown().nullish(),
+  BytesNullable: hexString.nullish(),
+  boolNullable: z.boolean().nullish(),
+  nullNullable: z.null().nullish(),
+  u32Array: z.array(z.number()),
+  u32ArrayWithLength: z.tuple([z.number(), z.number(), z.number()]),
+  bytes: hexString,
+  tuple: z.tuple([z.number(), z.boolean(), accountId]),
+  range: z.object({ start: numberOrHex, end: numberOrHex }),
+  map: z.array(z.tuple([z.tuple([accountId, z.number()]), mapValue])),
+  flattenedEnumThing: enumWithFlattenedField,
+  arrayOfIdentifiers: z.array(moneySymbol),
+});
+"
+`;
+
+exports[`CodeGenerator > generates a lot of stuff > EventOne 2`] = `
+"import { z } from 'zod';
+import { myEnum } from '../common';
+
+export const enumsEventOne = myEnum;
+"
+`;
+
+exports[`CodeGenerator > generates a lot of stuff > H160 1`] = `
+"import { z } from 'zod';
+import { hexString } from '../common';
+
+export const primitivesH160 = hexString;
+"
+`;
+
+exports[`CodeGenerator > generates a lot of stuff > H256 1`] = `
+"import { z } from 'zod';
+import { hexString } from '../common';
+
+export const primitivesH256 = hexString;
+"
+`;
+
+exports[`CodeGenerator > generates a lot of stuff > Percent 1`] = `
+"import { z } from 'zod';
+
+export const primitivesPercent = z.number();
+"
+`;
+
+exports[`CodeGenerator > generates a lot of stuff > Permill 1`] = `
+"import { z } from 'zod';
+
+export const primitivesPermill = z.number();
+"
+`;
+
+exports[`CodeGenerator > generates a lot of stuff > U256 1`] = `
+"import { z } from 'zod';
+import { numberOrHex } from '../common';
+
+export const primitivesU256 = numberOrHex;
+"
+`;
+
+exports[`CodeGenerator > generates a lot of stuff > bool 1`] = `
+"import { z } from 'zod';
+
+export const primitivesBool = z.boolean();
+"
+`;
+
+exports[`CodeGenerator > generates a lot of stuff > common 1`] = `
+"import { z } from 'zod';
+import { encode } from '@chainflip/utils/ss58';
+
+export const numericString = z
+  .string()
+  .refine((v) => /^\\d+$/.test(v), { message: 'Invalid numeric string' });
+
+export const hexString = z
+  .string()
+  .refine((v): v is \`0x\${string}\` => /^0x[\\da-f]*$/i.test(v), { message: 'Invalid hex string' });
+
+export const numberOrHex = z
+  .union([z.number(), hexString, numericString])
+  .transform((n) => BigInt(n));
+
+export const accountId = z
+  .union([
+    hexString,
+    z
+      .string()
+      .regex(/^[0-9a-f]+$/)
+      .transform<\`0x\${string}\`>((v) => \`0x\${v}\`),
+  ])
+  .transform((value) => encode({ data: value, ss58Format: 2112 }));
+
+export const simpleEnum = <U extends string, T extends readonly [U, ...U[]]>(values: T) =>
+  z.object({ __kind: z.enum(values) }).transform(({ __kind }) => __kind!);
+
+export const moneySymbol = simpleEnum(['Flip']);
+
+export const mapValue = z.object({ value: z.number(), moneySymbol });
+
+export const enumWithFlattenedField = z.union([
+  z.object({ __kind: z.literal('One'), field: z.number() }),
+]);
+
+export const myEnum = z.union([
+  z.object({ __kind: z.literal('i8'), value: z.number() }),
+  z.object({ __kind: z.literal('u8'), value: z.number() }),
+  z.object({ __kind: z.literal('i16'), value: z.number() }),
+  z.object({ __kind: z.literal('u16'), value: z.number() }),
+  z.object({ __kind: z.literal('i32'), value: z.number() }),
+  z.object({ __kind: z.literal('u32'), value: z.number() }),
+  z.object({ __kind: z.literal('Percent'), value: z.number() }),
+  z.object({ __kind: z.literal('Permill'), value: z.number() }),
+  z.object({ __kind: z.literal('u64'), value: numberOrHex }),
+  z.object({ __kind: z.literal('u128'), value: numberOrHex }),
+  z.object({ __kind: z.literal('U256'), value: numberOrHex }),
+  z.object({ __kind: z.literal('AccountId32'), value: accountId }),
+  z.object({ __kind: z.literal('H160'), value: hexString }),
+  z.object({ __kind: z.literal('H256'), value: hexString }),
+  z.object({ __kind: z.literal('Call'), value: z.unknown() }),
+  z.object({ __kind: z.literal('Bytes'), value: hexString }),
+  z.object({ __kind: z.literal('bool'), value: z.boolean() }),
+  z.object({ __kind: z.literal('null') }),
+]);
+"
+`;
+
+exports[`CodeGenerator > generates a lot of stuff > i8 1`] = `
+"import { z } from 'zod';
+
+export const primitivesI8 = z.number();
+"
+`;
+
+exports[`CodeGenerator > generates a lot of stuff > i16 1`] = `
+"import { z } from 'zod';
+
+export const primitivesI16 = z.number();
+"
+`;
+
+exports[`CodeGenerator > generates a lot of stuff > i32 1`] = `
+"import { z } from 'zod';
+
+export const primitivesI32 = z.number();
+"
+`;
+
+exports[`CodeGenerator > generates a lot of stuff > null 1`] = `
+"import { z } from 'zod';
+
+export const primitivesNull = z.null();
+"
+`;
+
+exports[`CodeGenerator > generates a lot of stuff > u8 1`] = `
+"import { z } from 'zod';
+
+export const primitivesU8 = z.number();
+"
+`;
+
+exports[`CodeGenerator > generates a lot of stuff > u16 1`] = `
+"import { z } from 'zod';
+
+export const primitivesU16 = z.number();
+"
+`;
+
+exports[`CodeGenerator > generates a lot of stuff > u32 1`] = `
+"import { z } from 'zod';
+
+export const primitivesU32 = z.number();
+"
+`;
+
+exports[`CodeGenerator > generates a lot of stuff > u64 1`] = `
+"import { z } from 'zod';
+import { numberOrHex } from '../common';
+
+export const primitivesU64 = numberOrHex;
+"
+`;
+
+exports[`CodeGenerator > generates a lot of stuff > u128 1`] = `
+"import { z } from 'zod';
+import { numberOrHex } from '../common';
+
+export const primitivesU128 = numberOrHex;
+"
+`;
+
+exports[`CodeGenerator > generates a named struct once > AnotherEvent 1`] = `
+"import { z } from 'zod';
+import { reusedStruct } from '../common';
+
+export const palletOneAnotherEvent = reusedStruct;
+"
+`;
+
+exports[`CodeGenerator > generates a named struct once > EventOne 1`] = `
+"import { z } from 'zod';
+import { reusedStruct } from '../common';
+
+export const palletOneEventOne = reusedStruct;
+"
+`;
+
+exports[`CodeGenerator > generates a named struct once > common 1`] = `
+"import { z } from 'zod';
+
+export const reusedStruct = z.object({ field: z.number() });
+"
+`;

@@ -41,7 +41,7 @@ abstract class CodegenResult {
       if (dep instanceof Identifier) {
         acc[dep.pkg] ??= new Set();
         acc[dep.pkg].add(dep.toString());
-      } else if (dep instanceof Code) {
+      } else {
         dep.dependencies.forEach((dep) => {
           if (dep instanceof Identifier) {
             acc[dep.pkg] ??= new Set();
@@ -70,13 +70,50 @@ class Identifier extends CodegenResult {
   }
 
   getImportStatements(): string[] {
-    const pkg = this.pkg === 'common' ? '../common' : this.pkg;
-
-    return [`import { ${this.toString()} } from '${pkg}';`];
+    return [`import { ${this.toString()} } from '../common';`];
   }
 }
 
 class Code extends CodegenResult {}
+
+class Module {
+  constructor(
+    private readonly name: string,
+    private readonly exports: Map<string, CodegenResult>,
+    private readonly pallet?: string,
+  ) {}
+
+  toString() {
+    const imports: string[] = ["import { z } from 'zod';"];
+    const generated: string[] = [];
+
+    for (const [identifier, type] of this.exports.entries()) {
+      imports.push(
+        ...type
+          .getImportStatements()
+          .filter((stmt) => this.name !== 'common' || !stmt.includes('../common')),
+      );
+      generated.push(`export const ${identifier} = ${type.toString()};`);
+      generated.push('');
+    }
+
+    return [...imports, '', ...generated].join('\n');
+  }
+
+  toFormattedString() {
+    return formatCode(this.toString());
+  }
+
+  async writeFile(specDir: string) {
+    const outDir = this.pallet ? path.join(specDir, this.pallet) : specDir;
+    await fs.mkdir(outDir, { recursive: true });
+    await fs.writeFile(
+      path.join(outDir, uncapitalize(`${this.name}.ts`)),
+      await this.toFormattedString(),
+      'utf8',
+    );
+  }
+}
 
 const hexString = new Code(
   "z.string().refine((v): v is `0x${string}` => /^0x[\\da-f]*$/i.test(v), { message: 'Invalid hex string' })",
@@ -100,14 +137,9 @@ export default class CodeGenerator {
     types: new Map<string, CodegenResult>(),
   };
 
-  private ignoredEvents?: Set<string>;
   private trackedEvents?: Set<string>;
 
-  constructor({
-    ignoredEvents,
-    trackedEvents,
-  }: { ignoredEvents?: Set<string>; trackedEvents?: Set<string> } = {}) {
-    if (ignoredEvents) this.ignoredEvents = new Set(ignoredEvents);
+  constructor({ trackedEvents }: { trackedEvents?: Set<string> } = {}) {
     if (trackedEvents) this.trackedEvents = new Set(trackedEvents);
   }
 
@@ -153,7 +185,6 @@ export default class CodeGenerator {
   }
 
   private generateEnum(def: EnumType): Identifier {
-    console.log(def.name);
     if (this.registry.types.has(def.name)) return new Identifier(def.name);
 
     // "isSimple" means that none of the variants have any associated data, e.g.
@@ -317,28 +348,15 @@ export default class CodeGenerator {
     }
   }
 
-  async generate(
-    specVersion: number,
-    def: Record<PalletName, Record<EventName, ResolvedType>>,
-  ): Promise<void> {
-    const generatedDir = path.join(import.meta.dirname, '..', '..', 'generated');
-    await fs.mkdir(generatedDir, { recursive: true });
-    const specDir = path.join(generatedDir, String(specVersion));
-    await fs.rm(specDir, { recursive: true }).catch(() => null);
+  *generate(def: Record<PalletName, Record<EventName, ResolvedType>>) {
     const unhandledEvents = new Set(this.trackedEvents);
     const generatedEvents = new Set<string>();
 
     for (const [palletName, events] of Object.entries(def)) {
-      const palletDir = path.join(specDir, uncapitalize(palletName));
-
       for (const [eventName, event] of Object.entries(events)) {
         const name = `${palletName}.${eventName}`;
-        if (this.ignoredEvents?.has(name)) continue;
         if (this.trackedEvents && !unhandledEvents.delete(name)) continue;
         generatedEvents.add(name);
-
-        await fs.mkdir(specDir, { recursive: true });
-        await fs.mkdir(palletDir, { recursive: true });
 
         let generatedEvent: CodegenResult;
 
@@ -353,142 +371,17 @@ export default class CodeGenerator {
 
         const parserName = nameToIdentifier(`${palletName}::${eventName}`);
 
-        const generated = await formatCode(
-          [
-            "import { z } from 'zod';",
-            ...generatedEvent.getImportStatements(),
-            '',
-            `export const ${parserName} = ${generatedEvent.toString()};`,
-            '',
-          ].join('\n'),
-        );
-
-        await fs.writeFile(path.join(palletDir, uncapitalize(`${eventName}.ts`)), generated);
+        yield new Module(eventName, new Map([[parserName, generatedEvent]]), palletName);
       }
     }
 
     if (unhandledEvents.size !== 0) {
-      console.warn('Not all events were generated:');
-      console.warn([...unhandledEvents].join('\n'));
+      console.error('Unhandled events:', unhandledEvents);
+      throw new Error('Not all events were generated');
     }
 
     if (generatedEvents.size === 0) return;
 
-    await this.generateCommon(specDir);
-
-    await this.generateIndex(specDir, generatedEvents, specVersion);
-  }
-
-  private async generateCommon(specDir: string) {
-    const imports: string[] = ["import { z } from 'zod';"];
-    const generated: string[] = [];
-
-    for (const [identifier, type] of this.registry.types.entries()) {
-      imports.push(...type.getImportStatements().filter((dep) => !dep.includes('../common')));
-      generated.push(`export const ${identifier} = ${type.toString()};`);
-      generated.push('');
-    }
-
-    if (generated.length === 0) return;
-
-    const common = await formatCode([...imports, '', ...generated].join('\n'));
-
-    await fs.writeFile(path.join(specDir, 'common.ts'), common);
-  }
-
-  private async generateUtils(specDir: string) {
-    const utils = path.join(path.dirname(specDir), 'utils.ts');
-
-    await fs.writeFile(
-      utils,
-      await formatCode(
-        `import { z } from 'zod';
-
-type EventHandlerArgs = {
-  // todo: fix \`any\`s
-  prisma: any;
-  event: any;
-  block: any;
-  eventId: bigint;
-  submitterId?: number;
-};
-
-type ParsedEventHandlerArgs<T> = EventHandlerArgs & { args: T };
-
-export type InternalEventHandler = (args: EventHandlerArgs) => Promise<void>;
-
-export type EventHandler<T> = (args: ParsedEventHandlerArgs<T>) => Promise<void>;
-
-export const wrapHandler = <T extends z.ZodTypeAny>(
-  handler: EventHandler<z.output<T>> | undefined,
-  schema: T,
-): InternalEventHandler | undefined => {
-  if (!handler) return undefined;
-
-  return async ({ event, ...rest }) => handler({ ...rest, event, args: schema.parse(event.args) });
-}`,
-      ),
-    );
-  }
-
-  private async generateIndex(specDir: string, generatedEvents: Set<string>, specVersion: number) {
-    await this.generateUtils(specDir);
-
-    const palletsAndEvents = [...generatedEvents]
-      .map((name) => name.split('.'))
-      .reduce<Record<string, string[]>>((acc, [pallet, event]) => {
-        acc[pallet] ??= [];
-        acc[pallet].push(event);
-        return acc;
-      }, {});
-
-    const imports = Object.entries(palletsAndEvents).flatMap(([pallet, events]) =>
-      events.map(
-        (event) =>
-          `import { ${uncapitalize(pallet)}${event} } from './${uncapitalize(pallet)}/${uncapitalize(event)}';`,
-      ),
-    );
-
-    const generated = `import { z } from 'zod';
-    import { InternalEventHandler, EventHandler, wrapHandler } from '../utils';
-    ${imports.join('\n')}
-
-    ${Object.entries(palletsAndEvents)
-      .flatMap(([pallet, events]) =>
-        events.map(
-          (event) =>
-            `export type ${pallet}${event} = EventHandler<z.output<typeof ${uncapitalize(pallet)}${event}>>;`,
-        ),
-      )
-      .join('\n')}
-
-    type HandlerMap = {
-      ${Object.entries(palletsAndEvents)
-        .map(([pallet, events]) => {
-          return `${pallet}?: {
-            ${events.map((event) => `${event}?: ${pallet}${event}`).join('\n')}
-          };`;
-        })
-        .join('\n')}
-    };
-
-    export const handleEvents = (map: HandlerMap) => ({
-      spec: ${specVersion},
-      handlers: [
-        ${Object.entries(palletsAndEvents)
-          .flatMap(([pallet, events]) =>
-            events.map(
-              (event) => `({
-            name: '${pallet}.${event}',
-            handler: wrapHandler(map.${pallet}?.${event}, ${uncapitalize(pallet)}${event}),
-          })`,
-            ),
-          )
-          .join(',\n')}
-      ].filter((h): h is { name: string; handler: InternalEventHandler } => h.handler !== undefined),
-    })
-    `;
-
-    await fs.writeFile(path.join(specDir, 'index.ts'), await formatCode(generated));
+    yield new Module('common', new Map(this.registry.types));
   }
 }
