@@ -261,3 +261,44 @@ export const cfPoolOrders = z.object({
   }),
   range_orders: z.array(rangeOrder),
 });
+
+const boostPoolAmount = z.object({
+  account_id: z.string(),
+  amount: u256,
+});
+export const cfBoostPoolDetails = z.array(
+  z.intersection(
+    rpcAssetSchema,
+    z.object({
+      fee_tier: z.number(),
+      available_amounts: z.array(boostPoolAmount),
+      deposits_pending_finalization: z.array(
+        z.object({
+          deposit_id: z.number().transform(BigInt),
+          owed_amounts: z.array(boostPoolAmount),
+        }),
+      ),
+      pending_withdrawals: z.array(
+        z.object({
+          account_id: z.string(),
+          pending_deposits: z.array(z.bigint()),
+        }),
+      ),
+    }),
+  ),
+);
+
+export const cfBoostPoolPendingFees = z.array(
+  z.intersection(
+    rpcAssetSchema,
+    z.object({
+      fee_tier: z.number(),
+      pending_fees: z.array(
+        z.object({
+          deposit_id: z.number().transform(BigInt),
+          fees: z.array(boostPoolAmount),
+        }),
+      ),
+    }),
+  ),
+);
