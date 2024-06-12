@@ -2,8 +2,8 @@ import { HexString } from '@chainflip/utils/types';
 import type { z } from 'zod';
 import {
   AssetAndChain,
-  boostPoolDetails,
-  boostPoolPendingFees,
+  cfBoostPoolDetails,
+  cfBoostPoolPendingFees,
   brokerRequestSwapDepositAddress,
   cfAccountInfo,
   cfBoostPoolsDepth,
@@ -106,8 +106,8 @@ export const rpcResult = {
   cf_swap_rate_v2: cfSwapRateV2,
   cf_swapping_environment: cfSwappingEnvironment,
   chain_getBlockHash: chainGetBlockHash,
-  cf_boost_pool_details: boostPoolDetails,
-  cf_boost_pool_pending_fees: boostPoolPendingFees,
+  cf_boost_pool_details: cfBoostPoolDetails,
+  cf_boost_pool_pending_fees: cfBoostPoolPendingFees,
   state_getMetadata: stateGetMetadata,
   state_getRuntimeVersion: stateGetRuntimeVersion,
 } as const satisfies { [K in keyof RpcRequest]: z.ZodTypeAny };

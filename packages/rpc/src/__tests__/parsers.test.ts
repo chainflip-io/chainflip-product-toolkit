@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { boostPoolDetails, boostPoolPendingFees, numberOrHex } from '../parsers';
+import { cfBoostPoolDetails, cfBoostPoolPendingFees, numberOrHex } from '../parsers';
 
 describe('parsers', () => {
   describe('numberOrHex', () => {
@@ -8,9 +8,9 @@ describe('parsers', () => {
     });
   });
 
-  describe('boostPoolDetails', () => {
+  describe('cfBoostPoolDetails', () => {
     it('parses boost pool details', () => {
-      boostPoolDetails.parse([
+      cfBoostPoolDetails.parse([
         {
           fee_tier: 5,
           chain: 'Bitcoin',
@@ -46,9 +46,9 @@ describe('parsers', () => {
     });
   });
 
-  describe('boostPoolPendingFees', () => {
+  describe('cfBoostPoolPendingFees', () => {
     it('parses boost pool pending fees', () => {
-      boostPoolPendingFees.parse([
+      cfBoostPoolPendingFees.parse([
         {
           fee_tier: 5,
           chain: 'Bitcoin',
