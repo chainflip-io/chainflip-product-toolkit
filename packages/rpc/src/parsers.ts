@@ -6,6 +6,8 @@ import { z } from 'zod';
 
 export const hexString = z.string().refine(isHex, { message: 'Invalid hex string' });
 
+const u128 = z.union([hexString, z.number()]).transform((n) => BigInt(n));
+
 export const u256 = hexString.transform((value) => BigInt(value));
 
 export const numberOrHex = z.union([z.number().transform((n) => BigInt(n)), u256]);
@@ -261,3 +263,49 @@ export const cfPoolOrders = z.object({
   }),
   range_orders: z.array(rangeOrder),
 });
+
+const boostPoolAmount = z.object({
+  account_id: z.string(),
+  amount: hexString,
+});
+export const boostPoolDetails = z.array(
+  z.intersection(
+    rpcAssetSchema,
+    z.object({
+      fee_tier: z.number(),
+      available_amounts: z.array(boostPoolAmount),
+      deposits_pending_finalization: z.array(
+        z.object({
+          deposit_id: z.number().transform(BigInt),
+          owed_amounts: z.array(boostPoolAmount),
+        }),
+      ),
+      pending_withdrawals: z.array(
+        z.object({
+          account_id: z.string(),
+          pending_deposits: z.array(z.bigint()),
+        }),
+      ),
+    }),
+  ),
+);
+
+export const boostPoolPendingFees = z.array(
+  z.intersection(
+    rpcAssetSchema,
+    z.object({
+      fee_tier: z.number(),
+      pending_fees: z.array(
+        z.object({
+          deposit_id: z.number().transform(BigInt),
+          fees: z.array(
+            z.object({
+              account_id: z.string(),
+              amount: u128,
+            }),
+          ),
+        }),
+      ),
+    }),
+  ),
+);

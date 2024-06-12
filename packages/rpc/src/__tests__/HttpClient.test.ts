@@ -466,6 +466,8 @@ describe(HttpClient, () => {
       [
         "broker_requestSwapDepositAddress",
         "cf_account_info",
+        "cf_boost_pool_details",
+        "cf_boost_pool_pending_fees",
         "cf_boost_pools_depth",
         "cf_environment",
         "cf_funding_environment",
