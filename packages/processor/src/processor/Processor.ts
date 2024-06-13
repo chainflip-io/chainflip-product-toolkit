@@ -1,3 +1,4 @@
+import { WsClient } from '@chainflip/rpc';
 import { average, sum } from '@chainflip/utils/math';
 import assert from 'assert';
 import { setTimeout as sleep } from 'timers/promises';
@@ -38,11 +39,11 @@ export function timedMethod<P extends ProcessorStore<any, any>, I extends Indexe
 }
 
 export default class Processor<P extends ProcessorStore<unknown, unknown>, I extends IndexerStore> {
-  batchSize = 50;
+  private batchSize = 50;
 
-  transactionTimeout = 10_000;
+  private transactionTimeout = 10_000;
 
-  running = false;
+  private running = false;
 
   protected readonly name: string;
 
@@ -52,13 +53,15 @@ export default class Processor<P extends ProcessorStore<unknown, unknown>, I ext
 
   protected readonly startHeight: number = -1;
 
+  readonly #rpcClient?: WsClient;
+
   protected timings = {
     extrinsicHandlers: 0,
     eventHandlers: {} as Record<string, number[]>,
   } as Record<string, number | Record<string, number[]>>;
 
   constructor(
-    { batchSize, transactionTimeout, eventHandlers, name }: ProcessorOptions<P>,
+    { batchSize, transactionTimeout, eventHandlers, name, rpcNodeWsUrl }: ProcessorOptions<P>,
     private processorStore: P,
     private indexerStore: I,
     private logger: Logger,
@@ -68,19 +71,17 @@ export default class Processor<P extends ProcessorStore<unknown, unknown>, I ext
     this.eventHandlerMap = new HandlerMap(eventHandlers);
     this.handledEvents = new Set(eventHandlers.flatMap(({ name }) => name));
     this.name = name;
+    if (rpcNodeWsUrl) this.#rpcClient = new WsClient(rpcNodeWsUrl);
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  // eslint-disable-next-line @typescript-eslint/require-await
   protected async preBlockHook(_store: P, _block: Block): Promise<void> {
     this.timings = {
       extrinsicHandlers: 0,
       eventHandlers: {} as Record<string, number[]>,
     };
-
-    return Promise.resolve();
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   protected async postBlockHook(_store: P, _block: Block): Promise<void> {
     // do nothing by default
   }
@@ -136,7 +137,6 @@ export default class Processor<P extends ProcessorStore<unknown, unknown>, I ext
     }) as EventHandler<P>;
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   protected async handleExtrinsic(_store: P, _block: Block, _call: Call): Promise<void> {
     // do nothing by default
   }
@@ -158,6 +158,7 @@ export default class Processor<P extends ProcessorStore<unknown, unknown>, I ext
       await this.handleExtrinsic(store, block, call);
     }
     this.timings.extrinsicHandlers = performance.now() - start;
+    const rpcClient = this.#rpcClient;
 
     start = performance.now();
     for (const event of block.events) {
@@ -181,6 +182,10 @@ export default class Processor<P extends ProcessorStore<unknown, unknown>, I ext
             event,
             eventInfo,
             extrinsicInfo,
+            get rpcClient() {
+              assert(rpcClient, 'rpcClient is not available');
+              return rpcClient;
+            },
           });
         } catch (error) {
           this.logger.customError(
@@ -192,6 +197,7 @@ export default class Processor<P extends ProcessorStore<unknown, unknown>, I ext
               indexInBlock: event.indexInBlock,
               blockHeight: block.height,
               specId: block.specId,
+              args: event.args,
             },
           );
           throw error;
@@ -233,7 +239,6 @@ export default class Processor<P extends ProcessorStore<unknown, unknown>, I ext
     assert(updated, 'failed to update state, maybe another process is running');
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   protected shouldProcessBlock(_block: Block): boolean {
     return true;
   }
