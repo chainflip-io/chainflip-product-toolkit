@@ -26,13 +26,15 @@ export default function lint(files) {
     file.replace(import.meta.dirname, '').slice(1),
   );
 
+  let eslintFiles;
+
   if (tsFiles.length) {
     commands.push(`pnpm prettier --check ${tsFiles.join(' ')}`);
-    if (micromatch(files, '**/eslint.config.js').length) {
-      commands.push('pnpm eslint --max-warnings 0 --no-warn-ignored .');
-    } else {
-      commands.push(`pnpm eslint --max-warnings 0 --no-warn-ignored ${tsFiles.join(' ')}`);
-    }
+    eslintFiles = micromatch(files, '**/eslint.config.js').length ? '.' : tsFiles.join(' ');
+  }
+
+  if (eslintFiles) {
+    commands.push(`pnpm eslint --max-warnings 0 --no-warn-ignored ${eslintFiles}`);
   }
 
   return commands;
