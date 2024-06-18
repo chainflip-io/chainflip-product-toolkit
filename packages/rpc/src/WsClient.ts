@@ -2,6 +2,7 @@ import { DeferredPromise, deferredPromise, once, sleep } from '@chainflip/utils/
 import { randomUUID } from 'crypto';
 import Client from './Client';
 import { JsonRpcRequest, RpcMethod, rpcResponse } from './common';
+import { noop } from './utils';
 
 const READY = 'READY';
 const DISCONNECT = 'DISCONNECT';
@@ -12,13 +13,6 @@ export default class WsClient extends Client {
   private emitter = new EventTarget();
   private requestMap: Map<string | number, DeferredPromise<unknown>> = new Map();
 
-  constructor(
-    url: string,
-    private readonly WebSocket: typeof globalThis.WebSocket = globalThis.WebSocket,
-  ) {
-    super(url);
-  }
-
   protected override getRequestId() {
     return randomUUID();
   }
@@ -28,11 +22,20 @@ export default class WsClient extends Client {
   }
 
   private async handleClose() {
-    if (!this.ws) return;
+    if (
+      !this.ws ||
+      this.ws.readyState === WebSocket.CLOSED ||
+      this.ws.readyState === WebSocket.CLOSING
+    ) {
+      return;
+    }
     this.ws.removeEventListener('close', this.handleDisconnect);
+    const closed = once(this.ws, 'close');
     this.ws.close();
-    if (this.ws.readyState !== this.WebSocket.CLOSED) {
-      await once(this.ws, 'close');
+    try {
+      await closed;
+    } catch {
+      // nothing to do really
     }
   }
 
@@ -40,7 +43,7 @@ export default class WsClient extends Client {
     if (!this.ws) {
       return this.connect();
     }
-    if (this.ws.readyState !== this.WebSocket.OPEN) {
+    if (this.ws.readyState !== WebSocket.OPEN) {
       await once(this.emitter, READY, { timeout: 30_000 });
     }
     return this.ws;
@@ -61,6 +64,9 @@ export default class WsClient extends Client {
 
     await this.connect().catch(() => {
       this.reconnectAttempts = Math.min(this.reconnectAttempts + 1, 6);
+      setTimeout(() => {
+        this.handleDisconnect().catch(noop);
+      }, 1);
     });
   };
 
@@ -69,7 +75,10 @@ export default class WsClient extends Client {
 
     const response = rpcResponse.safeParse(parsedData);
 
-    if (!response.success) return;
+    if (!response.success) {
+      this.emitter.dispatchEvent(new CustomEvent('error', { detail: response.error }));
+      return;
+    }
 
     const { id } = response.data;
 
@@ -77,13 +86,11 @@ export default class WsClient extends Client {
   };
 
   private async connect(): Promise<WebSocket> {
-    const socket = new this.WebSocket(this.url);
+    const socket = new WebSocket(this.url);
     this.ws = socket;
 
     this.ws.addEventListener('message', this.handleMessage);
 
-    // this event is also emitted if a socket fails to open, so all reconnection
-    // logic will be funnelled through here
     this.ws.addEventListener('close', this.handleDisconnect, { once: true });
 
     await once(this.ws, 'open', { timeout: 30_000 });
