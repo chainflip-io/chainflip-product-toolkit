@@ -33,6 +33,7 @@ const supportedAssets = [
   { chain: 'Bitcoin', asset: 'BTC' },
   { chain: 'Arbitrum', asset: 'ETH' },
   { chain: 'Arbitrum', asset: 'USDC' },
+  { chain: 'Solana', asset: 'SOL' },
 ];
 
 const ingressEgressEnvironment: z.input<typeof cfIngressEgressEnvironment> = {
@@ -41,31 +42,36 @@ const ingressEgressEnvironment: z.input<typeof cfIngressEgressEnvironment> = {
     Polkadot: { DOT: '0x0' },
     Bitcoin: { BTC: '0x0' },
     Arbitrum: { ETH: '0x0', USDC: '0x0' },
+    Solana: { SOL: '0x0' },
   },
   ingress_fees: {
     Ethereum: { ETH: '0x55730', FLIP: '0x0', USDC: '0x0', USDT: '0x0' },
     Polkadot: { DOT: '0xbc28f20' },
     Bitcoin: { BTC: '0x4e' },
     Arbitrum: { ETH: '0x574b457d400', USDC: '0x231b' },
+    Solana: { SOL: '0xb0' },
   },
   egress_fees: {
     Ethereum: { ETH: '0x77a10', FLIP: '0x0', USDC: '0x0', USDT: '0x0' },
     Polkadot: { DOT: '0xbc4d910' },
     Bitcoin: { BTC: '0xb0' },
     Arbitrum: { ETH: '0x74645ca7000', USDC: '0x2701' },
+    Solana: { SOL: '0xb0' },
   },
-  witness_safety_margins: { Bitcoin: 2, Polkadot: null, Ethereum: 2, Arbitrum: 1 },
+  witness_safety_margins: { Bitcoin: 2, Polkadot: null, Ethereum: 2, Arbitrum: 1, Solana: 1 },
   egress_dust_limits: {
     Ethereum: { ETH: '0x1', FLIP: '0x1', USDC: '0x1', USDT: '0x1' },
     Polkadot: { DOT: '0x1' },
     Bitcoin: { BTC: '0x258' },
     Arbitrum: { ETH: '0x1', USDC: '0x1' },
+    Solana: { SOL: '0x1' },
   },
   channel_opening_fees: {
     Arbitrum: '0x0',
     Ethereum: '0x0',
     Polkadot: '0x0',
     Bitcoin: '0x0',
+    Solana: '0x0',
   },
 };
 
@@ -86,6 +92,9 @@ const swappingEnvironment: z.input<typeof cfSwappingEnvironment> = {
     Arbitrum: {
       ETH: null,
       USDC: null,
+    },
+    Solana: {
+      SOL: null,
     },
   },
   network_fee_hundredth_pips: 1000,
@@ -277,7 +286,30 @@ const poolsEnvironment: z.input<typeof cfPoolsEnvironment> = {
       },
     },
     Solana: {
-      SOL: null,
+      SOL: {
+        limit_order_fee_hundredth_pips: 20,
+        range_order_fee_hundredth_pips: 20,
+        range_order_total_fees_earned: {
+          base: '0xb4',
+          quote: '0x4e1c',
+        },
+        limit_order_total_fees_earned: {
+          base: '0x0',
+          quote: '0x0',
+        },
+        range_total_swap_inputs: {
+          base: '0x89470a',
+          quote: '0x3b96bc30',
+        },
+        limit_total_swap_inputs: {
+          base: '0x0',
+          quote: '0x0',
+        },
+        quote_asset: {
+          chain: 'Ethereum',
+          asset: 'USDC',
+        },
+      },
     },
   },
 };
@@ -348,11 +380,13 @@ const liquidityProviderAccount: z.input<typeof liquidityProvider> = {
     Polkadot: { DOT: '0x0' },
     Bitcoin: { BTC: '0x0' },
     Arbitrum: { ETH: '0x0', USDC: '0x0' },
+    Solana: { SOL: '0x0' },
   },
   refund_addresses: {
     Ethereum: '0xacd7c0481fc71dce9e3e8bd4cca5828ce8302629',
     Polkadot: null,
     Bitcoin: 'bc1qqt3juqef9azhd0zeuamu9c30pg5xdllvmks2ja',
+    Solana: '7zLEfU3nQKqnfrN2A5yNEiFd1Vt9D7maVaoSAV8invMT',
   },
   flip_balance: '0x456306aa68edbb80',
   earned_fees: {
@@ -360,6 +394,7 @@ const liquidityProviderAccount: z.input<typeof liquidityProvider> = {
     Polkadot: { DOT: 0 },
     Bitcoin: { BTC: 0 },
     Arbitrum: { ETH: 0, USDC: 0 },
+    Solana: { SOL: 0 },
   },
 };
 
@@ -382,6 +417,9 @@ const brokerAccount: z.input<typeof broker> = {
     Arbitrum: {
       ETH: 0,
       USDC: 0,
+    },
+    Solana: {
+      SOL: 0,
     },
   },
 };
@@ -675,6 +713,9 @@ describe(HttpClient, () => {
             },
             "Polkadot": {
               "DOT": null,
+            },
+            "Solana": {
+              "SOL": null,
             },
           },
           "network_fee_hundredth_pips": 1000,
