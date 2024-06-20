@@ -16,7 +16,7 @@ const chainAssetMapFactory = <Z extends z.ZodTypeAny>(parser: Z, defaultValue: z
     Ethereum: z.object({ ETH: parser, USDC: parser, FLIP: parser, USDT: parser }),
     Polkadot: z.object({ DOT: parser }),
     Arbitrum: z.object({ ETH: parser.default(defaultValue), USDC: parser.default(defaultValue) }),
-    Solana: z.object({ SOL: parser.default(defaultValue) }),
+    // Solana: z.object({ SOL: parser.default(defaultValue) }),
   });
 
 const chainBaseAssetMapFactory = <Z extends z.ZodTypeAny>(parser: Z, defaultValue: z.input<Z>) =>
@@ -25,7 +25,7 @@ const chainBaseAssetMapFactory = <Z extends z.ZodTypeAny>(parser: Z, defaultValu
     Ethereum: z.object({ ETH: parser, FLIP: parser, USDT: parser }),
     Polkadot: z.object({ DOT: parser }),
     Arbitrum: z.object({ ETH: parser.default(defaultValue), USDC: parser.default(defaultValue) }),
-    Solana: z.object({ SOL: parser.default(defaultValue) }),
+    // Solana: z.object({ SOL: parser.default(defaultValue) }),
   });
 
 const chainMapFactory = <Z extends z.ZodTypeAny>(parser: Z, defaultValue: z.input<Z>) =>
@@ -34,7 +34,7 @@ const chainMapFactory = <Z extends z.ZodTypeAny>(parser: Z, defaultValue: z.inpu
     Ethereum: parser,
     Polkadot: parser,
     Arbitrum: parser.default(defaultValue),
-    Solana: parser.default(defaultValue),
+    // Solana: parser.default(defaultValue),
   });
 
 const rpcAssetSchema = z.union([
@@ -47,6 +47,7 @@ const rpcAssetSchema = z.union([
   z.object({ chain: z.literal('Arbitrum'), asset: z.literal('ETH') }),
   z.object({ chain: z.literal('Arbitrum'), asset: z.literal('USDC') }),
   z.object({ chain: z.literal('Solana'), asset: z.literal('SOL') }),
+  z.object({ chain: z.literal('Solana'), asset: z.literal('USDC') }),
 ]);
 
 export type AssetAndChain = z.output<typeof rpcAssetSchema>;

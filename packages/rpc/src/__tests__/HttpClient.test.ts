@@ -714,9 +714,6 @@ describe(HttpClient, () => {
             "Polkadot": {
               "DOT": null,
             },
-            "Solana": {
-              "SOL": null,
-            },
           },
           "network_fee_hundredth_pips": 1000,
         }
