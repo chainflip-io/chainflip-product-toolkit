@@ -1,5 +1,14 @@
 import { describe, it, expect } from 'vitest';
-import { capitalize, isHex, split, toLowerCase, toUpperCase, uncapitalize } from '../string';
+import {
+  capitalize,
+  isHex,
+  split,
+  toLowerCase,
+  toUpperCase,
+  trimPrefix,
+  trimSuffix,
+  uncapitalize,
+} from '../string';
 
 describe(toUpperCase, () => {
   it('should convert to uppercase', () => {
@@ -35,5 +44,21 @@ describe(isHex, () => {
   it('checks if the string is a hex string', () => {
     expect(isHex('0x123')).toBe(true);
     expect(isHex('123')).toBe(false);
+  });
+});
+
+describe(trimPrefix, () => {
+  it('removes a prefix', () => {
+    const trim0x = trimPrefix('0x');
+    expect(trim0x('0x123')).toBe('123');
+    expect(trimPrefix('0x', '0x123')).toBe('123');
+  });
+});
+
+describe(trimSuffix, () => {
+  it('removes a suffix', () => {
+    const trimWorld = trimSuffix('world');
+    expect(trimWorld('hello world')).toBe('hello ');
+    expect(trimSuffix('world', 'hello world')).toBe('hello ');
   });
 });
