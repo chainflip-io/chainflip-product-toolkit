@@ -1,6 +1,6 @@
 {
   "name": "@chainflip/rpc",
-  "version": "1.4.7",
+  "version": "1.4.8",
   "type": "module",
   "scripts": {
     "clean": "rm -rf dist",
