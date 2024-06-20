@@ -46,8 +46,6 @@ const rpcAssetSchema = z.union([
   z.object({ chain: z.literal('Ethereum'), asset: z.literal('USDT') }),
   z.object({ chain: z.literal('Arbitrum'), asset: z.literal('ETH') }),
   z.object({ chain: z.literal('Arbitrum'), asset: z.literal('USDC') }),
-  z.object({ chain: z.literal('Solana'), asset: z.literal('SOL') }),
-  z.object({ chain: z.literal('Solana'), asset: z.literal('USDC') }),
 ]);
 
 export type AssetAndChain = z.output<typeof rpcAssetSchema>;
@@ -168,7 +166,11 @@ export const cfBoostPoolsDepth = z.array(
   z.intersection(rpcAssetSchema, z.object({ tier: z.number(), available_amount: u256 })),
 );
 
-export const cfSupportedAsssets = z.array(rpcAssetSchema);
+export const cfSupportedAsssets = z
+  .array(z.object({ chain: z.string(), asset: z.string() }))
+  .transform((assets) =>
+    assets.filter((asset): asset is AssetAndChain => rpcAssetSchema.safeParse(asset).success),
+  );
 
 export const brokerRequestSwapDepositAddress = z.object({
   address: z.string(),
