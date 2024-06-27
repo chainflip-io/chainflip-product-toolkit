@@ -118,7 +118,7 @@ export const specVersionCache = new SpecVersionCache(
 );
 
 export const networkToRpcUrl: Record<Network, string> = {
-  mainnet: 'https://mainnet-archive.chainflip.io',
+  mainnet: 'https://rpc.mainnet.chainflip.io',
   perseverance: 'https://archive.perseverance.chainflip.io',
   sisyphos: 'https://archive.sisyphos.chainflip.io',
   backspin: 'https://backspin-rpc.staging',
