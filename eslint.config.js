@@ -39,10 +39,17 @@ export default [
           allowNumber: true,
         },
       ],
-      '@typescript-eslint/no-invalid-void-type': [
+      '@typescript-eslint/no-invalid-void-type': 'off',
+      '@typescript-eslint/no-unused-vars': [
         'error',
         {
-          allowInGenericTypeArguments: true,
+          args: 'after-used',
+          argsIgnorePattern: '^_',
+          caughtErrors: 'all',
+          caughtErrorsIgnorePattern: '^_',
+          destructuredArrayIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
+          ignoreRestSiblings: true,
         },
       ],
     },

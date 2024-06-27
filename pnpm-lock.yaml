@@ -62,11 +62,11 @@ importers:
   packages/processor:
     dependencies:
       '@chainflip/rpc':
-        specifier: ^1.4.4
-        version: 1.4.4
+        specifier: ^1.4.6
+        version: 1.4.6
       '@chainflip/utils':
-        specifier: ^0.3.0
-        version: 0.3.0
+        specifier: ^0.4.0
+        version: 0.4.0
       zod:
         specifier: ^3.22.8
         version: 3.23.8
@@ -202,11 +202,14 @@ packages:
   '@bcoe/v8-coverage@0.2.3':
     resolution: {integrity: sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==}
 
-  '@chainflip/rpc@1.4.4':
-    resolution: {integrity: sha512-8f4s8secD6LQt/7C1FEPsZ92kVhH7B6iC3PMxHKPwDlaNM3+pF12Fx+JzS94sEwOrhNmWyn39Er2+xkcdTAAWg==}
+  '@chainflip/rpc@1.4.6':
+    resolution: {integrity: sha512-fJvB4YyahpzUQDPNezEwLjXJzF2TkGKS7TBXcb8nHAdCPVLRXBxhS4ZbtYHJagO/oXrj0crjFg7BFWpamAhGQw==}
 
   '@chainflip/utils@0.3.0':
     resolution: {integrity: sha512-csW8E3lRcSG1udN/kgsOhjZ7bfRrSbgv8Hdh/pzjM+VjQ6Hh46/LuiZHeQR0rQMimfG+lu2Afxk4jeRXRGFWTg==}
+
+  '@chainflip/utils@0.4.0':
+    resolution: {integrity: sha512-OuMFlgbIbyJ1Kt39zytfGh4HZ5dVY25/a3qb0c1K137+QmhdOuF+R7QSkFPqYAfDG4KhGRqo0rgUtEpaEEcSKA==}
 
   '@esbuild/aix-ppc64@0.19.12':
     resolution: {integrity: sha512-bmoCYyWdEL3wDQIVbcyzRyeKLgk2WtWLTWz1ZIAZF/EGbNOwSA6ew3PftJ1PqMiOOGu0OyFMzG53L0zqIpPeNA==}
@@ -2236,12 +2239,14 @@ snapshots:
 
   '@bcoe/v8-coverage@0.2.3': {}
 
-  '@chainflip/rpc@1.4.4':
+  '@chainflip/rpc@1.4.6':
     dependencies:
       '@chainflip/utils': 0.3.0
       zod: 3.23.8
 
   '@chainflip/utils@0.3.0': {}
+
+  '@chainflip/utils@0.4.0': {}
 
   '@esbuild/aix-ppc64@0.19.12':
     optional: true

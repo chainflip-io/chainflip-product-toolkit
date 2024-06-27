@@ -1,8 +1,17 @@
 import { once } from 'events';
 import { Mock, afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { AddressInfo, WebSocket, WebSocketServer } from 'ws';
+import { AddressInfo, WebSocketServer } from 'ws';
 import WsClient from '../WsClient';
 import { JsonRpcRequest, RpcMethod } from '../common';
+import { deferredPromise } from '@chainflip/utils/async';
+import * as asyncHelpers from '@chainflip/utils/async';
+import { ZodError } from 'zod';
+
+// eslint-disable-next-line @typescript-eslint/no-unsafe-return
+vi.mock('@chainflip/utils/async', async (original) => ({
+  ...((await original()) as any),
+  // sleep: vi.fn(async () => {}),
+}));
 
 describe(WsClient, () => {
   let serverClosed = false;
@@ -61,10 +70,7 @@ describe(WsClient, () => {
 
     await once(server, 'listening');
     const address = server.address() as AddressInfo;
-    client = new WsClient(
-      `ws://127.0.0.1:${address.port}`,
-      WebSocket as unknown as typeof globalThis.WebSocket,
-    );
+    client = new WsClient(`ws://127.0.0.1:${address.port}`);
   });
 
   afterEach(async () => {
@@ -73,6 +79,21 @@ describe(WsClient, () => {
     server.close();
     if (!serverClosed) await once(server, 'close');
     vi.useRealTimers();
+  });
+
+  it('waits for the socket to be closed', async () => {
+    const response = await client.sendRequest(
+      'cf_swap_rate',
+      { asset: 'USDC', chain: 'Ethereum' },
+      { asset: 'FLIP', chain: 'Ethereum' },
+      '0x1',
+    );
+
+    expect(response).toEqual({ intermediary: null, output: 1n });
+
+    expect(client['ws']?.readyState).toEqual(WebSocket.OPEN);
+    await client.close();
+    expect(client['ws']?.readyState).toEqual(WebSocket.CLOSED);
   });
 
   it('resends messages if a disconnection happens while awaiting a response', async () => {
@@ -97,7 +118,6 @@ describe(WsClient, () => {
   });
 
   it("doesn't spam the reconnect", async () => {
-    vi.useFakeTimers();
     const response = await client.sendRequest(
       'cf_swap_rate',
       { asset: 'USDC', chain: 'Ethereum' },
@@ -108,19 +128,32 @@ describe(WsClient, () => {
 
     killConnections();
     closeServer();
-    const connectSpy = vi.spyOn(client, 'connect' as any);
-    await once(client['emitter'], 'DISCONNECT');
 
-    expect(connectSpy).not.toHaveBeenCalled();
+    let deferred = deferredPromise<void>();
+    const connectSpy = vi.spyOn(client, 'connect' as any).mockImplementation(async (...args) => {
+      deferred.resolve();
+      deferred = deferredPromise();
+      return WsClient.prototype['connect'].apply(client, args as any);
+    });
+    const sleepSpy = vi.spyOn(asyncHelpers, 'sleep').mockReturnValue(Promise.resolve());
 
-    for (let i = 0; i < 7; i += 1) {
-      const promise = once(client['emitter'], 'DISCONNECT');
-      await vi.advanceTimersToNextTimerAsync();
-      await promise;
+    for (let i = 0; i < 10; i += 1) {
+      await deferred.promise;
       expect(connectSpy).toHaveBeenCalledTimes(i + 1);
     }
 
-    expect(connectSpy).toHaveBeenCalledTimes(7);
+    expect(sleepSpy.mock.calls).toEqual([
+      [250],
+      [500],
+      [1000],
+      [2000],
+      [4000],
+      [8000],
+      [16000],
+      [16000],
+      [16000],
+      [16000],
+    ]);
   });
 
   it('only retries 5 times', async () => {
@@ -141,7 +174,7 @@ describe(WsClient, () => {
       ),
     ).resolves.not.toThrow();
     expect(client['ws']).toBeDefined();
-    (client['ws'] as unknown as WebSocket).emit('error', new Error('test'));
+    client['ws']!.dispatchEvent(new Event('error'));
     await once(client['emitter'], 'DISCONNECT');
     await expect(
       client.sendRequest(
@@ -206,16 +239,29 @@ describe(WsClient, () => {
     vi.useFakeTimers();
     serverFn = vi.fn();
     const request = client.sendRequest('cf_swapping_environment');
+    const error = deferredPromise<ZodError>();
+    client['emitter'].addEventListener(
+      'error',
+      (e) => {
+        if (e instanceof CustomEvent) {
+          error.resolve(e.detail);
+        } else {
+          error.reject(Error('unexpected error'));
+        }
+      },
+      { once: true },
+    );
+
+    // give time for second response to arrive
+    await vi.advanceTimersByTimeAsync(0);
 
     await Promise.all([
       vi.advanceTimersToNextTimerAsync(),
       expect(request).rejects.toThrowError('timeout'),
+      error.promise,
     ]);
 
     expect(serverFn).toHaveBeenCalledTimes(1);
-  });
-
-  it('uses the global websocket if none is provided', () => {
-    expect(new WsClient('ws://hello.world')['WebSocket']).toBe(globalThis.WebSocket);
+    expect(await error.promise).toBeInstanceOf(ZodError);
   });
 });

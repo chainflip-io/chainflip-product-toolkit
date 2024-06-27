@@ -1,3 +1,5 @@
+import { type WsClient } from '@chainflip/rpc';
+
 export type JsonObject = { [Key in string]?: JsonValue };
 export interface JsonArray extends Array<JsonValue> {}
 export type JsonValue = string | number | boolean | JsonObject | JsonArray | null;
@@ -100,6 +102,7 @@ export type ProcessorOptions<T extends ProcessorStore<any, any>> = {
   transactionTimeout?: number;
   eventHandlers: { name: string; handler: EventHandler<T>; spec: number }[];
   name: string;
+  rpcNodeWsUrl?: string;
 };
 
 export type State = {
@@ -115,4 +118,5 @@ export type EventHandler<T extends ProcessorStore<any, any>> = (args: {
   block: Block;
   eventInfo: Awaited<ReturnType<T['getEventInfo']>>;
   extrinsicInfo?: Awaited<ReturnType<T['getExtrinsicInfo']>> | undefined;
+  rpcClient: WsClient;
 }) => Promise<void>;
