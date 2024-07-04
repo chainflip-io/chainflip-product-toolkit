@@ -105,7 +105,7 @@ class Module {
   }
 
   async writeFile(specDir: string) {
-    const outDir = this.pallet ? path.join(specDir, this.pallet) : specDir;
+    const outDir = this.pallet ? path.join(specDir, uncapitalize(this.pallet)) : specDir;
     await fs.mkdir(outDir, { recursive: true });
     await fs.writeFile(
       path.join(outDir, uncapitalize(`${this.name}.ts`)),

@@ -84,7 +84,6 @@ export interface IndexerStore {
     batchSize: number,
     filter?: {
       eventNames?: string[];
-      extrinsicNames?: string[];
       callNames?: string[];
     },
   ): Promise<Block[]>;
