@@ -79,7 +79,15 @@ export interface ProcessorStore<Ev, Ex> extends Store {
 }
 
 export interface IndexerStore {
-  fetchBlocks(height: number, batchSize: number, eventNames?: string[]): Promise<Block[]>;
+  fetchBlocks(
+    height: number,
+    batchSize: number,
+    filter?: {
+      eventNames?: string[];
+      extrinsicNames?: string[];
+      callNames?: string[];
+    },
+  ): Promise<Block[]>;
 }
 
 export interface Logger {
