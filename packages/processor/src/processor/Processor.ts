@@ -93,16 +93,24 @@ export default class Processor<P extends ProcessorStore<unknown, unknown>, I ext
     return undefined;
   }
 
+  protected getCallNames(): string[] | undefined {
+    return undefined;
+  }
+
+  protected getExtrinsicNames(): string[] | undefined {
+    return undefined;
+  }
+
   @timedMethod
   private async fetchBlocks(height: number): Promise<Block[]> {
     const start = performance.now();
     for (let i = 0; i < 5 && this.running; i += 1) {
       try {
-        const blocks = await this.indexerStore.fetchBlocks(
-          height,
-          this.batchSize,
-          this.getEventNames(),
-        );
+        const blocks = await this.indexerStore.fetchBlocks(height, this.batchSize, {
+          eventNames: this.getEventNames(),
+          callNames: this.getCallNames(),
+          extrinsicNames: this.getExtrinsicNames(),
+        });
 
         this.logger.info('blocks fetched', {
           height,
