@@ -89,12 +89,20 @@ export default class Processor<P extends ProcessorStore<unknown, unknown>, I ext
     return this.processorStore.initializeState(this.name, this.startHeight, endHeight);
   }
 
+  protected getEventNames(): string[] | undefined {
+    return undefined;
+  }
+
   @timedMethod
   private async fetchBlocks(height: number): Promise<Block[]> {
     const start = performance.now();
     for (let i = 0; i < 5 && this.running; i += 1) {
       try {
-        const blocks = await this.indexerStore.fetchBlocks(height, this.batchSize);
+        const blocks = await this.indexerStore.fetchBlocks(
+          height,
+          this.batchSize,
+          this.getEventNames(),
+        );
 
         this.logger.info('blocks fetched', {
           height,
