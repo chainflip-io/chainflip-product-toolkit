@@ -259,7 +259,7 @@ describe(CodeGenerator, () => {
     expect(spy.mock.calls).toMatchInlineSnapshot(`
       [
         [
-          "topLevelDir/PalletOne/eventOne.ts",
+          "topLevelDir/palletOne/eventOne.ts",
           "import { z } from 'zod';
       import { reusedStruct } from '../common';
 
