@@ -206,7 +206,8 @@ export default class CodeGenerator {
             return `z.object({ __kind: z.literal('${v.name}') })`;
           }
 
-          if (v.value.type === 'struct' && Object.keys(v.value.fields).length === 1) {
+          // if the struct has no name, it is not actually a struct but an enum variant w/ named fields
+          if (v.value.type === 'struct' && v.value.name === undefined) {
             const value = this.generateStruct({
               ...v.value,
               additionalFields: {

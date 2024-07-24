@@ -333,10 +333,7 @@ export const cfChainsBtcScriptPubkey = z.union([
   z.object({ __kind: z.literal('P2WPKH'), value: hexString }),
   z.object({ __kind: z.literal('P2WSH'), value: hexString }),
   z.object({ __kind: z.literal('Taproot'), value: hexString }),
-  z.object({
-    __kind: z.literal('OtherSegwit'),
-    value: z.object({ version: z.number(), program: hexString }),
-  }),
+  z.object({ __kind: z.literal('OtherSegwit'), version: z.number(), program: hexString }),
 ]);
 
 export const cfChainsAddressEncodedAddress = z.union([
@@ -356,11 +353,9 @@ export const cfChainsCcmChannelMetadata = z.object({
 export const cfChainsSwapOrigin = z.union([
   z.object({
     __kind: z.literal('DepositChannel'),
-    value: z.object({
-      depositAddress: cfChainsAddressEncodedAddress,
-      channelId: numberOrHex,
-      depositBlockHeight: numberOrHex,
-    }),
+    depositAddress: cfChainsAddressEncodedAddress,
+    channelId: numberOrHex,
+    depositBlockHeight: numberOrHex,
   }),
   z.object({ __kind: z.literal('Vault'), txHash: hexString }),
 ]);
