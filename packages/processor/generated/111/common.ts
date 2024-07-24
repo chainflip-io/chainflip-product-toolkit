@@ -33,10 +33,7 @@ export const cfChainsBtcScriptPubkey = z.union([
   z.object({ __kind: z.literal('P2WPKH'), value: hexString }),
   z.object({ __kind: z.literal('P2WSH'), value: hexString }),
   z.object({ __kind: z.literal('Taproot'), value: hexString }),
-  z.object({
-    __kind: z.literal('OtherSegwit'),
-    value: z.object({ version: z.number(), program: hexString }),
-  }),
+  z.object({ __kind: z.literal('OtherSegwit'), version: z.number(), program: hexString }),
 ]);
 
 export const cfPrimitivesChainsAssetsAnyAsset = simpleEnum(['Eth', 'Flip', 'Usdc', 'Dot', 'Btc']);
