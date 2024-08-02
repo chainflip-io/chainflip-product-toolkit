@@ -72,7 +72,7 @@ export const formatCode = (code: string) =>
 const cacheSchema = z.record(
   z.object({
     hash: z.string(),
-    network: z.enum(['mainnet', 'perseverance', 'sisyphos', 'backspin']),
+    network: z.enum(['mainnet', 'perseverance', 'sisyphos', 'backspin', 'localnet']),
   }),
 );
 export type Network = z.output<typeof cacheSchema>[string]['network'];
@@ -122,4 +122,5 @@ export const networkToRpcUrl: Record<Network, string> = {
   perseverance: 'https://archive.perseverance.chainflip.io',
   sisyphos: 'https://archive.sisyphos.chainflip.io',
   backspin: 'https://backspin-rpc.staging',
+  localnet: 'http://127.0.0.1:9944',
 };
