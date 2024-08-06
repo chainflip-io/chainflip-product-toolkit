@@ -79,6 +79,13 @@ const ingressEgressEnvironment: z.input<typeof cfIngressEgressEnvironment> = {
     Bitcoin: '0x0',
     // Solana: '0x0',
   },
+  max_swap_retry_duration_blocks: {
+    Arbitrum: 1,
+    Ethereum: 1,
+    Polkadot: 1,
+    Bitcoin: 1,
+    // Solana: 1,
+  },
 };
 
 const swappingEnvironment: z.input<typeof cfSwappingEnvironment> = {
