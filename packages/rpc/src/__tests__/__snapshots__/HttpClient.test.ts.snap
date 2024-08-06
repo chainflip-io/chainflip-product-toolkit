@@ -168,6 +168,12 @@ exports[`HttpClient > with server > gets the environment 1`] = `
         "DOT": 197300000n,
       },
     },
+    "max_swap_retry_duration_blocks": {
+      "Arbitrum": 1,
+      "Bitcoin": 1,
+      "Ethereum": 1,
+      "Polkadot": 1,
+    },
     "minimum_deposit_amounts": {
       "Arbitrum": {
         "ETH": 0n,
@@ -458,6 +464,12 @@ exports[`HttpClient > with server > gets the ingress/egress environment 1`] = `
     "Polkadot": {
       "DOT": 197300000n,
     },
+  },
+  "max_swap_retry_duration_blocks": {
+    "Arbitrum": 1,
+    "Bitcoin": 1,
+    "Ethereum": 1,
+    "Polkadot": 1,
   },
   "minimum_deposit_amounts": {
     "Arbitrum": {
