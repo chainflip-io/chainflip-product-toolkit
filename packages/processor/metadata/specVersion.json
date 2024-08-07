@@ -44,8 +44,8 @@
     "network": "backspin"
   },
   "150": {
-    "hash": "0xb535f3e4e470614d192095e5bf35bba6da4600d54ee294b3cb0c6b37407b3efd",
-    "network": "localnet"
+    "hash": "0x6a91d5948f82fb6635479fd83b32896878f2ee02a0183a44140d422e4c33b46e",
+    "network": "sisyphos"
   },
   "160": {
     "hash": "0x274ea6eb697d0e635254f06acf230d5253af65a92b4f4b8efce900b750c473a4",
