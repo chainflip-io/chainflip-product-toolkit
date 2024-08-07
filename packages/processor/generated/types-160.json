@@ -1071,6 +1071,10 @@
       "type": "primitive",
       "name": "null"
     },
+    "SolanaInitialized": {
+      "type": "primitive",
+      "name": "null"
+    },
     "StaleUtxosDiscarded": {
       "type": "struct",
       "fields": {
@@ -1153,6 +1157,27 @@
               }
             }
           }
+        }
+      }
+    },
+    "DurableNonceSetForAccount": {
+      "type": "struct",
+      "fields": {
+        "nonceAccount": {
+          "type": "array",
+          "value": {
+            "type": "primitive",
+            "name": "u8"
+          },
+          "length": 32
+        },
+        "durableNonce": {
+          "type": "array",
+          "value": {
+            "type": "primitive",
+            "name": "u8"
+          },
+          "length": 32
         }
       }
     }
@@ -7695,6 +7720,13 @@
                 "type": "primitive",
                 "name": "null"
               }
+            },
+            {
+              "name": "SolUsdc",
+              "value": {
+                "type": "primitive",
+                "name": "null"
+              }
             }
           ]
         },
@@ -7771,6 +7803,13 @@
             },
             {
               "name": "Sol",
+              "value": {
+                "type": "primitive",
+                "name": "null"
+              }
+            },
+            {
+              "name": "SolUsdc",
               "value": {
                 "type": "primitive",
                 "name": "null"
@@ -8432,6 +8471,13 @@
                 "type": "primitive",
                 "name": "null"
               }
+            },
+            {
+              "name": "SolUsdc",
+              "value": {
+                "type": "primitive",
+                "name": "null"
+              }
             }
           ]
         },
@@ -8504,6 +8550,13 @@
             },
             {
               "name": "Sol",
+              "value": {
+                "type": "primitive",
+                "name": "null"
+              }
+            },
+            {
+              "name": "SolUsdc",
               "value": {
                 "type": "primitive",
                 "name": "null"
@@ -8869,6 +8922,13 @@
                 "type": "primitive",
                 "name": "null"
               }
+            },
+            {
+              "name": "SolUsdc",
+              "value": {
+                "type": "primitive",
+                "name": "null"
+              }
             }
           ]
         },
@@ -8941,6 +9001,13 @@
             },
             {
               "name": "Sol",
+              "value": {
+                "type": "primitive",
+                "name": "null"
+              }
+            },
+            {
+              "name": "SolUsdc",
               "value": {
                 "type": "primitive",
                 "name": "null"
@@ -9106,6 +9173,13 @@
                 "type": "primitive",
                 "name": "null"
               }
+            },
+            {
+              "name": "SolUsdc",
+              "value": {
+                "type": "primitive",
+                "name": "null"
+              }
             }
           ]
         },
@@ -9256,6 +9330,13 @@
                 "type": "primitive",
                 "name": "null"
               }
+            },
+            {
+              "name": "SolUsdc",
+              "value": {
+                "type": "primitive",
+                "name": "null"
+              }
             }
           ]
         },
@@ -9402,6 +9483,13 @@
                 "type": "primitive",
                 "name": "null"
               }
+            },
+            {
+              "name": "SolUsdc",
+              "value": {
+                "type": "primitive",
+                "name": "null"
+              }
             }
           ]
         },
@@ -9544,6 +9632,13 @@
             },
             {
               "name": "Sol",
+              "value": {
+                "type": "primitive",
+                "name": "null"
+              }
+            },
+            {
+              "name": "SolUsdc",
               "value": {
                 "type": "primitive",
                 "name": "null"
@@ -10034,6 +10129,13 @@
                 "type": "primitive",
                 "name": "null"
               }
+            },
+            {
+              "name": "SolUsdc",
+              "value": {
+                "type": "primitive",
+                "name": "null"
+              }
             }
           ]
         },
@@ -10122,6 +10224,13 @@
             },
             {
               "name": "Sol",
+              "value": {
+                "type": "primitive",
+                "name": "null"
+              }
+            },
+            {
+              "name": "SolUsdc",
               "value": {
                 "type": "primitive",
                 "name": "null"
@@ -10215,6 +10324,13 @@
             },
             {
               "name": "Sol",
+              "value": {
+                "type": "primitive",
+                "name": "null"
+              }
+            },
+            {
+              "name": "SolUsdc",
               "value": {
                 "type": "primitive",
                 "name": "null"
@@ -10533,6 +10649,13 @@
             },
             {
               "name": "Sol",
+              "value": {
+                "type": "primitive",
+                "name": "null"
+              }
+            },
+            {
+              "name": "SolUsdc",
               "value": {
                 "type": "primitive",
                 "name": "null"
@@ -10875,6 +10998,13 @@
                 "type": "primitive",
                 "name": "null"
               }
+            },
+            {
+              "name": "SolUsdc",
+              "value": {
+                "type": "primitive",
+                "name": "null"
+              }
             }
           ]
         },
@@ -10964,6 +11094,13 @@
                 "type": "primitive",
                 "name": "null"
               }
+            },
+            {
+              "name": "SolUsdc",
+              "value": {
+                "type": "primitive",
+                "name": "null"
+              }
             }
           ]
         },
@@ -11049,6 +11186,13 @@
             },
             {
               "name": "Sol",
+              "value": {
+                "type": "primitive",
+                "name": "null"
+              }
+            },
+            {
+              "name": "SolUsdc",
               "value": {
                 "type": "primitive",
                 "name": "null"
@@ -11260,6 +11404,13 @@
             },
             {
               "name": "Sol",
+              "value": {
+                "type": "primitive",
+                "name": "null"
+              }
+            },
+            {
+              "name": "SolUsdc",
               "value": {
                 "type": "primitive",
                 "name": "null"
@@ -11593,6 +11744,13 @@
                 "type": "primitive",
                 "name": "null"
               }
+            },
+            {
+              "name": "SolUsdc",
+              "value": {
+                "type": "primitive",
+                "name": "null"
+              }
             }
           ]
         },
@@ -11682,6 +11840,13 @@
             },
             {
               "name": "Sol",
+              "value": {
+                "type": "primitive",
+                "name": "null"
+              }
+            },
+            {
+              "name": "SolUsdc",
               "value": {
                 "type": "primitive",
                 "name": "null"
@@ -12004,229 +12169,370 @@
         },
         "error": {
           "type": "enum",
-          "name": "spRuntimeDispatchError",
+          "name": "cfChainsExecutexSwapAndCallError",
           "values": [
             {
-              "name": "Other",
+              "name": "Unsupported",
               "value": {
                 "type": "primitive",
                 "name": "null"
               }
             },
             {
-              "name": "CannotLookup",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            },
-            {
-              "name": "BadOrigin",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            },
-            {
-              "name": "Module",
-              "value": {
-                "type": "struct",
-                "name": "SpRuntimeModuleError",
-                "fields": {
-                  "index": {
-                    "type": "primitive",
-                    "name": "u8"
-                  },
-                  "error": {
-                    "type": "array",
-                    "value": {
-                      "type": "primitive",
-                      "name": "u8"
-                    },
-                    "length": 4
-                  }
-                }
-              }
-            },
-            {
-              "name": "ConsumerRemaining",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            },
-            {
-              "name": "NoProviders",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            },
-            {
-              "name": "TooManyConsumers",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            },
-            {
-              "name": "Token",
+              "name": "FailedToBuildCcmForSolana",
               "value": {
                 "type": "enum",
-                "name": "spRuntimeTokenError",
+                "name": "cfChainsSolApiSolanaTransactionBuildingError",
                 "values": [
                   {
-                    "name": "FundsUnavailable",
+                    "name": "CannotLookupApiEnvironment",
                     "value": {
                       "type": "primitive",
                       "name": "null"
                     }
                   },
                   {
-                    "name": "OnlyProvider",
+                    "name": "CannotLookupCurrentAggKey",
                     "value": {
                       "type": "primitive",
                       "name": "null"
                     }
                   },
                   {
-                    "name": "BelowMinimum",
+                    "name": "CannotLookupComputePrice",
                     "value": {
                       "type": "primitive",
                       "name": "null"
                     }
                   },
                   {
-                    "name": "CannotCreate",
+                    "name": "NoNonceAccountsSet",
                     "value": {
                       "type": "primitive",
                       "name": "null"
                     }
                   },
                   {
-                    "name": "UnknownAsset",
+                    "name": "NoAvailableNonceAccount",
                     "value": {
                       "type": "primitive",
                       "name": "null"
                     }
                   },
                   {
-                    "name": "Frozen",
+                    "name": "FailedToDeriveAddress",
+                    "value": {
+                      "type": "enum",
+                      "name": "solPrimPdaPdaError",
+                      "values": [
+                        {
+                          "name": "NotAValidPoint",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "TooManySeeds",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "SeedTooLarge",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "BumpSeedBadLuck",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "name": "InvalidCcm",
+                    "value": {
+                      "type": "enum",
+                      "name": "cfChainsCcmCheckerCcmValidityError",
+                      "values": [
+                        {
+                          "name": "CannotDecodeCfParameters",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "CcmIsTooLong",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "CfParametersContainsInvalidAccounts",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "name": "FailedToSerializeFinalTransaction",
                     "value": {
                       "type": "primitive",
                       "name": "null"
                     }
                   },
                   {
-                    "name": "Unsupported",
+                    "name": "FinalTransactionExceededMaxLength",
                     "value": {
                       "type": "primitive",
-                      "name": "null"
-                    }
-                  },
-                  {
-                    "name": "CannotCreateHold",
-                    "value": {
-                      "type": "primitive",
-                      "name": "null"
-                    }
-                  },
-                  {
-                    "name": "NotExpendable",
-                    "value": {
-                      "type": "primitive",
-                      "name": "null"
-                    }
-                  },
-                  {
-                    "name": "Blocked",
-                    "value": {
-                      "type": "primitive",
-                      "name": "null"
+                      "name": "u32"
                     }
                   }
                 ]
               }
             },
             {
-              "name": "Arithmetic",
+              "name": "DispatchError",
               "value": {
                 "type": "enum",
-                "name": "spArithmeticArithmeticError",
+                "name": "spRuntimeDispatchError",
                 "values": [
                   {
-                    "name": "Underflow",
+                    "name": "Other",
                     "value": {
                       "type": "primitive",
                       "name": "null"
                     }
                   },
                   {
-                    "name": "Overflow",
+                    "name": "CannotLookup",
                     "value": {
                       "type": "primitive",
                       "name": "null"
                     }
                   },
                   {
-                    "name": "DivisionByZero",
+                    "name": "BadOrigin",
+                    "value": {
+                      "type": "primitive",
+                      "name": "null"
+                    }
+                  },
+                  {
+                    "name": "Module",
+                    "value": {
+                      "type": "struct",
+                      "name": "SpRuntimeModuleError",
+                      "fields": {
+                        "index": {
+                          "type": "primitive",
+                          "name": "u8"
+                        },
+                        "error": {
+                          "type": "array",
+                          "value": {
+                            "type": "primitive",
+                            "name": "u8"
+                          },
+                          "length": 4
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "name": "ConsumerRemaining",
+                    "value": {
+                      "type": "primitive",
+                      "name": "null"
+                    }
+                  },
+                  {
+                    "name": "NoProviders",
+                    "value": {
+                      "type": "primitive",
+                      "name": "null"
+                    }
+                  },
+                  {
+                    "name": "TooManyConsumers",
+                    "value": {
+                      "type": "primitive",
+                      "name": "null"
+                    }
+                  },
+                  {
+                    "name": "Token",
+                    "value": {
+                      "type": "enum",
+                      "name": "spRuntimeTokenError",
+                      "values": [
+                        {
+                          "name": "FundsUnavailable",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "OnlyProvider",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "BelowMinimum",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "CannotCreate",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "UnknownAsset",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "Frozen",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "Unsupported",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "CannotCreateHold",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "NotExpendable",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "Blocked",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "name": "Arithmetic",
+                    "value": {
+                      "type": "enum",
+                      "name": "spArithmeticArithmeticError",
+                      "values": [
+                        {
+                          "name": "Underflow",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "Overflow",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "DivisionByZero",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "name": "Transactional",
+                    "value": {
+                      "type": "enum",
+                      "name": "spRuntimeTransactionalError",
+                      "values": [
+                        {
+                          "name": "LimitReached",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "NoLayer",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "name": "Exhausted",
+                    "value": {
+                      "type": "primitive",
+                      "name": "null"
+                    }
+                  },
+                  {
+                    "name": "Corruption",
+                    "value": {
+                      "type": "primitive",
+                      "name": "null"
+                    }
+                  },
+                  {
+                    "name": "Unavailable",
+                    "value": {
+                      "type": "primitive",
+                      "name": "null"
+                    }
+                  },
+                  {
+                    "name": "RootNotAllowed",
                     "value": {
                       "type": "primitive",
                       "name": "null"
                     }
                   }
                 ]
-              }
-            },
-            {
-              "name": "Transactional",
-              "value": {
-                "type": "enum",
-                "name": "spRuntimeTransactionalError",
-                "values": [
-                  {
-                    "name": "LimitReached",
-                    "value": {
-                      "type": "primitive",
-                      "name": "null"
-                    }
-                  },
-                  {
-                    "name": "NoLayer",
-                    "value": {
-                      "type": "primitive",
-                      "name": "null"
-                    }
-                  }
-                ]
-              }
-            },
-            {
-              "name": "Exhausted",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            },
-            {
-              "name": "Corruption",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            },
-            {
-              "name": "Unavailable",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            },
-            {
-              "name": "RootNotAllowed",
-              "value": {
-                "type": "primitive",
-                "name": "null"
               }
             }
           ]
@@ -13796,229 +14102,370 @@
         },
         "error": {
           "type": "enum",
-          "name": "spRuntimeDispatchError",
+          "name": "cfChainsExecutexSwapAndCallError",
           "values": [
             {
-              "name": "Other",
+              "name": "Unsupported",
               "value": {
                 "type": "primitive",
                 "name": "null"
               }
             },
             {
-              "name": "CannotLookup",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            },
-            {
-              "name": "BadOrigin",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            },
-            {
-              "name": "Module",
-              "value": {
-                "type": "struct",
-                "name": "SpRuntimeModuleError",
-                "fields": {
-                  "index": {
-                    "type": "primitive",
-                    "name": "u8"
-                  },
-                  "error": {
-                    "type": "array",
-                    "value": {
-                      "type": "primitive",
-                      "name": "u8"
-                    },
-                    "length": 4
-                  }
-                }
-              }
-            },
-            {
-              "name": "ConsumerRemaining",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            },
-            {
-              "name": "NoProviders",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            },
-            {
-              "name": "TooManyConsumers",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            },
-            {
-              "name": "Token",
+              "name": "FailedToBuildCcmForSolana",
               "value": {
                 "type": "enum",
-                "name": "spRuntimeTokenError",
+                "name": "cfChainsSolApiSolanaTransactionBuildingError",
                 "values": [
                   {
-                    "name": "FundsUnavailable",
+                    "name": "CannotLookupApiEnvironment",
                     "value": {
                       "type": "primitive",
                       "name": "null"
                     }
                   },
                   {
-                    "name": "OnlyProvider",
+                    "name": "CannotLookupCurrentAggKey",
                     "value": {
                       "type": "primitive",
                       "name": "null"
                     }
                   },
                   {
-                    "name": "BelowMinimum",
+                    "name": "CannotLookupComputePrice",
                     "value": {
                       "type": "primitive",
                       "name": "null"
                     }
                   },
                   {
-                    "name": "CannotCreate",
+                    "name": "NoNonceAccountsSet",
                     "value": {
                       "type": "primitive",
                       "name": "null"
                     }
                   },
                   {
-                    "name": "UnknownAsset",
+                    "name": "NoAvailableNonceAccount",
                     "value": {
                       "type": "primitive",
                       "name": "null"
                     }
                   },
                   {
-                    "name": "Frozen",
+                    "name": "FailedToDeriveAddress",
+                    "value": {
+                      "type": "enum",
+                      "name": "solPrimPdaPdaError",
+                      "values": [
+                        {
+                          "name": "NotAValidPoint",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "TooManySeeds",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "SeedTooLarge",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "BumpSeedBadLuck",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "name": "InvalidCcm",
+                    "value": {
+                      "type": "enum",
+                      "name": "cfChainsCcmCheckerCcmValidityError",
+                      "values": [
+                        {
+                          "name": "CannotDecodeCfParameters",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "CcmIsTooLong",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "CfParametersContainsInvalidAccounts",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "name": "FailedToSerializeFinalTransaction",
                     "value": {
                       "type": "primitive",
                       "name": "null"
                     }
                   },
                   {
-                    "name": "Unsupported",
+                    "name": "FinalTransactionExceededMaxLength",
                     "value": {
                       "type": "primitive",
-                      "name": "null"
-                    }
-                  },
-                  {
-                    "name": "CannotCreateHold",
-                    "value": {
-                      "type": "primitive",
-                      "name": "null"
-                    }
-                  },
-                  {
-                    "name": "NotExpendable",
-                    "value": {
-                      "type": "primitive",
-                      "name": "null"
-                    }
-                  },
-                  {
-                    "name": "Blocked",
-                    "value": {
-                      "type": "primitive",
-                      "name": "null"
+                      "name": "u32"
                     }
                   }
                 ]
               }
             },
             {
-              "name": "Arithmetic",
+              "name": "DispatchError",
               "value": {
                 "type": "enum",
-                "name": "spArithmeticArithmeticError",
+                "name": "spRuntimeDispatchError",
                 "values": [
                   {
-                    "name": "Underflow",
+                    "name": "Other",
                     "value": {
                       "type": "primitive",
                       "name": "null"
                     }
                   },
                   {
-                    "name": "Overflow",
+                    "name": "CannotLookup",
                     "value": {
                       "type": "primitive",
                       "name": "null"
                     }
                   },
                   {
-                    "name": "DivisionByZero",
+                    "name": "BadOrigin",
+                    "value": {
+                      "type": "primitive",
+                      "name": "null"
+                    }
+                  },
+                  {
+                    "name": "Module",
+                    "value": {
+                      "type": "struct",
+                      "name": "SpRuntimeModuleError",
+                      "fields": {
+                        "index": {
+                          "type": "primitive",
+                          "name": "u8"
+                        },
+                        "error": {
+                          "type": "array",
+                          "value": {
+                            "type": "primitive",
+                            "name": "u8"
+                          },
+                          "length": 4
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "name": "ConsumerRemaining",
+                    "value": {
+                      "type": "primitive",
+                      "name": "null"
+                    }
+                  },
+                  {
+                    "name": "NoProviders",
+                    "value": {
+                      "type": "primitive",
+                      "name": "null"
+                    }
+                  },
+                  {
+                    "name": "TooManyConsumers",
+                    "value": {
+                      "type": "primitive",
+                      "name": "null"
+                    }
+                  },
+                  {
+                    "name": "Token",
+                    "value": {
+                      "type": "enum",
+                      "name": "spRuntimeTokenError",
+                      "values": [
+                        {
+                          "name": "FundsUnavailable",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "OnlyProvider",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "BelowMinimum",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "CannotCreate",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "UnknownAsset",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "Frozen",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "Unsupported",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "CannotCreateHold",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "NotExpendable",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "Blocked",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "name": "Arithmetic",
+                    "value": {
+                      "type": "enum",
+                      "name": "spArithmeticArithmeticError",
+                      "values": [
+                        {
+                          "name": "Underflow",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "Overflow",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "DivisionByZero",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "name": "Transactional",
+                    "value": {
+                      "type": "enum",
+                      "name": "spRuntimeTransactionalError",
+                      "values": [
+                        {
+                          "name": "LimitReached",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "NoLayer",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "name": "Exhausted",
+                    "value": {
+                      "type": "primitive",
+                      "name": "null"
+                    }
+                  },
+                  {
+                    "name": "Corruption",
+                    "value": {
+                      "type": "primitive",
+                      "name": "null"
+                    }
+                  },
+                  {
+                    "name": "Unavailable",
+                    "value": {
+                      "type": "primitive",
+                      "name": "null"
+                    }
+                  },
+                  {
+                    "name": "RootNotAllowed",
                     "value": {
                       "type": "primitive",
                       "name": "null"
                     }
                   }
                 ]
-              }
-            },
-            {
-              "name": "Transactional",
-              "value": {
-                "type": "enum",
-                "name": "spRuntimeTransactionalError",
-                "values": [
-                  {
-                    "name": "LimitReached",
-                    "value": {
-                      "type": "primitive",
-                      "name": "null"
-                    }
-                  },
-                  {
-                    "name": "NoLayer",
-                    "value": {
-                      "type": "primitive",
-                      "name": "null"
-                    }
-                  }
-                ]
-              }
-            },
-            {
-              "name": "Exhausted",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            },
-            {
-              "name": "Corruption",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            },
-            {
-              "name": "Unavailable",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            },
-            {
-              "name": "RootNotAllowed",
-              "value": {
-                "type": "primitive",
-                "name": "null"
               }
             }
           ]
@@ -15437,229 +15884,370 @@
         },
         "error": {
           "type": "enum",
-          "name": "spRuntimeDispatchError",
+          "name": "cfChainsExecutexSwapAndCallError",
           "values": [
             {
-              "name": "Other",
+              "name": "Unsupported",
               "value": {
                 "type": "primitive",
                 "name": "null"
               }
             },
             {
-              "name": "CannotLookup",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            },
-            {
-              "name": "BadOrigin",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            },
-            {
-              "name": "Module",
-              "value": {
-                "type": "struct",
-                "name": "SpRuntimeModuleError",
-                "fields": {
-                  "index": {
-                    "type": "primitive",
-                    "name": "u8"
-                  },
-                  "error": {
-                    "type": "array",
-                    "value": {
-                      "type": "primitive",
-                      "name": "u8"
-                    },
-                    "length": 4
-                  }
-                }
-              }
-            },
-            {
-              "name": "ConsumerRemaining",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            },
-            {
-              "name": "NoProviders",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            },
-            {
-              "name": "TooManyConsumers",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            },
-            {
-              "name": "Token",
+              "name": "FailedToBuildCcmForSolana",
               "value": {
                 "type": "enum",
-                "name": "spRuntimeTokenError",
+                "name": "cfChainsSolApiSolanaTransactionBuildingError",
                 "values": [
                   {
-                    "name": "FundsUnavailable",
+                    "name": "CannotLookupApiEnvironment",
                     "value": {
                       "type": "primitive",
                       "name": "null"
                     }
                   },
                   {
-                    "name": "OnlyProvider",
+                    "name": "CannotLookupCurrentAggKey",
                     "value": {
                       "type": "primitive",
                       "name": "null"
                     }
                   },
                   {
-                    "name": "BelowMinimum",
+                    "name": "CannotLookupComputePrice",
                     "value": {
                       "type": "primitive",
                       "name": "null"
                     }
                   },
                   {
-                    "name": "CannotCreate",
+                    "name": "NoNonceAccountsSet",
                     "value": {
                       "type": "primitive",
                       "name": "null"
                     }
                   },
                   {
-                    "name": "UnknownAsset",
+                    "name": "NoAvailableNonceAccount",
                     "value": {
                       "type": "primitive",
                       "name": "null"
                     }
                   },
                   {
-                    "name": "Frozen",
+                    "name": "FailedToDeriveAddress",
+                    "value": {
+                      "type": "enum",
+                      "name": "solPrimPdaPdaError",
+                      "values": [
+                        {
+                          "name": "NotAValidPoint",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "TooManySeeds",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "SeedTooLarge",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "BumpSeedBadLuck",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "name": "InvalidCcm",
+                    "value": {
+                      "type": "enum",
+                      "name": "cfChainsCcmCheckerCcmValidityError",
+                      "values": [
+                        {
+                          "name": "CannotDecodeCfParameters",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "CcmIsTooLong",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "CfParametersContainsInvalidAccounts",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "name": "FailedToSerializeFinalTransaction",
                     "value": {
                       "type": "primitive",
                       "name": "null"
                     }
                   },
                   {
-                    "name": "Unsupported",
+                    "name": "FinalTransactionExceededMaxLength",
                     "value": {
                       "type": "primitive",
-                      "name": "null"
-                    }
-                  },
-                  {
-                    "name": "CannotCreateHold",
-                    "value": {
-                      "type": "primitive",
-                      "name": "null"
-                    }
-                  },
-                  {
-                    "name": "NotExpendable",
-                    "value": {
-                      "type": "primitive",
-                      "name": "null"
-                    }
-                  },
-                  {
-                    "name": "Blocked",
-                    "value": {
-                      "type": "primitive",
-                      "name": "null"
+                      "name": "u32"
                     }
                   }
                 ]
               }
             },
             {
-              "name": "Arithmetic",
+              "name": "DispatchError",
               "value": {
                 "type": "enum",
-                "name": "spArithmeticArithmeticError",
+                "name": "spRuntimeDispatchError",
                 "values": [
                   {
-                    "name": "Underflow",
+                    "name": "Other",
                     "value": {
                       "type": "primitive",
                       "name": "null"
                     }
                   },
                   {
-                    "name": "Overflow",
+                    "name": "CannotLookup",
                     "value": {
                       "type": "primitive",
                       "name": "null"
                     }
                   },
                   {
-                    "name": "DivisionByZero",
+                    "name": "BadOrigin",
+                    "value": {
+                      "type": "primitive",
+                      "name": "null"
+                    }
+                  },
+                  {
+                    "name": "Module",
+                    "value": {
+                      "type": "struct",
+                      "name": "SpRuntimeModuleError",
+                      "fields": {
+                        "index": {
+                          "type": "primitive",
+                          "name": "u8"
+                        },
+                        "error": {
+                          "type": "array",
+                          "value": {
+                            "type": "primitive",
+                            "name": "u8"
+                          },
+                          "length": 4
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "name": "ConsumerRemaining",
+                    "value": {
+                      "type": "primitive",
+                      "name": "null"
+                    }
+                  },
+                  {
+                    "name": "NoProviders",
+                    "value": {
+                      "type": "primitive",
+                      "name": "null"
+                    }
+                  },
+                  {
+                    "name": "TooManyConsumers",
+                    "value": {
+                      "type": "primitive",
+                      "name": "null"
+                    }
+                  },
+                  {
+                    "name": "Token",
+                    "value": {
+                      "type": "enum",
+                      "name": "spRuntimeTokenError",
+                      "values": [
+                        {
+                          "name": "FundsUnavailable",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "OnlyProvider",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "BelowMinimum",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "CannotCreate",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "UnknownAsset",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "Frozen",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "Unsupported",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "CannotCreateHold",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "NotExpendable",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "Blocked",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "name": "Arithmetic",
+                    "value": {
+                      "type": "enum",
+                      "name": "spArithmeticArithmeticError",
+                      "values": [
+                        {
+                          "name": "Underflow",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "Overflow",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "DivisionByZero",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "name": "Transactional",
+                    "value": {
+                      "type": "enum",
+                      "name": "spRuntimeTransactionalError",
+                      "values": [
+                        {
+                          "name": "LimitReached",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "NoLayer",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "name": "Exhausted",
+                    "value": {
+                      "type": "primitive",
+                      "name": "null"
+                    }
+                  },
+                  {
+                    "name": "Corruption",
+                    "value": {
+                      "type": "primitive",
+                      "name": "null"
+                    }
+                  },
+                  {
+                    "name": "Unavailable",
+                    "value": {
+                      "type": "primitive",
+                      "name": "null"
+                    }
+                  },
+                  {
+                    "name": "RootNotAllowed",
                     "value": {
                       "type": "primitive",
                       "name": "null"
                     }
                   }
                 ]
-              }
-            },
-            {
-              "name": "Transactional",
-              "value": {
-                "type": "enum",
-                "name": "spRuntimeTransactionalError",
-                "values": [
-                  {
-                    "name": "LimitReached",
-                    "value": {
-                      "type": "primitive",
-                      "name": "null"
-                    }
-                  },
-                  {
-                    "name": "NoLayer",
-                    "value": {
-                      "type": "primitive",
-                      "name": "null"
-                    }
-                  }
-                ]
-              }
-            },
-            {
-              "name": "Exhausted",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            },
-            {
-              "name": "Corruption",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            },
-            {
-              "name": "Unavailable",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            },
-            {
-              "name": "RootNotAllowed",
-              "value": {
-                "type": "primitive",
-                "name": "null"
               }
             }
           ]
@@ -17124,6 +17712,13 @@
                 "type": "primitive",
                 "name": "null"
               }
+            },
+            {
+              "name": "SolUsdc",
+              "value": {
+                "type": "primitive",
+                "name": "null"
+              }
             }
           ]
         },
@@ -17196,6 +17791,13 @@
             },
             {
               "name": "Sol",
+              "value": {
+                "type": "primitive",
+                "name": "null"
+              }
+            },
+            {
+              "name": "SolUsdc",
               "value": {
                 "type": "primitive",
                 "name": "null"
@@ -17293,6 +17895,13 @@
                 "type": "primitive",
                 "name": "null"
               }
+            },
+            {
+              "name": "SolUsdc",
+              "value": {
+                "type": "primitive",
+                "name": "null"
+              }
             }
           ]
         },
@@ -17365,6 +17974,13 @@
             },
             {
               "name": "Sol",
+              "value": {
+                "type": "primitive",
+                "name": "null"
+              }
+            },
+            {
+              "name": "SolUsdc",
               "value": {
                 "type": "primitive",
                 "name": "null"
@@ -17546,6 +18162,13 @@
                 "type": "primitive",
                 "name": "null"
               }
+            },
+            {
+              "name": "SolUsdc",
+              "value": {
+                "type": "primitive",
+                "name": "null"
+              }
             }
           ]
         },
@@ -17618,6 +18241,13 @@
             },
             {
               "name": "Sol",
+              "value": {
+                "type": "primitive",
+                "name": "null"
+              }
+            },
+            {
+              "name": "SolUsdc",
               "value": {
                 "type": "primitive",
                 "name": "null"
@@ -17766,6 +18396,13 @@
                 "type": "primitive",
                 "name": "null"
               }
+            },
+            {
+              "name": "SolUsdc",
+              "value": {
+                "type": "primitive",
+                "name": "null"
+              }
             }
           ]
         },
@@ -17838,6 +18475,13 @@
             },
             {
               "name": "Sol",
+              "value": {
+                "type": "primitive",
+                "name": "null"
+              }
+            },
+            {
+              "name": "SolUsdc",
               "value": {
                 "type": "primitive",
                 "name": "null"
@@ -17931,6 +18575,13 @@
                 "type": "primitive",
                 "name": "null"
               }
+            },
+            {
+              "name": "SolUsdc",
+              "value": {
+                "type": "primitive",
+                "name": "null"
+              }
             }
           ]
         },
@@ -18003,6 +18654,13 @@
             },
             {
               "name": "Sol",
+              "value": {
+                "type": "primitive",
+                "name": "null"
+              }
+            },
+            {
+              "name": "SolUsdc",
               "value": {
                 "type": "primitive",
                 "name": "null"
@@ -18372,6 +19030,13 @@
                         "type": "primitive",
                         "name": "null"
                       }
+                    },
+                    {
+                      "name": "SolUsdc",
+                      "value": {
+                        "type": "primitive",
+                        "name": "null"
+                      }
                     }
                   ]
                 },
@@ -18444,6 +19109,13 @@
                     },
                     {
                       "name": "Sol",
+                      "value": {
+                        "type": "primitive",
+                        "name": "null"
+                      }
+                    },
+                    {
+                      "name": "SolUsdc",
                       "value": {
                         "type": "primitive",
                         "name": "null"
@@ -19308,229 +19980,370 @@
         },
         "error": {
           "type": "enum",
-          "name": "spRuntimeDispatchError",
+          "name": "cfChainsExecutexSwapAndCallError",
           "values": [
             {
-              "name": "Other",
+              "name": "Unsupported",
               "value": {
                 "type": "primitive",
                 "name": "null"
               }
             },
             {
-              "name": "CannotLookup",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            },
-            {
-              "name": "BadOrigin",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            },
-            {
-              "name": "Module",
-              "value": {
-                "type": "struct",
-                "name": "SpRuntimeModuleError",
-                "fields": {
-                  "index": {
-                    "type": "primitive",
-                    "name": "u8"
-                  },
-                  "error": {
-                    "type": "array",
-                    "value": {
-                      "type": "primitive",
-                      "name": "u8"
-                    },
-                    "length": 4
-                  }
-                }
-              }
-            },
-            {
-              "name": "ConsumerRemaining",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            },
-            {
-              "name": "NoProviders",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            },
-            {
-              "name": "TooManyConsumers",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            },
-            {
-              "name": "Token",
+              "name": "FailedToBuildCcmForSolana",
               "value": {
                 "type": "enum",
-                "name": "spRuntimeTokenError",
+                "name": "cfChainsSolApiSolanaTransactionBuildingError",
                 "values": [
                   {
-                    "name": "FundsUnavailable",
+                    "name": "CannotLookupApiEnvironment",
                     "value": {
                       "type": "primitive",
                       "name": "null"
                     }
                   },
                   {
-                    "name": "OnlyProvider",
+                    "name": "CannotLookupCurrentAggKey",
                     "value": {
                       "type": "primitive",
                       "name": "null"
                     }
                   },
                   {
-                    "name": "BelowMinimum",
+                    "name": "CannotLookupComputePrice",
                     "value": {
                       "type": "primitive",
                       "name": "null"
                     }
                   },
                   {
-                    "name": "CannotCreate",
+                    "name": "NoNonceAccountsSet",
                     "value": {
                       "type": "primitive",
                       "name": "null"
                     }
                   },
                   {
-                    "name": "UnknownAsset",
+                    "name": "NoAvailableNonceAccount",
                     "value": {
                       "type": "primitive",
                       "name": "null"
                     }
                   },
                   {
-                    "name": "Frozen",
+                    "name": "FailedToDeriveAddress",
+                    "value": {
+                      "type": "enum",
+                      "name": "solPrimPdaPdaError",
+                      "values": [
+                        {
+                          "name": "NotAValidPoint",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "TooManySeeds",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "SeedTooLarge",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "BumpSeedBadLuck",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "name": "InvalidCcm",
+                    "value": {
+                      "type": "enum",
+                      "name": "cfChainsCcmCheckerCcmValidityError",
+                      "values": [
+                        {
+                          "name": "CannotDecodeCfParameters",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "CcmIsTooLong",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "CfParametersContainsInvalidAccounts",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "name": "FailedToSerializeFinalTransaction",
                     "value": {
                       "type": "primitive",
                       "name": "null"
                     }
                   },
                   {
-                    "name": "Unsupported",
+                    "name": "FinalTransactionExceededMaxLength",
                     "value": {
                       "type": "primitive",
-                      "name": "null"
-                    }
-                  },
-                  {
-                    "name": "CannotCreateHold",
-                    "value": {
-                      "type": "primitive",
-                      "name": "null"
-                    }
-                  },
-                  {
-                    "name": "NotExpendable",
-                    "value": {
-                      "type": "primitive",
-                      "name": "null"
-                    }
-                  },
-                  {
-                    "name": "Blocked",
-                    "value": {
-                      "type": "primitive",
-                      "name": "null"
+                      "name": "u32"
                     }
                   }
                 ]
               }
             },
             {
-              "name": "Arithmetic",
+              "name": "DispatchError",
               "value": {
                 "type": "enum",
-                "name": "spArithmeticArithmeticError",
+                "name": "spRuntimeDispatchError",
                 "values": [
                   {
-                    "name": "Underflow",
+                    "name": "Other",
                     "value": {
                       "type": "primitive",
                       "name": "null"
                     }
                   },
                   {
-                    "name": "Overflow",
+                    "name": "CannotLookup",
                     "value": {
                       "type": "primitive",
                       "name": "null"
                     }
                   },
                   {
-                    "name": "DivisionByZero",
+                    "name": "BadOrigin",
+                    "value": {
+                      "type": "primitive",
+                      "name": "null"
+                    }
+                  },
+                  {
+                    "name": "Module",
+                    "value": {
+                      "type": "struct",
+                      "name": "SpRuntimeModuleError",
+                      "fields": {
+                        "index": {
+                          "type": "primitive",
+                          "name": "u8"
+                        },
+                        "error": {
+                          "type": "array",
+                          "value": {
+                            "type": "primitive",
+                            "name": "u8"
+                          },
+                          "length": 4
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "name": "ConsumerRemaining",
+                    "value": {
+                      "type": "primitive",
+                      "name": "null"
+                    }
+                  },
+                  {
+                    "name": "NoProviders",
+                    "value": {
+                      "type": "primitive",
+                      "name": "null"
+                    }
+                  },
+                  {
+                    "name": "TooManyConsumers",
+                    "value": {
+                      "type": "primitive",
+                      "name": "null"
+                    }
+                  },
+                  {
+                    "name": "Token",
+                    "value": {
+                      "type": "enum",
+                      "name": "spRuntimeTokenError",
+                      "values": [
+                        {
+                          "name": "FundsUnavailable",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "OnlyProvider",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "BelowMinimum",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "CannotCreate",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "UnknownAsset",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "Frozen",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "Unsupported",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "CannotCreateHold",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "NotExpendable",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "Blocked",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "name": "Arithmetic",
+                    "value": {
+                      "type": "enum",
+                      "name": "spArithmeticArithmeticError",
+                      "values": [
+                        {
+                          "name": "Underflow",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "Overflow",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "DivisionByZero",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "name": "Transactional",
+                    "value": {
+                      "type": "enum",
+                      "name": "spRuntimeTransactionalError",
+                      "values": [
+                        {
+                          "name": "LimitReached",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "NoLayer",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "name": "Exhausted",
+                    "value": {
+                      "type": "primitive",
+                      "name": "null"
+                    }
+                  },
+                  {
+                    "name": "Corruption",
+                    "value": {
+                      "type": "primitive",
+                      "name": "null"
+                    }
+                  },
+                  {
+                    "name": "Unavailable",
+                    "value": {
+                      "type": "primitive",
+                      "name": "null"
+                    }
+                  },
+                  {
+                    "name": "RootNotAllowed",
                     "value": {
                       "type": "primitive",
                       "name": "null"
                     }
                   }
                 ]
-              }
-            },
-            {
-              "name": "Transactional",
-              "value": {
-                "type": "enum",
-                "name": "spRuntimeTransactionalError",
-                "values": [
-                  {
-                    "name": "LimitReached",
-                    "value": {
-                      "type": "primitive",
-                      "name": "null"
-                    }
-                  },
-                  {
-                    "name": "NoLayer",
-                    "value": {
-                      "type": "primitive",
-                      "name": "null"
-                    }
-                  }
-                ]
-              }
-            },
-            {
-              "name": "Exhausted",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            },
-            {
-              "name": "Corruption",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            },
-            {
-              "name": "Unavailable",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            },
-            {
-              "name": "RootNotAllowed",
-              "value": {
-                "type": "primitive",
-                "name": "null"
               }
             }
           ]
@@ -20720,7 +21533,7 @@
               "fields": {
                 "priorityFee": {
                   "type": "primitive",
-                  "name": "u128"
+                  "name": "u64"
                 }
               }
             }
@@ -20801,8 +21614,68 @@
           }
         },
         "payload": {
-          "type": "primitive",
-          "name": "null"
+          "type": "struct",
+          "name": "CfChainsSolSolTxCoreMessage",
+          "fields": {
+            "header": {
+              "type": "struct",
+              "name": "CfChainsSolSolTxCoreMessageHeader",
+              "fields": {
+                "numRequiredSignatures": {
+                  "type": "primitive",
+                  "name": "u8"
+                },
+                "numReadonlySignedAccounts": {
+                  "type": "primitive",
+                  "name": "u8"
+                },
+                "numReadonlyUnsignedAccounts": {
+                  "type": "primitive",
+                  "name": "u8"
+                }
+              }
+            },
+            "accountKeys": {
+              "type": "array",
+              "value": {
+                "type": "array",
+                "value": {
+                  "type": "primitive",
+                  "name": "u8"
+                },
+                "length": 32
+              }
+            },
+            "recentBlockhash": {
+              "type": "array",
+              "value": {
+                "type": "primitive",
+                "name": "u8"
+              },
+              "length": 32
+            },
+            "instructions": {
+              "type": "array",
+              "value": {
+                "type": "struct",
+                "name": "CfChainsSolSolTxCoreCompiledInstruction",
+                "fields": {
+                  "programIdIndex": {
+                    "type": "primitive",
+                    "name": "u8"
+                  },
+                  "accounts": {
+                    "type": "primitive",
+                    "name": "Bytes"
+                  },
+                  "data": {
+                    "type": "primitive",
+                    "name": "Bytes"
+                  }
+                }
+              }
+            }
+          }
         }
       }
     },
@@ -21346,8 +22219,85 @@
           "name": "AccountId32"
         },
         "transactionPayload": {
-          "type": "primitive",
-          "name": "null"
+          "type": "struct",
+          "name": "CfChainsSolSolTxCoreTransaction",
+          "fields": {
+            "signatures": {
+              "type": "array",
+              "value": {
+                "type": "array",
+                "value": {
+                  "type": "primitive",
+                  "name": "u8"
+                },
+                "length": 64
+              }
+            },
+            "message": {
+              "type": "struct",
+              "name": "CfChainsSolSolTxCoreMessage",
+              "fields": {
+                "header": {
+                  "type": "struct",
+                  "name": "CfChainsSolSolTxCoreMessageHeader",
+                  "fields": {
+                    "numRequiredSignatures": {
+                      "type": "primitive",
+                      "name": "u8"
+                    },
+                    "numReadonlySignedAccounts": {
+                      "type": "primitive",
+                      "name": "u8"
+                    },
+                    "numReadonlyUnsignedAccounts": {
+                      "type": "primitive",
+                      "name": "u8"
+                    }
+                  }
+                },
+                "accountKeys": {
+                  "type": "array",
+                  "value": {
+                    "type": "array",
+                    "value": {
+                      "type": "primitive",
+                      "name": "u8"
+                    },
+                    "length": 32
+                  }
+                },
+                "recentBlockhash": {
+                  "type": "array",
+                  "value": {
+                    "type": "primitive",
+                    "name": "u8"
+                  },
+                  "length": 32
+                },
+                "instructions": {
+                  "type": "array",
+                  "value": {
+                    "type": "struct",
+                    "name": "CfChainsSolSolTxCoreCompiledInstruction",
+                    "fields": {
+                      "programIdIndex": {
+                        "type": "primitive",
+                        "name": "u8"
+                      },
+                      "accounts": {
+                        "type": "primitive",
+                        "name": "Bytes"
+                      },
+                      "data": {
+                        "type": "primitive",
+                        "name": "Bytes"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
         },
         "transactionOutId": {
           "type": "array",
@@ -21411,7 +22361,7 @@
             "type": "primitive",
             "name": "u8"
           },
-          "length": 32
+          "length": 64
         }
       }
     },
@@ -21691,7 +22641,7 @@
         },
         "amount": {
           "type": "primitive",
-          "name": "u128"
+          "name": "u64"
         }
       }
     },
@@ -21740,12 +22690,19 @@
                 "type": "primitive",
                 "name": "null"
               }
+            },
+            {
+              "name": "SolUsdc",
+              "value": {
+                "type": "primitive",
+                "name": "null"
+              }
             }
           ]
         },
         "amount": {
           "type": "primitive",
-          "name": "u128"
+          "name": "u64"
         },
         "blockHeight": {
           "type": "primitive",
@@ -21757,7 +22714,7 @@
         },
         "ingressFee": {
           "type": "primitive",
-          "name": "u128"
+          "name": "u64"
         },
         "action": {
           "type": "enum",
@@ -21835,6 +22792,13 @@
           "values": [
             {
               "name": "Sol",
+              "value": {
+                "type": "primitive",
+                "name": "null"
+              }
+            },
+            {
+              "name": "SolUsdc",
               "value": {
                 "type": "primitive",
                 "name": "null"
@@ -21976,229 +22940,370 @@
         },
         "error": {
           "type": "enum",
-          "name": "spRuntimeDispatchError",
+          "name": "cfChainsExecutexSwapAndCallError",
           "values": [
             {
-              "name": "Other",
+              "name": "Unsupported",
               "value": {
                 "type": "primitive",
                 "name": "null"
               }
             },
             {
-              "name": "CannotLookup",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            },
-            {
-              "name": "BadOrigin",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            },
-            {
-              "name": "Module",
-              "value": {
-                "type": "struct",
-                "name": "SpRuntimeModuleError",
-                "fields": {
-                  "index": {
-                    "type": "primitive",
-                    "name": "u8"
-                  },
-                  "error": {
-                    "type": "array",
-                    "value": {
-                      "type": "primitive",
-                      "name": "u8"
-                    },
-                    "length": 4
-                  }
-                }
-              }
-            },
-            {
-              "name": "ConsumerRemaining",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            },
-            {
-              "name": "NoProviders",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            },
-            {
-              "name": "TooManyConsumers",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            },
-            {
-              "name": "Token",
+              "name": "FailedToBuildCcmForSolana",
               "value": {
                 "type": "enum",
-                "name": "spRuntimeTokenError",
+                "name": "cfChainsSolApiSolanaTransactionBuildingError",
                 "values": [
                   {
-                    "name": "FundsUnavailable",
+                    "name": "CannotLookupApiEnvironment",
                     "value": {
                       "type": "primitive",
                       "name": "null"
                     }
                   },
                   {
-                    "name": "OnlyProvider",
+                    "name": "CannotLookupCurrentAggKey",
                     "value": {
                       "type": "primitive",
                       "name": "null"
                     }
                   },
                   {
-                    "name": "BelowMinimum",
+                    "name": "CannotLookupComputePrice",
                     "value": {
                       "type": "primitive",
                       "name": "null"
                     }
                   },
                   {
-                    "name": "CannotCreate",
+                    "name": "NoNonceAccountsSet",
                     "value": {
                       "type": "primitive",
                       "name": "null"
                     }
                   },
                   {
-                    "name": "UnknownAsset",
+                    "name": "NoAvailableNonceAccount",
                     "value": {
                       "type": "primitive",
                       "name": "null"
                     }
                   },
                   {
-                    "name": "Frozen",
+                    "name": "FailedToDeriveAddress",
+                    "value": {
+                      "type": "enum",
+                      "name": "solPrimPdaPdaError",
+                      "values": [
+                        {
+                          "name": "NotAValidPoint",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "TooManySeeds",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "SeedTooLarge",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "BumpSeedBadLuck",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "name": "InvalidCcm",
+                    "value": {
+                      "type": "enum",
+                      "name": "cfChainsCcmCheckerCcmValidityError",
+                      "values": [
+                        {
+                          "name": "CannotDecodeCfParameters",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "CcmIsTooLong",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "CfParametersContainsInvalidAccounts",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "name": "FailedToSerializeFinalTransaction",
                     "value": {
                       "type": "primitive",
                       "name": "null"
                     }
                   },
                   {
-                    "name": "Unsupported",
+                    "name": "FinalTransactionExceededMaxLength",
                     "value": {
                       "type": "primitive",
-                      "name": "null"
-                    }
-                  },
-                  {
-                    "name": "CannotCreateHold",
-                    "value": {
-                      "type": "primitive",
-                      "name": "null"
-                    }
-                  },
-                  {
-                    "name": "NotExpendable",
-                    "value": {
-                      "type": "primitive",
-                      "name": "null"
-                    }
-                  },
-                  {
-                    "name": "Blocked",
-                    "value": {
-                      "type": "primitive",
-                      "name": "null"
+                      "name": "u32"
                     }
                   }
                 ]
               }
             },
             {
-              "name": "Arithmetic",
+              "name": "DispatchError",
               "value": {
                 "type": "enum",
-                "name": "spArithmeticArithmeticError",
+                "name": "spRuntimeDispatchError",
                 "values": [
                   {
-                    "name": "Underflow",
+                    "name": "Other",
                     "value": {
                       "type": "primitive",
                       "name": "null"
                     }
                   },
                   {
-                    "name": "Overflow",
+                    "name": "CannotLookup",
                     "value": {
                       "type": "primitive",
                       "name": "null"
                     }
                   },
                   {
-                    "name": "DivisionByZero",
+                    "name": "BadOrigin",
+                    "value": {
+                      "type": "primitive",
+                      "name": "null"
+                    }
+                  },
+                  {
+                    "name": "Module",
+                    "value": {
+                      "type": "struct",
+                      "name": "SpRuntimeModuleError",
+                      "fields": {
+                        "index": {
+                          "type": "primitive",
+                          "name": "u8"
+                        },
+                        "error": {
+                          "type": "array",
+                          "value": {
+                            "type": "primitive",
+                            "name": "u8"
+                          },
+                          "length": 4
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "name": "ConsumerRemaining",
+                    "value": {
+                      "type": "primitive",
+                      "name": "null"
+                    }
+                  },
+                  {
+                    "name": "NoProviders",
+                    "value": {
+                      "type": "primitive",
+                      "name": "null"
+                    }
+                  },
+                  {
+                    "name": "TooManyConsumers",
+                    "value": {
+                      "type": "primitive",
+                      "name": "null"
+                    }
+                  },
+                  {
+                    "name": "Token",
+                    "value": {
+                      "type": "enum",
+                      "name": "spRuntimeTokenError",
+                      "values": [
+                        {
+                          "name": "FundsUnavailable",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "OnlyProvider",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "BelowMinimum",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "CannotCreate",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "UnknownAsset",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "Frozen",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "Unsupported",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "CannotCreateHold",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "NotExpendable",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "Blocked",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "name": "Arithmetic",
+                    "value": {
+                      "type": "enum",
+                      "name": "spArithmeticArithmeticError",
+                      "values": [
+                        {
+                          "name": "Underflow",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "Overflow",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "DivisionByZero",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "name": "Transactional",
+                    "value": {
+                      "type": "enum",
+                      "name": "spRuntimeTransactionalError",
+                      "values": [
+                        {
+                          "name": "LimitReached",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "NoLayer",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "name": "Exhausted",
+                    "value": {
+                      "type": "primitive",
+                      "name": "null"
+                    }
+                  },
+                  {
+                    "name": "Corruption",
+                    "value": {
+                      "type": "primitive",
+                      "name": "null"
+                    }
+                  },
+                  {
+                    "name": "Unavailable",
+                    "value": {
+                      "type": "primitive",
+                      "name": "null"
+                    }
+                  },
+                  {
+                    "name": "RootNotAllowed",
                     "value": {
                       "type": "primitive",
                       "name": "null"
                     }
                   }
                 ]
-              }
-            },
-            {
-              "name": "Transactional",
-              "value": {
-                "type": "enum",
-                "name": "spRuntimeTransactionalError",
-                "values": [
-                  {
-                    "name": "LimitReached",
-                    "value": {
-                      "type": "primitive",
-                      "name": "null"
-                    }
-                  },
-                  {
-                    "name": "NoLayer",
-                    "value": {
-                      "type": "primitive",
-                      "name": "null"
-                    }
-                  }
-                ]
-              }
-            },
-            {
-              "name": "Exhausted",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            },
-            {
-              "name": "Corruption",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            },
-            {
-              "name": "Unavailable",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            },
-            {
-              "name": "RootNotAllowed",
-              "value": {
-                "type": "primitive",
-                "name": "null"
               }
             }
           ]
@@ -22218,6 +23323,13 @@
           "values": [
             {
               "name": "Sol",
+              "value": {
+                "type": "primitive",
+                "name": "null"
+              }
+            },
+            {
+              "name": "SolUsdc",
               "value": {
                 "type": "primitive",
                 "name": "null"
@@ -22309,12 +23421,19 @@
                 "type": "primitive",
                 "name": "null"
               }
+            },
+            {
+              "name": "SolUsdc",
+              "value": {
+                "type": "primitive",
+                "name": "null"
+              }
             }
           ]
         },
         "minimumDeposit": {
           "type": "primitive",
-          "name": "u128"
+          "name": "u64"
         }
       }
     },
@@ -22339,12 +23458,19 @@
                 "type": "primitive",
                 "name": "null"
               }
+            },
+            {
+              "name": "SolUsdc",
+              "value": {
+                "type": "primitive",
+                "name": "null"
+              }
             }
           ]
         },
         "amount": {
           "type": "primitive",
-          "name": "u128"
+          "name": "u64"
         },
         "depositDetails": {
           "type": "primitive",
@@ -22385,12 +23511,19 @@
                 "type": "primitive",
                 "name": "null"
               }
+            },
+            {
+              "name": "SolUsdc",
+              "value": {
+                "type": "primitive",
+                "name": "null"
+              }
             }
           ]
         },
         "amount": {
           "type": "primitive",
-          "name": "u128"
+          "name": "u64"
         },
         "destinationAddress": {
           "type": "array",
@@ -22660,12 +23793,19 @@
                     "type": "primitive",
                     "name": "null"
                   }
+                },
+                {
+                  "name": "SolUsdc",
+                  "value": {
+                    "type": "primitive",
+                    "name": "null"
+                  }
                 }
               ]
             },
             "amount": {
               "type": "primitive",
-              "name": "u128"
+              "name": "u64"
             },
             "depositDetails": {
               "type": "primitive",
@@ -23032,6 +24172,13 @@
                 "type": "primitive",
                 "name": "null"
               }
+            },
+            {
+              "name": "SolUsdc",
+              "value": {
+                "type": "primitive",
+                "name": "null"
+              }
             }
           ]
         },
@@ -23043,7 +24190,7 @@
           },
           "value": {
             "type": "primitive",
-            "name": "u128"
+            "name": "u64"
           }
         },
         "depositDetails": {
@@ -23064,11 +24211,11 @@
         },
         "ingressFee": {
           "type": "primitive",
-          "name": "u128"
+          "name": "u64"
         },
         "boostFee": {
           "type": "primitive",
-          "name": "u128"
+          "name": "u64"
         },
         "action": {
           "type": "enum",
@@ -23154,6 +24301,13 @@
                     "type": "primitive",
                     "name": "null"
                   }
+                },
+                {
+                  "name": "SolUsdc",
+                  "value": {
+                    "type": "primitive",
+                    "name": "null"
+                  }
                 }
               ]
             },
@@ -23165,7 +24319,7 @@
         },
         "amount": {
           "type": "primitive",
-          "name": "u128"
+          "name": "u64"
         }
       }
     },
@@ -23190,6 +24344,13 @@
                     "type": "primitive",
                     "name": "null"
                   }
+                },
+                {
+                  "name": "SolUsdc",
+                  "value": {
+                    "type": "primitive",
+                    "name": "null"
+                  }
                 }
               ]
             },
@@ -23201,7 +24362,7 @@
         },
         "unlockedAmount": {
           "type": "primitive",
-          "name": "u128"
+          "name": "u64"
         },
         "pendingBoosts": {
           "type": "array",
@@ -23229,12 +24390,19 @@
                 "type": "primitive",
                 "name": "null"
               }
+            },
+            {
+              "name": "SolUsdc",
+              "value": {
+                "type": "primitive",
+                "name": "null"
+              }
             }
           ]
         },
         "amountAttempted": {
           "type": "primitive",
-          "name": "u128"
+          "name": "u64"
         },
         "channelId": {
           "type": "primitive",
@@ -23255,6 +24423,13 @@
               "values": [
                 {
                   "name": "Sol",
+                  "value": {
+                    "type": "primitive",
+                    "name": "null"
+                  }
+                },
+                {
+                  "name": "SolUsdc",
                   "value": {
                     "type": "primitive",
                     "name": "null"
