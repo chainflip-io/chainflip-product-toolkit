@@ -148,8 +148,6 @@ const chainEnumMember = (name: keyof typeof shortChainToLongChain, transform?: s
  })`;
 
 export default class CodeGenerator {
-  private log = false;
-
   private registry = {
     types: new Map<string, CodegenResult>(),
   };
