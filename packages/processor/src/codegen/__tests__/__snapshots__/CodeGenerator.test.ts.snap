@@ -155,7 +155,7 @@ export const primitivesBool = z.boolean();
 
 exports[`CodeGenerator > generates a lot of stuff > common 1`] = `
 "import { z } from 'zod';
-import { encode } from '@chainflip/utils/ss58';
+import * as ss58 from '@chainflip/utils/ss58';
 
 export const numericString = z
   .string()
@@ -177,7 +177,7 @@ export const accountId = z
       .regex(/^[0-9a-f]+$/)
       .transform<\`0x\${string}\`>((v) => \`0x\${v}\`),
   ])
-  .transform((value) => encode({ data: value, ss58Format: 2112 }));
+  .transform((value) => ss58.encode({ data: value, ss58Format: 2112 }));
 
 export const simpleEnum = <U extends string, T extends readonly [U, ...U[]]>(values: T) =>
   z.object({ __kind: z.enum(values) }).transform(({ __kind }) => __kind!);
@@ -298,5 +298,48 @@ exports[`CodeGenerator > generates a named struct once > common 1`] = `
 "import { z } from 'zod';
 
 export const reusedStruct = z.object({ field: z.number() });
+"
+`;
+
+exports[`CodeGenerator > generates the encoded address enum > EventOne 1`] = `
+"import { z } from 'zod';
+import { cfChainsAddressEncodedAddress } from '../common';
+
+export const palletOneEventOne = cfChainsAddressEncodedAddress;
+"
+`;
+
+exports[`CodeGenerator > generates the encoded address enum > common 1`] = `
+"import { z } from 'zod';
+import * as ss58 from '@chainflip/utils/ss58';
+import * as base58 from '@chainflip/utils/base58';
+import { hexToBytes } from '@chainflip/utils/bytes';
+
+export const hexString = z
+  .string()
+  .refine((v): v is \`0x\${string}\` => /^0x[\\da-f]*$/i.test(v), { message: 'Invalid hex string' });
+
+export const cfChainsAddressEncodedAddress = z.union([
+  z.object({
+    __kind: z.literal('Eth').transform(() => 'Ethereum' as const),
+    value: hexString,
+  }),
+  z.object({
+    __kind: z.literal('Dot').transform(() => 'Polkadot' as const),
+    value: hexString.transform((value) => ss58.encode({ data: value, ss58Format: 0 })),
+  }),
+  z.object({
+    __kind: z.literal('Sol').transform(() => 'Solana' as const),
+    value: hexString.transform((value) => base58.encode(hexToBytes(value))),
+  }),
+  z.object({
+    __kind: z.literal('Btc').transform(() => 'Bitcoin' as const),
+    value: hexString.transform((value) => Buffer.from(value.slice(2), 'hex').toString('utf8')),
+  }),
+  z.object({
+    __kind: z.literal('Arb').transform(() => 'Arbitrum' as const),
+    value: hexString,
+  }),
+]);
 "
 `;
