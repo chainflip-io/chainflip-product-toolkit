@@ -223,6 +223,51 @@ describe(CodeGenerator, () => {
     }
   });
 
+  it('generates the encoded address enum', async () => {
+    const modules = [
+      ...new CodeGenerator().generate({
+        PalletOne: {
+          EventOne: {
+            type: 'enum',
+            name: 'cfChainsAddressEncodedAddress',
+            values: [
+              { name: 'Eth', value: { type: 'primitive', name: 'null' } },
+              { name: 'Dot', value: { type: 'primitive', name: 'null' } },
+              { name: 'Sol', value: { type: 'primitive', name: 'null' } },
+              { name: 'Btc', value: { type: 'primitive', name: 'null' } },
+              { name: 'Arb', value: { type: 'primitive', name: 'null' } },
+            ],
+          },
+        },
+      }),
+    ];
+
+    for (const module of modules) {
+      expect(await module.toFormattedString()).toMatchSnapshot(module['name']);
+    }
+  });
+
+  it('throws for new chains', () => {
+    expect(() => [
+      ...new CodeGenerator().generate({
+        PalletOne: {
+          EventOne: {
+            type: 'enum',
+            name: 'cfChainsAddressEncodedAddress',
+            values: [
+              { name: 'Eth', value: { type: 'primitive', name: 'null' } },
+              { name: 'Dot', value: { type: 'primitive', name: 'null' } },
+              { name: 'Sol', value: { type: 'primitive', name: 'null' } },
+              { name: 'Btc', value: { type: 'primitive', name: 'null' } },
+              { name: 'Arb', value: { type: 'primitive', name: 'null' } },
+              { name: 'Ton', value: { type: 'primitive', name: 'null' } },
+            ],
+          },
+        },
+      }),
+    ]).toThrowErrorMatchingInlineSnapshot(`[Error: unknown chain: "Ton"]`);
+  });
+
   it('throws on unsupported primitives', () => {
     vi.spyOn(console, 'error').mockImplementation(() => {});
     expect(() => [
@@ -235,7 +280,7 @@ describe(CodeGenerator, () => {
     expect(console.error).toHaveBeenCalled();
   });
 
-  it('writes a formateted module to disk', async () => {
+  it('writes a formatted module to disk', async () => {
     const spy = vi.spyOn(fs, 'writeFile');
 
     const modules = [

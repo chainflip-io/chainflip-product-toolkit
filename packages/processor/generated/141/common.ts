@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { encode } from '@chainflip/utils/ss58';
+import * as ss58 from '@chainflip/utils/ss58';
 
 export const simpleEnum = <U extends string, T extends readonly [U, ...U[]]>(values: T) =>
   z.object({ __kind: z.enum(values) }).transform(({ __kind }) => __kind!);
@@ -161,7 +161,7 @@ export const accountId = z
       .regex(/^[0-9a-f]+$/)
       .transform<`0x${string}`>((v) => `0x${v}`),
   ])
-  .transform((value) => encode({ data: value, ss58Format: 2112 }));
+  .transform((value) => ss58.encode({ data: value, ss58Format: 2112 }));
 
 export const cfPrimitivesAccountRole = simpleEnum([
   'Unregistered',
@@ -247,10 +247,22 @@ export const dispatchResult = z.union([
 ]);
 
 export const cfChainsAddressEncodedAddress = z.union([
-  z.object({ __kind: z.literal('Eth'), value: hexString }),
-  z.object({ __kind: z.literal('Dot'), value: hexString }),
-  z.object({ __kind: z.literal('Btc'), value: hexString }),
-  z.object({ __kind: z.literal('Arb'), value: hexString }),
+  z.object({
+    __kind: z.literal('Eth').transform(() => 'Ethereum' as const),
+    value: hexString,
+  }),
+  z.object({
+    __kind: z.literal('Dot').transform(() => 'Polkadot' as const),
+    value: hexString.transform((value) => ss58.encode({ data: value, ss58Format: 0 })),
+  }),
+  z.object({
+    __kind: z.literal('Btc').transform(() => 'Bitcoin' as const),
+    value: hexString.transform((value) => Buffer.from(value.slice(2), 'hex').toString('utf8')),
+  }),
+  z.object({
+    __kind: z.literal('Arb').transform(() => 'Arbitrum' as const),
+    value: hexString,
+  }),
 ]);
 
 export const cfPrimitivesChainsAssetsAnyAsset = simpleEnum([

@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { encode } from '@chainflip/utils/ss58';
+import * as ss58 from '@chainflip/utils/ss58';
 
 export const palletCfBroadcastBroadcastAttemptId = z.object({
   broadcastId: z.number(),
@@ -46,7 +46,7 @@ export const accountId = z
       .regex(/^[0-9a-f]+$/)
       .transform<`0x${string}`>((v) => `0x${v}`),
   ])
-  .transform((value) => encode({ data: value, ss58Format: 2112 }));
+  .transform((value) => ss58.encode({ data: value, ss58Format: 2112 }));
 
 export const palletCfPoolsAssetsMapU128 = z.object({ base: numberOrHex, quote: numberOrHex });
 

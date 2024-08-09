@@ -36,29 +36,7 @@ abstract class CodegenResult {
     return this.code;
   }
 
-  getImportStatements() {
-    const depMap = this.dependencies.reduce<Record<string, Set<string>>>((acc, dep) => {
-      if (dep instanceof Identifier) {
-        acc[dep.pkg] ??= new Set();
-        acc[dep.pkg].add(dep.toString());
-      } else {
-        dep.dependencies.forEach((dep) => {
-          if (dep instanceof Identifier) {
-            acc[dep.pkg] ??= new Set();
-            acc[dep.pkg].add(dep.toString());
-          }
-        });
-      }
-
-      return acc;
-    }, {});
-
-    return Object.entries(depMap).map(([pkg, deps]) => {
-      const pkgPath = pkg === 'common' ? '../common' : pkg;
-
-      return `import { ${[...deps].sort().join(', ')} } from '${pkgPath}';`;
-    });
-  }
+  abstract getDependencies(): Identifier[];
 }
 
 class Identifier extends CodegenResult {
@@ -69,12 +47,16 @@ class Identifier extends CodegenResult {
     super(identifier);
   }
 
-  getImportStatements(): string[] {
-    return [`import { ${this.toString()} } from '../common';`];
+  getDependencies(): Identifier[] {
+    return [this];
   }
 }
 
-class Code extends CodegenResult {}
+class Code extends CodegenResult {
+  getDependencies(): Identifier[] {
+    return this.dependencies.flatMap((d) => d.getDependencies());
+  }
+}
 
 class Module {
   constructor(
@@ -84,20 +66,39 @@ class Module {
   ) {}
 
   toString() {
-    const imports: string[] = ["import { z } from 'zod';"];
     const generated: string[] = [];
 
+    const dependencies: Record<string, Set<string>> = {};
+
     for (const [identifier, type] of this.exports.entries()) {
-      imports.push(
-        ...type
-          .getImportStatements()
-          .filter((stmt) => this.name !== 'common' || !stmt.includes('../common')),
-      );
+      const exportDeps = type.getDependencies();
+
+      for (const ident of exportDeps) {
+        // don't import from the file we are in
+        if (ident.pkg === this.name) continue;
+        dependencies[ident.pkg] ??= new Set();
+        dependencies[ident.pkg].add(ident.toString());
+      }
+
       generated.push(`export const ${identifier} = ${type.toString()};`);
       generated.push('');
     }
 
-    return [...imports, '', ...generated].join('\n');
+    return [
+      "import { z } from 'zod';",
+      ...Object.entries(dependencies).map(([pkg, depsSet]) => {
+        const pkgPath = pkg === 'common' ? '../common' : pkg;
+
+        const deps = [...depsSet];
+
+        const names =
+          deps.length === 1 && deps[0].startsWith('*') ? deps[0] : `{ ${deps.sort().join(', ')} }`;
+
+        return `import ${names} from '${pkgPath}';`;
+      }),
+      '',
+      ...generated,
+    ].join('\n');
   }
 
   toFormattedString() {
@@ -125,12 +126,26 @@ const numberOrHex = new Code(
   'z.union([z.number(), hexString, numericString]).transform((n) => BigInt(n))',
 );
 const accountId = new Code(
-  'z.union([hexString, z.string().regex(/^[0-9a-f]+$/).transform<`0x${string}`>((v) => `0x${v}`)]).transform((value) => encode({ data: value, ss58Format: 2112 }))',
-  [new Identifier('encode', '@chainflip/utils/ss58')],
+  'z.union([hexString, z.string().regex(/^[0-9a-f]+$/).transform<`0x${string}`>((v) => `0x${v}`)]).transform((value) => ss58.encode({ data: value, ss58Format: 2112 }))',
+  [new Identifier('* as ss58', '@chainflip/utils/ss58')],
 );
 const simpleEnum = new Code(
   '<U extends string, T extends readonly [U, ...U[]]>(values: T) => z.object({ __kind: z.enum(values) }).transform(({ __kind }) => __kind!)',
 );
+
+const shortChainToLongChain = {
+  Arb: 'Arbitrum',
+  Btc: 'Bitcoin',
+  Eth: 'Ethereum',
+  Dot: 'Polkadot',
+  Sol: 'Solana',
+} as const;
+
+const chainEnumMember = (name: keyof typeof shortChainToLongChain, transform?: string) =>
+  `z.object({
+  __kind: z.literal('${name}').transform(() => '${shortChainToLongChain[name]}' as const),
+  value: hexString${transform ? `.transform(${transform})` : ''},
+ })`;
 
 export default class CodeGenerator {
   private registry = {
@@ -141,6 +156,42 @@ export default class CodeGenerator {
 
   constructor({ trackedEvents }: { trackedEvents?: Set<string> } = {}) {
     if (trackedEvents) this.trackedEvents = new Set(trackedEvents);
+  }
+
+  private generateEncodedAddressEnum(def: EnumType): Identifier {
+    this.registry.types.set('hexString', hexString);
+
+    const dependencies: Identifier[] = [];
+
+    const unionMembers = def.values.map((v) => {
+      switch (v.name) {
+        case 'Arb':
+        case 'Eth':
+          return chainEnumMember(v.name);
+        case 'Dot':
+          dependencies.push(new Identifier('* as ss58', '@chainflip/utils/ss58'));
+          return chainEnumMember(v.name, `(value) => ss58.encode({ data: value, ss58Format: 0 })`);
+        case 'Btc':
+          return chainEnumMember(
+            v.name,
+            `(value) => Buffer.from(value.slice(2), 'hex').toString('utf8')`,
+          );
+        case 'Sol':
+          dependencies.push(
+            new Identifier('* as base58', '@chainflip/utils/base58'),
+            new Identifier('hexToBytes', '@chainflip/utils/bytes'),
+          );
+          return chainEnumMember(v.name, `(value) => base58.encode(hexToBytes(value))`);
+        default:
+          throw new Error(`unknown chain: "${v.name}"`);
+      }
+    });
+
+    const generated = `z.union([${unionMembers.join(',')}])`;
+
+    this.registry.types.set(def.name, new Code(generated, dependencies));
+
+    return new Identifier(def.name);
   }
 
   private generatePrimitive(def: PrimitiveType): CodegenResult {
@@ -186,6 +237,10 @@ export default class CodeGenerator {
 
   private generateEnum(def: EnumType): Identifier {
     if (this.registry.types.has(def.name)) return new Identifier(def.name);
+
+    if (def.name === 'cfChainsAddressEncodedAddress') {
+      return this.generateEncodedAddressEnum(def);
+    }
 
     // "isSimple" means that none of the variants have any associated data, e.g.
     // `enum Foo { A, B, C }` and not `enum Foo { A(u32), B { field: u32 }, C }`

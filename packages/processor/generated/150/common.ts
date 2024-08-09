@@ -1,5 +1,7 @@
 import { z } from 'zod';
-import { encode } from '@chainflip/utils/ss58';
+import * as ss58 from '@chainflip/utils/ss58';
+import * as base58 from '@chainflip/utils/base58';
+import { hexToBytes } from '@chainflip/utils/bytes';
 
 export const palletCfEmissionsPalletSafeMode = z.object({ emissionsSyncEnabled: z.boolean() });
 
@@ -144,11 +146,26 @@ export const palletCfTokenholderGovernanceProposal = z.union([
 ]);
 
 export const cfChainsAddressEncodedAddress = z.union([
-  z.object({ __kind: z.literal('Eth'), value: hexString }),
-  z.object({ __kind: z.literal('Dot'), value: hexString }),
-  z.object({ __kind: z.literal('Btc'), value: hexString }),
-  z.object({ __kind: z.literal('Arb'), value: hexString }),
-  z.object({ __kind: z.literal('Sol'), value: hexString }),
+  z.object({
+    __kind: z.literal('Eth').transform(() => 'Ethereum' as const),
+    value: hexString,
+  }),
+  z.object({
+    __kind: z.literal('Dot').transform(() => 'Polkadot' as const),
+    value: hexString.transform((value) => ss58.encode({ data: value, ss58Format: 0 })),
+  }),
+  z.object({
+    __kind: z.literal('Btc').transform(() => 'Bitcoin' as const),
+    value: hexString.transform((value) => Buffer.from(value.slice(2), 'hex').toString('utf8')),
+  }),
+  z.object({
+    __kind: z.literal('Arb').transform(() => 'Arbitrum' as const),
+    value: hexString,
+  }),
+  z.object({
+    __kind: z.literal('Sol').transform(() => 'Solana' as const),
+    value: hexString.transform((value) => base58.encode(hexToBytes(value))),
+  }),
 ]);
 
 export const cfPrimitivesChainsAssetsAnyAsset = simpleEnum([
@@ -177,7 +194,7 @@ export const accountId = z
       .regex(/^[0-9a-f]+$/)
       .transform<`0x${string}`>((v) => `0x${v}`),
   ])
-  .transform((value) => encode({ data: value, ss58Format: 2112 }));
+  .transform((value) => ss58.encode({ data: value, ss58Format: 2112 }));
 
 export const cfPrimitivesBeneficiary = z.object({ account: accountId, bps: z.number() });
 
