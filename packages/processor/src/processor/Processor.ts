@@ -250,6 +250,7 @@ export default class Processor<P extends ProcessorStore<unknown, unknown>, I ext
   }
 
   stop() {
+    this.logger.info('stopping processing of blocks');
     this.running = false;
   }
 
@@ -265,7 +266,7 @@ export default class Processor<P extends ProcessorStore<unknown, unknown>, I ext
 
     while (this.running) {
       const blocks = await (nextBatch ?? this.fetchBlocks(lastBlock + 1));
-
+      let numBlocksProcessed = 0;
       const start = performance.now();
 
       if (blocks.length === 0) {
@@ -286,6 +287,11 @@ export default class Processor<P extends ProcessorStore<unknown, unknown>, I ext
       );
 
       for (const block of blocks) {
+        numBlocksProcessed++;
+        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+        if (!this.running) {
+          break;
+        }
         const state = await this.processorStore.getCurrentState(this.name);
 
         assert(
@@ -320,7 +326,7 @@ export default class Processor<P extends ProcessorStore<unknown, unknown>, I ext
 
       const end = performance.now();
       this.logger.info(
-        `processed ${blocks.length} blocks in ${
+        `processed ${numBlocksProcessed} blocks in ${
           end - start
         } milliseconds, last block: ${lastBlock}`,
       );
