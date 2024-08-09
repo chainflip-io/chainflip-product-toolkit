@@ -181,6 +181,22 @@ export const accountId = z
 
 export const cfPrimitivesBeneficiary = z.object({ account: accountId, bps: z.number() });
 
+export const cfChainsChannelRefundParametersEncodedAddress = z.object({
+  retryDuration: z.number(),
+  refundAddress: cfChainsAddressEncodedAddress,
+  minPrice: numberOrHex,
+});
+
+export const cfChainsSwapOrigin = z.union([
+  z.object({
+    __kind: z.literal('DepositChannel'),
+    depositAddress: cfChainsAddressEncodedAddress,
+    channelId: numberOrHex,
+    depositBlockHeight: numberOrHex,
+  }),
+  z.object({ __kind: z.literal('Vault'), txHash: hexString }),
+]);
+
 export const cfChainsBtcScriptPubkey = z.union([
   z.object({ __kind: z.literal('P2PKH'), value: hexString }),
   z.object({ __kind: z.literal('P2SH'), value: hexString }),
@@ -196,22 +212,6 @@ export const cfChainsAddressForeignChainAddress = z.union([
   z.object({ __kind: z.literal('Btc'), value: cfChainsBtcScriptPubkey }),
   z.object({ __kind: z.literal('Arb'), value: hexString }),
   z.object({ __kind: z.literal('Sol'), value: hexString }),
-]);
-
-export const cfChainsChannelRefundParameters = z.object({
-  retryDuration: z.number(),
-  refundAddress: cfChainsAddressForeignChainAddress,
-  minPrice: numberOrHex,
-});
-
-export const cfChainsSwapOrigin = z.union([
-  z.object({
-    __kind: z.literal('DepositChannel'),
-    depositAddress: cfChainsAddressEncodedAddress,
-    channelId: numberOrHex,
-    depositBlockHeight: numberOrHex,
-  }),
-  z.object({ __kind: z.literal('Vault'), txHash: hexString }),
 ]);
 
 export const cfTraitsLiquiditySwapType = z.union([
