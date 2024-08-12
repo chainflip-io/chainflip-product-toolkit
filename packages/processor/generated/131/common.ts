@@ -188,18 +188,18 @@ export const cfChainsDotPolkadotTransactionId = z.object({
 export const cfChainsBtcBitcoinTransactionData = z.object({ encodedTransaction: hexString });
 
 export const cfChainsAddressEncodedAddress = z.union([
-  z.object({
-    __kind: z.literal('Eth').transform(() => 'Ethereum' as const),
-    value: hexString,
-  }),
-  z.object({
-    __kind: z.literal('Dot').transform(() => 'Polkadot' as const),
-    value: hexString.transform((value) => ss58.encode({ data: value, ss58Format: 0 })),
-  }),
-  z.object({
-    __kind: z.literal('Btc').transform(() => 'Bitcoin' as const),
-    value: hexString.transform((value) => Buffer.from(value.slice(2), 'hex').toString('utf8')),
-  }),
+  z.object({ __kind: z.literal('Eth'), value: hexString }).transform(({ value }) => ({
+    chain: 'Ethereum' as const,
+    address: value,
+  })),
+  z.object({ __kind: z.literal('Dot'), value: hexString }).transform(({ value }) => ({
+    chain: 'Polkadot' as const,
+    address: ss58.encode({ data: value, ss58Format: 0 }),
+  })),
+  z.object({ __kind: z.literal('Btc'), value: hexString }).transform(({ value }) => ({
+    chain: 'Bitcoin' as const,
+    address: Buffer.from(value.slice(2), 'hex').toString('utf8'),
+  })),
 ]);
 
 export const cfPrimitivesChainsAssetsAnyAsset = simpleEnum([

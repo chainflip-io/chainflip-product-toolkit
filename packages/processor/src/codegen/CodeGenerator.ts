@@ -142,10 +142,10 @@ const shortChainToLongChain = {
 } as const;
 
 const chainEnumMember = (name: keyof typeof shortChainToLongChain, transform?: string) =>
-  `z.object({
-  __kind: z.literal('${name}').transform(() => '${shortChainToLongChain[name]}' as const),
-  value: hexString${transform ? `.transform(${transform})` : ''},
- })`;
+  `z.object({ __kind: z.literal('${name}'), value: hexString }).transform(({ value }) => ({
+  chain: '${shortChainToLongChain[name]}' as const,
+  address: ${transform ?? 'value'},
+}))`;
 
 export default class CodeGenerator {
   private registry = {
@@ -170,18 +170,15 @@ export default class CodeGenerator {
           return chainEnumMember(v.name);
         case 'Dot':
           dependencies.push(new Identifier('* as ss58', '@chainflip/utils/ss58'));
-          return chainEnumMember(v.name, `(value) => ss58.encode({ data: value, ss58Format: 0 })`);
+          return chainEnumMember(v.name, `ss58.encode({ data: value, ss58Format: 0 })`);
         case 'Btc':
-          return chainEnumMember(
-            v.name,
-            `(value) => Buffer.from(value.slice(2), 'hex').toString('utf8')`,
-          );
+          return chainEnumMember(v.name, `Buffer.from(value.slice(2), 'hex').toString('utf8')`);
         case 'Sol':
           dependencies.push(
             new Identifier('* as base58', '@chainflip/utils/base58'),
             new Identifier('hexToBytes', '@chainflip/utils/bytes'),
           );
-          return chainEnumMember(v.name, `(value) => base58.encode(hexToBytes(value))`);
+          return chainEnumMember(v.name, `base58.encode(hexToBytes(value))`);
         default:
           throw new Error(`unknown chain: "${v.name}"`);
       }
