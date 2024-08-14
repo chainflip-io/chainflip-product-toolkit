@@ -19,6 +19,10 @@ exports[`HttpClient > with server > gets broker account info 1`] = `
     "Polkadot": {
       "DOT": 19519248600n,
     },
+    "Solana": {
+      "SOL": 0n,
+      "USDC": 0n,
+    },
   },
   "flip_balance": 21031117317233135625n,
   "role": "broker",
@@ -44,6 +48,10 @@ exports[`HttpClient > with server > gets lp account info 1`] = `
     "Polkadot": {
       "DOT": 0n,
     },
+    "Solana": {
+      "SOL": 0n,
+      "USDC": 0n,
+    },
   },
   "earned_fees": {
     "Arbitrum": {
@@ -62,6 +70,10 @@ exports[`HttpClient > with server > gets lp account info 1`] = `
     "Polkadot": {
       "DOT": 0n,
     },
+    "Solana": {
+      "SOL": 0n,
+      "USDC": 0n,
+    },
   },
   "flip_balance": 4999847340286000000n,
   "refund_addresses": {
@@ -69,6 +81,7 @@ exports[`HttpClient > with server > gets lp account info 1`] = `
     "Bitcoin": "bc1qqt3juqef9azhd0zeuamu9c30pg5xdllvmks2ja",
     "Ethereum": "0xacd7c0481fc71dce9e3e8bd4cca5828ce8302629",
     "Polkadot": null,
+    "Solana": null,
   },
   "role": "liquidity_provider",
 }
@@ -131,6 +144,7 @@ exports[`HttpClient > with server > gets the environment 1`] = `
       "Bitcoin": 0n,
       "Ethereum": 0n,
       "Polkadot": 0n,
+      "Solana": 0n,
     },
     "egress_fees": {
       "Arbitrum": {
@@ -148,6 +162,10 @@ exports[`HttpClient > with server > gets the environment 1`] = `
       },
       "Polkadot": {
         "DOT": 197450000n,
+      },
+      "Solana": {
+        "SOL": null,
+        "USDC": null,
       },
     },
     "ingress_fees": {
@@ -167,12 +185,17 @@ exports[`HttpClient > with server > gets the environment 1`] = `
       "Polkadot": {
         "DOT": 197300000n,
       },
+      "Solana": {
+        "SOL": null,
+        "USDC": null,
+      },
     },
     "max_swap_retry_duration_blocks": {
       "Arbitrum": 1,
       "Bitcoin": 1,
       "Ethereum": 1,
       "Polkadot": 1,
+      "Solana": 0,
     },
     "minimum_deposit_amounts": {
       "Arbitrum": {
@@ -190,6 +213,10 @@ exports[`HttpClient > with server > gets the environment 1`] = `
       },
       "Polkadot": {
         "DOT": 0n,
+      },
+      "Solana": {
+        "SOL": 0n,
+        "USDC": 0n,
       },
     },
     "minimum_egress_amounts": {
@@ -209,12 +236,17 @@ exports[`HttpClient > with server > gets the environment 1`] = `
       "Polkadot": {
         "DOT": 1n,
       },
+      "Solana": {
+        "SOL": 0n,
+        "USDC": 0n,
+      },
     },
     "witness_safety_margins": {
       "Arbitrum": 1,
       "Bitcoin": 2,
       "Ethereum": 2,
       "Polkadot": null,
+      "Solana": null,
     },
   },
   "pools": {
@@ -395,6 +427,56 @@ exports[`HttpClient > with server > gets the environment 1`] = `
           },
         },
       },
+      "Solana": {
+        "SOL": {
+          "limit_order_fee_hundredth_pips": 20,
+          "limit_order_total_fees_earned": {
+            "base": 0n,
+            "quote": 0n,
+          },
+          "limit_total_swap_inputs": {
+            "base": 0n,
+            "quote": 0n,
+          },
+          "quote_asset": {
+            "asset": "USDC",
+            "chain": "Ethereum",
+          },
+          "range_order_fee_hundredth_pips": 20,
+          "range_order_total_fees_earned": {
+            "base": 180n,
+            "quote": 19996n,
+          },
+          "range_total_swap_inputs": {
+            "base": 8996618n,
+            "quote": 999734320n,
+          },
+        },
+        "USDC": {
+          "limit_order_fee_hundredth_pips": 0,
+          "limit_order_total_fees_earned": {
+            "base": 0n,
+            "quote": 0n,
+          },
+          "limit_total_swap_inputs": {
+            "base": 0n,
+            "quote": 0n,
+          },
+          "quote_asset": {
+            "asset": "USDC",
+            "chain": "Ethereum",
+          },
+          "range_order_fee_hundredth_pips": 0,
+          "range_order_total_fees_earned": {
+            "base": 0n,
+            "quote": 0n,
+          },
+          "range_total_swap_inputs": {
+            "base": 0n,
+            "quote": 0n,
+          },
+        },
+      },
     },
   },
   "swapping": {
@@ -415,6 +497,10 @@ exports[`HttpClient > with server > gets the environment 1`] = `
       "Polkadot": {
         "DOT": null,
       },
+      "Solana": {
+        "SOL": null,
+        "USDC": null,
+      },
     },
     "network_fee_hundredth_pips": 1000,
   },
@@ -428,6 +514,7 @@ exports[`HttpClient > with server > gets the ingress/egress environment 1`] = `
     "Bitcoin": 0n,
     "Ethereum": 0n,
     "Polkadot": 0n,
+    "Solana": 0n,
   },
   "egress_fees": {
     "Arbitrum": {
@@ -445,6 +532,10 @@ exports[`HttpClient > with server > gets the ingress/egress environment 1`] = `
     },
     "Polkadot": {
       "DOT": 197450000n,
+    },
+    "Solana": {
+      "SOL": null,
+      "USDC": null,
     },
   },
   "ingress_fees": {
@@ -464,12 +555,17 @@ exports[`HttpClient > with server > gets the ingress/egress environment 1`] = `
     "Polkadot": {
       "DOT": 197300000n,
     },
+    "Solana": {
+      "SOL": null,
+      "USDC": null,
+    },
   },
   "max_swap_retry_duration_blocks": {
     "Arbitrum": 1,
     "Bitcoin": 1,
     "Ethereum": 1,
     "Polkadot": 1,
+    "Solana": 0,
   },
   "minimum_deposit_amounts": {
     "Arbitrum": {
@@ -487,6 +583,10 @@ exports[`HttpClient > with server > gets the ingress/egress environment 1`] = `
     },
     "Polkadot": {
       "DOT": 0n,
+    },
+    "Solana": {
+      "SOL": 0n,
+      "USDC": 0n,
     },
   },
   "minimum_egress_amounts": {
@@ -506,12 +606,17 @@ exports[`HttpClient > with server > gets the ingress/egress environment 1`] = `
     "Polkadot": {
       "DOT": 1n,
     },
+    "Solana": {
+      "SOL": 0n,
+      "USDC": 0n,
+    },
   },
   "witness_safety_margins": {
     "Arbitrum": 1,
     "Bitcoin": 2,
     "Ethereum": 2,
     "Polkadot": null,
+    "Solana": null,
   },
 }
 `;

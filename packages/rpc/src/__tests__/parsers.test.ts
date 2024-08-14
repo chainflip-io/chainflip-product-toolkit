@@ -407,9 +407,6 @@ describe('parsers', () => {
                 },
               },
             },
-            Solana: {
-              SOL: null,
-            },
           },
         },
       });

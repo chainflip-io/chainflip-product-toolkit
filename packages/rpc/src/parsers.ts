@@ -15,10 +15,10 @@ const chainAssetMapFactory = <Z extends z.ZodTypeAny>(parser: Z, defaultValue: z
     Bitcoin: z.object({ BTC: parser }),
     Ethereum: z.object({ ETH: parser, USDC: parser, FLIP: parser, USDT: parser }),
     Polkadot: z.object({ DOT: parser }),
-    Arbitrum: z
-      .object({ ETH: parser.default(defaultValue), USDC: parser.default(defaultValue) })
-      .default({ ETH: defaultValue, USDC: defaultValue }),
-    // Solana: z.object({ SOL: parser.default(defaultValue) }),
+    Arbitrum: z.object({ ETH: parser, USDC: parser }),
+    Solana: z
+      .object({ SOL: parser.default(defaultValue), USDC: parser.default(defaultValue) })
+      .default({ SOL: defaultValue, USDC: defaultValue }),
   });
 
 const chainBaseAssetMapFactory = <Z extends z.ZodTypeAny>(parser: Z, defaultValue: z.input<Z>) =>
@@ -26,10 +26,10 @@ const chainBaseAssetMapFactory = <Z extends z.ZodTypeAny>(parser: Z, defaultValu
     Bitcoin: z.object({ BTC: parser }),
     Ethereum: z.object({ ETH: parser, FLIP: parser, USDT: parser }),
     Polkadot: z.object({ DOT: parser }),
-    Arbitrum: z
-      .object({ ETH: parser.default(defaultValue), USDC: parser.default(defaultValue) })
-      .default({ ETH: defaultValue, USDC: defaultValue }),
-    // Solana: z.object({ SOL: parser.default(defaultValue) }),
+    Arbitrum: z.object({ ETH: parser, USDC: parser }),
+    Solana: z
+      .object({ SOL: parser.default(defaultValue), USDC: parser.default(defaultValue) })
+      .default({ SOL: defaultValue, USDC: defaultValue }),
   });
 
 const chainMapFactory = <Z extends z.ZodTypeAny>(parser: Z, defaultValue: z.input<Z>) =>
@@ -37,8 +37,8 @@ const chainMapFactory = <Z extends z.ZodTypeAny>(parser: Z, defaultValue: z.inpu
     Bitcoin: parser,
     Ethereum: parser,
     Polkadot: parser,
-    Arbitrum: parser.default(defaultValue),
-    // Solana: parser.default(defaultValue),
+    Arbitrum: parser,
+    Solana: parser.default(defaultValue),
   });
 
 const rpcAssetSchema = z.union([
@@ -50,6 +50,8 @@ const rpcAssetSchema = z.union([
   z.object({ chain: z.literal('Ethereum'), asset: z.literal('USDT') }),
   z.object({ chain: z.literal('Arbitrum'), asset: z.literal('ETH') }),
   z.object({ chain: z.literal('Arbitrum'), asset: z.literal('USDC') }),
+  z.object({ chain: z.literal('Solana'), asset: z.literal('SOL') }),
+  z.object({ chain: z.literal('Solana'), asset: z.literal('USDC') }),
 ]);
 
 export type AssetAndChain = z.output<typeof rpcAssetSchema>;
