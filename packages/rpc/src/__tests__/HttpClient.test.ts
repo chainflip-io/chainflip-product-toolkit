@@ -399,6 +399,7 @@ const liquidityProviderAccount: z.input<typeof liquidityProvider> = {
     Ethereum: '0xacd7c0481fc71dce9e3e8bd4cca5828ce8302629',
     Polkadot: null,
     Bitcoin: 'bc1qqt3juqef9azhd0zeuamu9c30pg5xdllvmks2ja',
+    Arbitrum: null,
     // Solana: '7zLEfU3nQKqnfrN2A5yNEiFd1Vt9D7maVaoSAV8invMT',
   },
   flip_balance: '0x456306aa68edbb80',
@@ -726,6 +727,10 @@ describe(HttpClient, () => {
             },
             "Polkadot": {
               "DOT": null,
+            },
+            "Solana": {
+              "SOL": null,
+              "USDC": null,
             },
           },
           "network_fee_hundredth_pips": 1000,
