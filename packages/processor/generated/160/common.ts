@@ -125,9 +125,9 @@ export const accountId = z
 
 export const cfPrimitivesBeneficiary = z.object({ account: accountId, bps: z.number() });
 
-export const cfChainsChannelRefundParameters = z.object({
+export const cfChainsChannelRefundParametersEncodedAddress = z.object({
   retryDuration: z.number(),
-  refundAddress: cfChainsAddressForeignChainAddress,
+  refundAddress: cfChainsAddressEncodedAddress,
   minPrice: numberOrHex,
 });
 
