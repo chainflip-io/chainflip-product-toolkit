@@ -1,0 +1,45 @@
+{
+  "name": "@chainflip/solana",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "prepublish": "pnpm build && pnpm test run",
+    "clean": "rm -rf dist",
+    "build": "pnpm clean && pnpm tsup",
+    "test": "vitest"
+  },
+  "dependencies": {
+    "@solana/web3.js": "^1.95.2"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "exports": {
+    "./*": {
+      "require": {
+        "types": "./dist/*.d.cts",
+        "default": "./dist/*.cjs"
+      },
+      "import": {
+        "types": "./dist/*.d.ts",
+        "default": "./dist/*.mjs"
+      }
+    },
+    ".": {
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      },
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.mjs"
+      }
+    }
+  },
+  "repository": "https://github.com/chainflip-io/chainflip-product-toolkit.git",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  }
+}
