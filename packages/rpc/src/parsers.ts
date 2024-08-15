@@ -10,35 +10,38 @@ export const u256 = hexString.transform((value) => BigInt(value));
 
 export const numberOrHex = z.union([z.number().transform((n) => BigInt(n)), u256]);
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const chainAssetMapFactory = <Z extends z.ZodTypeAny>(parser: Z, defaultValue: z.input<Z>) =>
   z.object({
     Bitcoin: z.object({ BTC: parser }),
     Ethereum: z.object({ ETH: parser, USDC: parser, FLIP: parser, USDT: parser }),
     Polkadot: z.object({ DOT: parser }),
     Arbitrum: z.object({ ETH: parser, USDC: parser }),
-    Solana: z
-      .object({ SOL: parser.default(defaultValue), USDC: parser.default(defaultValue) })
-      .default({ SOL: defaultValue, USDC: defaultValue }),
+    // Solana: z
+    //   .object({ SOL: parser.default(defaultValue), USDC: parser.default(defaultValue) })
+    //   .default({ SOL: defaultValue, USDC: defaultValue }),
   });
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const chainBaseAssetMapFactory = <Z extends z.ZodTypeAny>(parser: Z, defaultValue: z.input<Z>) =>
   z.object({
     Bitcoin: z.object({ BTC: parser }),
     Ethereum: z.object({ ETH: parser, FLIP: parser, USDT: parser }),
     Polkadot: z.object({ DOT: parser }),
     Arbitrum: z.object({ ETH: parser, USDC: parser }),
-    Solana: z
-      .object({ SOL: parser.default(defaultValue), USDC: parser.default(defaultValue) })
-      .default({ SOL: defaultValue, USDC: defaultValue }),
+    // Solana: z
+    //   .object({ SOL: parser.default(defaultValue), USDC: parser.default(defaultValue) })
+    //   .default({ SOL: defaultValue, USDC: defaultValue }),
   });
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const chainMapFactory = <Z extends z.ZodTypeAny>(parser: Z, defaultValue: z.input<Z>) =>
   z.object({
     Bitcoin: parser,
     Ethereum: parser,
     Polkadot: parser,
     Arbitrum: parser,
-    Solana: parser.default(defaultValue),
+    // Solana: parser.default(defaultValue),
   });
 
 const rpcAssetSchema = z.union([
@@ -164,8 +167,8 @@ export const cfPoolsEnvironment = z.object({
         limit_total_swap_inputs: z.object({ base: u256, quote: u256 }),
         quote_asset: z.object({ chain: z.literal('Ethereum'), asset: z.literal('USDC') }),
       })
-      .nullable()
-      .transform((info) => info ?? structuredClone(defaultFeeInfo)),
+      .nullable(),
+    // .transform((info) => info ?? structuredClone(defaultFeeInfo)),
     structuredClone(defaultFeeInfo),
   ),
 });
