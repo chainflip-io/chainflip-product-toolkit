@@ -421,7 +421,7 @@ describe('parsers', () => {
 
   describe('cfPoolsEnvironment', () => {
     it('parses the cfPoolsEnvironment response', () => {
-      cfPoolsEnvironment.parse({
+      const result = cfPoolsEnvironment.parse({
         fees: {
           Ethereum: {
             ETH: {
@@ -605,6 +605,9 @@ describe('parsers', () => {
           },
         },
       });
+
+      expect(result.fees.Solana.SOL).not.toBeNull();
+      expect(result.fees.Solana.USDC).not.toBeNull();
     });
   });
 });
