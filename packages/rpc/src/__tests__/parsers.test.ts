@@ -1,5 +1,11 @@
 import { describe, expect, it } from 'vitest';
-import { cfBoostPoolDetails, cfBoostPoolPendingFees, cfEnvironment, numberOrHex } from '../parsers';
+import {
+  cfBoostPoolDetails,
+  cfBoostPoolPendingFees,
+  cfEnvironment,
+  numberOrHex,
+  cfPoolsEnvironment,
+} from '../parsers';
 
 describe('parsers', () => {
   describe('numberOrHex', () => {
@@ -407,6 +413,195 @@ describe('parsers', () => {
                 },
               },
             },
+          },
+        },
+      });
+    });
+  });
+
+  describe('cfPoolsEnvironment', () => {
+    it('parses the cfPoolsEnvironment response', () => {
+      cfPoolsEnvironment.parse({
+        fees: {
+          Ethereum: {
+            ETH: {
+              limit_order_fee_hundredth_pips: 20,
+              range_order_fee_hundredth_pips: 20,
+              range_order_total_fees_earned: {
+                base: '0x86f0428ea65',
+                quote: '0x996fb',
+              },
+              limit_order_total_fees_earned: {
+                base: '0xa8cfbac89ee8',
+                quote: '0x1275e',
+              },
+              range_total_swap_inputs: {
+                base: '0x66f2a6d7322ee91',
+                quote: '0x750e7a0f1',
+              },
+              limit_total_swap_inputs: {
+                base: '0x80ca536174e92eb0',
+                quote: '0xe13dd2e6',
+              },
+              quote_asset: {
+                chain: 'Ethereum',
+                asset: 'USDC',
+              },
+            },
+            FLIP: {
+              limit_order_fee_hundredth_pips: 20,
+              range_order_fee_hundredth_pips: 20,
+              range_order_total_fees_earned: {
+                base: '0xccb9a0f848e',
+                quote: '0x0',
+              },
+              limit_order_total_fees_earned: {
+                base: '0x4c52d7d621a2d',
+                quote: '0x468d7',
+              },
+              range_total_swap_inputs: {
+                base: '0x9c3092e5cc1a8e5',
+                quote: '0x0',
+              },
+              limit_total_swap_inputs: {
+                base: '0x3a3aa7f8b6b2b6b51',
+                quote: '0x35cf87380',
+              },
+              quote_asset: {
+                chain: 'Ethereum',
+                asset: 'USDC',
+              },
+            },
+            USDC: null,
+            USDT: {
+              limit_order_fee_hundredth_pips: 5,
+              range_order_fee_hundredth_pips: 5,
+              range_order_total_fees_earned: {
+                base: '0x18ac',
+                quote: '0x42c17',
+              },
+              limit_order_total_fees_earned: {
+                base: '0x19d',
+                quote: '0xfb',
+              },
+              range_total_swap_inputs: {
+                base: '0x4b195890',
+                quote: '0xcbb6eea1b',
+              },
+              limit_total_swap_inputs: {
+                base: '0x4e400a2',
+                quote: '0x2fadcfb',
+              },
+              quote_asset: {
+                chain: 'Ethereum',
+                asset: 'USDC',
+              },
+            },
+          },
+          Polkadot: {
+            DOT: {
+              limit_order_fee_hundredth_pips: 20,
+              range_order_fee_hundredth_pips: 20,
+              range_order_total_fees_earned: {
+                base: '0x6ff3',
+                quote: '0x0',
+              },
+              limit_order_total_fees_earned: {
+                base: '0x3fb505a',
+                quote: '0xeb53',
+              },
+              range_total_swap_inputs: {
+                base: '0x5568199c',
+                quote: '0x0',
+              },
+              limit_total_swap_inputs: {
+                base: '0x309a8bce81d',
+                quote: '0xb383d1fa',
+              },
+              quote_asset: {
+                chain: 'Ethereum',
+                asset: 'USDC',
+              },
+            },
+          },
+          Bitcoin: {
+            BTC: {
+              limit_order_fee_hundredth_pips: 20,
+              range_order_fee_hundredth_pips: 20,
+              range_order_total_fees_earned: {
+                base: '0x70',
+                quote: '0x91aa0',
+              },
+              limit_order_total_fees_earned: {
+                base: '0xab',
+                quote: '0x49a9a',
+              },
+              range_total_swap_inputs: {
+                base: '0x5356ca',
+                quote: '0x6f212e4ff',
+              },
+              limit_total_swap_inputs: {
+                base: '0x7fb017',
+                quote: '0x3832ba417',
+              },
+              quote_asset: {
+                chain: 'Ethereum',
+                asset: 'USDC',
+              },
+            },
+          },
+          Arbitrum: {
+            ETH: {
+              limit_order_fee_hundredth_pips: 20,
+              range_order_fee_hundredth_pips: 20,
+              range_order_total_fees_earned: {
+                base: '0xf3288bb9446',
+                quote: '0x5ef8b',
+              },
+              limit_order_total_fees_earned: {
+                base: '0x0',
+                quote: '0x0',
+              },
+              range_total_swap_inputs: {
+                base: '0xb982ebf13d4139a',
+                quote: '0x487437e83',
+              },
+              limit_total_swap_inputs: {
+                base: '0x0',
+                quote: '0x0',
+              },
+              quote_asset: {
+                chain: 'Ethereum',
+                asset: 'USDC',
+              },
+            },
+            USDC: {
+              limit_order_fee_hundredth_pips: 20,
+              range_order_fee_hundredth_pips: 20,
+              range_order_total_fees_earned: {
+                base: '0x18da0',
+                quote: '0xe9203',
+              },
+              limit_order_total_fees_earned: {
+                base: '0x0',
+                quote: '0x0',
+              },
+              range_total_swap_inputs: {
+                base: '0x12f561efa',
+                quote: '0xb1db4cae8',
+              },
+              limit_total_swap_inputs: {
+                base: '0x0',
+                quote: '0x0',
+              },
+              quote_asset: {
+                chain: 'Ethereum',
+                asset: 'USDC',
+              },
+            },
+          },
+          Solana: {
+            SOL: null,
           },
         },
       });
