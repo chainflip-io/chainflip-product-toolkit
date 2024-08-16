@@ -125,10 +125,15 @@ export const accountId = z
 
 export const cfPrimitivesBeneficiary = z.object({ account: accountId, bps: z.number() });
 
-export const cfChainsChannelRefundParametersEncodedAddress = z.object({
+export const cfChainsChannelRefundParametersGenericEncodedAddress = z.object({
   retryDuration: z.number(),
   refundAddress: cfChainsAddressEncodedAddress,
   minPrice: numberOrHex,
+});
+
+export const cfPrimitivesDcaParameters = z.object({
+  numberOfChunks: z.number(),
+  chunkInterval: z.number(),
 });
 
 export const cfTraitsSwappingSwapType = simpleEnum([

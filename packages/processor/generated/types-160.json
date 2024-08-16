@@ -8626,7 +8626,7 @@
           "type": "option",
           "value": {
             "type": "struct",
-            "name": "CfChainsChannelRefundParametersEncodedAddress",
+            "name": "CfChainsChannelRefundParametersGenericEncodedAddress",
             "fields": {
               "retryDuration": {
                 "type": "primitive",
@@ -8692,6 +8692,23 @@
               "minPrice": {
                 "type": "primitive",
                 "name": "U256"
+              }
+            }
+          }
+        },
+        "dcaParameters": {
+          "type": "option",
+          "value": {
+            "type": "struct",
+            "name": "CfPrimitivesDcaParameters",
+            "fields": {
+              "numberOfChunks": {
+                "type": "primitive",
+                "name": "u32"
+              },
+              "chunkInterval": {
+                "type": "primitive",
+                "name": "u32"
               }
             }
           }
@@ -9122,7 +9139,7 @@
           "type": "primitive",
           "name": "u128"
         },
-        "fee": {
+        "egressFee": {
           "type": "primitive",
           "name": "u128"
         }
