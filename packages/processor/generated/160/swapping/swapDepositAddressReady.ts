@@ -2,9 +2,10 @@ import { z } from 'zod';
 import {
   cfChainsAddressEncodedAddress,
   cfChainsCcmChannelMetadata,
-  cfChainsChannelRefundParametersEncodedAddress,
+  cfChainsChannelRefundParametersGenericEncodedAddress,
   cfPrimitivesBeneficiary,
   cfPrimitivesChainsAssetsAnyAsset,
+  cfPrimitivesDcaParameters,
   numberOrHex,
 } from '../common';
 
@@ -20,5 +21,6 @@ export const swappingSwapDepositAddressReady = z.object({
   boostFee: z.number(),
   channelOpeningFee: numberOrHex,
   affiliateFees: z.array(cfPrimitivesBeneficiary),
-  refundParameters: cfChainsChannelRefundParametersEncodedAddress.nullish(),
+  refundParameters: cfChainsChannelRefundParametersGenericEncodedAddress.nullish(),
+  dcaParameters: cfPrimitivesDcaParameters.nullish(),
 });

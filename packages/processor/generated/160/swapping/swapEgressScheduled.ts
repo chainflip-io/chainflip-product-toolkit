@@ -10,5 +10,5 @@ export const swappingSwapEgressScheduled = z.object({
   egressId: z.tuple([cfPrimitivesChainsForeignChain, numberOrHex]),
   asset: cfPrimitivesChainsAssetsAnyAsset,
   amount: numberOrHex,
-  fee: numberOrHex,
+  egressFee: numberOrHex,
 });
