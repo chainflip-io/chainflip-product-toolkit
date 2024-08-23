@@ -75,9 +75,12 @@ class ChangelogGenerator {
 
     const pallets = Object.keys(this.addedOrRemovedPallets).sort();
 
-    if (pallets.length) lines.push('New or removed pallets:');
-    for (const pallet of pallets) {
-      lines.push(`  ${pallet}: ${this.addedOrRemovedPallets[pallet]}`);
+    if (pallets.length) {
+      lines.push('New or removed pallets:');
+      for (const pallet of pallets) {
+        lines.push(`  ${pallet}: ${this.addedOrRemovedPallets[pallet]}`);
+      }
+      lines.push('');
     }
 
     const events = Object.keys(this.addedOrRemovedEvents)

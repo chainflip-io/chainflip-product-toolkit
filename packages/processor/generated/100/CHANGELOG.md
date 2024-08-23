@@ -31,3 +31,4 @@ New or removed pallets:
   TransactionPayment: added
   Validator: added
   Witnesser: added
+

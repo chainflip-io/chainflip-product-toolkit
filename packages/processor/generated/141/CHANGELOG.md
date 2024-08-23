@@ -5,6 +5,7 @@ New or removed pallets:
   ArbitrumVault: added
   EthereumThresholdSigner: removed
   EvmThresholdSigner: added
+
 AccountRoles:
   - AccountRoleDeregistered: added
   - VanityNameSet: added

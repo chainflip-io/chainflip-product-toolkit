@@ -1,6 +1,7 @@
 New or removed pallets:
   SolanaChainTracking: removed
   SolanaElections: added
+
 ArbitrumIngressEgress:
   - CcmEgressInvalid:
     - error: changed

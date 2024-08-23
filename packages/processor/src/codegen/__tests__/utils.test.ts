@@ -105,6 +105,7 @@ describe(diffSpecs, () => {
     expect(changelog).toMatchInlineSnapshot(`
       "New or removed pallets:
         pallet2: added
+
       "
     `);
   });

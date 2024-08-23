@@ -5,6 +5,7 @@ New or removed pallets:
   SolanaIngressEgress: added
   SolanaThresholdSigner: added
   SolanaVault: added
+
 ArbitrumIngressEgress:
   - BatchBroadcastRequested:
     - egressIds: added
