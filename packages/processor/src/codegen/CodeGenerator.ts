@@ -65,6 +65,10 @@ class Module {
     private readonly pallet?: string,
   ) {}
 
+  isCommon() {
+    return this.name === 'common';
+  }
+
   toString() {
     const generated: string[] = [];
 
@@ -105,7 +109,7 @@ class Module {
     return formatCode(this.toString());
   }
 
-  async writeFile(specDir: string) {
+  async writeFile(specDir: string, changelog?: string) {
     const outDir = this.pallet ? path.join(specDir, uncapitalize(this.pallet)) : specDir;
     await fs.mkdir(outDir, { recursive: true });
     await fs.writeFile(
@@ -113,6 +117,7 @@ class Module {
       await this.toFormattedString(),
       'utf8',
     );
+    if (changelog) await fs.writeFile(path.join(outDir, 'CHANGELOG.md'), changelog, 'utf8');
   }
 }
 

@@ -21,10 +21,10 @@ const generateAllCode = async () => {
   for (const { metadata, specVersion } of metadataForHashes) {
     const specDir = path.join(generatedDir, `${specVersion}`);
     await fs.rm(specDir, { recursive: true, force: true });
-    const eventsChanged = diffSpecs(previousMetadata, metadata);
-    const generator = new CodeGenerator({ trackedEvents: eventsChanged });
+    const { changedOrAddedEvents, changelog } = diffSpecs(previousMetadata, metadata);
+    const generator = new CodeGenerator({ trackedEvents: changedOrAddedEvents });
     for (const module of generator.generate(metadata)) {
-      await module.writeFile(specDir);
+      await module.writeFile(specDir, module.isCommon() ? changelog : undefined);
     }
     previousMetadata = metadata;
   }
