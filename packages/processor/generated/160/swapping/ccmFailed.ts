@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import {
   cfChainsAddressEncodedAddress,
-  cfChainsCcmDepositMetadata,
+  cfChainsCcmDepositMetadataGenericEncodedAddress,
   cfChainsSwapOrigin,
   palletCfSwappingCcmFailReason,
 } from '../common';
@@ -9,6 +9,6 @@ import {
 export const swappingCcmFailed = z.object({
   reason: palletCfSwappingCcmFailReason,
   destinationAddress: cfChainsAddressEncodedAddress,
-  depositMetadata: cfChainsCcmDepositMetadata,
+  depositMetadata: cfChainsCcmDepositMetadataGenericEncodedAddress,
   origin: cfChainsSwapOrigin,
 });

@@ -8,6 +8,7 @@ export const swappingSwapExecuted = z.object({
   outputAsset: cfPrimitivesChainsAssetsAnyAsset,
   inputAmount: numberOrHex,
   networkFee: numberOrHex,
+  brokerFee: numberOrHex,
   intermediateAmount: numberOrHex.nullish(),
   outputAmount: numberOrHex,
 });

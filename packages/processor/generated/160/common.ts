@@ -3,6 +3,115 @@ import * as ss58 from '@chainflip/utils/ss58';
 import * as base58 from '@chainflip/utils/base58';
 import { hexToBytes } from '@chainflip/utils/bytes';
 
+export const palletCfEmissionsPalletSafeMode = z.object({ emissionsSyncEnabled: z.boolean() });
+
+export const palletCfFundingPalletSafeMode = z.object({ redeemEnabled: z.boolean() });
+
+export const palletCfSwappingPalletSafeMode = z.object({
+  swapsEnabled: z.boolean(),
+  withdrawalsEnabled: z.boolean(),
+  brokerRegistrationEnabled: z.boolean(),
+});
+
+export const palletCfLpPalletSafeMode = z.object({
+  depositEnabled: z.boolean(),
+  withdrawalEnabled: z.boolean(),
+});
+
+export const palletCfValidatorPalletSafeMode = z.object({
+  authorityRotationEnabled: z.boolean(),
+  startBiddingEnabled: z.boolean(),
+  stopBiddingEnabled: z.boolean(),
+});
+
+export const palletCfPoolsPalletSafeMode = z.object({
+  rangeOrderUpdateEnabled: z.boolean(),
+  limitOrderUpdateEnabled: z.boolean(),
+});
+
+export const palletCfReputationPalletSafeMode = z.object({ reportingEnabled: z.boolean() });
+
+export const palletCfAssetBalancesPalletSafeMode = z.object({ reconciliationEnabled: z.boolean() });
+
+export const palletCfThresholdSignaturePalletSafeMode = z.object({ slashingEnabled: z.boolean() });
+
+export const palletCfBroadcastPalletSafeMode = z.object({ retryEnabled: z.boolean() });
+
+export const stateChainRuntimeSafeModeWitnesserCallPermission = z.object({
+  governance: z.boolean(),
+  funding: z.boolean(),
+  swapping: z.boolean(),
+  ethereumBroadcast: z.boolean(),
+  ethereumChainTracking: z.boolean(),
+  ethereumIngressEgress: z.boolean(),
+  ethereumVault: z.boolean(),
+  polkadotBroadcast: z.boolean(),
+  polkadotChainTracking: z.boolean(),
+  polkadotIngressEgress: z.boolean(),
+  polkadotVault: z.boolean(),
+  bitcoinBroadcast: z.boolean(),
+  bitcoinChainTracking: z.boolean(),
+  bitcoinIngressEgress: z.boolean(),
+  bitcoinVault: z.boolean(),
+  arbitrumBroadcast: z.boolean(),
+  arbitrumChainTracking: z.boolean(),
+  arbitrumIngressEgress: z.boolean(),
+  arbitrumVault: z.boolean(),
+  solanaBroadcast: z.boolean(),
+  solanaVault: z.boolean(),
+});
+
+export const palletCfWitnesserPalletSafeMode = z.union([
+  z.object({ __kind: z.literal('CodeGreen') }),
+  z.object({ __kind: z.literal('CodeRed') }),
+  z.object({
+    __kind: z.literal('CodeAmber'),
+    value: stateChainRuntimeSafeModeWitnesserCallPermission,
+  }),
+]);
+
+export const palletCfIngressEgressPalletSafeMode = z.object({
+  boostDepositsEnabled: z.boolean(),
+  addBoostFundsEnabled: z.boolean(),
+  stopBoostingEnabled: z.boolean(),
+  depositsEnabled: z.boolean(),
+});
+
+export const stateChainRuntimeSafeModeInnerRuntimeSafeMode = z.object({
+  emissions: palletCfEmissionsPalletSafeMode,
+  funding: palletCfFundingPalletSafeMode,
+  swapping: palletCfSwappingPalletSafeMode,
+  liquidityProvider: palletCfLpPalletSafeMode,
+  validator: palletCfValidatorPalletSafeMode,
+  pools: palletCfPoolsPalletSafeMode,
+  reputation: palletCfReputationPalletSafeMode,
+  assetBalances: palletCfAssetBalancesPalletSafeMode,
+  thresholdSignatureEvm: palletCfThresholdSignaturePalletSafeMode,
+  thresholdSignatureBitcoin: palletCfThresholdSignaturePalletSafeMode,
+  thresholdSignaturePolkadot: palletCfThresholdSignaturePalletSafeMode,
+  thresholdSignatureSolana: palletCfThresholdSignaturePalletSafeMode,
+  broadcastEthereum: palletCfBroadcastPalletSafeMode,
+  broadcastBitcoin: palletCfBroadcastPalletSafeMode,
+  broadcastPolkadot: palletCfBroadcastPalletSafeMode,
+  broadcastArbitrum: palletCfBroadcastPalletSafeMode,
+  broadcastSolana: palletCfBroadcastPalletSafeMode,
+  witnesser: palletCfWitnesserPalletSafeMode,
+  ingressEgressEthereum: palletCfIngressEgressPalletSafeMode,
+  ingressEgressBitcoin: palletCfIngressEgressPalletSafeMode,
+  ingressEgressPolkadot: palletCfIngressEgressPalletSafeMode,
+  ingressEgressArbitrum: palletCfIngressEgressPalletSafeMode,
+  ingressEgressSolana: palletCfIngressEgressPalletSafeMode,
+});
+
+export const palletCfEnvironmentSafeModeUpdate = z.union([
+  z.object({ __kind: z.literal('CodeRed') }),
+  z.object({ __kind: z.literal('CodeGreen') }),
+  z.object({
+    __kind: z.literal('CodeAmber'),
+    value: stateChainRuntimeSafeModeInnerRuntimeSafeMode,
+  }),
+]);
+
 export const hexString = z
   .string()
   .refine((v): v is `0x${string}` => /^0x[\da-f]*$/i.test(v), { message: 'Invalid hex string' });
@@ -73,32 +182,15 @@ export const cfPrimitivesChainsForeignChain = simpleEnum([
   'Solana',
 ]);
 
-export const cfChainsBtcScriptPubkey = z.union([
-  z.object({ __kind: z.literal('P2PKH'), value: hexString }),
-  z.object({ __kind: z.literal('P2SH'), value: hexString }),
-  z.object({ __kind: z.literal('P2WPKH'), value: hexString }),
-  z.object({ __kind: z.literal('P2WSH'), value: hexString }),
-  z.object({ __kind: z.literal('Taproot'), value: hexString }),
-  z.object({ __kind: z.literal('OtherSegwit'), version: z.number(), program: hexString }),
-]);
-
-export const cfChainsAddressForeignChainAddress = z.union([
-  z.object({ __kind: z.literal('Eth'), value: hexString }),
-  z.object({ __kind: z.literal('Dot'), value: hexString }),
-  z.object({ __kind: z.literal('Btc'), value: cfChainsBtcScriptPubkey }),
-  z.object({ __kind: z.literal('Arb'), value: hexString }),
-  z.object({ __kind: z.literal('Sol'), value: hexString }),
-]);
-
 export const cfChainsCcmChannelMetadata = z.object({
   message: hexString,
   gasBudget: numberOrHex,
   cfParameters: hexString,
 });
 
-export const cfChainsCcmDepositMetadata = z.object({
+export const cfChainsCcmDepositMetadataGenericEncodedAddress = z.object({
   sourceChain: cfPrimitivesChainsForeignChain,
-  sourceAddress: cfChainsAddressForeignChainAddress.nullish(),
+  sourceAddress: cfChainsAddressEncodedAddress.nullish(),
   channelMetadata: cfChainsCcmChannelMetadata,
 });
 
@@ -109,9 +201,20 @@ export const cfTraitsSwappingSwapRequestTypeGeneric = z.union([
   z.object({
     __kind: z.literal('Ccm'),
     outputAddress: cfChainsAddressEncodedAddress,
-    ccmDepositMetadata: cfChainsCcmDepositMetadata,
+    ccmDepositMetadata: cfChainsCcmDepositMetadataGenericEncodedAddress,
   }),
 ]);
+
+export const cfChainsChannelRefundParametersGenericEncodedAddress = z.object({
+  retryDuration: z.number(),
+  refundAddress: cfChainsAddressEncodedAddress,
+  minPrice: numberOrHex,
+});
+
+export const cfPrimitivesDcaParameters = z.object({
+  numberOfChunks: z.number(),
+  chunkInterval: z.number(),
+});
 
 export const accountId = z
   .union([
@@ -124,17 +227,6 @@ export const accountId = z
   .transform((value) => ss58.encode({ data: value, ss58Format: 2112 }));
 
 export const cfPrimitivesBeneficiary = z.object({ account: accountId, bps: z.number() });
-
-export const cfChainsChannelRefundParametersGenericEncodedAddress = z.object({
-  retryDuration: z.number(),
-  refundAddress: cfChainsAddressEncodedAddress,
-  minPrice: numberOrHex,
-});
-
-export const cfPrimitivesDcaParameters = z.object({
-  numberOfChunks: z.number(),
-  chunkInterval: z.number(),
-});
 
 export const cfTraitsSwappingSwapType = simpleEnum([
   'Swap',
@@ -235,6 +327,15 @@ export const cfChainsExecutexSwapAndCallError = z.union([
 
 export const cfPrimitivesChainsAssetsDotAsset = simpleEnum(['Dot']);
 
+export const cfChainsBtcScriptPubkey = z.union([
+  z.object({ __kind: z.literal('P2PKH'), value: hexString }),
+  z.object({ __kind: z.literal('P2SH'), value: hexString }),
+  z.object({ __kind: z.literal('P2WPKH'), value: hexString }),
+  z.object({ __kind: z.literal('P2WSH'), value: hexString }),
+  z.object({ __kind: z.literal('Taproot'), value: hexString }),
+  z.object({ __kind: z.literal('OtherSegwit'), version: z.number(), program: hexString }),
+]);
+
 export const cfPrimitivesChainsAssetsBtcAsset = simpleEnum(['Btc']);
 
 export const cfChainsBtcUtxoId = z.object({ txId: hexString, vout: z.number() });
@@ -260,14 +361,23 @@ export const palletCfPoolsIncreaseOrDecreaseU128 = z.union([
 
 export const palletCfPoolsAssetPair = z.object({ assets: cfAmmCommonPoolPairsMap });
 
+export const palletCfPoolsCloseOrder = z.union([
+  z.object({
+    __kind: z.literal('Limit'),
+    baseAsset: cfPrimitivesChainsAssetsAnyAsset,
+    quoteAsset: cfPrimitivesChainsAssetsAnyAsset,
+    side: cfAmmCommonSide,
+    id: numberOrHex,
+  }),
+  z.object({
+    __kind: z.literal('Range'),
+    baseAsset: cfPrimitivesChainsAssetsAnyAsset,
+    quoteAsset: cfPrimitivesChainsAssetsAnyAsset,
+    id: numberOrHex,
+  }),
+]);
+
 export const cfPrimitivesChainsAssetsArbAsset = simpleEnum(['ArbEth', 'ArbUsdc']);
-
-export const cfChainsSolSolTrackedData = z.object({ priorityFee: numberOrHex });
-
-export const cfChainsChainStateSolana = z.object({
-  blockHeight: numberOrHex,
-  trackedData: cfChainsSolSolTrackedData,
-});
 
 export const cfChainsSolSolTxCoreMessageHeader = z.object({
   numRequiredSignatures: z.number(),
