@@ -5,6 +5,7 @@ export default defineConfig({
   splitting: true,
   minify: false,
   dts: true,
+  bundle: true,
   format: ['cjs', 'esm'],
   entry: ['./src/*.ts'],
   noExternal: ['@noble/curves/*'],
