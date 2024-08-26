@@ -1,6 +1,6 @@
 {
   "name": "@chainflip/solana",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "type": "module",
   "scripts": {
     "prepublish": "pnpm build && pnpm test run",
@@ -9,7 +9,8 @@
     "test": "vitest"
   },
   "dependencies": {
-    "@solana/web3.js": "^1.95.2"
+    "@chainflip/utils": "^0.3.0",
+    "@noble/curves": "^1.5.0"
   },
   "files": [
     "dist",

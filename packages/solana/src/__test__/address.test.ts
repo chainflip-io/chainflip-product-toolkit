@@ -3,9 +3,10 @@ import { isValidSolanaAddress } from '../address';
 
 describe('address', () => {
   it.each([
+    ['', false],
+    ['123', false],
     ['Program Name', false],
     ['fakeaddress', false],
-    ['', false],
     // block hash
     ['38JiGVG26UdYHVFkScWRoBvRTCcEuZ2JWwCjfTa6NKak', false],
     ['J65zrLRq2YvGp8d9TzddkpvYRbCiNeRUJDksbWmRQeBt', false],
