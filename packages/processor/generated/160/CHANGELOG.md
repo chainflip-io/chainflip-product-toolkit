@@ -1,5 +1,4 @@
 New or removed pallets:
-  SolanaChainTracking: removed
   SolanaElections: added
 
 ArbitrumIngressEgress:
@@ -86,6 +85,10 @@ SolanaBroadcaster:
     - transactionPayload: added
   - TransactionFeeDeficitRecorded:
     - amount: changed
+
+SolanaChainTracking:
+  - ChainStateUpdated:
+    - newChainState: changed
 
 SolanaIngressEgress:
   - AssetEgressStatusChanged:
