@@ -24414,6 +24414,42 @@
       "name": "null"
     }
   },
+  "SolanaChainTracking": {
+    "ChainStateUpdated": {
+      "type": "struct",
+      "fields": {
+        "newChainState": {
+          "type": "struct",
+          "name": "CfChainsChainStateSolana",
+          "fields": {
+            "blockHeight": {
+              "type": "primitive",
+              "name": "u64"
+            },
+            "trackedData": {
+              "type": "struct",
+              "name": "CfChainsSolSolTrackedData",
+              "fields": {
+                "priorityFee": {
+                  "type": "primitive",
+                  "name": "u64"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "FeeMultiplierUpdated": {
+      "type": "struct",
+      "fields": {
+        "newFeeMultiplier": {
+          "type": "primitive",
+          "name": "u128"
+        }
+      }
+    }
+  },
   "AssetBalances": {
     "RefundScheduled": {
       "type": "struct",

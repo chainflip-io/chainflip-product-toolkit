@@ -420,3 +420,10 @@ export const palletCfIngressEgressBoostPoolIdSolana = z.object({
   asset: cfPrimitivesChainsAssetsSolAsset,
   tier: z.number(),
 });
+
+export const cfChainsSolSolTrackedData = z.object({ priorityFee: numberOrHex });
+
+export const cfChainsChainStateSolana = z.object({
+  blockHeight: numberOrHex,
+  trackedData: cfChainsSolSolTrackedData,
+});
