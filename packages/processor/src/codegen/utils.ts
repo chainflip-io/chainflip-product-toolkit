@@ -4,15 +4,15 @@ import * as path from 'path';
 import * as prettier from 'prettier';
 import { z } from 'zod';
 import { ParsedMetadata } from './Parser';
+import assert from 'assert';
+
+type ChangeType = 'added' | 'removed' | 'changed';
+type Change = { path: string[]; type: ChangeType };
 
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 // a function to deep diff two metadata objects
-function* diff(
-  a: any,
-  b: any,
-  path: string[] = [],
-): Generator<{ path: string[]; type: 'added' | 'removed' | 'changed' }> {
+function* diff(a: any, b: any, path: string[] = []): Generator<Change> {
   const addedKeys = Object.keys(b)
     .filter((key) => b[key] !== undefined)
     .filter((key) => !a[key]);
@@ -42,11 +42,84 @@ function* diff(
 /* eslint-enable @typescript-eslint/no-unsafe-member-access */
 /* eslint-enable @typescript-eslint/no-unsafe-argument */
 
+class ChangelogGenerator {
+  addedOrRemovedPallets: Record<string, 'added' | 'removed'> = {};
+
+  changedEvents: Record<
+    `${string}.${string}`,
+    { field: string; type: 'added' | 'changed' | 'removed' }[]
+  > = {};
+  addedOrRemovedEvents: Record<`${string}.${string}`, 'added' | 'removed'> = {};
+
+  trackedFieldChanges = new Set<string>();
+
+  add({ path, type }: Change) {
+    if (path.length === 1) {
+      assert(type === 'added' || type === 'removed');
+      this.addedOrRemovedPallets[path[0]] = type;
+    } else if (path.length === 2) {
+      const name = `${path[0]}.${path[1]}` as const;
+      assert(type === 'added' || type === 'removed');
+      this.addedOrRemovedEvents[name] = type;
+    } else {
+      const [pallet, event, , field] = path;
+      const id = `${pallet}.${event}.${field}`;
+      if (this.trackedFieldChanges.has(id)) return;
+      this.trackedFieldChanges.add(id);
+      (this.changedEvents[`${pallet}.${event}`] ??= []).push({ field, type });
+    }
+  }
+
+  toString() {
+    const lines: string[] = [];
+
+    const pallets = Object.keys(this.addedOrRemovedPallets).sort();
+
+    if (pallets.length) {
+      lines.push('New or removed pallets:');
+      for (const pallet of pallets) {
+        lines.push(`  ${pallet}: ${this.addedOrRemovedPallets[pallet]}`);
+      }
+      lines.push('');
+    }
+
+    const events = Object.keys(this.addedOrRemovedEvents)
+      .concat(Object.keys(this.changedEvents))
+      .sort() as `${string}.${string}`[];
+
+    let currentPallet = '';
+    for (const event of events) {
+      const [pallet, name] = event.split('.');
+      if (pallet !== currentPallet) {
+        if (currentPallet) lines.push('');
+        currentPallet = pallet;
+        lines.push(`${pallet}:`);
+      }
+      if (event in this.addedOrRemovedEvents) {
+        lines.push(`  - ${name}: ${this.addedOrRemovedEvents[event]}`);
+      } else {
+        lines.push(`  - ${name}:`);
+        const fields = this.changedEvents[event].map(
+          ({ field, type }) => `    - ${field}: ${type}`,
+        );
+        lines.push(...fields);
+      }
+    }
+
+    lines.push('');
+    return lines.join('\n');
+  }
+}
+
 export const diffSpecs = (a: ParsedMetadata, b: ParsedMetadata) => {
   const changedOrAddedEvents = new Set<string>();
+  const changelog = new ChangelogGenerator();
 
   for (const change of diff(a, b)) {
+    changelog.add(change);
+
     const [pallet, event, field] = change.path;
+
     if (event && (field || change.type === 'added')) {
       // if a field changed or a new event was added
       changedOrAddedEvents.add(`${pallet}.${event}`);
@@ -58,7 +131,7 @@ export const diffSpecs = (a: ParsedMetadata, b: ParsedMetadata) => {
     }
   }
 
-  return changedOrAddedEvents;
+  return { changedOrAddedEvents, changelog: changelog.toString() };
 };
 
 export const formatCode = (code: string) =>

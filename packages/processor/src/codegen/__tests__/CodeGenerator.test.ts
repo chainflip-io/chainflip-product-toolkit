@@ -298,7 +298,10 @@ describe(CodeGenerator, () => {
     ];
 
     for (const module of modules) {
-      await module.writeFile('topLevelDir');
+      await module.writeFile(
+        'topLevelDir',
+        module.isCommon() ? 'hello world, this is a changelog' : undefined,
+      );
     }
 
     expect(spy.mock.calls).toMatchInlineSnapshot(`
@@ -318,6 +321,11 @@ describe(CodeGenerator, () => {
 
       export const reusedStruct = z.object({ field: z.number() });
       ",
+          "utf8",
+        ],
+        [
+          "topLevelDir/CHANGELOG.md",
+          "hello world, this is a changelog",
           "utf8",
         ],
       ]
