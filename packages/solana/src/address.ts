@@ -1,10 +1,12 @@
-import { PublicKey } from '@solana/web3.js';
+import { ed25519 } from '@noble/curves/ed25519';
+import * as base58 from '@chainflip/utils/base58';
 
 export const isValidSolanaAddress = (address: string) => {
   try {
-    const key = new PublicKey(address);
-    return PublicKey.isOnCurve(key.toBytes());
-  } catch (error) {
+    const rawBytes = base58.decode(address);
+    ed25519.ExtendedPoint.fromHex(rawBytes);
+    return true;
+  } catch (e) {
     return false;
   }
 };
