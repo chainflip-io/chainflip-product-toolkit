@@ -48,7 +48,7 @@
     "network": "perseverance"
   },
   "160": {
-    "hash": "0x54eb9d977cd3752173a8f3ad02f9d8e9b7409b7bddf373df9fdf6e53e98b2d42",
-    "network": "localnet"
+    "hash": "0xacef276429cf5a01633b5bd5d478118ea410040ec3700d99909d6c979f7c9d12",
+    "network": "sisyphos"
   }
 }
