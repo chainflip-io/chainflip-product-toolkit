@@ -53,6 +53,36 @@ exports[`HttpClient > with server > gets lp account info 1`] = `
       "USDC": 0n,
     },
   },
+  "boost_balances": {
+    "Arbitrum": {
+      "ETH": [],
+      "USDC": [],
+    },
+    "Bitcoin": {
+      "BTC": [
+        {
+          "available_balance": 8933778n,
+          "fee_tier": 5,
+          "in_use_balance": 0n,
+          "is_withdrawing": false,
+          "total_balance": 8933778n,
+        },
+      ],
+    },
+    "Ethereum": {
+      "ETH": [],
+      "FLIP": [],
+      "USDC": [],
+      "USDT": [],
+    },
+    "Polkadot": {
+      "DOT": [],
+    },
+    "Solana": {
+      "SOL": [],
+      "USDC": [],
+    },
+  },
   "earned_fees": {
     "Arbitrum": {
       "ETH": 0n,
