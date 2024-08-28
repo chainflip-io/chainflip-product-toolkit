@@ -410,6 +410,35 @@ const liquidityProviderAccount: z.input<typeof liquidityProvider> = {
     Arbitrum: { ETH: 0, USDC: 0 },
     // Solana: { SOL: 0 },
   },
+  boost_balances: {
+    Ethereum: {
+      ETH: [],
+      FLIP: [],
+      USDC: [],
+      USDT: [],
+    },
+    Polkadot: {
+      DOT: [],
+    },
+    Bitcoin: {
+      BTC: [
+        {
+          fee_tier: 5,
+          total_balance: '0x885192',
+          available_balance: '0x885192',
+          in_use_balance: '0x0',
+          is_withdrawing: false,
+        },
+      ],
+    },
+    Arbitrum: {
+      ETH: [],
+      USDC: [],
+    },
+    // Solana: {
+    //   SOL: [],
+    // },
+  },
 };
 
 const brokerAccount: z.input<typeof broker> = {

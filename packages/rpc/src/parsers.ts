@@ -209,12 +209,23 @@ export const broker = z.object({
   earned_fees: chainAssetMapFactory(numberOrHex, 0),
 });
 
+const boostBalances = z.array(
+  z.object({
+    fee_tier: z.number(),
+    total_balance: u256,
+    available_balance: u256,
+    in_use_balance: u256,
+    is_withdrawing: z.boolean(),
+  }),
+);
+
 export const liquidityProvider = z.object({
   role: z.literal('liquidity_provider'),
   balances: chainAssetMapFactory(numberOrHex, '0x0'),
   refund_addresses: chainMapFactory(z.string().nullable(), null),
   flip_balance: numberOrHex,
   earned_fees: chainAssetMapFactory(numberOrHex, 0),
+  boost_balances: chainAssetMapFactory(boostBalances, []),
 });
 
 export const validator = z.object({
