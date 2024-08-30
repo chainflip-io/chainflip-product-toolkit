@@ -8,7 +8,6 @@ export default defineConfig({
   bundle: true,
   format: ['cjs', 'esm'],
   entry: ['./src/*.ts'],
-  noExternal: ['@noble/curves/*'],
   target: 'es2022',
   outExtension: ({ format }) => ({
     js: format === 'esm' ? '.mjs' : '.cjs',

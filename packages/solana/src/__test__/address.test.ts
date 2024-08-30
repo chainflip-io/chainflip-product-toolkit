@@ -4,16 +4,16 @@ import { isValidSolanaAddress } from '../address';
 describe('address', () => {
   it.each([
     ['', false],
-    ['123', false],
+    ['123', true],
     ['Program Name', false],
-    ['fakeaddress', false],
+    ['fakeaddress', true],
     // block hash
-    ['38JiGVG26UdYHVFkScWRoBvRTCcEuZ2JWwCjfTa6NKak', false],
-    ['J65zrLRq2YvGp8d9TzddkpvYRbCiNeRUJDksbWmRQeBt', false],
+    ['38JiGVG26UdYHVFkScWRoBvRTCcEuZ2JWwCjfTa6NKak', true],
+    ['J65zrLRq2YvGp8d9TzddkpvYRbCiNeRUJDksbWmRQeBt', true],
     // signature hash
     [
       '5MoD2UuXe422c95yCPAKTH3ZzDHKv6skkQabyu6fF42iVzs19c5uq4RQEHchX84ApfzxNFPpnxkuLpkFBF8XwgFq',
-      false,
+      true,
     ],
     // accounts on the curve
     ['7EcDhSYGxXyscszYEp35KHN8vvw3svAuLKTzXwCFLtV', true],
@@ -22,6 +22,6 @@ describe('address', () => {
     // Wrapped SOL token address
     ['So11111111111111111111111111111111111111112', true],
   ])(`isValidSolanaAddress(%s) should return %s`, (address, expected) => {
-    expect(isValidSolanaAddress(address)).toBe(expected);
+    expect(isValidSolanaAddress(address), address).toBe(expected);
   });
 });

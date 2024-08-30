@@ -57,7 +57,14 @@ importers:
         specifier: ^1.6.0
         version: 1.6.0(@types/node@20.12.7)
 
-  packages/bitcoin: {}
+  packages/bitcoin:
+    dependencies:
+      '@chainflip/utils':
+        specifier: ^0.4.0
+        version: 0.4.0
+      '@noble/hashes':
+        specifier: ^1.4.0
+        version: 1.4.0
 
   packages/processor:
     dependencies:
@@ -103,11 +110,8 @@ importers:
   packages/solana:
     dependencies:
       '@chainflip/utils':
-        specifier: ^0.3.0
-        version: 0.3.0
-      '@noble/curves':
-        specifier: ^1.5.0
-        version: 1.5.0
+        specifier: ^0.4.0
+        version: 0.4.0
 
   packages/utils:
     devDependencies:
@@ -216,6 +220,9 @@ packages:
 
   '@chainflip/utils@0.3.0':
     resolution: {integrity: sha512-csW8E3lRcSG1udN/kgsOhjZ7bfRrSbgv8Hdh/pzjM+VjQ6Hh46/LuiZHeQR0rQMimfG+lu2Afxk4jeRXRGFWTg==}
+
+  '@chainflip/utils@0.4.0':
+    resolution: {integrity: sha512-OuMFlgbIbyJ1Kt39zytfGh4HZ5dVY25/a3qb0c1K137+QmhdOuF+R7QSkFPqYAfDG4KhGRqo0rgUtEpaEEcSKA==}
 
   '@esbuild/aix-ppc64@0.19.12':
     resolution: {integrity: sha512-bmoCYyWdEL3wDQIVbcyzRyeKLgk2WtWLTWz1ZIAZF/EGbNOwSA6ew3PftJ1PqMiOOGu0OyFMzG53L0zqIpPeNA==}
@@ -2263,6 +2270,8 @@ snapshots:
       zod: 3.23.8
 
   '@chainflip/utils@0.3.0': {}
+
+  '@chainflip/utils@0.4.0': {}
 
   '@esbuild/aix-ppc64@0.19.12':
     optional: true
