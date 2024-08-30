@@ -9,8 +9,7 @@
     "test": "vitest"
   },
   "dependencies": {
-    "@chainflip/utils": "^0.3.0",
-    "@noble/curves": "^1.5.0"
+    "@chainflip/utils": "^0.4.0"
   },
   "files": [
     "dist",
