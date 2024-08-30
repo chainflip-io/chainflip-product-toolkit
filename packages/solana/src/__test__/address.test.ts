@@ -4,16 +4,16 @@ import { isValidSolanaAddress } from '../address';
 describe('address', () => {
   it.each([
     ['', false],
-    ['123', true],
+    ['123', false],
     ['Program Name', false],
-    ['fakeaddress', true],
+    ['fakeaddress', false],
     // block hash
     ['38JiGVG26UdYHVFkScWRoBvRTCcEuZ2JWwCjfTa6NKak', true],
     ['J65zrLRq2YvGp8d9TzddkpvYRbCiNeRUJDksbWmRQeBt', true],
     // signature hash
     [
       '5MoD2UuXe422c95yCPAKTH3ZzDHKv6skkQabyu6fF42iVzs19c5uq4RQEHchX84ApfzxNFPpnxkuLpkFBF8XwgFq',
-      true,
+      false,
     ],
     // accounts on the curve
     ['7EcDhSYGxXyscszYEp35KHN8vvw3svAuLKTzXwCFLtV', true],

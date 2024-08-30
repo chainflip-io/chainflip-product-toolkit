@@ -1,6 +1,6 @@
 {
   "name": "@chainflip/solana",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "type": "module",
   "scripts": {
     "prepublish": "pnpm build && pnpm test run",
