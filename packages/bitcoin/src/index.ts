@@ -144,7 +144,7 @@ function convert5BitGroupsToBytes(data: number[]): Uint8Array {
   return new Uint8Array(result);
 }
 
-export function decodeSegwitAddress(address: string) {
+function decodeSegwitAddress(address: string) {
   const decoded = decodeBech32(address.toLowerCase());
 
   if (!decoded) {
@@ -214,7 +214,7 @@ const segwitVersions: Record<SegwitAddressType, number> = {
   Taproot: 1,
 };
 
-export function encodeSegwitAddress(
+function encodeSegwitAddress(
   hexData: `0x${string}`,
   kind: SegwitAddressType,
   network: BitcoinNetwork,

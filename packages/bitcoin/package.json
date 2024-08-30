@@ -3,11 +3,10 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "wasm-pack": "wasm-pack build --release --target nodejs --out-dir 'wasm/built' --no-pack",
     "prepublish": "pnpm build && pnpm test run",
-    "clean": "rm -rf wasm/built dist",
+    "clean": "rm -rf dist",
     "tsup:build": "tsup --config tsup.config.mts",
-    "build": "pnpm clean && pnpm wasm-pack && pnpm tsup:build",
+    "build": "pnpm clean && pnpm tsup:build",
     "test": "vitest"
   },
   "repository": "https://github.com/chainflip-io/chainflip-product-toolkit.git",

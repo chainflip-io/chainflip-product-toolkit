@@ -9,7 +9,7 @@ export default defineConfig({
   dts: true,
   bundle: true,
   format: ['esm', 'cjs'],
-  entry: ['./wasm/index.ts'],
+  entry: ['./src/index.ts'],
   target: 'es2022',
   outExtension: ({ format }) => ({
     js: format === 'esm' ? '.mjs' : '.cjs',
