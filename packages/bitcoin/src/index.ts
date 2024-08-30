@@ -279,7 +279,11 @@ export const isValidAddressForNetwork = (address: string, network: BitcoinNetwor
       return parseBase58Address(address, network) !== null;
     }
 
-    if (/^(tb|bcrt)1/.test(address)) {
+    if (network === 'regtest' && /^bcrt1/.test(address)) {
+      return decodeSegwitAddress(address) !== null;
+    }
+
+    if (network === 'testnet' && /^tb1/.test(address)) {
       return decodeSegwitAddress(address) !== null;
     }
   }
