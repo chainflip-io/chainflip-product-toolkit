@@ -57,6 +57,15 @@ export type RpcRequest = WithHash<{
     }>,
     boostFee?: Nullish<number>,
     affiliateFees?: Nullish<{ account: string; bps: number }[]>,
+    fillOrKillParams?: Nullish<{
+      refund_address: string;
+      retry_duration_blocks: number;
+      min_price: string;
+    }>,
+    dcaParams?: Nullish<{
+      number_of_chunks: number;
+      chunk_interval: number;
+    }>,
   ];
   cf_account_info: [accountId: string];
   cf_environment: [];
