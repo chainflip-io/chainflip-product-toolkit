@@ -119,6 +119,31 @@ const checksums = {
 
 type Variant = keyof typeof checksums;
 
+function convert5BitGroupsToBytes(data: number[]): Uint8Array {
+  let acc = 0;
+  let bits = 0;
+  const result = [];
+  for (let i = 0; i < data.length; i++) {
+    acc = (acc << 5) | data[i];
+    bits += 5;
+    if (bits >= 8) {
+      result.push((acc >> (bits - 8)) & 0xff); // Extract the top 8 bits
+      bits -= 8;
+    }
+  }
+
+  // Handle any remaining bits
+  if (bits > 0) {
+    const remainingByte = (acc << (8 - bits)) & 0xff;
+    // Only push the remaining byte if it is not zero or bits are fully used
+    if (remainingByte !== 0 || bits > 5) {
+      result.push(remainingByte);
+    }
+  }
+
+  return new Uint8Array(result);
+}
+
 export function decodeSegwitAddress(address: string) {
   const decoded = decodeBech32(address.toLowerCase());
 
@@ -126,9 +151,9 @@ export function decodeSegwitAddress(address: string) {
     return null; // Invalid address format
   }
 
-  const { hrp, data } = decoded;
+  const { hrp, data: dataWithChecksum } = decoded;
 
-  const checksum = computeChecksum(hrp, data);
+  const checksum = computeChecksum(hrp, dataWithChecksum);
   let type;
 
   if (checksum === 1) {
@@ -139,10 +164,14 @@ export function decodeSegwitAddress(address: string) {
     return null; // Invalid checksum
   }
 
-  // Remove checksum from data
-  const dataWithoutChecksum = data.slice(0, -6);
+  // Remove version and checksum from data
+  const data = convert5BitGroupsToBytes(dataWithChecksum.slice(1, -6));
+  const [version] = dataWithChecksum;
 
-  return { hrp, data: dataWithoutChecksum, type };
+  assert(data.length >= 2 && data.length <= 40, 'Invalid address');
+  assert(version !== 0 || data.length === 20 || data.length === 32, 'Invalid address');
+
+  return { hrp, data, type, version };
 }
 
 function createChecksum(hrp: string, data: number[], variant: Variant): number[] {
@@ -229,7 +258,6 @@ export const encodeAddress = (
       return encodeBase58Address(data, btcNetwork, kind);
     case 'P2WPKH':
     case 'P2WSH':
-      return encodeSegwitAddress(data, kind, btcNetwork);
     case 'Taproot':
       return encodeSegwitAddress(data, kind, btcNetwork);
     default:
