@@ -16,6 +16,12 @@ const cases = (
 describe('bitcoin', () => {
   it.each(cases)('decodes a %s address on %s', (kind, network, address) => {
     expect(encodeAddress(address, kind, network)).toMatchSnapshot(`${kind} on ${network}`);
+    expect(encodeAddress(Buffer.from(address.slice(2), 'hex'), kind, network)).toMatchSnapshot(
+      `${kind} on ${network}`,
+    );
+    expect(encodeAddress([...Buffer.from(address.slice(2), 'hex')], kind, network)).toMatchSnapshot(
+      `${kind} on ${network}`,
+    );
   });
 
   it('throws for invalid networks', () => {
@@ -39,7 +45,7 @@ describe('bitcoin', () => {
   it('throws for non-hex addresses', () => {
     expect(() =>
       encodeAddress('0x63b7cc4432bba5c51fd09428c47abaf2d52f937g', 'P2WPKH', 'mainnet'),
-    ).toThrowErrorMatchingInlineSnapshot(`[Error: bytes must be hex-encoded with a 0x prefix]`);
+    ).toThrowErrorMatchingInlineSnapshot(`[Error: bytes are not a valid hex string]`);
   });
 
   it('throws on bad addresses', () => {

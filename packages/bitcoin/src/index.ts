@@ -5,6 +5,7 @@ import { sha256 } from '@noble/hashes/sha256';
 
 type ChainflipNetwork = 'mainnet' | 'perseverance' | 'sisyphos' | 'backspin';
 type BitcoinNetwork = 'mainnet' | 'testnet' | 'regtest';
+type Bytelike = Uint8Array | number[] | `0x${string}`;
 
 const p2pkhAddressVersion: Record<BitcoinNetwork, number> = {
   mainnet: 0,
@@ -52,9 +53,12 @@ function parseBase58Address(address: string, network: BitcoinNetwork) {
   return null;
 }
 
-function encodeBase58Address(data: `0x${string}`, network: BitcoinNetwork, type: 'P2SH' | 'P2PKH') {
+function encodeBase58Address(data: Bytelike, network: BitcoinNetwork, type: 'P2SH' | 'P2PKH') {
   const version = (type === 'P2SH' ? p2shAddressVersion : p2pkhAddressVersion)[network];
-  const payload = new Uint8Array([version, ...hexToBytes(data)]);
+  const payload = new Uint8Array([
+    version,
+    ...(typeof data === 'string' ? hexToBytes(data) : data),
+  ]);
   const checksum = sha256(sha256(payload)).slice(0, 4);
   const address = base58.encode(Buffer.concat([payload, checksum]));
   return address;
@@ -214,13 +218,9 @@ const segwitVersions: Record<SegwitAddressType, number> = {
   Taproot: 1,
 };
 
-function encodeSegwitAddress(
-  hexData: `0x${string}`,
-  kind: SegwitAddressType,
-  network: BitcoinNetwork,
-) {
+function encodeSegwitAddress(byteData: Bytelike, kind: SegwitAddressType, network: BitcoinNetwork) {
   const variant = kind === 'Taproot' ? 'bech32m' : 'bech32';
-  const bytes = hexToBytes(hexData);
+  const bytes = typeof byteData === 'string' ? hexToBytes(byteData) : new Uint8Array(byteData);
   const version = segwitVersions[kind];
   assert(bytes.length >= 2 && bytes.length <= 40, 'Invalid address');
   assert(version !== 0 || bytes.length === 20 || bytes.length === 32, 'Invalid address');
@@ -242,7 +242,7 @@ const networkMap: Record<ChainflipNetwork | BitcoinNetwork, BitcoinNetwork> = {
 };
 
 export const encodeAddress = (
-  data: `0x${string}`,
+  data: Bytelike,
   kind: AddressType,
   cfOrBtcnetwork: BitcoinNetwork | ChainflipNetwork,
 ) => {
@@ -250,7 +250,10 @@ export const encodeAddress = (
 
   assert(btcNetwork, `Invalid network: ${cfOrBtcnetwork}`);
   assert(data.length % 2 === 0, 'bytes must have an even number of characters');
-  assert(/^(0x)?[0-9a-f]*$/.test(data), 'bytes must be hex-encoded with a 0x prefix');
+  assert(
+    typeof data !== 'string' || /^(0x)?[0-9a-f]*$/.test(data),
+    'bytes are not a valid hex string',
+  );
 
   switch (kind) {
     case 'P2PKH':
