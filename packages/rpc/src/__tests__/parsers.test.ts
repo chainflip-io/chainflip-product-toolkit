@@ -5,6 +5,7 @@ import {
   cfEnvironment,
   numberOrHex,
   cfPoolsEnvironment,
+  cfPoolDepth,
 } from '../parsers';
 
 describe('parsers', () => {
@@ -608,6 +609,38 @@ describe('parsers', () => {
 
       expect(result.fees.Solana.SOL).not.toBeNull();
       expect(result.fees.Solana.USDC).not.toBeNull();
+    });
+  });
+
+  describe('cfPoolDepth', () => {
+    it('parses the cfPoolDepth response', () => {
+      const result = cfPoolDepth.parse({
+        asks: {
+          limit_orders: {
+            price: null,
+            depth: '0x0',
+          },
+          range_orders: {
+            price: '0x44b82fa09b5a53ffffffd38ad',
+            depth: '0x363466684d81170047',
+          },
+        },
+        bids: {
+          limit_orders: {
+            price: null,
+            depth: '0x0',
+          },
+          range_orders: {
+            price: '0x44b82fa09b5a53ffffffd38ad',
+            depth: '0xe8ceaf2eff',
+          },
+        },
+      });
+
+      expect(result?.asks.limit_orders.depth).not.toBeNull();
+      expect(result?.asks.range_orders.depth).not.toBeNull();
+      expect(result?.bids.limit_orders.depth).not.toBeNull();
+      expect(result?.bids.range_orders.depth).not.toBeNull();
     });
   });
 });

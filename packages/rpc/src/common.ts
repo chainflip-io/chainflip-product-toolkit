@@ -21,6 +21,7 @@ import {
   rpcResponse,
   stateGetMetadata,
   stateGetRuntimeVersion,
+  cfPoolDepth,
 } from './parsers';
 
 type Nullish<T> = T | null | undefined;
@@ -94,6 +95,11 @@ export type RpcRequest = WithHash<{
   cf_boost_pools_depth: [];
   cf_boost_pool_details: [asset?: UncheckedAssetAndChain | null];
   cf_boost_pool_pending_fees: [asset?: UncheckedAssetAndChain | null];
+  cf_pool_depth: [
+    fromAsset: UncheckedAssetAndChain,
+    toAsset: UncheckedAssetAndChain,
+    tick_range: { start: number; end: number },
+  ];
   state_getMetadata: [];
   state_getRuntimeVersion: [];
 }> & {
@@ -103,6 +109,7 @@ export type RpcRequest = WithHash<{
 export const rpcResult = {
   broker_requestSwapDepositAddress: brokerRequestSwapDepositAddress,
   cf_account_info: cfAccountInfo,
+  cf_pool_depth: cfPoolDepth,
   cf_boost_pools_depth: cfBoostPoolsDepth,
   cf_environment: cfEnvironment,
   cf_funding_environment: cfFundingEnvironment,
