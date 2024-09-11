@@ -32,7 +32,7 @@ export type CfSupportedAssetsResponse = RpcResponse<'cf_supported_assets'>;
 export type CfSwappingEnvironmentResponse = RpcResponse<'cf_swapping_environment'>;
 export type CfSwapRateResponse = RpcResponse<'cf_swap_rate'>;
 export type CfSwapRateV2Response = RpcResponse<'cf_swap_rate_v2'>;
-// export type CfPoolDepthResponse = RpcResponse<'cf_pool_depth'>;
+export type CfPoolDepthResponse = RpcResponse<'cf_pool_depth'>;
 
 export type CfUnregisteredAccount = z.output<typeof unregistered>;
 export type CfBrokerAccount = z.output<typeof broker>;
