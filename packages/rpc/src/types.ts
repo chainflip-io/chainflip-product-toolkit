@@ -16,6 +16,7 @@ export type CfSupportedAssets = RpcResult<'cf_supported_assets'>;
 export type CfSwappingEnvironment = RpcResult<'cf_swapping_environment'>;
 export type CfSwapRate = RpcResult<'cf_swap_rate'>;
 export type CfSwapRateV2 = RpcResult<'cf_swap_rate_v2'>;
+export type CfPoolDepth = RpcResult<'cf_pool_depth'>;
 
 export type CfAccountInfoResponse = RpcResponse<'cf_account_info'>;
 export type CfBoostPoolDetailsResponse = RpcResponse<'cf_boost_pool_details'>;
@@ -31,6 +32,7 @@ export type CfSupportedAssetsResponse = RpcResponse<'cf_supported_assets'>;
 export type CfSwappingEnvironmentResponse = RpcResponse<'cf_swapping_environment'>;
 export type CfSwapRateResponse = RpcResponse<'cf_swap_rate'>;
 export type CfSwapRateV2Response = RpcResponse<'cf_swap_rate_v2'>;
+export type CfPoolDepthResponse = RpcResponse<'cf_pool_depth'>;
 
 export type CfUnregisteredAccount = z.output<typeof unregistered>;
 export type CfBrokerAccount = z.output<typeof broker>;

@@ -553,6 +553,7 @@ describe(HttpClient, () => {
         "cf_environment",
         "cf_funding_environment",
         "cf_ingress_egress_environment",
+        "cf_pool_depth",
         "cf_pool_orders",
         "cf_pool_price_v2",
         "cf_pools_environment",

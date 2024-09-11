@@ -181,6 +181,21 @@ export const cfBoostPoolsDepth = z.array(
   z.intersection(rpcAssetSchema, z.object({ tier: z.number(), available_amount: u256 })),
 );
 
+const orderInfoSchema = z.object({
+  depth: numberOrHex,
+  price: numberOrHex.nullable(),
+});
+const assetInfoSchema = z.object({
+  limit_orders: orderInfoSchema,
+  range_orders: orderInfoSchema,
+});
+export const cfPoolDepth = z
+  .object({
+    asks: assetInfoSchema,
+    bids: assetInfoSchema,
+  })
+  .nullable();
+
 export const cfSupportedAsssets = z
   .array(z.object({ chain: z.string(), asset: z.string() }))
   .transform((assets) =>
