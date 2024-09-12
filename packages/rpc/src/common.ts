@@ -13,7 +13,7 @@ import {
   cfPoolOrders,
   cfPoolPriceV2,
   cfPoolsEnvironment,
-  cfSupportedAsssets,
+  cfSupportedAssets,
   cfSwapRate,
   cfSwapRateV2,
   cfSwappingEnvironment,
@@ -22,6 +22,7 @@ import {
   stateGetMetadata,
   stateGetRuntimeVersion,
   cfPoolDepth,
+  cfAccounts,
 } from './parsers';
 
 type Nullish<T> = T | null | undefined;
@@ -69,6 +70,7 @@ export type RpcRequest = WithHash<{
     }>,
   ];
   cf_account_info: [accountId: string];
+  cf_accounts: [];
   cf_environment: [];
   cf_supported_assets: [];
   cf_swapping_environment: [];
@@ -79,7 +81,7 @@ export type RpcRequest = WithHash<{
     toAsset: UncheckedAssetAndChain,
     accountId?: Nullish<string>,
   ];
-  cf_pool_price_v2: [baseAssset: UncheckedAssetAndChain, quoteAsset: UncheckedAssetAndChain];
+  cf_pool_price_v2: [baseAsset: UncheckedAssetAndChain, quoteAsset: UncheckedAssetAndChain];
   cf_pools_environment: [];
   cf_swap_rate: [
     fromAsset: UncheckedAssetAndChain,
@@ -108,6 +110,7 @@ export type RpcRequest = WithHash<{
 
 export const rpcResult = {
   broker_requestSwapDepositAddress: brokerRequestSwapDepositAddress,
+  cf_accounts: cfAccounts,
   cf_account_info: cfAccountInfo,
   cf_pool_depth: cfPoolDepth,
   cf_boost_pools_depth: cfBoostPoolsDepth,
@@ -117,7 +120,7 @@ export const rpcResult = {
   cf_pool_orders: cfPoolOrders,
   cf_pool_price_v2: cfPoolPriceV2,
   cf_pools_environment: cfPoolsEnvironment,
-  cf_supported_assets: cfSupportedAsssets,
+  cf_supported_assets: cfSupportedAssets,
   cf_swap_rate: cfSwapRate,
   cf_swap_rate_v2: cfSwapRateV2,
   cf_swapping_environment: cfSwappingEnvironment,
