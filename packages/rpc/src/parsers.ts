@@ -196,7 +196,7 @@ export const cfPoolDepth = z
   })
   .nullable();
 
-export const cfSupportedAsssets = z
+export const cfSupportedAssets = z
   .array(z.object({ chain: z.string(), asset: z.string() }))
   .transform((assets) =>
     assets.filter((asset): asset is AssetAndChain => rpcAssetSchema.safeParse(asset).success),
@@ -258,6 +258,8 @@ export const validator = z.object({
 });
 
 export const cfAccountInfo = z.union([unregistered, broker, liquidityProvider, validator]);
+
+export const cfAccounts = z.array(z.tuple([z.string(), z.string()]));
 
 export const cfPoolPriceV2 = z.object({
   sell: numberOrHex.nullable(),

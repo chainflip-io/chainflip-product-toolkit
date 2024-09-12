@@ -6,6 +6,7 @@ import {
   numberOrHex,
   cfPoolsEnvironment,
   cfPoolDepth,
+  cfAccounts,
 } from '../parsers';
 
 describe('parsers', () => {
@@ -641,6 +642,25 @@ describe('parsers', () => {
       expect(result?.asks.range_orders.depth).not.toBeNull();
       expect(result?.bids.limit_orders.depth).not.toBeNull();
       expect(result?.bids.range_orders.depth).not.toBeNull();
+    });
+  });
+
+  describe('cfAccounts', () => {
+    it('parses the cfAccounts response', () => {
+      const result = cfAccounts.parse([
+        ['cFL8fmgKZcchhtLagBH2GKfsuWxBqUaD5CYE1m7DFb8DBSLJ1', 'Chainflip Testnet LP BOOST'],
+        ['cFNYfLm7YEjWenMB7pBRGMTaawyhYLcRxgrNUqsvZBrKNXvfw', ''],
+        ['cFPdef3hF5zEwbWUG6ZaCJ3X7mTvEeAog7HxZ8QyFcCgDVGDM', 'Chainflip Testnet LP 1'],
+        ['cFLxadYLtGwLKA4QZ7XM7KEtmwEohJJy4rVGCG6XK6qS1reye', ''],
+        ['cFM8kRvLBXagj6ZXvrt7wCM4jGmHvb5842jTtXXg3mRHjrvKy', 'Chainflip Testnet Broker 1'],
+      ]);
+
+      expect(result.length).toEqual(5);
+      expect(result[0]).toEqual([
+        'cFL8fmgKZcchhtLagBH2GKfsuWxBqUaD5CYE1m7DFb8DBSLJ1',
+        'Chainflip Testnet LP BOOST',
+      ]);
+      expect(result[1]).toEqual(['cFNYfLm7YEjWenMB7pBRGMTaawyhYLcRxgrNUqsvZBrKNXvfw', '']);
     });
   });
 });
