@@ -142,15 +142,16 @@ export const cfFundingEnvironment = z.object({
   minimum_funding_amount: numberOrHex,
 });
 
-const defaultFeeInfo = {
-  limit_order_fee_hundredth_pips: 0,
-  range_order_fee_hundredth_pips: 0,
-  range_order_total_fees_earned: { base: '0x0', quote: '0x0' },
-  limit_order_total_fees_earned: { base: '0x0', quote: '0x0' },
-  range_total_swap_inputs: { base: '0x0', quote: '0x0' },
-  limit_total_swap_inputs: { base: '0x0', quote: '0x0' },
-  quote_asset: { chain: 'Ethereum', asset: 'USDC' },
-} as const;
+const defaultFeeInfo = () =>
+  ({
+    limit_order_fee_hundredth_pips: 0,
+    range_order_fee_hundredth_pips: 0,
+    range_order_total_fees_earned: { base: '0x0', quote: '0x0' },
+    limit_order_total_fees_earned: { base: '0x0', quote: '0x0' },
+    range_total_swap_inputs: { base: '0x0', quote: '0x0' },
+    limit_total_swap_inputs: { base: '0x0', quote: '0x0' },
+    quote_asset: { chain: 'Ethereum', asset: 'USDC' },
+  }) as const;
 
 export const cfPoolsEnvironment = z.object({
   fees: chainBaseAssetMapFactory(
@@ -165,8 +166,8 @@ export const cfPoolsEnvironment = z.object({
         quote_asset: z.object({ chain: z.literal('Ethereum'), asset: z.literal('USDC') }),
       })
       .nullable()
-      .transform((info) => info ?? structuredClone(defaultFeeInfo)),
-    structuredClone(defaultFeeInfo),
+      .transform((info) => info ?? defaultFeeInfo()),
+    defaultFeeInfo(),
   ),
 });
 
