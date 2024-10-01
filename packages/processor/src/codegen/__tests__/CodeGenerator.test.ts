@@ -147,7 +147,7 @@ describe(CodeGenerator, () => {
 
   it('filters on selected events', async () => {
     const modules = [
-      ...new CodeGenerator({ trackedEvents: new Set(['Enums.EventOne']) }).generate({
+      ...new CodeGenerator({ trackedItems: new Set(['Enums.EventOne']) }).generate({
         Primitives: Object.fromEntries(
           primitives.map((name) => [name, { type: 'primitive', name }]),
         ),
@@ -172,7 +172,7 @@ describe(CodeGenerator, () => {
 
   it('throws if it does not find the expected event', () => {
     vi.spyOn(console, 'error').mockImplementation(() => {});
-    const it = new CodeGenerator({ trackedEvents: new Set(['Enums.EventOne']) }).generate({
+    const it = new CodeGenerator({ trackedItems: new Set(['Enums.EventOne']) }).generate({
       Primitives: Object.fromEntries(primitives.map((name) => [name, { type: 'primitive', name }])),
     });
 

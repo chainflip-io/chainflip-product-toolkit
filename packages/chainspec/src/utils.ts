@@ -1,5 +1,5 @@
 import * as prettier from 'prettier';
-import { ParsedMetadata } from './Parser';
+import { ParsedMetadata } from './BaseParser';
 import assert from 'assert';
 
 type ChangeType = 'added' | 'removed' | 'changed';
@@ -107,7 +107,7 @@ class ChangelogGenerator {
   }
 }
 
-export const diffSpecs = (a: ParsedMetadata, b: ParsedMetadata) => {
+export const diffSpecs = <T>(a: ParsedMetadata<T>, b: ParsedMetadata<T>) => {
   const changedOrAddedEvents = new Set<string>();
   const changelog = new ChangelogGenerator();
 

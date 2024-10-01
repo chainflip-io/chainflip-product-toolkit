@@ -38,6 +38,9 @@ importers:
       micromatch:
         specifier: ^4.0.7
         version: 4.0.7
+      prettier:
+        specifier: ^3.3.3
+        version: 3.3.3
       tsup:
         specifier: ^8.0.2
         version: 8.0.2(postcss@8.4.38)(typescript@5.4.5)
@@ -67,13 +70,32 @@ importers:
         version: 1.4.0
 
   packages/chainspec:
-    dependencies:
+    devDependencies:
+      '@chainflip/rpc':
+        specifier: ^1.6.7
+        version: 1.6.7
       '@chainflip/utils':
         specifier: ^0.4.0
         version: 0.4.0
+      '@polkadot/types':
+        specifier: ^10.11.2
+        version: 10.13.1
+      prettier:
+        specifier: ^3.3.3
+        version: 3.3.3
       zod:
         specifier: ^3.23.8
         version: 3.23.8
+
+  packages/extrinsics:
+    dependencies:
+      zod:
+        specifier: ^3.23.8
+        version: 3.23.8
+    devDependencies:
+      '@polkadot/types':
+        specifier: ^10.11.2
+        version: 10.13.1
 
   packages/processor:
     dependencies:
@@ -90,9 +112,6 @@ importers:
       '@polkadot/types':
         specifier: ^10.11.2
         version: 10.13.1
-      prettier:
-        specifier: ^3.3.3
-        version: 3.3.3
 
   packages/rpc:
     dependencies:
