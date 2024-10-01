@@ -4,11 +4,11 @@ import * as fs from 'fs/promises';
 import * as path from 'path';
 import { TypeRegistry, Metadata, TypeDefInfo } from '@polkadot/types';
 import { TypeDef } from '@polkadot/types/types';
-import { Network, networkToRpcUrl, specVersionCache } from './utils';
+import { Network, networkToRpcUrl, specVersionCache } from '@/chainspec/cache';
 import { HttpClient } from '@chainflip/rpc';
 import { uncapitalize } from '@chainflip/utils/string';
 
-const metadataDir = path.join(import.meta.dirname, '..', '..', 'metadata');
+const metadataDir = specVersionCache.getDir();
 
 export type MetadataOpts = {
   network?: Network;

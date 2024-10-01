@@ -1,0 +1,11 @@
+{
+  "name": "chainspec-internal",
+  "type": "module",
+  "scripts": {
+    "test": "vitest"
+  },
+  "dependencies": {
+    "@chainflip/utils": "^0.4.0",
+    "zod": "^3.23.8"
+  }
+}

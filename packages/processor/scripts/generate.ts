@@ -1,9 +1,10 @@
 #!/usr/bin/env -S pnpm tsx
+import { specVersionCache } from '@/chainspec/cache';
 import * as fs from 'fs/promises';
 import * as path from 'path';
-import Parser, { MetadataOpts } from '../src/codegen/Parser';
 import CodeGenerator from '../src/codegen/CodeGenerator';
-import { diffSpecs, specVersionCache } from '../src/codegen/utils';
+import Parser, { MetadataOpts } from '../src/codegen/Parser';
+import { diffSpecs } from '../src/codegen/utils';
 
 const generatedDir = path.join(import.meta.dirname, '..', 'generated');
 
