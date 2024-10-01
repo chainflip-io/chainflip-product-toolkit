@@ -1,0 +1,14 @@
+{
+  "name": "chainspec-internal",
+  "type": "module",
+  "scripts": {
+    "test": "vitest"
+  },
+  "devDependencies": {
+    "@chainflip/rpc": "^1.6.7",
+    "@chainflip/utils": "^0.4.0",
+    "@polkadot/types": "^10.11.2",
+    "prettier": "^3.3.3",
+    "zod": "^3.23.8"
+  }
+}

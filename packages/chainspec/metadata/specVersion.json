@@ -40,15 +40,15 @@
     "network": "mainnet"
   },
   "141": {
-    "hash": "0xd516b8489f250dc5749d0d96a7bb907c606f33d33b991fe615619a226df25103",
-    "network": "backspin"
+    "hash": "0xdbc3955d98e83875daaaf8771b2d3aecc1afe80a8142dd88668e95642e0b2fee",
+    "network": "mainnet"
   },
   "150": {
-    "hash": "0x91d8a7a44eac03362d3b00d20096f5ded01b6b1fe20c51553de20dff5431c8f3",
-    "network": "perseverance"
+    "hash": "0x8bcb21e3c84a86b369a804020682e11b29e0817d2612900de5a5ede60f4094b2",
+    "network": "mainnet"
   },
   "160": {
-    "hash": "0xacef276429cf5a01633b5bd5d478118ea410040ec3700d99909d6c979f7c9d12",
-    "network": "sisyphos"
+    "hash": "0x0ce1cdc29708776267398fd0a2f68f556cd4deb372a7c8fe78dae94c2ba1d48b",
+    "network": "mainnet"
   }
 }

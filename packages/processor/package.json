@@ -7,14 +7,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@chainflip/rpc": "^1.4.4",
-    "@chainflip/utils": "^0.3.0",
-    "zod": "^3.22.8"
+    "@chainflip/utils": "^0.4.0",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
-    "@polkadot/types": "^10.11.2",
-    "axios": "^1.6.7",
-    "prettier": "^3.2.5"
+    "@chainflip/rpc": "^1.6.7",
+    "@polkadot/types": "^10.11.2"
   },
   "scripts": {
     "test": "vitest",

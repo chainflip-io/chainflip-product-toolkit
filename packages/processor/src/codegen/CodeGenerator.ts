@@ -1,5 +1,3 @@
-import * as fs from 'fs/promises';
-import * as path from 'path';
 import {
   isPrimitiveType,
   type ArrayType,
@@ -12,12 +10,8 @@ import {
   type StructType,
   type TupleType,
 } from './Parser';
-import { uncapitalize } from '@chainflip/utils/string';
 import { unreachable } from '@chainflip/utils/assertion';
-import { formatCode } from './utils';
-
-type PalletName = string;
-type EventName = string;
+import BaseCodeGenerator, { CodegenResult, Code, Identifier } from '@/chainspec/BaseCodeGenerator';
 
 const nameToIdentifier = (name: string): string =>
   name
@@ -25,101 +19,6 @@ const nameToIdentifier = (name: string): string =>
     .replace(/^./, (c) => c.toLowerCase());
 
 const isNull = (type: ResolvedType) => type.type === 'primitive' && type.name === 'null';
-
-abstract class CodegenResult {
-  constructor(
-    private readonly code: string,
-    readonly dependencies: CodegenResult[] = [],
-  ) {}
-
-  toString() {
-    return this.code;
-  }
-
-  abstract getDependencies(): Identifier[];
-}
-
-class Identifier extends CodegenResult {
-  constructor(
-    identifier: string,
-    readonly pkg: string = 'common',
-  ) {
-    super(identifier);
-  }
-
-  getDependencies(): Identifier[] {
-    return [this];
-  }
-}
-
-class Code extends CodegenResult {
-  getDependencies(): Identifier[] {
-    return this.dependencies.flatMap((d) => d.getDependencies());
-  }
-}
-
-class Module {
-  constructor(
-    private readonly name: string,
-    private readonly exports: Map<string, CodegenResult>,
-    private readonly pallet?: string,
-  ) {}
-
-  isCommon() {
-    return this.name === 'common';
-  }
-
-  toString() {
-    const generated: string[] = [];
-
-    const dependencies: Record<string, Set<string>> = {};
-
-    for (const [identifier, type] of this.exports.entries()) {
-      const exportDeps = type.getDependencies();
-
-      for (const ident of exportDeps) {
-        // don't import from the file we are in
-        if (ident.pkg === this.name) continue;
-        dependencies[ident.pkg] ??= new Set();
-        dependencies[ident.pkg].add(ident.toString());
-      }
-
-      generated.push(`export const ${identifier} = ${type.toString()};`);
-      generated.push('');
-    }
-
-    return [
-      "import { z } from 'zod';",
-      ...Object.entries(dependencies).map(([pkg, depsSet]) => {
-        const pkgPath = pkg === 'common' ? '../common' : pkg;
-
-        const deps = [...depsSet];
-
-        const names =
-          deps.length === 1 && deps[0].startsWith('*') ? deps[0] : `{ ${deps.sort().join(', ')} }`;
-
-        return `import ${names} from '${pkgPath}';`;
-      }),
-      '',
-      ...generated,
-    ].join('\n');
-  }
-
-  toFormattedString() {
-    return formatCode(this.toString());
-  }
-
-  async writeFile(specDir: string, changelog?: string) {
-    const outDir = this.pallet ? path.join(specDir, uncapitalize(this.pallet)) : specDir;
-    await fs.mkdir(outDir, { recursive: true });
-    await fs.writeFile(
-      path.join(outDir, uncapitalize(`${this.name}.ts`)),
-      await this.toFormattedString(),
-      'utf8',
-    );
-    if (changelog) await fs.writeFile(path.join(outDir, 'CHANGELOG.md'), changelog, 'utf8');
-  }
-}
 
 const hexString = new Code(
   "z.string().refine((v): v is `0x${string}` => /^0x[\\da-f]*$/i.test(v), { message: 'Invalid hex string' })",
@@ -152,17 +51,7 @@ const chainEnumMember = (name: keyof typeof shortChainToLongChain, transform?: s
   address: ${transform ?? 'value'},
 }))`;
 
-export default class CodeGenerator {
-  private registry = {
-    types: new Map<string, CodegenResult>(),
-  };
-
-  private trackedEvents?: Set<string>;
-
-  constructor({ trackedEvents }: { trackedEvents?: Set<string> } = {}) {
-    if (trackedEvents) this.trackedEvents = new Set(trackedEvents);
-  }
-
+export default class CodeGenerator extends BaseCodeGenerator<ResolvedType> {
   private generateEncodedAddressEnum(def: EnumType): Identifier {
     this.registry.types.set('hexString', hexString);
 
@@ -383,7 +272,7 @@ export default class CodeGenerator {
     ]);
   }
 
-  private generateResolvedType(def: ResolvedType): CodegenResult {
+  protected generateResolvedType(def: ResolvedType): CodegenResult {
     switch (def.type) {
       case 'primitive':
         return this.generatePrimitive(def);
@@ -406,40 +295,7 @@ export default class CodeGenerator {
     }
   }
 
-  *generate(def: Record<PalletName, Record<EventName, ResolvedType>>) {
-    const unhandledEvents = new Set(this.trackedEvents);
-    const generatedEvents = new Set<string>();
-
-    for (const [palletName, events] of Object.entries(def)) {
-      for (const [eventName, event] of Object.entries(events)) {
-        const name = `${palletName}.${eventName}`;
-        if (this.trackedEvents && !unhandledEvents.delete(name)) continue;
-        generatedEvents.add(name);
-
-        let generatedEvent: CodegenResult;
-
-        try {
-          generatedEvent = this.generateResolvedType(event);
-        } catch (e) {
-          console.error(`failed to parse: ${name}`);
-          console.error(JSON.stringify(event, null, 2));
-          console.error(e);
-          throw e;
-        }
-
-        const parserName = nameToIdentifier(`${palletName}::${eventName}`);
-
-        yield new Module(eventName, new Map([[parserName, generatedEvent]]), palletName);
-      }
-    }
-
-    if (unhandledEvents.size !== 0) {
-      console.error('Unhandled events:', unhandledEvents);
-      throw new Error('Not all events were generated');
-    }
-
-    if (generatedEvents.size === 0) return;
-
-    yield new Module('common', new Map(this.registry.types));
+  protected getName(palletName: string, itemName: string): string {
+    return `${palletName}.${itemName}`;
   }
 }
