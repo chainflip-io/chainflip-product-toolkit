@@ -87,6 +87,22 @@ importers:
         specifier: ^3.23.8
         version: 3.23.8
 
+  packages/extrinsics:
+    dependencies:
+      '@chainflip/bitcoin':
+        specifier: workspace:../bitcoin
+        version: link:../bitcoin
+      '@chainflip/utils':
+        specifier: ^0.4.0
+        version: 0.4.0
+      zod:
+        specifier: ^3.23.8
+        version: 3.23.8
+    devDependencies:
+      '@polkadot/types':
+        specifier: ^10.11.2
+        version: 10.13.1
+
   packages/processor:
     dependencies:
       '@chainflip/utils':

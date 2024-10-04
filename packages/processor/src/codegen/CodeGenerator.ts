@@ -10,7 +10,6 @@ import {
   type StructType,
   type TupleType,
 } from './Parser';
-import { unreachable } from '@chainflip/utils/assertion';
 import BaseCodeGenerator, { CodegenResult, Code, Identifier } from '@/chainspec/BaseCodeGenerator';
 
 const nameToIdentifier = (name: string): string =>
@@ -51,7 +50,7 @@ const chainEnumMember = (name: keyof typeof shortChainToLongChain, transform?: s
   address: ${transform ?? 'value'},
 }))`;
 
-export default class CodeGenerator extends BaseCodeGenerator<ResolvedType> {
+export default class CodeGenerator extends BaseCodeGenerator {
   private generateEncodedAddressEnum(def: EnumType): Identifier {
     this.registry.types.set('hexString', hexString);
 
@@ -85,7 +84,7 @@ export default class CodeGenerator extends BaseCodeGenerator<ResolvedType> {
     return new Identifier(def.name);
   }
 
-  private generatePrimitive(def: PrimitiveType): CodegenResult {
+  protected override generatePrimitive(def: PrimitiveType): CodegenResult {
     switch (def.name) {
       case 'i8':
       case 'u8':
@@ -126,7 +125,7 @@ export default class CodeGenerator extends BaseCodeGenerator<ResolvedType> {
     throw new Error(`Unsupported primitive: ${def.name}`);
   }
 
-  private generateEnum(def: EnumType): Identifier {
+  protected override generateEnum(def: EnumType): Identifier {
     if (this.registry.types.has(def.name)) return new Identifier(def.name);
 
     if (def.name === 'cfChainsAddressEncodedAddress') {
@@ -180,7 +179,7 @@ export default class CodeGenerator extends BaseCodeGenerator<ResolvedType> {
     return new Identifier(def.name);
   }
 
-  private generateStruct(def: StructType): CodegenResult {
+  protected override generateStruct(def: StructType): CodegenResult {
     const identifier = def.name && nameToIdentifier(def.name);
 
     if (identifier && this.registry.types.has(identifier)) {
@@ -221,7 +220,7 @@ export default class CodeGenerator extends BaseCodeGenerator<ResolvedType> {
     return new Identifier(identifier);
   }
 
-  private generateArray(def: ArrayType): CodegenResult {
+  protected override generateArray(def: ArrayType): CodegenResult {
     if (def.length) {
       if (isPrimitiveType(def.value) && def.value.name === 'u8') {
         this.registry.types.set('hexString', hexString);
@@ -241,7 +240,7 @@ export default class CodeGenerator extends BaseCodeGenerator<ResolvedType> {
     return new Code(`z.array(${resolvedType.toString()})`, dependencies);
   }
 
-  private generateTuple(def: TupleType): Code {
+  protected override generateTuple(def: TupleType): Code {
     const dependencies = def.values.map((t) => {
       const resolvedType = this.generateResolvedType(t);
       return resolvedType;
@@ -250,12 +249,12 @@ export default class CodeGenerator extends BaseCodeGenerator<ResolvedType> {
     return new Code(`z.tuple([${dependencies.join(', ')}])`, dependencies);
   }
 
-  private generateOption(def: OptionType): Code {
+  protected override generateOption(def: OptionType): Code {
     const resolvedType = this.generateResolvedType(def.value);
     return new Code(`${resolvedType.toString()}.nullish()`, [resolvedType]);
   }
 
-  private generateRange(def: RangeType): Code {
+  protected override generateRange(def: RangeType): Code {
     const resolvedType = this.generateResolvedType(def.value);
     return new Code(
       `z.object({ start: ${resolvedType.toString()}, end: ${resolvedType.toString()} })`,
@@ -263,7 +262,7 @@ export default class CodeGenerator extends BaseCodeGenerator<ResolvedType> {
     );
   }
 
-  private generateMap(def: MapType): Code {
+  protected override generateMap(def: MapType): Code {
     const keyType = this.generateResolvedType(def.key);
     const valueType = this.generateResolvedType(def.value);
     return new Code(`z.array(z.tuple([${keyType.toString()}, ${valueType.toString()}]))`, [
@@ -272,30 +271,7 @@ export default class CodeGenerator extends BaseCodeGenerator<ResolvedType> {
     ]);
   }
 
-  protected generateResolvedType(def: ResolvedType): CodegenResult {
-    switch (def.type) {
-      case 'primitive':
-        return this.generatePrimitive(def);
-      case 'enum':
-        return this.generateEnum(def);
-      case 'struct':
-        return this.generateStruct(def);
-      case 'array':
-        return this.generateArray(def);
-      case 'tuple':
-        return this.generateTuple(def);
-      case 'range':
-        return this.generateRange(def);
-      case 'option':
-        return this.generateOption(def);
-      case 'map':
-        return this.generateMap(def);
-      default:
-        return unreachable(def, `Unsupported type: ${(def as ResolvedType).type}`);
-    }
-  }
-
-  protected getName(palletName: string, itemName: string): string {
+  protected override getName(palletName: string, itemName: string): string {
     return `${palletName}.${itemName}`;
   }
 }

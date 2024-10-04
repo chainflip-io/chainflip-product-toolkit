@@ -2,11 +2,9 @@ import { describe, expect, it } from 'vitest';
 import { diffSpecs } from '../utils';
 import { ParsedMetadata } from '../BaseParser';
 
-type Data = ParsedMetadata<unknown>;
-
 describe(diffSpecs, () => {
   it('returns an empty set if nothing has changed', () => {
-    const a: Data = { pallet1: { event1: { type: 'primitive', name: 'u64' } } };
+    const a: ParsedMetadata = { pallet1: { event1: { type: 'primitive', name: 'u64' } } };
 
     const { changedOrAddedEvents, changelog } = diffSpecs(a, a);
     expect(changedOrAddedEvents).toEqual(new Set());
@@ -14,8 +12,8 @@ describe(diffSpecs, () => {
   });
 
   it('returns a set of changed events', () => {
-    const a: Data = { pallet1: { event1: { type: 'primitive', name: 'u64' } } };
-    const b: Data = {
+    const a: ParsedMetadata = { pallet1: { event1: { type: 'primitive', name: 'u64' } } };
+    const b: ParsedMetadata = {
       pallet1: {
         event1: {
           type: 'tuple',
@@ -40,8 +38,8 @@ describe(diffSpecs, () => {
   });
 
   it('returns a set of added events', () => {
-    const a: Data = { pallet1: { event1: { type: 'primitive', name: 'u64' } } };
-    const b: Data = {
+    const a: ParsedMetadata = { pallet1: { event1: { type: 'primitive', name: 'u64' } } };
+    const b: ParsedMetadata = {
       pallet1: {
         event1: { type: 'primitive', name: 'u64' },
         event2: { type: 'primitive', name: 'u64' },
@@ -58,8 +56,8 @@ describe(diffSpecs, () => {
   });
 
   it('returns a set of changed and added events', () => {
-    const a: Data = { pallet1: { event1: { type: 'primitive', name: 'u64' } } };
-    const b: Data = {
+    const a: ParsedMetadata = { pallet1: { event1: { type: 'primitive', name: 'u64' } } };
+    const b: ParsedMetadata = {
       pallet1: {
         event1: {
           type: 'tuple',
@@ -86,8 +84,8 @@ describe(diffSpecs, () => {
   });
 
   it('returns all the events from a new pallet', () => {
-    const a: Data = { pallet1: { event1: { type: 'primitive', name: 'u64' } } };
-    const b: Data = {
+    const a: ParsedMetadata = { pallet1: { event1: { type: 'primitive', name: 'u64' } } };
+    const b: ParsedMetadata = {
       ...a,
       pallet2: {
         event1: { type: 'primitive', name: 'u64' },

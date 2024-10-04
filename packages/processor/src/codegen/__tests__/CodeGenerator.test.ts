@@ -177,7 +177,7 @@ describe(CodeGenerator, () => {
     });
 
     expect(() => it.next()).toThrowErrorMatchingInlineSnapshot(
-      `[Error: Not all events were generated]`,
+      `[Error: Not all items were generated]`,
     );
     expect(console.error).toHaveBeenCalled();
   });

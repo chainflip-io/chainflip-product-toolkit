@@ -108,7 +108,7 @@ export default class WsClient extends Client {
       let socket;
       try {
         socket = await this.connectionReady();
-      } catch (err) {
+      } catch {
         // retry
         continue;
       }

@@ -17,6 +17,9 @@ export default [
         tsconfigRootDir: import.meta.dirname,
       },
     },
+    linterOptions: {
+      reportUnusedDisableDirectives: 'error',
+    },
   },
   {
     ...pluginJs.configs.recommended,
@@ -43,6 +46,18 @@ export default [
         'error',
         {
           allowInGenericTypeArguments: true,
+        },
+      ],
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        {
+          args: 'after-used',
+          argsIgnorePattern: '^_',
+          caughtErrors: 'all',
+          caughtErrorsIgnorePattern: '^_',
+          destructuredArrayIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
+          ignoreRestSiblings: true,
         },
       ],
     },
