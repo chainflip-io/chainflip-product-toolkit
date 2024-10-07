@@ -98,7 +98,7 @@ export const tryDecodeAddress = (
   address: string,
   cfOrBtcNetwork: BitcoinNetwork | ChainflipNetwork,
 ): DecodedBase58Address | DecodedSegwitAddress | null => {
-  if (/^(1|3|m|n|2)/.test(address)) {
+  if (/^[13mn2]/.test(address)) {
     const network = networkMap[cfOrBtcNetwork];
 
     const { hash, version } = bitcoin.address.fromBase58Check(address);
