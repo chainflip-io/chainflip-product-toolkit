@@ -2,9 +2,9 @@ import { assert } from '@chainflip/utils/assertion';
 import { hexToBytes } from '@chainflip/utils/bytes';
 import * as bitcoin from 'bitcoinjs-lib';
 
-type ChainflipNetwork = 'mainnet' | 'perseverance' | 'sisyphos' | 'backspin';
-type BitcoinNetwork = 'mainnet' | 'testnet' | 'regtest';
-type Bytelike = Uint8Array | number[] | `0x${string}`;
+export type ChainflipNetwork = 'mainnet' | 'perseverance' | 'sisyphos' | 'backspin';
+export type BitcoinNetwork = 'mainnet' | 'testnet' | 'regtest';
+export type Bytelike = Uint8Array | number[] | `0x${string}`;
 
 const p2pkhAddressVersion: Record<BitcoinNetwork, number> = {
   mainnet: 0,
@@ -26,24 +26,22 @@ const networkHrp = {
 
 export type HRP = (typeof networkHrp)[keyof typeof networkHrp];
 
-type AddressType = 'P2SH' | 'P2PKH' | 'P2WPKH' | 'P2WSH' | 'Taproot';
+export type Base58AddressType = 'P2SH' | 'P2PKH';
 
-type Base58AddressType = 'P2SH' | 'P2PKH';
-
-type DecodedBase58Address = {
+export type DecodedBase58Address = {
   type: Base58AddressType;
   data: Uint8Array;
   version: number;
 };
 
-type DecodedSegwitAddress = {
+export type DecodedSegwitAddress = {
   hrp: HRP;
   data: Uint8Array;
   type: SegwitAddressType;
   version: number;
 };
 
-type SegwitAddressType = Exclude<AddressType, Base58AddressType>;
+export type SegwitAddressType = 'P2WPKH' | 'P2WSH' | 'Taproot';
 
 const segwitVersions: Record<SegwitAddressType, number> = {
   P2WPKH: 0,
@@ -65,9 +63,9 @@ const byteLikeToUint8Array = (data: Bytelike): Uint8Array =>
 
 export const encodeAddress = (
   data: Bytelike,
-  kind: AddressType,
+  kind: Base58AddressType | SegwitAddressType,
   cfOrBtcnetwork: BitcoinNetwork | ChainflipNetwork,
-) => {
+): string => {
   const btcNetwork = networkMap[cfOrBtcnetwork];
 
   assert(btcNetwork, `Invalid network: ${cfOrBtcnetwork}`);
@@ -94,10 +92,10 @@ export const encodeAddress = (
   }
 };
 
-export const tryDecodeAddress = (
+export const decodeAddress = (
   address: string,
   cfOrBtcNetwork: BitcoinNetwork | ChainflipNetwork,
-): DecodedBase58Address | DecodedSegwitAddress | null => {
+): DecodedBase58Address | DecodedSegwitAddress => {
   if (/^[13mn2]/.test(address)) {
     const network = networkMap[cfOrBtcNetwork];
 
@@ -140,7 +138,7 @@ export const isValidAddressForNetwork = (
   cfOrBtcNetwork: BitcoinNetwork | ChainflipNetwork,
 ): boolean => {
   try {
-    tryDecodeAddress(address, cfOrBtcNetwork);
+    decodeAddress(address, cfOrBtcNetwork);
     return true;
   } catch {
     return false;
