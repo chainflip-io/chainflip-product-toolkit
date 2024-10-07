@@ -1,7 +1,6 @@
 import { assert } from '@chainflip/utils/assertion';
-import * as base58 from '@chainflip/utils/base58';
 import { hexToBytes } from '@chainflip/utils/bytes';
-import { sha256 } from '@noble/hashes/sha256';
+import * as bitcoin from 'bitcoinjs-lib';
 
 type ChainflipNetwork = 'mainnet' | 'perseverance' | 'sisyphos' | 'backspin';
 type BitcoinNetwork = 'mainnet' | 'testnet' | 'regtest';
@@ -19,218 +18,38 @@ const p2shAddressVersion: Record<BitcoinNetwork, number> = {
   regtest: 196,
 };
 
-const networkHrp: Record<BitcoinNetwork, string> = {
+const networkHrp = {
   mainnet: 'bc',
   testnet: 'tb',
   regtest: 'bcrt',
+} as const satisfies Record<BitcoinNetwork, string>;
+
+export type HRP = (typeof networkHrp)[keyof typeof networkHrp];
+
+type AddressType = 'P2SH' | 'P2PKH' | 'P2WPKH' | 'P2WSH' | 'Taproot';
+
+type Base58AddressType = 'P2SH' | 'P2PKH';
+
+type DecodedBase58Address = {
+  type: Base58AddressType;
+  data: Uint8Array;
+  version: number;
 };
 
-function parseBase58Address(address: string, network: BitcoinNetwork) {
-  const checksumLength = 4;
-  const payloadLength = 21;
+type DecodedSegwitAddress = {
+  hrp: HRP;
+  data: Uint8Array;
+  type: SegwitAddressType;
+  version: number;
+};
 
-  const data = base58.decode(address);
-
-  if (data.length !== payloadLength + checksumLength) return null;
-
-  const payload = data.slice(0, payloadLength);
-  const checksum = data.slice(-checksumLength);
-
-  const computedChecksum = sha256(sha256(payload)).slice(0, checksumLength);
-
-  if (!computedChecksum.every((byte, i) => byte === checksum[i])) return null;
-
-  const [version, ...hash] = payload;
-
-  if (version === p2pkhAddressVersion[network]) {
-    return { type: 'p2pkh', hash: hash };
-  }
-
-  if (version === p2shAddressVersion[network]) {
-    return { type: 'p2sh', hash: hash };
-  }
-
-  return null;
-}
-
-function encodeBase58Address(data: Bytelike, network: BitcoinNetwork, type: 'P2SH' | 'P2PKH') {
-  const version = (type === 'P2SH' ? p2shAddressVersion : p2pkhAddressVersion)[network];
-  const payload = new Uint8Array([
-    version,
-    ...(typeof data === 'string' ? hexToBytes(data) : data),
-  ]);
-  const checksum = sha256(sha256(payload)).slice(0, 4);
-  const address = base58.encode(Buffer.concat([payload, checksum]));
-  return address;
-}
-
-const BECH32_CHARSET = 'qpzry9x8gf2tvdw0s3jn54khce6mua7l';
-
-function decodeBech32(address: string): { hrp: string; data: number[] } | null {
-  // Find the separator '1'
-  const pos = address.lastIndexOf('1');
-  if (pos === -1 || pos === 0 || pos + 7 > address.length) {
-    return null; // Invalid Bech32 address
-  }
-
-  const hrp = address.substring(0, pos);
-  const data = [];
-  for (let i = pos + 1; i < address.length; i++) {
-    const charIndex = BECH32_CHARSET.indexOf(address[i]);
-    if (charIndex === -1) return null; // Invalid character in data part
-
-    data.push(charIndex);
-  }
-
-  return { hrp, data };
-}
-
-function polymod(values: number[]): number {
-  const generators = [0x3b6a57b2, 0x26508e6d, 0x1ea119fa, 0x3d4233dd, 0x2a1462b3];
-  let chk = 1;
-  for (const value of values) {
-    const top = chk >> 25;
-    chk = ((chk & 0x1ffffff) << 5) ^ value;
-    for (let i = 0; i < 5; i++) {
-      if ((top >> i) & 1) {
-        chk ^= generators[i];
-      }
-    }
-  }
-  return chk;
-}
-
-function hrpExpand(hrp: string): number[] {
-  const ret = [];
-  for (let i = 0; i < hrp.length; i++) {
-    ret.push(hrp.charCodeAt(i) >> 5);
-  }
-  ret.push(0);
-  for (let i = 0; i < hrp.length; i++) {
-    ret.push(hrp.charCodeAt(i) & 31);
-  }
-  return ret;
-}
-
-function computeChecksum(hrp: string, data: number[]): number {
-  return polymod(hrpExpand(hrp).concat(data));
-}
-
-const checksums = {
-  bech32: 1,
-  bech32m: 0x2bc830a3,
-} as const;
-
-type Variant = keyof typeof checksums;
-
-function convert5BitGroupsToBytes(data: number[]): Uint8Array {
-  let acc = 0;
-  let bits = 0;
-  const result = [];
-  for (let i = 0; i < data.length; i++) {
-    acc = (acc << 5) | data[i];
-    bits += 5;
-    if (bits >= 8) {
-      result.push((acc >> (bits - 8)) & 0xff); // Extract the top 8 bits
-      bits -= 8;
-    }
-  }
-
-  // Handle any remaining bits
-  if (bits > 0) {
-    const remainingByte = (acc << (8 - bits)) & 0xff;
-    // Only push the remaining byte if it is not zero or bits are fully used
-    if (remainingByte !== 0 || bits > 5) {
-      result.push(remainingByte);
-    }
-  }
-
-  return new Uint8Array(result);
-}
-
-function decodeSegwitAddress(address: string) {
-  const decoded = decodeBech32(address.toLowerCase());
-
-  if (!decoded) {
-    return null; // Invalid address format
-  }
-
-  const { hrp, data: dataWithChecksum } = decoded;
-
-  const checksum = computeChecksum(hrp, dataWithChecksum);
-  let type;
-
-  if (checksum === 1) {
-    type = 'bech32';
-  } else if (checksum === 0x2bc830a3) {
-    type = 'bech32m';
-  } else {
-    return null; // Invalid checksum
-  }
-
-  // Remove version and checksum from data
-  const data = convert5BitGroupsToBytes(dataWithChecksum.slice(1, -6));
-  const [version] = dataWithChecksum;
-
-  assert(data.length >= 2 && data.length <= 40, 'Invalid address');
-  assert(version !== 0 || data.length === 20 || data.length === 32, 'Invalid address');
-
-  return { hrp, data, type, version };
-}
-
-function createChecksum(hrp: string, data: number[], variant: Variant): number[] {
-  const values = hrpExpand(hrp).concat(data).concat([0, 0, 0, 0, 0, 0]);
-  const polymodValue = polymod(values) ^ checksums[variant];
-  const checksum = [];
-  for (let i = 0; i < 6; i++) {
-    checksum.push((polymodValue >> (5 * (5 - i))) & 31);
-  }
-  return checksum;
-}
-
-function encodeBech32(hrp: string, data: number[]): string {
-  return `${hrp}1${data.map((i) => BECH32_CHARSET[i]).join('')}`;
-}
-
-function convertBytesTo5BitGroups(data: Uint8Array): number[] {
-  let acc = 0;
-  let bits = 0;
-  const result = [];
-  for (let i = 0; i < data.length; i++) {
-    acc = (acc << 8) | data[i];
-    bits += 8;
-    while (bits >= 5) {
-      result.push((acc >> (bits - 5)) & 31); // Extract the top 5 bits
-      bits -= 5;
-    }
-  }
-  if (bits > 0) {
-    result.push((acc << (5 - bits)) & 31); // Add remaining bits as the last group
-  }
-  return result;
-}
-
-type SegwitAddressType = 'P2WPKH' | 'P2WSH' | 'Taproot';
+type SegwitAddressType = Exclude<AddressType, Base58AddressType>;
 
 const segwitVersions: Record<SegwitAddressType, number> = {
   P2WPKH: 0,
   P2WSH: 0,
   Taproot: 1,
 };
-
-function encodeSegwitAddress(byteData: Bytelike, kind: SegwitAddressType, network: BitcoinNetwork) {
-  const variant = kind === 'Taproot' ? 'bech32m' : 'bech32';
-  const bytes = typeof byteData === 'string' ? hexToBytes(byteData) : new Uint8Array(byteData);
-  const version = segwitVersions[kind];
-  assert(bytes.length >= 2 && bytes.length <= 40, 'Invalid address');
-  assert(version !== 0 || bytes.length === 20 || bytes.length === 32, 'Invalid address');
-  const data = [segwitVersions[kind]].concat(convertBytesTo5BitGroups(bytes));
-  const hrp = networkHrp[network];
-  const checksum = createChecksum(hrp, data, variant);
-  return encodeBech32(hrp, data.concat(checksum));
-}
-
-type AddressType = 'P2WPKH' | 'P2SH' | 'P2PKH' | 'P2WSH' | 'Taproot';
 
 const networkMap: Record<ChainflipNetwork | BitcoinNetwork, BitcoinNetwork> = {
   mainnet: 'mainnet',
@@ -240,6 +59,9 @@ const networkMap: Record<ChainflipNetwork | BitcoinNetwork, BitcoinNetwork> = {
   backspin: 'regtest',
   regtest: 'regtest',
 };
+
+const byteLikeToUint8Array = (data: Bytelike): Uint8Array =>
+  typeof data === 'string' ? hexToBytes(data) : new Uint8Array(data);
 
 export const encodeAddress = (
   data: Bytelike,
@@ -255,41 +77,72 @@ export const encodeAddress = (
     'bytes are not a valid hex string',
   );
 
+  const bytes = byteLikeToUint8Array(data);
+
   switch (kind) {
     case 'P2PKH':
-    case 'P2SH':
-      return encodeBase58Address(data, btcNetwork, kind);
+    case 'P2SH': {
+      const version = (kind === 'P2SH' ? p2shAddressVersion : p2pkhAddressVersion)[btcNetwork];
+      return bitcoin.address.toBase58Check(bytes, version);
+    }
     case 'P2WPKH':
     case 'P2WSH':
     case 'Taproot':
-      return encodeSegwitAddress(data, kind, btcNetwork);
+      return bitcoin.address.toBech32(bytes, segwitVersions[kind], networkHrp[btcNetwork]);
     default:
       throw new Error(`Invalid address type: ${kind as string}`);
   }
 };
 
-export const isValidAddressForNetwork = (address: string, network: BitcoinNetwork) => {
-  if (network === 'mainnet') {
-    if (/^(1|3)/.test(address)) {
-      return parseBase58Address(address, network) !== null;
+export const tryDecodeAddress = (
+  address: string,
+  cfOrBtcNetwork: BitcoinNetwork | ChainflipNetwork,
+): DecodedBase58Address | DecodedSegwitAddress | null => {
+  if (/^(1|3|m|n|2)/.test(address)) {
+    const network = networkMap[cfOrBtcNetwork];
+
+    const { hash, version } = bitcoin.address.fromBase58Check(address);
+
+    if (version === p2pkhAddressVersion[network]) {
+      return { type: 'P2PKH', data: hash, version };
     }
 
-    if (/^bc1/.test(address)) {
-      return decodeSegwitAddress(address) !== null;
-    }
-  } else {
-    if (/^(m|n|2)/.test(address)) {
-      return parseBase58Address(address, network) !== null;
+    if (version === p2shAddressVersion[network]) {
+      return { type: 'P2SH', data: hash, version };
     }
 
-    if (network === 'regtest' && /^bcrt1/.test(address)) {
-      return decodeSegwitAddress(address) !== null;
-    }
-
-    if (network === 'testnet' && /^tb1/.test(address)) {
-      return decodeSegwitAddress(address) !== null;
-    }
+    throw new TypeError(`Invalid version: ${version}`);
   }
 
-  return false;
+  if (/^(bc|tb|bcrt)1/.test(address)) {
+    const { data, prefix, version } = bitcoin.address.fromBech32(address);
+
+    let type: SegwitAddressType;
+
+    if (version === 0 && data.length === 20) {
+      type = 'P2WPKH';
+    } else if (version === 0) {
+      type = 'P2WSH';
+    } else if (version === 1) {
+      type = 'Taproot';
+    } else {
+      throw new TypeError(`Invalid version: ${version}`);
+    }
+
+    return { hrp: prefix as HRP, data, type, version };
+  }
+
+  throw new TypeError(`Invalid address: ${address}`);
+};
+
+export const isValidAddressForNetwork = (
+  address: string,
+  cfOrBtcNetwork: BitcoinNetwork | ChainflipNetwork,
+): boolean => {
+  try {
+    tryDecodeAddress(address, cfOrBtcNetwork);
+    return true;
+  } catch {
+    return false;
+  }
 };

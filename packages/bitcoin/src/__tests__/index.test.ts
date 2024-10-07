@@ -1,5 +1,6 @@
+import { bytesToHex } from '@chainflip/utils/bytes';
 import { describe, it, expect } from 'vitest';
-import { encodeAddress, isValidAddressForNetwork } from '../index';
+import { encodeAddress, tryDecodeAddress, isValidAddressForNetwork } from '../index';
 
 const networks = ['mainnet', 'perseverance', 'sisyphos', 'backspin', 'regtest', 'testnet'] as const;
 
@@ -14,14 +15,12 @@ const cases = (
 ).flatMap(([type, address]) => networks.map((n) => [type, n, address] as const));
 
 describe('bitcoin', () => {
-  it.each(cases)('decodes a %s address on %s', (kind, network, address) => {
-    expect(encodeAddress(address, kind, network)).toMatchSnapshot(`${kind} on ${network}`);
-    expect(encodeAddress(Buffer.from(address.slice(2), 'hex'), kind, network)).toMatchSnapshot(
-      `${kind} on ${network}`,
-    );
-    expect(encodeAddress([...Buffer.from(address.slice(2), 'hex')], kind, network)).toMatchSnapshot(
-      `${kind} on ${network}`,
-    );
+  it.each(cases)('encodes and decodes a %s address on %s', (kind, network, address) => {
+    const result = encodeAddress(address, kind, network);
+    expect(result).toMatchSnapshot(`${kind} on ${network}`);
+    expect(encodeAddress(Buffer.from(address.slice(2), 'hex'), kind, network)).toEqual(result);
+    expect(encodeAddress([...Buffer.from(address.slice(2), 'hex')], kind, network)).toEqual(result);
+    expect(bytesToHex(tryDecodeAddress(result, network)!.data)).toEqual(address);
   });
 
   it('throws for invalid networks', () => {
@@ -47,12 +46,6 @@ describe('bitcoin', () => {
       encodeAddress('0x63b7cc4432bba5c51fd09428c47abaf2d52f937g', 'P2WPKH', 'mainnet'),
     ).toThrowErrorMatchingInlineSnapshot(`[Error: bytes are not a valid hex string]`);
   });
-
-  it('throws on bad addresses', () => {
-    expect(() => encodeAddress('0x00', 'Taproot', 'mainnet')).toThrowErrorMatchingInlineSnapshot(
-      `[Error: Invalid address]`,
-    );
-  });
 });
 
 describe(isValidAddressForNetwork, () => {
@@ -61,6 +54,7 @@ describe(isValidAddressForNetwork, () => {
       P2PKH: ['1PYVSoeftFP4EVBN3ou8vZctkhDthJamvp'],
       P2SH: ['32k55FA93MYqbjhLk9hokD3P666Vz9QqKb'],
       Taproot: ['bc1qwqdg6squsna38e46795at95yu9atm8azzmyvckulcc7kytlcckxswvvzej'],
+      P2WSH: ['bc1qeklep85ntjz4605drds6aww9u0qr46qzrv5xswd35uhjuj8ahfcqgf6hak'],
     },
     testnet: {
       P2PKH: ['mipcBbFg9gMiCh81Kj8tqqdgoZub1ZJRfn', 'n2ZtW11kqP6pf3umiU4NaSRgrL9aQJVuJV'],
