@@ -6,12 +6,8 @@
     "build": "pnpm clean && pnpm tsup",
     "test": "vitest"
   },
-  "dependencies": {
-    "@chainflip/bitcoin": "workspace:../bitcoin",
-    "@chainflip/utils": "^0.4.0",
-    "zod": "^3.23.8"
-  },
   "devDependencies": {
+    "@chainflip/utils": "^0.4.0",
     "@polkadot/types": "^10.11.2"
   },
   "files": [

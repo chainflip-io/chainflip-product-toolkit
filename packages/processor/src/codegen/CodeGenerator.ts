@@ -271,7 +271,17 @@ export default class CodeGenerator extends BaseCodeGenerator {
     ]);
   }
 
-  protected override getName(palletName: string, itemName: string): string {
+  protected override getParserName(palletName: string, itemName: string): string {
     return `${palletName}.${itemName}`;
+  }
+
+  protected override getName(palletName: string, itemName: string): string {
+    return `${palletName}::${itemName}`
+      .replace(/(?:::|_)(.)/g, (_, c: string) => c.toUpperCase())
+      .replace(/^./, (c) => c.toLowerCase());
+  }
+
+  protected override getGlobalImports(): string[] {
+    return ["import { z } from 'zod';"];
   }
 }

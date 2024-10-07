@@ -17,16 +17,11 @@ import {
 } from './BaseParser';
 import { formatCode } from './utils';
 
-const nameToIdentifier = (name: string): string =>
-  name
-    .replace(/(?:::|_)(.)/g, (_, c: string) => c.toUpperCase())
-    .replace(/^./, (c) => c.toLowerCase());
-
 export abstract class CodegenResult {
   declarationType: 'type' | 'const' = 'const';
 
   constructor(
-    private readonly code: string,
+    readonly code: string,
     readonly dependencies: CodegenResult[] = [],
   ) {}
 
@@ -40,6 +35,7 @@ export abstract class CodegenResult {
   }
 
   abstract getDependencies(): Identifier[];
+  abstract [Symbol.toStringTag](): string;
 }
 
 export class Identifier extends CodegenResult {
@@ -53,11 +49,19 @@ export class Identifier extends CodegenResult {
   getDependencies(): Identifier[] {
     return [this];
   }
+
+  [Symbol.toStringTag](): string {
+    return 'Identifier';
+  }
 }
 
 export class Code extends CodegenResult {
   getDependencies(): Identifier[] {
     return this.dependencies.flatMap((d) => d.getDependencies());
+  }
+
+  [Symbol.toStringTag](): string {
+    return 'Code';
   }
 }
 
@@ -65,6 +69,7 @@ class Module {
   constructor(
     private readonly name: string,
     private readonly exports: Map<string, CodegenResult>,
+    private readonly globalImports: string[],
     private readonly pallet?: string,
   ) {}
 
@@ -92,7 +97,7 @@ class Module {
     }
 
     return [
-      "import { z } from 'zod';",
+      ...this.globalImports,
       ...Object.entries(dependencies).map(([pkg, depsSet]) => {
         const pkgPath = pkg === 'common' ? '../common' : pkg;
 
@@ -169,11 +174,23 @@ export default abstract class CodeGenerator {
     }
   }
 
-  protected generateItem(itemName: string, def: ResolvedType) {
+  protected generateItem(itemName: string, def: ResolvedType): CodegenResult {
     return this.generateResolvedType(def);
   }
 
-  protected abstract getName(palletName: string, itemName: string): string;
+  protected abstract getParserName(palletName: string, itemName: string): string;
+
+  protected getName(palletName: string, itemName: string) {
+    return this.getParserName(palletName, itemName);
+  }
+
+  protected getGlobalImports(): string[] {
+    return [];
+  }
+
+  protected getFileName(palletName: string, itemName: string) {
+    return itemName;
+  }
 
   *generate(def: ParsedMetadata) {
     const unhandledItems = new Set(this.trackedItems);
@@ -181,24 +198,29 @@ export default abstract class CodeGenerator {
 
     for (const [palletName, items] of Object.entries(def)) {
       for (const [itemName, item] of Object.entries(items)) {
-        const name = this.getName(palletName, itemName);
-        if (this.trackedItems && !unhandledItems.delete(name)) continue;
-        generatedItems.add(name);
+        const parserName = this.getParserName(palletName, itemName);
+        if (this.trackedItems && !unhandledItems.delete(parserName)) continue;
+        generatedItems.add(parserName);
 
         let generatedCode: CodegenResult;
 
         try {
           generatedCode = this.generateItem(itemName, item);
         } catch (e) {
-          console.error(`failed to parse: ${name}`);
+          console.error(`failed to parse: ${parserName}`);
           console.error(JSON.stringify(item, null, 2));
           console.error(e);
           throw e;
         }
 
-        const parserName = nameToIdentifier(`${palletName}::${itemName}`);
+        const name = this.getName(palletName, itemName);
 
-        yield new Module(itemName, new Map([[parserName, generatedCode]]), palletName);
+        yield new Module(
+          this.getFileName(palletName, itemName),
+          new Map([[name, generatedCode]]),
+          this.getGlobalImports(),
+          palletName,
+        );
       }
     }
 
@@ -209,6 +231,6 @@ export default abstract class CodeGenerator {
 
     if (generatedItems.size === 0) return;
 
-    yield new Module('common', new Map(this.registry.types));
+    yield new Module('common', new Map(this.registry.types), this.getGlobalImports());
   }
 }
