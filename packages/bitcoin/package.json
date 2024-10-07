@@ -22,6 +22,6 @@
   "module": "dist/index.mjs",
   "dependencies": {
     "@chainflip/utils": "^0.4.0",
-    "@noble/hashes": "^1.4.0"
+    "bitcoinjs-lib": "^7.0.0-rc.0"
   }
 }
