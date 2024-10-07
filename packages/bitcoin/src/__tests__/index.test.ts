@@ -1,6 +1,6 @@
 import { bytesToHex } from '@chainflip/utils/bytes';
 import { describe, it, expect } from 'vitest';
-import { encodeAddress, tryDecodeAddress, isValidAddressForNetwork } from '../index';
+import { encodeAddress, decodeAddress, isValidAddressForNetwork } from '../index';
 
 const networks = ['mainnet', 'perseverance', 'sisyphos', 'backspin', 'regtest', 'testnet'] as const;
 
@@ -20,7 +20,7 @@ describe('bitcoin', () => {
     expect(result).toMatchSnapshot(`${kind} on ${network}`);
     expect(encodeAddress(Buffer.from(address.slice(2), 'hex'), kind, network)).toEqual(result);
     expect(encodeAddress([...Buffer.from(address.slice(2), 'hex')], kind, network)).toEqual(result);
-    expect(bytesToHex(tryDecodeAddress(result, network)!.data)).toEqual(address);
+    expect(bytesToHex(decodeAddress(result, network).data)).toEqual(address);
   });
 
   it('throws for invalid networks', () => {
