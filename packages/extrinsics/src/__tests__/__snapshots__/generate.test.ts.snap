@@ -29,7 +29,7 @@ exports[`extrinsic codegen > generates the code in the desired format > /160/com
 export type EncodedAddress =
   | Record<'Eth', Uint8Array>
   | Record<'Dot', Uint8Array>
-  | Record<'Btc', \`0x\${string}\`>
+  | Record<'Btc', Uint8Array | \`0x\${string}\`>
   | Record<'Arb', Uint8Array>
   | Record<'Sol', Uint8Array>;
 
@@ -43,15 +43,15 @@ export type BitcoinScriptPubKey =
       'OtherSegwit',
       {
         version: number;
-        program: \`0x\${string}\`;
+        program: Uint8Array | \`0x\${string}\`;
       }
     >;
 
 export type ForeignChainAddress =
-  | Record<'Eth', number[]>
+  | Record<'Eth', Uint8Array>
   | Record<'Dot', Uint8Array>
   | Record<'Btc', BitcoinScriptPubKey>
-  | Record<'Arb', number[]>
+  | Record<'Arb', Uint8Array>
   | Record<'Sol', Uint8Array>;
 "
 `;
@@ -65,9 +65,9 @@ export type SwappingRequestSwapDepositAddress = [
   destinationAddress: EncodedAddress,
   brokerCommission: number,
   channelMetadata: {
-    message: \`0x\${string}\`;
-    gasBudget: \`0x\${string}\`;
-    cfParameters: \`0x\${string}\`;
+    message: Uint8Array | \`0x\${string}\`;
+    gas_budget: \`0x\${string}\`;
+    cf_parameters: Uint8Array | \`0x\${string}\`;
   } | null,
   boostFee: number,
 ];
@@ -83,9 +83,9 @@ export type SwappingRequestSwapDepositAddressWithAffiliates = [
   destinationAddress: EncodedAddress,
   brokerCommission: number,
   channelMetadata: {
-    message: \`0x\${string}\`;
-    gasBudget: \`0x\${string}\`;
-    cfParameters: \`0x\${string}\`;
+    message: Uint8Array | \`0x\${string}\`;
+    gas_budget: \`0x\${string}\`;
+    cf_parameters: Uint8Array | \`0x\${string}\`;
   } | null,
   boostFee: number,
   affiliateFees: {
@@ -93,13 +93,13 @@ export type SwappingRequestSwapDepositAddressWithAffiliates = [
     bps: number;
   }[],
   refundParameters: {
-    retryDuration: number;
-    refundAddress: ForeignChainAddress;
-    minPrice: \`0x\${string}\`;
+    retry_duration: number;
+    refund_address: ForeignChainAddress;
+    min_price: \`0x\${string}\`;
   } | null,
   dcaParameters: {
-    numberOfChunks: number;
-    chunkInterval: number;
+    number_of_chunks: number;
+    chunk_interval: number;
   } | null,
 ];
 "

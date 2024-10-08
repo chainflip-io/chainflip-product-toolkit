@@ -6,9 +6,9 @@ export type SwappingRequestSwapDepositAddressWithAffiliates = [
   destinationAddress: EncodedAddress,
   brokerCommission: number,
   channelMetadata: {
-    message: `0x${string}`;
-    gasBudget: `0x${string}`;
-    cfParameters: `0x${string}`;
+    message: Uint8Array | `0x${string}`;
+    gas_budget: `0x${string}`;
+    cf_parameters: Uint8Array | `0x${string}`;
   } | null,
   boostFee: number,
   affiliateFees: {
@@ -16,12 +16,12 @@ export type SwappingRequestSwapDepositAddressWithAffiliates = [
     bps: number;
   }[],
   refundParameters: {
-    retryDuration: number;
-    refundAddress: ForeignChainAddress;
-    minPrice: `0x${string}`;
+    retry_duration: number;
+    refund_address: ForeignChainAddress;
+    min_price: `0x${string}`;
   } | null,
   dcaParameters: {
-    numberOfChunks: number;
-    chunkInterval: number;
+    number_of_chunks: number;
+    chunk_interval: number;
   } | null,
 ];

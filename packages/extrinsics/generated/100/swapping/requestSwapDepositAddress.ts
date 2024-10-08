@@ -6,8 +6,8 @@ export type SwappingRequestSwapDepositAddress = [
   destinationAddress: EncodedAddress,
   brokerCommissionBps: number,
   channelMetadata: {
-    message: `0x${string}`;
-    gasBudget: `0x${string}`;
-    cfParameters: `0x${string}`;
+    message: Uint8Array | `0x${string}`;
+    gas_budget: `0x${string}`;
+    cf_parameters: Uint8Array | `0x${string}`;
   } | null,
 ];
