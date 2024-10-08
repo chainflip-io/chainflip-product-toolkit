@@ -13,6 +13,44 @@ import {
 } from '@/chainspec/BaseParser';
 import assert from 'assert';
 
+class Struct extends Code {
+  as: 'tuple' | 'record' = 'record';
+  declarationType: 'type' | 'const' = 'type';
+
+  constructor(private readonly fields: (readonly [string, CodegenResult])[]) {
+    super(
+      '',
+      fields.map(([, type]) => type),
+    );
+  }
+
+  asTuple() {
+    this.as = 'tuple';
+    return this;
+  }
+
+  override toString() {
+    let open: string;
+    let close: string;
+    let transform = (name: string) => name;
+
+    if (this.as === 'tuple') {
+      open = '[';
+      close = ']';
+    } else {
+      open = '{';
+      close = '}';
+      transform = (name) => name.replace(/[A-Z]/g, (m) => `_${m.toLowerCase()}`);
+    }
+
+    return `${open}\n${this.fields.map(([name, type]) => `${transform(name)}: ${type.toString()}`).join(',\n')}\n${close}`;
+  }
+
+  [Symbol.toStringTag]() {
+    return 'Struct';
+  }
+}
+
 export default class CodeGenerator extends BaseCodeGenerator {
   private getKnownIdentifier(name: string): string {
     switch (name) {
@@ -37,11 +75,12 @@ export default class CodeGenerator extends BaseCodeGenerator {
         return new Code('number').asType();
       case 'u128':
       case 'U256':
-      case 'Bytes':
       case 'AccountId32':
         return new Code('`0x${string}`').asType();
+      case 'Bytes':
+        return new Code('Uint8Array | `0x${string}`').asType();
       case 'H160':
-        return new Code('number[]').asType();
+        return new Code('Uint8Array').asType();
       default:
         throw new Error(`Method not implemented for primitive type: ${def.name}`);
     }
@@ -74,14 +113,11 @@ export default class CodeGenerator extends BaseCodeGenerator {
   }
 
   protected override generateStruct(def: StructType): CodegenResult {
-    const fields: string[] = [];
-    const dependencies: CodegenResult[] = [];
-    for (const [name, type] of Object.entries(def.fields)) {
+    const fields = Object.entries(def.fields).map(([name, type]) => {
       const result = this.generateResolvedType(type);
-      dependencies.push(result);
-      fields.push(`${name}: ${result.toString()}`);
-    }
-    return new Code(`{\n${fields.join(',\n')}\n}`, dependencies).asType();
+      return [name, result] as const;
+    });
+    return new Struct(fields);
   }
 
   protected override generateArray(def: ArrayType): CodegenResult {
@@ -114,9 +150,8 @@ export default class CodeGenerator extends BaseCodeGenerator {
   protected override generateItem(itemName: string, def: ResolvedType): CodegenResult {
     const type = this.generateResolvedType(def);
     assert(def.type === 'struct', `Expected struct, got ${def.type}`);
-    assert(type instanceof Code, `Expected code, got ${type[Symbol.toStringTag]()}`);
-    // change struct to named tuple
-    return new Code(`[${type.code.slice(1, -1)}]`, type.dependencies).asType();
+    assert(type instanceof Struct, `Expected code, got ${type[Symbol.toStringTag]()}`);
+    return type.asTuple();
   }
 
   protected override getParserName(palletName: string, itemName: string): string {

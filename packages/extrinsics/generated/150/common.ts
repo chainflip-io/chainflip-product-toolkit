@@ -12,7 +12,7 @@ export type ChainflipAsset =
 export type EncodedAddress =
   | Record<'Eth', Uint8Array>
   | Record<'Dot', Uint8Array>
-  | Record<'Btc', `0x${string}`>
+  | Record<'Btc', Uint8Array | `0x${string}`>
   | Record<'Arb', Uint8Array>
   | Record<'Sol', Uint8Array>;
 
@@ -26,13 +26,13 @@ export type BitcoinScriptPubKey =
       'OtherSegwit',
       {
         version: number;
-        program: `0x${string}`;
+        program: Uint8Array | `0x${string}`;
       }
     >;
 
 export type ForeignChainAddress =
-  | Record<'Eth', number[]>
+  | Record<'Eth', Uint8Array>
   | Record<'Dot', Uint8Array>
   | Record<'Btc', BitcoinScriptPubKey>
-  | Record<'Arb', number[]>
+  | Record<'Arb', Uint8Array>
   | Record<'Sol', Uint8Array>;
