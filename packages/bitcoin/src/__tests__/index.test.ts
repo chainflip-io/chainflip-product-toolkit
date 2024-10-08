@@ -49,6 +49,8 @@ describe('bitcoin', () => {
 });
 
 describe(isValidAddressForNetwork, () => {
+  const keys = <T extends Record<string, unknown>>(obj: T) => Object.keys(obj) as (keyof T)[];
+
   const bitcoinAddresses = {
     mainnet: {
       P2PKH: ['1PYVSoeftFP4EVBN3ou8vZctkhDthJamvp'],
@@ -66,17 +68,65 @@ describe(isValidAddressForNetwork, () => {
     },
   };
 
-  describe.each(Object.entries(bitcoinAddresses))('for %s', (network, addressTypes) => {
-    describe.each(Object.entries(addressTypes))('for %s', (kind, addresses) => {
-      it.each(addresses)('gets the network for %s', (address) => {
-        expect(
-          isValidAddressForNetwork(address, network as 'mainnet' | 'testnet' | 'regtest'),
-        ).toBe(true);
-      });
-    });
+  it('handles mainnet addresses', () => {
+    const addresses = bitcoinAddresses.mainnet;
+
+    for (const kind of keys(addresses)) {
+      for (const address of addresses[kind]) {
+        expect(isValidAddressForNetwork(address, 'mainnet')).toBe(true);
+      }
+    }
+
+    for (const network of ['testnet', 'regtest'] as const) {
+      for (const address of Object.values(bitcoinAddresses[network]).flat()) {
+        expect(isValidAddressForNetwork(address, 'mainnet')).toBe(false);
+      }
+    }
   });
 
-  it('returns null for invalid addresses', () => {
+  it('handles testnet addresses', () => {
+    const addresses = bitcoinAddresses.testnet;
+
+    for (const kind of keys(addresses)) {
+      for (const address of addresses[kind]) {
+        expect(isValidAddressForNetwork(address, 'testnet')).toBe(true);
+      }
+    }
+
+    for (const network of ['mainnet', 'regtest'] as const) {
+      for (const address of Object.values(bitcoinAddresses[network]).flat()) {
+        expect(isValidAddressForNetwork(address, 'testnet')).toBe(false);
+      }
+    }
+  });
+
+  it('handles regtest addresses', () => {
+    const addresses = bitcoinAddresses.regtest;
+
+    for (const kind of keys(addresses)) {
+      for (const address of addresses[kind]) {
+        expect(isValidAddressForNetwork(address, 'regtest')).toBe(true);
+      }
+    }
+
+    for (const address of Object.values(bitcoinAddresses['mainnet']).flat()) {
+      expect(isValidAddressForNetwork(address, 'regtest')).toBe(false);
+    }
+
+    for (const type of keys(bitcoinAddresses.testnet)) {
+      for (const address of bitcoinAddresses.testnet[type]) {
+        expect(isValidAddressForNetwork(address, 'regtest')).toBe(type !== 'Taproot');
+      }
+    }
+  });
+
+  it('returns false for invalid addresses', () => {
     expect(isValidAddressForNetwork('invalid', 'mainnet')).toBe(false);
+    expect(
+      isValidAddressForNetwork(
+        'bc1teklep85ntjz4605drds6aww9u0qr46qzrv5xswd35uhjuj8ahfcqgf6hak',
+        'mainnet',
+      ),
+    ).toBe(false);
   });
 });

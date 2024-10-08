@@ -96,9 +96,9 @@ export const decodeAddress = (
   address: string,
   cfOrBtcNetwork: BitcoinNetwork | ChainflipNetwork,
 ): DecodedBase58Address | DecodedSegwitAddress => {
-  if (/^[13mn2]/.test(address)) {
-    const network = networkMap[cfOrBtcNetwork];
+  const network = networkMap[cfOrBtcNetwork];
 
+  if (/^[13mn2]/.test(address)) {
     const { hash, version } = bitcoin.address.fromBase58Check(address);
 
     if (version === p2pkhAddressVersion[network]) {
@@ -115,6 +115,8 @@ export const decodeAddress = (
   if (/^(bc|tb|bcrt)1/.test(address)) {
     const { data, prefix, version } = bitcoin.address.fromBech32(address);
 
+    assert(prefix === networkHrp[network], `Invalid prefix: ${prefix}`);
+
     let type: SegwitAddressType;
 
     if (version === 0 && data.length === 20) {
@@ -127,10 +129,10 @@ export const decodeAddress = (
       throw new TypeError(`Invalid version: ${version}`);
     }
 
-    return { hrp: prefix as HRP, data, type, version };
+    return { hrp: prefix, data, type, version };
   }
 
-  throw new TypeError(`Invalid address: ${address}`);
+  throw new TypeError(`Invalid address "${address}" for network "${network}"`);
 };
 
 export const isValidAddressForNetwork = (
