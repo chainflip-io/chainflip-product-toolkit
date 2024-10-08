@@ -107,7 +107,7 @@ class ChangelogGenerator {
   }
 }
 
-export const diffSpecs = <T>(a: ParsedMetadata<T>, b: ParsedMetadata<T>) => {
+export const diffSpecs = (a: ParsedMetadata, b: ParsedMetadata) => {
   const changedOrAddedEvents = new Set<string>();
   const changelog = new ChangelogGenerator();
 

@@ -70,7 +70,6 @@ export default class Processor<P extends ProcessorStore<unknown, unknown>, I ext
     this.name = name;
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   protected async preBlockHook(_store: P, _block: Block): Promise<void> {
     this.timings = {
       extrinsicHandlers: 0,
@@ -80,7 +79,6 @@ export default class Processor<P extends ProcessorStore<unknown, unknown>, I ext
     return Promise.resolve();
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   protected async postBlockHook(_store: P, _block: Block): Promise<void> {
     // do nothing by default
   }
@@ -147,7 +145,6 @@ export default class Processor<P extends ProcessorStore<unknown, unknown>, I ext
     }) as EventHandler<P>;
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   protected async handleExtrinsic(_store: P, _block: Block, _call: Call): Promise<void> {
     // do nothing by default
   }
@@ -244,7 +241,6 @@ export default class Processor<P extends ProcessorStore<unknown, unknown>, I ext
     assert(updated, 'failed to update state, maybe another process is running');
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   protected shouldProcessBlock(_block: Block): boolean {
     return true;
   }

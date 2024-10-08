@@ -4,7 +4,7 @@ export const isValidSolanaAddress = (address: string) => {
   try {
     const bytes = base58.decode(address);
     return bytes.length === 32;
-  } catch (e) {
+  } catch {
     return false;
   }
 };

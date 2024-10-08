@@ -59,7 +59,7 @@ export type ResolvedType =
   | OptionType
   | RangeType;
 
-export default class Parser extends BaseParser<ResolvedType> {
+export default class Parser extends BaseParser {
   protected getItems(pallet: PalletMetadataV14): { type: SiLookupTypeId } | null {
     return pallet.events.isSome ? pallet.events.unwrap() : null;
   }

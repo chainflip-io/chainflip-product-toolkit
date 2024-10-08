@@ -1,18 +1,27 @@
 /* eslint-disable no-console */
+import { unreachable } from '@chainflip/utils/assertion';
+import { uncapitalize } from '@chainflip/utils/string';
 import * as fs from 'fs/promises';
 import * as path from 'path';
-import { uncapitalize } from '@chainflip/utils/string';
-import { ParsedMetadata } from './BaseParser';
+import {
+  ArrayType,
+  EnumType,
+  MapType,
+  OptionType,
+  ParsedMetadata,
+  PrimitiveType,
+  RangeType,
+  ResolvedType,
+  StructType,
+  TupleType,
+} from './BaseParser';
 import { formatCode } from './utils';
 
-const nameToIdentifier = (name: string): string =>
-  name
-    .replace(/(?:::|_)(.)/g, (_, c: string) => c.toUpperCase())
-    .replace(/^./, (c) => c.toLowerCase());
-
 export abstract class CodegenResult {
+  declarationType: 'type' | 'const' = 'const';
+
   constructor(
-    private readonly code: string,
+    readonly code: string,
     readonly dependencies: CodegenResult[] = [],
   ) {}
 
@@ -20,7 +29,13 @@ export abstract class CodegenResult {
     return this.code;
   }
 
+  asType() {
+    this.declarationType = 'type';
+    return this;
+  }
+
   abstract getDependencies(): Identifier[];
+  abstract [Symbol.toStringTag](): string;
 }
 
 export class Identifier extends CodegenResult {
@@ -34,11 +49,19 @@ export class Identifier extends CodegenResult {
   getDependencies(): Identifier[] {
     return [this];
   }
+
+  [Symbol.toStringTag](): string {
+    return 'Identifier';
+  }
 }
 
 export class Code extends CodegenResult {
   getDependencies(): Identifier[] {
     return this.dependencies.flatMap((d) => d.getDependencies());
+  }
+
+  [Symbol.toStringTag](): string {
+    return 'Code';
   }
 }
 
@@ -46,6 +69,7 @@ class Module {
   constructor(
     private readonly name: string,
     private readonly exports: Map<string, CodegenResult>,
+    private readonly globalImports: string[],
     private readonly pallet?: string,
   ) {}
 
@@ -56,7 +80,7 @@ class Module {
   toString() {
     const generated: string[] = [];
 
-    const dependencies: Record<string, Set<string>> = {};
+    const dependencies: Record<string, Map<string, CodegenResult>> = {};
 
     for (const [identifier, type] of this.exports.entries()) {
       const exportDeps = type.getDependencies();
@@ -64,23 +88,25 @@ class Module {
       for (const ident of exportDeps) {
         // don't import from the file we are in
         if (ident.pkg === this.name) continue;
-        dependencies[ident.pkg] ??= new Set();
-        dependencies[ident.pkg].add(ident.toString());
+        dependencies[ident.pkg] ??= new Map();
+        dependencies[ident.pkg].set(ident.toString(), ident);
       }
 
-      generated.push(`export const ${identifier} = ${type.toString()};`);
+      generated.push(`export ${type.declarationType} ${identifier} = ${type.toString()};`);
       generated.push('');
     }
 
     return [
-      "import { z } from 'zod';",
+      ...this.globalImports,
       ...Object.entries(dependencies).map(([pkg, depsSet]) => {
         const pkgPath = pkg === 'common' ? '../common' : pkg;
 
-        const deps = [...depsSet];
+        const deps = [...depsSet.entries()]
+          .sort(([a], [b]) => (a.toLowerCase() < b.toLowerCase() ? -1 : 1))
+          .map(([name, type]) => (type.declarationType === 'const' ? name : `type ${name}`));
 
         const names =
-          deps.length === 1 && deps[0].startsWith('*') ? deps[0] : `{ ${deps.sort().join(', ')} }`;
+          deps.length === 1 && deps[0].startsWith('*') ? deps[0] : `{ ${deps.join(', ')} }`;
 
         return `import ${names} from '${pkgPath}';`;
       }),
@@ -105,7 +131,7 @@ class Module {
   }
 }
 
-export default abstract class CodeGenerator<T> {
+export default abstract class CodeGenerator {
   protected registry = {
     types: new Map<string, CodegenResult>(),
   };
@@ -116,44 +142,95 @@ export default abstract class CodeGenerator<T> {
     if (trackedItems) this.trackedItems = new Set(trackedItems);
   }
 
-  protected abstract generateResolvedType(event: T): CodegenResult;
+  protected abstract generateArray(def: ArrayType): CodegenResult;
+  protected abstract generateEnum(def: EnumType): CodegenResult;
+  protected abstract generateMap(def: MapType): CodegenResult;
+  protected abstract generateOption(def: OptionType): CodegenResult;
+  protected abstract generatePrimitive(def: PrimitiveType): CodegenResult;
+  protected abstract generateRange(def: RangeType): CodegenResult;
+  protected abstract generateStruct(def: StructType): CodegenResult;
+  protected abstract generateTuple(def: TupleType): CodegenResult;
 
-  protected abstract getName(palletName: string, itemName: string): string;
+  protected generateResolvedType(def: ResolvedType): CodegenResult {
+    switch (def.type) {
+      case 'array':
+        return this.generateArray(def);
+      case 'enum':
+        return this.generateEnum(def);
+      case 'map':
+        return this.generateMap(def);
+      case 'option':
+        return this.generateOption(def);
+      case 'primitive':
+        return this.generatePrimitive(def);
+      case 'range':
+        return this.generateRange(def);
+      case 'struct':
+        return this.generateStruct(def);
+      case 'tuple':
+        return this.generateTuple(def);
+      default:
+        return unreachable(def, `Unsupported type: ${(def as ResolvedType).type}`);
+    }
+  }
 
-  *generate(def: ParsedMetadata<T>) {
-    const unhandledEvents = new Set(this.trackedItems);
-    const generatedEvents = new Set<string>();
+  protected generateItem(itemName: string, def: ResolvedType): CodegenResult {
+    return this.generateResolvedType(def);
+  }
 
-    for (const [palletName, events] of Object.entries(def)) {
-      for (const [itemName, event] of Object.entries(events)) {
-        const name = this.getName(palletName, itemName);
-        if (this.trackedItems && !unhandledEvents.delete(name)) continue;
-        generatedEvents.add(name);
+  protected abstract getParserName(palletName: string, itemName: string): string;
+
+  protected getName(palletName: string, itemName: string) {
+    return this.getParserName(palletName, itemName);
+  }
+
+  protected getGlobalImports(): string[] {
+    return [];
+  }
+
+  protected getFileName(palletName: string, itemName: string) {
+    return itemName;
+  }
+
+  *generate(def: ParsedMetadata) {
+    const unhandledItems = new Set(this.trackedItems);
+    const generatedItems = new Set<string>();
+
+    for (const [palletName, items] of Object.entries(def)) {
+      for (const [itemName, item] of Object.entries(items)) {
+        const parserName = this.getParserName(palletName, itemName);
+        if (this.trackedItems && !unhandledItems.delete(parserName)) continue;
+        generatedItems.add(parserName);
 
         let generatedCode: CodegenResult;
 
         try {
-          generatedCode = this.generateResolvedType(event);
+          generatedCode = this.generateItem(itemName, item);
         } catch (e) {
-          console.error(`failed to parse: ${name}`);
-          console.error(JSON.stringify(event, null, 2));
+          console.error(`failed to parse: ${parserName}`);
+          console.error(JSON.stringify(item, null, 2));
           console.error(e);
           throw e;
         }
 
-        const parserName = nameToIdentifier(`${palletName}::${itemName}`);
+        const name = this.getName(palletName, itemName);
 
-        yield new Module(itemName, new Map([[parserName, generatedCode]]), palletName);
+        yield new Module(
+          this.getFileName(palletName, itemName),
+          new Map([[name, generatedCode]]),
+          this.getGlobalImports(),
+          palletName,
+        );
       }
     }
 
-    if (unhandledEvents.size !== 0) {
-      console.error('Unhandled events:', unhandledEvents);
-      throw new Error('Not all events were generated');
+    if (unhandledItems.size !== 0) {
+      console.error('Unhandled items:', unhandledItems);
+      throw new Error('Not all items were generated');
     }
 
-    if (generatedEvents.size === 0) return;
+    if (generatedItems.size === 0) return;
 
-    yield new Module('common', new Map(this.registry.types));
+    yield new Module('common', new Map(this.registry.types), this.getGlobalImports());
   }
 }

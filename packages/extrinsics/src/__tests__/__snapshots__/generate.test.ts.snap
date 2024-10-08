@@ -1,0 +1,106 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`extrinsic codegen > generates the code in the desired format > /160/CHANGELOG.md 1`] = `
+"Swapping:
+  - request_swap_deposit_address:
+    - sourceAsset: added
+    - destinationAsset: added
+  - request_swap_deposit_address_with_affiliates:
+    - dcaParameters: added
+    - sourceAsset: added
+    - destinationAsset: added
+    - refundParameters: changed
+"
+`;
+
+exports[`extrinsic codegen > generates the code in the desired format > /160/common.ts 1`] = `
+"export type ChainflipAsset =
+  | 'Eth'
+  | 'Flip'
+  | 'Usdc'
+  | 'Dot'
+  | 'Btc'
+  | 'ArbEth'
+  | 'ArbUsdc'
+  | 'Usdt'
+  | 'Sol'
+  | 'SolUsdc';
+
+export type EncodedAddress =
+  | Record<'Eth', Uint8Array>
+  | Record<'Dot', Uint8Array>
+  | Record<'Btc', \`0x\${string}\`>
+  | Record<'Arb', Uint8Array>
+  | Record<'Sol', Uint8Array>;
+
+export type BitcoinScriptPubKey =
+  | Record<'P2PKH', Uint8Array>
+  | Record<'P2SH', Uint8Array>
+  | Record<'P2WPKH', Uint8Array>
+  | Record<'P2WSH', Uint8Array>
+  | Record<'Taproot', Uint8Array>
+  | Record<
+      'OtherSegwit',
+      {
+        version: number;
+        program: \`0x\${string}\`;
+      }
+    >;
+
+export type ForeignChainAddress =
+  | Record<'Eth', number[]>
+  | Record<'Dot', Uint8Array>
+  | Record<'Btc', BitcoinScriptPubKey>
+  | Record<'Arb', number[]>
+  | Record<'Sol', Uint8Array>;
+"
+`;
+
+exports[`extrinsic codegen > generates the code in the desired format > /160/swapping/requestSwapDepositAddress.ts 1`] = `
+"import { type ChainflipAsset, type EncodedAddress } from '../common';
+
+export type SwappingRequestSwapDepositAddress = [
+  sourceAsset: ChainflipAsset,
+  destinationAsset: ChainflipAsset,
+  destinationAddress: EncodedAddress,
+  brokerCommission: number,
+  channelMetadata: {
+    message: \`0x\${string}\`;
+    gasBudget: \`0x\${string}\`;
+    cfParameters: \`0x\${string}\`;
+  } | null,
+  boostFee: number,
+];
+"
+`;
+
+exports[`extrinsic codegen > generates the code in the desired format > /160/swapping/requestSwapDepositAddressWithAffiliates.ts 1`] = `
+"import { type ChainflipAsset, type EncodedAddress, type ForeignChainAddress } from '../common';
+
+export type SwappingRequestSwapDepositAddressWithAffiliates = [
+  sourceAsset: ChainflipAsset,
+  destinationAsset: ChainflipAsset,
+  destinationAddress: EncodedAddress,
+  brokerCommission: number,
+  channelMetadata: {
+    message: \`0x\${string}\`;
+    gasBudget: \`0x\${string}\`;
+    cfParameters: \`0x\${string}\`;
+  } | null,
+  boostFee: number,
+  affiliateFees: {
+    account: \`0x\${string}\`;
+    bps: number;
+  }[],
+  refundParameters: {
+    retryDuration: number;
+    refundAddress: ForeignChainAddress;
+    minPrice: \`0x\${string}\`;
+  } | null,
+  dcaParameters: {
+    numberOfChunks: number;
+    chunkInterval: number;
+  } | null,
+];
+"
+`;

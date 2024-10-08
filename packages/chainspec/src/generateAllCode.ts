@@ -6,8 +6,8 @@ import BaseCodeGenerator from './BaseCodeGenerator';
 import { diffSpecs } from './utils';
 
 const generateAllCode = async (
-  Parser: { new (opts: MetadataOpts): BaseParser<unknown> },
-  CodeGenerator: { new (opts?: { trackedItems: Set<string> }): BaseCodeGenerator<unknown> },
+  Parser: { new (opts: MetadataOpts): BaseParser },
+  CodeGenerator: { new (opts?: { trackedItems: Set<string> }): BaseCodeGenerator },
   generatedDir: string,
 ) => {
   const info = await specVersionCache.read();

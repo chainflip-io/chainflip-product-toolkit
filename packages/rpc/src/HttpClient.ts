@@ -20,8 +20,8 @@ export default class HttpClient extends Client {
     try {
       const result = (await res.json()) as unknown;
       return { success: true, result };
-    } catch (error) {
-      return { success: false, error: new Error('Invalid JSON response') };
+    } catch (cause) {
+      return { success: false, error: new Error('Invalid JSON response', { cause }) };
     }
   }
 }
