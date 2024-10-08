@@ -80,6 +80,7 @@ export type RpcRequest = WithHash<{
     fromAsset: UncheckedAssetAndChain,
     toAsset: UncheckedAssetAndChain,
     accountId?: Nullish<string>,
+    includeFilled?: Nullish<boolean>,
   ];
   cf_pool_price_v2: [baseAsset: UncheckedAssetAndChain, quoteAsset: UncheckedAssetAndChain];
   cf_pools_environment: [];
