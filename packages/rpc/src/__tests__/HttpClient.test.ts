@@ -575,11 +575,94 @@ describe(HttpClient, () => {
 
   describe('with server', () => {
     let server: Server;
+    let callCounter = 0;
 
     let client: HttpClient;
 
+    function handleRequest(body: JsonRpcRequest<RpcMethod>) {
+      const specialMethod = body.method as string;
+
+      if (specialMethod === 'malformed_response') {
+        return { jsonrpc: '2.0', result: 1 };
+      }
+
+      const respond = (result: unknown) => ({
+        id: body.id,
+        jsonrpc: '2.0',
+        result,
+      });
+
+      if (body.method === 'cf_swap_rate') {
+        const { chain, asset } = body.params[1] as AssetAndChain;
+
+        if (!isHexString(body.params.at(-1))) {
+          return {
+            id: body.id,
+            jsonrpc: '2.0',
+            error: { code: -32602, message: 'invalid parameter type' },
+          };
+        }
+
+        return respond({
+          intermediary: chain === 'Ethereum' && asset === 'USDC' ? null : '0x1',
+          output: '0x1',
+        } as z.input<typeof cfSwapRate>);
+      }
+
+      switch (body.method) {
+        case 'cf_account_info':
+          switch (body.params[0]) {
+            case LP_ACCOUNT_ID:
+              return respond(liquidityProviderAccount);
+            case BROKER_ACCOUNT_ID:
+              return respond(brokerAccount);
+            case VALIDATOR_ACCOUNT_ID:
+              return respond(validatorAccount);
+            default:
+              return respond(unregisteredAccount);
+          }
+        case 'broker_requestSwapDepositAddress':
+          return respond(swapDepositAddress);
+        case 'cf_boost_pools_depth':
+          return respond(boostPoolsDepth);
+        case 'cf_environment':
+          return respond(environment);
+        case 'cf_funding_environment':
+          return respond(fundingEnvironment);
+        case 'cf_ingress_egress_environment':
+          return respond(ingressEgressEnvironment);
+        case 'cf_pool_orders':
+          return respond(poolOrders);
+        case 'cf_pool_price_v2':
+          return respond(poolPriceV2);
+        case 'cf_pools_environment':
+          return respond(poolsEnvironment);
+        case 'cf_supported_assets':
+          return respond(supportedAssets);
+        case 'cf_swap_rate_v2':
+          return respond(swapRateV2);
+        case 'cf_swapping_environment':
+          return respond(swappingEnvironment);
+        case 'chain_getBlockHash':
+          return respond('0x5678');
+        case 'state_getMetadata':
+          return respond('0x1234');
+        case 'state_getRuntimeVersion':
+          return respond(runtimeVersion);
+        default:
+          console.error('Method not found:', body.method);
+          return {
+            id: body.id,
+            jsonrpc: '2.0',
+            error: { code: 1, message: `Method not found: "${body.method as string}"` },
+          };
+      }
+    }
+
     beforeEach(() => {
+      callCounter = 0;
       server = new Server(async (req, res) => {
+        callCounter++;
         if (req.headers['content-type'] !== 'application/json') {
           return res.writeHead(400).end();
         }
@@ -595,96 +678,18 @@ describe(HttpClient, () => {
 
         const body = JSON.parse(
           Buffer.concat(chunks, length).toString(),
-        ) as JsonRpcRequest<RpcMethod>;
+        ) as JsonRpcRequest<RpcMethod>[];
 
-        const specialMethod = body.method as string;
-
-        if (specialMethod === 'malformed_response') {
-          return res.end(JSON.stringify({ jsonrpc: '2.0', result: 1 }));
-        } else if (specialMethod === 'non_200') {
-          return res.writeHead(404).end();
-        } else if (specialMethod === 'malformed_json') {
-          return res.end('{');
-        }
-
-        const respond = (result: unknown) =>
-          res.end(
-            JSON.stringify({
-              id: body.id,
-              jsonrpc: '2.0',
-              result,
-            }),
-          );
-
-        if (body.method === 'cf_swap_rate') {
-          const { chain, asset } = body.params[1] as AssetAndChain;
-
-          if (!isHexString(body.params.at(-1))) {
-            return res.end(
-              JSON.stringify({
-                id: body.id,
-                jsonrpc: '2.0',
-                error: { code: -32602, message: 'invalid parameter type' },
-              }),
-            );
+        const response = [];
+        for (const item of body) {
+          if ((item.method as string) === 'non_200') {
+            return res.writeHead(404).end();
+          } else if ((item.method as string) === 'malformed_json') {
+            return res.end('{');
           }
-
-          return respond({
-            intermediary: chain === 'Ethereum' && asset === 'USDC' ? null : '0x1',
-            output: '0x1',
-          } as z.input<typeof cfSwapRate>);
+          response.push(handleRequest(item));
         }
-
-        switch (body.method) {
-          case 'cf_account_info':
-            switch (body.params[0]) {
-              case LP_ACCOUNT_ID:
-                return respond(liquidityProviderAccount);
-              case BROKER_ACCOUNT_ID:
-                return respond(brokerAccount);
-              case VALIDATOR_ACCOUNT_ID:
-                return respond(validatorAccount);
-              default:
-                return respond(unregisteredAccount);
-            }
-          case 'broker_requestSwapDepositAddress':
-            return respond(swapDepositAddress);
-          case 'cf_boost_pools_depth':
-            return respond(boostPoolsDepth);
-          case 'cf_environment':
-            return respond(environment);
-          case 'cf_funding_environment':
-            return respond(fundingEnvironment);
-          case 'cf_ingress_egress_environment':
-            return respond(ingressEgressEnvironment);
-          case 'cf_pool_orders':
-            return respond(poolOrders);
-          case 'cf_pool_price_v2':
-            return respond(poolPriceV2);
-          case 'cf_pools_environment':
-            return respond(poolsEnvironment);
-          case 'cf_supported_assets':
-            return respond(supportedAssets);
-          case 'cf_swap_rate_v2':
-            return respond(swapRateV2);
-          case 'cf_swapping_environment':
-            return respond(swappingEnvironment);
-          case 'chain_getBlockHash':
-            return respond('0x5678');
-          case 'state_getMetadata':
-            return respond('0x1234');
-          case 'state_getRuntimeVersion':
-            return respond(runtimeVersion);
-          default:
-            console.error('Method not found:', body.method);
-            return res.writeHead(200).end(
-              JSON.stringify({
-                id: body.id,
-                jsonrpc: '2.0',
-                error: { code: 1, message: `Method not found: "${body.method as string}"` },
-              }),
-            );
-        }
+        res.writeHead(200).end(JSON.stringify(response));
       }).listen(0);
 
       client = new HttpClient(`http://localhost:${(server.address() as AddressInfo).port}`);
@@ -908,13 +913,77 @@ describe(HttpClient, () => {
           "source_chain_expiry_block": 1n,
         }
       `);
+      expect(callCounter).toEqual(1);
+    });
+
+    it('handles multiple requests with 1 call', async () => {
+      const [r1, r2] = await Promise.all([
+        client.sendRequest(
+          'cf_pool_orders',
+          { chain: 'Ethereum', asset: 'ETH' },
+          { asset: 'USDC', chain: 'Ethereum' },
+        ),
+        client.sendRequest(
+          'broker_requestSwapDepositAddress',
+          { asset: 'BTC', chain: 'Bitcoin' },
+          { asset: 'ETH', chain: 'Ethereum' },
+          '0x4567',
+          100,
+          { gas_budget: '0x0', message: '0x0' },
+          30,
+          [{ account: '0x1234', bps: 0 }],
+        ),
+      ]);
+      expect(r1).toMatchSnapshot();
+
+      expect(r2).toMatchInlineSnapshot(`
+        {
+          "address": "0x1234",
+          "channel_id": 1,
+          "channel_opening_fee": 0n,
+          "issued_block": 1,
+          "source_chain_expiry_block": 1n,
+        }
+      `);
+      expect(callCounter).toEqual(1);
+    });
+
+    it('handles multiple requests separately if they are sent far apart', async () => {
+      const r1 = await client.sendRequest(
+        'cf_pool_orders',
+        { chain: 'Ethereum', asset: 'ETH' },
+        { asset: 'USDC', chain: 'Ethereum' },
+      );
+
+      const r2 = await client.sendRequest(
+        'broker_requestSwapDepositAddress',
+        { asset: 'BTC', chain: 'Bitcoin' },
+        { asset: 'ETH', chain: 'Ethereum' },
+        '0x4567',
+        100,
+        { gas_budget: '0x0', message: '0x0' },
+        30,
+        [{ account: '0x1234', bps: 0 }],
+      );
+      expect(r1).toMatchSnapshot();
+
+      expect(r2).toMatchInlineSnapshot(`
+        {
+          "address": "0x1234",
+          "channel_id": 1,
+          "channel_opening_fee": 0n,
+          "issued_block": 1,
+          "source_chain_expiry_block": 1n,
+        }
+      `);
+      expect(callCounter).toEqual(2);
     });
 
     it('throws on invalid response', async () => {
       const method = 'malformed_response' as RpcMethod;
 
       await expect(client.sendRequest(method)).rejects.toThrowErrorMatchingInlineSnapshot(
-        `[Error: Malformed RPC response received]`,
+        `"Malformed RPC response received"`,
       );
     });
 
@@ -932,9 +1001,7 @@ describe(HttpClient, () => {
           '0x1',
           1 as unknown as HexString,
         ),
-      ).rejects.toThrowErrorMatchingInlineSnapshot(
-        `[Error: RPC error [-32602]: invalid parameter type]`,
-      );
+      ).rejects.toThrowErrorMatchingInlineSnapshot(`"RPC error [-32602]: invalid parameter type"`);
     });
 
     it('handles malformed json', async () => {
