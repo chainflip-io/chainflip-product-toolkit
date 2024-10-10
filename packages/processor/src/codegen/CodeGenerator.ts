@@ -145,33 +145,37 @@ export default class CodeGenerator extends BaseCodeGenerator {
       this.registry.types.set('simpleEnum', simpleEnum);
       generated = `simpleEnum([${values.map((v) => `'${v.name}'`).join(', ')}])`;
     } else {
-      generated = `z.union([${values
-        .map((v) => {
-          if (isNull(v.value)) {
-            return `z.object({ __kind: z.literal('${v.name}') })`;
-          }
+      const members = values.map((v) => {
+        if (isNull(v.value)) {
+          return `z.object({ __kind: z.literal('${v.name}') })`;
+        }
 
-          // if the struct has no name, it is not actually a struct but an enum variant w/ named fields
-          if (v.value.type === 'struct' && v.value.name === undefined) {
-            const value = this.generateStruct({
-              ...v.value,
-              additionalFields: {
-                __kind: `z.literal('${v.name}')`,
-              },
-            });
-
-            dependencies.push(value);
-
-            return value.toString();
-          }
-
-          const value = this.generateResolvedType(v.value);
+        // if the struct has no name, it is not actually a struct but an enum variant w/ named fields
+        if (v.value.type === 'struct' && v.value.name === undefined) {
+          const value = this.generateStruct({
+            ...v.value,
+            additionalFields: {
+              __kind: `z.literal('${v.name}')`,
+            },
+          });
 
           dependencies.push(value);
 
-          return `z.object({ __kind: z.literal('${v.name}'), value: ${value.toString()} })`;
-        })
-        .join(', ')}])`;
+          return value.toString();
+        }
+
+        const value = this.generateResolvedType(v.value);
+
+        dependencies.push(value);
+
+        return `z.object({ __kind: z.literal('${v.name}'), value: ${value.toString()} })`;
+      });
+
+      if (members.length === 1) {
+        generated = members[0];
+      } else {
+        generated = `z.union([${members.join(', ')}])`;
+      }
     }
 
     this.registry.types.set(def.name, new Code(generated, dependencies));
