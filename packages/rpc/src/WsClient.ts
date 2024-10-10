@@ -1,5 +1,4 @@
 import { DeferredPromise, deferredPromise, once, sleep } from '@chainflip/utils/async';
-import { randomUUID } from 'crypto';
 import Client, { Response } from './Client';
 import { JsonRpcRequest, RpcMethod, rpcResponse } from './common';
 
@@ -17,10 +16,6 @@ export default class WsClient extends Client {
     private readonly WebSocket: typeof globalThis.WebSocket = globalThis.WebSocket,
   ) {
     super(url);
-  }
-
-  protected override getRequestId() {
-    return randomUUID();
   }
 
   async close() {
@@ -104,9 +99,8 @@ export default class WsClient extends Client {
   ): Promise<Response[]> {
     const responses: Response[] = [];
     for (const data of requests) {
-      let requestId = data.id;
-
-      for (let i = 0; i < 5; i += 1) {
+      const MAX_RETRIES = 5;
+      for (let i = 0; i < MAX_RETRIES; i += 1) {
         let socket;
         try {
           socket = await this.connectionReady();
@@ -115,11 +109,11 @@ export default class WsClient extends Client {
           continue;
         }
 
-        socket.send(JSON.stringify({ ...data, id: requestId }));
+        socket.send(JSON.stringify(data));
 
         const request = deferredPromise<unknown>();
 
-        this.requestMap.set(requestId, request);
+        this.requestMap.set(data.id, request);
 
         const controller = new AbortController();
         const result = await Promise.race([
@@ -131,16 +125,23 @@ export default class WsClient extends Client {
             (error) => ({ success: false, error: error as Error, retry: true }) as const,
           ),
         ]).finally(() => {
-          this.requestMap.delete(requestId);
+          this.requestMap.delete(data.id);
           controller.abort();
         });
 
-        if (result.success || !result.retry) responses.push({ ...result, id: requestId });
+        if (result.success || !result.retry) {
+          responses.push({ ...result, id: data.id });
+          break;
+        }
 
-        requestId = this.getRequestId();
+        if (i === MAX_RETRIES - 1) {
+          responses.push({
+            success: false,
+            error: new Error('max retries exceeded'),
+            id: data.id,
+          });
+        }
       }
-
-      responses.push({ success: false, error: new Error('max retries exceeded'), id: requestId });
     }
     return responses;
   }

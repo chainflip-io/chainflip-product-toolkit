@@ -1,5 +1,5 @@
+import { randomUUID } from 'crypto';
 import { RpcRequest, RpcMethod, RpcResult, rpcResult, rpcResponse, JsonRpcRequest } from './common';
-import { assert } from '@chainflip/utils/assertion';
 
 export type Response =
   | { success: true; id: string; result: unknown }
@@ -9,6 +9,7 @@ export default abstract class Client {
     method: RpcMethod;
     params: RpcRequest[RpcMethod];
     resolve: (value: RpcResult<RpcMethod> | PromiseLike<RpcResult<RpcMethod>>) => void;
+    reject: (reason?: any) => void;
   }[] = [];
   timer: NodeJS.Timeout | null = null;
   isRunning = false;
@@ -20,7 +21,7 @@ export default abstract class Client {
   ): Promise<Response[]>;
 
   protected getRequestId() {
-    return `${this.queue.length.toString()}-${Date.now().toString()}`;
+    return randomUUID();
   }
 
   private formatRequest<T extends RpcMethod>(method: T, params: RpcRequest[T]): JsonRpcRequest<T> {
@@ -38,18 +39,28 @@ export default abstract class Client {
 
       requests.forEach((item, index) => {
         const response = responses.find((r) => r.id === item.id);
-        if (!response) throw new Error('Could not find the result for the request');
+        if (!response) {
+          this.queue[index].reject('Could not find the result for the request');
+          return;
+        }
 
-        if (!response.success) throw response.error;
+        if (!response.success) {
+          this.queue[index].reject(response.error);
+          return;
+        }
 
         const parseResult = rpcResponse.safeParse(response.result);
 
-        assert(parseResult.success, 'Malformed RPC response received');
+        if (!parseResult.success) {
+          this.queue[index].reject('Malformed RPC response received');
+          return;
+        }
 
         if ('error' in parseResult.data) {
-          throw new Error(
+          this.queue[index].reject(
             `RPC error [${parseResult.data.error.code}]: ${parseResult.data.error.message}`,
           );
+          return;
         }
 
         this.queue[index].resolve(rpcResult[item.method].parse(parseResult.data.result));
@@ -59,15 +70,15 @@ export default abstract class Client {
       this.isRunning = false;
     };
 
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
       if (this.isRunning) {
         // wait for the queue to be processed
         setTimeout(() => this.sendRequest(method, ...params).then(resolve), 100);
       }
-      this.queue.push({ method, params, resolve });
+      this.queue.push({ method, params, resolve, reject });
 
       if (!this.timer) {
-        this.timer = setTimeout(processQueue, 1000);
+        this.timer = setTimeout(processQueue, 200);
       }
     });
   }
