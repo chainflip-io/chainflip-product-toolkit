@@ -7,13 +7,13 @@ This utility was written to help us spot new events as well as changes in the sc
 
 To be able to run the code generation tool, you first need to find out the new spec version of the network and the block hash at which it occured. Once you have these 2 pieces of information, you need to update the [configuration file](../chainspec/metadata/specVersion.json) by adding the new spec verson together with the environment, like so:
 
-```
+```json
 {
-    ....,
-    "170": {
-        "hash": "0xd9eeefdbd275bf7466b9d76c810a7ebfb1aab16a68301ee1ab605015c7295e95",
-        "network": "backspin"
-    }
+  //...,
+  "170": {
+    "hash": "0xd9eeefdbd275bf7466b9d76c810a7ebfb1aab16a68301ee1ab605015c7295e95",
+    "network": "backspin"
+  }
 }
 ```
 
