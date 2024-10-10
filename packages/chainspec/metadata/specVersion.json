@@ -50,5 +50,9 @@
   "160": {
     "hash": "0x0ce1cdc29708776267398fd0a2f68f556cd4deb372a7c8fe78dae94c2ba1d48b",
     "network": "mainnet"
+  },
+  "170": {
+    "hash": "0xd9eeefdbd275bf7466b9d76c810a7ebfb1aab16a68301ee1ab605015c7295e95",
+    "network": "backspin"
   }
 }

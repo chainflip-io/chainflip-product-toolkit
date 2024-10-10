@@ -186,9 +186,7 @@ export const moneySymbol = simpleEnum(['Flip']);
 
 export const mapValue = z.object({ value: z.number(), moneySymbol });
 
-export const enumWithFlattenedField = z.union([
-  z.object({ __kind: z.literal('One'), field: z.number() }),
-]);
+export const enumWithFlattenedField = z.object({ __kind: z.literal('One'), field: z.number() });
 
 export const myEnum = z.union([
   z.object({ __kind: z.literal('i8'), value: z.number() }),
