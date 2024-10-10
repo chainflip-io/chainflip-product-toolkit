@@ -1,10 +1,10 @@
-import Client from './Client';
-import { JsonRpcRequest, RpcMethod } from './common';
+import Client, { Response } from './Client';
+import { JsonRpcRequest, JsonRpcResponse, RpcMethod } from './common';
 
 export default class HttpClient extends Client {
   protected async send<const T extends RpcMethod>(
-    request: JsonRpcRequest<T>,
-  ): Promise<{ success: true; result: unknown } | { success: false; error: Error }> {
+    request: JsonRpcRequest<T>[],
+  ): Promise<Response[]> {
     const res = await fetch(this.url, {
       body: JSON.stringify(request),
       method: 'POST',
@@ -12,16 +12,34 @@ export default class HttpClient extends Client {
         'Content-Type': 'application/json',
       },
     });
+    const responses: Response[] = [];
 
     if (!res.ok) {
-      return { success: false, error: new Error(`HTTP error: ${res.status}`) };
+      request.map((r) =>
+        responses.push({ id: r.id, success: false, error: new Error(`HTTP error: ${res.status}`) }),
+      );
+      return responses;
     }
 
     try {
-      const result = (await res.json()) as unknown;
-      return { success: true, result };
+      const jsonRpcResponse = (await res.json()) as JsonRpcResponse[];
+      request.map((r) =>
+        responses.push({
+          id: r.id,
+          success: true,
+          result: jsonRpcResponse.find((j) => j.id === r.id),
+        }),
+      );
+      return responses;
     } catch (cause) {
-      return { success: false, error: new Error('Invalid JSON response', { cause }) };
+      request.map((r) =>
+        responses.push({
+          id: r.id,
+          success: false,
+          error: new Error('Invalid JSON response', { cause }),
+        }),
+      );
+      return responses;
     }
   }
 }

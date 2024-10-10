@@ -1,6 +1,6 @@
 import { DeferredPromise, deferredPromise, once, sleep } from '@chainflip/utils/async';
 import { randomUUID } from 'crypto';
-import Client from './Client';
+import Client, { Response } from './Client';
 import { JsonRpcRequest, RpcMethod, rpcResponse } from './common';
 
 const READY = 'READY';
@@ -100,44 +100,48 @@ export default class WsClient extends Client {
   }
 
   protected async send<const T extends RpcMethod>(
-    data: JsonRpcRequest<T>,
-  ): Promise<{ success: true; result: unknown } | { success: false; error: Error }> {
-    let requestId = data.id;
+    requests: JsonRpcRequest<T>[],
+  ): Promise<Response[]> {
+    const responses: Response[] = [];
+    for (const data of requests) {
+      let requestId = data.id;
 
-    for (let i = 0; i < 5; i += 1) {
-      let socket;
-      try {
-        socket = await this.connectionReady();
-      } catch {
-        // retry
-        continue;
+      for (let i = 0; i < 5; i += 1) {
+        let socket;
+        try {
+          socket = await this.connectionReady();
+        } catch {
+          // retry
+          continue;
+        }
+
+        socket.send(JSON.stringify({ ...data, id: requestId }));
+
+        const request = deferredPromise<unknown>();
+
+        this.requestMap.set(requestId, request);
+
+        const controller = new AbortController();
+        const result = await Promise.race([
+          sleep(30_000, { signal: controller.signal }).then(
+            () => ({ success: false, retry: false, error: new Error('timeout') }) as const,
+          ),
+          request.promise.then(
+            (result) => ({ success: true, result }) as const,
+            (error) => ({ success: false, error: error as Error, retry: true }) as const,
+          ),
+        ]).finally(() => {
+          this.requestMap.delete(requestId);
+          controller.abort();
+        });
+
+        if (result.success || !result.retry) responses.push({ ...result, id: requestId });
+
+        requestId = this.getRequestId();
       }
 
-      socket.send(JSON.stringify({ ...data, id: requestId }));
-
-      const request = deferredPromise<unknown>();
-
-      this.requestMap.set(requestId, request);
-
-      const controller = new AbortController();
-      const result = await Promise.race([
-        sleep(30_000, { signal: controller.signal }).then(
-          () => ({ success: false, retry: false, error: new Error('timeout') }) as const,
-        ),
-        request.promise.then(
-          (result) => ({ success: true, result }) as const,
-          (error) => ({ success: false, error: error as Error, retry: true }) as const,
-        ),
-      ]).finally(() => {
-        this.requestMap.delete(requestId);
-        controller.abort();
-      });
-
-      if (result.success || !result.retry) return result;
-
-      requestId = this.getRequestId();
+      responses.push({ success: false, error: new Error('max retries exceeded'), id: requestId });
     }
-
-    return { success: false, error: new Error('max retries exceeded') };
+    return responses;
   }
 }

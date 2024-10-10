@@ -1,15 +1,26 @@
 import { RpcRequest, RpcMethod, RpcResult, rpcResult, rpcResponse, JsonRpcRequest } from './common';
 import { assert } from '@chainflip/utils/assertion';
 
+export type Response =
+  | { success: true; id: string; result: unknown }
+  | { success: false; id: string; error: Error };
 export default abstract class Client {
+  queue: {
+    method: RpcMethod;
+    params: RpcRequest[RpcMethod];
+    resolve: (value: RpcResult<RpcMethod> | PromiseLike<RpcResult<RpcMethod>>) => void;
+  }[] = [];
+  timer: NodeJS.Timeout | null = null;
+  isRunning = false;
+
   constructor(protected readonly url: string) {}
 
   protected abstract send<const T extends RpcMethod>(
-    data: JsonRpcRequest<T>,
-  ): Promise<{ success: true; result: unknown } | { success: false; error: Error }>;
+    data: JsonRpcRequest<T>[],
+  ): Promise<Response[]>;
 
   protected getRequestId() {
-    return '1';
+    return `${this.queue.length.toString()}-${Date.now().toString()}`;
   }
 
   private formatRequest<T extends RpcMethod>(method: T, params: RpcRequest[T]): JsonRpcRequest<T> {
@@ -20,21 +31,45 @@ export default abstract class Client {
     method: T,
     ...params: RpcRequest[T]
   ): Promise<RpcResult<T>> {
-    const response = await this.send(this.formatRequest(method, params));
+    const processQueue = async () => {
+      this.isRunning = true;
+      const requests = this.queue.map((item) => this.formatRequest(item.method, item.params));
+      const responses = await this.send(requests);
 
-    if (!response.success) throw response.error;
+      requests.forEach((item, index) => {
+        const response = responses.find((r) => r.id === item.id);
+        if (!response) throw new Error('Could not find the result for the request');
 
-    const parseResult = rpcResponse.safeParse(response.result);
+        if (!response.success) throw response.error;
 
-    assert(parseResult.success, 'Malformed RPC response received');
+        const parseResult = rpcResponse.safeParse(response.result);
 
-    if ('error' in parseResult.data) {
-      throw new Error(
-        `RPC error [${parseResult.data.error.code}]: ${parseResult.data.error.message}`,
-      );
-    }
+        assert(parseResult.success, 'Malformed RPC response received');
 
-    return rpcResult[method].parse(parseResult.data.result);
+        if ('error' in parseResult.data) {
+          throw new Error(
+            `RPC error [${parseResult.data.error.code}]: ${parseResult.data.error.message}`,
+          );
+        }
+
+        this.queue[index].resolve(rpcResult[item.method].parse(parseResult.data.result));
+      });
+      this.queue = [];
+      this.timer = null;
+      this.isRunning = false;
+    };
+
+    return new Promise((resolve) => {
+      if (this.isRunning) {
+        // wait for the queue to be processed
+        setTimeout(() => this.sendRequest(method, ...params).then(resolve), 100);
+      }
+      this.queue.push({ method, params, resolve });
+
+      if (!this.timer) {
+        this.timer = setTimeout(processQueue, 1000);
+      }
+    });
   }
 
   methods(): RpcMethod[] {
