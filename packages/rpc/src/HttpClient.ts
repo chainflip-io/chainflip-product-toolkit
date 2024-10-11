@@ -12,34 +12,24 @@ export default class HttpClient extends Client {
         'Content-Type': 'application/json',
       },
     });
-    const responses: Response[] = [];
 
     if (!res.ok) {
-      request.map((r) =>
-        responses.push({ id: r.id, success: false, error: new Error(`HTTP error: ${res.status}`) }),
-      );
-      return responses;
+      return request.map((r) => ({
+        id: r.id,
+        success: false,
+        error: new Error(`HTTP error: ${res.status}`),
+      }));
     }
 
     try {
       const jsonRpcResponse = (await res.json()) as JsonRpcResponse[];
-      request.map((r) =>
-        responses.push({
-          id: r.id,
-          success: true,
-          result: jsonRpcResponse.find((j) => j.id === r.id),
-        }),
-      );
-      return responses;
+      return jsonRpcResponse.map((r) => ({ id: r.id as string, success: true, result: r }));
     } catch (cause) {
-      request.map((r) =>
-        responses.push({
-          id: r.id,
-          success: false,
-          error: new Error('Invalid JSON response', { cause }),
-        }),
-      );
-      return responses;
+      return request.map((r) => ({
+        id: r.id,
+        success: false,
+        error: new Error('Invalid JSON response', { cause }),
+      }));
     }
   }
 }
