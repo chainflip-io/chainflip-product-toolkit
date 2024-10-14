@@ -1,7 +1,26 @@
+import { deferredPromise } from '@chainflip/utils/async';
 import Client, { Response } from './Client';
-import { JsonRpcRequest, JsonRpcResponse, RpcMethod } from './common';
+import {
+  JsonRpcRequest,
+  JsonRpcResponse,
+  RpcMethod,
+  RpcRequest,
+  RpcResult,
+  rpcResult,
+} from './common';
 
 export default class HttpClient extends Client {
+  private timer: ReturnType<typeof setTimeout> | null = null;
+  private batchDuration = 100;
+  private requestMap = new Map<
+    string,
+    {
+      deferred: ReturnType<typeof deferredPromise<RpcResult<RpcMethod>>>;
+      body: JsonRpcRequest<RpcMethod>;
+      method: RpcMethod;
+    }
+  >();
+
   protected async send<const T extends RpcMethod>(
     request: JsonRpcRequest<T>[],
   ): Promise<Response[]> {
@@ -30,6 +49,49 @@ export default class HttpClient extends Client {
         success: false,
         error: new Error('Invalid JSON response', { cause }),
       }));
+    }
+  }
+
+  override sendRequest<const T extends RpcMethod>(
+    method: T,
+    ...params: RpcRequest[T]
+  ): Promise<RpcResult<T>> {
+    const deferred = deferredPromise<RpcResult<T>>();
+    const body = this.formatRequest(method, params);
+    this.requestMap.set(body.id, { deferred, body, method });
+    if (this.timer) clearTimeout(this.timer);
+    this.timer = setTimeout(() => this.sendBatch(), this.batchDuration);
+    return deferred.promise;
+  }
+
+  private async sendBatch() {
+    const clonedMap = new Map(this.requestMap);
+    this.requestMap.clear();
+    const requests = [...clonedMap.values()].map((item) => item.body);
+    const responses = await this.send(requests);
+
+    for (const request of requests) {
+      const response = responses.find((r) => r.id === request.id);
+      const clonedItem = clonedMap.get(request.id);
+      if (!clonedItem) {
+        throw new Error('Could not find the request in the map');
+      }
+      if (!response) {
+        clonedItem.deferred.reject(new Error('Could not find the result for the request'));
+        continue;
+      }
+
+      if (!response.success) {
+        clonedItem.deferred.reject(response.error);
+        continue;
+      }
+
+      try {
+        const parseResult = this.parseSingleResponse(response);
+        clonedItem.deferred.resolve(rpcResult[clonedItem.method].parse(parseResult.result));
+      } catch (e) {
+        clonedItem.deferred.reject(e as Error);
+      }
     }
   }
 }

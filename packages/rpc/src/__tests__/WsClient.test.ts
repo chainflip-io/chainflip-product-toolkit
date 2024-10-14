@@ -76,36 +76,35 @@ describe(WsClient, () => {
   });
 
   it('resends messages if a disconnection happens while awaiting a response', async () => {
-    const response = await client.sendRequest(
-      'cf_swap_rate',
-      { asset: 'USDC', chain: 'Ethereum' },
-      { asset: 'FLIP', chain: 'Ethereum' },
-      '0x1',
-    );
-
-    expect(response).toEqual({ intermediary: null, output: 1n });
-
-    killConnections();
-
-    const response2 = await client.sendRequest(
-      'cf_swap_rate',
-      { asset: 'USDC', chain: 'Ethereum' },
-      { asset: 'FLIP', chain: 'Ethereum' },
-      '0x1',
-    );
-    expect(response2).toEqual({ intermediary: null, output: 1n });
-  });
-
-  it("doesn't spam the reconnect", async () => {
-    vi.useFakeTimers();
     const response = client.sendRequest(
       'cf_swap_rate',
       { asset: 'USDC', chain: 'Ethereum' },
       { asset: 'FLIP', chain: 'Ethereum' },
       '0x1',
     );
-    await vi.advanceTimersToNextTimerAsync();
+
     expect(await response).toEqual({ intermediary: null, output: 1n });
+
+    killConnections();
+
+    const response2 = client.sendRequest(
+      'cf_swap_rate',
+      { asset: 'USDC', chain: 'Ethereum' },
+      { asset: 'FLIP', chain: 'Ethereum' },
+      '0x1',
+    );
+    expect(await response2).toEqual({ intermediary: null, output: 1n });
+  });
+
+  it("doesn't spam the reconnect", async () => {
+    vi.useFakeTimers();
+    const response = await client.sendRequest(
+      'cf_swap_rate',
+      { asset: 'USDC', chain: 'Ethereum' },
+      { asset: 'FLIP', chain: 'Ethereum' },
+      '0x1',
+    );
+    expect(response).toEqual({ intermediary: null, output: 1n });
 
     killConnections();
     closeServer();
@@ -154,7 +153,7 @@ describe(WsClient, () => {
     ).resolves.not.toThrow();
   });
 
-  it.skip('rejects if no response is received', async () => {
+  it('rejects if no response is received', async () => {
     await expect(
       client.sendRequest(
         'cf_swap_rate',
@@ -167,10 +166,12 @@ describe(WsClient, () => {
     vi.useFakeTimers();
     serverFn = vi.fn();
 
-    const response = client.sendRequest('cf_supported_assets');
+    const request = client.sendRequest('cf_supported_assets');
 
-    await vi.runAllTimersAsync();
-    expect(await response).rejects.toThrowError('timeout');
+    await Promise.all([
+      vi.advanceTimersToNextTimerAsync(),
+      expect(request).rejects.toThrowError('timeout'),
+    ]);
 
     expect(serverFn).toHaveBeenCalledTimes(1);
   });

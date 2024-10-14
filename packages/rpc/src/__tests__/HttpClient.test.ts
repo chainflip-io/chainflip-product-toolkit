@@ -583,6 +583,10 @@ describe(HttpClient, () => {
       const specialMethod = body.method as string;
 
       if (specialMethod === 'malformed_response') {
+        return { result: 1, id: body.id };
+      }
+
+      if (specialMethod === 'missing_id') {
         return { jsonrpc: '2.0', result: 1 };
       }
 
@@ -983,7 +987,15 @@ describe(HttpClient, () => {
       const method = 'malformed_response' as RpcMethod;
 
       await expect(client.sendRequest(method)).rejects.toThrowErrorMatchingInlineSnapshot(
-        `"Malformed RPC response received"`,
+        `[Error: Malformed RPC response received]`,
+      );
+    });
+
+    it('throws on missing id on response', async () => {
+      const method = 'missing_id' as RpcMethod;
+
+      await expect(client.sendRequest(method)).rejects.toThrowErrorMatchingInlineSnapshot(
+        `[Error: Could not find the result for the request]`,
       );
     });
 
@@ -1001,7 +1013,7 @@ describe(HttpClient, () => {
           '0x1',
           1 as unknown as HexString,
         ),
-      ).rejects.toThrowErrorMatchingInlineSnapshot(`"RPC error [-32602]: invalid parameter type"`);
+      ).rejects.toThrowErrorMatchingInlineSnapshot(`[Error: RPC error [-32602]: invalid parameter type]`);
     });
 
     it('handles malformed json', async () => {
