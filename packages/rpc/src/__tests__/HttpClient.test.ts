@@ -1013,7 +1013,9 @@ describe(HttpClient, () => {
           '0x1',
           1 as unknown as HexString,
         ),
-      ).rejects.toThrowErrorMatchingInlineSnapshot(`[Error: RPC error [-32602]: invalid parameter type]`);
+      ).rejects.toThrowErrorMatchingInlineSnapshot(
+        `[Error: RPC error [-32602]: invalid parameter type]`,
+      );
     });
 
     it('handles malformed json', async () => {

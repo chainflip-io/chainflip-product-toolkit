@@ -70,14 +70,9 @@ export default class HttpClient extends Client {
     const requests = [...clonedMap.values()].map((item) => item.body);
     const responses = await this.send(requests);
 
-    for (const request of requests) {
-      const response = responses.find((r) => r.id === request.id);
-      const clonedItem = clonedMap.get(request.id);
+    for (const response of responses) {
+      const clonedItem = clonedMap.get(response.id);
       if (!clonedItem) {
-        throw new Error('Could not find the request in the map');
-      }
-      if (!response) {
-        clonedItem.deferred.reject(new Error('Could not find the result for the request'));
         continue;
       }
 
@@ -91,7 +86,13 @@ export default class HttpClient extends Client {
         clonedItem.deferred.resolve(rpcResult[clonedItem.method].parse(parseResult.result));
       } catch (e) {
         clonedItem.deferred.reject(e as Error);
+      } finally {
+        clonedMap.delete(response.id);
       }
     }
+
+    clonedMap.forEach((item) => {
+      item.deferred.reject(new Error('Could not find the result for the request'));
+    });
   }
 }
