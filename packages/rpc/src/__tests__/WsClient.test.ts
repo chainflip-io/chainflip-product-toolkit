@@ -54,7 +54,7 @@ describe(WsClient, () => {
         // tests malformed response handling
         if (rpcRequest.method === 'cf_swapping_environment') {
           serverFn?.();
-          ws.send(JSON.stringify({}));
+          ws.send(JSON.stringify([{}]));
         }
       });
     });

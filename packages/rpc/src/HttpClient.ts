@@ -1,10 +1,29 @@
-import Client from './Client';
-import { JsonRpcRequest, RpcMethod } from './common';
+import { deferredPromise } from '@chainflip/utils/async';
+import Client, { Response } from './Client';
+import {
+  JsonRpcRequest,
+  JsonRpcResponse,
+  RpcMethod,
+  RpcRequest,
+  RpcResult,
+  rpcResult,
+} from './common';
 
 export default class HttpClient extends Client {
+  private timer: ReturnType<typeof setTimeout> | null = null;
+  private batchDuration = 100;
+  private requestMap = new Map<
+    string,
+    {
+      deferred: ReturnType<typeof deferredPromise<RpcResult<RpcMethod>>>;
+      body: JsonRpcRequest<RpcMethod>;
+      method: RpcMethod;
+    }
+  >();
+
   protected async send<const T extends RpcMethod>(
-    request: JsonRpcRequest<T>,
-  ): Promise<{ success: true; result: unknown } | { success: false; error: Error }> {
+    request: JsonRpcRequest<T>[],
+  ): Promise<Response[]> {
     const res = await fetch(this.url, {
       body: JSON.stringify(request),
       method: 'POST',
@@ -14,14 +33,66 @@ export default class HttpClient extends Client {
     });
 
     if (!res.ok) {
-      return { success: false, error: new Error(`HTTP error: ${res.status}`) };
+      return request.map((r) => ({
+        id: r.id,
+        success: false,
+        error: new Error(`HTTP error: ${res.status}`),
+      }));
     }
 
     try {
-      const result = (await res.json()) as unknown;
-      return { success: true, result };
+      const jsonRpcResponse = (await res.json()) as JsonRpcResponse[];
+      return jsonRpcResponse.map((r) => ({ id: r.id as string, success: true, result: r }));
     } catch (cause) {
-      return { success: false, error: new Error('Invalid JSON response', { cause }) };
+      return request.map((r) => ({
+        id: r.id,
+        success: false,
+        error: new Error('Invalid JSON response', { cause }),
+      }));
     }
+  }
+
+  override sendRequest<const T extends RpcMethod>(
+    method: T,
+    ...params: RpcRequest[T]
+  ): Promise<RpcResult<T>> {
+    const deferred = deferredPromise<RpcResult<T>>();
+    const body = this.formatRequest(method, params);
+    this.requestMap.set(body.id, { deferred, body, method });
+    if (this.timer) clearTimeout(this.timer);
+    this.timer = setTimeout(() => this.sendBatch(), this.batchDuration);
+    return deferred.promise;
+  }
+
+  private async sendBatch() {
+    const clonedMap = new Map(this.requestMap);
+    this.requestMap.clear();
+    const requests = [...clonedMap.values()].map((item) => item.body);
+    const responses = await this.send(requests);
+
+    for (const response of responses) {
+      const clonedItem = clonedMap.get(response.id);
+      if (!clonedItem) {
+        continue;
+      }
+
+      if (!response.success) {
+        clonedItem.deferred.reject(response.error);
+        continue;
+      }
+
+      try {
+        const parseResult = this.parseSingleResponse(response);
+        clonedItem.deferred.resolve(rpcResult[clonedItem.method].parse(parseResult.result));
+      } catch (e) {
+        clonedItem.deferred.reject(e as Error);
+      } finally {
+        clonedMap.delete(response.id);
+      }
+    }
+
+    clonedMap.forEach((item) => {
+      item.deferred.reject(new Error('Could not find the result for the request'));
+    });
   }
 }

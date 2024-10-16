@@ -679,3 +679,93 @@ exports[`HttpClient > with server > gets validator account info 1`] = `
   "role": "validator",
 }
 `;
+
+exports[`HttpClient > with server > handles multiple requests separately if they are sent far apart 1`] = `
+{
+  "limit_orders": {
+    "asks": [
+      {
+        "fees_earned": 0n,
+        "id": "0",
+        "lp": "cFLGvPhhrribWCx9id5kLVqwiFK4QiVNjQ6ViyaRFF2Nrgq7j",
+        "original_sell_amount": 2645327689967594500n,
+        "sell_amount": 2645327689967594500n,
+        "tick": -193955,
+        "type": "ask",
+      },
+    ],
+    "bids": [
+      {
+        "fees_earned": 0n,
+        "id": "1708299934639",
+        "lp": "cFLvCBxThPho4LP8iSP54B1iHdEtJhTHniUW5yyNcwDBGSe1X",
+        "original_sell_amount": 390425502n,
+        "sell_amount": 390425502n,
+        "tick": -196947,
+        "type": "bid",
+      },
+    ],
+  },
+  "range_orders": [
+    {
+      "fees_earned": {
+        "base": 35985487972100833n,
+        "quote": 130011380n,
+      },
+      "id": "1",
+      "liquidity": 4115587651042067n,
+      "lp": "cFM63NFq2MiujSSXUz1AfZgb4aZrkv5aWggdLkyufyTcpkrf2",
+      "range": {
+        "end": -192004,
+        "start": -198197,
+      },
+      "type": "range",
+    },
+  ],
+}
+`;
+
+exports[`HttpClient > with server > handles multiple requests with 1 call 1`] = `
+{
+  "limit_orders": {
+    "asks": [
+      {
+        "fees_earned": 0n,
+        "id": "0",
+        "lp": "cFLGvPhhrribWCx9id5kLVqwiFK4QiVNjQ6ViyaRFF2Nrgq7j",
+        "original_sell_amount": 2645327689967594500n,
+        "sell_amount": 2645327689967594500n,
+        "tick": -193955,
+        "type": "ask",
+      },
+    ],
+    "bids": [
+      {
+        "fees_earned": 0n,
+        "id": "1708299934639",
+        "lp": "cFLvCBxThPho4LP8iSP54B1iHdEtJhTHniUW5yyNcwDBGSe1X",
+        "original_sell_amount": 390425502n,
+        "sell_amount": 390425502n,
+        "tick": -196947,
+        "type": "bid",
+      },
+    ],
+  },
+  "range_orders": [
+    {
+      "fees_earned": {
+        "base": 35985487972100833n,
+        "quote": 130011380n,
+      },
+      "id": "1",
+      "liquidity": 4115587651042067n,
+      "lp": "cFM63NFq2MiujSSXUz1AfZgb4aZrkv5aWggdLkyufyTcpkrf2",
+      "range": {
+        "end": -192004,
+        "start": -198197,
+      },
+      "type": "range",
+    },
+  ],
+}
+`;
