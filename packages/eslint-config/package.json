@@ -1,0 +1,19 @@
+{
+  "name": "@chainflip/eslint-config",
+  "version": "1.0.0",
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "mkdir -p dist && cp '../../eslint.config.js' dist/.eslintrc.js",
+    "clean": "rm -rf dist",
+    "prepublish": "pnpm clean && pnpm build"
+  },
+  "peerDependencies": {
+    "@eslint/js": "^9.13.0",
+    "eslint": "^9.13.0",
+    "globals": "^15.11.0",
+    "typescript-eslint": "^8.10.0"
+  }
+}

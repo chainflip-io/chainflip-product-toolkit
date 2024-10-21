@@ -87,6 +87,21 @@ importers:
         specifier: ^3.23.8
         version: 3.23.8
 
+  packages/eslint-config:
+    dependencies:
+      '@eslint/js':
+        specifier: ^9.13.0
+        version: 9.13.0
+      eslint:
+        specifier: ^9.13.0
+        version: 9.13.0
+      globals:
+        specifier: ^15.11.0
+        version: 15.11.0
+      typescript-eslint:
+        specifier: ^8.10.0
+        version: 8.10.0(eslint@9.13.0)(typescript@5.6.3)
+
   packages/extrinsics:
     devDependencies:
       '@chainflip/utils':
