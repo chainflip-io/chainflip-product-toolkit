@@ -10,6 +10,7 @@
     "clean": "rm -rf dist",
     "build": "pnpm clean && pnpm tsup",
     "prepublish": "pnpm test run && pnpm build",
+    "test:ci": "CI=1 pnpm t run",
     "test": "vitest"
   },
   "devDependencies": {

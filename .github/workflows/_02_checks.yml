@@ -51,4 +51,4 @@ jobs:
           done
 
       - name: Run Test ${{ matrix.package }} 🧪
-        run: pnpm run test:ci:${{ matrix.package }}
+        run: pnpm run --filter ${{ matrix.package }} test:ci

@@ -11,6 +11,7 @@
     "prepublish": "pnpm test run && pnpm build:clean",
     "build": "tsup",
     "build:clean": "pnpm clean && pnpm build",
+    "test:ci": "CI=1 pnpm t run",
     "test": "vitest",
     "coverage": "vitest run --coverage"
   },

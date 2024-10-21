@@ -11,6 +11,7 @@
     "clean": "rm -rf dist",
     "tsup:build": "tsup --config tsup.config.mts",
     "build": "pnpm clean && pnpm tsup:build",
+    "test:ci": "CI=1 pnpm t run",
     "test": "vitest"
   },
   "repository": "https://github.com/chainflip-io/chainflip-product-toolkit.git",

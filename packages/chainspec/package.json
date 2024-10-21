@@ -6,6 +6,7 @@
     "prettier:base": "prettier ./** --ignore-path=../../.prettierignore",
     "prettier:check": "pnpm prettier:base --check",
     "prettier:write": "pnpm prettier:base --write",
+    "test:ci": "CI=1 pnpm t run",
     "test": "vitest"
   },
   "devDependencies": {

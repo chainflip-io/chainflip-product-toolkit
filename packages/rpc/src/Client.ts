@@ -1,5 +1,6 @@
 import { randomUUID } from 'crypto';
 import { RpcRequest, RpcMethod, RpcResult, rpcResult, rpcResponse, JsonRpcRequest } from './common';
+import { assert } from '@chainflip/utils/assertion';
 
 export type Response =
   | { success: true; id: string; result: unknown }
@@ -38,10 +39,10 @@ export default abstract class Client {
         `RPC error [${parseResult.data.error.code}]: ${parseResult.data.error.message}`,
       );
     }
-    if (parseResult.data.result) {
-      return parseResult.data;
-    }
-    throw new Error('Malformed RPC response received');
+
+    assert('result' in parseResult.data);
+
+    return parseResult.data;
   }
 
   async sendRequest<const T extends RpcMethod>(
