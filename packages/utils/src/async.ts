@@ -47,6 +47,7 @@ export class Queue {
     return new Promise((resolve, reject) => {
       this.promise = this.promise.then(async () => {
         const sleepPromise = this.debounce ? sleep(this.debounce) : Promise.resolve();
+        // eslint-disable-next-line @typescript-eslint/use-unknown-in-catch-callback-variable
         await Promise.all([fn(...args).then(resolve, reject), sleepPromise]);
       });
     });
@@ -76,9 +77,9 @@ export class RateLimiter<T, Args extends unknown[]> {
   }
 }
 
-export const once = async <T extends EventTarget, K extends string>(
-  target: T,
-  event: K,
+export const once = async (
+  target: EventTarget,
+  event: string,
   opts?: { signal?: AbortSignal; timeout?: number },
 ): Promise<void> => {
   // eslint-disable-next-line @typescript-eslint/no-invalid-void-type
