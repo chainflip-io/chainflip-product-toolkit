@@ -2,6 +2,10 @@
   "name": "chainspec-internal",
   "type": "module",
   "scripts": {
+    "eslint:check": "pnpm eslint --max-warnings 0 './**/*.ts'",
+    "prettier:base": "prettier ./** --ignore-path=../../.prettierignore",
+    "prettier:check": "pnpm prettier:base --check",
+    "prettier:write": "pnpm prettier:base --write",
     "test": "vitest"
   },
   "devDependencies": {
