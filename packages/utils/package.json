@@ -3,6 +3,10 @@
   "version": "0.4.0",
   "type": "module",
   "scripts": {
+    "eslint:check": "pnpm eslint --max-warnings 0 './**/*.ts'",
+    "prettier:base": "prettier ./** --ignore-path=../../.prettierignore",
+    "prettier:check": "pnpm prettier:base --check",
+    "prettier:write": "pnpm prettier:base --write",
     "clean": "rm -rf dist",
     "prepublish": "pnpm test run && pnpm build:clean",
     "build": "tsup",

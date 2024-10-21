@@ -1,0 +1,24 @@
+name: Node JS Context Reusable Workflow
+
+on:
+  workflow_call:
+    outputs:
+      node_version:
+        description: Node version
+        value: ${{ jobs.get-node-version.outputs.node_version }}
+
+env:
+  FORCE_COLOR: 1
+
+jobs:
+  get-node-version:
+    runs-on: ubuntu-latest
+    outputs:
+      node_version: ${{ steps.node-version.outputs.node_version }}
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
+
+      - name: Get Node.JS version from package.json 👀
+        id: node-version
+        run: echo "node_version=$(cat .nvmrc)" >> $GITHUB_OUTPUT
