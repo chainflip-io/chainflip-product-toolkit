@@ -2,9 +2,9 @@ import { HexString } from '@chainflip/utils/types';
 import { Server } from 'http';
 import { AddressInfo } from 'net';
 import { promisify } from 'util';
-import { afterEach, beforeEach, describe, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { z } from 'zod';
-import HttpClient from '../HttpClient';
+import { HttpClient } from '../index';
 import { JsonRpcRequest, RpcMethod } from '../common';
 import {
   AssetAndChain,
@@ -542,7 +542,7 @@ const isHexString = (value: unknown): value is HexString =>
   typeof value === 'string' && value.startsWith('0x');
 
 describe(HttpClient, () => {
-  it('returns all methods', ({ expect }) => {
+  it('returns all methods', () => {
     expect(new HttpClient('http://localhost:8080').methods()).toMatchInlineSnapshot(`
       [
         "broker_requestSwapDepositAddress",
@@ -703,7 +703,7 @@ describe(HttpClient, () => {
       await promisify(server.close.bind(server))();
     });
 
-    it('gets the swap rate with intermediary', async ({ expect }) => {
+    it('gets the swap rate with intermediary', async () => {
       expect(
         await client.sendRequest(
           'cf_swap_rate',
@@ -719,7 +719,7 @@ describe(HttpClient, () => {
       `);
     });
 
-    it('gets the swap rate without intermediary', async ({ expect }) => {
+    it('gets the swap rate without intermediary', async () => {
       expect(
         await client.sendRequest(
           'cf_swap_rate',
@@ -735,7 +735,7 @@ describe(HttpClient, () => {
       `);
     });
 
-    it('gets the funding environment', async ({ expect }) => {
+    it('gets the funding environment', async () => {
       expect(await client.sendRequest('cf_funding_environment')).toMatchInlineSnapshot(`
         {
           "minimum_funding_amount": 10000000000000000000n,
@@ -744,11 +744,11 @@ describe(HttpClient, () => {
       `);
     });
 
-    it('gets the ingress/egress environment', async ({ expect }) => {
+    it('gets the ingress/egress environment', async () => {
       expect(await client.sendRequest('cf_ingress_egress_environment')).toMatchSnapshot();
     });
 
-    it('gets the swapping environment', async ({ expect }) => {
+    it('gets the swapping environment', async () => {
       expect(await client.sendRequest('cf_swapping_environment')).toMatchInlineSnapshot(`
         {
           "maximum_swap_amounts": {
@@ -778,27 +778,27 @@ describe(HttpClient, () => {
       `);
     });
 
-    it('gets the environment', async ({ expect }) => {
+    it('gets the environment', async () => {
       expect(await client.sendRequest('cf_environment')).toMatchSnapshot();
     });
 
-    it('gets the metadata', async ({ expect }) => {
+    it('gets the metadata', async () => {
       expect(await client.sendRequest('state_getMetadata')).toBe('0x1234');
     });
 
-    it('gets the supported assets', async ({ expect }) => {
+    it('gets the supported assets', async () => {
       expect(await client.sendRequest('cf_supported_assets')).toEqual(supportedAssets);
     });
 
-    it('gets the block hash', async ({ expect }) => {
+    it('gets the block hash', async () => {
       expect(await client.sendRequest('chain_getBlockHash')).toEqual('0x5678');
     });
 
-    it('gets the runtime version', async ({ expect }) => {
+    it('gets the runtime version', async () => {
       expect(await client.sendRequest('state_getRuntimeVersion')).toEqual(runtimeVersion);
     });
 
-    it('gets the boost pools', async ({ expect }) => {
+    it('gets the boost pools', async () => {
       expect(await client.sendRequest('cf_boost_pools_depth')).toMatchInlineSnapshot(`
         [
           {
@@ -823,7 +823,7 @@ describe(HttpClient, () => {
       `);
     });
 
-    it('does the swap rate v2', async ({ expect }) => {
+    it('does the swap rate v2', async () => {
       expect(
         await client.sendRequest(
           'cf_swap_rate_v2',
@@ -865,19 +865,19 @@ describe(HttpClient, () => {
       `);
     });
 
-    it('gets validator account info', async ({ expect }) => {
+    it('gets validator account info', async () => {
       expect(await client.sendRequest('cf_account_info', VALIDATOR_ACCOUNT_ID)).toMatchSnapshot();
     });
 
-    it('gets lp account info', async ({ expect }) => {
+    it('gets lp account info', async () => {
       expect(await client.sendRequest('cf_account_info', LP_ACCOUNT_ID)).toMatchSnapshot();
     });
 
-    it('gets broker account info', async ({ expect }) => {
+    it('gets broker account info', async () => {
       expect(await client.sendRequest('cf_account_info', BROKER_ACCOUNT_ID)).toMatchSnapshot();
     });
 
-    it('gets unregistered account info', async ({ expect }) => {
+    it('gets unregistered account info', async () => {
       expect(
         await client.sendRequest(
           'cf_account_info',
@@ -886,7 +886,7 @@ describe(HttpClient, () => {
       ).toMatchSnapshot();
     });
 
-    it('gets pools orders', async ({ expect }) => {
+    it('gets pools orders', async () => {
       expect(
         await client.sendRequest(
           'cf_pool_orders',
@@ -896,7 +896,7 @@ describe(HttpClient, () => {
       ).toMatchSnapshot();
     });
 
-    it('requests deposit addresses', async ({ expect }) => {
+    it('requests deposit addresses', async () => {
       expect(
         await client.sendRequest(
           'broker_requestSwapDepositAddress',
@@ -920,7 +920,7 @@ describe(HttpClient, () => {
       expect(callCounter).toEqual(1);
     });
 
-    it('handles multiple requests with 1 call', async ({ expect }) => {
+    it('handles multiple requests with 1 call', async () => {
       const [r1, r2] = await Promise.all([
         client.sendRequest(
           'cf_pool_orders',
@@ -952,7 +952,7 @@ describe(HttpClient, () => {
       expect(callCounter).toEqual(1);
     });
 
-    it('handles multiple requests separately if they are sent far apart', async ({ expect }) => {
+    it('handles multiple requests separately if they are sent far apart', async () => {
       const r1 = await client.sendRequest(
         'cf_pool_orders',
         { chain: 'Ethereum', asset: 'ETH' },
@@ -983,7 +983,7 @@ describe(HttpClient, () => {
       expect(callCounter).toEqual(2);
     });
 
-    it('throws on invalid response', async ({ expect }) => {
+    it('throws on invalid response', async () => {
       const method = 'malformed_response' as RpcMethod;
 
       await expect(client.sendRequest(method)).rejects.toThrowErrorMatchingInlineSnapshot(
@@ -991,7 +991,7 @@ describe(HttpClient, () => {
       );
     });
 
-    it('throws on missing id on response', async ({ expect }) => {
+    it('throws on missing id on response', async () => {
       const method = 'missing_id' as RpcMethod;
 
       await expect(client.sendRequest(method)).rejects.toThrowErrorMatchingInlineSnapshot(
@@ -999,12 +999,12 @@ describe(HttpClient, () => {
       );
     });
 
-    it('throws on a non-200 response', async ({ expect }) => {
+    it('throws on a non-200 response', async () => {
       const method = 'non_200' as RpcMethod;
       await expect(client.sendRequest(method)).rejects.toThrow('HTTP error: 404');
     });
 
-    it('returns the rejected error message', async ({ expect }) => {
+    it('returns the rejected error message', async () => {
       await expect(
         client.sendRequest(
           'cf_swap_rate',
@@ -1018,7 +1018,7 @@ describe(HttpClient, () => {
       );
     });
 
-    it('handles malformed json', async ({ expect }) => {
+    it('handles malformed json', async () => {
       const method = 'malformed_json' as RpcMethod;
       await expect(client.sendRequest(method)).rejects.toThrow('Invalid JSON response');
     });

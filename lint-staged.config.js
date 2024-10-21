@@ -8,6 +8,10 @@ import * as path from 'path';
 export default function lint(files) {
   const commands = [];
 
+  if (micromatch(files, '**/package.json.md').length) {
+    commands.push('pnpm syncpack:check');
+  }
+
   const packages = new Set(
     micromatch(files, '**/packages/**/*')
       .map((file) =>
