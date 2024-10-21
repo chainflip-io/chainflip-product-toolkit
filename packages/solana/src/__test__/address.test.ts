@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { isValidSolanaAddress } from '../address';
+import { isValidSolanaAddress } from '../index';
 
 describe('address', () => {
   it.each([

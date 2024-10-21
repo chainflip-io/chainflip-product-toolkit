@@ -122,7 +122,7 @@ export default class WsClient extends Client {
           ),
           request.promise.then(
             (result) => ({ success: true, result }) as const,
-            (error) => ({ success: false, error: error as Error, retry: true }) as const,
+            (error: unknown) => ({ success: false, error: error as Error, retry: true }) as const,
           ),
         ]).finally(() => {
           this.requestMap.delete(data.id);

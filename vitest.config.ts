@@ -8,8 +8,11 @@ const exclude = [
   '**/node_modules/**',
   '**/*.js',
   '**/*.d.ts',
-  'packages/**/scripts/**',
+  '**/*.config.*',
+  '**/scripts/**',
 ];
+
+const include = ['**/*.test.ts', '**/*.test.tsx'];
 
 export default defineConfig({
   plugins: [
@@ -20,11 +23,10 @@ export default defineConfig({
   test: {
     restoreMocks: true,
     exclude,
-    include: ['**/*.test.ts', '**/*.test.tsx'],
+    include,
     coverage: {
-      exclude,
+      exclude: [...exclude, ...include],
       enabled: true,
-      provider: 'istanbul',
     },
   },
 });
