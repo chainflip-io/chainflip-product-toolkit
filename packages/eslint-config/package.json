@@ -15,5 +15,11 @@
     "eslint": "^9.13.0",
     "globals": "^15.11.0",
     "typescript-eslint": "^8.10.0"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/.eslintrc.js",
+      "require": "./dist/.eslintrc.js"
+    }
   }
 }
