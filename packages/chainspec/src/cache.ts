@@ -1,9 +1,9 @@
 import { HttpClient } from '@chainflip/rpc';
 import { Queue } from '@chainflip/utils/async';
+import { TypeRegistry, Metadata } from '@polkadot/types';
 import * as fs from 'fs/promises';
 import * as path from 'path';
 import { z } from 'zod';
-import { TypeRegistry, Metadata } from '@polkadot/types';
 
 const cacheSchema = z.record(
   z.object({

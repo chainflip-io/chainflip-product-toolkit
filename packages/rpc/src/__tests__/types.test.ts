@@ -1,8 +1,8 @@
-import { describe, expect, it } from 'vitest';
-import { rpcResult } from '../common';
 import { capitalize } from '@chainflip/utils/string';
 import * as fs from 'fs/promises';
 import * as path from 'path';
+import { describe, expect, it } from 'vitest';
+import { rpcResult } from '../common';
 
 describe('types', () => {
   it.each(Object.keys(rpcResult).filter((key) => key.startsWith('cf_')))(

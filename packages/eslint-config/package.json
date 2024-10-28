@@ -6,20 +6,21 @@
     "dist"
   ],
   "scripts": {
-    "build": "mkdir -p dist && cp '../../eslint.config.js' dist/.eslintrc.js",
+    "build": "mkdir -p dist && cp '../../eslint.config.js' dist/eslint.config.js",
     "clean": "rm -rf dist",
     "prepublish": "pnpm clean && pnpm build"
   },
   "peerDependencies": {
     "@eslint/js": "^9.13.0",
     "eslint": "^9.13.0",
+    "eslint-plugin-import": "^2.31.0",
     "globals": "^15.11.0",
     "typescript-eslint": "^8.10.0"
   },
   "exports": {
     ".": {
-      "import": "./dist/.eslintrc.js",
-      "require": "./dist/.eslintrc.js"
+      "import": "./dist/eslint.config.js",
+      "require": "./dist/eslint.config.js"
     }
   }
 }

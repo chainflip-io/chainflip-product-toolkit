@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { diffSpecs } from '../utils';
 import { ParsedMetadata } from '../BaseParser';
+import { diffSpecs } from '../utils';
 
 describe(diffSpecs, () => {
   it('returns an empty set if nothing has changed', () => {

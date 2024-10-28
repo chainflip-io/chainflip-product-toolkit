@@ -1,8 +1,8 @@
 import { once } from 'events';
 import { Mock, afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { AddressInfo, WebSocket, WebSocketServer } from 'ws';
-import WsClient from '../WsClient';
 import { JsonRpcRequest, RpcMethod } from '../common';
+import WsClient from '../WsClient';
 
 describe(WsClient, () => {
   let serverClosed = false;

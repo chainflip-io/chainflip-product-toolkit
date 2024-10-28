@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import assert from 'assert';
-import { TypeDefInfo } from '@polkadot/types';
-import { TypeDef } from '@polkadot/types/types';
-import BaseParser from '@/chainspec/BaseParser';
 import { uncapitalize } from '@chainflip/utils/string';
+import { TypeDefInfo } from '@polkadot/types';
 import { PalletMetadataV14, SiLookupTypeId } from '@polkadot/types/interfaces';
+import { TypeDef } from '@polkadot/types/types';
+import assert from 'assert';
+import BaseParser from '@/chainspec/BaseParser';
 
 const hasSubs = <T extends TypeDef>(type: T, count?: number): type is T & { sub: TypeDef[] } =>
   Array.isArray(type.sub) && (count === undefined || type.sub.length === count);

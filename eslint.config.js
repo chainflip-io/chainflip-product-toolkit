@@ -1,6 +1,7 @@
 import globals from 'globals';
 import pluginJs from '@eslint/js';
 import tseslint from 'typescript-eslint';
+import importPlugin from 'eslint-plugin-import';
 
 export default [
   { ignores: ['**/coverage', '**/dist', '**/generated', '**/wasm/built'] },
@@ -27,6 +28,9 @@ export default [
   ...tseslint.configs.strictTypeChecked,
   {
     files: ['**/*.ts'],
+    plugins: {
+      import: importPlugin,
+    },
     rules: {
       '@typescript-eslint/no-explicit-any': 'off',
       '@typescript-eslint/no-confusing-void-expression': 'off',
@@ -60,10 +64,31 @@ export default [
           ignoreRestSiblings: true,
         },
       ],
+      'object-shorthand': ['error', 'always'],
+      'import/no-extraneous-dependencies': 'off',
+      'import/extensions': 'off',
+      'import/prefer-default-export': 'off',
+      'import/no-unresolved': 'off',
+      'import/order': [
+        'error',
+        {
+          pathGroups: [
+            { pattern: '@/**', group: 'internal' },
+            { pattern: 'react', group: 'external', position: 'before' },
+            { pattern: 'next/**', group: 'external', position: 'before' },
+          ],
+          groups: [['external', 'builtin'], 'internal', ['sibling', 'parent'], 'index'],
+          pathGroupsExcludedImportTypes: ['internal'],
+          alphabetize: {
+            order: 'asc',
+            caseInsensitive: true,
+          },
+        },
+      ],
     },
   },
   {
-    files: ['**/*.js', '**/*.config.ts'],
+    files: ['**/*.js', '**/*.mjs', '**/*.cjs', '**/*.config.ts'],
     ...tseslint.configs.disableTypeChecked,
   },
   {

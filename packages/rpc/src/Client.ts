@@ -1,6 +1,6 @@
+import { assert } from '@chainflip/utils/assertion';
 import { randomUUID } from 'crypto';
 import { RpcRequest, RpcMethod, RpcResult, rpcResult, rpcResponse, JsonRpcRequest } from './common';
-import { assert } from '@chainflip/utils/assertion';
 
 export type Response =
   | { success: true; id: string; result: unknown }

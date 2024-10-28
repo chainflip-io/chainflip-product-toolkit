@@ -1,14 +1,14 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable no-console */
 import { isNotNullish } from '@chainflip/utils/guard';
+import { uncapitalize } from '@chainflip/utils/string';
 import { Metadata } from '@polkadot/types';
+import { PalletMetadataV14, SiLookupTypeId } from '@polkadot/types/interfaces';
 import { TypeDef, TypeDefInfo } from '@polkadot/types/types';
 import assert from 'assert';
 import * as fs from 'fs/promises';
 import * as path from 'path';
 import { Network, specVersionCache } from './cache';
-import { PalletMetadataV14, SiLookupTypeId } from '@polkadot/types/interfaces';
-import { uncapitalize } from '@chainflip/utils/string';
 
 export type MetadataOpts = {
   network?: Network;
