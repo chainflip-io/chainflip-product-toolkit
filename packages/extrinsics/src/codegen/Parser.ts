@@ -1,6 +1,6 @@
+import { PalletMetadataV14, SiLookupTypeId } from '@polkadot/types/interfaces';
 import { TypeDef } from '@polkadot/types/types';
 import BaseParser, { ResolvedType } from '@/chainspec/BaseParser';
-import { PalletMetadataV14, SiLookupTypeId } from '@polkadot/types/interfaces';
 
 export default class Parser extends BaseParser {
   protected getItems(pallet: PalletMetadataV14): { type: SiLookupTypeId } | null {

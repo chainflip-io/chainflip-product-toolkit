@@ -1,4 +1,5 @@
 import { capitalize } from '@chainflip/utils/string';
+import assert from 'assert';
 import BaseCodeGenerator, { CodegenResult, Code, Identifier } from '@/chainspec/BaseCodeGenerator';
 import {
   ArrayType,
@@ -11,7 +12,6 @@ import {
   StructType,
   TupleType,
 } from '@/chainspec/BaseParser';
-import assert from 'assert';
 
 class Struct extends Code {
   as: 'tuple' | 'record' = 'record';

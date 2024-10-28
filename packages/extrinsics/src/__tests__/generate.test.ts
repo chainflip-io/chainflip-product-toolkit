@@ -1,10 +1,10 @@
-import generateAllCode from '@/chainspec/generateAllCode';
-import Parser from '../codegen/Parser';
-import CodeGenerator from '../codegen/CodeGenerator';
+import * as fs from 'fs/promises';
 import * as os from 'os';
 import * as path from 'path';
-import * as fs from 'fs/promises';
 import { describe, it, expect } from 'vitest';
+import generateAllCode from '@/chainspec/generateAllCode';
+import CodeGenerator from '../codegen/CodeGenerator';
+import Parser from '../codegen/Parser';
 
 async function* readdir(dir: string): AsyncGenerator<string> {
   const dirents = await fs.readdir(dir, { withFileTypes: true });

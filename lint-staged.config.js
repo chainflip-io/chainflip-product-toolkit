@@ -32,11 +32,11 @@ export default function lint(files) {
 
   if (tsFiles.length) {
     commands.push(`pnpm prettier --check ${tsFiles.join(' ')}`);
-    commands.push(`pnpm eslint --max-warnings 0 --no-warn-ignored ${tsFiles.join(' ')}`);
-  }
-
-  if (micromatch(files, '**/eslint.config.js').length) {
-    commands.push('pnpm eslint --max-warnings 0 --no-warn-ignored .');
+    if (micromatch(files, '**/eslint.config.js').length) {
+      commands.push('pnpm eslint --max-warnings 0 --no-warn-ignored .');
+    } else {
+      commands.push(`pnpm eslint --max-warnings 0 --no-warn-ignored ${tsFiles.join(' ')}`);
+    }
   }
 
   return commands;

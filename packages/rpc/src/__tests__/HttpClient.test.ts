@@ -4,8 +4,8 @@ import { AddressInfo } from 'net';
 import { promisify } from 'util';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { z } from 'zod';
-import { HttpClient } from '../index';
 import { JsonRpcRequest, RpcMethod } from '../common';
+import { HttpClient } from '../index';
 import {
   AssetAndChain,
   broker,

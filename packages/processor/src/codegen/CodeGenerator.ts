@@ -1,3 +1,4 @@
+import BaseCodeGenerator, { CodegenResult, Code, Identifier } from '@/chainspec/BaseCodeGenerator';
 import {
   isPrimitiveType,
   type ArrayType,
@@ -10,7 +11,6 @@ import {
   type StructType,
   type TupleType,
 } from './Parser';
-import BaseCodeGenerator, { CodegenResult, Code, Identifier } from '@/chainspec/BaseCodeGenerator';
 
 const nameToIdentifier = (name: string): string =>
   name

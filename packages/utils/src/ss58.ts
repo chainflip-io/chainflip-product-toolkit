@@ -1,8 +1,8 @@
-import { assert } from './assertion';
 import { blake2b } from '@noble/hashes/blake2b';
+import { assert } from './assertion';
 import * as base58 from './base58';
-import { HexString } from './types';
 import { hexToBytes, bytesToHex } from './bytes';
+import { HexString } from './types';
 
 const CHECKSUM_BYTE_LENGTH = 2;
 const DATA_LENGTH = 32;
@@ -51,7 +51,7 @@ export const decode = (input: string): { data: Uint8Array; ss58Format: number } 
 
   return {
     data: new Uint8Array(data),
-    ss58Format: ss58Format,
+    ss58Format,
   };
 };
 
