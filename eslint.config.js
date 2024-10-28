@@ -27,7 +27,7 @@ export default [
   },
   ...tseslint.configs.strictTypeChecked,
   {
-    files: ['**/*.ts'],
+    files: ['**/*.ts', '**/*.tsx'],
     plugins: {
       import: importPlugin,
     },
