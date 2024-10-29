@@ -47,7 +47,7 @@ export class Queue {
     return new Promise((resolve, reject) => {
       this.promise = this.promise.then(async () => {
         const sleepPromise = this.debounce ? sleep(this.debounce) : Promise.resolve();
-        // eslint-disable-next-line @typescript-eslint/use-unknown-in-catch-callback-variable
+
         await Promise.all([fn(...args).then(resolve, reject), sleepPromise]);
       });
     });

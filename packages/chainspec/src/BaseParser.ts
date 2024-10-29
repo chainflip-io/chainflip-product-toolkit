@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable no-console */
 import { isNotNullish } from '@chainflip/utils/guard';
 import { uncapitalize } from '@chainflip/utils/string';

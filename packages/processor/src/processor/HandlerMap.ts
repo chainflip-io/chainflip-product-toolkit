@@ -36,13 +36,12 @@ export default class HandlerMap<T extends string, U> {
       )
       .reduce(
         (acc, { spec, name, handler }) => {
-          // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
           acc[name] ??= [];
           acc[name].push({ spec, handler });
 
           return acc;
         },
-        // eslint-disable-next-line @typescript-eslint/prefer-reduce-type-parameter
+
         {} as HandlerMap<T, U>['handlersByName'],
       );
   }
@@ -59,7 +58,6 @@ export default class HandlerMap<T extends string, U> {
 
     if (handler !== undefined) return handler;
 
-    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
     const handlers = this.handlersByName[name] ?? [];
 
     const index = handlers.findIndex(({ spec }) => spec <= specNumber);
