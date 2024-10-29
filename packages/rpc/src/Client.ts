@@ -1,11 +1,12 @@
 import { assert } from '@chainflip/utils/assertion';
-import { randomUUID } from 'crypto';
 import { RpcRequest, RpcMethod, RpcResult, rpcResult, rpcResponse, JsonRpcRequest } from './common';
 
 export type Response =
   | { success: true; id: string; result: unknown }
   | { success: false; id: string; error: Error };
 export default abstract class Client {
+  private lastRequestId = 0;
+
   constructor(protected readonly url: string) {}
 
   protected abstract send<const T extends RpcMethod>(
@@ -13,7 +14,7 @@ export default abstract class Client {
   ): Promise<Response[]>;
 
   protected getRequestId() {
-    return randomUUID();
+    return String(++this.lastRequestId);
   }
 
   protected formatRequest<T extends RpcMethod>(
