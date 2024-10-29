@@ -284,7 +284,7 @@ export default class Processor<P extends ProcessorStore<unknown, unknown>, I ext
 
       for (const block of blocks) {
         numBlocksProcessed++;
-        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+
         if (!this.running) {
           break;
         }

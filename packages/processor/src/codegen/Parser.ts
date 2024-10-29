@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { uncapitalize } from '@chainflip/utils/string';
 import { TypeDefInfo } from '@polkadot/types';
 import { PalletMetadataV14, SiLookupTypeId } from '@polkadot/types/interfaces';

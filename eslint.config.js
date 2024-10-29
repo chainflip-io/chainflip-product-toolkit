@@ -25,9 +25,9 @@ export default [
   {
     ...pluginJs.configs.recommended,
   },
-  ...tseslint.configs.strictTypeChecked,
+  ...tseslint.configs.recommendedTypeChecked,
   {
-    files: ['**/*.ts'],
+    files: ['**/*.ts', '**/*.tsx'],
     plugins: {
       import: importPlugin,
     },
