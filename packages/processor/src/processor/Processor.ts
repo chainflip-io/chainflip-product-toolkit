@@ -24,6 +24,7 @@ export function timedMethod<P extends ProcessorStore<any, any>, I extends Indexe
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const method = descriptor.value;
   assert(typeof method === 'function');
+  // eslint-disable-next-line no-param-reassign
   descriptor.value = async function (
     this: Processor<ProcessorStore<any, any>, IndexerStore>,
     ...args: unknown[]
@@ -66,7 +67,7 @@ export default class Processor<P extends ProcessorStore<unknown, unknown>, I ext
     if (batchSize) this.batchSize = batchSize;
     if (transactionTimeout) this.transactionTimeout = transactionTimeout;
     this.eventHandlerMap = new HandlerMap(eventHandlers);
-    this.handledEvents = new Set(eventHandlers.flatMap(({ name }) => name));
+    this.handledEvents = new Set(eventHandlers.flatMap(({ name: n }) => n));
     this.name = name;
   }
 
@@ -135,8 +136,8 @@ export default class Processor<P extends ProcessorStore<unknown, unknown>, I ext
 
     if (handler === null) return null;
 
-    this.timings['eventHandlers'] ??= {};
-    const timing = this.timings['eventHandlers'] as Record<string, number[]>;
+    this.timings.eventHandlers ??= {};
+    const timing = this.timings.eventHandlers as Record<string, number[]>;
     return (async (args) => {
       timing[name] ??= [];
       const start = performance.now();

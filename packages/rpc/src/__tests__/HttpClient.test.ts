@@ -688,12 +688,13 @@ describe(HttpClient, () => {
         for (const item of body) {
           if ((item.method as string) === 'non_200') {
             return res.writeHead(404).end();
-          } else if ((item.method as string) === 'malformed_json') {
+          }
+          if ((item.method as string) === 'malformed_json') {
             return res.end('{');
           }
           response.push(handleRequest(item));
         }
-        res.writeHead(200).end(JSON.stringify(response));
+        return res.writeHead(200).end(JSON.stringify(response));
       }).listen(0);
 
       client = new HttpClient(`http://localhost:${(server.address() as AddressInfo).port}`);

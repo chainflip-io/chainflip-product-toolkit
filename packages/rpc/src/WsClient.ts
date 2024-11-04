@@ -121,7 +121,7 @@ export default class WsClient extends Client {
             () => ({ success: false, retry: false, error: new Error('timeout') }) as const,
           ),
           request.promise.then(
-            (result) => ({ success: true, result }) as const,
+            (r) => ({ success: true, result: r }) as const,
             (error: unknown) => ({ success: false, error: error as Error, retry: true }) as const,
           ),
         ]).finally(() => {

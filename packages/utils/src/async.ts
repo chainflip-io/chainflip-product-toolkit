@@ -98,7 +98,7 @@ export const once = async (
   target.addEventListener('error', onError, { once: true, signal: opts?.signal });
 
   if (opts?.signal) {
-    const signal = opts.signal;
+    const { signal } = opts;
     const abort = () => {
       deferred.reject(new Error('aborted'));
     };

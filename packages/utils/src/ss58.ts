@@ -28,7 +28,7 @@ export const decode = (input: string): { data: Uint8Array; ss58Format: number } 
       ((decodedBytes[0] & 0x3f) << 2) | (decodedBytes[1] >> 6) | ((decodedBytes[1] & 0x3f) << 8);
   } else {
     ss58FormatLen = 1;
-    ss58Format = decodedBytes[0];
+    [ss58Format] = decodedBytes;
   }
 
   assert(!RESERVED_PREFIXES.includes(ss58Format), `Reserved prefix: ${ss58Format}`);

@@ -15,7 +15,7 @@ const generateAllCode = async (
   const opts: MetadataOpts[] = Object.values(info).map((i) => ({ ...i, generatedDir }));
 
   const metadataForHashes = (
-    await Promise.all(opts.map((opts) => new Parser(opts).fetchAndParseSpec()))
+    await Promise.all(opts.map((o) => new Parser(o).fetchAndParseSpec()))
   ).sort((a, b) => a.specVersion - b.specVersion);
 
   let previousMetadata = {};

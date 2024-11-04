@@ -33,23 +33,23 @@ describe(SpecVersionCache, () => {
     });
   });
 
-  describe(SpecVersionCache.prototype['write'], () => {
+  describe(SpecVersionCache.prototype.write, () => {
     it('updates the cache', async () => {
-      await specVersionCache['write'](1, 'hash', 'mainnet');
+      await specVersionCache.write(1, 'hash', 'mainnet');
       expect(await fs.readFile(cachePath, 'utf8')).toEqual(
         JSON.stringify({ '1': { hash: 'hash', network: 'mainnet' } }, null, 2),
       );
     });
   });
 
-  describe(SpecVersionCache.prototype['getVersion'], () => {
+  describe(SpecVersionCache.prototype.getVersion, () => {
     it('finds the version for a hash and network', async () => {
-      await specVersionCache['write'](1, 'hash', 'mainnet');
-      expect(await specVersionCache['getVersion']('hash', 'mainnet')).toEqual(1);
+      await specVersionCache.write(1, 'hash', 'mainnet');
+      expect(await specVersionCache.getVersion('hash', 'mainnet')).toEqual(1);
     });
 
     it('returns undefined for unknown versions', async () => {
-      expect(await specVersionCache['getVersion']('hash', 'mainnet')).toBeUndefined();
+      expect(await specVersionCache.getVersion('hash', 'mainnet')).toBeUndefined();
     });
   });
 

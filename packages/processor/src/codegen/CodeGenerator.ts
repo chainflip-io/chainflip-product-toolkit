@@ -172,7 +172,7 @@ export default class CodeGenerator extends BaseCodeGenerator {
       });
 
       if (members.length === 1) {
-        generated = members[0];
+        [generated] = members;
       } else {
         generated = `z.union([${members.join(', ')}])`;
       }
@@ -184,10 +184,10 @@ export default class CodeGenerator extends BaseCodeGenerator {
   }
 
   protected override generateStruct(def: StructType): CodegenResult {
-    const identifier = def.name && nameToIdentifier(def.name);
+    const structIdent = def.name && nameToIdentifier(def.name);
 
-    if (identifier && this.registry.types.has(identifier)) {
-      return new Identifier(identifier);
+    if (structIdent && this.registry.types.has(structIdent)) {
+      return new Identifier(structIdent);
     }
 
     const dependencies: CodegenResult[] = [];
@@ -217,11 +217,11 @@ export default class CodeGenerator extends BaseCodeGenerator {
       dependencies,
     );
 
-    if (!identifier) return code;
+    if (!structIdent) return code;
 
-    this.registry.types.set(identifier, code);
+    this.registry.types.set(structIdent, code);
 
-    return new Identifier(identifier);
+    return new Identifier(structIdent);
   }
 
   protected override generateArray(def: ArrayType): CodegenResult {

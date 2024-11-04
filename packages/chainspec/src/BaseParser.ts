@@ -286,7 +286,7 @@ export default abstract class BaseParser {
   }
 
   protected async getMetadata(): Promise<Metadata> {
-    let metadata = this.metadata;
+    let { metadata } = this;
 
     if (!metadata) metadata = (await this.fetchMetadataAndSpecVersion()).metadata;
 
@@ -299,7 +299,7 @@ export default abstract class BaseParser {
   }
 
   protected async getSpecVersion(): Promise<number> {
-    let specVersion = this.specVersion;
+    let { specVersion } = this;
 
     if (!specVersion) specVersion = (await this.fetchMetadataAndSpecVersion()).specVersion;
 
