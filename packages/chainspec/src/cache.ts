@@ -27,12 +27,12 @@ export class SpecVersionCache {
 
   private readonly queue = new Queue();
 
-  constructor(private readonly path: string) {}
+  constructor(private readonly filePath: string) {}
 
   async read(): Promise<z.output<typeof cacheSchema>> {
     const contents = JSON.parse(
-      await fs.readFile(this.path, 'utf8').catch(async () => {
-        await fs.mkdir(path.dirname(this.path), { recursive: true });
+      await fs.readFile(this.filePath, 'utf8').catch(async () => {
+        await fs.mkdir(path.dirname(this.filePath), { recursive: true });
         return '{}';
       }),
     ) as unknown;
@@ -46,7 +46,7 @@ export class SpecVersionCache {
     return this.queue.enqueue(async () => {
       const data = await this.read();
       data[id] = { hash, network };
-      await fs.writeFile(this.path, JSON.stringify(data, null, 2));
+      await fs.writeFile(this.filePath, JSON.stringify(data, null, 2));
     });
   }
 
@@ -95,7 +95,7 @@ export class SpecVersionCache {
   }
 
   getDir() {
-    return path.dirname(this.path);
+    return path.dirname(this.filePath);
   }
 }
 

@@ -137,7 +137,7 @@ describe(CodeGenerator, () => {
     ];
 
     for (const module of modules) {
-      expect(await module.toFormattedString()).toMatchSnapshot(module['name']);
+      expect(await module.toFormattedString()).toMatchSnapshot(module.name);
     }
   });
 
@@ -166,17 +166,18 @@ describe(CodeGenerator, () => {
     ];
 
     for (const module of modules) {
+      // eslint-disable-next-line dot-notation
       expect(await module.toFormattedString()).toMatchSnapshot(module['name']);
     }
   });
 
   it('throws if it does not find the expected event', () => {
     vi.spyOn(console, 'error').mockImplementation(() => {});
-    const it = new CodeGenerator({ trackedItems: new Set(['Enums.EventOne']) }).generate({
+    const iter = new CodeGenerator({ trackedItems: new Set(['Enums.EventOne']) }).generate({
       Primitives: Object.fromEntries(primitives.map((name) => [name, { type: 'primitive', name }])),
     });
 
-    expect(() => it.next()).toThrowErrorMatchingInlineSnapshot(
+    expect(() => iter.next()).toThrowErrorMatchingInlineSnapshot(
       `[Error: Not all items were generated]`,
     );
     expect(console.error).toHaveBeenCalled();
@@ -219,7 +220,7 @@ describe(CodeGenerator, () => {
     ];
 
     for (const module of modules) {
-      expect(await module.toFormattedString()).toMatchSnapshot(module['name']);
+      expect(await module.toFormattedString()).toMatchSnapshot(module.name);
     }
   });
 
@@ -243,7 +244,7 @@ describe(CodeGenerator, () => {
     ];
 
     for (const module of modules) {
-      expect(await module.toFormattedString()).toMatchSnapshot(module['name']);
+      expect(await module.toFormattedString()).toMatchSnapshot(module.name);
     }
   });
 

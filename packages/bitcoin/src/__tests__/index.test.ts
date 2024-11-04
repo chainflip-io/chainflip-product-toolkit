@@ -109,7 +109,7 @@ describe(isValidAddressForNetwork, () => {
       }
     }
 
-    for (const address of Object.values(bitcoinAddresses['mainnet']).flat()) {
+    for (const address of Object.values(bitcoinAddresses.mainnet).flat()) {
       expect(isValidAddressForNetwork(address, 'regtest')).toBe(false);
     }
 
