@@ -4343,6 +4343,45 @@
         }
       }
     },
+    "ActivationTxFailedAwaitingGovernance": {
+      "type": "struct",
+      "fields": {
+        "newPublicKey": {
+          "type": "struct",
+          "name": "CfChainsEvmAggKey",
+          "fields": {
+            "pubKeyX": {
+              "type": "array",
+              "value": {
+                "type": "primitive",
+                "name": "u8"
+              },
+              "length": 32
+            },
+            "pubKeyYParity": {
+              "type": "enum",
+              "name": "cfChainsEvmParityBit",
+              "values": [
+                {
+                  "name": "Odd",
+                  "value": {
+                    "type": "primitive",
+                    "name": "null"
+                  }
+                },
+                {
+                  "name": "Even",
+                  "value": {
+                    "type": "primitive",
+                    "name": "null"
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
     "ChainInitialized": {
       "type": "primitive",
       "name": "null"
@@ -4362,6 +4401,19 @@
       "length": 32
     },
     "AwaitingGovernanceActivation": {
+      "type": "struct",
+      "fields": {
+        "newPublicKey": {
+          "type": "array",
+          "value": {
+            "type": "primitive",
+            "name": "u8"
+          },
+          "length": 32
+        }
+      }
+    },
+    "ActivationTxFailedAwaitingGovernance": {
       "type": "struct",
       "fields": {
         "newPublicKey": {
@@ -4410,6 +4462,36 @@
       }
     },
     "AwaitingGovernanceActivation": {
+      "type": "struct",
+      "fields": {
+        "newPublicKey": {
+          "type": "struct",
+          "name": "CfChainsBtcAggKey",
+          "fields": {
+            "previous": {
+              "type": "option",
+              "value": {
+                "type": "array",
+                "value": {
+                  "type": "primitive",
+                  "name": "u8"
+                },
+                "length": 32
+              }
+            },
+            "current": {
+              "type": "array",
+              "value": {
+                "type": "primitive",
+                "name": "u8"
+              },
+              "length": 32
+            }
+          }
+        }
+      }
+    },
+    "ActivationTxFailedAwaitingGovernance": {
       "type": "struct",
       "fields": {
         "newPublicKey": {
@@ -10890,6 +10972,98 @@
           "name": "u32"
         }
       }
+    },
+    "MinimumChunkSizeSet": {
+      "type": "struct",
+      "fields": {
+        "asset": {
+          "type": "enum",
+          "name": "cfPrimitivesChainsAssetsAnyAsset",
+          "values": [
+            {
+              "name": "__Unused0",
+              "value": {
+                "type": "primitive",
+                "name": "null"
+              }
+            },
+            {
+              "name": "Eth",
+              "value": {
+                "type": "primitive",
+                "name": "null"
+              }
+            },
+            {
+              "name": "Flip",
+              "value": {
+                "type": "primitive",
+                "name": "null"
+              }
+            },
+            {
+              "name": "Usdc",
+              "value": {
+                "type": "primitive",
+                "name": "null"
+              }
+            },
+            {
+              "name": "Dot",
+              "value": {
+                "type": "primitive",
+                "name": "null"
+              }
+            },
+            {
+              "name": "Btc",
+              "value": {
+                "type": "primitive",
+                "name": "null"
+              }
+            },
+            {
+              "name": "ArbEth",
+              "value": {
+                "type": "primitive",
+                "name": "null"
+              }
+            },
+            {
+              "name": "ArbUsdc",
+              "value": {
+                "type": "primitive",
+                "name": "null"
+              }
+            },
+            {
+              "name": "Usdt",
+              "value": {
+                "type": "primitive",
+                "name": "null"
+              }
+            },
+            {
+              "name": "Sol",
+              "value": {
+                "type": "primitive",
+                "name": "null"
+              }
+            },
+            {
+              "name": "SolUsdc",
+              "value": {
+                "type": "primitive",
+                "name": "null"
+              }
+            }
+          ]
+        },
+        "amount": {
+          "type": "primitive",
+          "name": "u128"
+        }
+      }
     }
   },
   "LiquidityProvider": {
@@ -12459,6 +12633,13 @@
                 "type": "primitive",
                 "name": "null"
               }
+            },
+            {
+              "name": "TransactionTainted",
+              "value": {
+                "type": "primitive",
+                "name": "null"
+              }
             }
           ]
         }
@@ -13988,6 +14169,162 @@
           ]
         }
       }
+    },
+    "TaintedTransactionReportReceived": {
+      "type": "struct",
+      "fields": {
+        "accountId": {
+          "type": "primitive",
+          "name": "AccountId32"
+        },
+        "txId": {
+          "type": "primitive",
+          "name": "H256"
+        },
+        "expiresAt": {
+          "type": "primitive",
+          "name": "u32"
+        }
+      }
+    },
+    "TaintedTransactionReportExpired": {
+      "type": "struct",
+      "fields": {
+        "accountId": {
+          "type": "primitive",
+          "name": "AccountId32"
+        },
+        "txId": {
+          "type": "primitive",
+          "name": "H256"
+        }
+      }
+    },
+    "CcmFallbackScheduled": {
+      "type": "struct",
+      "fields": {
+        "broadcastId": {
+          "type": "primitive",
+          "name": "u32"
+        },
+        "egressDetails": {
+          "type": "struct",
+          "name": "CfTraitsScheduledEgressDetailsEthereum",
+          "fields": {
+            "egressId": {
+              "type": "tuple",
+              "values": [
+                {
+                  "type": "enum",
+                  "name": "cfPrimitivesChainsForeignChain",
+                  "values": [
+                    {
+                      "name": "__Unused0",
+                      "value": {
+                        "type": "primitive",
+                        "name": "null"
+                      }
+                    },
+                    {
+                      "name": "Ethereum",
+                      "value": {
+                        "type": "primitive",
+                        "name": "null"
+                      }
+                    },
+                    {
+                      "name": "Polkadot",
+                      "value": {
+                        "type": "primitive",
+                        "name": "null"
+                      }
+                    },
+                    {
+                      "name": "Bitcoin",
+                      "value": {
+                        "type": "primitive",
+                        "name": "null"
+                      }
+                    },
+                    {
+                      "name": "Arbitrum",
+                      "value": {
+                        "type": "primitive",
+                        "name": "null"
+                      }
+                    },
+                    {
+                      "name": "Solana",
+                      "value": {
+                        "type": "primitive",
+                        "name": "null"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "primitive",
+                  "name": "u64"
+                }
+              ]
+            },
+            "egressAmount": {
+              "type": "primitive",
+              "name": "u128"
+            },
+            "feeWithheld": {
+              "type": "primitive",
+              "name": "u128"
+            }
+          }
+        }
+      }
+    },
+    "TaintedTransactionRejected": {
+      "type": "struct",
+      "fields": {
+        "broadcastId": {
+          "type": "primitive",
+          "name": "u32"
+        },
+        "txId": {
+          "type": "struct",
+          "name": "CfChainsEvmDepositDetails",
+          "fields": {
+            "txHashes": {
+              "type": "option",
+              "value": {
+                "type": "array",
+                "value": {
+                  "type": "primitive",
+                  "name": "H256"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "FailedToRejectTaintedTransaction": {
+      "type": "struct",
+      "fields": {
+        "txId": {
+          "type": "struct",
+          "name": "CfChainsEvmDepositDetails",
+          "fields": {
+            "txHashes": {
+              "type": "option",
+              "value": {
+                "type": "array",
+                "value": {
+                  "type": "primitive",
+                  "name": "H256"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "PolkadotIngressEgress": {
@@ -14776,6 +15113,13 @@
             },
             {
               "name": "NotEnoughToPayFees",
+              "value": {
+                "type": "primitive",
+                "name": "null"
+              }
+            },
+            {
+              "name": "TransactionTainted",
               "value": {
                 "type": "primitive",
                 "name": "null"
@@ -16150,6 +16494,158 @@
           ]
         }
       }
+    },
+    "TaintedTransactionReportReceived": {
+      "type": "struct",
+      "fields": {
+        "accountId": {
+          "type": "primitive",
+          "name": "AccountId32"
+        },
+        "txId": {
+          "type": "struct",
+          "name": "CfPrimitivesTxId",
+          "fields": {
+            "blockNumber": {
+              "type": "primitive",
+              "name": "u32"
+            },
+            "extrinsicIndex": {
+              "type": "primitive",
+              "name": "u32"
+            }
+          }
+        },
+        "expiresAt": {
+          "type": "primitive",
+          "name": "u32"
+        }
+      }
+    },
+    "TaintedTransactionReportExpired": {
+      "type": "struct",
+      "fields": {
+        "accountId": {
+          "type": "primitive",
+          "name": "AccountId32"
+        },
+        "txId": {
+          "type": "struct",
+          "name": "CfPrimitivesTxId",
+          "fields": {
+            "blockNumber": {
+              "type": "primitive",
+              "name": "u32"
+            },
+            "extrinsicIndex": {
+              "type": "primitive",
+              "name": "u32"
+            }
+          }
+        }
+      }
+    },
+    "CcmFallbackScheduled": {
+      "type": "struct",
+      "fields": {
+        "broadcastId": {
+          "type": "primitive",
+          "name": "u32"
+        },
+        "egressDetails": {
+          "type": "struct",
+          "name": "CfTraitsScheduledEgressDetailsPolkadot",
+          "fields": {
+            "egressId": {
+              "type": "tuple",
+              "values": [
+                {
+                  "type": "enum",
+                  "name": "cfPrimitivesChainsForeignChain",
+                  "values": [
+                    {
+                      "name": "__Unused0",
+                      "value": {
+                        "type": "primitive",
+                        "name": "null"
+                      }
+                    },
+                    {
+                      "name": "Ethereum",
+                      "value": {
+                        "type": "primitive",
+                        "name": "null"
+                      }
+                    },
+                    {
+                      "name": "Polkadot",
+                      "value": {
+                        "type": "primitive",
+                        "name": "null"
+                      }
+                    },
+                    {
+                      "name": "Bitcoin",
+                      "value": {
+                        "type": "primitive",
+                        "name": "null"
+                      }
+                    },
+                    {
+                      "name": "Arbitrum",
+                      "value": {
+                        "type": "primitive",
+                        "name": "null"
+                      }
+                    },
+                    {
+                      "name": "Solana",
+                      "value": {
+                        "type": "primitive",
+                        "name": "null"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "primitive",
+                  "name": "u64"
+                }
+              ]
+            },
+            "egressAmount": {
+              "type": "primitive",
+              "name": "u128"
+            },
+            "feeWithheld": {
+              "type": "primitive",
+              "name": "u128"
+            }
+          }
+        }
+      }
+    },
+    "TaintedTransactionRejected": {
+      "type": "struct",
+      "fields": {
+        "broadcastId": {
+          "type": "primitive",
+          "name": "u32"
+        },
+        "txId": {
+          "type": "primitive",
+          "name": "u32"
+        }
+      }
+    },
+    "FailedToRejectTaintedTransaction": {
+      "type": "struct",
+      "fields": {
+        "txId": {
+          "type": "primitive",
+          "name": "u32"
+        }
+      }
     }
   },
   "BitcoinIngressEgress": {
@@ -16256,15 +16752,78 @@
         },
         "depositDetails": {
           "type": "struct",
-          "name": "CfChainsBtcUtxoId",
+          "name": "CfChainsBtcUtxo",
           "fields": {
-            "txId": {
-              "type": "primitive",
-              "name": "H256"
+            "id": {
+              "type": "struct",
+              "name": "CfChainsBtcUtxoId",
+              "fields": {
+                "txId": {
+                  "type": "primitive",
+                  "name": "H256"
+                },
+                "vout": {
+                  "type": "primitive",
+                  "name": "u32"
+                }
+              }
             },
-            "vout": {
+            "amount": {
               "type": "primitive",
-              "name": "u32"
+              "name": "u64"
+            },
+            "depositAddress": {
+              "type": "struct",
+              "name": "CfChainsBtcDepositAddress",
+              "fields": {
+                "pubkeyX": {
+                  "type": "array",
+                  "value": {
+                    "type": "primitive",
+                    "name": "u8"
+                  },
+                  "length": 32
+                },
+                "scriptPath": {
+                  "type": "option",
+                  "value": {
+                    "type": "struct",
+                    "name": "CfChainsBtcDepositAddressTapscriptPath",
+                    "fields": {
+                      "salt": {
+                        "type": "primitive",
+                        "name": "u32"
+                      },
+                      "tweakedPubkeyBytes": {
+                        "type": "array",
+                        "value": {
+                          "type": "primitive",
+                          "name": "u8"
+                        },
+                        "length": 33
+                      },
+                      "tapleafHash": {
+                        "type": "array",
+                        "value": {
+                          "type": "primitive",
+                          "name": "u8"
+                        },
+                        "length": 32
+                      },
+                      "unlockScript": {
+                        "type": "struct",
+                        "name": "CfChainsBtcBitcoinScript",
+                        "fields": {
+                          "bytes": {
+                            "type": "primitive",
+                            "name": "Bytes"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
             }
           }
         },
@@ -17071,15 +17630,78 @@
         },
         "depositDetails": {
           "type": "struct",
-          "name": "CfChainsBtcUtxoId",
+          "name": "CfChainsBtcUtxo",
           "fields": {
-            "txId": {
-              "type": "primitive",
-              "name": "H256"
+            "id": {
+              "type": "struct",
+              "name": "CfChainsBtcUtxoId",
+              "fields": {
+                "txId": {
+                  "type": "primitive",
+                  "name": "H256"
+                },
+                "vout": {
+                  "type": "primitive",
+                  "name": "u32"
+                }
+              }
             },
-            "vout": {
+            "amount": {
               "type": "primitive",
-              "name": "u32"
+              "name": "u64"
+            },
+            "depositAddress": {
+              "type": "struct",
+              "name": "CfChainsBtcDepositAddress",
+              "fields": {
+                "pubkeyX": {
+                  "type": "array",
+                  "value": {
+                    "type": "primitive",
+                    "name": "u8"
+                  },
+                  "length": 32
+                },
+                "scriptPath": {
+                  "type": "option",
+                  "value": {
+                    "type": "struct",
+                    "name": "CfChainsBtcDepositAddressTapscriptPath",
+                    "fields": {
+                      "salt": {
+                        "type": "primitive",
+                        "name": "u32"
+                      },
+                      "tweakedPubkeyBytes": {
+                        "type": "array",
+                        "value": {
+                          "type": "primitive",
+                          "name": "u8"
+                        },
+                        "length": 33
+                      },
+                      "tapleafHash": {
+                        "type": "array",
+                        "value": {
+                          "type": "primitive",
+                          "name": "u8"
+                        },
+                        "length": 32
+                      },
+                      "unlockScript": {
+                        "type": "struct",
+                        "name": "CfChainsBtcBitcoinScript",
+                        "fields": {
+                          "bytes": {
+                            "type": "primitive",
+                            "name": "Bytes"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
             }
           }
         },
@@ -17096,6 +17718,13 @@
             },
             {
               "name": "NotEnoughToPayFees",
+              "value": {
+                "type": "primitive",
+                "name": "null"
+              }
+            },
+            {
+              "name": "TransactionTainted",
               "value": {
                 "type": "primitive",
                 "name": "null"
@@ -17540,15 +18169,78 @@
             },
             "depositDetails": {
               "type": "struct",
-              "name": "CfChainsBtcUtxoId",
+              "name": "CfChainsBtcUtxo",
               "fields": {
-                "txId": {
-                  "type": "primitive",
-                  "name": "H256"
+                "id": {
+                  "type": "struct",
+                  "name": "CfChainsBtcUtxoId",
+                  "fields": {
+                    "txId": {
+                      "type": "primitive",
+                      "name": "H256"
+                    },
+                    "vout": {
+                      "type": "primitive",
+                      "name": "u32"
+                    }
+                  }
                 },
-                "vout": {
+                "amount": {
                   "type": "primitive",
-                  "name": "u32"
+                  "name": "u64"
+                },
+                "depositAddress": {
+                  "type": "struct",
+                  "name": "CfChainsBtcDepositAddress",
+                  "fields": {
+                    "pubkeyX": {
+                      "type": "array",
+                      "value": {
+                        "type": "primitive",
+                        "name": "u8"
+                      },
+                      "length": 32
+                    },
+                    "scriptPath": {
+                      "type": "option",
+                      "value": {
+                        "type": "struct",
+                        "name": "CfChainsBtcDepositAddressTapscriptPath",
+                        "fields": {
+                          "salt": {
+                            "type": "primitive",
+                            "name": "u32"
+                          },
+                          "tweakedPubkeyBytes": {
+                            "type": "array",
+                            "value": {
+                              "type": "primitive",
+                              "name": "u8"
+                            },
+                            "length": 33
+                          },
+                          "tapleafHash": {
+                            "type": "array",
+                            "value": {
+                              "type": "primitive",
+                              "name": "u8"
+                            },
+                            "length": 32
+                          },
+                          "unlockScript": {
+                            "type": "struct",
+                            "name": "CfChainsBtcBitcoinScript",
+                            "fields": {
+                              "bytes": {
+                                "type": "primitive",
+                                "name": "Bytes"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -18123,15 +18815,78 @@
         },
         "depositDetails": {
           "type": "struct",
-          "name": "CfChainsBtcUtxoId",
+          "name": "CfChainsBtcUtxo",
           "fields": {
-            "txId": {
-              "type": "primitive",
-              "name": "H256"
+            "id": {
+              "type": "struct",
+              "name": "CfChainsBtcUtxoId",
+              "fields": {
+                "txId": {
+                  "type": "primitive",
+                  "name": "H256"
+                },
+                "vout": {
+                  "type": "primitive",
+                  "name": "u32"
+                }
+              }
             },
-            "vout": {
+            "amount": {
               "type": "primitive",
-              "name": "u32"
+              "name": "u64"
+            },
+            "depositAddress": {
+              "type": "struct",
+              "name": "CfChainsBtcDepositAddress",
+              "fields": {
+                "pubkeyX": {
+                  "type": "array",
+                  "value": {
+                    "type": "primitive",
+                    "name": "u8"
+                  },
+                  "length": 32
+                },
+                "scriptPath": {
+                  "type": "option",
+                  "value": {
+                    "type": "struct",
+                    "name": "CfChainsBtcDepositAddressTapscriptPath",
+                    "fields": {
+                      "salt": {
+                        "type": "primitive",
+                        "name": "u32"
+                      },
+                      "tweakedPubkeyBytes": {
+                        "type": "array",
+                        "value": {
+                          "type": "primitive",
+                          "name": "u8"
+                        },
+                        "length": 33
+                      },
+                      "tapleafHash": {
+                        "type": "array",
+                        "value": {
+                          "type": "primitive",
+                          "name": "u8"
+                        },
+                        "length": 32
+                      },
+                      "unlockScript": {
+                        "type": "struct",
+                        "name": "CfChainsBtcBitcoinScript",
+                        "fields": {
+                          "bytes": {
+                            "type": "primitive",
+                            "name": "Bytes"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
             }
           }
         },
@@ -18695,6 +19450,284 @@
               }
             }
           ]
+        }
+      }
+    },
+    "TaintedTransactionReportReceived": {
+      "type": "struct",
+      "fields": {
+        "accountId": {
+          "type": "primitive",
+          "name": "AccountId32"
+        },
+        "txId": {
+          "type": "primitive",
+          "name": "H256"
+        },
+        "expiresAt": {
+          "type": "primitive",
+          "name": "u32"
+        }
+      }
+    },
+    "TaintedTransactionReportExpired": {
+      "type": "struct",
+      "fields": {
+        "accountId": {
+          "type": "primitive",
+          "name": "AccountId32"
+        },
+        "txId": {
+          "type": "primitive",
+          "name": "H256"
+        }
+      }
+    },
+    "CcmFallbackScheduled": {
+      "type": "struct",
+      "fields": {
+        "broadcastId": {
+          "type": "primitive",
+          "name": "u32"
+        },
+        "egressDetails": {
+          "type": "struct",
+          "name": "CfTraitsScheduledEgressDetailsBitcoin",
+          "fields": {
+            "egressId": {
+              "type": "tuple",
+              "values": [
+                {
+                  "type": "enum",
+                  "name": "cfPrimitivesChainsForeignChain",
+                  "values": [
+                    {
+                      "name": "__Unused0",
+                      "value": {
+                        "type": "primitive",
+                        "name": "null"
+                      }
+                    },
+                    {
+                      "name": "Ethereum",
+                      "value": {
+                        "type": "primitive",
+                        "name": "null"
+                      }
+                    },
+                    {
+                      "name": "Polkadot",
+                      "value": {
+                        "type": "primitive",
+                        "name": "null"
+                      }
+                    },
+                    {
+                      "name": "Bitcoin",
+                      "value": {
+                        "type": "primitive",
+                        "name": "null"
+                      }
+                    },
+                    {
+                      "name": "Arbitrum",
+                      "value": {
+                        "type": "primitive",
+                        "name": "null"
+                      }
+                    },
+                    {
+                      "name": "Solana",
+                      "value": {
+                        "type": "primitive",
+                        "name": "null"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "primitive",
+                  "name": "u64"
+                }
+              ]
+            },
+            "egressAmount": {
+              "type": "primitive",
+              "name": "u64"
+            },
+            "feeWithheld": {
+              "type": "primitive",
+              "name": "u64"
+            }
+          }
+        }
+      }
+    },
+    "TaintedTransactionRejected": {
+      "type": "struct",
+      "fields": {
+        "broadcastId": {
+          "type": "primitive",
+          "name": "u32"
+        },
+        "txId": {
+          "type": "struct",
+          "name": "CfChainsBtcUtxo",
+          "fields": {
+            "id": {
+              "type": "struct",
+              "name": "CfChainsBtcUtxoId",
+              "fields": {
+                "txId": {
+                  "type": "primitive",
+                  "name": "H256"
+                },
+                "vout": {
+                  "type": "primitive",
+                  "name": "u32"
+                }
+              }
+            },
+            "amount": {
+              "type": "primitive",
+              "name": "u64"
+            },
+            "depositAddress": {
+              "type": "struct",
+              "name": "CfChainsBtcDepositAddress",
+              "fields": {
+                "pubkeyX": {
+                  "type": "array",
+                  "value": {
+                    "type": "primitive",
+                    "name": "u8"
+                  },
+                  "length": 32
+                },
+                "scriptPath": {
+                  "type": "option",
+                  "value": {
+                    "type": "struct",
+                    "name": "CfChainsBtcDepositAddressTapscriptPath",
+                    "fields": {
+                      "salt": {
+                        "type": "primitive",
+                        "name": "u32"
+                      },
+                      "tweakedPubkeyBytes": {
+                        "type": "array",
+                        "value": {
+                          "type": "primitive",
+                          "name": "u8"
+                        },
+                        "length": 33
+                      },
+                      "tapleafHash": {
+                        "type": "array",
+                        "value": {
+                          "type": "primitive",
+                          "name": "u8"
+                        },
+                        "length": 32
+                      },
+                      "unlockScript": {
+                        "type": "struct",
+                        "name": "CfChainsBtcBitcoinScript",
+                        "fields": {
+                          "bytes": {
+                            "type": "primitive",
+                            "name": "Bytes"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "FailedToRejectTaintedTransaction": {
+      "type": "struct",
+      "fields": {
+        "txId": {
+          "type": "struct",
+          "name": "CfChainsBtcUtxo",
+          "fields": {
+            "id": {
+              "type": "struct",
+              "name": "CfChainsBtcUtxoId",
+              "fields": {
+                "txId": {
+                  "type": "primitive",
+                  "name": "H256"
+                },
+                "vout": {
+                  "type": "primitive",
+                  "name": "u32"
+                }
+              }
+            },
+            "amount": {
+              "type": "primitive",
+              "name": "u64"
+            },
+            "depositAddress": {
+              "type": "struct",
+              "name": "CfChainsBtcDepositAddress",
+              "fields": {
+                "pubkeyX": {
+                  "type": "array",
+                  "value": {
+                    "type": "primitive",
+                    "name": "u8"
+                  },
+                  "length": 32
+                },
+                "scriptPath": {
+                  "type": "option",
+                  "value": {
+                    "type": "struct",
+                    "name": "CfChainsBtcDepositAddressTapscriptPath",
+                    "fields": {
+                      "salt": {
+                        "type": "primitive",
+                        "name": "u32"
+                      },
+                      "tweakedPubkeyBytes": {
+                        "type": "array",
+                        "value": {
+                          "type": "primitive",
+                          "name": "u8"
+                        },
+                        "length": 33
+                      },
+                      "tapleafHash": {
+                        "type": "array",
+                        "value": {
+                          "type": "primitive",
+                          "name": "u8"
+                        },
+                        "length": 32
+                      },
+                      "unlockScript": {
+                        "type": "struct",
+                        "name": "CfChainsBtcBitcoinScript",
+                        "fields": {
+                          "bytes": {
+                            "type": "primitive",
+                            "name": "Bytes"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
         }
       }
     }
@@ -20706,6 +21739,45 @@
         }
       }
     },
+    "ActivationTxFailedAwaitingGovernance": {
+      "type": "struct",
+      "fields": {
+        "newPublicKey": {
+          "type": "struct",
+          "name": "CfChainsEvmAggKey",
+          "fields": {
+            "pubKeyX": {
+              "type": "array",
+              "value": {
+                "type": "primitive",
+                "name": "u8"
+              },
+              "length": 32
+            },
+            "pubKeyYParity": {
+              "type": "enum",
+              "name": "cfChainsEvmParityBit",
+              "values": [
+                {
+                  "name": "Odd",
+                  "value": {
+                    "type": "primitive",
+                    "name": "null"
+                  }
+                },
+                {
+                  "name": "Even",
+                  "value": {
+                    "type": "primitive",
+                    "name": "null"
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
     "ChainInitialized": {
       "type": "primitive",
       "name": "null"
@@ -22011,6 +23083,13 @@
             },
             {
               "name": "NotEnoughToPayFees",
+              "value": {
+                "type": "primitive",
+                "name": "null"
+              }
+            },
+            {
+              "name": "TransactionTainted",
               "value": {
                 "type": "primitive",
                 "name": "null"
@@ -23446,6 +24525,162 @@
           ]
         }
       }
+    },
+    "TaintedTransactionReportReceived": {
+      "type": "struct",
+      "fields": {
+        "accountId": {
+          "type": "primitive",
+          "name": "AccountId32"
+        },
+        "txId": {
+          "type": "primitive",
+          "name": "H256"
+        },
+        "expiresAt": {
+          "type": "primitive",
+          "name": "u32"
+        }
+      }
+    },
+    "TaintedTransactionReportExpired": {
+      "type": "struct",
+      "fields": {
+        "accountId": {
+          "type": "primitive",
+          "name": "AccountId32"
+        },
+        "txId": {
+          "type": "primitive",
+          "name": "H256"
+        }
+      }
+    },
+    "CcmFallbackScheduled": {
+      "type": "struct",
+      "fields": {
+        "broadcastId": {
+          "type": "primitive",
+          "name": "u32"
+        },
+        "egressDetails": {
+          "type": "struct",
+          "name": "CfTraitsScheduledEgressDetailsArbitrum",
+          "fields": {
+            "egressId": {
+              "type": "tuple",
+              "values": [
+                {
+                  "type": "enum",
+                  "name": "cfPrimitivesChainsForeignChain",
+                  "values": [
+                    {
+                      "name": "__Unused0",
+                      "value": {
+                        "type": "primitive",
+                        "name": "null"
+                      }
+                    },
+                    {
+                      "name": "Ethereum",
+                      "value": {
+                        "type": "primitive",
+                        "name": "null"
+                      }
+                    },
+                    {
+                      "name": "Polkadot",
+                      "value": {
+                        "type": "primitive",
+                        "name": "null"
+                      }
+                    },
+                    {
+                      "name": "Bitcoin",
+                      "value": {
+                        "type": "primitive",
+                        "name": "null"
+                      }
+                    },
+                    {
+                      "name": "Arbitrum",
+                      "value": {
+                        "type": "primitive",
+                        "name": "null"
+                      }
+                    },
+                    {
+                      "name": "Solana",
+                      "value": {
+                        "type": "primitive",
+                        "name": "null"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "primitive",
+                  "name": "u64"
+                }
+              ]
+            },
+            "egressAmount": {
+              "type": "primitive",
+              "name": "u128"
+            },
+            "feeWithheld": {
+              "type": "primitive",
+              "name": "u128"
+            }
+          }
+        }
+      }
+    },
+    "TaintedTransactionRejected": {
+      "type": "struct",
+      "fields": {
+        "broadcastId": {
+          "type": "primitive",
+          "name": "u32"
+        },
+        "txId": {
+          "type": "struct",
+          "name": "CfChainsEvmDepositDetails",
+          "fields": {
+            "txHashes": {
+              "type": "option",
+              "value": {
+                "type": "array",
+                "value": {
+                  "type": "primitive",
+                  "name": "H256"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "FailedToRejectTaintedTransaction": {
+      "type": "struct",
+      "fields": {
+        "txId": {
+          "type": "struct",
+          "name": "CfChainsEvmDepositDetails",
+          "fields": {
+            "txHashes": {
+              "type": "option",
+              "value": {
+                "type": "array",
+                "value": {
+                  "type": "primitive",
+                  "name": "H256"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "SolanaVault": {
@@ -23462,6 +24697,19 @@
       "length": 32
     },
     "AwaitingGovernanceActivation": {
+      "type": "struct",
+      "fields": {
+        "newPublicKey": {
+          "type": "array",
+          "value": {
+            "type": "primitive",
+            "name": "u8"
+          },
+          "length": 32
+        }
+      }
+    },
+    "ActivationTxFailedAwaitingGovernance": {
       "type": "struct",
       "fields": {
         "newPublicKey": {
@@ -25371,6 +26619,13 @@
                 "type": "primitive",
                 "name": "null"
               }
+            },
+            {
+              "name": "TransactionTainted",
+              "value": {
+                "type": "primitive",
+                "name": "null"
+              }
             }
           ]
         }
@@ -26788,6 +28043,146 @@
               }
             }
           ]
+        }
+      }
+    },
+    "TaintedTransactionReportReceived": {
+      "type": "struct",
+      "fields": {
+        "accountId": {
+          "type": "primitive",
+          "name": "AccountId32"
+        },
+        "txId": {
+          "type": "array",
+          "value": {
+            "type": "primitive",
+            "name": "u8"
+          },
+          "length": 32
+        },
+        "expiresAt": {
+          "type": "primitive",
+          "name": "u32"
+        }
+      }
+    },
+    "TaintedTransactionReportExpired": {
+      "type": "struct",
+      "fields": {
+        "accountId": {
+          "type": "primitive",
+          "name": "AccountId32"
+        },
+        "txId": {
+          "type": "array",
+          "value": {
+            "type": "primitive",
+            "name": "u8"
+          },
+          "length": 32
+        }
+      }
+    },
+    "CcmFallbackScheduled": {
+      "type": "struct",
+      "fields": {
+        "broadcastId": {
+          "type": "primitive",
+          "name": "u32"
+        },
+        "egressDetails": {
+          "type": "struct",
+          "name": "CfTraitsScheduledEgressDetailsSolana",
+          "fields": {
+            "egressId": {
+              "type": "tuple",
+              "values": [
+                {
+                  "type": "enum",
+                  "name": "cfPrimitivesChainsForeignChain",
+                  "values": [
+                    {
+                      "name": "__Unused0",
+                      "value": {
+                        "type": "primitive",
+                        "name": "null"
+                      }
+                    },
+                    {
+                      "name": "Ethereum",
+                      "value": {
+                        "type": "primitive",
+                        "name": "null"
+                      }
+                    },
+                    {
+                      "name": "Polkadot",
+                      "value": {
+                        "type": "primitive",
+                        "name": "null"
+                      }
+                    },
+                    {
+                      "name": "Bitcoin",
+                      "value": {
+                        "type": "primitive",
+                        "name": "null"
+                      }
+                    },
+                    {
+                      "name": "Arbitrum",
+                      "value": {
+                        "type": "primitive",
+                        "name": "null"
+                      }
+                    },
+                    {
+                      "name": "Solana",
+                      "value": {
+                        "type": "primitive",
+                        "name": "null"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "primitive",
+                  "name": "u64"
+                }
+              ]
+            },
+            "egressAmount": {
+              "type": "primitive",
+              "name": "u64"
+            },
+            "feeWithheld": {
+              "type": "primitive",
+              "name": "u64"
+            }
+          }
+        }
+      }
+    },
+    "TaintedTransactionRejected": {
+      "type": "struct",
+      "fields": {
+        "broadcastId": {
+          "type": "primitive",
+          "name": "u32"
+        },
+        "txId": {
+          "type": "primitive",
+          "name": "null"
+        }
+      }
+    },
+    "FailedToRejectTaintedTransaction": {
+      "type": "struct",
+      "fields": {
+        "txId": {
+          "type": "primitive",
+          "name": "null"
         }
       }
     }
