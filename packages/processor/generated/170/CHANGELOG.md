@@ -4,8 +4,18 @@ ArbitrumBroadcaster:
 ArbitrumIngressEgress:
   - BoostedDepositLost: added
   - CcmFailed: added
+  - CcmFallbackScheduled: added
+  - DepositIgnored:
+    - reason: added
   - FailedToBuildAllBatchCall:
     - error: added
+  - FailedToRejectTaintedTransaction: added
+  - TaintedTransactionRejected: added
+  - TaintedTransactionReportExpired: added
+  - TaintedTransactionReportReceived: added
+
+ArbitrumVault:
+  - ActivationTxFailedAwaitingGovernance: added
 
 BitcoinBroadcaster:
   - PalletConfigUpdated: added
@@ -13,13 +23,30 @@ BitcoinBroadcaster:
 BitcoinIngressEgress:
   - BoostedDepositLost: added
   - CcmFailed: added
+  - CcmFallbackScheduled: added
+  - DepositBoosted:
+    - depositDetails: changed
+  - DepositFinalised:
+    - depositDetails: changed
+  - DepositIgnored:
+    - depositDetails: changed
+    - reason: added
+  - DepositWitnessRejected:
+    - depositWitness: changed
   - FailedToBuildAllBatchCall:
     - error: added
+  - FailedToRejectTaintedTransaction: added
+  - TaintedTransactionRejected: added
+  - TaintedTransactionReportExpired: added
+  - TaintedTransactionReportReceived: added
 
 BitcoinThresholdSigner:
   - KeygenResponseTimeoutUpdated: removed
   - PalletConfigUpdated: added
   - ThresholdSignatureResponseTimeoutUpdated: removed
+
+BitcoinVault:
+  - ActivationTxFailedAwaitingGovernance: added
 
 EthereumBroadcaster:
   - PalletConfigUpdated: added
@@ -27,8 +54,18 @@ EthereumBroadcaster:
 EthereumIngressEgress:
   - BoostedDepositLost: added
   - CcmFailed: added
+  - CcmFallbackScheduled: added
+  - DepositIgnored:
+    - reason: added
   - FailedToBuildAllBatchCall:
     - error: added
+  - FailedToRejectTaintedTransaction: added
+  - TaintedTransactionRejected: added
+  - TaintedTransactionReportExpired: added
+  - TaintedTransactionReportReceived: added
+
+EthereumVault:
+  - ActivationTxFailedAwaitingGovernance: added
 
 EvmThresholdSigner:
   - KeygenResponseTimeoutUpdated: removed
@@ -41,13 +78,23 @@ PolkadotBroadcaster:
 PolkadotIngressEgress:
   - BoostedDepositLost: added
   - CcmFailed: added
+  - CcmFallbackScheduled: added
+  - DepositIgnored:
+    - reason: added
   - FailedToBuildAllBatchCall:
     - error: added
+  - FailedToRejectTaintedTransaction: added
+  - TaintedTransactionRejected: added
+  - TaintedTransactionReportExpired: added
+  - TaintedTransactionReportReceived: added
 
 PolkadotThresholdSigner:
   - KeygenResponseTimeoutUpdated: removed
   - PalletConfigUpdated: added
   - ThresholdSignatureResponseTimeoutUpdated: removed
+
+PolkadotVault:
+  - ActivationTxFailedAwaitingGovernance: added
 
 Reputation:
   - OffencePenalty:
@@ -63,16 +110,27 @@ SolanaBroadcaster:
 SolanaIngressEgress:
   - BoostedDepositLost: added
   - CcmFailed: added
+  - CcmFallbackScheduled: added
+  - DepositIgnored:
+    - reason: added
   - FailedToBuildAllBatchCall:
     - error: added
+  - FailedToRejectTaintedTransaction: added
+  - TaintedTransactionRejected: added
+  - TaintedTransactionReportExpired: added
+  - TaintedTransactionReportReceived: added
 
 SolanaThresholdSigner:
   - KeygenResponseTimeoutUpdated: removed
   - PalletConfigUpdated: added
   - ThresholdSignatureResponseTimeoutUpdated: removed
 
+SolanaVault:
+  - ActivationTxFailedAwaitingGovernance: added
+
 Swapping:
   - CcmFailed: removed
+  - MinimumChunkSizeSet: added
   - SwapRequested:
     - requestType: added
 
