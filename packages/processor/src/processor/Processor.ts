@@ -3,17 +3,17 @@ import assert from 'assert';
 import { setTimeout as sleep } from 'timers/promises';
 import HandlerMap from './HandlerMap';
 import {
-  Block,
-  Call,
-  EventHandler,
-  EventInfo,
-  ExtrinsicInfo,
-  IndexerExtrinsic,
-  IndexerStore,
-  Logger,
-  ProcessorOptions,
-  ProcessorStore,
-  State,
+  type Block,
+  type Call,
+  type EventHandler,
+  type EventInfo,
+  type ExtrinsicInfo,
+  type IndexerExtrinsic,
+  type IndexerStore,
+  type Logger,
+  type ProcessorOptions,
+  type ProcessorStore,
+  type State,
 } from './types';
 
 export function timedMethod<P extends ProcessorStore<any, any>, I extends IndexerStore>(

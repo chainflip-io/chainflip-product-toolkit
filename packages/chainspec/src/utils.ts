@@ -1,6 +1,6 @@
 import assert from 'assert';
 import * as prettier from 'prettier';
-import { ParsedMetadata } from './BaseParser';
+import { type ParsedMetadata } from './BaseParser';
 
 type ChangeType = 'added' | 'removed' | 'changed';
 type Change = { path: string[]; type: ChangeType };

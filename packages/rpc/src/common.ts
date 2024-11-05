@@ -1,7 +1,7 @@
-import { HexString } from '@chainflip/utils/types';
+import { type HexString } from '@chainflip/utils/types';
 import type { z } from 'zod';
 import {
-  AssetAndChain,
+  type AssetAndChain,
   cfBoostPoolDetails,
   cfBoostPoolPendingFees,
   brokerRequestSwapDepositAddress,
@@ -18,7 +18,7 @@ import {
   cfSwapRateV2,
   cfSwappingEnvironment,
   chainGetBlockHash,
-  rpcResponse,
+  type rpcResponse,
   stateGetMetadata,
   stateGetRuntimeVersion,
   cfPoolDepth,

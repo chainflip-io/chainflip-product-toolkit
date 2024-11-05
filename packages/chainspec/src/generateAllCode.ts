@@ -1,8 +1,9 @@
 import * as fs from 'fs/promises';
 import * as path from 'path';
 import { specVersionCache } from '@/chainspec/cache';
-import BaseCodeGenerator from './BaseCodeGenerator';
-import BaseParser, { MetadataOpts } from './BaseParser';
+import type BaseCodeGenerator from './BaseCodeGenerator';
+import { type MetadataOpts } from './BaseParser';
+import type BaseParser from './BaseParser';
 import { diffSpecs } from './utils';
 
 const generateAllCode = async (

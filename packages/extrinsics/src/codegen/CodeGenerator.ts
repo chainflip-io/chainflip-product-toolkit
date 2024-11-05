@@ -1,16 +1,20 @@
 import { capitalize } from '@chainflip/utils/string';
 import assert from 'assert';
-import BaseCodeGenerator, { CodegenResult, Code, Identifier } from '@/chainspec/BaseCodeGenerator';
+import BaseCodeGenerator, {
+  type CodegenResult,
+  Code,
+  Identifier,
+} from '@/chainspec/BaseCodeGenerator';
 import {
-  ArrayType,
-  EnumType,
-  MapType,
-  OptionType,
-  PrimitiveType,
-  RangeType,
-  ResolvedType,
-  StructType,
-  TupleType,
+  type ArrayType,
+  type EnumType,
+  type MapType,
+  type OptionType,
+  type PrimitiveType,
+  type RangeType,
+  type ResolvedType,
+  type StructType,
+  type TupleType,
 } from '@/chainspec/BaseParser';
 
 class Struct extends Code {

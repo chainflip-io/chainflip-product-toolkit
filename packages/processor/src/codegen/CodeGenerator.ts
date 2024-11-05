@@ -1,4 +1,8 @@
-import BaseCodeGenerator, { CodegenResult, Code, Identifier } from '@/chainspec/BaseCodeGenerator';
+import BaseCodeGenerator, {
+  type CodegenResult,
+  Code,
+  Identifier,
+} from '@/chainspec/BaseCodeGenerator';
 import {
   isPrimitiveType,
   type ArrayType,

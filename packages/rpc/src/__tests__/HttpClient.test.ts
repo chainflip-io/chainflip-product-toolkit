@@ -1,25 +1,25 @@
-import { HexString } from '@chainflip/utils/types';
+import { type HexString } from '@chainflip/utils/types';
 import { Server } from 'http';
-import { AddressInfo } from 'net';
+import { type AddressInfo } from 'net';
 import { promisify } from 'util';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
-import { z } from 'zod';
-import { JsonRpcRequest, RpcMethod } from '../common';
+import { type z } from 'zod';
+import { type JsonRpcRequest, type RpcMethod } from '../common';
 import { HttpClient } from '../index';
 import {
-  AssetAndChain,
-  broker,
-  brokerRequestSwapDepositAddress,
-  cfEnvironment,
-  cfIngressEgressEnvironment,
-  cfPoolOrders,
-  cfPoolPriceV2,
-  cfPoolsEnvironment,
-  cfSwapRateV2,
-  cfSwappingEnvironment,
-  liquidityProvider,
-  unregistered,
-  validator,
+  type AssetAndChain,
+  type broker,
+  type brokerRequestSwapDepositAddress,
+  type cfEnvironment,
+  type cfIngressEgressEnvironment,
+  type cfPoolOrders,
+  type cfPoolPriceV2,
+  type cfPoolsEnvironment,
+  type cfSwapRateV2,
+  type cfSwappingEnvironment,
+  type liquidityProvider,
+  type unregistered,
+  type validator,
   type cfFundingEnvironment,
   type cfSwapRate,
 } from '../parsers';

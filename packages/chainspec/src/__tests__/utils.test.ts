@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { ParsedMetadata } from '../BaseParser';
+import { type ParsedMetadata } from '../BaseParser';
 import { diffSpecs } from '../utils';
 
 describe(diffSpecs, () => {
