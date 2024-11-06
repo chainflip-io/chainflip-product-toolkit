@@ -64,6 +64,7 @@ describe('abbreviate', () => {
     ['0x1234567890abcdef', '0x12…cdef'],
     ['0x1234567890abcdef', '0x12. . .cdef', 4, true],
     ['0x1234567890abcdef', '0x…ef', 2],
+    [null, ''],
   ])('abbreviates the string', (input, expected, ...args) => {
     expect(abbreviate(input, ...(args as any))).toBe(expected);
   });

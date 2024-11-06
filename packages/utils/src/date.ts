@@ -1,11 +1,14 @@
+import { utc } from '@date-fns/utc';
 import {
-  addHours,
   differenceInDays,
   differenceInHours,
   differenceInMinutes,
   differenceInSeconds,
   Interval,
   intervalToDuration,
+  eachDayOfInterval,
+  endOfDay,
+  startOfDay,
 } from 'date-fns';
 import { isNullish } from './guard';
 
@@ -87,8 +90,8 @@ export const intervalToDurationWords = (interval: Interval): string => {
   if (duration.months) return '>1 month';
   if (duration.days) {
     return `${pad(duration.days)}${duration.days === 1 ? 'day' : 'days'} ${pad(
-      duration.hours!,
-    )}h ${pad(duration.minutes!)}min ${pad(duration.seconds!)}s`;
+      duration.hours ?? 0,
+    )}h ${pad(duration.minutes ?? 0)}min ${pad(duration.seconds ?? 0)}s`;
   }
   if (duration.hours) {
     return `${pad(duration.hours)}h ${pad(duration.minutes!)}min ${pad(duration.seconds!)}s`;
@@ -98,33 +101,9 @@ export const intervalToDurationWords = (interval: Interval): string => {
   return '??';
 };
 
-const getUTCDateParts = (date: Date) => {
-  const day = date.getUTCDate().toString().padStart(2, '0');
-  const month = (date.getUTCMonth() + 1).toString().padStart(2, '0');
-  const year = date.getUTCFullYear().toString().padStart(4, '0');
-  return { day, month, year };
-};
+export const toStartOfUtcDayString = (date: Date) => startOfDay(date, { in: utc }).toISOString();
 
-export const toStartOfUtcDayString = (date: Date) => {
-  const { day, month, year } = getUTCDateParts(date);
-  return `${year}-${month}-${day}T00:00:00.000Z`;
-};
+export const toEndOfUtcDayString = (date: Date) => endOfDay(date, { in: utc }).toISOString();
 
-export const toEndOfUtcDayString = (date: Date) => {
-  const { day, month, year } = getUTCDateParts(date);
-  return `${year}-${month}-${day}T23:59:59.999Z`;
-};
-
-export const eachUtcDayOfInterval = ({ start, end }: { start: Date; end: Date }) => {
-  let accumulator = start;
-  const days: Date[] = [];
-
-  while (end >= accumulator) {
-    if (new Date(toStartOfUtcDayString(accumulator)).getTime() > new Date().getTime()) {
-      break;
-    }
-    days.push(new Date(toStartOfUtcDayString(accumulator)));
-    accumulator = addHours(accumulator, 24);
-  }
-  return days;
-};
+export const eachUtcDayOfInterval = (interval: { start: Date; end: Date }) =>
+  eachDayOfInterval(interval, { in: utc });

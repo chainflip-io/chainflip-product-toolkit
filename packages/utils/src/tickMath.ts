@@ -24,6 +24,8 @@ export const rateToTick = (rate: BigNumber.Value, baseAsset: ChainflipAsset): nu
   return Math.max(MIN_TICK, Math.min(tick, MAX_TICK));
 };
 
-export const sqrtPriceX96ToPrice = (amount: string) => new BigNumber(amount).div(2 ** 96).pow(2);
+export const sqrtPriceX96ToPrice = (amount: string) =>
+  new BigNumber(amount).div(new BigNumber(2).pow(96)).pow(2);
 
-export const priceX128ToPrice = (amount: string) => new BigNumber(amount).div(2 ** 128);
+export const priceX128ToPrice = (amount: string) =>
+  new BigNumber(amount).div(new BigNumber(2).pow(128));
