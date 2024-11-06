@@ -1,5 +1,12 @@
 import { describe, it, expect } from 'vitest';
-import { MAX_TICK, MIN_TICK, rateToTick, tickToRate } from '../tickMath';
+import {
+  MAX_TICK,
+  MIN_TICK,
+  rateToTick,
+  priceX128ToPrice,
+  tickToRate,
+  sqrtPriceX96ToPrice,
+} from '../tickMath';
 
 describe(tickToRate, () => {
   it.each([
@@ -29,5 +36,19 @@ describe(rateToTick, () => {
     [102.47090724, 'Flip' as const, -230026],
   ])('returns the rate for the tick and asset', (tick, asset, expectedTick) => {
     expect(rateToTick(tick, asset)).toBe(expectedTick);
+  });
+});
+
+describe(priceX128ToPrice, () => {
+  it('converts sqrt price to price', () => {
+    expect(priceX128ToPrice('340282366920938463463374607431768211456').toFixed()).toBe('1');
+  });
+});
+
+describe(sqrtPriceX96ToPrice, () => {
+  it('converts sqrt price to price', () => {
+    expect(sqrtPriceX96ToPrice('0x35c82c71f1f121c098c73').toFixed()).toBe(
+      '0.0000000026307096037125100789283861900481',
+    );
   });
 });

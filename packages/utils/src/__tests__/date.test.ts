@@ -20,9 +20,13 @@ describe('toISODateString', () => {
   });
 });
 
-describe('Date', () => {
-  it('fromUnixTime', () => {
+describe('fromUnixTime', () => {
+  it('converts a timestamp', () => {
     expect(fromUnixTime(1626860700).toISOString()).toBe('2021-07-21T09:45:00.000Z');
+  });
+
+  it('throws an error for invalid date', () => {
+    expect(() => fromUnixTime('abc')).toThrowError('date is invalid');
   });
 });
 
@@ -60,32 +64,41 @@ describe('differenceInTimeAgo', () => {
   });
 
   it.each([
-    ['0 sec ago', 0],
-    ['1 hour ago', 3600000],
-    ['47 hours ago', 170400000],
-  ])('displays the proper time as %s ago', (expected, time) => {
+    ['0 sec ago', 0, true],
+    ['58 min ago', 3500000, true],
+    ['1 hour ago', 3600000, true],
+    ['47 hours ago', 170400000, true],
+    ['2 days ago', 180400000, true],
+    ['0 sec', 0, false],
+    ['58 min', 3500000, false],
+    ['1 hour', 3600000, false],
+    ['47 hours', 170400000, false],
+    ['2 days', 180400000, false],
+  ])('displays the proper time as %s ago', (expected, time, ago) => {
     vi.spyOn(Date, 'now').mockImplementation(() => now);
-    expect(differenceInTimeAgo(new Date(Date.now() - time).toISOString())).toBe(expected);
+    expect(differenceInTimeAgo(new Date(Date.now() - time).toISOString(), ago)).toBe(expected);
   });
 });
 
 describe('intervalToDurationWords', () => {
   it.each([
-    [{ start: 0, end: 1000 }, '01s'],
-    [{ start: 0, end: 10000 }, '10s'],
-    [{ start: 0, end: 100000 }, '01min 40s'],
-    [{ start: 0, end: 1000000 }, '16min 40s'],
-    [{ start: 0, end: 10000000 }, '02h 46min 40s'],
-    [{ start: 0, end: 100000000 }, '01day 03h 46min 40s'],
-    [{ start: 0, end: 0 }, '??'],
-    [{ start: null, end: 100 }, '??'],
-    [{ start: 10, end: undefined }, '??'],
-    [{ start: new Date('01-01-2023'), end: new Date('01-02-2023') }, '01day 00h 00min 00s'],
-    [{ start: new Date('01-01-2023'), end: new Date('02-01-2023') }, '>1 month'],
+    ['01s', { start: 0, end: 1000 }],
+    ['10s', { start: 0, end: 10000 }],
+    ['01min 40s', { start: 0, end: 100000 }],
+    ['16min 40s', { start: 0, end: 1000000 }],
+    ['02h 46min 40s', { start: 0, end: 10000000 }],
+    ['01day 03h 46min 40s', { start: 0, end: 100000000 }],
+    ['02days 07h 33min 20s', { start: 0, end: 200000000 }],
+    ['??', { start: 0, end: 0 }],
+    ['??', { start: 0, end: 1 }],
+    ['??', { start: null, end: 100 }],
+    ['??', { start: 10, end: undefined }],
+    ['01day 00h 00min 00s', { start: new Date('01-01-2023'), end: new Date('01-02-2023') }],
+    ['>1 month', { start: new Date('01-01-2023'), end: new Date('02-01-2023') }],
     // reverse start and end stays the same
-    [{ start: new Date('02-01-2023'), end: new Date('01-01-2023') }, '>1 month'],
-  ])('displays the proper time as %s ago', (actual, expected) => {
-    expect(intervalToDurationWords(actual as Interval)).toBe(expected);
+    ['>1 month', { start: new Date('02-01-2023'), end: new Date('01-01-2023') }],
+  ])('displays the proper time as %s ago', (expected, input) => {
+    expect(intervalToDurationWords(input as Interval)).toBe(expected);
   });
 });
 
