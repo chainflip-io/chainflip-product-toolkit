@@ -98,7 +98,7 @@ export const intervalToDurationWords = (interval: Interval): string => {
   return '??';
 };
 
-const getDateParts = (date: Date) => {
+const getUTCDateParts = (date: Date) => {
   const day = date.getUTCDate().toString().padStart(2, '0');
   const month = (date.getUTCMonth() + 1).toString().padStart(2, '0');
   const year = date.getUTCFullYear().toString().padStart(4, '0');
@@ -106,12 +106,12 @@ const getDateParts = (date: Date) => {
 };
 
 export const toStartOfUtcDayString = (date: Date) => {
-  const { day, month, year } = getDateParts(date);
+  const { day, month, year } = getUTCDateParts(date);
   return `${year}-${month}-${day}T00:00:00.000Z`;
 };
 
 export const toEndOfUtcDayString = (date: Date) => {
-  const { day, month, year } = getDateParts(date);
+  const { day, month, year } = getUTCDateParts(date);
   return `${year}-${month}-${day}T23:59:59.999Z`;
 };
 
