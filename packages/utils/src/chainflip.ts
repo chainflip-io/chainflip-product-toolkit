@@ -137,15 +137,3 @@ export const chainConstants = {
     blockTimeSeconds: number;
   }
 >;
-
-// https://github.com/chainflip-io/chainflip-backend/tree/ba71514e404efe2fe0fda5925238afb642a99a9e/state-chain/node/src/chain_spec
-export const GENESIS_LP_ACCOUNT_IDS = [
-  // perseverance
-  'cFN2sr3eDPoyp3G4CAg3EBRMo2VMoYJ7x3rBn51tmXsguYzMX',
-  // sisyphos
-  'cFNDZDhGLS4ZKE2VjuWbqwgBKGznATxXbpdabrLiiR75hJi71',
-  // backspin
-  'cFPdef3hF5zEwbWUG6ZaCJ3X7mTvEeAog7HxZ8QyFcCgDVGDM',
-  'cFMzM1G4He5k3Aa58X6d8yo8hRxiMVd92qrXMu1zKBXCqqTxi',
-  'cFL8fmgKZcchhtLagBH2GKfsuWxBqUaD5CYE1m7DFb8DBSLJ1',
-];
