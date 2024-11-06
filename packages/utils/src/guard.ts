@@ -30,3 +30,12 @@ export const isUndefined = createIsGuard('undefined');
 export const isNotNullish = <T>(value: T): value is NonNullable<T> => value != null;
 
 export const isNullish = (value: unknown): value is null | undefined => value == null;
+
+export const isTruthy = <T>(value: T | null | undefined): value is T => Boolean(value);
+
+export const isFullfilled = <T>(
+  value: PromiseSettledResult<T>,
+): value is PromiseFulfilledResult<T> => value.status === 'fulfilled';
+
+export const isRejected = <T>(value: PromiseSettledResult<T>): value is PromiseRejectedResult =>
+  value.status === 'rejected';
