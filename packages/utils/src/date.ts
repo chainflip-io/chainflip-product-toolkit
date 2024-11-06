@@ -27,8 +27,10 @@ export const fromUnixTime = (time: string | number): Date => {
 export const formatTimestamp = (
   timestamp: string,
   locale: string | undefined = undefined,
+  timeZone: undefined | 'UTC' = undefined,
 ): string =>
   new Date(timestamp).toLocaleString(locale, {
+    timeZone,
     weekday: 'short',
     month: 'short',
     day: 'numeric',
@@ -42,8 +44,10 @@ export const formatTimestamp = (
 export const formatTimestampShort = (
   timestamp: string,
   locale: string | undefined = undefined,
+  timeZone: undefined | 'UTC' = undefined,
 ): string =>
   new Date(timestamp).toLocaleString(locale, {
+    timeZone,
     month: 'numeric',
     day: 'numeric',
     year: 'numeric',

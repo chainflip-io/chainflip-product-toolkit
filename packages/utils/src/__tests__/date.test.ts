@@ -28,15 +28,17 @@ describe('Date', () => {
 
 describe('formatTimestamp', () => {
   it('formats timestamp', () => {
-    expect(formatTimestamp('2022-03-14T00:00:00.000Z', 'en-US')).toBe(
-      'Mon, Mar 14, 2022, 1:00:00 AM GMT+1',
+    expect(formatTimestamp('2022-03-14T00:00:00.000Z', 'en-US', 'UTC')).toBe(
+      'Mon, Mar 14, 2022, 12:00:00 AM UTC',
     );
   });
 });
 
 describe('formatTimestampShort', () => {
   it('formats timestamp', () => {
-    expect(formatTimestampShort('2022-03-14T00:00:00.000Z', 'en-US')).toBe('3/14/2022, 1:00:00 AM');
+    expect(formatTimestampShort('2022-03-14T00:00:00.000Z', 'en-US', 'UTC')).toBe(
+      '3/14/2022, 12:00:00 AM',
+    );
   });
 });
 
