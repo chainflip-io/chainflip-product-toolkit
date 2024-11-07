@@ -4,7 +4,7 @@ import {
   differenceInHours,
   differenceInMinutes,
   differenceInSeconds,
-  Interval,
+  type Interval,
   intervalToDuration,
   eachDayOfInterval,
   endOfDay,

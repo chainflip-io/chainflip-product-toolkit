@@ -1,4 +1,4 @@
-import { Interval } from 'date-fns';
+import { type Interval } from 'date-fns';
 import { describe, expect, it, vi } from 'vitest';
 import {
   differenceInTimeAgo,
