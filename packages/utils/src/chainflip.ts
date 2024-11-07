@@ -31,6 +31,9 @@ export type ChainflipChain = (typeof chainflipChains)[number];
 export const chainflipNetworks = ['backspin', 'sisyphos', 'perseverance', 'mainnet'] as const;
 export type ChainflipNetwork = (typeof chainflipNetworks)[number];
 
+export const addressTypes = ['Eth', 'Btc', 'Dot', 'Arb', 'Sol'] as const;
+export type AddressType = (typeof addressTypes)[number];
+
 export type AssetOfChain<C extends ChainflipChain> = (typeof chainConstants)[C]['assets'][number];
 
 export type ChainAssetMap<T> = {
@@ -38,10 +41,35 @@ export type ChainAssetMap<T> = {
     [A in (typeof assetConstants)[AssetOfChain<C>]['rpcAsset']]: T;
   };
 };
-export const readAssetValue = <T>(value: ChainAssetMap<T>, asset: ChainflipAsset): T => {
-  const chainValues = value[assetConstants[asset].chain];
-  return chainValues[assetConstants[asset].rpcAsset as keyof typeof chainValues];
+
+export type BaseChainAssetMap<T> = {
+  [C in ChainflipChain]: {
+    [A in (typeof assetConstants)[Exclude<AssetOfChain<C>, 'Usdc'>]['rpcAsset']]: T;
+  };
 };
+
+type AssetAndChain = {
+  [C in ChainflipChain]: { chain: C; asset: keyof ChainAssetMap<unknown>[C] };
+}[ChainflipChain];
+
+export function readAssetValue<T>(
+  map: ChainAssetMap<T>,
+  asset: ChainflipAsset | BaseChainflipAsset,
+): T;
+// a BaseChainAssetMap can only be safely used with base assets
+export function readAssetValue<T>(map: BaseChainAssetMap<T>, asset: BaseChainflipAsset): T;
+// a BaseChainAssetMap can only be safely used with base assets
+export function readAssetValue<T>(
+  map: ChainAssetMap<T> | BaseChainAssetMap<T>,
+  asset: BaseChainflipAsset,
+): T;
+export function readAssetValue<T>(
+  map: ChainAssetMap<T> | BaseChainAssetMap<T>,
+  asset: ChainflipAsset | BaseChainflipAsset,
+): T {
+  const chainValues = map[assetConstants[asset].chain];
+  return chainValues[assetConstants[asset].rpcAsset as keyof typeof chainValues];
+}
 
 export const assetConstants = {
   Eth: {
@@ -107,26 +135,31 @@ export const chainConstants = {
   Ethereum: {
     assets: ['Eth', 'Flip', 'Usdc', 'Usdt'],
     gasAsset: 'Eth',
+    addressType: 'Eth',
     blockTimeSeconds: 12,
   },
   Polkadot: {
     assets: ['Dot'],
     gasAsset: 'Dot',
+    addressType: 'Dot',
     blockTimeSeconds: 6,
   },
   Bitcoin: {
     assets: ['Btc'],
     gasAsset: 'Btc',
+    addressType: 'Btc',
     blockTimeSeconds: 10 * 60,
   },
   Arbitrum: {
     assets: ['ArbUsdc', 'ArbEth'],
     gasAsset: 'ArbEth',
+    addressType: 'Arb',
     blockTimeSeconds: 0.26,
   },
   Solana: {
     assets: ['Sol', 'SolUsdc'],
     gasAsset: 'Sol',
+    addressType: 'Sol',
     blockTimeSeconds: 0.8,
   },
 } as const satisfies Record<
@@ -134,6 +167,20 @@ export const chainConstants = {
   {
     assets: ChainflipAsset[];
     gasAsset: ChainflipAsset;
+    addressType: 'Eth' | 'Dot' | 'Btc' | 'Arb' | 'Sol';
     blockTimeSeconds: number;
   }
 >;
+
+export const internalAssetToRpcAsset: Record<ChainflipAsset, AssetAndChain> = {
+  Eth: { chain: 'Ethereum', asset: 'ETH' },
+  Flip: { chain: 'Ethereum', asset: 'FLIP' },
+  Usdc: { chain: 'Ethereum', asset: 'USDC' },
+  Usdt: { chain: 'Ethereum', asset: 'USDT' },
+  Dot: { chain: 'Polkadot', asset: 'DOT' },
+  Btc: { chain: 'Bitcoin', asset: 'BTC' },
+  ArbUsdc: { chain: 'Arbitrum', asset: 'USDC' },
+  ArbEth: { chain: 'Arbitrum', asset: 'ETH' },
+  Sol: { chain: 'Solana', asset: 'SOL' },
+  SolUsdc: { chain: 'Solana', asset: 'USDC' },
+};
