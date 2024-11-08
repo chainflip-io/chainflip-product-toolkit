@@ -11,7 +11,7 @@ import {
 describe(tickToRate, () => {
   it.each([
     [-211594, 'Eth' as const, 647.2153062413026],
-    [-45848, 'Dot' as const, 102.08130429456655],
+    [-45848, 'Dot' as const, 102.08130429456654],
     [154543, 'Btc' as const, 514495580.0824737],
   ])('returns the rate for the tick and asset', (tick, asset, expected) => {
     expect(tickToRate(tick, asset)).toBe(expected);

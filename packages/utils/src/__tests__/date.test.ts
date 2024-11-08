@@ -97,6 +97,11 @@ describe('intervalToDurationWords', () => {
     ['>1 month', { start: new Date('01-01-2023'), end: new Date('02-01-2023') }],
     // reverse start and end stays the same
     ['>1 month', { start: new Date('02-01-2023'), end: new Date('01-01-2023') }],
+    ['10min 00s', { start: 1640994900000, end: 1640995500000 }],
+    [
+      '03h 00min 00s',
+      { start: new Date('2024-11-08T10:49:55.589Z'), end: new Date('2024-11-08T13:49:55.589Z') },
+    ],
   ])('displays the proper time as %s ago', (expected, input) => {
     expect(intervalToDurationWords(input as Interval)).toBe(expected);
   });

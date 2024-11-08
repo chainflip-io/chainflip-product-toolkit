@@ -7,10 +7,10 @@ export const FULL_TICK_RANGE = { start: MIN_TICK, end: MAX_TICK };
 
 export const tickToRate = (tick: number, baseAsset: ChainflipAsset): number => {
   // https://blog.uniswap.org/uniswap-v3-math-primer
-  const baseRate = 1.0001 ** tick;
+  const baseRate = new BigNumber(1.0001 ** tick);
   const rateDecimals = assetConstants.Usdc.decimals - assetConstants[baseAsset].decimals;
 
-  return baseRate / 10 ** rateDecimals;
+  return baseRate.shiftedBy(-rateDecimals).toNumber();
 };
 
 export const rateToTick = (rate: BigNumber.Value, baseAsset: ChainflipAsset): number => {
