@@ -1,6 +1,6 @@
-import { DeferredPromise, deferredPromise, once, sleep } from '@chainflip/utils/async';
-import Client, { Response } from './Client';
-import { JsonRpcRequest, RpcMethod, rpcResponse } from './common';
+import { type DeferredPromise, deferredPromise, once, sleep } from '@chainflip/utils/async';
+import Client, { type Response } from './Client';
+import { type JsonRpcRequest, type RpcMethod, rpcResponse } from './common';
 
 const READY = 'READY';
 const DISCONNECT = 'DISCONNECT';

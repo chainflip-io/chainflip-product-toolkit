@@ -408,6 +408,8 @@ export default [
           },
         },
       ],
+      '@typescript-eslint/array-type': 'error',
+      '@typescript-eslint/consistent-type-imports': ['error', { fixStyle: 'inline-type-imports' }],
     },
   },
   {

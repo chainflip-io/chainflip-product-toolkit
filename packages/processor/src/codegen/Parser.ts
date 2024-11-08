@@ -1,7 +1,7 @@
 import { uncapitalize } from '@chainflip/utils/string';
 import { TypeDefInfo } from '@polkadot/types';
-import { PalletMetadataV14, SiLookupTypeId } from '@polkadot/types/interfaces';
-import { TypeDef } from '@polkadot/types/types';
+import { type PalletMetadataV14, type SiLookupTypeId } from '@polkadot/types/interfaces';
+import { type TypeDef } from '@polkadot/types/types';
 import assert from 'assert';
 import BaseParser from '@/chainspec/BaseParser';
 

@@ -6,7 +6,7 @@ import {
   hexToBytes,
   reverseBytes,
 } from '../bytes';
-import { HexString } from '../types';
+import { type HexString } from '../types';
 
 describe(bytesToHex, () => {
   it('converts bytes to hex', () => {

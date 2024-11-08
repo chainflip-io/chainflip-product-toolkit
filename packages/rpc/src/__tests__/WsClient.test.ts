@@ -1,7 +1,7 @@
 import { once } from 'events';
-import { Mock, afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { AddressInfo, WebSocket, WebSocketServer } from 'ws';
-import { JsonRpcRequest, RpcMethod } from '../common';
+import { type Mock, afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { type AddressInfo, WebSocket, WebSocketServer } from 'ws';
+import { type JsonRpcRequest, type RpcMethod } from '../common';
 import WsClient from '../WsClient';
 
 describe(WsClient, () => {

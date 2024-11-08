@@ -4,16 +4,16 @@ import { uncapitalize } from '@chainflip/utils/string';
 import * as fs from 'fs/promises';
 import * as path from 'path';
 import {
-  ArrayType,
-  EnumType,
-  MapType,
-  OptionType,
-  ParsedMetadata,
-  PrimitiveType,
-  RangeType,
-  ResolvedType,
-  StructType,
-  TupleType,
+  type ArrayType,
+  type EnumType,
+  type MapType,
+  type OptionType,
+  type ParsedMetadata,
+  type PrimitiveType,
+  type RangeType,
+  type ResolvedType,
+  type StructType,
+  type TupleType,
 } from './BaseParser';
 import { formatCode } from './utils';
 

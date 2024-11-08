@@ -1,11 +1,11 @@
 import { deferredPromise } from '@chainflip/utils/async';
-import Client, { Response } from './Client';
+import Client, { type Response } from './Client';
 import {
-  JsonRpcRequest,
-  JsonRpcResponse,
-  RpcMethod,
-  RpcRequest,
-  RpcResult,
+  type JsonRpcRequest,
+  type JsonRpcResponse,
+  type RpcMethod,
+  type RpcRequest,
+  type RpcResult,
   rpcResult,
 } from './common';
 

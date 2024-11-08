@@ -1,5 +1,5 @@
 import { assert } from './assertion';
-import { HexString } from './types';
+import { type HexString } from './types';
 
 export const bytesToHex = (input: Uint8Array | number[]): `0x${string}` => {
   const bytes = new Uint8Array(input);

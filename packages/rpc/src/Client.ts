@@ -1,5 +1,12 @@
 import { assert } from '@chainflip/utils/assertion';
-import { RpcRequest, RpcMethod, RpcResult, rpcResult, rpcResponse, JsonRpcRequest } from './common';
+import {
+  type RpcRequest,
+  type RpcMethod,
+  type RpcResult,
+  rpcResult,
+  rpcResponse,
+  type JsonRpcRequest,
+} from './common';
 
 export type Response =
   | { success: true; id: string; result: unknown }
