@@ -94,9 +94,9 @@ export const intervalToDurationWords = (interval: Interval): string => {
     )}h ${pad(duration.minutes ?? 0)}min ${pad(duration.seconds ?? 0)}s`;
   }
   if (duration.hours) {
-    return `${pad(duration.hours)}h ${pad(duration.minutes!)}min ${pad(duration.seconds!)}s`;
+    return `${pad(duration.hours)}h ${pad(duration.minutes ?? 0)}min ${pad(duration.seconds ?? 0)}s`;
   }
-  if (duration.minutes) return `${pad(duration.minutes)}min ${pad(duration.seconds!)}s`;
+  if (duration.minutes) return `${pad(duration.minutes)}min ${pad(duration.seconds ?? 0)}s`;
   if (duration.seconds) return `${pad(duration.seconds)}s`;
   return 'A few seconds';
 };
