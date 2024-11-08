@@ -19,7 +19,11 @@ export const chainflipCommunityLinks = {
   telegram: 'https://t.me/chainflip',
 };
 
-export const brokerAliasMap = {
+type AccountAliasMap = {
+  [account: string]: { name: string; twitter: string | null };
+};
+
+export const brokerAliasMap: AccountAliasMap = {
   cFLRQDfEdmnv6d2XfHJNRBQHi4fruPMReLSfvB8WWD2ENbqj7: { name: 'Chainflip', twitter: '@Chainflip' },
   cFN1AfNQBEBCkuNAV37WWw34bCAdiW5e5sHTY4LaaRWiBSh7B: {
     name: 'BlockSwap',
@@ -60,9 +64,9 @@ export const brokerAliasMap = {
     name: 'SubWallet',
     twitter: '@subwalletapp',
   },
-};
+} as const;
 
-export const lpAliasMap = {
+export const lpAliasMap: AccountAliasMap = {
   cFLBKavxvThwqLWNr7cTwtqhYD6jDqXM31d6QoTLvuK4X78ve: { name: 'CumpsD', twitter: '@cumpsd' },
   cFKy4xbhLxvAVxYuPEWbbTJTed5WtyqNVikH2fS2WYLNHRrFh: {
     name: 'TreStylez',
@@ -93,7 +97,7 @@ export const lpAliasMap = {
   cFLBRkucKofjzUNnFpSoW8Lv4RK24K5tUPFKAWgdrBci9WPDY: { name: 'Selini', twitter: '@SeliniCapital' },
   cFJsDTPT4Pcwco6raEz5PJC65nrdvhcu3ZoEBhtQxapsWmB8A: { name: 'Tokka Labs', twitter: '@TokkaLabs' },
   cFPJNbXH9KNP1CRejnf19ARopcS8w8c4teTz5GF3G36MZRWJG: { name: 'curiouspleb', twitter: null },
-};
+} as const;
 
 // https://github.com/chainflip-io/chainflip-backend/tree/ba71514e404efe2fe0fda5925238afb642a99a9e/state-chain/node/src/chain_spec
 export const GENESIS_LP_ACCOUNT_IDS = [
