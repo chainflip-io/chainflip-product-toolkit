@@ -1,4 +1,4 @@
-import { utc, UTCDate } from '@date-fns/utc';
+import { utc, type UTCDate } from '@date-fns/utc';
 import {
   differenceInDays,
   differenceInHours,
