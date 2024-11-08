@@ -1,6 +1,7 @@
 export const HEARTBEAT_BLOCK_INTERVAL = 150; // interval between heartbeats sent by nodes. Configurable on the state chain
 export const CHAINFLIP_SS58_PREFIX = 2112;
 export const POLKADOT_SS58_PREFIX = 0;
+export const CHAINFLIP_BLOCK_TIME_SECONDS = 6;
 export const CHAINFLIP_BLOCKS_PER_YEAR = 5256000;
 
 export const chainflipLinks = {

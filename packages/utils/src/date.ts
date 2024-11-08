@@ -1,4 +1,4 @@
-import { utc } from '@date-fns/utc';
+import { utc, UTCDate } from '@date-fns/utc';
 import {
   differenceInDays,
   differenceInHours,
@@ -98,7 +98,7 @@ export const intervalToDurationWords = (interval: Interval): string => {
   }
   if (duration.minutes) return `${pad(duration.minutes)}min ${pad(duration.seconds!)}s`;
   if (duration.seconds) return `${pad(duration.seconds)}s`;
-  return '??';
+  return 'A few seconds';
 };
 
 export const toStartOfUtcDayString = (date: Date) => startOfDay(date, { in: utc }).toISOString();
@@ -106,4 +106,4 @@ export const toStartOfUtcDayString = (date: Date) => startOfDay(date, { in: utc 
 export const toEndOfUtcDayString = (date: Date) => endOfDay(date, { in: utc }).toISOString();
 
 export const eachUtcDayOfInterval = (interval: { start: Date; end: Date }) =>
-  eachDayOfInterval(interval, { in: utc });
+  eachDayOfInterval(interval, { in: utc }) as UTCDate[];

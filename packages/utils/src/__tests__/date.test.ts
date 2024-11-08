@@ -90,7 +90,7 @@ describe('intervalToDurationWords', () => {
     ['01day 03h 46min 40s', { start: 0, end: 100000000 }],
     ['02days 07h 33min 20s', { start: 0, end: 200000000 }],
     ['??', { start: 0, end: 0 }],
-    ['??', { start: 0, end: 1 }],
+    ['A few seconds', { start: 0, end: 1 }],
     ['??', { start: null, end: 100 }],
     ['??', { start: 10, end: undefined }],
     ['01day 00h 00min 00s', { start: new Date('01-01-2023'), end: new Date('01-02-2023') }],
