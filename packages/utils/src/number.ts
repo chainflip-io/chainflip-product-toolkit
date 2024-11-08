@@ -1,5 +1,5 @@
-import assert from 'assert';
 import BigNumber from 'bignumber.js';
+import { assert } from './assertion';
 import { type HexString } from './types';
 
 export const hexEncodeNumber = (num: number | bigint): HexString => `0x${num.toString(16)}`;
