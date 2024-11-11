@@ -97,6 +97,8 @@ export const lpAliasMap: AccountAliasMap = {
   cFLBRkucKofjzUNnFpSoW8Lv4RK24K5tUPFKAWgdrBci9WPDY: { name: 'Selini', twitter: '@SeliniCapital' },
   cFJsDTPT4Pcwco6raEz5PJC65nrdvhcu3ZoEBhtQxapsWmB8A: { name: 'Tokka Labs', twitter: '@TokkaLabs' },
   cFPJNbXH9KNP1CRejnf19ARopcS8w8c4teTz5GF3G36MZRWJG: { name: 'curiouspleb', twitter: null },
+  cFNBZ5iYqorZcAEjpUSHgt6Ghy4Hmf9sNK6rRYemEa93Xnark: { name: 'curiouspleb', twitter: null },
+  cFNgY2xnF9jvLLJ9TTtFwVTUCoo9aAX26UveiN7NftzkhEyYW: { name: 'curiouspleb', twitter: null },
 } as const;
 
 // https://github.com/chainflip-io/chainflip-backend/tree/ba71514e404efe2fe0fda5925238afb642a99a9e/state-chain/node/src/chain_spec
