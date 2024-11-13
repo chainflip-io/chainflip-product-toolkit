@@ -95,6 +95,17 @@ export type RpcRequest = WithHash<{
     amount: `0x${string}`,
     additionalOrders?: Nullish<AdditionalOrder[]>,
   ];
+  cf_swap_rate_v3: [
+    fromAsset: UncheckedAssetAndChain,
+    toAsset: UncheckedAssetAndChain,
+    amount: `0x${string}`,
+    brokerComission?: Nullish<number>,
+    dcaParams?: Nullish<{
+      number_of_chunks: number;
+      chunk_interval: number;
+    }>,
+    additionalOrders?: Nullish<AdditionalOrder[]>,
+  ];
   cf_boost_pools_depth: [];
   cf_boost_pool_details: [asset?: UncheckedAssetAndChain | null];
   cf_boost_pool_pending_fees: [asset?: UncheckedAssetAndChain | null];
@@ -124,6 +135,7 @@ export const rpcResult = {
   cf_supported_assets: cfSupportedAssets,
   cf_swap_rate: cfSwapRate,
   cf_swap_rate_v2: cfSwapRateV2,
+  cf_swap_rate_v3: cfSwapRateV2,
   cf_swapping_environment: cfSwappingEnvironment,
   chain_getBlockHash: chainGetBlockHash,
   cf_boost_pool_details: cfBoostPoolDetails,

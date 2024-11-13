@@ -371,6 +371,7 @@ const swapRateV2: z.input<typeof cfSwapRateV2> = {
   network_fee: { chain: 'Ethereum', asset: 'USDC', amount: '0x42' },
   ingress_fee: { chain: 'Ethereum', asset: 'USDT', amount: '0x0' },
   egress_fee: { chain: 'Ethereum', asset: 'USDC', amount: '0x0' },
+  broker_commission: { chain: 'Ethereum', asset: 'USDC', amount: '0x0' },
 };
 
 const swapDepositAddress: z.input<typeof brokerRequestSwapDepositAddress> = {
@@ -561,6 +562,7 @@ describe(HttpClient, () => {
         "cf_supported_assets",
         "cf_swap_rate",
         "cf_swap_rate_v2",
+        "cf_swap_rate_v3",
         "cf_swapping_environment",
         "chain_getBlockHash",
         "state_getMetadata",
@@ -644,6 +646,8 @@ describe(HttpClient, () => {
         case 'cf_supported_assets':
           return respond(supportedAssets);
         case 'cf_swap_rate_v2':
+          return respond(swapRateV2);
+        case 'cf_swap_rate_v3':
           return respond(swapRateV2);
         case 'cf_swapping_environment':
           return respond(swappingEnvironment);
@@ -845,6 +849,63 @@ describe(HttpClient, () => {
         ),
       ).toMatchInlineSnapshot(`
         {
+          "broker_commission": {
+            "amount": 0n,
+            "asset": "USDC",
+            "chain": "Ethereum",
+          },
+          "egress_fee": {
+            "amount": 0n,
+            "asset": "USDC",
+            "chain": "Ethereum",
+          },
+          "ingress_fee": {
+            "amount": 0n,
+            "asset": "USDT",
+            "chain": "Ethereum",
+          },
+          "intermediary": null,
+          "network_fee": {
+            "amount": 66n,
+            "asset": "USDC",
+            "chain": "Ethereum",
+          },
+          "output": 65468n,
+        }
+      `);
+    });
+
+    it('does the swap rate v3', async () => {
+      expect(
+        await client.sendRequest(
+          'cf_swap_rate_v3',
+          { asset: 'USDT', chain: 'Ethereum' },
+          { asset: 'USDC', chain: 'Ethereum' },
+          '0x10000',
+          10,
+          {
+            number_of_chunks: 10,
+            chunk_interval: 2,
+          },
+          [
+            {
+              LimitOrder: {
+                base_asset: { asset: 'USDT', chain: 'Ethereum' },
+                quote_asset: { asset: 'USDC', chain: 'Ethereum' },
+                side: 'buy',
+                tick: 0,
+                sell_amount: '0x10000',
+              },
+            },
+          ],
+        ),
+      ).toMatchInlineSnapshot(`
+        {
+          "broker_commission": {
+            "amount": 0n,
+            "asset": "USDC",
+            "chain": "Ethereum",
+          },
           "egress_fee": {
             "amount": 0n,
             "asset": "USDC",

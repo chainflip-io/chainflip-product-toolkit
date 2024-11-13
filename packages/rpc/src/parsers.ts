@@ -100,6 +100,7 @@ export const cfSwapRateV2 = z.object({
   intermediary: u256.nullable(),
   network_fee: fee,
   output: u256,
+  broker_commission: fee,
 });
 
 export const chainGetBlockHash = hexString;
