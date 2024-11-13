@@ -64,7 +64,10 @@ export const brokerAliasMap: AccountAliasMap = {
     name: 'SubWallet',
     twitter: '@subwalletapp',
   },
-  cFMjbSKgEiUacx4pqmSMVajksRf2Vhvefm4Lc5dwJxKA6DW3E: { name: 'InstaSwap', twitter: '@instaswap_io' },
+  cFMjbSKgEiUacx4pqmSMVajksRf2Vhvefm4Lc5dwJxKA6DW3E: {
+    name: 'InstaSwap',
+    twitter: '@instaswap_io',
+  },
 } as const;
 
 export const lpAliasMap: AccountAliasMap = {
