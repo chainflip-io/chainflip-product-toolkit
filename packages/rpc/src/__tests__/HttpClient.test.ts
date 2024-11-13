@@ -22,6 +22,7 @@ import {
   type validator,
   type cfFundingEnvironment,
   type cfSwapRate,
+  type cfSwapRateV3,
 } from '../parsers';
 
 const supportedAssets = [
@@ -371,6 +372,14 @@ const swapRateV2: z.input<typeof cfSwapRateV2> = {
   network_fee: { chain: 'Ethereum', asset: 'USDC', amount: '0x42' },
   ingress_fee: { chain: 'Ethereum', asset: 'USDT', amount: '0x0' },
   egress_fee: { chain: 'Ethereum', asset: 'USDC', amount: '0x0' },
+};
+
+const swapRateV3: z.input<typeof cfSwapRateV3> = {
+  intermediary: null,
+  output: '0xffbc',
+  network_fee: { chain: 'Ethereum', asset: 'USDC', amount: '0x42' },
+  ingress_fee: { chain: 'Ethereum', asset: 'USDT', amount: '0x0' },
+  egress_fee: { chain: 'Ethereum', asset: 'USDC', amount: '0x0' },
   broker_commission: { chain: 'Ethereum', asset: 'USDC', amount: '0x0' },
 };
 
@@ -648,7 +657,7 @@ describe(HttpClient, () => {
         case 'cf_swap_rate_v2':
           return respond(swapRateV2);
         case 'cf_swap_rate_v3':
-          return respond(swapRateV2);
+          return respond(swapRateV3);
         case 'cf_swapping_environment':
           return respond(swappingEnvironment);
         case 'chain_getBlockHash':
@@ -849,11 +858,6 @@ describe(HttpClient, () => {
         ),
       ).toMatchInlineSnapshot(`
         {
-          "broker_commission": {
-            "amount": 0n,
-            "asset": "USDC",
-            "chain": "Ethereum",
-          },
           "egress_fee": {
             "amount": 0n,
             "asset": "USDC",

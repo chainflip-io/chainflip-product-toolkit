@@ -23,6 +23,7 @@ import {
   stateGetRuntimeVersion,
   cfPoolDepth,
   cfAccounts,
+  cfSwapRateV3,
 } from './parsers';
 
 type Nullish<T> = T | null | undefined;
@@ -135,7 +136,7 @@ export const rpcResult = {
   cf_supported_assets: cfSupportedAssets,
   cf_swap_rate: cfSwapRate,
   cf_swap_rate_v2: cfSwapRateV2,
-  cf_swap_rate_v3: cfSwapRateV2,
+  cf_swap_rate_v3: cfSwapRateV3,
   cf_swapping_environment: cfSwappingEnvironment,
   chain_getBlockHash: chainGetBlockHash,
   cf_boost_pool_details: cfBoostPoolDetails,

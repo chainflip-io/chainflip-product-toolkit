@@ -100,6 +100,9 @@ export const cfSwapRateV2 = z.object({
   intermediary: u256.nullable(),
   network_fee: fee,
   output: u256,
+});
+
+export const cfSwapRateV3 = cfSwapRateV2.extend({
   broker_commission: fee,
 });
 
