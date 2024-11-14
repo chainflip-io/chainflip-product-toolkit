@@ -12,11 +12,10 @@ env:
 
 jobs:
   semantic-pr:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: amannn/action-semantic-pull-request@e9fabac35e210fea40ca5b14c0da95a099eff26f
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    permissions:
+      pull-requests: read
+    uses: chainflip-io/chainflip-reusable-workflows/.github/workflows/_git_semantic_pr.yml@main
+    secrets: inherit
   pre-checks:
     uses: ./.github/workflows/_01_pre_checks.yml
     secrets: inherit
