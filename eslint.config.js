@@ -369,7 +369,6 @@ export default [
         },
       ],
       'object-shorthand': ['error', 'always'],
-      'lines-between-class-members': 'off',
       'import/no-extraneous-dependencies': 'off',
       'import/extensions': 'off',
       'import/prefer-default-export': 'off',
