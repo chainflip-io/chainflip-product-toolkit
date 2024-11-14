@@ -109,18 +109,9 @@ export default [
       // suggest using template literals instead of string concatenation
       // https://eslint.org/docs/rules/prefer-template
       'prefer-template': 'error',
-      // enforce spacing between object rest-spread
-      // https://eslint.org/docs/rules/rest-spread-spacing
-      'rest-spread-spacing': ['error', 'never'],
       // require a Symbol description
       // https://eslint.org/docs/rules/symbol-description
       'symbol-description': 'error',
-      // enforce usage of spacing in template strings
-      // https://eslint.org/docs/rules/template-curly-spacing
-      'template-curly-spacing': 'error',
-      // enforce spacing around the * in yield* expressions
-      // https://eslint.org/docs/rules/yield-star-spacing
-      'yield-star-spacing': ['error', 'after'],
       // enforces getter/setter pairs in objects
       // https://eslint.org/docs/rules/accessor-pairs
       'accessor-pairs': 'off',
@@ -144,9 +135,6 @@ export default [
       // encourages use of dot notation whenever possible
       // https://eslint.org/docs/rules/dot-notation
       'dot-notation': ['error', { allowKeywords: true }],
-      // enforces consistent newlines before or after dots
-      // https://eslint.org/docs/rules/dot-location
-      'dot-location': ['error', 'property'],
       // require the use of === and !==
       // https://eslint.org/docs/rules/eqeqeq
       eqeqeq: ['error', 'always', { null: 'ignore' }],
@@ -186,9 +174,6 @@ export default [
       // disallow Unnecessary Labels
       // https://eslint.org/docs/rules/no-extra-label
       'no-extra-label': 'error',
-      // disallow the use of leading or trailing decimal points in numeric literals
-      // https://eslint.org/docs/rules/no-floating-decimal
-      'no-floating-decimal': 'error',
       // deprecated in favor of no-global-assign
       // https://eslint.org/docs/rules/no-native-reassign
       'no-native-reassign': 'off',
@@ -222,9 +207,6 @@ export default [
         'off',
         { ignore: [], ignoreArrayIndexes: true, enforceConst: true, detectObjects: false },
       ],
-      // disallow use of multiple spaces
-      // https://eslint.org/docs/rules/no-multi-spaces
-      'no-multi-spaces': ['error', { ignoreEOLComments: false }],
       // disallow use of multiline strings
       // https://eslint.org/docs/rules/no-multi-str
       'no-multi-str': 'error',
@@ -387,7 +369,6 @@ export default [
         },
       ],
       'object-shorthand': ['error', 'always'],
-      'arrow-body-style': ['error', 'as-needed'],
       'import/no-extraneous-dependencies': 'off',
       'import/extensions': 'off',
       'import/prefer-default-export': 'off',
