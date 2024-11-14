@@ -102,6 +102,10 @@ export const cfSwapRateV2 = z.object({
   output: u256,
 });
 
+export const cfSwapRateV3 = cfSwapRateV2.extend({
+  broker_commission: fee,
+});
+
 export const chainGetBlockHash = hexString;
 
 export const stateGetMetadata = hexString;
