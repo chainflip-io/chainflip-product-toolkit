@@ -187,7 +187,9 @@ describe('eachUtcDayOfInterval', () => {
 describe('subUtcDays', () => {
   it.each([
     [1, '2024-10-28T00:00:00.000Z', '2024-10-27T00:00:00.000Z'],
+    [1, 'Mon Nov 27 2024 00:00:00 GMT+0100', '2024-11-25T23:00:00.000Z'],
     [4, '2024-10-28T23:59:59.000Z', '2024-10-24T23:59:59.000Z'],
+    [4, 'Mon Nov 27 2024 00:00:00 GMT+0100', '2024-11-22T23:00:00.000Z'],
     [31, '2024-10-28T23:59:59.000Z', '2024-09-27T23:59:59.000Z'],
   ])(`properly subtracts %i utc days`, (days, date, expected) => {
     expect(subUtcDays(date, days).toISOString()).toBe(expected);
@@ -197,9 +199,11 @@ describe('subUtcDays', () => {
 describe('addUtcDays', () => {
   it.each([
     [1, '2024-10-28T00:00:00.000Z', '2024-10-29T00:00:00.000Z'],
+    [1, 'Mon Nov 27 2024 00:00:00 GMT+0100', '2024-11-27T23:00:00.000Z'],
     [4, '2024-10-28T23:59:59.000Z', '2024-11-01T23:59:59.000Z'],
+    [4, 'Mon Nov 20 2024 00:00:00 GMT+0100', '2024-11-23T23:00:00.000Z'],
     [31, '2024-10-28T23:59:59.000Z', '2024-11-28T23:59:59.000Z'],
-  ])(`properly subtracts %i utc days`, (days, date, expected) => {
+  ])(`properly adds %i utc days`, (days, date, expected) => {
     expect(addUtcDays(date, days).toISOString()).toBe(expected);
   });
 });
@@ -210,6 +214,7 @@ describe('differenceInUtcDays', () => {
     ['Mon Nov 17 2024 01:00:00 GMT+0100', 'Mon Nov 18 2024 01:00:00 GMT+0100', 1],
     ['Mon Nov 17 2024 02:00:00 GMT+0200', 'Mon Nov 18 2024 01:00:00 GMT+0100', 1],
     ['Mon Nov 17 2024 02:00:00 GMT+0100', 'Mon Nov 18 2024 01:00:00 GMT+0100', 0],
+    ['Mon Nov 17 2024 02:00:00 GMT+0100', 'Mon Nov 28 2024 01:00:00 GMT+0100', 10],
   ])(`properly calculates the difference in UTC days`, (start, end, expected) => {
     expect(differenceInUtcDays({ start, end })).toBe(expected);
   });
