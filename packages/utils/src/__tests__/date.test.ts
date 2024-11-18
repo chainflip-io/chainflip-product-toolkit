@@ -1,14 +1,19 @@
 import { type Interval } from 'date-fns';
 import { describe, expect, it, vi } from 'vitest';
 import {
+  addUtcDays,
   differenceInTimeAgo,
+  differenceInUtcDays,
   eachUtcDayOfInterval,
   formatTimestamp,
   formatTimestampShort,
   fromUnixTime,
   intervalToDurationWords,
+  subUtcDays,
+  toEndOfUtcDay,
   toEndOfUtcDayString,
   toISODateString,
+  toStartOfUtcDay,
   toStartOfUtcDayString,
 } from '../date';
 
@@ -107,11 +112,36 @@ describe('intervalToDurationWords', () => {
   });
 });
 
+describe('toStartOfUtcDay', () => {
+  it.each([
+    ['2022-03-14T12:00:00.000Z', '2022-03-14T00:00:00.000Z'],
+    ['2022-03-14T23:59:00.000Z', '2022-03-14T00:00:00.000Z'],
+    ['Mon Nov 18 2024 01:00:00 GMT+0100', '2024-11-18T00:00:00.000Z'],
+    ['Mon Nov 18 2024 00:00:00 GMT+0100', '2024-11-17T00:00:00.000Z'],
+  ])('gets the start of the UTC day', (time, expected) => {
+    expect(toStartOfUtcDay(new Date(time)).toISOString()).toBe(expected);
+  });
+});
+
+describe('toEndOfUtcDay', () => {
+  it.each([
+    ['2022-03-14T12:00:00.000Z', '2022-03-14T23:59:59.999Z'],
+    ['2022-03-14T23:59:00.000Z', '2022-03-14T23:59:59.999Z'],
+    ['Mon Nov 18 2024 00:59:59 GMT+0100', '2024-11-17T23:59:59.999Z'],
+    ['Mon Nov 18 2024 01:00:00 GMT+0100', '2024-11-18T23:59:59.999Z'],
+    ['Mon Nov 18 2024 00:30:00 GMT+0100', '2024-11-17T23:59:59.999Z'],
+  ])('gets the end of the UTC day', (time, expected) => {
+    expect(toEndOfUtcDay(new Date(time)).toISOString()).toBe(expected);
+  });
+});
+
 describe('toStartOfUtcDayString', () => {
   it.each([
     ['2022-03-14T12:00:00.000Z', '2022-03-14T00:00:00.000Z'],
     ['2022-03-14T23:59:00.000Z', '2022-03-14T00:00:00.000Z'],
-  ])('gets the start of the day', (time, expected) => {
+    ['Mon Nov 18 2024 01:00:00 GMT+0100', '2024-11-18T00:00:00.000Z'],
+    ['Mon Nov 18 2024 00:00:00 GMT+0100', '2024-11-17T00:00:00.000Z'],
+  ])('gets the start of the UTC day in ISO string format', (time, expected) => {
     expect(toStartOfUtcDayString(new Date(time))).toBe(expected);
   });
 });
@@ -120,7 +150,10 @@ describe('toEndOfUtcDayString', () => {
   it.each([
     ['2022-03-14T12:00:00.000Z', '2022-03-14T23:59:59.999Z'],
     ['2022-03-14T23:59:00.000Z', '2022-03-14T23:59:59.999Z'],
-  ])('gets the start of the day', (time, expected) => {
+    ['Mon Nov 18 2024 00:59:59 GMT+0100', '2024-11-17T23:59:59.999Z'],
+    ['Mon Nov 18 2024 01:00:00 GMT+0100', '2024-11-18T23:59:59.999Z'],
+    ['Mon Nov 18 2024 00:30:00 GMT+0100', '2024-11-17T23:59:59.999Z'],
+  ])('gets the start of the UTC day in ISO string format', (time, expected) => {
     expect(toEndOfUtcDayString(new Date(time))).toBe(expected);
   });
 });
@@ -148,5 +181,36 @@ describe('eachUtcDayOfInterval', () => {
       end: new Date('2022-03-12T23:59:00.000Z'),
     });
     expect(result.map((item) => item.toISOString())).toEqual(expectedOutput);
+  });
+});
+
+describe('subUtcDays', () => {
+  it.each([
+    [1, '2024-10-28T00:00:00.000Z', '2024-10-27T00:00:00.000Z'],
+    [4, '2024-10-28T23:59:59.000Z', '2024-10-24T23:59:59.000Z'],
+    [31, '2024-10-28T23:59:59.000Z', '2024-09-27T23:59:59.000Z'],
+  ])(`properly subtracts %i utc days`, (days, date, expected) => {
+    expect(subUtcDays(date, days).toISOString()).toBe(expected);
+  });
+});
+
+describe('addUtcDays', () => {
+  it.each([
+    [1, '2024-10-28T00:00:00.000Z', '2024-10-29T00:00:00.000Z'],
+    [4, '2024-10-28T23:59:59.000Z', '2024-11-01T23:59:59.000Z'],
+    [31, '2024-10-28T23:59:59.000Z', '2024-11-28T23:59:59.000Z'],
+  ])(`properly subtracts %i utc days`, (days, date, expected) => {
+    expect(addUtcDays(date, days).toISOString()).toBe(expected);
+  });
+});
+
+describe('differenceInUtcDays', () => {
+  it.each([
+    ['Mon Nov 17 2024 00:00:00 GMT+0100', 'Mon Nov 18 2024 01:00:00 GMT+0100', 1],
+    ['Mon Nov 17 2024 01:00:00 GMT+0100', 'Mon Nov 18 2024 01:00:00 GMT+0100', 1],
+    ['Mon Nov 17 2024 02:00:00 GMT+0200', 'Mon Nov 18 2024 01:00:00 GMT+0100', 1],
+    ['Mon Nov 17 2024 02:00:00 GMT+0100', 'Mon Nov 18 2024 01:00:00 GMT+0100', 0],
+  ])(`properly calculates the difference in UTC days`, (start, end, expected) => {
+    expect(differenceInUtcDays({ start, end })).toBe(expected);
   });
 });
