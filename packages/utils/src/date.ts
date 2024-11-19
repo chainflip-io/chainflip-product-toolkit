@@ -9,6 +9,9 @@ import {
   eachDayOfInterval,
   endOfDay,
   startOfDay,
+  subDays,
+  addDays,
+  type DateArg,
 } from 'date-fns';
 import { isNullish } from './guard';
 
@@ -101,9 +104,18 @@ export const intervalToDurationWords = (interval: Interval): string => {
   return 'A few seconds';
 };
 
-export const toStartOfUtcDayString = (date: Date) => startOfDay(date, { in: utc }).toISOString();
+type FNSDate = DateArg<Date>;
+export const subUtcDays = (date: FNSDate, days: number) => subDays(date, days, { in: utc });
+export const addUtcDays = (date: FNSDate, days: number) => addDays(date, days, { in: utc });
 
-export const toEndOfUtcDayString = (date: Date) => endOfDay(date, { in: utc }).toISOString();
+export const toStartOfUtcDay = (date: FNSDate) => startOfDay(date, { in: utc });
+export const toStartOfUtcDayString = (date: FNSDate) => toStartOfUtcDay(date).toISOString();
 
-export const eachUtcDayOfInterval = (interval: { start: Date; end: Date }) =>
+export const toEndOfUtcDay = (date: FNSDate) => endOfDay(date, { in: utc });
+export const toEndOfUtcDayString = (date: FNSDate) => toEndOfUtcDay(date).toISOString();
+
+export const differenceInUtcDays = (interval: { start: FNSDate; end: FNSDate }) =>
+  differenceInDays(interval.end, interval.start, { in: utc });
+
+export const eachUtcDayOfInterval = (interval: { start: FNSDate; end: FNSDate }) =>
   eachDayOfInterval(interval, { in: utc }) as UTCDate[];
