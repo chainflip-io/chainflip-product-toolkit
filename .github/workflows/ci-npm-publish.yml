@@ -1,0 +1,56 @@
+name: NPM Publich CI 🛰️
+
+concurrency:
+  group: npm-publish-ci
+  cancel-in-progress: false
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'packages/**/package.json'
+
+permissions:
+  packages: write
+  contents: read
+
+jobs:
+  get-release-context:
+    uses: ./.github/workflows/_utils_check_release_context.yml
+  get-node-version:
+    needs: [get-release-context]
+    if: needs.get-release-context.outputs.publish != ''
+    uses: ./.github/workflows/_node_context.yml
+
+  debug:
+    needs: [get-release-context]
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "${{ needs.get-release-context.outputs.publish }}"
+          echo "${{ needs.get-release-context.outputs.publish-tag }}"
+  pre-checks:
+    needs: [get-release-context]
+    if: needs.get-release-context.outputs.publish != ''
+    uses: ./.github/workflows/_01_pre_checks.yml
+    with:
+      package: needs.get-release-context.outputs.publish
+    secrets: inherit
+  checks:
+    needs: [pre-checks]
+    uses: ./.github/workflows/_02_checks.yml
+    with:
+      package: needs.get-release-context.outputs.publish
+    secrets: inherit
+  publish:
+    needs: [get-node-version, get-release-context, checks]
+    uses: ./.github/workflows/_npm_publish.yml
+    with:
+      node_version: ${{ needs.get-node-version.outputs.node_version }}
+      package_registry: 'https://registry.npmjs.org'
+      package_scope: '@chainflip-io'
+      build_cmd: pnpm --filter @chainflip/${{ needs.get-release-context.outputs.publish }} build
+      publish_cmd: pnpm --filter @chainflip/${{ needs.get-release-context.outputs.publish }} publish --tag ${{ needs.get-release-context.outputs.publish-tag }}
+    secrets:
+      node_auth_token: ${{ secrets.CF_NPM_JS_PACKAGES_READ_WRITE }}

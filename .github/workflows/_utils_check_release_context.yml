@@ -1,0 +1,50 @@
+name: Node JS Context Reusable Workflow
+
+on:
+  workflow_call:
+    outputs:
+      publish:
+        value: ${{ jobs.check-commit-message.outputs.publish }}
+      publish-tag:
+        value: ${{ jobs.check-commit-message.outputs.publish_tag }}
+
+env:
+  FORCE_COLOR: 1
+
+jobs:
+  check-commit-message:
+    runs-on: ubuntu-latest
+    outputs:
+      publish: ${{ steps.check-commit-message.outputs.publish }}
+      publish_tag: ${{ steps.check-version.outputs.publish_tag }}
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
+
+      - name: Check commit message
+        id: check-commit-message
+        env:
+          GITHUB_COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
+        run: |
+          commit_message="$GITHUB_COMMIT_MESSAGE"
+          if [[ $commit_message =~ @chainflip/([\w-]+)/v[0-9]+\.[0-9]+\.[0-9]+ ]]; then
+            echo "Publishing ${BASH_REMATCH[1]} package"
+            echo "publish=${BASH_REMATCH[1]}" >> $GITHUB_OUTPUT
+            echo "PACKAGE_JSON_PATH=packages/${BASH_REMATCH[1]}/package.json" >> $GITHUB_ENV
+          else
+            echo "No package name found in commit message"
+            echo "publish=" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Check version
+        id: check-version
+        if: steps.check-commit-message.outputs.publish != ''
+        run: |
+          version=$(jq -r .version $PACKAGE_JSON_PATH)
+          if [[ $version =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "Stable version detected: $version"
+            echo "publish_tag=latest" >> $GITHUB_OUTPUT
+          else
+            echo "Pre-release version detected: $version"
+            echo "publish_tag=pre-release" >> $GITHUB_OUTPUT
+          fi

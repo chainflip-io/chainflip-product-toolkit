@@ -1,0 +1,77 @@
+name: Node JS Publish NPM Package Reusable Workflow
+
+on:
+  workflow_call:
+    inputs:
+      runs_on:
+        description: Runs on
+        required: false
+        type: string
+        default: ubuntu-latest
+      node_version:
+        description: Node version
+        required: false
+        type: string
+        default: 22.x
+      package_registry:
+        description: Package registry
+        required: false
+        type: string
+        default: https://npm.pkg.github.com
+      package_scope:
+        description: Package scope
+        required: false
+        type: string
+        default: '@chainflip-io'
+      build_cmd:
+        description: Build command
+        required: false
+        type: string
+        default: pnpm run build
+      publish_cmd:
+        description: Publish command
+        required: false
+        type: string
+        default: pnpm publish
+    secrets:
+      node_auth_token:
+        description: Node auth token
+        required: true
+
+permissions:
+  packages: write
+  contents: read
+
+jobs:
+  publish:
+    runs-on: ${{ inputs.runs_on }}
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
+
+      - name: Install pnpm 💿
+        run: npm i -g pnpm@9
+
+      - name: Setup Node.js ${{ inputs.node_version }} 🎮
+        uses: actions/setup-node@8f152de45cc393bb48ce5d89d36b731f54556e65
+        with:
+          node-version: ${{ inputs.node_version }}
+          cache: 'pnpm'
+          registry-url: ${{ inputs.package_registry }}
+          scope: ${{ inputs.package_scope }}
+
+      - name: Install dependencies 📦
+        run: |
+          for i in {1..5}
+          do
+            pnpm install && break
+            sleep 10
+          done
+
+      - name: Build 🏗️
+        run: ${{ inputs.build_cmd }}
+
+      - name: Publish npm package 📦
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.node_auth_token }}
+        run: ${{ inputs.publish_cmd }}
