@@ -5,14 +5,15 @@ ArbitrumIngressEgress:
   - BoostedDepositLost: added
   - CcmFailed: added
   - CcmFallbackScheduled: added
+  - DepositChannelLifetimeSet: added
   - DepositIgnored:
     - reason: added
   - FailedToBuildAllBatchCall:
     - error: added
-  - FailedToRejectTaintedTransaction: added
-  - TaintedTransactionRejected: added
-  - TaintedTransactionReportExpired: added
-  - TaintedTransactionReportReceived: added
+  - TransactionRejectedByBroker: added
+  - TransactionRejectionFailed: added
+  - TransactionRejectionRequestExpired: added
+  - TransactionRejectionRequestReceived: added
 
 ArbitrumVault:
   - ActivationTxFailedAwaitingGovernance: added
@@ -26,6 +27,7 @@ BitcoinIngressEgress:
   - CcmFallbackScheduled: added
   - DepositBoosted:
     - depositDetails: changed
+  - DepositChannelLifetimeSet: added
   - DepositFinalised:
     - depositDetails: changed
   - DepositIgnored:
@@ -35,10 +37,10 @@ BitcoinIngressEgress:
     - depositWitness: changed
   - FailedToBuildAllBatchCall:
     - error: added
-  - FailedToRejectTaintedTransaction: added
-  - TaintedTransactionRejected: added
-  - TaintedTransactionReportExpired: added
-  - TaintedTransactionReportReceived: added
+  - TransactionRejectedByBroker: added
+  - TransactionRejectionFailed: added
+  - TransactionRejectionRequestExpired: added
+  - TransactionRejectionRequestReceived: added
 
 BitcoinThresholdSigner:
   - KeygenResponseTimeoutUpdated: removed
@@ -55,14 +57,15 @@ EthereumIngressEgress:
   - BoostedDepositLost: added
   - CcmFailed: added
   - CcmFallbackScheduled: added
+  - DepositChannelLifetimeSet: added
   - DepositIgnored:
     - reason: added
   - FailedToBuildAllBatchCall:
     - error: added
-  - FailedToRejectTaintedTransaction: added
-  - TaintedTransactionRejected: added
-  - TaintedTransactionReportExpired: added
-  - TaintedTransactionReportReceived: added
+  - TransactionRejectedByBroker: added
+  - TransactionRejectionFailed: added
+  - TransactionRejectionRequestExpired: added
+  - TransactionRejectionRequestReceived: added
 
 EthereumVault:
   - ActivationTxFailedAwaitingGovernance: added
@@ -79,14 +82,15 @@ PolkadotIngressEgress:
   - BoostedDepositLost: added
   - CcmFailed: added
   - CcmFallbackScheduled: added
+  - DepositChannelLifetimeSet: added
   - DepositIgnored:
     - reason: added
   - FailedToBuildAllBatchCall:
     - error: added
-  - FailedToRejectTaintedTransaction: added
-  - TaintedTransactionRejected: added
-  - TaintedTransactionReportExpired: added
-  - TaintedTransactionReportReceived: added
+  - TransactionRejectedByBroker: added
+  - TransactionRejectionFailed: added
+  - TransactionRejectionRequestExpired: added
+  - TransactionRejectionRequestReceived: added
 
 PolkadotThresholdSigner:
   - KeygenResponseTimeoutUpdated: removed
@@ -111,14 +115,15 @@ SolanaIngressEgress:
   - BoostedDepositLost: added
   - CcmFailed: added
   - CcmFallbackScheduled: added
+  - DepositChannelLifetimeSet: added
   - DepositIgnored:
     - reason: added
   - FailedToBuildAllBatchCall:
     - error: added
-  - FailedToRejectTaintedTransaction: added
-  - TaintedTransactionRejected: added
-  - TaintedTransactionReportExpired: added
-  - TaintedTransactionReportReceived: added
+  - TransactionRejectedByBroker: added
+  - TransactionRejectionFailed: added
+  - TransactionRejectionRequestExpired: added
+  - TransactionRejectionRequestReceived: added
 
 SolanaThresholdSigner:
   - KeygenResponseTimeoutUpdated: removed

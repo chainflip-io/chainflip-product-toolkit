@@ -172,7 +172,7 @@ export const cfChainsEvmDepositDetails = z.object({ txHashes: z.array(hexString)
 export const palletCfIngressEgressDepositIgnoredReason = simpleEnum([
   'BelowMinimumDeposit',
   'NotEnoughToPayFees',
-  'TransactionTainted',
+  'TransactionRejectedByBroker',
 ]);
 
 export const solPrimPdaPdaError = simpleEnum([

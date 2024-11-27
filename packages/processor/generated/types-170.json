@@ -12555,6 +12555,15 @@
         }
       }
     },
+    "DepositChannelLifetimeSet": {
+      "type": "struct",
+      "fields": {
+        "lifetime": {
+          "type": "primitive",
+          "name": "u64"
+        }
+      }
+    },
     "DepositIgnored": {
       "type": "struct",
       "fields": {
@@ -12635,7 +12644,7 @@
               }
             },
             {
-              "name": "TransactionTainted",
+              "name": "TransactionRejectedByBroker",
               "value": {
                 "type": "primitive",
                 "name": "null"
@@ -14170,7 +14179,7 @@
         }
       }
     },
-    "TaintedTransactionReportReceived": {
+    "TransactionRejectionRequestReceived": {
       "type": "struct",
       "fields": {
         "accountId": {
@@ -14187,7 +14196,7 @@
         }
       }
     },
-    "TaintedTransactionReportExpired": {
+    "TransactionRejectionRequestExpired": {
       "type": "struct",
       "fields": {
         "accountId": {
@@ -14280,7 +14289,7 @@
         }
       }
     },
-    "TaintedTransactionRejected": {
+    "TransactionRejectedByBroker": {
       "type": "struct",
       "fields": {
         "broadcastId": {
@@ -14305,7 +14314,7 @@
         }
       }
     },
-    "FailedToRejectTaintedTransaction": {
+    "TransactionRejectionFailed": {
       "type": "struct",
       "fields": {
         "txId": {
@@ -15068,6 +15077,15 @@
         }
       }
     },
+    "DepositChannelLifetimeSet": {
+      "type": "struct",
+      "fields": {
+        "lifetime": {
+          "type": "primitive",
+          "name": "u32"
+        }
+      }
+    },
     "DepositIgnored": {
       "type": "struct",
       "fields": {
@@ -15119,7 +15137,7 @@
               }
             },
             {
-              "name": "TransactionTainted",
+              "name": "TransactionRejectedByBroker",
               "value": {
                 "type": "primitive",
                 "name": "null"
@@ -16495,7 +16513,7 @@
         }
       }
     },
-    "TaintedTransactionReportReceived": {
+    "TransactionRejectionRequestReceived": {
       "type": "struct",
       "fields": {
         "accountId": {
@@ -16522,7 +16540,7 @@
         }
       }
     },
-    "TaintedTransactionReportExpired": {
+    "TransactionRejectionRequestExpired": {
       "type": "struct",
       "fields": {
         "accountId": {
@@ -16625,7 +16643,7 @@
         }
       }
     },
-    "TaintedTransactionRejected": {
+    "TransactionRejectedByBroker": {
       "type": "struct",
       "fields": {
         "broadcastId": {
@@ -16638,7 +16656,7 @@
         }
       }
     },
-    "FailedToRejectTaintedTransaction": {
+    "TransactionRejectionFailed": {
       "type": "struct",
       "fields": {
         "txId": {
@@ -17531,6 +17549,15 @@
         }
       }
     },
+    "DepositChannelLifetimeSet": {
+      "type": "struct",
+      "fields": {
+        "lifetime": {
+          "type": "primitive",
+          "name": "u64"
+        }
+      }
+    },
     "DepositIgnored": {
       "type": "struct",
       "fields": {
@@ -17724,7 +17751,7 @@
               }
             },
             {
-              "name": "TransactionTainted",
+              "name": "TransactionRejectedByBroker",
               "value": {
                 "type": "primitive",
                 "name": "null"
@@ -19453,7 +19480,7 @@
         }
       }
     },
-    "TaintedTransactionReportReceived": {
+    "TransactionRejectionRequestReceived": {
       "type": "struct",
       "fields": {
         "accountId": {
@@ -19470,7 +19497,7 @@
         }
       }
     },
-    "TaintedTransactionReportExpired": {
+    "TransactionRejectionRequestExpired": {
       "type": "struct",
       "fields": {
         "accountId": {
@@ -19563,7 +19590,7 @@
         }
       }
     },
-    "TaintedTransactionRejected": {
+    "TransactionRejectedByBroker": {
       "type": "struct",
       "fields": {
         "broadcastId": {
@@ -19649,7 +19676,7 @@
         }
       }
     },
-    "FailedToRejectTaintedTransaction": {
+    "TransactionRejectionFailed": {
       "type": "struct",
       "fields": {
         "txId": {
@@ -23023,6 +23050,15 @@
         }
       }
     },
+    "DepositChannelLifetimeSet": {
+      "type": "struct",
+      "fields": {
+        "lifetime": {
+          "type": "primitive",
+          "name": "u64"
+        }
+      }
+    },
     "DepositIgnored": {
       "type": "struct",
       "fields": {
@@ -23089,7 +23125,7 @@
               }
             },
             {
-              "name": "TransactionTainted",
+              "name": "TransactionRejectedByBroker",
               "value": {
                 "type": "primitive",
                 "name": "null"
@@ -24526,7 +24562,7 @@
         }
       }
     },
-    "TaintedTransactionReportReceived": {
+    "TransactionRejectionRequestReceived": {
       "type": "struct",
       "fields": {
         "accountId": {
@@ -24543,7 +24579,7 @@
         }
       }
     },
-    "TaintedTransactionReportExpired": {
+    "TransactionRejectionRequestExpired": {
       "type": "struct",
       "fields": {
         "accountId": {
@@ -24636,7 +24672,7 @@
         }
       }
     },
-    "TaintedTransactionRejected": {
+    "TransactionRejectedByBroker": {
       "type": "struct",
       "fields": {
         "broadcastId": {
@@ -24661,7 +24697,7 @@
         }
       }
     },
-    "FailedToRejectTaintedTransaction": {
+    "TransactionRejectionFailed": {
       "type": "struct",
       "fields": {
         "txId": {
@@ -26563,6 +26599,15 @@
         }
       }
     },
+    "DepositChannelLifetimeSet": {
+      "type": "struct",
+      "fields": {
+        "lifetime": {
+          "type": "primitive",
+          "name": "u64"
+        }
+      }
+    },
     "DepositIgnored": {
       "type": "struct",
       "fields": {
@@ -26621,7 +26666,7 @@
               }
             },
             {
-              "name": "TransactionTainted",
+              "name": "TransactionRejectedByBroker",
               "value": {
                 "type": "primitive",
                 "name": "null"
@@ -28046,7 +28091,7 @@
         }
       }
     },
-    "TaintedTransactionReportReceived": {
+    "TransactionRejectionRequestReceived": {
       "type": "struct",
       "fields": {
         "accountId": {
@@ -28067,7 +28112,7 @@
         }
       }
     },
-    "TaintedTransactionReportExpired": {
+    "TransactionRejectionRequestExpired": {
       "type": "struct",
       "fields": {
         "accountId": {
@@ -28164,7 +28209,7 @@
         }
       }
     },
-    "TaintedTransactionRejected": {
+    "TransactionRejectedByBroker": {
       "type": "struct",
       "fields": {
         "broadcastId": {
@@ -28177,7 +28222,7 @@
         }
       }
     },
-    "FailedToRejectTaintedTransaction": {
+    "TransactionRejectionFailed": {
       "type": "struct",
       "fields": {
         "txId": {

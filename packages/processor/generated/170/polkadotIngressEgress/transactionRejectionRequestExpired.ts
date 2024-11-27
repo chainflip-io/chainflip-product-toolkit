@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { accountId, cfPrimitivesTxId } from '../common';
 
-export const polkadotIngressEgressTaintedTransactionReportExpired = z.object({
+export const polkadotIngressEgressTransactionRejectionRequestExpired = z.object({
   accountId,
   txId: cfPrimitivesTxId,
 });
