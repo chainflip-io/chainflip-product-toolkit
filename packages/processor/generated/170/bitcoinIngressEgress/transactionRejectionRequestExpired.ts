@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { accountId, hexString } from '../common';
 
-export const arbitrumIngressEgressTaintedTransactionReportExpired = z.object({
+export const bitcoinIngressEgressTransactionRejectionRequestExpired = z.object({
   accountId,
   txId: hexString,
 });

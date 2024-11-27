@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { cfChainsEvmDepositDetails } from '../common';
 
-export const arbitrumIngressEgressFailedToRejectTaintedTransaction = z.object({
+export const ethereumIngressEgressTransactionRejectionFailed = z.object({
   txId: cfChainsEvmDepositDetails,
 });

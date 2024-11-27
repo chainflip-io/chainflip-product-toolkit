@@ -1,7 +1,8 @@
 import { z } from 'zod';
 import { accountId, hexString } from '../common';
 
-export const ethereumIngressEgressTaintedTransactionReportExpired = z.object({
+export const ethereumIngressEgressTransactionRejectionRequestReceived = z.object({
   accountId,
   txId: hexString,
+  expiresAt: z.number(),
 });
