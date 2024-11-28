@@ -76,7 +76,6 @@ export const brokerAliasMap: AccountAliasMap = {
     name: 'FortunaSwap',
     twitter: '@fortunaswapdex',
   },
-  
 } as const;
 
 export const lpAliasMap: AccountAliasMap = {
