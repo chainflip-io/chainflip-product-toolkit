@@ -120,4 +120,5 @@ export const GENESIS_LP_ACCOUNT_IDS = [
   'cFPdef3hF5zEwbWUG6ZaCJ3X7mTvEeAog7HxZ8QyFcCgDVGDM',
   'cFMzM1G4He5k3Aa58X6d8yo8hRxiMVd92qrXMu1zKBXCqqTxi',
   'cFL8fmgKZcchhtLagBH2GKfsuWxBqUaD5CYE1m7DFb8DBSLJ1',
+  'cFJt3kyUdXvaoarfxJDLrFmHFqkXUgnVZ4zqqDLLTRjbJosmK',
 ];
