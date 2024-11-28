@@ -72,6 +72,11 @@ export const brokerAliasMap: AccountAliasMap = {
     name: 'ShapeShift',
     twitter: '@ShapeShift',
   },
+  cFNdvoAPed5iA5u8X7RoUK58zYcg5mPL2EM7BMoQBSVxwMjLL: {
+    name: 'FortunaSwap',
+    twitter: '@fortunaswapdex',
+  },
+  
 } as const;
 
 export const lpAliasMap: AccountAliasMap = {
