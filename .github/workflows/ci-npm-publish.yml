@@ -35,13 +35,13 @@ jobs:
     if: needs.get-release-context.outputs.publish != ''
     uses: ./.github/workflows/_01_pre_checks.yml
     with:
-      package: needs.get-release-context.outputs.publish
+      package: ${{ needs.get-release-context.outputs.publish }}
     secrets: inherit
   checks:
-    needs: [pre-checks]
+    needs: [get-release-context, pre-checks]
     uses: ./.github/workflows/_02_checks.yml
     with:
-      package: needs.get-release-context.outputs.publish
+      package: ${{ needs.get-release-context.outputs.publish }}
     secrets: inherit
   publish:
     needs: [get-node-version, get-release-context, checks]
