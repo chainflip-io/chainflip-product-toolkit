@@ -64,6 +64,8 @@ const rpcAssetSchema = z.union([
   z.object({ chain: z.literal('Solana'), asset: z.literal('SOL') }),
   z.object({ chain: z.literal('Solana'), asset: z.literal('USDC') }),
   z.object({ chain: z.literal('Assethub'), asset: z.literal('DOT') }),
+  z.object({ chain: z.literal('Assethub'), asset: z.literal('USDC') }),
+  z.object({ chain: z.literal('Assethub'), asset: z.literal('USDT') }),
 ]);
 
 export type AssetAndChain = z.output<typeof rpcAssetSchema>;
