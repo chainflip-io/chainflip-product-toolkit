@@ -1,14 +1,21 @@
 export const chainflipAssets = [
-  'Usdc',
-  'Usdt',
-  'Flip',
-  'Dot',
-  'Eth',
   'Btc',
+  'Dot',
+  // Ethereum
+  'Eth',
+  'Usdc',
+  'Flip',
+  'Usdt',
+  // Arbitrum
   'ArbUsdc',
   'ArbEth',
+  // Solana
   'Sol',
   'SolUsdc',
+  // AssetHub
+  'HubDot',
+  'HubUsdc',
+  'HubUsdt',
 ] as const;
 
 export type ChainflipAsset = (typeof chainflipAssets)[number];
@@ -25,7 +32,13 @@ export const baseChainflipAssets = chainflipAssets.filter(
 export const chainflipEvmChains = ['Ethereum', 'Arbitrum'] as const;
 export type ChainflipEvmChain = (typeof chainflipEvmChains)[number];
 
-export const chainflipChains = [...chainflipEvmChains, 'Bitcoin', 'Polkadot', 'Solana'] as const;
+export const chainflipChains = [
+  ...chainflipEvmChains,
+  'Bitcoin',
+  'Polkadot',
+  'Solana',
+  'Assethub',
+] as const;
 export type ChainflipChain = (typeof chainflipChains)[number];
 
 export const chainflipNetworks = ['backspin', 'sisyphos', 'perseverance', 'mainnet'] as const;
@@ -122,6 +135,21 @@ export const assetConstants = {
     rpcAsset: 'USDC',
     decimals: 6,
   },
+  HubDot: {
+    chain: 'Assethub',
+    rpcAsset: 'DOT',
+    decimals: 10,
+  },
+  HubUsdc: {
+    chain: 'Assethub',
+    rpcAsset: 'USDC',
+    decimals: 6,
+  },
+  HubUsdt: {
+    chain: 'Assethub',
+    rpcAsset: 'USDT',
+    decimals: 6,
+  },
 } as const satisfies Record<
   ChainflipAsset,
   {
@@ -162,6 +190,12 @@ export const chainConstants = {
     addressType: 'Sol',
     blockTimeSeconds: 0.8,
   },
+  Assethub: {
+    assets: ['HubDot', 'HubUsdc', 'HubUsdt'],
+    gasAsset: 'HubDot',
+    addressType: 'Dot',
+    blockTimeSeconds: 12,
+  },
 } as const satisfies Record<
   ChainflipChain,
   {
@@ -173,14 +207,21 @@ export const chainConstants = {
 >;
 
 export const internalAssetToRpcAsset: Record<ChainflipAsset, AssetAndChain> = {
-  Eth: { chain: 'Ethereum', asset: 'ETH' },
-  Flip: { chain: 'Ethereum', asset: 'FLIP' },
-  Usdc: { chain: 'Ethereum', asset: 'USDC' },
-  Usdt: { chain: 'Ethereum', asset: 'USDT' },
-  Dot: { chain: 'Polkadot', asset: 'DOT' },
   Btc: { chain: 'Bitcoin', asset: 'BTC' },
+  Dot: { chain: 'Polkadot', asset: 'DOT' },
+  // Ethereum
+  Eth: { chain: 'Ethereum', asset: 'ETH' },
+  Usdc: { chain: 'Ethereum', asset: 'USDC' },
+  Flip: { chain: 'Ethereum', asset: 'FLIP' },
+  Usdt: { chain: 'Ethereum', asset: 'USDT' },
+  // Arbitrum
   ArbUsdc: { chain: 'Arbitrum', asset: 'USDC' },
   ArbEth: { chain: 'Arbitrum', asset: 'ETH' },
+  // Solana
   Sol: { chain: 'Solana', asset: 'SOL' },
   SolUsdc: { chain: 'Solana', asset: 'USDC' },
+  // AssetHub
+  HubDot: { chain: 'Assethub', asset: 'DOT' },
+  HubUsdc: { chain: 'Assethub', asset: 'USDC' },
+  HubUsdt: { chain: 'Assethub', asset: 'USDT' },
 };
