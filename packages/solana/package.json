@@ -14,7 +14,8 @@
     "test": "vitest"
   },
   "dependencies": {
-    "@chainflip/utils": "0.4.0"
+    "@chainflip/utils": "0.4.0",
+    "@solana/web3.js": "^1.95.8"
   },
   "files": [
     "dist",
