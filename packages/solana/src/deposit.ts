@@ -41,8 +41,8 @@ const getTransferAmount = (
     key.equals(depositPublicKey),
   );
 
-  const preBalance = tx.meta?.preBalances.at(accountIndex) ?? 0;
-  const postBalance = tx.meta?.postBalances.at(accountIndex) ?? 0;
+  const preBalance = tx.meta?.preBalances[accountIndex] ?? 0;
+  const postBalance = tx.meta?.postBalances[accountIndex] ?? 0;
 
   return BigInt(postBalance - preBalance);
 };

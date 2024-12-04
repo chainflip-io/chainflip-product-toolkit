@@ -177,6 +177,18 @@ const transactions: Record<string, VersionedTransactionResponse> = {
       preBalances: [1573814256, 0, 2039280, 1, 731913600, 0, 321908068466, 1, 934087680, 1009200],
       preTokenBalances: [
         {
+          accountIndex: 1,
+          mint: 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v',
+          owner: 'EqkWgheG46WRqAR5Tsi3x7PvgHcW1gq8gPaN7JLtXri4',
+          programId: 'TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA',
+          uiTokenAmount: {
+            amount: '0',
+            decimals: 6,
+            uiAmount: 0,
+            uiAmountString: '0',
+          },
+        },
+        {
           accountIndex: 2,
           mint: 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v',
           owner: '67ta16PhyLVxcDNM9XpJMbpougPCPm1tQvZvkT75GfiP',
@@ -328,7 +340,7 @@ describe('deposit', () => {
 
     // https://scan.chainflip.io/events/5561277-2061
     const result = await findSolanaDepositSignature(
-      'https://test.solana.com',
+      'https://user:password@test.solana.com',
       null,
       '8z1bM4fWJwvz6shKBvdfFBtW1mNAvhZ6dw8TJo7ZxP4R',
       6000000000n,
@@ -339,6 +351,11 @@ describe('deposit', () => {
     expect(result).toEqual(
       '3zC67SpVaUAMXitSZw6Z1HtTPFtEEeKdJ2cAkHGAPYyBdWkbbT3RRva9Do6SbQjk8Zs8oHJrprV8txdc3YgBp33x',
     );
+    expect(Connection).toHaveBeenCalledWith('https://test.solana.com/', {
+      httpHeaders: {
+        Authorization: 'Basic dXNlcjpwYXNzd29yZA==',
+      },
+    });
     expect(Connection.prototype.getTransactions).toHaveBeenCalledWith(
       ['3zC67SpVaUAMXitSZw6Z1HtTPFtEEeKdJ2cAkHGAPYyBdWkbbT3RRva9Do6SbQjk8Zs8oHJrprV8txdc3YgBp33x'],
       { maxSupportedTransactionVersion: 0 },
@@ -361,11 +378,33 @@ describe('deposit', () => {
     expect(result).toEqual(
       '3zC67SpVaUAMXitSZw6Z1HtTPFtEEeKdJ2cAkHGAPYyBdWkbbT3RRva9Do6SbQjk8Zs8oHJrprV8txdc3YgBp33x',
     );
+    expect(Connection).toHaveBeenCalledWith('https://test.solana.com/', {
+      httpHeaders: {},
+    });
     expect(Connection.prototype.getTransactions).toHaveBeenCalledWith(
       [
         '546q8d7bhBaNBLL8jj3mPHeN3DGD3n1Y2qyhAVeuwsuPRNj8UVFerB3DRzh4sDS3ftaKBtoSiJsXMgx6aHTNhwEr',
         '3zC67SpVaUAMXitSZw6Z1HtTPFtEEeKdJ2cAkHGAPYyBdWkbbT3RRva9Do6SbQjk8Zs8oHJrprV8txdc3YgBp33x',
       ],
+      { maxSupportedTransactionVersion: 0 },
+    );
+  });
+
+  it('does not find sol deposit for wrong address', async () => {
+    vi.mocked(Connection.prototype.getSignaturesForAddress).mockResolvedValue(solDepositSignatures);
+
+    const result = await findSolanaDepositSignature(
+      'https://test.solana.com',
+      null,
+      '97R4UGhdj7WqXA5AhfQqxM2CGDscJ5meFC8ZJvSoNUBs',
+      6000000000n,
+      305374576,
+      305374576,
+    );
+
+    expect(result).toEqual(undefined);
+    expect(Connection.prototype.getTransactions).toHaveBeenCalledWith(
+      ['3zC67SpVaUAMXitSZw6Z1HtTPFtEEeKdJ2cAkHGAPYyBdWkbbT3RRva9Do6SbQjk8Zs8oHJrprV8txdc3YgBp33x'],
       { maxSupportedTransactionVersion: 0 },
     );
   });
@@ -407,6 +446,28 @@ describe('deposit', () => {
     expect(result).toEqual(
       'YvQLEdk8ZP4MQeDk657bXyyj7xtEGtUcPMrdAM5546F9QAaS87WGniitisbUy1E68aiKXvPFXvw3zPdJk1UcWjE',
     );
+    expect(Connection.prototype.getTransactions).toHaveBeenCalledWith(
+      ['YvQLEdk8ZP4MQeDk657bXyyj7xtEGtUcPMrdAM5546F9QAaS87WGniitisbUy1E68aiKXvPFXvw3zPdJk1UcWjE'],
+      { maxSupportedTransactionVersion: 0 },
+    );
+  });
+
+  it('does not find usdc deposit for wrong address', async () => {
+    vi.mocked(Connection.prototype.getSignaturesForAddress).mockResolvedValue(
+      usdcDepositSignatures,
+    );
+
+    // https://scan.chainflip.io/events/5557575-2017
+    const result = await findSolanaDepositSignature(
+      'https://test.solana.com',
+      'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v',
+      '97R4UGhdj7WqXA5AhfQqxM2CGDscJ5meFC8ZJvSoNUBs',
+      100000000n,
+      0,
+      305320684,
+    );
+
+    expect(result).toEqual(undefined);
     expect(Connection.prototype.getTransactions).toHaveBeenCalledWith(
       ['YvQLEdk8ZP4MQeDk657bXyyj7xtEGtUcPMrdAM5546F9QAaS87WGniitisbUy1E68aiKXvPFXvw3zPdJk1UcWjE'],
       { maxSupportedTransactionVersion: 0 },
