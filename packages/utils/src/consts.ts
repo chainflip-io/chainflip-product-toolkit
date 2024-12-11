@@ -76,6 +76,10 @@ export const brokerAliasMap: AccountAliasMap = {
     name: 'FortunaSwap',
     twitter: '@fortunaswapdex',
   },
+  cFPGQVB86HRbJwHneuKF7RPvD8Lq4soQLHjw82WCB4y9as9TP: {
+    name: 'WinBit32.com',
+    twitter: '@WinBit32',
+  },
 } as const;
 
 export const lpAliasMap: AccountAliasMap = {
