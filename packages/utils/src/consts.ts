@@ -80,6 +80,10 @@ export const brokerAliasMap: AccountAliasMap = {
     name: 'WinBit32.com',
     twitter: '@WinBit32',
   },
+  cFJZ15BV75iMChsXkMvCTudzLGdKkKCAgE3bPvnJjJEhi79mM: {
+    name: 'SwapperXYZ',
+    twitter: null,
+  },
 } as const;
 
 export const lpAliasMap: AccountAliasMap = {
