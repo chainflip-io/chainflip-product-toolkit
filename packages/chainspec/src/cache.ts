@@ -18,7 +18,7 @@ export const networkToRpcUrl: Record<Network, string> = {
   mainnet: 'https://archive.mainnet.chainflip.io',
   perseverance: 'https://archive.perseverance.chainflip.io',
   sisyphos: 'https://archive.sisyphos.chainflip.io',
-  backspin: 'https://backspin-rpc.staging',
+  backspin: 'https://rpc.backspin.chainflip.io',
   localnet: 'http://127.0.0.1:9944',
 };
 
