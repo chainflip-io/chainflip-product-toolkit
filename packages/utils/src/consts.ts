@@ -115,6 +115,8 @@ export const lpAliasMap: AccountAliasMap = {
   cFLGvPhhrribWCx9id5kLVqwiFK4QiVNjQ6ViyaRFF2Nrgq7j: { name: 'Selini', twitter: '@SeliniCapital' },
   cFKZarxpf9MVwzzmYUtQfV61PRkYgTj9wUgUCeuKpKgMLrTow: { name: 'Selini', twitter: '@SeliniCapital' },
   cFLBRkucKofjzUNnFpSoW8Lv4RK24K5tUPFKAWgdrBci9WPDY: { name: 'Selini', twitter: '@SeliniCapital' },
+  cFP89cUtPvRYqbnPdT8o3jNGfBbkHLKSHGZCtP248c22hj5iw: { name: 'Selini', twitter: '@SeliniCapital' },
+  cFJFN3DAE2wyo655yEn5ewaHQk2BLG7ctCDpBHnb4Wkb3jkN8: { name: 'Selini', twitter: '@SeliniCapital' },
   cFJsDTPT4Pcwco6raEz5PJC65nrdvhcu3ZoEBhtQxapsWmB8A: { name: 'Tokka Labs', twitter: '@TokkaLabs' },
   cFPJNbXH9KNP1CRejnf19ARopcS8w8c4teTz5GF3G36MZRWJG: { name: 'curiouspleb', twitter: null },
   cFNBZ5iYqorZcAEjpUSHgt6Ghy4Hmf9sNK6rRYemEa93Xnark: { name: 'curiouspleb', twitter: null },
