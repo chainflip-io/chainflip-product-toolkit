@@ -1,120 +1,128 @@
+ArbitrumChainTracking:
+  - ChainStateUpdated:
+    - newChainState: added
+
 ArbitrumIngressEgress:
   - CcmEgressInvalid:
     - error: changed
-  - CcmFailed:
-    - reason: removed
-    - depositMetadata: added
-    - origin: added
+  - CcmFailed: removed
+  - CcmFallbackScheduled: removed
   - DepositBoosted:
     - maxBoostFeeBps: added
     - originType: added
     - depositAddress: added
     - channelId: added
-    - action: added
+    - action: removed
+  - DepositFailed: added
   - DepositFinalised:
     - maxBoostFeeBps: added
     - originType: added
     - depositAddress: added
-    - action: added
+    - action: removed
     - channelId: added
-  - DepositIgnored:
-    - depositAddress: added
+  - DepositIgnored: removed
+  - DepositWitnessRejected: removed
   - FailedToBuildAllBatchCall:
     - error: changed
   - InsufficientBoostLiquidity:
     - originType: added
     - channelId: added
   - NetworkFeeDeductionFromBoostSet: added
+  - TransferFallbackRequested:
+    - egressDetails: added
   - UnknownAffiliate: added
   - UnknownBroker: added
 
 BitcoinIngressEgress:
   - CcmEgressInvalid:
     - error: changed
-  - CcmFailed:
-    - reason: removed
-    - depositMetadata: added
-    - origin: added
+  - CcmFailed: removed
+  - CcmFallbackScheduled: removed
   - DepositBoosted:
     - maxBoostFeeBps: added
     - originType: added
     - depositAddress: added
     - channelId: added
-    - action: added
+    - action: removed
+  - DepositFailed: added
   - DepositFinalised:
     - maxBoostFeeBps: added
     - originType: added
     - depositAddress: added
-    - action: added
+    - action: removed
     - channelId: added
-  - DepositIgnored:
-    - depositAddress: added
+  - DepositIgnored: removed
+  - DepositWitnessRejected: removed
   - FailedToBuildAllBatchCall:
     - error: changed
   - InsufficientBoostLiquidity:
     - originType: added
     - channelId: added
   - NetworkFeeDeductionFromBoostSet: added
+  - TransferFallbackRequested:
+    - egressDetails: added
   - UnknownAffiliate: added
   - UnknownBroker: added
 
 EthereumIngressEgress:
   - CcmEgressInvalid:
     - error: changed
-  - CcmFailed:
-    - reason: removed
-    - depositMetadata: added
-    - origin: added
+  - CcmFailed: removed
+  - CcmFallbackScheduled: removed
   - DepositBoosted:
     - maxBoostFeeBps: added
     - originType: added
     - depositAddress: added
     - channelId: added
-    - action: added
+    - action: removed
+  - DepositFailed: added
   - DepositFinalised:
     - maxBoostFeeBps: added
     - originType: added
     - depositAddress: added
-    - action: added
+    - action: removed
     - channelId: added
-  - DepositIgnored:
-    - depositAddress: added
+  - DepositIgnored: removed
+  - DepositWitnessRejected: removed
   - FailedToBuildAllBatchCall:
     - error: changed
   - InsufficientBoostLiquidity:
     - originType: added
     - channelId: added
   - NetworkFeeDeductionFromBoostSet: added
+  - TransferFallbackRequested:
+    - egressDetails: added
   - UnknownAffiliate: added
   - UnknownBroker: added
 
 PolkadotIngressEgress:
   - CcmEgressInvalid:
     - error: changed
-  - CcmFailed:
-    - reason: removed
-    - depositMetadata: added
-    - origin: added
+  - CcmFailed: removed
+  - CcmFallbackScheduled: removed
   - DepositBoosted:
     - maxBoostFeeBps: added
     - originType: added
     - depositAddress: removed
     - channelId: added
-    - action: added
+    - action: removed
+  - DepositFailed: added
   - DepositFinalised:
     - maxBoostFeeBps: added
     - originType: added
     - depositAddress: removed
-    - action: added
+    - action: removed
     - channelId: added
-  - DepositIgnored:
-    - depositAddress: removed
+  - DepositIgnored: removed
+  - DepositWitnessRejected: removed
   - FailedToBuildAllBatchCall:
     - error: changed
   - InsufficientBoostLiquidity:
     - originType: added
     - channelId: added
   - NetworkFeeDeductionFromBoostSet: added
+  - TransferFallbackRequested:
+    - egressDetails: added
   - UnknownAffiliate: added
   - UnknownBroker: added
 
@@ -125,24 +133,23 @@ SolanaBroadcaster:
 SolanaIngressEgress:
   - CcmEgressInvalid:
     - error: changed
-  - CcmFailed:
-    - reason: removed
-    - depositMetadata: added
-    - origin: added
+  - CcmFailed: removed
+  - CcmFallbackScheduled: removed
   - DepositBoosted:
     - maxBoostFeeBps: added
     - originType: added
     - depositAddress: removed
     - channelId: added
-    - action: added
+    - action: removed
+  - DepositFailed: added
   - DepositFinalised:
     - maxBoostFeeBps: added
     - originType: added
     - depositAddress: removed
-    - action: added
+    - action: removed
     - channelId: added
-  - DepositIgnored:
-    - depositAddress: removed
+  - DepositIgnored: removed
+  - DepositWitnessRejected: removed
   - FailedToBuildAllBatchCall:
     - error: changed
   - InsufficientBoostLiquidity:
@@ -153,18 +160,29 @@ SolanaIngressEgress:
     - txId: added
   - TransactionRejectionRequestReceived:
     - txId: added
+  - TransferFallbackRequested:
+    - egressDetails: added
   - UnknownAffiliate: added
   - UnknownBroker: added
 
 Swapping:
   - AffiliateRegistrationUpdated: added
   - BrokerBondSet: added
+  - MinimumNetworkFeeSet: added
   - PrivateBrokerChannelClosed: added
   - PrivateBrokerChannelOpened: added
+  - RefundEgressScheduled:
+    - egressFee: added
   - SwapDepositAddressReady:
     - channelMetadata: added
     - affiliateFees: changed
+    - refundParameters: changed
+  - SwapEgressScheduled:
+    - egressFee: added
   - SwapRequested:
     - brokerFees: added
     - origin: added
-    - requestType: added
+    - requestType: removed
+    - refundParameters: changed
+  - SwapScheduled:
+    - swapType: removed
