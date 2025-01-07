@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import {
-  cfChainsChannelRefundParametersGenericEncodedAddress,
+  cfChainsChannelRefundParametersEncodedAddress,
   cfChainsSwapOrigin,
   cfPrimitivesBeneficiaryAccountId32,
   cfPrimitivesChainsAssetsAnyAsset,
@@ -17,6 +17,6 @@ export const swappingSwapRequested = z.object({
   origin: cfChainsSwapOrigin,
   requestType: cfTraitsSwappingSwapRequestTypeGeneric,
   brokerFees: z.array(cfPrimitivesBeneficiaryAccountId32),
-  refundParameters: cfChainsChannelRefundParametersGenericEncodedAddress.nullish(),
+  refundParameters: cfChainsChannelRefundParametersEncodedAddress.nullish(),
   dcaParameters: cfPrimitivesDcaParameters.nullish(),
 });
