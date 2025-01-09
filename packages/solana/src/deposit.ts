@@ -49,7 +49,6 @@ const getTransferAmount = (
 
 export const findSolanaDepositSignature = async (
   solanaEndpoint: string,
-  signatureAddress: string,
   tokenAddress: string | null,
   depositAddress: string,
   depositAmount: bigint,
@@ -57,7 +56,7 @@ export const findSolanaDepositSignature = async (
   maxSlot: number,
 ) => {
   const connection = getSolanaConnection(solanaEndpoint);
-  const allSignatures = await connection.getSignaturesForAddress(new PublicKey(signatureAddress));
+  const allSignatures = await connection.getSignaturesForAddress(new PublicKey(depositAddress));
   const filteredSignatures = allSignatures.filter(
     (sig) => sig.slot >= minSlot && sig.slot <= maxSlot,
   );
@@ -69,7 +68,7 @@ export const findSolanaDepositSignature = async (
 
   for (const tx of txs.filter(isNotNullish)) {
     const txAmount = getTransferAmount(tx, depositAddress, tokenAddress);
-    const txAmountRatio = Number(txAmount) / Number(depositAmount);
+    const txAmountRatio = Number(txAmount) / Number(depositAmount.toString());
 
     // witnessed amount can be slightly higher than transaction amount if deposit is witnessed together with spam transactions
     if (txAmountRatio > 0.99) {
