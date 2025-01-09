@@ -891,11 +891,6 @@ describe(HttpClient, () => {
             number_of_chunks: 10,
             chunk_interval: 2,
           },
-          {
-            gas_budget: '0x',
-            message_length: 0,
-          },
-          [],
           [
             {
               LimitOrder: {
