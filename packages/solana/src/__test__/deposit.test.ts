@@ -319,6 +319,7 @@ describe('deposit', () => {
     // https://scan.chainflip.io/events/5561277-2061
     const result = await findSolanaDepositSignature(
       'https://test.solana.com',
+      '8z1bM4fWJwvz6shKBvdfFBtW1mNAvhZ6dw8TJo7ZxP4R',
       null,
       '8z1bM4fWJwvz6shKBvdfFBtW1mNAvhZ6dw8TJo7ZxP4R',
       6000000000n,
@@ -341,6 +342,7 @@ describe('deposit', () => {
     // https://scan.chainflip.io/events/5561277-2061
     const result = await findSolanaDepositSignature(
       'https://user:password@test.solana.com',
+      '8z1bM4fWJwvz6shKBvdfFBtW1mNAvhZ6dw8TJo7ZxP4R',
       null,
       '8z1bM4fWJwvz6shKBvdfFBtW1mNAvhZ6dw8TJo7ZxP4R',
       6000000000n,
@@ -368,6 +370,7 @@ describe('deposit', () => {
     // https://scan.chainflip.io/events/5561277-2061
     const result = await findSolanaDepositSignature(
       'https://test.solana.com',
+      '8z1bM4fWJwvz6shKBvdfFBtW1mNAvhZ6dw8TJo7ZxP4R',
       null,
       '8z1bM4fWJwvz6shKBvdfFBtW1mNAvhZ6dw8TJo7ZxP4R',
       6000001000n,
@@ -395,6 +398,7 @@ describe('deposit', () => {
 
     const result = await findSolanaDepositSignature(
       'https://test.solana.com',
+      '97R4UGhdj7WqXA5AhfQqxM2CGDscJ5meFC8ZJvSoNUBs',
       null,
       '97R4UGhdj7WqXA5AhfQqxM2CGDscJ5meFC8ZJvSoNUBs',
       6000000000n,
@@ -414,6 +418,7 @@ describe('deposit', () => {
 
     const result = await findSolanaDepositSignature(
       'https://test.solana.com',
+      '8z1bM4fWJwvz6shKBvdfFBtW1mNAvhZ6dw8TJo7ZxP4R',
       'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v',
       '8z1bM4fWJwvz6shKBvdfFBtW1mNAvhZ6dw8TJo7ZxP4R',
       6000000000n,
@@ -436,6 +441,7 @@ describe('deposit', () => {
     // https://scan.chainflip.io/events/5557575-2017
     const result = await findSolanaDepositSignature(
       'https://test.solana.com',
+      'EqkWgheG46WRqAR5Tsi3x7PvgHcW1gq8gPaN7JLtXri4',
       'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v',
       'EqkWgheG46WRqAR5Tsi3x7PvgHcW1gq8gPaN7JLtXri4',
       100000000n,
@@ -445,6 +451,37 @@ describe('deposit', () => {
 
     expect(result).toEqual(
       'YvQLEdk8ZP4MQeDk657bXyyj7xtEGtUcPMrdAM5546F9QAaS87WGniitisbUy1E68aiKXvPFXvw3zPdJk1UcWjE',
+    );
+    expect(Connection.prototype.getSignaturesForAddress).toHaveBeenCalledWith(
+      new PublicKey('EqkWgheG46WRqAR5Tsi3x7PvgHcW1gq8gPaN7JLtXri4'),
+    );
+    expect(Connection.prototype.getTransactions).toHaveBeenCalledWith(
+      ['YvQLEdk8ZP4MQeDk657bXyyj7xtEGtUcPMrdAM5546F9QAaS87WGniitisbUy1E68aiKXvPFXvw3zPdJk1UcWjE'],
+      { maxSupportedTransactionVersion: 0 },
+    );
+  });
+
+  it('finds usdc deposit in usdc signatures with different signature address', async () => {
+    vi.mocked(Connection.prototype.getSignaturesForAddress).mockResolvedValue(
+      usdcDepositSignatures,
+    );
+
+    // https://scan.chainflip.io/events/5557575-2017
+    const result = await findSolanaDepositSignature(
+      'https://test.solana.com',
+      '8z1bM4fWJwvz6shKBvdfFBtW1mNAvhZ6dw8TJo7ZxP4R',
+      'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v',
+      'EqkWgheG46WRqAR5Tsi3x7PvgHcW1gq8gPaN7JLtXri4',
+      100000000n,
+      0,
+      305320684,
+    );
+
+    expect(result).toEqual(
+      'YvQLEdk8ZP4MQeDk657bXyyj7xtEGtUcPMrdAM5546F9QAaS87WGniitisbUy1E68aiKXvPFXvw3zPdJk1UcWjE',
+    );
+    expect(Connection.prototype.getSignaturesForAddress).toHaveBeenCalledWith(
+      new PublicKey('8z1bM4fWJwvz6shKBvdfFBtW1mNAvhZ6dw8TJo7ZxP4R'),
     );
     expect(Connection.prototype.getTransactions).toHaveBeenCalledWith(
       ['YvQLEdk8ZP4MQeDk657bXyyj7xtEGtUcPMrdAM5546F9QAaS87WGniitisbUy1E68aiKXvPFXvw3zPdJk1UcWjE'],
@@ -460,6 +497,7 @@ describe('deposit', () => {
     // https://scan.chainflip.io/events/5557575-2017
     const result = await findSolanaDepositSignature(
       'https://test.solana.com',
+      '97R4UGhdj7WqXA5AhfQqxM2CGDscJ5meFC8ZJvSoNUBs',
       'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v',
       '97R4UGhdj7WqXA5AhfQqxM2CGDscJ5meFC8ZJvSoNUBs',
       100000000n,
