@@ -107,6 +107,10 @@ export type RpcRequest = WithHash<{
       number_of_chunks: number;
       chunk_interval: number;
     }>,
+    ccm_data?: Nullish<{
+      gas_budget: HexString;
+      message_length: number;
+    }>,
     exclude_fees?: Nullish<SwapFeeType[]>,
     additionalOrders?: Nullish<AdditionalOrder[]>,
   ];
