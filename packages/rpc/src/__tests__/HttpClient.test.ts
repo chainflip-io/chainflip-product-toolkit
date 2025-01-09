@@ -931,6 +931,63 @@ describe(HttpClient, () => {
       `);
     });
 
+    it('does the swap rate v3 with ccm_data and exclude_fees fields', async () => {
+      expect(
+        await client.sendRequest(
+          'cf_swap_rate_v3',
+          { asset: 'USDT', chain: 'Ethereum' },
+          { asset: 'USDC', chain: 'Ethereum' },
+          '0x10000',
+          10,
+          {
+            number_of_chunks: 10,
+            chunk_interval: 2,
+          },
+          {
+            gas_budget: '0x',
+            message_length: 0,
+          },
+          ['Ingress'],
+          [
+            {
+              LimitOrder: {
+                base_asset: { asset: 'USDT', chain: 'Ethereum' },
+                quote_asset: { asset: 'USDC', chain: 'Ethereum' },
+                side: 'buy',
+                tick: 0,
+                sell_amount: '0x10000',
+              },
+            },
+          ],
+        ),
+      ).toMatchInlineSnapshot(`
+        {
+          "broker_commission": {
+            "amount": 0n,
+            "asset": "USDC",
+            "chain": "Ethereum",
+          },
+          "egress_fee": {
+            "amount": 0n,
+            "asset": "USDC",
+            "chain": "Ethereum",
+          },
+          "ingress_fee": {
+            "amount": 0n,
+            "asset": "USDT",
+            "chain": "Ethereum",
+          },
+          "intermediary": null,
+          "network_fee": {
+            "amount": 66n,
+            "asset": "USDC",
+            "chain": "Ethereum",
+          },
+          "output": 65468n,
+        }
+      `);
+    });
+
     it('gets validator account info', async () => {
       expect(await client.sendRequest('cf_account_info', VALIDATOR_ACCOUNT_ID)).toMatchSnapshot();
     });
