@@ -38,6 +38,8 @@ type AssetSymbol = AssetAndChain['asset'];
 
 type UncheckedAssetAndChain = { asset: AssetSymbol; chain: Chain };
 
+type SwapFeeType = 'Network' | 'Ingress' | 'Egress';
+
 type AdditionalOrder = {
   LimitOrder: {
     base_asset: UncheckedAssetAndChain;
@@ -105,6 +107,7 @@ export type RpcRequest = WithHash<{
       number_of_chunks: number;
       chunk_interval: number;
     }>,
+    exclude_fees?: Nullish<SwapFeeType[]>,
     additionalOrders?: Nullish<AdditionalOrder[]>,
   ];
   cf_boost_pools_depth: [];
