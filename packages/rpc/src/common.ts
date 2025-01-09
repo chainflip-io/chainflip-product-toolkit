@@ -119,11 +119,11 @@ export type RpcRequest = WithHash<{
           number_of_chunks: number;
           chunk_interval: number;
         }>,
-        ccm_data?: Nullish<{
+        ccmData?: Nullish<{
           gas_budget: HexString;
           message_length: number;
         }>,
-        exclude_fees?: Nullish<SwapFeeType[]>,
+        excludeFees?: Nullish<SwapFeeType[]>,
         additionalOrders?: Nullish<AdditionalOrder[]>,
       ];
   cf_boost_pools_depth: [];
