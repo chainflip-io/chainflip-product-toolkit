@@ -1,11 +1,11 @@
 {
   "package": [
-    "bitcoin", 
-    "chainspec", 
-    "extrinsics", 
-    "processor", 
-    "rpc", 
-    "solana", 
+    "bitcoin",
+    "chainspec",
+    "extrinsics",
+    "processor",
+    "rpc",
+    "solana",
     "utils"
   ],
   "include": []
