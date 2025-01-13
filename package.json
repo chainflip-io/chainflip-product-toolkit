@@ -22,7 +22,7 @@
     "esbuild-plugin-file-path-extensions": "^2.1.4",
     "eslint": "^9.17.0",
     "eslint-plugin-import": "^2.31.0",
-    "globals": "^15.13.0",
+    "globals": "^15.14.0",
     "husky": "^9.1.7",
     "lint-staged": "^15.2.11",
     "micromatch": "^4.0.8",
