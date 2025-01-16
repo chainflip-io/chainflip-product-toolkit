@@ -3,12 +3,12 @@ import {
   cfPrimitivesChainsAssetsDotAsset,
   hexString,
   numberOrHex,
-  palletCfIngressEgressDepositIgnoredReason,
+  palletCfPolkadotIngressEgressDepositIgnoredReason,
 } from '../common';
 
 export const polkadotIngressEgressDepositIgnored = z.object({
   depositAddress: hexString,
   asset: cfPrimitivesChainsAssetsDotAsset,
   amount: numberOrHex,
-  reason: palletCfIngressEgressDepositIgnoredReason,
+  reason: palletCfPolkadotIngressEgressDepositIgnoredReason,
 });

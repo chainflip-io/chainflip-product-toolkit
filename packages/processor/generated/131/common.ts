@@ -264,7 +264,7 @@ export const cfChainsCcmDepositMetadata = z.object({
   channelMetadata: cfChainsCcmChannelMetadata,
 });
 
-export const palletCfIngressEgressDepositAction = z.union([
+export const palletCfEthereumIngressEgressDepositAction = z.union([
   z.object({ __kind: z.literal('Swap'), swapId: numberOrHex }),
   z.object({ __kind: z.literal('LiquidityProvision'), lpAccount: accountId }),
   z.object({
@@ -275,7 +275,7 @@ export const palletCfIngressEgressDepositAction = z.union([
   z.object({ __kind: z.literal('NoAction') }),
 ]);
 
-export const palletCfIngressEgressDepositIgnoredReason = simpleEnum([
+export const palletCfEthereumIngressEgressDepositIgnoredReason = simpleEnum([
   'BelowMinimumDeposit',
   'NotEnoughToPayFees',
 ]);
@@ -298,6 +298,22 @@ export const cfChainsAllBatchError = z.union([
 export const cfPrimitivesChainsAssetsBtcAsset = simpleEnum(['Btc']);
 
 export const cfChainsBtcUtxoId = z.object({ txId: hexString, vout: z.number() });
+
+export const palletCfBitcoinIngressEgressDepositAction = z.union([
+  z.object({ __kind: z.literal('Swap'), swapId: numberOrHex }),
+  z.object({ __kind: z.literal('LiquidityProvision'), lpAccount: accountId }),
+  z.object({
+    __kind: z.literal('CcmTransfer'),
+    principalSwapId: numberOrHex.nullish(),
+    gasSwapId: numberOrHex.nullish(),
+  }),
+  z.object({ __kind: z.literal('NoAction') }),
+]);
+
+export const palletCfBitcoinIngressEgressDepositIgnoredReason = simpleEnum([
+  'BelowMinimumDeposit',
+  'NotEnoughToPayFees',
+]);
 
 export const palletCfIngressEgressDepositWitnessBitcoin = z.object({
   depositAddress: cfChainsBtcScriptPubkey,

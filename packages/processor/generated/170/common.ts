@@ -169,7 +169,7 @@ export const cfPrimitivesChainsAssetsEthAsset = simpleEnum(['Eth', 'Flip', 'Usdc
 
 export const cfChainsEvmDepositDetails = z.object({ txHashes: z.array(hexString).nullish() });
 
-export const palletCfIngressEgressDepositIgnoredReason = simpleEnum([
+export const palletCfEthereumIngressEgressDepositIgnoredReason = simpleEnum([
   'BelowMinimumDeposit',
   'NotEnoughToPayFees',
   'TransactionRejectedByBroker',
@@ -264,6 +264,12 @@ export const cfTraitsScheduledEgressDetailsEthereum = z.object({
 
 export const cfPrimitivesChainsAssetsDotAsset = simpleEnum(['Dot']);
 
+export const palletCfPolkadotIngressEgressDepositIgnoredReason = simpleEnum([
+  'BelowMinimumDeposit',
+  'NotEnoughToPayFees',
+  'TransactionRejectedByBroker',
+]);
+
 export const cfPrimitivesTxId = z.object({ blockNumber: z.number(), extrinsicIndex: z.number() });
 
 export const cfTraitsScheduledEgressDetailsPolkadot = z.object({
@@ -305,12 +311,18 @@ export const cfChainsBtcUtxo = z.object({
   depositAddress: cfChainsBtcDepositAddress,
 });
 
-export const palletCfIngressEgressDepositAction = z.union([
+export const palletCfBitcoinIngressEgressDepositAction = z.union([
   z.object({ __kind: z.literal('Swap'), swapRequestId: numberOrHex }),
   z.object({ __kind: z.literal('LiquidityProvision'), lpAccount: accountId }),
   z.object({ __kind: z.literal('CcmTransfer'), swapRequestId: numberOrHex }),
   z.object({ __kind: z.literal('NoAction') }),
   z.object({ __kind: z.literal('BoostersCredited'), prewitnessedDepositId: numberOrHex }),
+]);
+
+export const palletCfBitcoinIngressEgressDepositIgnoredReason = simpleEnum([
+  'BelowMinimumDeposit',
+  'NotEnoughToPayFees',
+  'TransactionRejectedByBroker',
 ]);
 
 export const palletCfIngressEgressDepositWitnessBitcoin = z.object({
@@ -328,6 +340,12 @@ export const cfTraitsScheduledEgressDetailsBitcoin = z.object({
 
 export const cfPrimitivesChainsAssetsArbAsset = simpleEnum(['ArbEth', 'ArbUsdc']);
 
+export const palletCfArbitrumIngressEgressDepositIgnoredReason = simpleEnum([
+  'BelowMinimumDeposit',
+  'NotEnoughToPayFees',
+  'TransactionRejectedByBroker',
+]);
+
 export const cfTraitsScheduledEgressDetailsArbitrum = z.object({
   egressId: z.tuple([cfPrimitivesChainsForeignChain, numberOrHex]),
   egressAmount: numberOrHex,
@@ -337,6 +355,12 @@ export const cfTraitsScheduledEgressDetailsArbitrum = z.object({
 export const cfChainsSolSolanaTransactionData = z.object({ serializedTransaction: hexString });
 
 export const cfPrimitivesChainsAssetsSolAsset = simpleEnum(['Sol', 'SolUsdc']);
+
+export const palletCfSolanaIngressEgressDepositIgnoredReason = simpleEnum([
+  'BelowMinimumDeposit',
+  'NotEnoughToPayFees',
+  'TransactionRejectedByBroker',
+]);
 
 export const cfTraitsScheduledEgressDetailsSolana = z.object({
   egressId: z.tuple([cfPrimitivesChainsForeignChain, numberOrHex]),

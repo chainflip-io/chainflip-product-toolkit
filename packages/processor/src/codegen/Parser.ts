@@ -74,7 +74,8 @@ export default class Parser extends BaseParser {
 
         const result: EnumType = {
           type: 'enum',
-          name: uncapitalize(type.lookupName),
+          // inserts the pallet name to make it distinct, e.g. `CfPalletIngressEgress...` => `CfPalletSolanaIngressEgress...`
+          name: uncapitalize(type.lookupName).replace('IngressEgress', this.getPalletName()),
           values: [],
         };
 

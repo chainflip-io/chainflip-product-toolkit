@@ -5,7 +5,7 @@ import {
   cfChainsDepositOriginType,
   cfPrimitivesChainsAssetsBtcAsset,
   numberOrHex,
-  palletCfIngressEgressDepositAction,
+  palletCfBitcoinIngressEgressDepositAction,
 } from '../common';
 
 export const bitcoinIngressEgressDepositFinalised = z.object({
@@ -16,7 +16,7 @@ export const bitcoinIngressEgressDepositFinalised = z.object({
   depositDetails: cfChainsBtcUtxo,
   ingressFee: numberOrHex,
   maxBoostFeeBps: z.number(),
-  action: palletCfIngressEgressDepositAction,
+  action: palletCfBitcoinIngressEgressDepositAction,
   channelId: numberOrHex.nullish(),
   originType: cfChainsDepositOriginType,
 });

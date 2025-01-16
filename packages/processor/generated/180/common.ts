@@ -134,7 +134,7 @@ export const cfPrimitivesChainsAssetsEthAsset = simpleEnum(['Eth', 'Flip', 'Usdc
 
 export const cfChainsEvmDepositDetails = z.object({ txHashes: z.array(hexString).nullish() });
 
-export const palletCfIngressEgressDepositAction = z.union([
+export const palletCfEthereumIngressEgressDepositAction = z.union([
   z.object({ __kind: z.literal('Swap'), swapRequestId: numberOrHex }),
   z.object({ __kind: z.literal('LiquidityProvision'), lpAccount: accountId }),
   z.object({ __kind: z.literal('CcmTransfer'), swapRequestId: numberOrHex }),
@@ -159,6 +159,7 @@ export const cfChainsCcmCheckerCcmValidityError = simpleEnum([
   'CannotDecodeCcmAdditionalData',
   'CcmIsTooLong',
   'CcmAdditionalDataContainsInvalidAccounts',
+  'RedundantDataSupplied',
 ]);
 
 export const cfChainsSolApiSolanaTransactionBuildingError = z.union([
@@ -218,7 +219,7 @@ export const cfChainsExecutexSwapAndCallError = z.union([
   z.object({ __kind: z.literal('DispatchError'), value: spRuntimeDispatchError }),
 ]);
 
-export const palletCfIngressEgressDepositFailedReason = z.union([
+export const palletCfEthereumIngressEgressDepositFailedReason = z.union([
   z.object({ __kind: z.literal('BelowMinimumDeposit') }),
   z.object({ __kind: z.literal('NotEnoughToPayFees') }),
   z.object({ __kind: z.literal('TransactionRejectedByBroker') }),
@@ -289,7 +290,7 @@ export const palletCfIngressEgressVaultDepositWitness = z.object({
   boostFee: z.number(),
 });
 
-export const palletCfIngressEgressDepositFailedDetails = z.union([
+export const palletCfEthereumIngressEgressDepositFailedDetails = z.union([
   z.object({
     __kind: z.literal('DepositChannel'),
     depositWitness: palletCfIngressEgressDepositWitnessEthereum,
@@ -317,6 +318,46 @@ export const cfChainsAllBatchError = z.union([
 ]);
 
 export const cfPrimitivesChainsAssetsDotAsset = simpleEnum(['Dot']);
+
+export const palletCfPolkadotIngressEgressDepositAction = z.union([
+  z.object({ __kind: z.literal('Swap'), swapRequestId: numberOrHex }),
+  z.object({ __kind: z.literal('LiquidityProvision'), lpAccount: accountId }),
+  z.object({ __kind: z.literal('CcmTransfer'), swapRequestId: numberOrHex }),
+  z.object({
+    __kind: z.literal('BoostersCredited'),
+    prewitnessedDepositId: numberOrHex,
+    networkFeeFromBoost: numberOrHex,
+    networkFeeSwapRequestId: numberOrHex.nullish(),
+  }),
+]);
+
+export const palletCfPolkadotIngressEgressDepositFailedReason = z.union([
+  z.object({ __kind: z.literal('BelowMinimumDeposit') }),
+  z.object({ __kind: z.literal('NotEnoughToPayFees') }),
+  z.object({ __kind: z.literal('TransactionRejectedByBroker') }),
+  z.object({ __kind: z.literal('DepositWitnessRejected'), value: spRuntimeDispatchError }),
+  z.object({ __kind: z.literal('InvalidDestinationAddress') }),
+  z.object({ __kind: z.literal('InvalidBrokerFees') }),
+  z.object({ __kind: z.literal('InvalidRefundParameters') }),
+  z.object({ __kind: z.literal('InvalidDcaParameters') }),
+  z.object({ __kind: z.literal('CcmUnsupportedForTargetChain') }),
+  z.object({ __kind: z.literal('CcmInvalidMetadata') }),
+]);
+
+export const palletCfIngressEgressDepositWitnessPolkadot = z.object({
+  depositAddress: hexString,
+  asset: cfPrimitivesChainsAssetsDotAsset,
+  amount: numberOrHex,
+  depositDetails: z.number(),
+});
+
+export const palletCfPolkadotIngressEgressDepositFailedDetails = z.union([
+  z.object({
+    __kind: z.literal('DepositChannel'),
+    depositWitness: palletCfIngressEgressDepositWitnessPolkadot,
+  }),
+  z.object({ __kind: z.literal('Vault'), vaultWitness: palletCfIngressEgressVaultDepositWitness }),
+]);
 
 export const cfTraitsScheduledEgressDetailsPolkadot = z.object({
   egressId: z.tuple([cfPrimitivesChainsForeignChain, numberOrHex]),
@@ -348,6 +389,46 @@ export const cfChainsBtcUtxo = z.object({
   depositAddress: cfChainsBtcDepositAddress,
 });
 
+export const palletCfBitcoinIngressEgressDepositAction = z.union([
+  z.object({ __kind: z.literal('Swap'), swapRequestId: numberOrHex }),
+  z.object({ __kind: z.literal('LiquidityProvision'), lpAccount: accountId }),
+  z.object({ __kind: z.literal('CcmTransfer'), swapRequestId: numberOrHex }),
+  z.object({
+    __kind: z.literal('BoostersCredited'),
+    prewitnessedDepositId: numberOrHex,
+    networkFeeFromBoost: numberOrHex,
+    networkFeeSwapRequestId: numberOrHex.nullish(),
+  }),
+]);
+
+export const palletCfBitcoinIngressEgressDepositFailedReason = z.union([
+  z.object({ __kind: z.literal('BelowMinimumDeposit') }),
+  z.object({ __kind: z.literal('NotEnoughToPayFees') }),
+  z.object({ __kind: z.literal('TransactionRejectedByBroker') }),
+  z.object({ __kind: z.literal('DepositWitnessRejected'), value: spRuntimeDispatchError }),
+  z.object({ __kind: z.literal('InvalidDestinationAddress') }),
+  z.object({ __kind: z.literal('InvalidBrokerFees') }),
+  z.object({ __kind: z.literal('InvalidRefundParameters') }),
+  z.object({ __kind: z.literal('InvalidDcaParameters') }),
+  z.object({ __kind: z.literal('CcmUnsupportedForTargetChain') }),
+  z.object({ __kind: z.literal('CcmInvalidMetadata') }),
+]);
+
+export const palletCfIngressEgressDepositWitnessBitcoin = z.object({
+  depositAddress: cfChainsBtcScriptPubkey,
+  asset: cfPrimitivesChainsAssetsBtcAsset,
+  amount: numberOrHex,
+  depositDetails: cfChainsBtcUtxo,
+});
+
+export const palletCfBitcoinIngressEgressDepositFailedDetails = z.union([
+  z.object({
+    __kind: z.literal('DepositChannel'),
+    depositWitness: palletCfIngressEgressDepositWitnessBitcoin,
+  }),
+  z.object({ __kind: z.literal('Vault'), vaultWitness: palletCfIngressEgressVaultDepositWitness }),
+]);
+
 export const cfTraitsScheduledEgressDetailsBitcoin = z.object({
   egressId: z.tuple([cfPrimitivesChainsForeignChain, numberOrHex]),
   egressAmount: numberOrHex,
@@ -366,6 +447,46 @@ export const cfChainsChainStateArbitrum = z.object({
 
 export const cfPrimitivesChainsAssetsArbAsset = simpleEnum(['ArbEth', 'ArbUsdc']);
 
+export const palletCfArbitrumIngressEgressDepositAction = z.union([
+  z.object({ __kind: z.literal('Swap'), swapRequestId: numberOrHex }),
+  z.object({ __kind: z.literal('LiquidityProvision'), lpAccount: accountId }),
+  z.object({ __kind: z.literal('CcmTransfer'), swapRequestId: numberOrHex }),
+  z.object({
+    __kind: z.literal('BoostersCredited'),
+    prewitnessedDepositId: numberOrHex,
+    networkFeeFromBoost: numberOrHex,
+    networkFeeSwapRequestId: numberOrHex.nullish(),
+  }),
+]);
+
+export const palletCfArbitrumIngressEgressDepositFailedReason = z.union([
+  z.object({ __kind: z.literal('BelowMinimumDeposit') }),
+  z.object({ __kind: z.literal('NotEnoughToPayFees') }),
+  z.object({ __kind: z.literal('TransactionRejectedByBroker') }),
+  z.object({ __kind: z.literal('DepositWitnessRejected'), value: spRuntimeDispatchError }),
+  z.object({ __kind: z.literal('InvalidDestinationAddress') }),
+  z.object({ __kind: z.literal('InvalidBrokerFees') }),
+  z.object({ __kind: z.literal('InvalidRefundParameters') }),
+  z.object({ __kind: z.literal('InvalidDcaParameters') }),
+  z.object({ __kind: z.literal('CcmUnsupportedForTargetChain') }),
+  z.object({ __kind: z.literal('CcmInvalidMetadata') }),
+]);
+
+export const palletCfIngressEgressDepositWitnessArbitrum = z.object({
+  depositAddress: hexString,
+  asset: cfPrimitivesChainsAssetsArbAsset,
+  amount: numberOrHex,
+  depositDetails: cfChainsEvmDepositDetails,
+});
+
+export const palletCfArbitrumIngressEgressDepositFailedDetails = z.union([
+  z.object({
+    __kind: z.literal('DepositChannel'),
+    depositWitness: palletCfIngressEgressDepositWitnessArbitrum,
+  }),
+  z.object({ __kind: z.literal('Vault'), vaultWitness: palletCfIngressEgressVaultDepositWitness }),
+]);
+
 export const cfTraitsScheduledEgressDetailsArbitrum = z.object({
   egressId: z.tuple([cfPrimitivesChainsForeignChain, numberOrHex]),
   egressAmount: numberOrHex,
@@ -378,6 +499,45 @@ export const cfChainsSolSolanaTransactionData = z.object({
 });
 
 export const cfPrimitivesChainsAssetsSolAsset = simpleEnum(['Sol', 'SolUsdc']);
+
+export const palletCfSolanaIngressEgressDepositAction = z.union([
+  z.object({ __kind: z.literal('Swap'), swapRequestId: numberOrHex }),
+  z.object({ __kind: z.literal('LiquidityProvision'), lpAccount: accountId }),
+  z.object({ __kind: z.literal('CcmTransfer'), swapRequestId: numberOrHex }),
+  z.object({
+    __kind: z.literal('BoostersCredited'),
+    prewitnessedDepositId: numberOrHex,
+    networkFeeFromBoost: numberOrHex,
+    networkFeeSwapRequestId: numberOrHex.nullish(),
+  }),
+]);
+
+export const palletCfSolanaIngressEgressDepositFailedReason = z.union([
+  z.object({ __kind: z.literal('BelowMinimumDeposit') }),
+  z.object({ __kind: z.literal('NotEnoughToPayFees') }),
+  z.object({ __kind: z.literal('TransactionRejectedByBroker') }),
+  z.object({ __kind: z.literal('DepositWitnessRejected'), value: spRuntimeDispatchError }),
+  z.object({ __kind: z.literal('InvalidDestinationAddress') }),
+  z.object({ __kind: z.literal('InvalidBrokerFees') }),
+  z.object({ __kind: z.literal('InvalidRefundParameters') }),
+  z.object({ __kind: z.literal('InvalidDcaParameters') }),
+  z.object({ __kind: z.literal('CcmUnsupportedForTargetChain') }),
+  z.object({ __kind: z.literal('CcmInvalidMetadata') }),
+]);
+
+export const palletCfIngressEgressDepositWitnessSolana = z.object({
+  depositAddress: hexString,
+  asset: cfPrimitivesChainsAssetsSolAsset,
+  amount: numberOrHex,
+});
+
+export const palletCfSolanaIngressEgressDepositFailedDetails = z.union([
+  z.object({
+    __kind: z.literal('DepositChannel'),
+    depositWitness: palletCfIngressEgressDepositWitnessSolana,
+  }),
+  z.object({ __kind: z.literal('Vault'), vaultWitness: palletCfIngressEgressVaultDepositWitness }),
+]);
 
 export const cfTraitsScheduledEgressDetailsSolana = z.object({
   egressId: z.tuple([cfPrimitivesChainsForeignChain, numberOrHex]),

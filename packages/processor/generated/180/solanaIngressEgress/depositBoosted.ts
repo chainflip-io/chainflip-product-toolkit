@@ -4,7 +4,7 @@ import {
   cfPrimitivesChainsAssetsSolAsset,
   hexString,
   numberOrHex,
-  palletCfIngressEgressDepositAction,
+  palletCfSolanaIngressEgressDepositAction,
 } from '../common';
 
 export const solanaIngressEgressDepositBoosted = z.object({
@@ -17,6 +17,6 @@ export const solanaIngressEgressDepositBoosted = z.object({
   ingressFee: numberOrHex,
   maxBoostFeeBps: z.number(),
   boostFee: numberOrHex,
-  action: palletCfIngressEgressDepositAction,
+  action: palletCfSolanaIngressEgressDepositAction,
   originType: cfChainsDepositOriginType,
 });

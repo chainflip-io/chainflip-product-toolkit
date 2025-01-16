@@ -4,7 +4,7 @@ ArbitrumChainTracking:
 
 ArbitrumIngressEgress:
   - CcmEgressInvalid:
-    - error: changed
+    - error: added
   - CcmFailed: removed
   - CcmFallbackScheduled: removed
   - DepositBoosted:
@@ -23,7 +23,7 @@ ArbitrumIngressEgress:
   - DepositIgnored: removed
   - DepositWitnessRejected: removed
   - FailedToBuildAllBatchCall:
-    - error: changed
+    - error: added
   - InsufficientBoostLiquidity:
     - originType: added
     - channelId: added
@@ -35,7 +35,7 @@ ArbitrumIngressEgress:
 
 BitcoinIngressEgress:
   - CcmEgressInvalid:
-    - error: changed
+    - error: added
   - CcmFailed: removed
   - CcmFallbackScheduled: removed
   - DepositBoosted:
@@ -54,7 +54,7 @@ BitcoinIngressEgress:
   - DepositIgnored: removed
   - DepositWitnessRejected: removed
   - FailedToBuildAllBatchCall:
-    - error: changed
+    - error: added
   - InsufficientBoostLiquidity:
     - originType: added
     - channelId: added
@@ -66,7 +66,7 @@ BitcoinIngressEgress:
 
 EthereumIngressEgress:
   - CcmEgressInvalid:
-    - error: changed
+    - error: added
   - CcmFailed: removed
   - CcmFallbackScheduled: removed
   - DepositBoosted:
@@ -85,7 +85,7 @@ EthereumIngressEgress:
   - DepositIgnored: removed
   - DepositWitnessRejected: removed
   - FailedToBuildAllBatchCall:
-    - error: changed
+    - error: added
   - InsufficientBoostLiquidity:
     - originType: added
     - channelId: added
@@ -97,7 +97,7 @@ EthereumIngressEgress:
 
 PolkadotIngressEgress:
   - CcmEgressInvalid:
-    - error: changed
+    - error: added
   - CcmFailed: removed
   - CcmFallbackScheduled: removed
   - DepositBoosted:
@@ -116,7 +116,7 @@ PolkadotIngressEgress:
   - DepositIgnored: removed
   - DepositWitnessRejected: removed
   - FailedToBuildAllBatchCall:
-    - error: changed
+    - error: added
   - InsufficientBoostLiquidity:
     - originType: added
     - channelId: added
@@ -132,7 +132,7 @@ SolanaBroadcaster:
 
 SolanaIngressEgress:
   - CcmEgressInvalid:
-    - error: changed
+    - error: added
   - CcmFailed: removed
   - CcmFallbackScheduled: removed
   - DepositBoosted:
@@ -151,7 +151,7 @@ SolanaIngressEgress:
   - DepositIgnored: removed
   - DepositWitnessRejected: removed
   - FailedToBuildAllBatchCall:
-    - error: changed
+    - error: added
   - InsufficientBoostLiquidity:
     - originType: added
     - channelId: added
