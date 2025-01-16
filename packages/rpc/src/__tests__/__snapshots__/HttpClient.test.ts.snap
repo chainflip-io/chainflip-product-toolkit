@@ -2,6 +2,7 @@
 
 exports[`HttpClient > with server > gets broker account info 1`] = `
 {
+  "btc_vault_deposit_address": "tb1pqyqszqgpqyqszqgpqyqszqgpqyqszqgpqyqszqgpqyqszqgpqyqsn60vlk",
   "earned_fees": {
     "Arbitrum": {
       "ETH": 0n,
