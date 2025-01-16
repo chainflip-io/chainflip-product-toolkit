@@ -475,6 +475,7 @@ const brokerAccount: z.input<typeof broker> = {
     //   SOL: 0,
     // },
   },
+  btc_vault_deposit_address: 'tb1pqyqszqgpqyqszqgpqyqszqgpqyqszqgpqyqszqgpqyqszqgpqyqsn60vlk',
 };
 
 const validatorAccount: z.input<typeof validator> = {

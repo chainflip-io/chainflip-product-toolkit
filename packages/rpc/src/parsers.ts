@@ -224,6 +224,7 @@ export const broker = z.object({
   role: z.literal('broker'),
   flip_balance: numberOrHex,
   earned_fees: chainAssetMapFactory(numberOrHex, 0),
+  btc_vault_deposit_address: z.string().nullable(),
 });
 
 const boostBalances = z.array(
