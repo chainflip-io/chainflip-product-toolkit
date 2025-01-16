@@ -11936,7 +11936,7 @@
         },
         "action": {
           "type": "enum",
-          "name": "palletCfIngressEgressDepositAction",
+          "name": "palletCfEthereumIngressEgressDepositAction",
           "values": [
             {
               "name": "Swap",
@@ -12308,6 +12308,13 @@
                         },
                         {
                           "name": "CcmAdditionalDataContainsInvalidAccounts",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "RedundantDataSupplied",
                           "value": {
                             "type": "primitive",
                             "name": "null"
@@ -12742,7 +12749,7 @@
         },
         "reason": {
           "type": "enum",
-          "name": "palletCfIngressEgressDepositFailedReason",
+          "name": "palletCfEthereumIngressEgressDepositFailedReason",
           "values": [
             {
               "name": "BelowMinimumDeposit",
@@ -13043,7 +13050,7 @@
         },
         "details": {
           "type": "enum",
-          "name": "palletCfIngressEgressDepositFailedDetails",
+          "name": "palletCfEthereumIngressEgressDepositFailedDetails",
           "values": [
             {
               "name": "DepositChannel",
@@ -14049,6 +14056,13 @@
                             "type": "primitive",
                             "name": "null"
                           }
+                        },
+                        {
+                          "name": "RedundantDataSupplied",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
                         }
                       ]
                     }
@@ -14424,7 +14438,7 @@
         },
         "action": {
           "type": "enum",
-          "name": "palletCfIngressEgressDepositAction",
+          "name": "palletCfEthereumIngressEgressDepositAction",
           "values": [
             {
               "name": "Swap",
@@ -14924,7 +14938,7 @@
         },
         "action": {
           "type": "enum",
-          "name": "palletCfIngressEgressDepositAction",
+          "name": "palletCfPolkadotIngressEgressDepositAction",
           "values": [
             {
               "name": "Swap",
@@ -15275,6 +15289,13 @@
                         },
                         {
                           "name": "CcmAdditionalDataContainsInvalidAccounts",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "RedundantDataSupplied",
                           "value": {
                             "type": "primitive",
                             "name": "null"
@@ -15667,7 +15688,7 @@
         },
         "reason": {
           "type": "enum",
-          "name": "palletCfIngressEgressDepositFailedReason",
+          "name": "palletCfPolkadotIngressEgressDepositFailedReason",
           "values": [
             {
               "name": "BelowMinimumDeposit",
@@ -15968,7 +15989,7 @@
         },
         "details": {
           "type": "enum",
-          "name": "palletCfIngressEgressDepositFailedDetails",
+          "name": "palletCfPolkadotIngressEgressDepositFailedDetails",
           "values": [
             {
               "name": "DepositChannel",
@@ -16909,6 +16930,13 @@
                             "type": "primitive",
                             "name": "null"
                           }
+                        },
+                        {
+                          "name": "RedundantDataSupplied",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
                         }
                       ]
                     }
@@ -17255,7 +17283,7 @@
         },
         "action": {
           "type": "enum",
-          "name": "palletCfIngressEgressDepositAction",
+          "name": "palletCfPolkadotIngressEgressDepositAction",
           "values": [
             {
               "name": "Swap",
@@ -17809,7 +17837,7 @@
         },
         "action": {
           "type": "enum",
-          "name": "palletCfIngressEgressDepositAction",
+          "name": "palletCfBitcoinIngressEgressDepositAction",
           "values": [
             {
               "name": "Swap",
@@ -18160,6 +18188,13 @@
                         },
                         {
                           "name": "CcmAdditionalDataContainsInvalidAccounts",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "RedundantDataSupplied",
                           "value": {
                             "type": "primitive",
                             "name": "null"
@@ -18552,7 +18587,7 @@
         },
         "reason": {
           "type": "enum",
-          "name": "palletCfIngressEgressDepositFailedReason",
+          "name": "palletCfBitcoinIngressEgressDepositFailedReason",
           "values": [
             {
               "name": "BelowMinimumDeposit",
@@ -18853,7 +18888,7 @@
         },
         "details": {
           "type": "enum",
-          "name": "palletCfIngressEgressDepositFailedDetails",
+          "name": "palletCfBitcoinIngressEgressDepositFailedDetails",
           "values": [
             {
               "name": "DepositChannel",
@@ -20137,6 +20172,13 @@
                             "type": "primitive",
                             "name": "null"
                           }
+                        },
+                        {
+                          "name": "RedundantDataSupplied",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
                         }
                       ]
                     }
@@ -20625,7 +20667,7 @@
         },
         "action": {
           "type": "enum",
-          "name": "palletCfIngressEgressDepositAction",
+          "name": "palletCfBitcoinIngressEgressDepositAction",
           "values": [
             {
               "name": "Swap",
@@ -23692,7 +23734,7 @@
         },
         "action": {
           "type": "enum",
-          "name": "palletCfIngressEgressDepositAction",
+          "name": "palletCfArbitrumIngressEgressDepositAction",
           "values": [
             {
               "name": "Swap",
@@ -24050,6 +24092,13 @@
                         },
                         {
                           "name": "CcmAdditionalDataContainsInvalidAccounts",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "RedundantDataSupplied",
                           "value": {
                             "type": "primitive",
                             "name": "null"
@@ -24456,7 +24505,7 @@
         },
         "reason": {
           "type": "enum",
-          "name": "palletCfIngressEgressDepositFailedReason",
+          "name": "palletCfArbitrumIngressEgressDepositFailedReason",
           "values": [
             {
               "name": "BelowMinimumDeposit",
@@ -24757,7 +24806,7 @@
         },
         "details": {
           "type": "enum",
-          "name": "palletCfIngressEgressDepositFailedDetails",
+          "name": "palletCfArbitrumIngressEgressDepositFailedDetails",
           "values": [
             {
               "name": "DepositChannel",
@@ -25721,6 +25770,13 @@
                             "type": "primitive",
                             "name": "null"
                           }
+                        },
+                        {
+                          "name": "RedundantDataSupplied",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
                         }
                       ]
                     }
@@ -26082,7 +26138,7 @@
         },
         "action": {
           "type": "enum",
-          "name": "palletCfIngressEgressDepositAction",
+          "name": "palletCfArbitrumIngressEgressDepositAction",
           "values": [
             {
               "name": "Swap",
@@ -27648,7 +27704,7 @@
         },
         "action": {
           "type": "enum",
-          "name": "palletCfIngressEgressDepositAction",
+          "name": "palletCfSolanaIngressEgressDepositAction",
           "values": [
             {
               "name": "Swap",
@@ -28006,6 +28062,13 @@
                         },
                         {
                           "name": "CcmAdditionalDataContainsInvalidAccounts",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "RedundantDataSupplied",
                           "value": {
                             "type": "primitive",
                             "name": "null"
@@ -28412,7 +28475,7 @@
         },
         "reason": {
           "type": "enum",
-          "name": "palletCfIngressEgressDepositFailedReason",
+          "name": "palletCfSolanaIngressEgressDepositFailedReason",
           "values": [
             {
               "name": "BelowMinimumDeposit",
@@ -28713,7 +28776,7 @@
         },
         "details": {
           "type": "enum",
-          "name": "palletCfIngressEgressDepositFailedDetails",
+          "name": "palletCfSolanaIngressEgressDepositFailedDetails",
           "values": [
             {
               "name": "DepositChannel",
@@ -29678,6 +29741,13 @@
                             "type": "primitive",
                             "name": "null"
                           }
+                        },
+                        {
+                          "name": "RedundantDataSupplied",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
                         }
                       ]
                     }
@@ -30031,7 +30101,7 @@
         },
         "action": {
           "type": "enum",
-          "name": "palletCfIngressEgressDepositAction",
+          "name": "palletCfSolanaIngressEgressDepositAction",
           "values": [
             {
               "name": "Swap",

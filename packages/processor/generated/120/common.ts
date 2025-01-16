@@ -148,7 +148,7 @@ export const cfChainsCcmDepositMetadata = z.object({
 
 export const cfPrimitivesChainsAssetsEthAsset = simpleEnum(['Eth', 'Flip', 'Usdc']);
 
-export const palletCfIngressEgressDepositAction = z.union([
+export const palletCfEthereumIngressEgressDepositAction = z.union([
   z.object({ __kind: z.literal('Swap'), swapId: numberOrHex }),
   z.object({ __kind: z.literal('LiquidityProvision'), lpAccount: accountId }),
   z.object({
@@ -159,13 +159,45 @@ export const palletCfIngressEgressDepositAction = z.union([
   z.object({ __kind: z.literal('NoAction') }),
 ]);
 
-export const palletCfIngressEgressDepositIgnoredReason = simpleEnum([
+export const palletCfEthereumIngressEgressDepositIgnoredReason = simpleEnum([
   'BelowMinimumDeposit',
   'NotEnoughToPayFees',
 ]);
 
 export const cfPrimitivesChainsAssetsDotAsset = simpleEnum(['Dot']);
 
+export const palletCfPolkadotIngressEgressDepositAction = z.union([
+  z.object({ __kind: z.literal('Swap'), swapId: numberOrHex }),
+  z.object({ __kind: z.literal('LiquidityProvision'), lpAccount: accountId }),
+  z.object({
+    __kind: z.literal('CcmTransfer'),
+    principalSwapId: numberOrHex.nullish(),
+    gasSwapId: numberOrHex.nullish(),
+  }),
+  z.object({ __kind: z.literal('NoAction') }),
+]);
+
+export const palletCfPolkadotIngressEgressDepositIgnoredReason = simpleEnum([
+  'BelowMinimumDeposit',
+  'NotEnoughToPayFees',
+]);
+
 export const cfPrimitivesChainsAssetsBtcAsset = simpleEnum(['Btc']);
 
 export const cfChainsBtcUtxoId = z.object({ txId: hexString, vout: z.number() });
+
+export const palletCfBitcoinIngressEgressDepositAction = z.union([
+  z.object({ __kind: z.literal('Swap'), swapId: numberOrHex }),
+  z.object({ __kind: z.literal('LiquidityProvision'), lpAccount: accountId }),
+  z.object({
+    __kind: z.literal('CcmTransfer'),
+    principalSwapId: numberOrHex.nullish(),
+    gasSwapId: numberOrHex.nullish(),
+  }),
+  z.object({ __kind: z.literal('NoAction') }),
+]);
+
+export const palletCfBitcoinIngressEgressDepositIgnoredReason = simpleEnum([
+  'BelowMinimumDeposit',
+  'NotEnoughToPayFees',
+]);

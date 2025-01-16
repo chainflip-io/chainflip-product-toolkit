@@ -4,7 +4,7 @@ import {
   cfPrimitivesChainsAssetsDotAsset,
   hexString,
   numberOrHex,
-  palletCfIngressEgressDepositAction,
+  palletCfPolkadotIngressEgressDepositAction,
 } from '../common';
 
 export const polkadotIngressEgressDepositFinalised = z.object({
@@ -15,7 +15,7 @@ export const polkadotIngressEgressDepositFinalised = z.object({
   depositDetails: z.number(),
   ingressFee: numberOrHex,
   maxBoostFeeBps: z.number(),
-  action: palletCfIngressEgressDepositAction,
+  action: palletCfPolkadotIngressEgressDepositAction,
   channelId: numberOrHex.nullish(),
   originType: cfChainsDepositOriginType,
 });

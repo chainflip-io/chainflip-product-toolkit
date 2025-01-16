@@ -74,7 +74,7 @@ export default class Parser extends BaseParser {
 
         const result: EnumType = {
           type: 'enum',
-          name: uncapitalize(type.lookupName),
+          name: uncapitalize(type.lookupName).replace('IngressEgress', this.getPalletName()),
           values: [],
         };
 

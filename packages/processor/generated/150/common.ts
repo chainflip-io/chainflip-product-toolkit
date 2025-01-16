@@ -292,7 +292,7 @@ export const cfPrimitivesChainsAssetsEthAsset = simpleEnum(['Eth', 'Flip', 'Usdc
 
 export const cfChainsEvmDepositDetails = z.object({ txHashes: z.array(hexString).nullish() });
 
-export const palletCfIngressEgressDepositAction = z.union([
+export const palletCfEthereumIngressEgressDepositAction = z.union([
   z.object({ __kind: z.literal('Swap'), swapId: numberOrHex }),
   z.object({ __kind: z.literal('LiquidityProvision'), lpAccount: accountId }),
   z.object({
@@ -304,7 +304,7 @@ export const palletCfIngressEgressDepositAction = z.union([
   z.object({ __kind: z.literal('BoostersCredited'), prewitnessedDepositId: numberOrHex }),
 ]);
 
-export const palletCfIngressEgressDepositIgnoredReason = simpleEnum([
+export const palletCfEthereumIngressEgressDepositIgnoredReason = simpleEnum([
   'BelowMinimumDeposit',
   'NotEnoughToPayFees',
 ]);
@@ -318,6 +318,23 @@ export const palletCfIngressEgressDepositWitnessEthereum = z.object({
 
 export const cfPrimitivesChainsAssetsDotAsset = simpleEnum(['Dot']);
 
+export const palletCfPolkadotIngressEgressDepositAction = z.union([
+  z.object({ __kind: z.literal('Swap'), swapId: numberOrHex }),
+  z.object({ __kind: z.literal('LiquidityProvision'), lpAccount: accountId }),
+  z.object({
+    __kind: z.literal('CcmTransfer'),
+    principalSwapId: numberOrHex.nullish(),
+    gasSwapId: numberOrHex.nullish(),
+  }),
+  z.object({ __kind: z.literal('NoAction') }),
+  z.object({ __kind: z.literal('BoostersCredited'), prewitnessedDepositId: numberOrHex }),
+]);
+
+export const palletCfPolkadotIngressEgressDepositIgnoredReason = simpleEnum([
+  'BelowMinimumDeposit',
+  'NotEnoughToPayFees',
+]);
+
 export const palletCfIngressEgressDepositWitnessPolkadot = z.object({
   depositAddress: hexString,
   asset: cfPrimitivesChainsAssetsDotAsset,
@@ -328,6 +345,18 @@ export const palletCfIngressEgressDepositWitnessPolkadot = z.object({
 export const cfPrimitivesChainsAssetsBtcAsset = simpleEnum(['Btc']);
 
 export const cfChainsBtcUtxoId = z.object({ txId: hexString, vout: z.number() });
+
+export const palletCfBitcoinIngressEgressDepositAction = z.union([
+  z.object({ __kind: z.literal('Swap'), swapId: numberOrHex }),
+  z.object({ __kind: z.literal('LiquidityProvision'), lpAccount: accountId }),
+  z.object({
+    __kind: z.literal('CcmTransfer'),
+    principalSwapId: numberOrHex.nullish(),
+    gasSwapId: numberOrHex.nullish(),
+  }),
+  z.object({ __kind: z.literal('NoAction') }),
+  z.object({ __kind: z.literal('BoostersCredited'), prewitnessedDepositId: numberOrHex }),
+]);
 
 export const cfAmmCommonPoolPairsMap = z.object({ base: numberOrHex, quote: numberOrHex });
 
@@ -352,6 +381,23 @@ export const palletCfPoolsAssetPair = z.object({ assets: cfAmmCommonPoolPairsMap
 
 export const cfPrimitivesChainsAssetsArbAsset = simpleEnum(['ArbEth', 'ArbUsdc']);
 
+export const palletCfArbitrumIngressEgressDepositAction = z.union([
+  z.object({ __kind: z.literal('Swap'), swapId: numberOrHex }),
+  z.object({ __kind: z.literal('LiquidityProvision'), lpAccount: accountId }),
+  z.object({
+    __kind: z.literal('CcmTransfer'),
+    principalSwapId: numberOrHex.nullish(),
+    gasSwapId: numberOrHex.nullish(),
+  }),
+  z.object({ __kind: z.literal('NoAction') }),
+  z.object({ __kind: z.literal('BoostersCredited'), prewitnessedDepositId: numberOrHex }),
+]);
+
+export const palletCfArbitrumIngressEgressDepositIgnoredReason = simpleEnum([
+  'BelowMinimumDeposit',
+  'NotEnoughToPayFees',
+]);
+
 export const palletCfIngressEgressDepositWitnessArbitrum = z.object({
   depositAddress: hexString,
   asset: cfPrimitivesChainsAssetsArbAsset,
@@ -372,6 +418,23 @@ export const dispatchResult = z.union([
 ]);
 
 export const cfPrimitivesChainsAssetsSolAsset = simpleEnum(['Sol']);
+
+export const palletCfSolanaIngressEgressDepositAction = z.union([
+  z.object({ __kind: z.literal('Swap'), swapId: numberOrHex }),
+  z.object({ __kind: z.literal('LiquidityProvision'), lpAccount: accountId }),
+  z.object({
+    __kind: z.literal('CcmTransfer'),
+    principalSwapId: numberOrHex.nullish(),
+    gasSwapId: numberOrHex.nullish(),
+  }),
+  z.object({ __kind: z.literal('NoAction') }),
+  z.object({ __kind: z.literal('BoostersCredited'), prewitnessedDepositId: numberOrHex }),
+]);
+
+export const palletCfSolanaIngressEgressDepositIgnoredReason = simpleEnum([
+  'BelowMinimumDeposit',
+  'NotEnoughToPayFees',
+]);
 
 export const palletCfIngressEgressDepositWitnessSolana = z.object({
   depositAddress: hexString,

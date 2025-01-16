@@ -4,7 +4,7 @@ import {
   cfPrimitivesChainsAssetsDotAsset,
   hexString,
   numberOrHex,
-  palletCfIngressEgressDepositAction,
+  palletCfPolkadotIngressEgressDepositAction,
 } from '../common';
 
 export const polkadotIngressEgressDepositBoosted = z.object({
@@ -18,6 +18,6 @@ export const polkadotIngressEgressDepositBoosted = z.object({
   ingressFee: numberOrHex,
   maxBoostFeeBps: z.number(),
   boostFee: numberOrHex,
-  action: palletCfIngressEgressDepositAction,
+  action: palletCfPolkadotIngressEgressDepositAction,
   originType: cfChainsDepositOriginType,
 });

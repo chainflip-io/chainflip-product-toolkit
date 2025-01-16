@@ -4,7 +4,7 @@ import {
   cfPrimitivesChainsAssetsArbAsset,
   hexString,
   numberOrHex,
-  palletCfIngressEgressDepositIgnoredReason,
+  palletCfArbitrumIngressEgressDepositIgnoredReason,
 } from '../common';
 
 export const arbitrumIngressEgressDepositIgnored = z.object({
@@ -12,5 +12,5 @@ export const arbitrumIngressEgressDepositIgnored = z.object({
   asset: cfPrimitivesChainsAssetsArbAsset,
   amount: numberOrHex,
   depositDetails: cfChainsEvmDepositDetails,
-  reason: palletCfIngressEgressDepositIgnoredReason,
+  reason: palletCfArbitrumIngressEgressDepositIgnoredReason,
 });

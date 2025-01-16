@@ -4,7 +4,7 @@ import {
   cfPrimitivesChainsAssetsEthAsset,
   hexString,
   numberOrHex,
-  palletCfIngressEgressDepositAction,
+  palletCfEthereumIngressEgressDepositAction,
 } from '../common';
 
 export const ethereumIngressEgressDepositBoosted = z.object({
@@ -17,5 +17,5 @@ export const ethereumIngressEgressDepositBoosted = z.object({
   blockHeight: numberOrHex,
   ingressFee: numberOrHex,
   boostFee: numberOrHex,
-  action: palletCfIngressEgressDepositAction,
+  action: palletCfEthereumIngressEgressDepositAction,
 });

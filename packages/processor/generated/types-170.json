@@ -11794,7 +11794,7 @@
         },
         "action": {
           "type": "enum",
-          "name": "palletCfIngressEgressDepositAction",
+          "name": "palletCfEthereumIngressEgressDepositAction",
           "values": [
             {
               "name": "Swap",
@@ -12627,7 +12627,7 @@
         },
         "reason": {
           "type": "enum",
-          "name": "palletCfIngressEgressDepositIgnoredReason",
+          "name": "palletCfEthereumIngressEgressDepositIgnoredReason",
           "values": [
             {
               "name": "BelowMinimumDeposit",
@@ -13554,7 +13554,7 @@
         },
         "action": {
           "type": "enum",
-          "name": "palletCfIngressEgressDepositAction",
+          "name": "palletCfEthereumIngressEgressDepositAction",
           "values": [
             {
               "name": "Swap",
@@ -14379,7 +14379,7 @@
         },
         "action": {
           "type": "enum",
-          "name": "palletCfIngressEgressDepositAction",
+          "name": "palletCfPolkadotIngressEgressDepositAction",
           "values": [
             {
               "name": "Swap",
@@ -15120,7 +15120,7 @@
         },
         "reason": {
           "type": "enum",
-          "name": "palletCfIngressEgressDepositIgnoredReason",
+          "name": "palletCfPolkadotIngressEgressDepositIgnoredReason",
           "values": [
             {
               "name": "BelowMinimumDeposit",
@@ -15972,7 +15972,7 @@
         },
         "action": {
           "type": "enum",
-          "name": "palletCfIngressEgressDepositAction",
+          "name": "palletCfPolkadotIngressEgressDepositAction",
           "values": [
             {
               "name": "Swap",
@@ -16851,7 +16851,7 @@
         },
         "action": {
           "type": "enum",
-          "name": "palletCfIngressEgressDepositAction",
+          "name": "palletCfBitcoinIngressEgressDepositAction",
           "values": [
             {
               "name": "Swap",
@@ -17734,7 +17734,7 @@
         },
         "reason": {
           "type": "enum",
-          "name": "palletCfIngressEgressDepositIgnoredReason",
+          "name": "palletCfBitcoinIngressEgressDepositIgnoredReason",
           "values": [
             {
               "name": "BelowMinimumDeposit",
@@ -18939,7 +18939,7 @@
         },
         "action": {
           "type": "enum",
-          "name": "palletCfIngressEgressDepositAction",
+          "name": "palletCfBitcoinIngressEgressDepositAction",
           "values": [
             {
               "name": "Swap",
@@ -22331,7 +22331,7 @@
         },
         "action": {
           "type": "enum",
-          "name": "palletCfIngressEgressDepositAction",
+          "name": "palletCfArbitrumIngressEgressDepositAction",
           "values": [
             {
               "name": "Swap",
@@ -23108,7 +23108,7 @@
         },
         "reason": {
           "type": "enum",
-          "name": "palletCfIngressEgressDepositIgnoredReason",
+          "name": "palletCfArbitrumIngressEgressDepositIgnoredReason",
           "values": [
             {
               "name": "BelowMinimumDeposit",
@@ -23993,7 +23993,7 @@
         },
         "action": {
           "type": "enum",
-          "name": "palletCfIngressEgressDepositAction",
+          "name": "palletCfArbitrumIngressEgressDepositAction",
           "values": [
             {
               "name": "Swap",
@@ -25880,7 +25880,7 @@
         },
         "action": {
           "type": "enum",
-          "name": "palletCfIngressEgressDepositAction",
+          "name": "palletCfSolanaIngressEgressDepositAction",
           "values": [
             {
               "name": "Swap",
@@ -26649,7 +26649,7 @@
         },
         "reason": {
           "type": "enum",
-          "name": "palletCfIngressEgressDepositIgnoredReason",
+          "name": "palletCfSolanaIngressEgressDepositIgnoredReason",
           "values": [
             {
               "name": "BelowMinimumDeposit",
@@ -27522,7 +27522,7 @@
         },
         "action": {
           "type": "enum",
-          "name": "palletCfIngressEgressDepositAction",
+          "name": "palletCfSolanaIngressEgressDepositAction",
           "values": [
             {
               "name": "Swap",

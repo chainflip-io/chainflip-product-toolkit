@@ -283,7 +283,7 @@ export const cfPrimitivesChainsAssetsEthAsset = simpleEnum(['Eth', 'Flip', 'Usdc
 
 export const cfChainsEvmDepositDetails = z.object({ txHashes: z.array(hexString).nullish() });
 
-export const palletCfIngressEgressDepositAction = z.union([
+export const palletCfEthereumIngressEgressDepositAction = z.union([
   z.object({ __kind: z.literal('Swap'), swapRequestId: numberOrHex }),
   z.object({ __kind: z.literal('LiquidityProvision'), lpAccount: accountId }),
   z.object({ __kind: z.literal('CcmTransfer'), swapRequestId: numberOrHex }),
@@ -327,6 +327,14 @@ export const cfChainsExecutexSwapAndCallError = z.union([
 
 export const cfPrimitivesChainsAssetsDotAsset = simpleEnum(['Dot']);
 
+export const palletCfPolkadotIngressEgressDepositAction = z.union([
+  z.object({ __kind: z.literal('Swap'), swapRequestId: numberOrHex }),
+  z.object({ __kind: z.literal('LiquidityProvision'), lpAccount: accountId }),
+  z.object({ __kind: z.literal('CcmTransfer'), swapRequestId: numberOrHex }),
+  z.object({ __kind: z.literal('NoAction') }),
+  z.object({ __kind: z.literal('BoostersCredited'), prewitnessedDepositId: numberOrHex }),
+]);
+
 export const cfChainsBtcScriptPubkey = z.union([
   z.object({ __kind: z.literal('P2PKH'), value: hexString }),
   z.object({ __kind: z.literal('P2SH'), value: hexString }),
@@ -339,6 +347,14 @@ export const cfChainsBtcScriptPubkey = z.union([
 export const cfPrimitivesChainsAssetsBtcAsset = simpleEnum(['Btc']);
 
 export const cfChainsBtcUtxoId = z.object({ txId: hexString, vout: z.number() });
+
+export const palletCfBitcoinIngressEgressDepositAction = z.union([
+  z.object({ __kind: z.literal('Swap'), swapRequestId: numberOrHex }),
+  z.object({ __kind: z.literal('LiquidityProvision'), lpAccount: accountId }),
+  z.object({ __kind: z.literal('CcmTransfer'), swapRequestId: numberOrHex }),
+  z.object({ __kind: z.literal('NoAction') }),
+  z.object({ __kind: z.literal('BoostersCredited'), prewitnessedDepositId: numberOrHex }),
+]);
 
 export const cfAmmCommonPoolPairsMap = z.object({ base: numberOrHex, quote: numberOrHex });
 
@@ -379,6 +395,14 @@ export const palletCfPoolsCloseOrder = z.union([
 
 export const cfPrimitivesChainsAssetsArbAsset = simpleEnum(['ArbEth', 'ArbUsdc']);
 
+export const palletCfArbitrumIngressEgressDepositAction = z.union([
+  z.object({ __kind: z.literal('Swap'), swapRequestId: numberOrHex }),
+  z.object({ __kind: z.literal('LiquidityProvision'), lpAccount: accountId }),
+  z.object({ __kind: z.literal('CcmTransfer'), swapRequestId: numberOrHex }),
+  z.object({ __kind: z.literal('NoAction') }),
+  z.object({ __kind: z.literal('BoostersCredited'), prewitnessedDepositId: numberOrHex }),
+]);
+
 export const cfChainsSolSolTxCoreMessageHeader = z.object({
   numRequiredSignatures: z.number(),
   numReadonlySignedAccounts: z.number(),
@@ -405,7 +429,15 @@ export const cfChainsSolSolTxCoreTransaction = z.object({
 
 export const cfPrimitivesChainsAssetsSolAsset = simpleEnum(['Sol', 'SolUsdc']);
 
-export const palletCfIngressEgressDepositIgnoredReason = simpleEnum([
+export const palletCfSolanaIngressEgressDepositAction = z.union([
+  z.object({ __kind: z.literal('Swap'), swapRequestId: numberOrHex }),
+  z.object({ __kind: z.literal('LiquidityProvision'), lpAccount: accountId }),
+  z.object({ __kind: z.literal('CcmTransfer'), swapRequestId: numberOrHex }),
+  z.object({ __kind: z.literal('NoAction') }),
+  z.object({ __kind: z.literal('BoostersCredited'), prewitnessedDepositId: numberOrHex }),
+]);
+
+export const palletCfSolanaIngressEgressDepositIgnoredReason = simpleEnum([
   'BelowMinimumDeposit',
   'NotEnoughToPayFees',
 ]);
