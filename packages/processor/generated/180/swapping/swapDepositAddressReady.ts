@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import {
+  accountId,
   cfChainsAddressEncodedAddress,
   cfChainsCcmChannelMetadata,
   cfChainsChannelRefundParametersEncodedAddress,
@@ -15,6 +16,7 @@ export const swappingSwapDepositAddressReady = z.object({
   sourceAsset: cfPrimitivesChainsAssetsAnyAsset,
   destinationAsset: cfPrimitivesChainsAssetsAnyAsset,
   channelId: numberOrHex,
+  brokerId: accountId,
   brokerCommissionRate: z.number(),
   channelMetadata: cfChainsCcmChannelMetadata.nullish(),
   sourceChainExpiryBlock: numberOrHex,
