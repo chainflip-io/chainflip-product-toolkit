@@ -1172,6 +1172,69 @@
           "length": 32
         }
       }
+    },
+    "SolanaGovCallDispatched": {
+      "type": "struct",
+      "fields": {
+        "govCall": {
+          "type": "enum",
+          "name": "cfChainsSolApiSolanaGovCall",
+          "values": [
+            {
+              "name": "SetProgramSwapsParameters",
+              "value": {
+                "type": "struct",
+                "fields": {
+                  "minNativeSwapAmount": {
+                    "type": "primitive",
+                    "name": "u64"
+                  },
+                  "maxDstAddressLen": {
+                    "type": "primitive",
+                    "name": "u16"
+                  },
+                  "maxCcmMessageLen": {
+                    "type": "primitive",
+                    "name": "u32"
+                  },
+                  "maxCfParametersLen": {
+                    "type": "primitive",
+                    "name": "u32"
+                  },
+                  "maxEventAccounts": {
+                    "type": "primitive",
+                    "name": "u32"
+                  }
+                }
+              }
+            },
+            {
+              "name": "SetTokenSwapParameters",
+              "value": {
+                "type": "struct",
+                "fields": {
+                  "minSwapAmount": {
+                    "type": "primitive",
+                    "name": "u64"
+                  },
+                  "tokenMintPubkey": {
+                    "type": "array",
+                    "value": {
+                      "type": "primitive",
+                      "name": "u8"
+                    },
+                    "length": 32
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "broadcastId": {
+          "type": "primitive",
+          "name": "u32"
+        }
+      }
     }
   },
   "Flip": {
@@ -8226,6 +8289,10 @@
                   "depositBlockHeight": {
                     "type": "primitive",
                     "name": "u64"
+                  },
+                  "brokerId": {
+                    "type": "primitive",
+                    "name": "AccountId32"
                   }
                 }
               }
@@ -8298,6 +8365,13 @@
                         }
                       }
                     ]
+                  },
+                  "brokerId": {
+                    "type": "option",
+                    "value": {
+                      "type": "primitive",
+                      "name": "AccountId32"
+                    }
                   }
                 }
               }
@@ -8936,6 +9010,10 @@
         "channelId": {
           "type": "primitive",
           "name": "u64"
+        },
+        "brokerId": {
+          "type": "primitive",
+          "name": "AccountId32"
         },
         "brokerCommissionRate": {
           "type": "primitive",
@@ -13546,16 +13624,19 @@
                         "name": "H256"
                       },
                       "brokerFee": {
-                        "type": "struct",
-                        "name": "CfPrimitivesBeneficiaryAccountId32",
-                        "fields": {
-                          "account": {
-                            "type": "primitive",
-                            "name": "AccountId32"
-                          },
-                          "bps": {
-                            "type": "primitive",
-                            "name": "u16"
+                        "type": "option",
+                        "value": {
+                          "type": "struct",
+                          "name": "CfPrimitivesBeneficiaryAccountId32",
+                          "fields": {
+                            "account": {
+                              "type": "primitive",
+                              "name": "AccountId32"
+                            },
+                            "bps": {
+                              "type": "primitive",
+                              "name": "u16"
+                            }
                           }
                         }
                       },
@@ -16437,16 +16518,19 @@
                         }
                       },
                       "brokerFee": {
-                        "type": "struct",
-                        "name": "CfPrimitivesBeneficiaryAccountId32",
-                        "fields": {
-                          "account": {
-                            "type": "primitive",
-                            "name": "AccountId32"
-                          },
-                          "bps": {
-                            "type": "primitive",
-                            "name": "u16"
+                        "type": "option",
+                        "value": {
+                          "type": "struct",
+                          "name": "CfPrimitivesBeneficiaryAccountId32",
+                          "fields": {
+                            "account": {
+                              "type": "primitive",
+                              "name": "AccountId32"
+                            },
+                            "bps": {
+                              "type": "primitive",
+                              "name": "u16"
+                            }
                           }
                         }
                       },
@@ -19610,16 +19694,19 @@
                         "name": "H256"
                       },
                       "brokerFee": {
-                        "type": "struct",
-                        "name": "CfPrimitivesBeneficiaryAccountId32",
-                        "fields": {
-                          "account": {
-                            "type": "primitive",
-                            "name": "AccountId32"
-                          },
-                          "bps": {
-                            "type": "primitive",
-                            "name": "u16"
+                        "type": "option",
+                        "value": {
+                          "type": "struct",
+                          "name": "CfPrimitivesBeneficiaryAccountId32",
+                          "fields": {
+                            "account": {
+                              "type": "primitive",
+                              "name": "AccountId32"
+                            },
+                            "bps": {
+                              "type": "primitive",
+                              "name": "u16"
+                            }
                           }
                         }
                       },
@@ -25274,16 +25361,19 @@
                         "name": "H256"
                       },
                       "brokerFee": {
-                        "type": "struct",
-                        "name": "CfPrimitivesBeneficiaryAccountId32",
-                        "fields": {
-                          "account": {
-                            "type": "primitive",
-                            "name": "AccountId32"
-                          },
-                          "bps": {
-                            "type": "primitive",
-                            "name": "u16"
+                        "type": "option",
+                        "value": {
+                          "type": "struct",
+                          "name": "CfPrimitivesBeneficiaryAccountId32",
+                          "fields": {
+                            "account": {
+                              "type": "primitive",
+                              "name": "AccountId32"
+                            },
+                            "bps": {
+                              "type": "primitive",
+                              "name": "u16"
+                            }
                           }
                         }
                       },
@@ -29241,16 +29331,19 @@
                         ]
                       },
                       "brokerFee": {
-                        "type": "struct",
-                        "name": "CfPrimitivesBeneficiaryAccountId32",
-                        "fields": {
-                          "account": {
-                            "type": "primitive",
-                            "name": "AccountId32"
-                          },
-                          "bps": {
-                            "type": "primitive",
-                            "name": "u16"
+                        "type": "option",
+                        "value": {
+                          "type": "struct",
+                          "name": "CfPrimitivesBeneficiaryAccountId32",
+                          "fields": {
+                            "account": {
+                              "type": "primitive",
+                              "name": "AccountId32"
+                            },
+                            "bps": {
+                              "type": "primitive",
+                              "name": "u16"
+                            }
                           }
                         }
                       },

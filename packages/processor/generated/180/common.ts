@@ -15,6 +15,22 @@ export const numberOrHex = z
   .union([z.number(), hexString, numericString])
   .transform((n) => BigInt(n));
 
+export const cfChainsSolApiSolanaGovCall = z.union([
+  z.object({
+    __kind: z.literal('SetProgramSwapsParameters'),
+    minNativeSwapAmount: numberOrHex,
+    maxDstAddressLen: z.number(),
+    maxCcmMessageLen: z.number(),
+    maxCfParametersLen: z.number(),
+    maxEventAccounts: z.number(),
+  }),
+  z.object({
+    __kind: z.literal('SetTokenSwapParameters'),
+    minSwapAmount: numberOrHex,
+    tokenMintPubkey: hexString,
+  }),
+]);
+
 export const simpleEnum = <U extends string, T extends readonly [U, ...U[]]>(values: T) =>
   z.object({ __kind: z.enum(values) }).transform(({ __kind }) => __kind!);
 
@@ -54,6 +70,16 @@ export const cfChainsAddressEncodedAddress = z.union([
   })),
 ]);
 
+export const accountId = z
+  .union([
+    hexString,
+    z
+      .string()
+      .regex(/^[0-9a-f]+$/)
+      .transform<`0x${string}`>((v) => `0x${v}`),
+  ])
+  .transform((value) => ss58.encode({ data: value, ss58Format: 2112 }));
+
 export const cfPrimitivesTxId = z.object({ blockNumber: z.number(), extrinsicIndex: z.number() });
 
 export const cfChainsTransactionInIdForAnyChain = z.union([
@@ -70,8 +96,13 @@ export const cfChainsSwapOrigin = z.union([
     depositAddress: cfChainsAddressEncodedAddress,
     channelId: numberOrHex,
     depositBlockHeight: numberOrHex,
+    brokerId: accountId,
   }),
-  z.object({ __kind: z.literal('Vault'), txId: cfChainsTransactionInIdForAnyChain }),
+  z.object({
+    __kind: z.literal('Vault'),
+    txId: cfChainsTransactionInIdForAnyChain,
+    brokerId: accountId.nullish(),
+  }),
   z.object({ __kind: z.literal('Internal') }),
 ]);
 
@@ -104,16 +135,6 @@ export const cfTraitsSwappingSwapRequestTypeGeneric = z.union([
     ccmDepositMetadata: cfChainsCcmDepositMetadataGenericEncodedAddress.nullish(),
   }),
 ]);
-
-export const accountId = z
-  .union([
-    hexString,
-    z
-      .string()
-      .regex(/^[0-9a-f]+$/)
-      .transform<`0x${string}`>((v) => `0x${v}`),
-  ])
-  .transform((value) => ss58.encode({ data: value, ss58Format: 2112 }));
 
 export const cfPrimitivesBeneficiaryAccountId32 = z.object({ account: accountId, bps: z.number() });
 
@@ -283,7 +304,7 @@ export const palletCfIngressEgressVaultDepositWitness = z.object({
   destinationAddress: cfChainsAddressEncodedAddress,
   depositMetadata: cfChainsCcmDepositMetadataGenericForeignChainAddress.nullish(),
   txId: hexString,
-  brokerFee: cfPrimitivesBeneficiaryAccountId32,
+  brokerFee: cfPrimitivesBeneficiaryAccountId32.nullish(),
   affiliateFees: z.array(cfPrimitivesBeneficiaryAffiliateShortId),
   refundParams: cfChainsChannelRefundParametersForeignChainAddress.nullish(),
   dcaParams: cfPrimitivesDcaParameters.nullish(),

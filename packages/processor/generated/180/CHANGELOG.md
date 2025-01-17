@@ -64,6 +64,9 @@ BitcoinIngressEgress:
   - UnknownAffiliate: added
   - UnknownBroker: added
 
+Environment:
+  - SolanaGovCallDispatched: added
+
 EthereumIngressEgress:
   - CcmEgressInvalid:
     - error: added
@@ -174,6 +177,7 @@ Swapping:
   - RefundEgressScheduled:
     - egressFee: added
   - SwapDepositAddressReady:
+    - brokerId: added
     - channelMetadata: added
     - affiliateFees: changed
     - refundParameters: changed
