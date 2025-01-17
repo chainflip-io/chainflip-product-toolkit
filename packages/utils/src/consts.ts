@@ -24,18 +24,24 @@ type AccountAliasMap = {
 };
 
 export const brokerAliasMap: AccountAliasMap = {
-  cFLRQDfEdmnv6d2XfHJNRBQHi4fruPMReLSfvB8WWD2ENbqj7: { name: 'Chainflip', twitter: '@Chainflip' },
+  cFLRQDfEdmnv6d2XfHJNRBQHi4fruPMReLSfvB8WWD2ENbqj7: {
+    name: 'Chainflip Swapping',
+    twitter: '@Chainflip',
+  },
   cFN1AfNQBEBCkuNAV37WWw34bCAdiW5e5sHTY4LaaRWiBSh7B: {
     name: 'BlockSwap',
     twitter: '@BlockswapBot',
   },
-  cFJZVRaybb2PBwxTiAiRLiQfHY4KPB3RpJK22Q7Fhqk979aCH: { name: 'Swappy', twitter: '@SwappyCrypto' },
+  cFJZVRaybb2PBwxTiAiRLiQfHY4KPB3RpJK22Q7Fhqk979aCH: {
+    name: 'Broker as a Service',
+    twitter: '@chainflipbaas',
+  },
   cFLuWQcabsKpegned1ka3Qad6cTATzpgwLYZK8U5spmkG9MEf: {
     name: 'THORWallet',
     twitter: '@THORWalletDEX',
   },
   cFJjZKzA5rUTb9qkZMGfec7piCpiAQKr15B4nALzriMGQL8BE: { name: 'THORSwap', twitter: '@THORSwap' },
-  cFLdvBS9Gq9iqB8Zdb5cmnWgmhqvEojQYGMBquDz7xRiSvsJV: { name: 'THORSwap', twitter: '@THORSwap' },
+  cFLdvBS9Gq9iqB8Zdb5cmnWgmhqvEojQYGMBquDz7xRiSvsJV: { name: 'THORSwap UI', twitter: '@THORSwap' },
   cFJWWedhJmnsk3P9jEmCfbmgmg62ZpA7LT5WCpwLXEzXuRuc3: {
     name: 'HoudiniSwap',
     twitter: '@HoudiniSwap',
