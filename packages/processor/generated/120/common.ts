@@ -52,7 +52,7 @@ export const spArithmeticArithmeticError = simpleEnum(['Underflow', 'Overflow', 
 
 export const spRuntimeTransactionalError = simpleEnum(['LimitReached', 'NoLayer']);
 
-export const spRuntimeDispatchError = z.union([
+export const spRuntimeDispatchError = z.discriminatedUnion('__kind', [
   z.object({ __kind: z.literal('Other') }),
   z.object({ __kind: z.literal('CannotLookup') }),
   z.object({ __kind: z.literal('BadOrigin') }),
@@ -99,27 +99,30 @@ export const cfChainsBtcBitcoinTransactionData = z.object({ encodedTransaction: 
 
 export const cfPrimitivesChainsAssetsAnyAsset = simpleEnum(['Eth', 'Flip', 'Usdc', 'Dot', 'Btc']);
 
-export const cfChainsAddressEncodedAddress = z.union([
-  z.object({ __kind: z.literal('Eth'), value: hexString }).transform(({ value }) => ({
-    chain: 'Ethereum' as const,
-    address: value,
-  })),
-  z.object({ __kind: z.literal('Dot'), value: hexString }).transform(({ value }) => ({
-    chain: 'Polkadot' as const,
-    address: ss58.encode({ data: value, ss58Format: 0 }),
-  })),
-  z.object({ __kind: z.literal('Btc'), value: hexString }).transform(({ value }) => ({
-    chain: 'Bitcoin' as const,
-    address: Buffer.from(value.slice(2), 'hex').toString('utf8'),
-  })),
-]);
+export const cfChainsAddressEncodedAddress = z
+  .object({ __kind: z.enum(['Eth', 'Dot', 'Btc']), value: hexString })
+  .transform(({ __kind, value }) => {
+    switch (__kind) {
+      case 'Eth':
+        return { chain: 'Ethereum', address: value } as const;
+      case 'Dot':
+        return { chain: 'Polkadot', address: ss58.encode({ data: value, ss58Format: 0 }) } as const;
+      case 'Btc':
+        return {
+          chain: 'Bitcoin',
+          address: Buffer.from(value.slice(2), 'hex').toString('utf8'),
+        } as const;
+      default:
+        throw new Error('Unknown chain');
+    }
+  });
 
 export const palletCfSwappingCcmFailReason = simpleEnum([
   'UnsupportedForTargetChain',
   'InsufficientDepositAmount',
 ]);
 
-export const cfChainsBtcScriptPubkey = z.union([
+export const cfChainsBtcScriptPubkey = z.discriminatedUnion('__kind', [
   z.object({ __kind: z.literal('P2PKH'), value: hexString }),
   z.object({ __kind: z.literal('P2SH'), value: hexString }),
   z.object({ __kind: z.literal('P2WPKH'), value: hexString }),
@@ -128,7 +131,7 @@ export const cfChainsBtcScriptPubkey = z.union([
   z.object({ __kind: z.literal('OtherSegwit'), version: z.number(), program: hexString }),
 ]);
 
-export const cfChainsAddressForeignChainAddress = z.union([
+export const cfChainsAddressForeignChainAddress = z.discriminatedUnion('__kind', [
   z.object({ __kind: z.literal('Eth'), value: hexString }),
   z.object({ __kind: z.literal('Dot'), value: hexString }),
   z.object({ __kind: z.literal('Btc'), value: cfChainsBtcScriptPubkey }),
@@ -148,7 +151,7 @@ export const cfChainsCcmDepositMetadata = z.object({
 
 export const cfPrimitivesChainsAssetsEthAsset = simpleEnum(['Eth', 'Flip', 'Usdc']);
 
-export const palletCfEthereumIngressEgressDepositAction = z.union([
+export const palletCfEthereumIngressEgressDepositAction = z.discriminatedUnion('__kind', [
   z.object({ __kind: z.literal('Swap'), swapId: numberOrHex }),
   z.object({ __kind: z.literal('LiquidityProvision'), lpAccount: accountId }),
   z.object({
@@ -166,7 +169,7 @@ export const palletCfEthereumIngressEgressDepositIgnoredReason = simpleEnum([
 
 export const cfPrimitivesChainsAssetsDotAsset = simpleEnum(['Dot']);
 
-export const palletCfPolkadotIngressEgressDepositAction = z.union([
+export const palletCfPolkadotIngressEgressDepositAction = z.discriminatedUnion('__kind', [
   z.object({ __kind: z.literal('Swap'), swapId: numberOrHex }),
   z.object({ __kind: z.literal('LiquidityProvision'), lpAccount: accountId }),
   z.object({
@@ -186,7 +189,7 @@ export const cfPrimitivesChainsAssetsBtcAsset = simpleEnum(['Btc']);
 
 export const cfChainsBtcUtxoId = z.object({ txId: hexString, vout: z.number() });
 
-export const palletCfBitcoinIngressEgressDepositAction = z.union([
+export const palletCfBitcoinIngressEgressDepositAction = z.discriminatedUnion('__kind', [
   z.object({ __kind: z.literal('Swap'), swapId: numberOrHex }),
   z.object({ __kind: z.literal('LiquidityProvision'), lpAccount: accountId }),
   z.object({

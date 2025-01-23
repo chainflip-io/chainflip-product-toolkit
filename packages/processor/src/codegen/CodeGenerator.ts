@@ -48,40 +48,58 @@ const shortChainToLongChain = {
   Sol: 'Solana',
 } as const;
 
-const chainEnumMember = (name: keyof typeof shortChainToLongChain, transform?: string) =>
-  `z.object({ __kind: z.literal('${name}'), value: hexString }).transform(({ value }) => ({
-  chain: '${shortChainToLongChain[name]}' as const,
-  address: ${transform ?? 'value'},
-}))`;
+const addressTransforms: Record<keyof typeof shortChainToLongChain, string | null> = {
+  Arb: null,
+  Btc: "Buffer.from(value.slice(2), 'hex').toString('utf8')",
+  Dot: 'ss58.encode({ data: value, ss58Format: 0 })',
+  Eth: null,
+  Sol: 'base58.encode(hexToBytes(value))',
+};
+
+const addressImports: Record<keyof typeof shortChainToLongChain, [string, string][] | null> = {
+  Arb: null,
+  Btc: null,
+  Dot: [['* as ss58', '@chainflip/utils/ss58']],
+  Eth: null,
+  Sol: [
+    ['* as base58', '@chainflip/utils/base58'],
+    ['hexToBytes', '@chainflip/utils/bytes'],
+  ],
+};
+
+function assertIsKnownChain(value: string): asserts value is keyof typeof shortChainToLongChain {
+  if (!(value in shortChainToLongChain)) throw new Error(`unknown chain: "${value}"`);
+}
 
 export default class CodeGenerator extends BaseCodeGenerator {
   private generateEncodedAddressEnum(def: EnumType): Identifier {
     this.registry.types.set('hexString', hexString);
 
     const dependencies: Identifier[] = [];
+    const chains = new Set<keyof typeof shortChainToLongChain>();
 
     const unionMembers = def.values.map((v) => {
-      switch (v.name) {
-        case 'Arb':
-        case 'Eth':
-          return chainEnumMember(v.name);
-        case 'Dot':
-          dependencies.push(new Identifier('* as ss58', '@chainflip/utils/ss58'));
-          return chainEnumMember(v.name, `ss58.encode({ data: value, ss58Format: 0 })`);
-        case 'Btc':
-          return chainEnumMember(v.name, `Buffer.from(value.slice(2), 'hex').toString('utf8')`);
-        case 'Sol':
-          dependencies.push(
-            new Identifier('* as base58', '@chainflip/utils/base58'),
-            new Identifier('hexToBytes', '@chainflip/utils/bytes'),
-          );
-          return chainEnumMember(v.name, `base58.encode(hexToBytes(value))`);
-        default:
-          throw new Error(`unknown chain: "${v.name}"`);
-      }
+      assertIsKnownChain(v.name);
+      chains.add(v.name);
+      addressImports[v.name]?.forEach((i) => dependencies.push(new Identifier(...i)));
+      return `'${v.name}'`;
     });
 
-    const generated = `z.union([${unionMembers.join(',')}])`;
+    const generated = `z.object({ __kind: z.enum([${unionMembers.join(',')}]), value: hexString })
+      .transform(({ __kind, value }) => {
+        switch (__kind) {
+          ${chains
+            .values()
+            .toArray()
+            .map(
+              (a) =>
+                `case '${a}':
+                  return { chain: '${shortChainToLongChain[a]}', address: ${addressTransforms[a] ?? 'value'} } as const;`,
+            )
+            .join('\n')}
+          default: throw new Error('Unknown chain');
+        }
+      })`;
 
     this.registry.types.set(def.name, new Code(generated, dependencies));
 
@@ -178,7 +196,7 @@ export default class CodeGenerator extends BaseCodeGenerator {
       if (members.length === 1) {
         [generated] = members;
       } else {
-        generated = `z.union([${members.join(', ')}])`;
+        generated = `z.discriminatedUnion('__kind', [${members.join(', ')}])`;
       }
     }
 

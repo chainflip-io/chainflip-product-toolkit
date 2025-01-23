@@ -28,7 +28,7 @@ export const cfPrimitivesChainsForeignChain = simpleEnum([
   'Solana',
 ]);
 
-export const stateChainRuntimeChainflipOffencesOffence = z.union([
+export const stateChainRuntimeChainflipOffencesOffence = z.discriminatedUnion('__kind', [
   z.object({ __kind: z.literal('ParticipateSigningFailed') }),
   z.object({ __kind: z.literal('ParticipateKeygenFailed') }),
   z.object({ __kind: z.literal('FailedToBroadcastTransaction') }),
@@ -62,7 +62,7 @@ export const numberOrHex = z
   .union([z.number(), hexString, numericString])
   .transform((n) => BigInt(n));
 
-export const palletCfThresholdSignaturePalletConfigUpdate = z.union([
+export const palletCfThresholdSignaturePalletConfigUpdate = z.discriminatedUnion('__kind', [
   z.object({ __kind: z.literal('ThresholdSignatureResponseTimeout'), newTimeout: z.number() }),
   z.object({ __kind: z.literal('KeygenResponseTimeout'), newTimeout: z.number() }),
   z.object({ __kind: z.literal('KeygenSlashAmount'), amountToSlash: numberOrHex }),
@@ -86,30 +86,29 @@ export const cfPrimitivesChainsAssetsAnyAsset = simpleEnum([
   'SolUsdc',
 ]);
 
-export const cfChainsAddressEncodedAddress = z.union([
-  z.object({ __kind: z.literal('Eth'), value: hexString }).transform(({ value }) => ({
-    chain: 'Ethereum' as const,
-    address: value,
-  })),
-  z.object({ __kind: z.literal('Dot'), value: hexString }).transform(({ value }) => ({
-    chain: 'Polkadot' as const,
-    address: ss58.encode({ data: value, ss58Format: 0 }),
-  })),
-  z.object({ __kind: z.literal('Btc'), value: hexString }).transform(({ value }) => ({
-    chain: 'Bitcoin' as const,
-    address: Buffer.from(value.slice(2), 'hex').toString('utf8'),
-  })),
-  z.object({ __kind: z.literal('Arb'), value: hexString }).transform(({ value }) => ({
-    chain: 'Arbitrum' as const,
-    address: value,
-  })),
-  z.object({ __kind: z.literal('Sol'), value: hexString }).transform(({ value }) => ({
-    chain: 'Solana' as const,
-    address: base58.encode(hexToBytes(value)),
-  })),
-]);
+export const cfChainsAddressEncodedAddress = z
+  .object({ __kind: z.enum(['Eth', 'Dot', 'Btc', 'Arb', 'Sol']), value: hexString })
+  .transform(({ __kind, value }) => {
+    switch (__kind) {
+      case 'Eth':
+        return { chain: 'Ethereum', address: value } as const;
+      case 'Dot':
+        return { chain: 'Polkadot', address: ss58.encode({ data: value, ss58Format: 0 }) } as const;
+      case 'Btc':
+        return {
+          chain: 'Bitcoin',
+          address: Buffer.from(value.slice(2), 'hex').toString('utf8'),
+        } as const;
+      case 'Arb':
+        return { chain: 'Arbitrum', address: value } as const;
+      case 'Sol':
+        return { chain: 'Solana', address: base58.encode(hexToBytes(value)) } as const;
+      default:
+        throw new Error('Unknown chain');
+    }
+  });
 
-export const cfChainsSwapOrigin = z.union([
+export const cfChainsSwapOrigin = z.discriminatedUnion('__kind', [
   z.object({
     __kind: z.literal('DepositChannel'),
     depositAddress: cfChainsAddressEncodedAddress,
@@ -143,7 +142,7 @@ export const cfChainsCcmSwapMetadataGeneric = z.object({
   swapAmounts: cfChainsCcmSwapAmounts,
 });
 
-export const cfTraitsSwappingSwapRequestTypeGeneric = z.union([
+export const cfTraitsSwappingSwapRequestTypeGeneric = z.discriminatedUnion('__kind', [
   z.object({ __kind: z.literal('NetworkFee') }),
   z.object({ __kind: z.literal('IngressEgressFee') }),
   z.object({ __kind: z.literal('Regular'), outputAddress: cfChainsAddressEncodedAddress }),
@@ -188,7 +187,7 @@ export const cfChainsCcmCheckerCcmValidityError = simpleEnum([
   'CfParametersContainsInvalidAccounts',
 ]);
 
-export const cfChainsSolApiSolanaTransactionBuildingError = z.union([
+export const cfChainsSolApiSolanaTransactionBuildingError = z.discriminatedUnion('__kind', [
   z.object({ __kind: z.literal('CannotLookupApiEnvironment') }),
   z.object({ __kind: z.literal('CannotLookupCurrentAggKey') }),
   z.object({ __kind: z.literal('CannotLookupComputePrice') }),
@@ -219,7 +218,7 @@ export const spArithmeticArithmeticError = simpleEnum(['Underflow', 'Overflow', 
 
 export const spRuntimeTransactionalError = simpleEnum(['LimitReached', 'NoLayer']);
 
-export const spRuntimeDispatchError = z.union([
+export const spRuntimeDispatchError = z.discriminatedUnion('__kind', [
   z.object({ __kind: z.literal('Other') }),
   z.object({ __kind: z.literal('CannotLookup') }),
   z.object({ __kind: z.literal('BadOrigin') }),
@@ -236,7 +235,7 @@ export const spRuntimeDispatchError = z.union([
   z.object({ __kind: z.literal('RootNotAllowed') }),
 ]);
 
-export const cfChainsAllBatchError = z.union([
+export const cfChainsAllBatchError = z.discriminatedUnion('__kind', [
   z.object({ __kind: z.literal('NotRequired') }),
   z.object({ __kind: z.literal('UnsupportedToken') }),
   z.object({ __kind: z.literal('VaultAccountNotSet') }),
@@ -278,7 +277,7 @@ export const cfTraitsScheduledEgressDetailsPolkadot = z.object({
   feeWithheld: numberOrHex,
 });
 
-export const cfChainsBtcScriptPubkey = z.union([
+export const cfChainsBtcScriptPubkey = z.discriminatedUnion('__kind', [
   z.object({ __kind: z.literal('P2PKH'), value: hexString }),
   z.object({ __kind: z.literal('P2SH'), value: hexString }),
   z.object({ __kind: z.literal('P2WPKH'), value: hexString }),
@@ -311,7 +310,7 @@ export const cfChainsBtcUtxo = z.object({
   depositAddress: cfChainsBtcDepositAddress,
 });
 
-export const palletCfBitcoinIngressEgressDepositAction = z.union([
+export const palletCfBitcoinIngressEgressDepositAction = z.discriminatedUnion('__kind', [
   z.object({ __kind: z.literal('Swap'), swapRequestId: numberOrHex }),
   z.object({ __kind: z.literal('LiquidityProvision'), lpAccount: accountId }),
   z.object({ __kind: z.literal('CcmTransfer'), swapRequestId: numberOrHex }),
