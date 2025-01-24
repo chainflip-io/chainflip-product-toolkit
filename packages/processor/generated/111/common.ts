@@ -27,7 +27,7 @@ export const cfPrimitivesChainsAssetsDotAsset = simpleEnum(['Dot']);
 
 export const cfPrimitivesChainsAssetsBtcAsset = simpleEnum(['Btc']);
 
-export const cfChainsBtcScriptPubkey = z.union([
+export const cfChainsBtcScriptPubkey = z.discriminatedUnion('__kind', [
   z.object({ __kind: z.literal('P2PKH'), value: hexString }),
   z.object({ __kind: z.literal('P2SH'), value: hexString }),
   z.object({ __kind: z.literal('P2WPKH'), value: hexString }),
@@ -55,14 +55,14 @@ export const palletCfPoolsRangeOrderChange = z.object({
   amounts: palletCfPoolsAssetsMapU128,
 });
 
-export const palletCfPoolsIncreaseOrDecreaseRangeOrderChange = z.union([
+export const palletCfPoolsIncreaseOrDecreaseRangeOrderChange = z.discriminatedUnion('__kind', [
   z.object({ __kind: z.literal('Increase'), value: palletCfPoolsRangeOrderChange }),
   z.object({ __kind: z.literal('Decrease'), value: palletCfPoolsRangeOrderChange }),
 ]);
 
 export const cfAmmCommonOrder = simpleEnum(['Buy', 'Sell']);
 
-export const palletCfPoolsIncreaseOrDecreaseU128 = z.union([
+export const palletCfPoolsIncreaseOrDecreaseU128 = z.discriminatedUnion('__kind', [
   z.object({ __kind: z.literal('Increase'), value: numberOrHex }),
   z.object({ __kind: z.literal('Decrease'), value: numberOrHex }),
 ]);
@@ -86,7 +86,7 @@ export const spArithmeticArithmeticError = simpleEnum(['Underflow', 'Overflow', 
 
 export const spRuntimeTransactionalError = simpleEnum(['LimitReached', 'NoLayer']);
 
-export const spRuntimeDispatchError = z.union([
+export const spRuntimeDispatchError = z.discriminatedUnion('__kind', [
   z.object({ __kind: z.literal('Other') }),
   z.object({ __kind: z.literal('CannotLookup') }),
   z.object({ __kind: z.literal('BadOrigin') }),

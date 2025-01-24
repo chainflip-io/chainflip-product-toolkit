@@ -37,7 +37,7 @@ export const cfPrimitivesSemVer = z.object({
   patch: z.number(),
 });
 
-export const palletCfValidatorPalletConfigUpdate = z.union([
+export const palletCfValidatorPalletConfigUpdate = z.discriminatedUnion('__kind', [
   z.object({ __kind: z.literal('RegistrationBondPercentage'), percentage: z.number() }),
   z.object({ __kind: z.literal('AuctionBidCutoffPercentage'), percentage: z.number() }),
   z.object({ __kind: z.literal('RedemptionPeriodAsPercentage'), percentage: z.number() }),
