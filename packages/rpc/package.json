@@ -19,8 +19,8 @@
     "zod": "^3.24.1"
   },
   "devDependencies": {
-    "@types/node": "^22.10.7",
-    "@types/ws": "^8.5.13",
+    "@types/node": "^22.10.10",
+    "@types/ws": "^8.5.14",
     "ws": "^8.18.0"
   },
   "files": [
