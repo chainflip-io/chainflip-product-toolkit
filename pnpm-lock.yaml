@@ -9,14 +9,14 @@ importers:
   .:
     devDependencies:
       '@eslint/js':
-        specifier: ^9.18.0
-        version: 9.18.0
+        specifier: ^9.19.0
+        version: 9.19.0
       '@types/node':
         specifier: ^22.10.7
         version: 22.10.7
       '@vitest/coverage-v8':
         specifier: ^3.0.2
-        version: 3.0.2(vitest@3.0.2(@types/node@22.10.7)(@vitest/ui@3.0.2))
+        version: 3.0.2(vitest@3.0.2)
       '@vitest/ui':
         specifier: ^3.0.2
         version: 3.0.2(vitest@3.0.2)
@@ -722,6 +722,10 @@ packages:
 
   '@eslint/js@9.18.0':
     resolution: {integrity: sha512-fK6L7rxcq6/z+AaQMtiFTkvbHkBLNlwyRxHpKawP0x3u9+NC6MQTnFW+AdpwC6gfHTW0051cokQgtTN2FqlxQA==}
+    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+
+  '@eslint/js@9.19.0':
+    resolution: {integrity: sha512-rbq9/g38qjfqFLOVPvwjIvFFdNziEC5S65jmjPw5r6A//QH+W91akh9irMwjDN8zKUTak6W9EsAv4m/7Wnw0UQ==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
   '@eslint/object-schema@2.1.4':
@@ -3445,6 +3449,8 @@ snapshots:
 
   '@eslint/js@9.18.0': {}
 
+  '@eslint/js@9.19.0': {}
+
   '@eslint/object-schema@2.1.4': {}
 
   '@eslint/plugin-kit@0.2.1':
@@ -3942,7 +3948,7 @@ snapshots:
       '@typescript-eslint/types': 8.20.0
       eslint-visitor-keys: 4.2.0
 
-  '@vitest/coverage-v8@3.0.2(vitest@3.0.2(@types/node@22.10.7)(@vitest/ui@3.0.2))':
+  '@vitest/coverage-v8@3.0.2(vitest@3.0.2)':
     dependencies:
       '@ampproject/remapping': 2.3.0
       '@bcoe/v8-coverage': 1.0.2
