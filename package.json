@@ -29,7 +29,7 @@
     "micromatch": "^4.0.8",
     "prettier": "^3.4.2",
     "syncpack": "^13.0.0",
-    "tsup": "^8.3.5",
+    "tsup": "^8.3.6",
     "tsx": "^4.19.2",
     "typescript": "^5.7.3",
     "typescript-eslint": "^8.20.0",
