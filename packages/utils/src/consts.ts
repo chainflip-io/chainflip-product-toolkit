@@ -101,7 +101,7 @@ export const brokerAliasMap: AccountAliasMap = {
   cFL4To8Uow6B1hk4dNrhWhvKpkBtnUTrVdWCEKCaXiXMMztjM: {
     name: 'SwapKit',
     twitter: '@SwapKitPowered',
-  }
+  },
 } as const;
 
 export const lpAliasMap: AccountAliasMap = {
