@@ -94,6 +94,14 @@ export const brokerAliasMap: AccountAliasMap = {
     name: 'Dexifier',
     twitter: '@DexifierX',
   },
+  cFNwtr2mPhpUEB5AyJq38DqMKMkSdzaL9548hajN2DRTwh7Mq: {
+    name: 'SwapKit',
+    twitter: '@SwapKitPowered',
+  },
+  cFL4To8Uow6B1hk4dNrhWhvKpkBtnUTrVdWCEKCaXiXMMztjM: {
+    name: 'SwapKit',
+    twitter: '@SwapKitPowered',
+  },
 } as const;
 
 export const lpAliasMap: AccountAliasMap = {
