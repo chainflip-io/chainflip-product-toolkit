@@ -97,6 +97,10 @@ export const brokerAliasMap: AccountAliasMap = {
   cFNwtr2mPhpUEB5AyJq38DqMKMkSdzaL9548hajN2DRTwh7Mq: {
     name: 'SwapKit',
     twitter: '@SwapKitPowered',
+  },
+  cFPaD1gZXVcwmwMmwsaCwBQ1CFap8rAQgC3PjBT9GKBvFBB4f: {
+    name: 'SwapKit',
+    twitter: '@SwapKitPowered',
   }
 } as const;
 
