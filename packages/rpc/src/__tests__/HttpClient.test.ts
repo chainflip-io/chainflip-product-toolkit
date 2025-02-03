@@ -23,6 +23,7 @@ import {
   type cfFundingEnvironment,
   type cfSwapRate,
   type cfSwapRateV3,
+  type brokerRequestSwapParameterEncoding,
 } from '../parsers';
 
 const supportedAssets = [
@@ -383,6 +384,33 @@ const swapRateV3: z.input<typeof cfSwapRateV3> = {
   broker_commission: { chain: 'Ethereum', asset: 'USDC', amount: '0x0' },
 };
 
+const swapParameterEncodingBitcoin: z.input<typeof brokerRequestSwapParameterEncoding> = {
+  intermediary: null,
+  output: '0xffbc',
+  network_fee: { chain: 'Ethereum', asset: 'USDC', amount: '0x42' },
+  ingress_fee: { chain: 'Ethereum', asset: 'USDT', amount: '0x0' },
+  egress_fee: { chain: 'Ethereum', asset: 'USDC', amount: '0x0' },
+  broker_commission: { chain: 'Ethereum', asset: 'USDC', amount: '0x0' },
+};
+
+const swapParameterEncodingEthereum: z.input<typeof brokerRequestSwapParameterEncoding> = {
+  intermediary: null,
+  output: '0xffbc',
+  network_fee: { chain: 'Ethereum', asset: 'USDC', amount: '0x42' },
+  ingress_fee: { chain: 'Ethereum', asset: 'USDT', amount: '0x0' },
+  egress_fee: { chain: 'Ethereum', asset: 'USDC', amount: '0x0' },
+  broker_commission: { chain: 'Ethereum', asset: 'USDC', amount: '0x0' },
+};
+
+const swapParameterEncodingSolana: z.input<typeof brokerRequestSwapParameterEncoding> = {
+  intermediary: null,
+  output: '0xffbc',
+  network_fee: { chain: 'Ethereum', asset: 'USDC', amount: '0x42' },
+  ingress_fee: { chain: 'Ethereum', asset: 'USDT', amount: '0x0' },
+  egress_fee: { chain: 'Ethereum', asset: 'USDC', amount: '0x0' },
+  broker_commission: { chain: 'Ethereum', asset: 'USDC', amount: '0x0' },
+};
+
 const swapDepositAddress: z.input<typeof brokerRequestSwapDepositAddress> = {
   channel_id: 1,
   address: '0x1234',
@@ -637,6 +665,15 @@ describe(HttpClient, () => {
               return respond(validatorAccount);
             default:
               return respond(unregisteredAccount);
+          }
+        case 'broker_request_swap_parameter_encoding':
+          switch (body.params[0]) {
+            case 'Ethereum':
+              return respond(swapParameterEncodingEthereum);
+            case 'Solana':
+              return respond(swapParameterEncodingSolana);
+            default:
+              return respond(swapParameterEncodingBitcoin);
           }
         case 'broker_requestSwapDepositAddress':
           return respond(swapDepositAddress);
