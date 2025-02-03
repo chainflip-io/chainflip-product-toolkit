@@ -215,6 +215,38 @@ export const brokerRequestSwapDepositAddress = z.object({
   channel_opening_fee: u256,
 });
 
+export const brokerRequestSwapParameterEncoding = z.discriminatedUnion('chain', [
+  z.object({
+    chain: z.literal('Bitcoin'),
+    nulldata_payload: hexString,
+    deposit_address: z.string(),
+  }),
+  z.object({
+    chain: z.literal('Ethereum'),
+    to: hexString,
+    calldata: hexString,
+    value: numberOrHex,
+  }),
+  z.object({
+    chain: z.literal('Arbitrum'),
+    to: hexString,
+    calldata: hexString,
+    value: numberOrHex,
+  }),
+  z.object({
+    chain: z.literal('Solana'),
+    program_id: hexString,
+    data: hexString,
+    accounts: z.array(
+      z.object({
+        pubkey: hexString,
+        is_signer: z.boolean(),
+        is_writable: z.boolean(),
+      }),
+    ),
+  }),
+]);
+
 export const unregistered = z.object({
   role: z.literal('unregistered'),
   flip_balance: numberOrHex,

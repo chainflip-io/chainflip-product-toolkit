@@ -557,6 +557,7 @@ describe(HttpClient, () => {
     expect(new HttpClient('http://localhost:8080').methods()).toMatchInlineSnapshot(`
       [
         "broker_requestSwapDepositAddress",
+        "broker_request_swap_parameter_encoding",
         "cf_account_info",
         "cf_accounts",
         "cf_boost_pool_details",
