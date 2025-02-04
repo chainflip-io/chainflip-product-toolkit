@@ -1064,7 +1064,13 @@ describe(HttpClient, () => {
             retry_duration: 100,
           },
         ),
-      ).toMatchSnapshot();
+      ).toMatchInlineSnapshot(`
+        {
+          "chain": "Bitcoin",
+          "deposit_address": "bcrt1pmrhjpvq2w7cgesrcrvuhqw6n6j487l6uc7tmwtx9jen7ezesunhqllvzxx",
+          "nulldata_payload": "0x0003656623d865425c0a4955ef7e7a39d09f58554d0800000000000000000000000000000000000001000200000100",
+        }
+      `);
     });
 
     it('gets vault swap data for ethereum', async () => {
@@ -1085,7 +1091,14 @@ describe(HttpClient, () => {
             },
           },
         ),
-      ).toMatchSnapshot();
+      ).toMatchInlineSnapshot(`
+        {
+          "calldata": "0xdd68734500000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000080000000000000000000000000000000000000000000000000000000000000000300000000000000000000000000000000000000000000000000000000000000c00000000000000000000000000000000000000000000000000000000000000014b5fb203bd12f528813b512408b374a8f0f44367a000000000000000000000000000000000000000000000000000000000000000000000000000000000000005f0000000000004cd85eb477b4820bbf10dc4689d8b344c2722eac000000000000000000000000000000000000000000000000000000000000000000009059e6d854b769a505d01148af212bf8cb7f8469a7153edce8dcaedd9d29912501000000",
+          "chain": "Ethereum",
+          "to": "0xb7a5bd0345ef1cc5e66bf61bdec17d2461fbd968",
+          "value": 5000000000000000000n,
+        }
+      `);
     });
 
     it('gets vault swap data for solana', async () => {
@@ -1108,7 +1121,30 @@ describe(HttpClient, () => {
             },
           },
         ),
-      ).toMatchSnapshot();
+      ).toMatchInlineSnapshot(`
+        {
+          "accounts": [
+            {
+              "is_signer": true,
+              "is_writable": true,
+              "pubkey": "Gm4QT3aC9YZtyZAFjMNTVEMB4otEY1JW2dVEBFbGfr9p",
+            },
+            {
+              "is_signer": false,
+              "is_writable": true,
+              "pubkey": "2tmtGLQcBd11BMiE9B1tAkQXwmPNgR79Meki2Eme4Ec9",
+            },
+            {
+              "is_signer": false,
+              "is_writable": false,
+              "pubkey": "11111111111111111111111111111111",
+            },
+          ],
+          "chain": "Solana",
+          "data": "0xa3265ce2f3698dc400e876481700000001000000140000004d2c78895c0fb2dbc04ecb98345f7b5e30bbd5f203000000006b000000000000000004f79d5e026f12edc6443a534b2cdd5072233989b415d7596573e743f3e5b386fb000000000000000000000000000000000000000000000000000000000000000000009059e6d854b769a505d01148af212bf8cb7f8469a7153edce8dcaedd9d299125010000",
+          "program_id": "35uYgHdfZQT4kHkaaXQ6ZdCkK5LFrsk43btTLbGCRCNT",
+        }
+      `);
     });
 
     it('gets unregistered account info', async () => {
