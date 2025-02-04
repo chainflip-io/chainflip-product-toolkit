@@ -215,23 +215,23 @@ export const brokerRequestSwapDepositAddress = z.object({
   channel_opening_fee: u256,
 });
 
+const evmBrokerRequestSwapParameterEncoding = z.object({
+  to: hexString,
+  calldata: hexString,
+  value: numberOrHex,
+});
+
 export const brokerRequestSwapParameterEncoding = z.discriminatedUnion('chain', [
   z.object({
     chain: z.literal('Bitcoin'),
     nulldata_payload: hexString,
     deposit_address: z.string(),
   }),
-  z.object({
+  evmBrokerRequestSwapParameterEncoding.extend({
     chain: z.literal('Ethereum'),
-    to: hexString,
-    calldata: hexString,
-    value: numberOrHex,
   }),
-  z.object({
+  evmBrokerRequestSwapParameterEncoding.extend({
     chain: z.literal('Arbitrum'),
-    to: hexString,
-    calldata: hexString,
-    value: numberOrHex,
   }),
   z.object({
     chain: z.literal('Solana'),
