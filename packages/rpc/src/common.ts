@@ -84,7 +84,7 @@ export type RpcRequest = WithHash<{
     destinationAsset: UncheckedAssetAndChain,
     destinationAddress: string,
     brokerCommission: number,
-    extra_parameters:
+    extraParameters:
       | {
           chain: 'Bitcoin';
           min_output_amount: `0x${string}`;

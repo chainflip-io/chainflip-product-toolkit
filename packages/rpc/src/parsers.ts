@@ -235,11 +235,11 @@ export const brokerRequestSwapParameterEncoding = z.discriminatedUnion('chain', 
   }),
   z.object({
     chain: z.literal('Solana'),
-    program_id: hexString,
+    program_id: z.string(),
     data: hexString,
     accounts: z.array(
       z.object({
-        pubkey: hexString,
+        pubkey: z.string(),
         is_signer: z.boolean(),
         is_writable: z.boolean(),
       }),

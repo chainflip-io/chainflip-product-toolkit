@@ -385,30 +385,41 @@ const swapRateV3: z.input<typeof cfSwapRateV3> = {
 };
 
 const swapParameterEncodingBitcoin: z.input<typeof brokerRequestSwapParameterEncoding> = {
-  intermediary: null,
-  output: '0xffbc',
-  network_fee: { chain: 'Ethereum', asset: 'USDC', amount: '0x42' },
-  ingress_fee: { chain: 'Ethereum', asset: 'USDT', amount: '0x0' },
-  egress_fee: { chain: 'Ethereum', asset: 'USDC', amount: '0x0' },
-  broker_commission: { chain: 'Ethereum', asset: 'USDC', amount: '0x0' },
+  chain: 'Bitcoin',
+  nulldata_payload:
+    '0x0003656623d865425c0a4955ef7e7a39d09f58554d0800000000000000000000000000000000000001000200000100',
+  deposit_address: 'bcrt1pmrhjpvq2w7cgesrcrvuhqw6n6j487l6uc7tmwtx9jen7ezesunhqllvzxx',
 };
 
 const swapParameterEncodingEthereum: z.input<typeof brokerRequestSwapParameterEncoding> = {
-  intermediary: null,
-  output: '0xffbc',
-  network_fee: { chain: 'Ethereum', asset: 'USDC', amount: '0x42' },
-  ingress_fee: { chain: 'Ethereum', asset: 'USDT', amount: '0x0' },
-  egress_fee: { chain: 'Ethereum', asset: 'USDC', amount: '0x0' },
-  broker_commission: { chain: 'Ethereum', asset: 'USDC', amount: '0x0' },
+  chain: 'Ethereum',
+  calldata:
+    '0xdd68734500000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000080000000000000000000000000000000000000000000000000000000000000000300000000000000000000000000000000000000000000000000000000000000c00000000000000000000000000000000000000000000000000000000000000014b5fb203bd12f528813b512408b374a8f0f44367a000000000000000000000000000000000000000000000000000000000000000000000000000000000000005f0000000000004cd85eb477b4820bbf10dc4689d8b344c2722eac000000000000000000000000000000000000000000000000000000000000000000009059e6d854b769a505d01148af212bf8cb7f8469a7153edce8dcaedd9d29912501000000',
+  value: '0x4563918244f40000',
+  to: '0xb7a5bd0345ef1cc5e66bf61bdec17d2461fbd968',
 };
 
 const swapParameterEncodingSolana: z.input<typeof brokerRequestSwapParameterEncoding> = {
-  intermediary: null,
-  output: '0xffbc',
-  network_fee: { chain: 'Ethereum', asset: 'USDC', amount: '0x42' },
-  ingress_fee: { chain: 'Ethereum', asset: 'USDT', amount: '0x0' },
-  egress_fee: { chain: 'Ethereum', asset: 'USDC', amount: '0x0' },
-  broker_commission: { chain: 'Ethereum', asset: 'USDC', amount: '0x0' },
+  chain: 'Solana',
+  program_id: '35uYgHdfZQT4kHkaaXQ6ZdCkK5LFrsk43btTLbGCRCNT',
+  accounts: [
+    {
+      pubkey: 'Gm4QT3aC9YZtyZAFjMNTVEMB4otEY1JW2dVEBFbGfr9p',
+      is_signer: true,
+      is_writable: true,
+    },
+    {
+      pubkey: '2tmtGLQcBd11BMiE9B1tAkQXwmPNgR79Meki2Eme4Ec9',
+      is_signer: false,
+      is_writable: true,
+    },
+    {
+      pubkey: '11111111111111111111111111111111',
+      is_signer: false,
+      is_writable: false,
+    },
+  ],
+  data: '0xa3265ce2f3698dc400e876481700000001000000140000004d2c78895c0fb2dbc04ecb98345f7b5e30bbd5f203000000006b000000000000000004f79d5e026f12edc6443a534b2cdd5072233989b415d7596573e743f3e5b386fb000000000000000000000000000000000000000000000000000000000000000000009059e6d854b769a505d01148af212bf8cb7f8469a7153edce8dcaedd9d299125010000',
 };
 
 const swapDepositAddress: z.input<typeof brokerRequestSwapDepositAddress> = {
@@ -667,7 +678,7 @@ describe(HttpClient, () => {
               return respond(unregisteredAccount);
           }
         case 'broker_request_swap_parameter_encoding':
-          switch (body.params[0]) {
+          switch ((body.params[0] as { chain?: string }).chain) {
             case 'Ethereum':
               return respond(swapParameterEncodingEthereum);
             case 'Solana':
@@ -1037,6 +1048,67 @@ describe(HttpClient, () => {
 
     it('gets broker account info', async () => {
       expect(await client.sendRequest('cf_account_info', BROKER_ACCOUNT_ID)).toMatchSnapshot();
+    });
+
+    it('gets vault swap data for bitcoin', async () => {
+      expect(
+        await client.sendRequest(
+          'broker_request_swap_parameter_encoding',
+          { chain: 'Bitcoin', asset: 'BTC' },
+          { chain: 'Ethereum', asset: 'USDC' },
+          '0x4838B106FCe9647Bdf1E7877BF73cE8B0BAD5f97',
+          10,
+          {
+            chain: 'Bitcoin',
+            min_output_amount: '0x1',
+            retry_duration: 100,
+          },
+        ),
+      ).toMatchSnapshot();
+    });
+
+    it('gets vault swap data for ethereum', async () => {
+      expect(
+        await client.sendRequest(
+          'broker_request_swap_parameter_encoding',
+          { chain: 'Ethereum', asset: 'ETH' },
+          { chain: 'Ethereum', asset: 'USDC' },
+          '0x4838B106FCe9647Bdf1E7877BF73cE8B0BAD5f97',
+          10,
+          {
+            chain: 'Ethereum',
+            input_amount: `0x111111`,
+            refund_parameters: {
+              refund_address: '0x4838B106FCe9647Bdf1E7877BF73cE8B0BAD5f97',
+              retry_duration: 100,
+              min_price: '0x1',
+            },
+          },
+        ),
+      ).toMatchSnapshot();
+    });
+
+    it('gets vault swap data for solana', async () => {
+      expect(
+        await client.sendRequest(
+          'broker_request_swap_parameter_encoding',
+          { chain: 'Solana', asset: 'SOL' },
+          { chain: 'Ethereum', asset: 'USDC' },
+          '0x4838B106FCe9647Bdf1E7877BF73cE8B0BAD5f97',
+          10,
+          {
+            chain: 'Solana',
+            from: 'oQPnhXAbLbMuKHESaGrbXT17CyvWCpLyERSJA9HCYd7',
+            event_data_account: 'HTox3DgDcrzsK5RvduHnW9Fu7m3QaQr3VwQ9oDmrnfr6',
+            input_amount: '0x11111',
+            refund_parameters: {
+              refund_address: '0x4838B106FCe9647Bdf1E7877BF73cE8B0BAD5f97',
+              retry_duration: 100,
+              min_price: '0x1',
+            },
+          },
+        ),
+      ).toMatchSnapshot();
     });
 
     it('gets unregistered account info', async () => {
