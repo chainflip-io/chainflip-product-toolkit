@@ -28,7 +28,7 @@ const getSolanaConnection = (solanaEndpoint: string) => {
   });
 };
 
-type Transfer = {
+export type Transfer = {
   signature: string;
   amount: bigint;
   slot: number;
@@ -150,7 +150,7 @@ const fetchTransfers = async (
   throw new Error('too much pagination');
 };
 
-type DepositInfo = {
+export type DepositInfo = {
   amount: bigint;
   maxSlot: number;
 };
@@ -208,9 +208,10 @@ export const findTransactionSignatures = async (
   depositAddress: string,
   asset: 'Sol' | 'SolUsdc',
   deposits: DepositInfo[],
+  fetcher: typeof fetchTransfers = fetchTransfers,
   reportingErrorTolerance = 50,
 ) => {
-  const transfers = await fetchTransfers(rpcUrl, depositAddress, asset, deposits.length);
+  const transfers = await fetcher(rpcUrl, depositAddress, asset, deposits.length);
 
   let error: Error;
 
