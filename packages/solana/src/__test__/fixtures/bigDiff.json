@@ -35,19 +35,13 @@
               "index": 3,
               "instructions": [
                 {
-                  "accounts": [
-                    0,
-                    2
-                  ],
+                  "accounts": [0, 2],
                   "data": "11115hda1xw8M8BwxHcK7YDsPxGSTyxfJQUH8h27JkZnS3CotYsbPnMtwiLbCzTgw9s9qd",
                   "programIdIndex": 4,
                   "stackHeight": 2
                 },
                 {
-                  "accounts": [
-                    3,
-                    0
-                  ],
+                  "accounts": [3, 0],
                   "data": "3Bxs4Bb7eStozSAB",
                   "programIdIndex": 4,
                   "stackHeight": 2
@@ -75,29 +69,9 @@
             "Program AusZPVXPoUM8QJJ2SL4KwvRGCQ22cDg6Y4rg7EvFrxi7 consumed 19630 of 49725 compute units",
             "Program AusZPVXPoUM8QJJ2SL4KwvRGCQ22cDg6Y4rg7EvFrxi7 success"
           ],
-          "postBalances": [
-            6922267688285,
-            1447680,
-            1057920,
-            0,
-            1,
-            1,
-            42706560,
-            2025360,
-            1141440
-          ],
+          "postBalances": [6922267688285, 1447680, 1057920, 0, 1, 1, 42706560, 2025360, 1141440],
           "postTokenBalances": [],
-          "preBalances": [
-            6920800252955,
-            1447680,
-            0,
-            1469000000,
-            1,
-            1,
-            42706560,
-            2025360,
-            1141440
-          ],
+          "preBalances": [6920800252955, 1447680, 0, 1469000000, 1, 1, 42706560, 2025360, 1141440],
           "preTokenBalances": [],
           "rewards": [],
           "status": {
@@ -125,11 +99,7 @@
             },
             "instructions": [
               {
-                "accounts": [
-                  1,
-                  6,
-                  0
-                ],
+                "accounts": [1, 6, 0],
                 "data": "6vx8P",
                 "programIdIndex": 4,
                 "stackHeight": null
@@ -147,13 +117,7 @@
                 "stackHeight": null
               },
               {
-                "accounts": [
-                  7,
-                  0,
-                  3,
-                  2,
-                  4
-                ],
+                "accounts": [7, 0, 3, 2, 4],
                 "data": "9jxBwMev6MEAXKcYfNDkcspcSzbcr",
                 "programIdIndex": 8,
                 "stackHeight": null
@@ -194,21 +158,9 @@
             "Program ComputeBudget111111111111111111111111111111 invoke [1]",
             "Program ComputeBudget111111111111111111111111111111 success"
           ],
-          "postBalances": [
-            1595163,
-            1469000000,
-            1141440,
-            1,
-            1
-          ],
+          "postBalances": [1595163, 1469000000, 1141440, 1, 1],
           "postTokenBalances": [],
-          "preBalances": [
-            1470601206,
-            0,
-            1141440,
-            1,
-            1
-          ],
+          "preBalances": [1470601206, 0, 1141440, 1, 1],
           "preTokenBalances": [],
           "rewards": [],
           "status": {
@@ -245,10 +197,7 @@
                 "stackHeight": null
               },
               {
-                "accounts": [
-                  0,
-                  1
-                ],
+                "accounts": [0, 1],
                 "data": "3Bxs4Bb7eStozSAB",
                 "programIdIndex": 3,
                 "stackHeight": null

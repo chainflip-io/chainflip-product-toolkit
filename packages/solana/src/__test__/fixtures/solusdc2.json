@@ -70,15 +70,7 @@
             "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA success"
           ],
           "postBalances": [
-            1542063126,
-            2039280,
-            2039280,
-            2039280,
-            2039280,
-            2039280,
-            2039280,
-            2039280,
-            934087680
+            1542063126, 2039280, 2039280, 2039280, 2039280, 2039280, 2039280, 2039280, 934087680
           ],
           "postTokenBalances": [
             {
@@ -167,15 +159,7 @@
             }
           ],
           "preBalances": [
-            1542068126,
-            2039280,
-            2039280,
-            2039280,
-            2039280,
-            2039280,
-            2039280,
-            2039280,
-            934087680
+            1542068126, 2039280, 2039280, 2039280, 2039280, 2039280, 2039280, 2039280, 934087680
           ],
           "preTokenBalances": [
             {
@@ -289,61 +273,37 @@
             },
             "instructions": [
               {
-                "accounts": [
-                  5,
-                  2,
-                  0
-                ],
+                "accounts": [5, 2, 0],
                 "data": "3DdGGhkhJbjm",
                 "programIdIndex": 8,
                 "stackHeight": null
               },
               {
-                "accounts": [
-                  5,
-                  1,
-                  0
-                ],
+                "accounts": [5, 1, 0],
                 "data": "3DdGGhkhJbjm",
                 "programIdIndex": 8,
                 "stackHeight": null
               },
               {
-                "accounts": [
-                  5,
-                  7,
-                  0
-                ],
+                "accounts": [5, 7, 0],
                 "data": "3DdGGhkhJbjm",
                 "programIdIndex": 8,
                 "stackHeight": null
               },
               {
-                "accounts": [
-                  5,
-                  4,
-                  0
-                ],
+                "accounts": [5, 4, 0],
                 "data": "3DdGGhkhJbjm",
                 "programIdIndex": 8,
                 "stackHeight": null
               },
               {
-                "accounts": [
-                  5,
-                  6,
-                  0
-                ],
+                "accounts": [5, 6, 0],
                 "data": "3DdGGhkhJbjm",
                 "programIdIndex": 8,
                 "stackHeight": null
               },
               {
-                "accounts": [
-                  5,
-                  3,
-                  0
-                ],
+                "accounts": [5, 3, 0],
                 "data": "3DdGGhkhJbjm",
                 "programIdIndex": 8,
                 "stackHeight": null
@@ -372,21 +332,13 @@
               "index": 3,
               "instructions": [
                 {
-                  "accounts": [
-                    0,
-                    2
-                  ],
+                  "accounts": [0, 2],
                   "data": "11115hda1xw8M8BwxHcK7YDsPxGSTyxfJQUH8h27JkZnS3CotYsbPnMtwiLbCzTgw9s9qd",
                   "programIdIndex": 5,
                   "stackHeight": 2
                 },
                 {
-                  "accounts": [
-                    4,
-                    12,
-                    3,
-                    9
-                  ],
+                  "accounts": [4, 12, 3, 9],
                   "data": "gXMZauXMhVTLq",
                   "programIdIndex": 8,
                   "stackHeight": 2
@@ -417,19 +369,8 @@
             "Program AusZPVXPoUM8QJJ2SL4KwvRGCQ22cDg6Y4rg7EvFrxi7 success"
           ],
           "postBalances": [
-            5550574197644,
-            1447680,
-            1057920,
-            2039280,
-            2039280,
-            1,
-            1,
-            42706560,
-            934087680,
-            0,
-            2025360,
-            1141440,
-            321908068466
+            5550574197644, 1447680, 1057920, 2039280, 2039280, 1, 1, 42706560, 934087680, 0,
+            2025360, 1141440, 321908068466
           ],
           "postTokenBalances": [
             {
@@ -458,19 +399,8 @@
             }
           ],
           "preBalances": [
-            5550575260565,
-            1447680,
-            0,
-            2039280,
-            2039280,
-            1,
-            1,
-            42706560,
-            934087680,
-            0,
-            2025360,
-            1141440,
-            321908068466
+            5550575260565, 1447680, 0, 2039280, 2039280, 1, 1, 42706560, 934087680, 0, 2025360,
+            1141440, 321908068466
           ],
           "preTokenBalances": [
             {
@@ -528,11 +458,7 @@
             },
             "instructions": [
               {
-                "accounts": [
-                  1,
-                  7,
-                  0
-                ],
+                "accounts": [1, 7, 0],
                 "data": "6vx8P",
                 "programIdIndex": 5,
                 "stackHeight": null
@@ -550,17 +476,7 @@
                 "stackHeight": null
               },
               {
-                "accounts": [
-                  10,
-                  0,
-                  9,
-                  4,
-                  3,
-                  12,
-                  8,
-                  2,
-                  5
-                ],
+                "accounts": [10, 0, 9, 4, 3, 12, 8, 2, 5],
                 "data": "LtXPtiMQqp5rK6sWAyoEXKV61phR1w",
                 "programIdIndex": 11,
                 "stackHeight": null
@@ -589,35 +505,25 @@
               "index": 3,
               "instructions": [
                 {
-                  "accounts": [
-                    8
-                  ],
+                  "accounts": [8],
                   "data": "84eT",
                   "programIdIndex": 10,
                   "stackHeight": 2
                 },
                 {
-                  "accounts": [
-                    0,
-                    1
-                  ],
+                  "accounts": [0, 1],
                   "data": "11119os1e9qSs2u7TsThXqkBSRVFxhmYaFKFZ1waB2X7armDmvK3p5GmLdUxYdg3h7QSrL",
                   "programIdIndex": 3,
                   "stackHeight": 2
                 },
                 {
-                  "accounts": [
-                    1
-                  ],
+                  "accounts": [1],
                   "data": "P",
                   "programIdIndex": 10,
                   "stackHeight": 2
                 },
                 {
-                  "accounts": [
-                    1,
-                    8
-                  ],
+                  "accounts": [1, 8],
                   "data": "6SAsH8vFmJorqrSxwkwAsF4rzCrRED7wc1mowgLa6HDpg",
                   "programIdIndex": 10,
                   "stackHeight": 2
@@ -664,16 +570,7 @@
             "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA success"
           ],
           "postBalances": [
-            199720784,
-            2039280,
-            2039280,
-            1,
-            0,
-            731913600,
-            1,
-            1141440,
-            321908068466,
-            1009200,
+            199720784, 2039280, 2039280, 1, 0, 731913600, 1, 1141440, 321908068466, 1009200,
             934087680
           ],
           "postTokenBalances": [
@@ -703,17 +600,7 @@
             }
           ],
           "preBalances": [
-            201837170,
-            0,
-            2039280,
-            1,
-            0,
-            731913600,
-            1,
-            1141440,
-            321908068466,
-            1009200,
-            934087680
+            201837170, 0, 2039280, 1, 0, 731913600, 1, 1141440, 321908068466, 1009200, 934087680
           ],
           "preTokenBalances": [
             {
@@ -769,35 +656,19 @@
                 "stackHeight": null
               },
               {
-                "accounts": [
-                  4
-                ],
+                "accounts": [4],
                 "data": "11111111111111111111111111111111",
                 "programIdIndex": 7,
                 "stackHeight": null
               },
               {
-                "accounts": [
-                  0,
-                  1,
-                  4,
-                  8,
-                  3,
-                  10,
-                  9
-                ],
+                "accounts": [0, 1, 4, 8, 3, 10, 9],
                 "data": "",
                 "programIdIndex": 5,
                 "stackHeight": null
               },
               {
-                "accounts": [
-                  2,
-                  8,
-                  1,
-                  0,
-                  0
-                ],
+                "accounts": [2, 8, 1, 0, 0],
                 "data": "gXMZauXMhVTLq",
                 "programIdIndex": 10,
                 "stackHeight": null
