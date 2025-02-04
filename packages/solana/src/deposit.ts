@@ -35,7 +35,6 @@ type Transfer = {
 };
 
 const addresses = {
-  Sol: 'So11111111111111111111111111111111111111111',
   SolUsdc: 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v',
 };
 
