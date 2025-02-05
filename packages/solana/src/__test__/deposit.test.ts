@@ -1,5 +1,10 @@
+import { Connection } from '@solana/web3.js';
 import { describe, beforeEach, it, vi, expect } from 'vitest';
-import { findTransactionSignatures, parseUrlWithBasicAuth } from '../deposit';
+import {
+  findTransactionSignatures,
+  findVaultSwapSignature,
+  parseUrlWithBasicAuth,
+} from '../deposit';
 import bigDiff from './fixtures/bigDiff.json';
 import cluster from './fixtures/cluster.json';
 import combineTxs from './fixtures/combineTxs.json';
@@ -287,6 +292,61 @@ describe(parseUrlWithBasicAuth, () => {
         },
         "url": "https://url.org/",
       }
+    `);
+  });
+});
+
+describe(findVaultSwapSignature, () => {
+  it('it finds the vault swap signature', async () => {
+    const spy = vi.spyOn(Connection.prototype, 'getSignaturesForAddress');
+
+    mockFetch({
+      signatures: {
+        jsonrpc: '2.0',
+        result: [
+          {
+            blockTime: 1738773949,
+            confirmationStatus: 'finalized',
+            err: null,
+            memo: null,
+            signature:
+              '4pEt91qznsQu7MNiEqHjMLXyR6ZjXLP8PqbtWvg8DxgEAK62DP6Xm1HSBsEdYDaBTcAhQnph9SMduYybqK3P28bD',
+            slot: 3165493,
+          },
+          {
+            blockTime: 1738773877,
+            confirmationStatus: 'finalized',
+            err: null,
+            memo: null,
+            signature:
+              '4kVrUsvMjoZfetYdfKx3CgkverNC72iDDqMcr3qERHT117sWqhszBsj5CqMDFs1uoy3cNnNVvGfPaercdRg1phy4',
+            slot: 3165324,
+          },
+        ],
+        id: '1',
+      },
+      transactions: null,
+    });
+
+    expect(
+      await findVaultSwapSignature(
+        'https://solana.rpc',
+        'FktykLDxTR3MnKSFQM4tGx7FPTaRVtHBzFsx57P8JumL',
+        3165324,
+      ),
+    ).toBe(
+      '4kVrUsvMjoZfetYdfKx3CgkverNC72iDDqMcr3qERHT117sWqhszBsj5CqMDFs1uoy3cNnNVvGfPaercdRg1phy4',
+    );
+    expect(spy.mock.calls).toMatchInlineSnapshot(`
+      [
+        [
+          "FktykLDxTR3MnKSFQM4tGx7FPTaRVtHBzFsx57P8JumL",
+          {
+            "limit": 10,
+            "minContextSlot": 3165324,
+          },
+        ],
+      ]
     `);
   });
 });
