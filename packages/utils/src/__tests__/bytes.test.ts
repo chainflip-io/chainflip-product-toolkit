@@ -42,6 +42,7 @@ describe(hexToBytes, () => {
 
 describe(encodeBytesWithCharset, () => {
   it('encodes a number in a charset', () => {
+    expect(encodeBytesWithCharset('0xff', '0123456789')).toBe('255');
     expect(encodeBytesWithCharset([0xff], '0123456789')).toBe('255');
     expect(encodeBytesWithCharset([0xff, 0xff], '0123456789')).toBe('65535');
     expect(encodeBytesWithCharset([0x8], '01')).toBe('1000');

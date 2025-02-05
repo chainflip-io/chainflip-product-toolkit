@@ -2,7 +2,7 @@ import { blake2b } from '@noble/hashes/blake2b';
 import { assert } from './assertion';
 import * as base58 from './base58';
 import { hexToBytes, bytesToHex } from './bytes';
-import { type HexString } from './types';
+import { type Bytelike, type HexString } from './types';
 
 const CHECKSUM_BYTE_LENGTH = 2;
 const DATA_LENGTH = 32;
@@ -59,7 +59,7 @@ export const encode = ({
   data: input,
   ss58Format,
 }: {
-  data: Uint8Array | HexString;
+  data: Bytelike;
   ss58Format: number;
 }): string => {
   const data = typeof input === 'string' ? hexToBytes(input) : input;

@@ -1,5 +1,5 @@
 import { assert } from './assertion';
-import { type HexString } from './types';
+import { type Bytelike, type HexString } from './types';
 
 export const bytesToHex = (input: Uint8Array | number[]): `0x${string}` => {
   const bytes = new Uint8Array(input);
@@ -23,7 +23,10 @@ export const hexToBytes = (input: HexString): Uint8Array => {
   return bytes;
 };
 
-const convertBase = (bytes: Uint8Array | number[], fromBase: number, toBase: number): number[] => {
+const convertBase = (inputBytes: Bytelike, fromBase: number, toBase: number): number[] => {
+  const bytes =
+    typeof inputBytes === 'string' ? hexToBytes(inputBytes) : new Uint8Array(inputBytes);
+
   const result = [];
 
   for (const byte of bytes) {
@@ -50,7 +53,7 @@ const convertBase = (bytes: Uint8Array | number[], fromBase: number, toBase: num
   return result.reverse();
 };
 
-export const encodeBytesWithCharset = (bytes: Uint8Array | number[], charset: string): string =>
+export const encodeBytesWithCharset = (bytes: Bytelike, charset: string): string =>
   convertBase(bytes, 256, charset.length)
     .map((charCode) => charset.charAt(charCode))
     .join('');
