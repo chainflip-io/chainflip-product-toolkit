@@ -1,5 +1,5 @@
+import { assert } from '@chainflip/utils/assertion';
 import { Connection, PublicKey, type VersionedTransactionResponse } from '@solana/web3.js';
-import assert from 'assert';
 
 export const parseUrlWithBasicAuth = (url: string) => {
   const rpcUrl = new URL(url);
@@ -231,4 +231,23 @@ export const findTransactionSignatures = async (
 
   // eslint-disable-next-line no-throw-literal -- false positive
   throw error!;
+};
+
+export const findVaultSwapSignature = async (
+  solanaEndpoint: string,
+  accountAddress: string,
+  slot: number,
+) => {
+  const connection = getSolanaConnection(solanaEndpoint);
+
+  const allSignatures = await connection.getSignaturesForAddress(new PublicKey(accountAddress), {
+    minContextSlot: slot,
+    limit: 10,
+  });
+
+  const signatures = allSignatures.filter((sig) => sig.slot === slot);
+
+  assert(signatures.length === 1, 'failed to find signature');
+
+  return signatures[0].signature;
 };
