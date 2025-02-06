@@ -102,6 +102,10 @@ export const brokerAliasMap: AccountAliasMap = {
     name: 'SwapKit',
     twitter: '@SwapKitPowered',
   },
+  cFKe4xhoVd783CUTYNxMua4eVE3pSDnbvjLXVRpeq2qC9bSZi: {
+    name: 'Cake Wallet',
+    twitter: '@cakewallet',
+  },
 } as const;
 
 export const lpAliasMap: AccountAliasMap = {
