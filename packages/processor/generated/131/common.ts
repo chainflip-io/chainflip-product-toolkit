@@ -283,7 +283,7 @@ export const palletCfEthereumIngressEgressDepositIgnoredReason = simpleEnum([
   'NotEnoughToPayFees',
 ]);
 
-export const palletCfIngressEgressDepositWitnessEthereum = z.object({
+export const palletCfEthereumIngressEgressDepositWitnessEthereum = z.object({
   depositAddress: hexString,
   asset: cfPrimitivesChainsAssetsEthAsset,
   amount: numberOrHex,
@@ -318,7 +318,7 @@ export const palletCfBitcoinIngressEgressDepositIgnoredReason = simpleEnum([
   'NotEnoughToPayFees',
 ]);
 
-export const palletCfIngressEgressDepositWitnessBitcoin = z.object({
+export const palletCfBitcoinIngressEgressDepositWitnessBitcoin = z.object({
   depositAddress: cfChainsBtcScriptPubkey,
   asset: cfPrimitivesChainsAssetsBtcAsset,
   amount: numberOrHex,

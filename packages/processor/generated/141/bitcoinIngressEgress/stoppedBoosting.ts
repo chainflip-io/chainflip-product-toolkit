@@ -1,9 +1,9 @@
 import { z } from 'zod';
-import { accountId, numberOrHex, palletCfIngressEgressBoostPoolIdBitcoin } from '../common';
+import { accountId, numberOrHex, palletCfBitcoinIngressEgressBoostPoolIdBitcoin } from '../common';
 
 export const bitcoinIngressEgressStoppedBoosting = z.object({
   boosterId: accountId,
-  boostPool: palletCfIngressEgressBoostPoolIdBitcoin,
+  boostPool: palletCfBitcoinIngressEgressBoostPoolIdBitcoin,
   unlockedAmount: numberOrHex,
   pendingBoosts: z.array(numberOrHex),
 });

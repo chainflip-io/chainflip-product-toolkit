@@ -1,9 +1,13 @@
 import { z } from 'zod';
-import { accountId, numberOrHex, palletCfIngressEgressBoostPoolIdArbitrum } from '../common';
+import {
+  accountId,
+  numberOrHex,
+  palletCfArbitrumIngressEgressBoostPoolIdArbitrum,
+} from '../common';
 
 export const arbitrumIngressEgressStoppedBoosting = z.object({
   boosterId: accountId,
-  boostPool: palletCfIngressEgressBoostPoolIdArbitrum,
+  boostPool: palletCfArbitrumIngressEgressBoostPoolIdArbitrum,
   unlockedAmount: numberOrHex,
   pendingBoosts: z.array(numberOrHex),
 });

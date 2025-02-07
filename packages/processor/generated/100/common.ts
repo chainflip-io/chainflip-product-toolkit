@@ -398,7 +398,7 @@ export const palletCfSwappingCcmFailReason = simpleEnum([
   'PrincipalSwapAmountTooLow',
 ]);
 
-export const palletCfIngressEgressDepositWitnessEthereum = z.object({
+export const palletCfEthereumIngressEgressDepositWitnessEthereum = z.object({
   depositAddress: hexString,
   asset: cfPrimitivesChainsAssetsEthAsset,
   amount: numberOrHex,
@@ -406,7 +406,7 @@ export const palletCfIngressEgressDepositWitnessEthereum = z.object({
 
 export const cfPrimitivesChainsAssetsDotAsset = simpleEnum(['Dot']);
 
-export const palletCfIngressEgressDepositWitnessPolkadot = z.object({
+export const palletCfPolkadotIngressEgressDepositWitnessPolkadot = z.object({
   depositAddress: hexString,
   asset: cfPrimitivesChainsAssetsDotAsset,
   amount: numberOrHex,
@@ -416,7 +416,7 @@ export const cfPrimitivesChainsAssetsBtcAsset = simpleEnum(['Btc']);
 
 export const cfChainsBtcUtxoId = z.object({ txId: hexString, vout: z.number() });
 
-export const palletCfIngressEgressDepositWitnessBitcoin = z.object({
+export const palletCfBitcoinIngressEgressDepositWitnessBitcoin = z.object({
   depositAddress: cfChainsBtcScriptPubkey,
   asset: cfPrimitivesChainsAssetsBtcAsset,
   amount: numberOrHex,

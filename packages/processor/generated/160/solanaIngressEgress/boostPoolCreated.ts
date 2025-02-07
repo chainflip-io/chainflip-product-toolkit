@@ -1,6 +1,6 @@
 import { z } from 'zod';
-import { palletCfIngressEgressBoostPoolIdSolana } from '../common';
+import { palletCfSolanaIngressEgressBoostPoolIdSolana } from '../common';
 
 export const solanaIngressEgressBoostPoolCreated = z.object({
-  boostPool: palletCfIngressEgressBoostPoolIdSolana,
+  boostPool: palletCfSolanaIngressEgressBoostPoolIdSolana,
 });

@@ -9923,7 +9923,7 @@
         },
         "depositWitness": {
           "type": "struct",
-          "name": "PalletCfIngressEgressDepositWitnessEthereum",
+          "name": "PalletCfEthereumIngressEgressDepositWitnessEthereum",
           "fields": {
             "depositAddress": {
               "type": "primitive",
@@ -10825,7 +10825,7 @@
         },
         "depositWitness": {
           "type": "struct",
-          "name": "PalletCfIngressEgressDepositWitnessPolkadot",
+          "name": "PalletCfPolkadotIngressEgressDepositWitnessPolkadot",
           "fields": {
             "depositAddress": {
               "type": "array",
@@ -12021,7 +12021,7 @@
         },
         "depositWitness": {
           "type": "struct",
-          "name": "PalletCfIngressEgressDepositWitnessBitcoin",
+          "name": "PalletCfBitcoinIngressEgressDepositWitnessBitcoin",
           "fields": {
             "depositAddress": {
               "type": "enum",

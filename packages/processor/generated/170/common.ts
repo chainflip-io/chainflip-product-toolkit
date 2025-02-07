@@ -324,7 +324,7 @@ export const palletCfBitcoinIngressEgressDepositIgnoredReason = simpleEnum([
   'TransactionRejectedByBroker',
 ]);
 
-export const palletCfIngressEgressDepositWitnessBitcoin = z.object({
+export const palletCfBitcoinIngressEgressDepositWitnessBitcoin = z.object({
   depositAddress: cfChainsBtcScriptPubkey,
   asset: cfPrimitivesChainsAssetsBtcAsset,
   amount: numberOrHex,
