@@ -8,7 +8,7 @@ export const chainflipLinks = {
   website: 'https://chainflip.io/',
   discord: 'https://discord.gg/chainflip-community',
   twitter: 'https://twitter.com/chainflip',
-  telegram: 'https://t.me/chainflip',
+  telegram: 'https://t.me/chainflip_io_chat',
   blog: 'https://blog.chainflip.io/',
   docs: 'https://docs.chainflip.io/',
 };
@@ -16,7 +16,7 @@ export const chainflipLinks = {
 export const chainflipCommunityLinks = {
   discord: 'https://discord.gg/chainflip-community',
   twitter: 'https://twitter.com/chainflip',
-  telegram: 'https://t.me/chainflip',
+  telegram: 'https://t.me/chainflip_io_chat',
 };
 
 type AccountAliasMap = {
