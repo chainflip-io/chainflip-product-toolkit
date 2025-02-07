@@ -1,6 +1,6 @@
 import { z } from 'zod';
-import { palletCfIngressEgressBoostPoolIdPolkadot } from '../common';
+import { palletCfPolkadotIngressEgressBoostPoolIdPolkadot } from '../common';
 
 export const polkadotIngressEgressBoostPoolCreated = z.object({
-  boostPool: palletCfIngressEgressBoostPoolIdPolkadot,
+  boostPool: palletCfPolkadotIngressEgressBoostPoolIdPolkadot,
 });

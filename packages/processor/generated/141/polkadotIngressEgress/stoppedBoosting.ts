@@ -1,9 +1,13 @@
 import { z } from 'zod';
-import { accountId, numberOrHex, palletCfIngressEgressBoostPoolIdPolkadot } from '../common';
+import {
+  accountId,
+  numberOrHex,
+  palletCfPolkadotIngressEgressBoostPoolIdPolkadot,
+} from '../common';
 
 export const polkadotIngressEgressStoppedBoosting = z.object({
   boosterId: accountId,
-  boostPool: palletCfIngressEgressBoostPoolIdPolkadot,
+  boostPool: palletCfPolkadotIngressEgressBoostPoolIdPolkadot,
   unlockedAmount: numberOrHex,
   pendingBoosts: z.array(numberOrHex),
 });

@@ -91,9 +91,15 @@ export default class Parser extends BaseParser {
       case TypeDefInfo.Struct: {
         assert(hasSubs(type));
 
+        let name = type.lookupName ?? this.genericNamespace(type.namespace);
+
+        if (name && this.getPalletName() !== 'Environment') {
+          name = name.replace('IngressEgress', this.getPalletName());
+        }
+
         const result: StructType = {
           type: 'struct',
-          name: type.lookupName ?? this.genericNamespace(type.namespace),
+          name,
           fields: {},
         };
 

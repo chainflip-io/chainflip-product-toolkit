@@ -441,13 +441,13 @@ export const palletCfSolanaIngressEgressDepositIgnoredReason = simpleEnum([
   'NotEnoughToPayFees',
 ]);
 
-export const palletCfIngressEgressDepositWitnessSolana = z.object({
+export const palletCfSolanaIngressEgressDepositWitnessSolana = z.object({
   depositAddress: hexString,
   asset: cfPrimitivesChainsAssetsSolAsset,
   amount: numberOrHex,
 });
 
-export const palletCfIngressEgressBoostPoolIdSolana = z.object({
+export const palletCfSolanaIngressEgressBoostPoolIdSolana = z.object({
   asset: cfPrimitivesChainsAssetsSolAsset,
   tier: z.number(),
 });

@@ -308,7 +308,7 @@ export const palletCfEthereumIngressEgressDepositIgnoredReason = simpleEnum([
   'NotEnoughToPayFees',
 ]);
 
-export const palletCfIngressEgressDepositWitnessEthereum = z.object({
+export const palletCfEthereumIngressEgressDepositWitnessEthereum = z.object({
   depositAddress: hexString,
   asset: cfPrimitivesChainsAssetsEthAsset,
   amount: numberOrHex,
@@ -334,7 +334,7 @@ export const palletCfPolkadotIngressEgressDepositIgnoredReason = simpleEnum([
   'NotEnoughToPayFees',
 ]);
 
-export const palletCfIngressEgressDepositWitnessPolkadot = z.object({
+export const palletCfPolkadotIngressEgressDepositWitnessPolkadot = z.object({
   depositAddress: hexString,
   asset: cfPrimitivesChainsAssetsDotAsset,
   amount: numberOrHex,
@@ -397,7 +397,7 @@ export const palletCfArbitrumIngressEgressDepositIgnoredReason = simpleEnum([
   'NotEnoughToPayFees',
 ]);
 
-export const palletCfIngressEgressDepositWitnessArbitrum = z.object({
+export const palletCfArbitrumIngressEgressDepositWitnessArbitrum = z.object({
   depositAddress: hexString,
   asset: cfPrimitivesChainsAssetsArbAsset,
   amount: numberOrHex,
@@ -435,7 +435,7 @@ export const palletCfSolanaIngressEgressDepositIgnoredReason = simpleEnum([
   'NotEnoughToPayFees',
 ]);
 
-export const palletCfIngressEgressDepositWitnessSolana = z.object({
+export const palletCfSolanaIngressEgressDepositWitnessSolana = z.object({
   depositAddress: hexString,
   asset: cfPrimitivesChainsAssetsSolAsset,
   amount: numberOrHex,
@@ -450,7 +450,7 @@ export const cfChainsAllBatchError = z.discriminatedUnion('__kind', [
   z.object({ __kind: z.literal('DispatchError'), value: spRuntimeDispatchError }),
 ]);
 
-export const palletCfIngressEgressBoostPoolIdSolana = z.object({
+export const palletCfSolanaIngressEgressBoostPoolIdSolana = z.object({
   asset: cfPrimitivesChainsAssetsSolAsset,
   tier: z.number(),
 });

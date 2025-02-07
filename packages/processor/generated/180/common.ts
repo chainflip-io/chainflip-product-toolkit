@@ -252,7 +252,7 @@ export const palletCfEthereumIngressEgressDepositFailedReason = z.discriminatedU
   z.object({ __kind: z.literal('CcmInvalidMetadata') }),
 ]);
 
-export const palletCfIngressEgressDepositWitnessEthereum = z.object({
+export const palletCfEthereumIngressEgressDepositWitnessEthereum = z.object({
   depositAddress: hexString,
   asset: cfPrimitivesChainsAssetsEthAsset,
   amount: numberOrHex,
@@ -293,7 +293,7 @@ export const cfChainsChannelRefundParametersForeignChainAddress = z.object({
   minPrice: numberOrHex,
 });
 
-export const palletCfIngressEgressVaultDepositWitness = z.object({
+export const palletCfEthereumIngressEgressVaultDepositWitness = z.object({
   inputAsset: cfPrimitivesChainsAssetsEthAsset,
   depositAddress: hexString.nullish(),
   channelId: numberOrHex.nullish(),
@@ -313,9 +313,12 @@ export const palletCfIngressEgressVaultDepositWitness = z.object({
 export const palletCfEthereumIngressEgressDepositFailedDetails = z.discriminatedUnion('__kind', [
   z.object({
     __kind: z.literal('DepositChannel'),
-    depositWitness: palletCfIngressEgressDepositWitnessEthereum,
+    depositWitness: palletCfEthereumIngressEgressDepositWitnessEthereum,
   }),
-  z.object({ __kind: z.literal('Vault'), vaultWitness: palletCfIngressEgressVaultDepositWitness }),
+  z.object({
+    __kind: z.literal('Vault'),
+    vaultWitness: palletCfEthereumIngressEgressVaultDepositWitness,
+  }),
 ]);
 
 export const cfTraitsScheduledEgressDetailsEthereum = z.object({
@@ -364,19 +367,39 @@ export const palletCfPolkadotIngressEgressDepositFailedReason = z.discriminatedU
   z.object({ __kind: z.literal('CcmInvalidMetadata') }),
 ]);
 
-export const palletCfIngressEgressDepositWitnessPolkadot = z.object({
+export const palletCfPolkadotIngressEgressDepositWitnessPolkadot = z.object({
   depositAddress: hexString,
   asset: cfPrimitivesChainsAssetsDotAsset,
   amount: numberOrHex,
   depositDetails: z.number(),
 });
 
+export const palletCfPolkadotIngressEgressVaultDepositWitness = z.object({
+  inputAsset: cfPrimitivesChainsAssetsDotAsset,
+  depositAddress: hexString.nullish(),
+  channelId: numberOrHex.nullish(),
+  depositAmount: numberOrHex,
+  depositDetails: z.number(),
+  outputAsset: cfPrimitivesChainsAssetsAnyAsset,
+  destinationAddress: cfChainsAddressEncodedAddress,
+  depositMetadata: cfChainsCcmDepositMetadataGenericForeignChainAddress.nullish(),
+  txId: cfPrimitivesTxId,
+  brokerFee: cfPrimitivesBeneficiaryAccountId32.nullish(),
+  affiliateFees: z.array(cfPrimitivesBeneficiaryAffiliateShortId),
+  refundParams: cfChainsChannelRefundParametersForeignChainAddress.nullish(),
+  dcaParams: cfPrimitivesDcaParameters.nullish(),
+  boostFee: z.number(),
+});
+
 export const palletCfPolkadotIngressEgressDepositFailedDetails = z.discriminatedUnion('__kind', [
   z.object({
     __kind: z.literal('DepositChannel'),
-    depositWitness: palletCfIngressEgressDepositWitnessPolkadot,
+    depositWitness: palletCfPolkadotIngressEgressDepositWitnessPolkadot,
   }),
-  z.object({ __kind: z.literal('Vault'), vaultWitness: palletCfIngressEgressVaultDepositWitness }),
+  z.object({
+    __kind: z.literal('Vault'),
+    vaultWitness: palletCfPolkadotIngressEgressVaultDepositWitness,
+  }),
 ]);
 
 export const cfTraitsScheduledEgressDetailsPolkadot = z.object({
@@ -434,19 +457,39 @@ export const palletCfBitcoinIngressEgressDepositFailedReason = z.discriminatedUn
   z.object({ __kind: z.literal('CcmInvalidMetadata') }),
 ]);
 
-export const palletCfIngressEgressDepositWitnessBitcoin = z.object({
+export const palletCfBitcoinIngressEgressDepositWitnessBitcoin = z.object({
   depositAddress: cfChainsBtcScriptPubkey,
   asset: cfPrimitivesChainsAssetsBtcAsset,
   amount: numberOrHex,
   depositDetails: cfChainsBtcUtxo,
 });
 
+export const palletCfBitcoinIngressEgressVaultDepositWitness = z.object({
+  inputAsset: cfPrimitivesChainsAssetsBtcAsset,
+  depositAddress: cfChainsBtcScriptPubkey.nullish(),
+  channelId: numberOrHex.nullish(),
+  depositAmount: numberOrHex,
+  depositDetails: cfChainsBtcUtxo,
+  outputAsset: cfPrimitivesChainsAssetsAnyAsset,
+  destinationAddress: cfChainsAddressEncodedAddress,
+  depositMetadata: cfChainsCcmDepositMetadataGenericForeignChainAddress.nullish(),
+  txId: hexString,
+  brokerFee: cfPrimitivesBeneficiaryAccountId32.nullish(),
+  affiliateFees: z.array(cfPrimitivesBeneficiaryAffiliateShortId),
+  refundParams: cfChainsChannelRefundParametersForeignChainAddress.nullish(),
+  dcaParams: cfPrimitivesDcaParameters.nullish(),
+  boostFee: z.number(),
+});
+
 export const palletCfBitcoinIngressEgressDepositFailedDetails = z.discriminatedUnion('__kind', [
   z.object({
     __kind: z.literal('DepositChannel'),
-    depositWitness: palletCfIngressEgressDepositWitnessBitcoin,
+    depositWitness: palletCfBitcoinIngressEgressDepositWitnessBitcoin,
   }),
-  z.object({ __kind: z.literal('Vault'), vaultWitness: palletCfIngressEgressVaultDepositWitness }),
+  z.object({
+    __kind: z.literal('Vault'),
+    vaultWitness: palletCfBitcoinIngressEgressVaultDepositWitness,
+  }),
 ]);
 
 export const cfTraitsScheduledEgressDetailsBitcoin = z.object({
@@ -492,19 +535,39 @@ export const palletCfArbitrumIngressEgressDepositFailedReason = z.discriminatedU
   z.object({ __kind: z.literal('CcmInvalidMetadata') }),
 ]);
 
-export const palletCfIngressEgressDepositWitnessArbitrum = z.object({
+export const palletCfArbitrumIngressEgressDepositWitnessArbitrum = z.object({
   depositAddress: hexString,
   asset: cfPrimitivesChainsAssetsArbAsset,
   amount: numberOrHex,
   depositDetails: cfChainsEvmDepositDetails,
 });
 
+export const palletCfArbitrumIngressEgressVaultDepositWitness = z.object({
+  inputAsset: cfPrimitivesChainsAssetsArbAsset,
+  depositAddress: hexString.nullish(),
+  channelId: numberOrHex.nullish(),
+  depositAmount: numberOrHex,
+  depositDetails: cfChainsEvmDepositDetails,
+  outputAsset: cfPrimitivesChainsAssetsAnyAsset,
+  destinationAddress: cfChainsAddressEncodedAddress,
+  depositMetadata: cfChainsCcmDepositMetadataGenericForeignChainAddress.nullish(),
+  txId: hexString,
+  brokerFee: cfPrimitivesBeneficiaryAccountId32.nullish(),
+  affiliateFees: z.array(cfPrimitivesBeneficiaryAffiliateShortId),
+  refundParams: cfChainsChannelRefundParametersForeignChainAddress.nullish(),
+  dcaParams: cfPrimitivesDcaParameters.nullish(),
+  boostFee: z.number(),
+});
+
 export const palletCfArbitrumIngressEgressDepositFailedDetails = z.discriminatedUnion('__kind', [
   z.object({
     __kind: z.literal('DepositChannel'),
-    depositWitness: palletCfIngressEgressDepositWitnessArbitrum,
+    depositWitness: palletCfArbitrumIngressEgressDepositWitnessArbitrum,
   }),
-  z.object({ __kind: z.literal('Vault'), vaultWitness: palletCfIngressEgressVaultDepositWitness }),
+  z.object({
+    __kind: z.literal('Vault'),
+    vaultWitness: palletCfArbitrumIngressEgressVaultDepositWitness,
+  }),
 ]);
 
 export const cfTraitsScheduledEgressDetailsArbitrum = z.object({
@@ -545,18 +608,37 @@ export const palletCfSolanaIngressEgressDepositFailedReason = z.discriminatedUni
   z.object({ __kind: z.literal('CcmInvalidMetadata') }),
 ]);
 
-export const palletCfIngressEgressDepositWitnessSolana = z.object({
+export const palletCfSolanaIngressEgressDepositWitnessSolana = z.object({
   depositAddress: hexString,
   asset: cfPrimitivesChainsAssetsSolAsset,
   amount: numberOrHex,
 });
 
+export const palletCfSolanaIngressEgressVaultDepositWitness = z.object({
+  inputAsset: cfPrimitivesChainsAssetsSolAsset,
+  depositAddress: hexString.nullish(),
+  channelId: numberOrHex.nullish(),
+  depositAmount: numberOrHex,
+  outputAsset: cfPrimitivesChainsAssetsAnyAsset,
+  destinationAddress: cfChainsAddressEncodedAddress,
+  depositMetadata: cfChainsCcmDepositMetadataGenericForeignChainAddress.nullish(),
+  txId: z.tuple([hexString, numberOrHex]),
+  brokerFee: cfPrimitivesBeneficiaryAccountId32.nullish(),
+  affiliateFees: z.array(cfPrimitivesBeneficiaryAffiliateShortId),
+  refundParams: cfChainsChannelRefundParametersForeignChainAddress.nullish(),
+  dcaParams: cfPrimitivesDcaParameters.nullish(),
+  boostFee: z.number(),
+});
+
 export const palletCfSolanaIngressEgressDepositFailedDetails = z.discriminatedUnion('__kind', [
   z.object({
     __kind: z.literal('DepositChannel'),
-    depositWitness: palletCfIngressEgressDepositWitnessSolana,
+    depositWitness: palletCfSolanaIngressEgressDepositWitnessSolana,
   }),
-  z.object({ __kind: z.literal('Vault'), vaultWitness: palletCfIngressEgressVaultDepositWitness }),
+  z.object({
+    __kind: z.literal('Vault'),
+    vaultWitness: palletCfSolanaIngressEgressVaultDepositWitness,
+  }),
 ]);
 
 export const cfTraitsScheduledEgressDetailsSolana = z.object({

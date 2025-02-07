@@ -346,7 +346,7 @@ export const palletCfEthereumIngressEgressDepositAction = z.discriminatedUnion('
   z.object({ __kind: z.literal('BoostersCredited'), prewitnessedDepositId: numberOrHex }),
 ]);
 
-export const palletCfIngressEgressBoostPoolIdEthereum = z.object({
+export const palletCfEthereumIngressEgressBoostPoolIdEthereum = z.object({
   asset: cfPrimitivesChainsAssetsEthAsset,
   tier: z.number(),
 });
@@ -365,7 +365,7 @@ export const palletCfPolkadotIngressEgressDepositAction = z.discriminatedUnion('
   z.object({ __kind: z.literal('BoostersCredited'), prewitnessedDepositId: numberOrHex }),
 ]);
 
-export const palletCfIngressEgressBoostPoolIdPolkadot = z.object({
+export const palletCfPolkadotIngressEgressBoostPoolIdPolkadot = z.object({
   asset: cfPrimitivesChainsAssetsDotAsset,
   tier: z.number(),
 });
@@ -384,7 +384,7 @@ export const palletCfBitcoinIngressEgressDepositAction = z.discriminatedUnion('_
   z.object({ __kind: z.literal('BoostersCredited'), prewitnessedDepositId: numberOrHex }),
 ]);
 
-export const palletCfIngressEgressBoostPoolIdBitcoin = z.object({
+export const palletCfBitcoinIngressEgressBoostPoolIdBitcoin = z.object({
   asset: cfPrimitivesChainsAssetsBtcAsset,
   tier: z.number(),
 });
@@ -452,7 +452,7 @@ export const palletCfArbitrumIngressEgressDepositIgnoredReason = simpleEnum([
   'NotEnoughToPayFees',
 ]);
 
-export const palletCfIngressEgressDepositWitnessArbitrum = z.object({
+export const palletCfArbitrumIngressEgressDepositWitnessArbitrum = z.object({
   depositAddress: hexString,
   asset: cfPrimitivesChainsAssetsArbAsset,
   amount: numberOrHex,
@@ -467,7 +467,7 @@ export const cfChainsAllBatchError = z.discriminatedUnion('__kind', [
   z.object({ __kind: z.literal('DispatchError'), value: spRuntimeDispatchError }),
 ]);
 
-export const palletCfIngressEgressBoostPoolIdArbitrum = z.object({
+export const palletCfArbitrumIngressEgressBoostPoolIdArbitrum = z.object({
   asset: cfPrimitivesChainsAssetsArbAsset,
   tier: z.number(),
 });

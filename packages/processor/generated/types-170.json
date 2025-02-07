@@ -12939,7 +12939,7 @@
         },
         "depositWitness": {
           "type": "struct",
-          "name": "PalletCfIngressEgressDepositWitnessEthereum",
+          "name": "PalletCfEthereumIngressEgressDepositWitnessEthereum",
           "fields": {
             "depositAddress": {
               "type": "primitive",
@@ -13624,7 +13624,7 @@
         },
         "boostPool": {
           "type": "struct",
-          "name": "PalletCfIngressEgressBoostPoolIdEthereum",
+          "name": "PalletCfEthereumIngressEgressBoostPoolIdEthereum",
           "fields": {
             "asset": {
               "type": "enum",
@@ -13681,7 +13681,7 @@
         },
         "boostPool": {
           "type": "struct",
-          "name": "PalletCfIngressEgressBoostPoolIdEthereum",
+          "name": "PalletCfEthereumIngressEgressBoostPoolIdEthereum",
           "fields": {
             "asset": {
               "type": "enum",
@@ -13792,7 +13792,7 @@
       "fields": {
         "boostPool": {
           "type": "struct",
-          "name": "PalletCfIngressEgressBoostPoolIdEthereum",
+          "name": "PalletCfEthereumIngressEgressBoostPoolIdEthereum",
           "fields": {
             "asset": {
               "type": "enum",
@@ -15415,7 +15415,7 @@
         },
         "depositWitness": {
           "type": "struct",
-          "name": "PalletCfIngressEgressDepositWitnessPolkadot",
+          "name": "PalletCfPolkadotIngressEgressDepositWitnessPolkadot",
           "fields": {
             "depositAddress": {
               "type": "array",
@@ -16042,7 +16042,7 @@
         },
         "boostPool": {
           "type": "struct",
-          "name": "PalletCfIngressEgressBoostPoolIdPolkadot",
+          "name": "PalletCfPolkadotIngressEgressBoostPoolIdPolkadot",
           "fields": {
             "asset": {
               "type": "enum",
@@ -16078,7 +16078,7 @@
         },
         "boostPool": {
           "type": "struct",
-          "name": "PalletCfIngressEgressBoostPoolIdPolkadot",
+          "name": "PalletCfPolkadotIngressEgressBoostPoolIdPolkadot",
           "fields": {
             "asset": {
               "type": "enum",
@@ -16147,7 +16147,7 @@
       "fields": {
         "boostPool": {
           "type": "struct",
-          "name": "PalletCfIngressEgressBoostPoolIdPolkadot",
+          "name": "PalletCfPolkadotIngressEgressBoostPoolIdPolkadot",
           "fields": {
             "asset": {
               "type": "enum",
@@ -18098,7 +18098,7 @@
         },
         "depositWitness": {
           "type": "struct",
-          "name": "PalletCfIngressEgressDepositWitnessBitcoin",
+          "name": "PalletCfBitcoinIngressEgressDepositWitnessBitcoin",
           "fields": {
             "depositAddress": {
               "type": "enum",
@@ -19009,7 +19009,7 @@
         },
         "boostPool": {
           "type": "struct",
-          "name": "PalletCfIngressEgressBoostPoolIdBitcoin",
+          "name": "PalletCfBitcoinIngressEgressBoostPoolIdBitcoin",
           "fields": {
             "asset": {
               "type": "enum",
@@ -19045,7 +19045,7 @@
         },
         "boostPool": {
           "type": "struct",
-          "name": "PalletCfIngressEgressBoostPoolIdBitcoin",
+          "name": "PalletCfBitcoinIngressEgressBoostPoolIdBitcoin",
           "fields": {
             "asset": {
               "type": "enum",
@@ -19114,7 +19114,7 @@
       "fields": {
         "boostPool": {
           "type": "struct",
-          "name": "PalletCfIngressEgressBoostPoolIdBitcoin",
+          "name": "PalletCfBitcoinIngressEgressBoostPoolIdBitcoin",
           "fields": {
             "asset": {
               "type": "enum",
@@ -23406,7 +23406,7 @@
         },
         "depositWitness": {
           "type": "struct",
-          "name": "PalletCfIngressEgressDepositWitnessArbitrum",
+          "name": "PalletCfArbitrumIngressEgressDepositWitnessArbitrum",
           "fields": {
             "depositAddress": {
               "type": "primitive",
@@ -24063,7 +24063,7 @@
         },
         "boostPool": {
           "type": "struct",
-          "name": "PalletCfIngressEgressBoostPoolIdArbitrum",
+          "name": "PalletCfArbitrumIngressEgressBoostPoolIdArbitrum",
           "fields": {
             "asset": {
               "type": "enum",
@@ -24106,7 +24106,7 @@
         },
         "boostPool": {
           "type": "struct",
-          "name": "PalletCfIngressEgressBoostPoolIdArbitrum",
+          "name": "PalletCfArbitrumIngressEgressBoostPoolIdArbitrum",
           "fields": {
             "asset": {
               "type": "enum",
@@ -24189,7 +24189,7 @@
       "fields": {
         "boostPool": {
           "type": "struct",
-          "name": "PalletCfIngressEgressBoostPoolIdArbitrum",
+          "name": "PalletCfArbitrumIngressEgressBoostPoolIdArbitrum",
           "fields": {
             "asset": {
               "type": "enum",
@@ -26951,7 +26951,7 @@
         },
         "depositWitness": {
           "type": "struct",
-          "name": "PalletCfIngressEgressDepositWitnessSolana",
+          "name": "PalletCfSolanaIngressEgressDepositWitnessSolana",
           "fields": {
             "depositAddress": {
               "type": "array",
@@ -27592,7 +27592,7 @@
         },
         "boostPool": {
           "type": "struct",
-          "name": "PalletCfIngressEgressBoostPoolIdSolana",
+          "name": "PalletCfSolanaIngressEgressBoostPoolIdSolana",
           "fields": {
             "asset": {
               "type": "enum",
@@ -27635,7 +27635,7 @@
         },
         "boostPool": {
           "type": "struct",
-          "name": "PalletCfIngressEgressBoostPoolIdSolana",
+          "name": "PalletCfSolanaIngressEgressBoostPoolIdSolana",
           "fields": {
             "asset": {
               "type": "enum",
@@ -27718,7 +27718,7 @@
       "fields": {
         "boostPool": {
           "type": "struct",
-          "name": "PalletCfIngressEgressBoostPoolIdSolana",
+          "name": "PalletCfSolanaIngressEgressBoostPoolIdSolana",
           "fields": {
             "asset": {
               "type": "enum",
