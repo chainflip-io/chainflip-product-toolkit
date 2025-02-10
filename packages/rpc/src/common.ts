@@ -24,7 +24,7 @@ import {
   cfPoolDepth,
   cfAccounts,
   cfSwapRateV3,
-  brokerRequestSwapParameterEncoding,
+  requestSwapParameterEncoding,
 } from './parsers';
 
 type Nullish<T> = T | null | undefined;
@@ -67,6 +67,36 @@ type DcaParams = {
   chunk_interval: number;
 };
 
+type RequestSwapParameterEncodingParams = [
+  sourceAsset: UncheckedAssetAndChain,
+  destinationAsset: UncheckedAssetAndChain,
+  destinationAddress: string,
+  brokerCommission: number,
+  extraParameters:
+    | {
+        chain: 'Bitcoin';
+        min_output_amount: `0x${string}`;
+        retry_duration: number;
+      }
+    | {
+        chain: 'Ethereum' | 'Arbitrum';
+        input_amount: `0x${string}`;
+        refund_parameters: FillOrKillParams;
+      }
+    | {
+        chain: 'Solana';
+        from: string;
+        event_data_account: string;
+        input_amount: string;
+        refund_parameters: FillOrKillParams;
+        from_token_account?: string;
+      },
+  ccmParams?: Nullish<CcmParams>,
+  boostFee?: Nullish<number>,
+  affiliateFees?: Nullish<{ account: string; bps: number }[]>,
+  dcaParams?: Nullish<DcaParams>,
+];
+
 export type RpcRequest = WithHash<{
   broker_requestSwapDepositAddress: [
     sourceAsset: UncheckedAssetAndChain,
@@ -79,34 +109,10 @@ export type RpcRequest = WithHash<{
     fillOrKillParams?: Nullish<FillOrKillParams>,
     dcaParams?: Nullish<DcaParams>,
   ];
-  broker_request_swap_parameter_encoding: [
-    sourceAsset: UncheckedAssetAndChain,
-    destinationAsset: UncheckedAssetAndChain,
-    destinationAddress: string,
-    brokerCommission: number,
-    extraParameters:
-      | {
-          chain: 'Bitcoin';
-          min_output_amount: `0x${string}`;
-          retry_duration: number;
-        }
-      | {
-          chain: 'Ethereum' | 'Arbitrum';
-          input_amount: `0x${string}`;
-          refund_parameters: FillOrKillParams;
-        }
-      | {
-          chain: 'Solana';
-          from: string;
-          event_data_account: string;
-          input_amount: string;
-          refund_parameters: FillOrKillParams;
-          from_token_account?: string;
-        },
-    ccmParams?: Nullish<CcmParams>,
-    boostFee?: Nullish<number>,
-    affiliateFees?: Nullish<{ account: string; bps: number }[]>,
-    dcaParams?: Nullish<DcaParams>,
+  broker_request_swap_parameter_encoding: RequestSwapParameterEncodingParams;
+  cf_request_swap_parameter_encoding: [
+    brokerAccountId: string,
+    ...RequestSwapParameterEncodingParams,
   ];
   cf_account_info: [accountId: string];
   cf_accounts: [];
@@ -178,7 +184,8 @@ export type RpcRequest = WithHash<{
 
 export const rpcResult = {
   broker_requestSwapDepositAddress: brokerRequestSwapDepositAddress,
-  broker_request_swap_parameter_encoding: brokerRequestSwapParameterEncoding,
+  broker_request_swap_parameter_encoding: requestSwapParameterEncoding,
+  cf_request_swap_parameter_encoding: requestSwapParameterEncoding,
   cf_accounts: cfAccounts,
   cf_account_info: cfAccountInfo,
   cf_pool_depth: cfPoolDepth,
