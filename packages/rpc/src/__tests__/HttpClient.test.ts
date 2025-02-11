@@ -23,7 +23,7 @@ import {
   type cfFundingEnvironment,
   type cfSwapRate,
   type cfSwapRateV3,
-  type brokerRequestSwapParameterEncoding,
+  type requestSwapParameterEncoding,
 } from '../parsers';
 
 const supportedAssets = [
@@ -384,14 +384,14 @@ const swapRateV3: z.input<typeof cfSwapRateV3> = {
   broker_commission: { chain: 'Ethereum', asset: 'USDC', amount: '0x0' },
 };
 
-const swapParameterEncodingBitcoin: z.input<typeof brokerRequestSwapParameterEncoding> = {
+const swapParameterEncodingBitcoin: z.input<typeof requestSwapParameterEncoding> = {
   chain: 'Bitcoin',
   nulldata_payload:
     '0x0003656623d865425c0a4955ef7e7a39d09f58554d0800000000000000000000000000000000000001000200000100',
   deposit_address: 'bcrt1pmrhjpvq2w7cgesrcrvuhqw6n6j487l6uc7tmwtx9jen7ezesunhqllvzxx',
 };
 
-const swapParameterEncodingEthereum: z.input<typeof brokerRequestSwapParameterEncoding> = {
+const swapParameterEncodingEthereum: z.input<typeof requestSwapParameterEncoding> = {
   chain: 'Ethereum',
   calldata:
     '0xdd68734500000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000080000000000000000000000000000000000000000000000000000000000000000300000000000000000000000000000000000000000000000000000000000000c00000000000000000000000000000000000000000000000000000000000000014b5fb203bd12f528813b512408b374a8f0f44367a000000000000000000000000000000000000000000000000000000000000000000000000000000000000005f0000000000004cd85eb477b4820bbf10dc4689d8b344c2722eac000000000000000000000000000000000000000000000000000000000000000000009059e6d854b769a505d01148af212bf8cb7f8469a7153edce8dcaedd9d29912501000000',
@@ -399,7 +399,7 @@ const swapParameterEncodingEthereum: z.input<typeof brokerRequestSwapParameterEn
   to: '0xb7a5bd0345ef1cc5e66bf61bdec17d2461fbd968',
 };
 
-const swapParameterEncodingSolana: z.input<typeof brokerRequestSwapParameterEncoding> = {
+const swapParameterEncodingSolana: z.input<typeof requestSwapParameterEncoding> = {
   chain: 'Solana',
   program_id: '35uYgHdfZQT4kHkaaXQ6ZdCkK5LFrsk43btTLbGCRCNT',
   accounts: [
@@ -609,6 +609,7 @@ describe(HttpClient, () => {
         "cf_pool_orders",
         "cf_pool_price_v2",
         "cf_pools_environment",
+        "cf_request_swap_parameter_encoding",
         "cf_supported_assets",
         "cf_swap_rate",
         "cf_swap_rate_v2",
@@ -678,6 +679,15 @@ describe(HttpClient, () => {
               return respond(unregisteredAccount);
           }
         case 'broker_request_swap_parameter_encoding':
+          switch ((body.params[0] as { chain?: string }).chain) {
+            case 'Ethereum':
+              return respond(swapParameterEncodingEthereum);
+            case 'Solana':
+              return respond(swapParameterEncodingSolana);
+            default:
+              return respond(swapParameterEncodingBitcoin);
+          }
+        case 'cf_request_swap_parameter_encoding':
           switch ((body.params[0] as { chain?: string }).chain) {
             case 'Ethereum':
               return respond(swapParameterEncodingEthereum);
@@ -1050,7 +1060,7 @@ describe(HttpClient, () => {
       expect(await client.sendRequest('cf_account_info', BROKER_ACCOUNT_ID)).toMatchSnapshot();
     });
 
-    it('gets vault swap data for bitcoin', async () => {
+    it('gets broker vault swap data for bitcoin', async () => {
       expect(
         await client.sendRequest(
           'broker_request_swap_parameter_encoding',
@@ -1073,7 +1083,7 @@ describe(HttpClient, () => {
       `);
     });
 
-    it('gets vault swap data for ethereum', async () => {
+    it('gets broker vault swap data for ethereum', async () => {
       expect(
         await client.sendRequest(
           'broker_request_swap_parameter_encoding',
@@ -1101,7 +1111,7 @@ describe(HttpClient, () => {
       `);
     });
 
-    it('gets vault swap data for solana', async () => {
+    it('gets broker vault swap data for solana', async () => {
       expect(
         await client.sendRequest(
           'broker_request_swap_parameter_encoding',
@@ -1143,6 +1153,30 @@ describe(HttpClient, () => {
           "chain": "Solana",
           "data": "0xa3265ce2f3698dc400e876481700000001000000140000004d2c78895c0fb2dbc04ecb98345f7b5e30bbd5f203000000006b000000000000000004f79d5e026f12edc6443a534b2cdd5072233989b415d7596573e743f3e5b386fb000000000000000000000000000000000000000000000000000000000000000000009059e6d854b769a505d01148af212bf8cb7f8469a7153edce8dcaedd9d299125010000",
           "program_id": "35uYgHdfZQT4kHkaaXQ6ZdCkK5LFrsk43btTLbGCRCNT",
+        }
+      `);
+    });
+
+    it('gets node vault swap data for bitcoin', async () => {
+      expect(
+        await client.sendRequest(
+          'cf_request_swap_parameter_encoding',
+          'cFLRQDfEdmnv6d2XfHJNRBQHi4fruPMReLSfvB8WWD2ENbqj7',
+          { chain: 'Bitcoin', asset: 'BTC' },
+          { chain: 'Ethereum', asset: 'USDC' },
+          '0x4838B106FCe9647Bdf1E7877BF73cE8B0BAD5f97',
+          10,
+          {
+            chain: 'Bitcoin',
+            min_output_amount: '0x1',
+            retry_duration: 100,
+          },
+        ),
+      ).toMatchInlineSnapshot(`
+        {
+          "chain": "Bitcoin",
+          "deposit_address": "bcrt1pmrhjpvq2w7cgesrcrvuhqw6n6j487l6uc7tmwtx9jen7ezesunhqllvzxx",
+          "nulldata_payload": "0x0003656623d865425c0a4955ef7e7a39d09f58554d0800000000000000000000000000000000000001000200000100",
         }
       `);
     });

@@ -10,8 +10,11 @@ describe('types', () => {
     async (key) => {
       const file = await fs.readFile(path.join(import.meta.dirname, '..', 'types.ts'), 'utf8');
       const exportName = capitalize(key).replace(/_(.)/g, (_, char: string) => char.toUpperCase());
-      expect(file).toContain(`export type ${exportName} = RpcResult<'${key}'>;`);
-      expect(file).toContain(`export type ${exportName}Response = RpcResponse<'${key}'>;`);
+
+      expect(file).toMatch(new RegExp(`export type ${exportName} =\\s+RpcResult<'${key}'>;`));
+      expect(file).toMatch(
+        new RegExp(`export type ${exportName}Response =\\s+RpcResponse<'${key}'>;`),
+      );
     },
   );
 });

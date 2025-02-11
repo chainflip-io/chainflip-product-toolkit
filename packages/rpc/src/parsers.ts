@@ -221,7 +221,7 @@ const evmBrokerRequestSwapParameterEncoding = z.object({
   value: numberOrHex,
 });
 
-export const brokerRequestSwapParameterEncoding = z.discriminatedUnion('chain', [
+export const requestSwapParameterEncoding = z.discriminatedUnion('chain', [
   z.object({
     chain: z.literal('Bitcoin'),
     nulldata_payload: hexString,
