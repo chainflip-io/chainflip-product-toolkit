@@ -133,6 +133,9 @@ SolanaBroadcaster:
   - TransactionBroadcastRequest:
     - transactionPayload: added
 
+SolanaElections:
+  - UnknownElection: added
+
 SolanaIngressEgress:
   - CcmEgressInvalid:
     - error: added
@@ -168,8 +171,12 @@ SolanaIngressEgress:
   - UnknownAffiliate: added
   - UnknownBroker: added
 
+SolanaThresholdSigner:
+  - ThresholdSignatureRequest:
+    - payload: changed
+
 Swapping:
-  - AffiliateRegistrationUpdated: added
+  - AffiliateRegistration: added
   - BrokerBondSet: added
   - MinimumNetworkFeeSet: added
   - PrivateBrokerChannelClosed: added

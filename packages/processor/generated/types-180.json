@@ -11236,27 +11236,20 @@
         }
       }
     },
-    "AffiliateRegistrationUpdated": {
+    "AffiliateRegistration": {
       "type": "struct",
       "fields": {
         "brokerId": {
           "type": "primitive",
           "name": "AccountId32"
         },
-        "affiliateShortId": {
+        "shortId": {
           "type": "primitive",
           "name": "u8"
         },
         "affiliateId": {
           "type": "primitive",
           "name": "AccountId32"
-        },
-        "previousAffiliateId": {
-          "type": "option",
-          "value": {
-            "type": "primitive",
-            "name": "AccountId32"
-          }
         }
       }
     },
@@ -12393,6 +12386,13 @@
                         },
                         {
                           "name": "RedundantDataSupplied",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "InvalidDestinationAddress",
                           "value": {
                             "type": "primitive",
                             "name": "null"
@@ -13661,133 +13661,15 @@
                         "type": "option",
                         "value": {
                           "type": "struct",
-                          "name": "CfChainsChannelRefundParametersForeignChainAddress",
+                          "name": "CfChainsChannelRefundParametersH160",
                           "fields": {
                             "retryDuration": {
                               "type": "primitive",
                               "name": "u32"
                             },
                             "refundAddress": {
-                              "type": "enum",
-                              "name": "cfChainsAddressForeignChainAddress",
-                              "values": [
-                                {
-                                  "name": "Eth",
-                                  "value": {
-                                    "type": "primitive",
-                                    "name": "H160"
-                                  }
-                                },
-                                {
-                                  "name": "Dot",
-                                  "value": {
-                                    "type": "array",
-                                    "value": {
-                                      "type": "primitive",
-                                      "name": "u8"
-                                    },
-                                    "length": 32
-                                  }
-                                },
-                                {
-                                  "name": "Btc",
-                                  "value": {
-                                    "type": "enum",
-                                    "name": "cfChainsBtcScriptPubkey",
-                                    "values": [
-                                      {
-                                        "name": "P2PKH",
-                                        "value": {
-                                          "type": "array",
-                                          "value": {
-                                            "type": "primitive",
-                                            "name": "u8"
-                                          },
-                                          "length": 20
-                                        }
-                                      },
-                                      {
-                                        "name": "P2SH",
-                                        "value": {
-                                          "type": "array",
-                                          "value": {
-                                            "type": "primitive",
-                                            "name": "u8"
-                                          },
-                                          "length": 20
-                                        }
-                                      },
-                                      {
-                                        "name": "P2WPKH",
-                                        "value": {
-                                          "type": "array",
-                                          "value": {
-                                            "type": "primitive",
-                                            "name": "u8"
-                                          },
-                                          "length": 20
-                                        }
-                                      },
-                                      {
-                                        "name": "P2WSH",
-                                        "value": {
-                                          "type": "array",
-                                          "value": {
-                                            "type": "primitive",
-                                            "name": "u8"
-                                          },
-                                          "length": 32
-                                        }
-                                      },
-                                      {
-                                        "name": "Taproot",
-                                        "value": {
-                                          "type": "array",
-                                          "value": {
-                                            "type": "primitive",
-                                            "name": "u8"
-                                          },
-                                          "length": 32
-                                        }
-                                      },
-                                      {
-                                        "name": "OtherSegwit",
-                                        "value": {
-                                          "type": "struct",
-                                          "fields": {
-                                            "version": {
-                                              "type": "primitive",
-                                              "name": "u8"
-                                            },
-                                            "program": {
-                                              "type": "primitive",
-                                              "name": "Bytes"
-                                            }
-                                          }
-                                        }
-                                      }
-                                    ]
-                                  }
-                                },
-                                {
-                                  "name": "Arb",
-                                  "value": {
-                                    "type": "primitive",
-                                    "name": "H160"
-                                  }
-                                },
-                                {
-                                  "name": "Sol",
-                                  "value": {
-                                    "type": "array",
-                                    "value": {
-                                      "type": "primitive",
-                                      "name": "u8"
-                                    },
-                                    "length": 32
-                                  }
-                                }
-                              ]
+                              "type": "primitive",
+                              "name": "H160"
                             },
                             "minPrice": {
                               "type": "primitive",
@@ -14140,6 +14022,13 @@
                         },
                         {
                           "name": "RedundantDataSupplied",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "InvalidDestinationAddress",
                           "value": {
                             "type": "primitive",
                             "name": "null"
@@ -15381,6 +15270,13 @@
                             "type": "primitive",
                             "name": "null"
                           }
+                        },
+                        {
+                          "name": "InvalidDestinationAddress",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
                         }
                       ]
                     }
@@ -16555,133 +16451,19 @@
                         "type": "option",
                         "value": {
                           "type": "struct",
-                          "name": "CfChainsChannelRefundParametersForeignChainAddress",
+                          "name": "CfChainsChannelRefundParametersPolkadotAccountId",
                           "fields": {
                             "retryDuration": {
                               "type": "primitive",
                               "name": "u32"
                             },
                             "refundAddress": {
-                              "type": "enum",
-                              "name": "cfChainsAddressForeignChainAddress",
-                              "values": [
-                                {
-                                  "name": "Eth",
-                                  "value": {
-                                    "type": "primitive",
-                                    "name": "H160"
-                                  }
-                                },
-                                {
-                                  "name": "Dot",
-                                  "value": {
-                                    "type": "array",
-                                    "value": {
-                                      "type": "primitive",
-                                      "name": "u8"
-                                    },
-                                    "length": 32
-                                  }
-                                },
-                                {
-                                  "name": "Btc",
-                                  "value": {
-                                    "type": "enum",
-                                    "name": "cfChainsBtcScriptPubkey",
-                                    "values": [
-                                      {
-                                        "name": "P2PKH",
-                                        "value": {
-                                          "type": "array",
-                                          "value": {
-                                            "type": "primitive",
-                                            "name": "u8"
-                                          },
-                                          "length": 20
-                                        }
-                                      },
-                                      {
-                                        "name": "P2SH",
-                                        "value": {
-                                          "type": "array",
-                                          "value": {
-                                            "type": "primitive",
-                                            "name": "u8"
-                                          },
-                                          "length": 20
-                                        }
-                                      },
-                                      {
-                                        "name": "P2WPKH",
-                                        "value": {
-                                          "type": "array",
-                                          "value": {
-                                            "type": "primitive",
-                                            "name": "u8"
-                                          },
-                                          "length": 20
-                                        }
-                                      },
-                                      {
-                                        "name": "P2WSH",
-                                        "value": {
-                                          "type": "array",
-                                          "value": {
-                                            "type": "primitive",
-                                            "name": "u8"
-                                          },
-                                          "length": 32
-                                        }
-                                      },
-                                      {
-                                        "name": "Taproot",
-                                        "value": {
-                                          "type": "array",
-                                          "value": {
-                                            "type": "primitive",
-                                            "name": "u8"
-                                          },
-                                          "length": 32
-                                        }
-                                      },
-                                      {
-                                        "name": "OtherSegwit",
-                                        "value": {
-                                          "type": "struct",
-                                          "fields": {
-                                            "version": {
-                                              "type": "primitive",
-                                              "name": "u8"
-                                            },
-                                            "program": {
-                                              "type": "primitive",
-                                              "name": "Bytes"
-                                            }
-                                          }
-                                        }
-                                      }
-                                    ]
-                                  }
-                                },
-                                {
-                                  "name": "Arb",
-                                  "value": {
-                                    "type": "primitive",
-                                    "name": "H160"
-                                  }
-                                },
-                                {
-                                  "name": "Sol",
-                                  "value": {
-                                    "type": "array",
-                                    "value": {
-                                      "type": "primitive",
-                                      "name": "u8"
-                                    },
-                                    "length": 32
-                                  }
-                                }
-                              ]
+                              "type": "array",
+                              "value": {
+                                "type": "primitive",
+                                "name": "u8"
+                              },
+                              "length": 32
                             },
                             "minPrice": {
                               "type": "primitive",
@@ -17017,6 +16799,13 @@
                         },
                         {
                           "name": "RedundantDataSupplied",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "InvalidDestinationAddress",
                           "value": {
                             "type": "primitive",
                             "name": "null"
@@ -18279,6 +18068,13 @@
                         },
                         {
                           "name": "RedundantDataSupplied",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "InvalidDestinationAddress",
                           "value": {
                             "type": "primitive",
                             "name": "null"
@@ -19731,7 +19527,7 @@
                         "type": "option",
                         "value": {
                           "type": "struct",
-                          "name": "CfChainsChannelRefundParametersForeignChainAddress",
+                          "name": "CfChainsChannelRefundParametersScriptPubkey",
                           "fields": {
                             "retryDuration": {
                               "type": "primitive",
@@ -19739,17 +19535,43 @@
                             },
                             "refundAddress": {
                               "type": "enum",
-                              "name": "cfChainsAddressForeignChainAddress",
+                              "name": "cfChainsBtcScriptPubkey",
                               "values": [
                                 {
-                                  "name": "Eth",
+                                  "name": "P2PKH",
                                   "value": {
-                                    "type": "primitive",
-                                    "name": "H160"
+                                    "type": "array",
+                                    "value": {
+                                      "type": "primitive",
+                                      "name": "u8"
+                                    },
+                                    "length": 20
                                   }
                                 },
                                 {
-                                  "name": "Dot",
+                                  "name": "P2SH",
+                                  "value": {
+                                    "type": "array",
+                                    "value": {
+                                      "type": "primitive",
+                                      "name": "u8"
+                                    },
+                                    "length": 20
+                                  }
+                                },
+                                {
+                                  "name": "P2WPKH",
+                                  "value": {
+                                    "type": "array",
+                                    "value": {
+                                      "type": "primitive",
+                                      "name": "u8"
+                                    },
+                                    "length": 20
+                                  }
+                                },
+                                {
+                                  "name": "P2WSH",
                                   "value": {
                                     "type": "array",
                                     "value": {
@@ -19760,101 +19582,30 @@
                                   }
                                 },
                                 {
-                                  "name": "Btc",
+                                  "name": "Taproot",
                                   "value": {
-                                    "type": "enum",
-                                    "name": "cfChainsBtcScriptPubkey",
-                                    "values": [
-                                      {
-                                        "name": "P2PKH",
-                                        "value": {
-                                          "type": "array",
-                                          "value": {
-                                            "type": "primitive",
-                                            "name": "u8"
-                                          },
-                                          "length": 20
-                                        }
+                                    "type": "array",
+                                    "value": {
+                                      "type": "primitive",
+                                      "name": "u8"
+                                    },
+                                    "length": 32
+                                  }
+                                },
+                                {
+                                  "name": "OtherSegwit",
+                                  "value": {
+                                    "type": "struct",
+                                    "fields": {
+                                      "version": {
+                                        "type": "primitive",
+                                        "name": "u8"
                                       },
-                                      {
-                                        "name": "P2SH",
-                                        "value": {
-                                          "type": "array",
-                                          "value": {
-                                            "type": "primitive",
-                                            "name": "u8"
-                                          },
-                                          "length": 20
-                                        }
-                                      },
-                                      {
-                                        "name": "P2WPKH",
-                                        "value": {
-                                          "type": "array",
-                                          "value": {
-                                            "type": "primitive",
-                                            "name": "u8"
-                                          },
-                                          "length": 20
-                                        }
-                                      },
-                                      {
-                                        "name": "P2WSH",
-                                        "value": {
-                                          "type": "array",
-                                          "value": {
-                                            "type": "primitive",
-                                            "name": "u8"
-                                          },
-                                          "length": 32
-                                        }
-                                      },
-                                      {
-                                        "name": "Taproot",
-                                        "value": {
-                                          "type": "array",
-                                          "value": {
-                                            "type": "primitive",
-                                            "name": "u8"
-                                          },
-                                          "length": 32
-                                        }
-                                      },
-                                      {
-                                        "name": "OtherSegwit",
-                                        "value": {
-                                          "type": "struct",
-                                          "fields": {
-                                            "version": {
-                                              "type": "primitive",
-                                              "name": "u8"
-                                            },
-                                            "program": {
-                                              "type": "primitive",
-                                              "name": "Bytes"
-                                            }
-                                          }
-                                        }
+                                      "program": {
+                                        "type": "primitive",
+                                        "name": "Bytes"
                                       }
-                                    ]
-                                  }
-                                },
-                                {
-                                  "name": "Arb",
-                                  "value": {
-                                    "type": "primitive",
-                                    "name": "H160"
-                                  }
-                                },
-                                {
-                                  "name": "Sol",
-                                  "value": {
-                                    "type": "array",
-                                    "value": {
-                                      "type": "primitive",
-                                      "name": "u8"
-                                    },
-                                    "length": 32
+                                    }
                                   }
                                 }
                               ]
@@ -20262,6 +20013,13 @@
                         },
                         {
                           "name": "RedundantDataSupplied",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "InvalidDestinationAddress",
                           "value": {
                             "type": "primitive",
                             "name": "null"
@@ -24190,6 +23948,13 @@
                             "type": "primitive",
                             "name": "null"
                           }
+                        },
+                        {
+                          "name": "InvalidDestinationAddress",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
                         }
                       ]
                     }
@@ -25398,133 +25163,15 @@
                         "type": "option",
                         "value": {
                           "type": "struct",
-                          "name": "CfChainsChannelRefundParametersForeignChainAddress",
+                          "name": "CfChainsChannelRefundParametersH160",
                           "fields": {
                             "retryDuration": {
                               "type": "primitive",
                               "name": "u32"
                             },
                             "refundAddress": {
-                              "type": "enum",
-                              "name": "cfChainsAddressForeignChainAddress",
-                              "values": [
-                                {
-                                  "name": "Eth",
-                                  "value": {
-                                    "type": "primitive",
-                                    "name": "H160"
-                                  }
-                                },
-                                {
-                                  "name": "Dot",
-                                  "value": {
-                                    "type": "array",
-                                    "value": {
-                                      "type": "primitive",
-                                      "name": "u8"
-                                    },
-                                    "length": 32
-                                  }
-                                },
-                                {
-                                  "name": "Btc",
-                                  "value": {
-                                    "type": "enum",
-                                    "name": "cfChainsBtcScriptPubkey",
-                                    "values": [
-                                      {
-                                        "name": "P2PKH",
-                                        "value": {
-                                          "type": "array",
-                                          "value": {
-                                            "type": "primitive",
-                                            "name": "u8"
-                                          },
-                                          "length": 20
-                                        }
-                                      },
-                                      {
-                                        "name": "P2SH",
-                                        "value": {
-                                          "type": "array",
-                                          "value": {
-                                            "type": "primitive",
-                                            "name": "u8"
-                                          },
-                                          "length": 20
-                                        }
-                                      },
-                                      {
-                                        "name": "P2WPKH",
-                                        "value": {
-                                          "type": "array",
-                                          "value": {
-                                            "type": "primitive",
-                                            "name": "u8"
-                                          },
-                                          "length": 20
-                                        }
-                                      },
-                                      {
-                                        "name": "P2WSH",
-                                        "value": {
-                                          "type": "array",
-                                          "value": {
-                                            "type": "primitive",
-                                            "name": "u8"
-                                          },
-                                          "length": 32
-                                        }
-                                      },
-                                      {
-                                        "name": "Taproot",
-                                        "value": {
-                                          "type": "array",
-                                          "value": {
-                                            "type": "primitive",
-                                            "name": "u8"
-                                          },
-                                          "length": 32
-                                        }
-                                      },
-                                      {
-                                        "name": "OtherSegwit",
-                                        "value": {
-                                          "type": "struct",
-                                          "fields": {
-                                            "version": {
-                                              "type": "primitive",
-                                              "name": "u8"
-                                            },
-                                            "program": {
-                                              "type": "primitive",
-                                              "name": "Bytes"
-                                            }
-                                          }
-                                        }
-                                      }
-                                    ]
-                                  }
-                                },
-                                {
-                                  "name": "Arb",
-                                  "value": {
-                                    "type": "primitive",
-                                    "name": "H160"
-                                  }
-                                },
-                                {
-                                  "name": "Sol",
-                                  "value": {
-                                    "type": "array",
-                                    "value": {
-                                      "type": "primitive",
-                                      "name": "u8"
-                                    },
-                                    "length": 32
-                                  }
-                                }
-                              ]
+                              "type": "primitive",
+                              "name": "H160"
                             },
                             "minPrice": {
                               "type": "primitive",
@@ -25863,6 +25510,13 @@
                         },
                         {
                           "name": "RedundantDataSupplied",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "InvalidDestinationAddress",
                           "value": {
                             "type": "primitive",
                             "name": "null"
@@ -26699,11 +26353,11 @@
         },
         "payload": {
           "type": "struct",
-          "name": "CfChainsSolSolTxCoreMessage",
+          "name": "SolPrimTransactionLegacyLegacyMessage",
           "fields": {
             "header": {
               "type": "struct",
-              "name": "CfChainsSolSolTxCoreMessageHeader",
+              "name": "SolPrimMessageHeader",
               "fields": {
                 "numRequiredSignatures": {
                   "type": "primitive",
@@ -26742,7 +26396,7 @@
               "type": "array",
               "value": {
                 "type": "struct",
-                "name": "CfChainsSolSolTxCoreCompiledInstruction",
+                "name": "SolPrimCompiledInstruction",
                 "fields": {
                   "programIdIndex": {
                     "type": "primitive",
@@ -28163,6 +27817,13 @@
                             "type": "primitive",
                             "name": "null"
                           }
+                        },
+                        {
+                          "name": "InvalidDestinationAddress",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
                         }
                       ]
                     }
@@ -29368,133 +29029,19 @@
                         "type": "option",
                         "value": {
                           "type": "struct",
-                          "name": "CfChainsChannelRefundParametersForeignChainAddress",
+                          "name": "CfChainsChannelRefundParametersAddress",
                           "fields": {
                             "retryDuration": {
                               "type": "primitive",
                               "name": "u32"
                             },
                             "refundAddress": {
-                              "type": "enum",
-                              "name": "cfChainsAddressForeignChainAddress",
-                              "values": [
-                                {
-                                  "name": "Eth",
-                                  "value": {
-                                    "type": "primitive",
-                                    "name": "H160"
-                                  }
-                                },
-                                {
-                                  "name": "Dot",
-                                  "value": {
-                                    "type": "array",
-                                    "value": {
-                                      "type": "primitive",
-                                      "name": "u8"
-                                    },
-                                    "length": 32
-                                  }
-                                },
-                                {
-                                  "name": "Btc",
-                                  "value": {
-                                    "type": "enum",
-                                    "name": "cfChainsBtcScriptPubkey",
-                                    "values": [
-                                      {
-                                        "name": "P2PKH",
-                                        "value": {
-                                          "type": "array",
-                                          "value": {
-                                            "type": "primitive",
-                                            "name": "u8"
-                                          },
-                                          "length": 20
-                                        }
-                                      },
-                                      {
-                                        "name": "P2SH",
-                                        "value": {
-                                          "type": "array",
-                                          "value": {
-                                            "type": "primitive",
-                                            "name": "u8"
-                                          },
-                                          "length": 20
-                                        }
-                                      },
-                                      {
-                                        "name": "P2WPKH",
-                                        "value": {
-                                          "type": "array",
-                                          "value": {
-                                            "type": "primitive",
-                                            "name": "u8"
-                                          },
-                                          "length": 20
-                                        }
-                                      },
-                                      {
-                                        "name": "P2WSH",
-                                        "value": {
-                                          "type": "array",
-                                          "value": {
-                                            "type": "primitive",
-                                            "name": "u8"
-                                          },
-                                          "length": 32
-                                        }
-                                      },
-                                      {
-                                        "name": "Taproot",
-                                        "value": {
-                                          "type": "array",
-                                          "value": {
-                                            "type": "primitive",
-                                            "name": "u8"
-                                          },
-                                          "length": 32
-                                        }
-                                      },
-                                      {
-                                        "name": "OtherSegwit",
-                                        "value": {
-                                          "type": "struct",
-                                          "fields": {
-                                            "version": {
-                                              "type": "primitive",
-                                              "name": "u8"
-                                            },
-                                            "program": {
-                                              "type": "primitive",
-                                              "name": "Bytes"
-                                            }
-                                          }
-                                        }
-                                      }
-                                    ]
-                                  }
-                                },
-                                {
-                                  "name": "Arb",
-                                  "value": {
-                                    "type": "primitive",
-                                    "name": "H160"
-                                  }
-                                },
-                                {
-                                  "name": "Sol",
-                                  "value": {
-                                    "type": "array",
-                                    "value": {
-                                      "type": "primitive",
-                                      "name": "u8"
-                                    },
-                                    "length": 32
-                                  }
-                                }
-                              ]
+                              "type": "array",
+                              "value": {
+                                "type": "primitive",
+                                "name": "u8"
+                              },
+                              "length": 32
                             },
                             "minPrice": {
                               "type": "primitive",
@@ -29837,6 +29384,13 @@
                         },
                         {
                           "name": "RedundantDataSupplied",
+                          "value": {
+                            "type": "primitive",
+                            "name": "null"
+                          }
+                        },
+                        {
+                          "name": "InvalidDestinationAddress",
                           "value": {
                             "type": "primitive",
                             "name": "null"
@@ -30606,6 +30160,63 @@
     "AllVotesNotCleared": {
       "type": "primitive",
       "name": "null"
+    },
+    "UnknownElection": {
+      "type": "tuple",
+      "values": [
+        {
+          "type": "primitive",
+          "name": "u64"
+        },
+        {
+          "type": "enum",
+          "name": "palletCfElectionsElectoralSystemsCompositeTuple6ImplsCompositeElectionIdentifierExtra",
+          "values": [
+            {
+              "name": "A",
+              "value": {
+                "type": "primitive",
+                "name": "null"
+              }
+            },
+            {
+              "name": "B",
+              "value": {
+                "type": "primitive",
+                "name": "u32"
+              }
+            },
+            {
+              "name": "C",
+              "value": {
+                "type": "primitive",
+                "name": "null"
+              }
+            },
+            {
+              "name": "D",
+              "value": {
+                "type": "primitive",
+                "name": "null"
+              }
+            },
+            {
+              "name": "EE",
+              "value": {
+                "type": "primitive",
+                "name": "null"
+              }
+            },
+            {
+              "name": "FF",
+              "value": {
+                "type": "primitive",
+                "name": "u64"
+              }
+            }
+          ]
+        }
+      ]
     }
   },
   "SolanaChainTracking": {
