@@ -256,7 +256,7 @@ export const broker = z.object({
   role: z.literal('broker'),
   flip_balance: numberOrHex,
   earned_fees: chainAssetMapFactory(numberOrHex, 0),
-  btc_vault_deposit_address: z.string().nullable(),
+  btc_vault_deposit_address: z.string().nullable().optional(),
 });
 
 const boostBalances = z.array(
@@ -295,7 +295,12 @@ export const validator = z.object({
   restricted_balances: z.record(hexString, numberOrHex),
 });
 
-export const cfAccountInfo = z.union([unregistered, broker, liquidityProvider, validator]);
+export const cfAccountInfo = z.discriminatedUnion('role', [
+  unregistered,
+  broker,
+  liquidityProvider,
+  validator,
+]);
 
 export const cfAccounts = z.array(z.tuple([z.string(), z.string()]));
 
