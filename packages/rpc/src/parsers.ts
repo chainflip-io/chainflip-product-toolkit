@@ -377,6 +377,7 @@ export const cfBoostPoolDetails = z.array(
           pending_deposits: z.array(z.bigint()),
         }),
       ),
+      network_fee_deduction_percent: z.number().optional(),
     }),
   ),
 );
