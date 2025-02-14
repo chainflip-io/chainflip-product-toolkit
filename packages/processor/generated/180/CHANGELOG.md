@@ -197,3 +197,5 @@ Swapping:
     - refundParameters: changed
   - SwapScheduled:
     - swapType: removed
+  - WithdrawalRequested:
+    - accountId: added

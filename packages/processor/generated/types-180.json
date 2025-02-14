@@ -9918,6 +9918,10 @@
     "WithdrawalRequested": {
       "type": "struct",
       "fields": {
+        "accountId": {
+          "type": "primitive",
+          "name": "AccountId32"
+        },
         "egressId": {
           "type": "tuple",
           "values": [
@@ -11246,6 +11250,10 @@
         "shortId": {
           "type": "primitive",
           "name": "u8"
+        },
+        "withdrawalAddress": {
+          "type": "primitive",
+          "name": "H160"
         },
         "affiliateId": {
           "type": "primitive",
@@ -26353,7 +26361,7 @@
         },
         "payload": {
           "type": "struct",
-          "name": "SolPrimTransactionLegacyLegacyMessage",
+          "name": "CfChainsSolSolTxCoreTransactionLegacyLegacyMessage",
           "fields": {
             "header": {
               "type": "struct",
