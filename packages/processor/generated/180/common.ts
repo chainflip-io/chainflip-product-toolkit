@@ -601,7 +601,7 @@ export const solPrimCompiledInstruction = z.object({
   data: hexString,
 });
 
-export const solPrimTransactionLegacyLegacyMessage = z.object({
+export const cfChainsSolSolTxCoreTransactionLegacyLegacyMessage = z.object({
   header: solPrimMessageHeader,
   accountKeys: z.array(hexString),
   recentBlockhash: hexString,

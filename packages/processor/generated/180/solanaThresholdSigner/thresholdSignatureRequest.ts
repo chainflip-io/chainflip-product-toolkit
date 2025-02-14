@@ -1,9 +1,9 @@
 import { z } from 'zod';
 import {
   accountId,
+  cfChainsSolSolTxCoreTransactionLegacyLegacyMessage,
   hexString,
   numberOrHex,
-  solPrimTransactionLegacyLegacyMessage,
 } from '../common';
 
 export const solanaThresholdSignerThresholdSignatureRequest = z.object({
@@ -12,5 +12,5 @@ export const solanaThresholdSignerThresholdSignatureRequest = z.object({
   epoch: z.number(),
   key: hexString,
   signatories: z.array(accountId),
-  payload: solPrimTransactionLegacyLegacyMessage,
+  payload: cfChainsSolSolTxCoreTransactionLegacyLegacyMessage,
 });
