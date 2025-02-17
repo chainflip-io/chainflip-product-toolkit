@@ -1,3 +1,4 @@
+/* eslint-disable dot-notation */
 import { once } from 'events';
 import { type Mock, afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { type AddressInfo, WebSocket, WebSocketServer } from 'ws';
@@ -109,12 +110,12 @@ describe(WsClient, () => {
     killConnections();
     closeServer();
     const connectSpy = vi.spyOn(client, 'connect' as any);
-    await once(client.emitter, 'DISCONNECT');
+    await once(client['emitter'], 'DISCONNECT');
 
     expect(connectSpy).not.toHaveBeenCalled();
 
     for (let i = 0; i < 7; i += 1) {
-      const promise = once(client.emitter, 'DISCONNECT');
+      const promise = once(client['emitter'], 'DISCONNECT');
       await vi.advanceTimersToNextTimerAsync();
       await promise;
       expect(connectSpy).toHaveBeenCalledTimes(i + 1);
@@ -140,9 +141,9 @@ describe(WsClient, () => {
         '0x1',
       ),
     ).resolves.not.toThrow();
-    expect(client.ws).toBeDefined();
-    (client.ws as unknown as WebSocket).emit('error', new Error('test'));
-    await once(client.emitter, 'DISCONNECT');
+    expect(client['ws']).toBeDefined();
+    (client['ws'] as unknown as WebSocket).emit('error', new Error('test'));
+    await once(client['emitter'], 'DISCONNECT');
     await expect(
       client.sendRequest(
         'cf_swap_rate',
@@ -216,6 +217,6 @@ describe(WsClient, () => {
   });
 
   it('uses the global websocket if none is provided', () => {
-    expect(new WsClient('ws://hello.world').WebSocket).toBe(globalThis.WebSocket);
+    expect(new WsClient('ws://hello.world')['WebSocket']).toBe(globalThis.WebSocket);
   });
 });

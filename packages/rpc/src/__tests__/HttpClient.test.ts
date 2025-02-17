@@ -622,6 +622,14 @@ describe(HttpClient, () => {
     `);
   });
 
+  it('handles network errors when fetch throws', async () => {
+    const client = new HttpClient('http://localhost:1313');
+
+    await expect(client.sendRequest('cf_accounts')).rejects.toThrowErrorMatchingInlineSnapshot(
+      `[Error: Network error]`,
+    );
+  });
+
   const LP_ACCOUNT_ID = 'cFMVtnPTJFYFvnHXK14HZ6XWDSCAByTPZDWrTeFEc2B8A3m7M';
   const BROKER_ACCOUNT_ID = 'cFJjZKzA5rUTb9qkZMGfec7piCpiAQKr15B4nALzriMGQL8BE';
   const VALIDATOR_ACCOUNT_ID = 'cFKzr7DwLCRtSkou5H5moKri7g9WwJ4tAbVJv6dZGhLb811Tc';
