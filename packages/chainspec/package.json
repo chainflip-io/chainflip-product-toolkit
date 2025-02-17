@@ -14,6 +14,6 @@
     "@chainflip/utils": "0.4.0",
     "@polkadot/types": "^10.11.2",
     "prettier": "^3.5.1",
-    "zod": "^3.24.1"
+    "zod": "^3.24.2"
   }
 }
