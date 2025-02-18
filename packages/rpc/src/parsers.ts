@@ -219,6 +219,7 @@ const evmBrokerRequestSwapParameterEncoding = z.object({
   to: hexString,
   calldata: hexString,
   value: numberOrHex,
+  source_token_address: hexString.optional(),
 });
 
 export const requestSwapParameterEncoding = z.discriminatedUnion('chain', [
