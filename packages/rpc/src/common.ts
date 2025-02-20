@@ -39,7 +39,7 @@ type AssetSymbol = AssetAndChain['asset'];
 
 type UncheckedAssetAndChain = { asset: AssetSymbol; chain: Chain };
 
-type SwapFeeType = 'Network' | 'Ingress' | 'Egress';
+type SwapFeeType = 'IngressDepositChannel' | 'IngressVaultSwap' | 'Network' | 'Egress';
 
 type AdditionalOrder = {
   LimitOrder: {
