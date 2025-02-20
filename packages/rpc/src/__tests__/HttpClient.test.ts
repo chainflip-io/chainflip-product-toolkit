@@ -1016,7 +1016,7 @@ describe(HttpClient, () => {
             gas_budget: '0x',
             message_length: 0,
           },
-          ['Ingress'],
+          ['IngressDepositChannel'],
           [
             {
               LimitOrder: {
