@@ -21,7 +21,7 @@
   "devDependencies": {
     "@types/node": "^22.13.4",
     "@types/ws": "^8.5.14",
-    "ws": "^8.18.0"
+    "ws": "^8.18.1"
   },
   "files": [
     "dist",
