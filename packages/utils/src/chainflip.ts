@@ -184,3 +184,24 @@ export const internalAssetToRpcAsset: Record<ChainflipAsset, AssetAndChain> = {
   Sol: { chain: 'Solana', asset: 'SOL' },
   SolUsdc: { chain: 'Solana', asset: 'USDC' },
 };
+
+export const chainContractId: Record<ChainflipChain, number> = {
+  Ethereum: 1,
+  Polkadot: 2,
+  Bitcoin: 3,
+  Arbitrum: 4,
+  Solana: 5,
+};
+
+export const assetContractId: Record<ChainflipAsset, number> = {
+  Eth: 1,
+  Flip: 2,
+  Usdc: 3,
+  Usdt: 8,
+  Dot: 4,
+  Btc: 5,
+  ArbEth: 6,
+  ArbUsdc: 7,
+  Sol: 9,
+  SolUsdc: 10,
+};
