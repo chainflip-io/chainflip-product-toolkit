@@ -1,5 +1,14 @@
-import { assert } from '@chainflip/utils/assertion';
-import { Connection, PublicKey, type VersionedTransactionResponse } from '@solana/web3.js';
+import { assert, unreachable } from '@chainflip/utils/assertion';
+import { BorshInstructionCoder, type Idl } from '@coral-xyz/anchor';
+import {
+  Connection,
+  PublicKey,
+  type VersionedTransactionResponse,
+  type PartiallyDecodedInstruction,
+  type ParsedTransactionWithMeta,
+} from '@solana/web3.js';
+import { devnet, mainnet } from './idls';
+import { swapSchema } from './schemas';
 
 export const parseUrlWithBasicAuth = (url: string) => {
   const rpcUrl = new URL(url);
@@ -25,6 +34,17 @@ const getSolanaConnection = (solanaEndpoint: string) => {
     httpHeaders: headers,
     // for injecting responses in the tests
     fetch,
+    // fetch: async (...args) => {
+    //   const res = await fetch(...args);
+
+    //   res.text = async () => {
+    //     const text = await Response.prototype.text.call(res);
+    //     console.log(text);
+    //     return text;
+    //   };
+
+    //   return res;
+    // },
   });
 };
 
@@ -250,4 +270,55 @@ export const findVaultSwapSignature = async (
   assert(signatures.length === 1, 'failed to find signature');
 
   return signatures[0].signature;
+};
+
+const findIdlAndInstruction = (
+  tx: ParsedTransactionWithMeta,
+): { idl: Idl; instruction: PartiallyDecodedInstruction } | { idl: null; instruction: null } => {
+  for (const inst of tx.transaction.message.instructions) {
+    switch (inst.programId.toBase58()) {
+      case mainnet.address:
+        return { idl: mainnet, instruction: inst as PartiallyDecodedInstruction };
+      case devnet.address:
+        return { idl: devnet, instruction: inst as PartiallyDecodedInstruction };
+    }
+  }
+
+  return { idl: null, instruction: null };
+};
+
+export const findVaultSwapData = async (rpcUrl: string, signature: string) => {
+  const connection = getSolanaConnection(rpcUrl);
+
+  const tx = await connection.getParsedTransaction(signature);
+
+  if (!tx) return null;
+
+  const { idl, instruction } = findIdlAndInstruction(tx);
+
+  if (instruction === null && idl === null) return null;
+
+  const coder = new BorshInstructionCoder(idl);
+  const decoded = coder.decode(instruction.data, 'base58');
+  const data = swapSchema.parse(decoded);
+
+  switch (data.name) {
+    case 'x_swap_native':
+      return {
+        sourceChain: 'Solana',
+        sourceAsset: 'Sol',
+        ...data.data,
+      };
+    case 'x_swap_token':
+      return {
+        sourceChain: 'Solana',
+        // only works because we only support the USDC. if we add more tokens
+        // we get to have more fun here
+        sourceAsset: 'SolUsdc',
+        ...data.data,
+      };
+    /* v8 ignore next 2 */
+    default:
+      return unreachable(data, 'unexpected program call');
+  }
 };
