@@ -40,7 +40,7 @@ describe(createVaultParamsDecoder, () => {
   });
 
   it('decodes params with additional data', () => {
-    console.log(bytesToHex(base58.decode('3yKDHJgzS2GbZB9qruoadRYtq8597HZifnRju7fHpdRC')));
+    
     expect(
       decodeSolanaParams(
         hexToBytes(
