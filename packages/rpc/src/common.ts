@@ -25,6 +25,7 @@ import {
   cfAccounts,
   cfSwapRateV3,
   requestSwapParameterEncoding,
+  lpTotalBalances,
 } from './parsers';
 
 type Nullish<T> = T | null | undefined;
@@ -178,6 +179,7 @@ export type RpcRequest = WithHash<{
   ];
   state_getMetadata: [];
   state_getRuntimeVersion: [];
+  lp_total_balances: [accountId: string];
 }> & {
   chain_getBlockHash: [blockHeight?: number];
 };
@@ -206,6 +208,7 @@ export const rpcResult = {
   cf_boost_pool_pending_fees: cfBoostPoolPendingFees,
   state_getMetadata: stateGetMetadata,
   state_getRuntimeVersion: stateGetRuntimeVersion,
+  lp_total_balances: lpTotalBalances,
 } as const satisfies { [K in keyof RpcRequest]: z.ZodTypeAny };
 
 export type RpcMethod = keyof RpcRequest;

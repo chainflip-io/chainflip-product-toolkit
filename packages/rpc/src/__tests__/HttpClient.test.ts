@@ -44,49 +44,49 @@ const ingressEgressEnvironment: z.input<typeof cfIngressEgressEnvironment> = {
     Polkadot: { DOT: '0x0' },
     Bitcoin: { BTC: '0x0' },
     Arbitrum: { ETH: '0x0', USDC: '0x0' },
-    // Solana: { SOL: '0x0' },
+    Solana: { SOL: '0x0', USDC: '0x0' },
   },
   ingress_fees: {
     Ethereum: { ETH: '0x55730', FLIP: '0x0', USDC: '0x0', USDT: '0x0' },
     Polkadot: { DOT: '0xbc28f20' },
     Bitcoin: { BTC: '0x4e' },
     Arbitrum: { ETH: '0x574b457d400', USDC: '0x231b' },
-    // Solana: { SOL: '0xb0' },
+    Solana: { SOL: '0xb0', USDC: '0x0' },
   },
   egress_fees: {
     Ethereum: { ETH: '0x77a10', FLIP: '0x0', USDC: '0x0', USDT: '0x0' },
     Polkadot: { DOT: '0xbc4d910' },
     Bitcoin: { BTC: '0xb0' },
     Arbitrum: { ETH: '0x74645ca7000', USDC: '0x2701' },
-    // Solana: { SOL: '0xb0' },
+    Solana: { SOL: '0xb0', USDC: '0x0' },
   },
   witness_safety_margins: {
     Bitcoin: 2,
     Polkadot: null,
     Ethereum: 2,
     Arbitrum: 1,
-    // Solana: 1,
+    Solana: 1,
   },
   egress_dust_limits: {
     Ethereum: { ETH: '0x1', FLIP: '0x1', USDC: '0x1', USDT: '0x1' },
     Polkadot: { DOT: '0x1' },
     Bitcoin: { BTC: '0x258' },
     Arbitrum: { ETH: '0x1', USDC: '0x1' },
-    // Solana: { SOL: '0x1' },
+    Solana: { SOL: '0x1', USDC: '0x1' },
   },
   channel_opening_fees: {
     Arbitrum: '0x0',
     Ethereum: '0x0',
     Polkadot: '0x0',
     Bitcoin: '0x0',
-    // Solana: '0x0',
+    Solana: '0x0',
   },
   max_swap_retry_duration_blocks: {
     Arbitrum: 1,
     Ethereum: 1,
     Polkadot: 1,
     Bitcoin: 1,
-    // Solana: 1,
+    Solana: 1,
   },
 };
 
@@ -108,9 +108,10 @@ const swappingEnvironment: z.input<typeof cfSwappingEnvironment> = {
       ETH: null,
       USDC: null,
     },
-    // Solana: {
-    //   SOL: null,
-    // },
+    Solana: {
+      SOL: null,
+      USDC: null,
+    },
   },
   network_fee_hundredth_pips: 1000,
 };
@@ -325,6 +326,7 @@ const poolsEnvironment: z.input<typeof cfPoolsEnvironment> = {
           asset: 'USDC',
         },
       },
+      USDC: null,
     },
   },
 };
@@ -443,14 +445,14 @@ const liquidityProviderAccount: z.input<typeof liquidityProvider> = {
     Polkadot: { DOT: '0x0' },
     Bitcoin: { BTC: '0x0' },
     Arbitrum: { ETH: '0x0', USDC: '0x0' },
-    // Solana: { SOL: '0x0' },
+    Solana: { SOL: '0x0', USDC: '0x0' },
   },
   refund_addresses: {
     Ethereum: '0xacd7c0481fc71dce9e3e8bd4cca5828ce8302629',
     Polkadot: null,
     Bitcoin: 'bc1qqt3juqef9azhd0zeuamu9c30pg5xdllvmks2ja',
     Arbitrum: null,
-    // Solana: '7zLEfU3nQKqnfrN2A5yNEiFd1Vt9D7maVaoSAV8invMT',
+    Solana: '7zLEfU3nQKqnfrN2A5yNEiFd1Vt9D7maVaoSAV8invMT',
   },
   flip_balance: '0x456306aa68edbb80',
   earned_fees: {
@@ -458,7 +460,7 @@ const liquidityProviderAccount: z.input<typeof liquidityProvider> = {
     Polkadot: { DOT: 0 },
     Bitcoin: { BTC: 0 },
     Arbitrum: { ETH: 0, USDC: 0 },
-    // Solana: { SOL: 0 },
+    Solana: { SOL: 0, USDC: 0 },
   },
   boost_balances: {
     Ethereum: {
@@ -487,6 +489,7 @@ const liquidityProviderAccount: z.input<typeof liquidityProvider> = {
     },
     Solana: {
       SOL: [],
+      USDC: [],
     },
   },
 };
@@ -511,9 +514,10 @@ const brokerAccount: z.input<typeof broker> = {
       ETH: 0,
       USDC: 0,
     },
-    // Solana: {
-    //   SOL: 0,
-    // },
+    Solana: {
+      SOL: 0,
+      USDC: 0,
+    },
   },
   btc_vault_deposit_address: 'tb1pqyqszqgpqyqszqgpqyqszqgpqyqszqgpqyqszqgpqyqszqgpqyqsn60vlk',
 };
@@ -617,6 +621,7 @@ describe(HttpClient, () => {
         "cf_swap_rate_v3",
         "cf_swapping_environment",
         "chain_getBlockHash",
+        "lp_total_balances",
         "state_getMetadata",
         "state_getRuntimeVersion",
       ]
@@ -735,6 +740,9 @@ describe(HttpClient, () => {
           return respond('0x1234');
         case 'state_getRuntimeVersion':
           return respond(runtimeVersion);
+        case 'lp_total_balances':
+          expect(body.params[0]).toEqual(LP_ACCOUNT_ID);
+          return respond(liquidityProviderAccount.balances);
         default:
           console.error('Method not found:', body.method);
           return {
@@ -1208,6 +1216,10 @@ describe(HttpClient, () => {
           { asset: 'USDC', chain: 'Ethereum' },
         ),
       ).toMatchSnapshot();
+    });
+
+    it('gets lp total balances', async () => {
+      expect(await client.sendRequest('lp_total_balances', LP_ACCOUNT_ID)).toMatchSnapshot();
     });
 
     it('requests deposit addresses', async () => {
