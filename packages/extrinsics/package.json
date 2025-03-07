@@ -41,6 +41,4 @@
         "default": "./dist/index.js"
       }
     }
-  },
-  "dependencies": {}
 }
