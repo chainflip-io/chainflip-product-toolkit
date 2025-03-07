@@ -66,25 +66,9 @@
         "Program DeL6iGV5RWrWh7cPoEa7tRHM8XURAaB4vPjfX5qVyuWE consumed 21099 of 200000 compute units",
         "Program DeL6iGV5RWrWh7cPoEa7tRHM8XURAaB4vPjfX5qVyuWE success"
       ],
-      "postBalances": [
-        165118942543,
-        2575200,
-        1531200,
-        1500000000,
-        1,
-        1141440,
-        2025360
-      ],
+      "postBalances": [165118942543, 2575200, 1531200, 1500000000, 1, 1141440, 2025360],
       "postTokenBalances": [],
-      "preBalances": [
-        166621750463,
-        0,
-        1308480,
-        0,
-        1,
-        1141440,
-        2025360
-      ],
+      "preBalances": [166621750463, 0, 1308480, 0, 1, 1141440, 2025360],
       "preTokenBalances": [],
       "rewards": [],
       "status": {
