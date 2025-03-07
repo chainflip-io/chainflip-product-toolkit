@@ -9,7 +9,7 @@ export default {
       thresholds: {
         lines: 93.46,
         statements: 93.46,
-        branches: 94.91,
+        branches: 95,
         functions: 87.5,
         autoUpdate: true,
       },

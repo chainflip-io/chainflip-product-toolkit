@@ -26,7 +26,7 @@
   "main": "dist/index.cjs",
   "module": "dist/index.mjs",
   "dependencies": {
-    "@chainflip/utils": "0.4.0",
+    "@chainflip/utils": "0.6.0",
     "bitcoinjs-lib": "^7.0.0-rc.0"
   }
 }

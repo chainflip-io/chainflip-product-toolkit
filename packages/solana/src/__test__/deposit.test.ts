@@ -1,37 +1,46 @@
 import { Connection } from '@solana/web3.js';
-import { describe, beforeEach, it, vi, expect } from 'vitest';
+import { describe, beforeEach, it, vi, expect, type MockInstance } from 'vitest';
 import {
   findTransactionSignatures,
+  findVaultSwapData,
   findVaultSwapSignature,
   parseUrlWithBasicAuth,
 } from '../deposit';
+import { mainnet } from '../idls';
 import bigDiff from './fixtures/bigDiff.json';
 import cluster from './fixtures/cluster.json';
 import combineTxs from './fixtures/combineTxs.json';
 import doubleTransfer from './fixtures/doubleTransfer.json';
 import maxBlockError from './fixtures/maxBlockError.json';
+import notVaultSwap from './fixtures/notVaultSwap.json';
 import paginate1 from './fixtures/paginate1.json';
 import paginate2 from './fixtures/paginate2.json';
 import paginate3 from './fixtures/paginate3.json';
 import simple from './fixtures/simple.json';
 import solusdc from './fixtures/solusdc.json';
 import solusdc2 from './fixtures/solusdc2.json';
+import swapNativeToArbDevnet from './fixtures/swapNativeToArbDevnet.json';
+import swapNativeToBtcDevnet from './fixtures/swapNativeToBtcDevnet.json';
+import swapNativeToDotDevnet from './fixtures/swapNativeToDotDevnet.json';
+import swapNativeToEthAdditionalParamsDevnet from './fixtures/swapNativeToEthAdditionalParamsDevnet.json';
+import swapNativeToEthDevnet from './fixtures/swapNativeToEthDevnet.json';
+import swapTokenDevnet from './fixtures/swapTokenDevnet.json';
 
-const mockFetch = (responses: { signatures: any; transactions: any }) =>
-  vi
-    .spyOn(globalThis, 'fetch')
-    .mockResolvedValueOnce({
-      ok: true,
-      status: 200,
-      text: () => Promise.resolve(JSON.stringify(responses.signatures)),
-    } as any)
-    .mockResolvedValueOnce({
-      ok: true,
-      status: 200,
-      text: () => Promise.resolve(JSON.stringify(responses.transactions)),
-    } as any);
+const mockFetchWithResponses = (responses: { jsonrpc: string; result: unknown; id: string }[]) =>
+  responses.reduce(
+    (mock: MockInstance<typeof fetch>, res) =>
+      mock.mockResolvedValueOnce({
+        ok: true,
+        status: 200,
+        text: () => Promise.resolve(JSON.stringify(res)),
+      } as any),
+    vi.spyOn(globalThis, 'fetch'),
+  );
 
 describe(findTransactionSignatures, () => {
+  const mockFetch = (response: { signatures: any; transactions: any }) =>
+    mockFetchWithResponses([response.signatures, response.transactions]);
+
   beforeEach(() => {
     vi.restoreAllMocks();
     vi.spyOn(globalThis, 'fetch').mockRejectedValue(Error('unhandled fetch'));
@@ -300,8 +309,8 @@ describe(findVaultSwapSignature, () => {
   it('it finds the vault swap signature', async () => {
     const spy = vi.spyOn(Connection.prototype, 'getSignaturesForAddress');
 
-    mockFetch({
-      signatures: {
+    mockFetchWithResponses([
+      {
         jsonrpc: '2.0',
         result: [
           {
@@ -325,8 +334,7 @@ describe(findVaultSwapSignature, () => {
         ],
         id: '1',
       },
-      transactions: null,
-    });
+    ]);
 
     expect(
       await findVaultSwapSignature(
@@ -348,5 +356,294 @@ describe(findVaultSwapSignature, () => {
         ],
       ]
     `);
+  });
+});
+
+describe(findVaultSwapData, () => {
+  it('gets the vault swap data for native swaps (to ETH)', async () => {
+    mockFetchWithResponses([swapNativeToEthDevnet]);
+
+    const data = await findVaultSwapData(
+      'https://solana.rpc',
+      '3fG2FkvUD3eFdpja9XBUsSa2stgENzZWKWqXZjfBEdBEnVE498kTXDaPFdRJnrwoBBp64wuoGKpkqNCnHhQRi8N1',
+    );
+
+    expect(data).toMatchInlineSnapshot(`
+      {
+        "ccmParams": null,
+        "cfParams": {
+          "affiliateFees": [],
+          "boostFee": 0,
+          "brokerFees": {
+            "account": "cFMTNSQQVfBo2HqtekvhLPfZY764kuJDVFG1EvnnDGYxc3LRW",
+            "commissionBps": 0,
+          },
+          "ccmAdditionalData": null,
+          "dcaParams": null,
+          "refundParams": {
+            "minPriceX128": "6616846606368726564647178815965546002365481543",
+            "refundAddress": "3yKDHJgzS2GbZB9qruoadRYtq8597HZifnRju7fHpdRC",
+            "retryDurationBlocks": 100,
+          },
+        },
+        "depositAmount": "1500000000",
+        "destinationAddress": "0xa56a6be23b6cf39d9448ff6e897c29c41c8fbdff",
+        "destinationAsset": "Eth",
+        "destinationChain": "Ethereum",
+        "sourceAsset": "Sol",
+        "sourceChain": "Solana",
+      }
+    `);
+  });
+
+  it('gets the vault swap data for native swaps (to ETH) with mainnet address', async () => {
+    const rpc = structuredClone(swapNativeToEthDevnet);
+    rpc.result.transaction.message.instructions[0].programId = mainnet.address;
+
+    mockFetchWithResponses([rpc]);
+
+    const data = await findVaultSwapData(
+      'https://solana.rpc',
+      '3fG2FkvUD3eFdpja9XBUsSa2stgENzZWKWqXZjfBEdBEnVE498kTXDaPFdRJnrwoBBp64wuoGKpkqNCnHhQRi8N1',
+    );
+
+    expect(data).toMatchInlineSnapshot(`
+      {
+        "ccmParams": null,
+        "cfParams": {
+          "affiliateFees": [],
+          "boostFee": 0,
+          "brokerFees": {
+            "account": "cFMTNSQQVfBo2HqtekvhLPfZY764kuJDVFG1EvnnDGYxc3LRW",
+            "commissionBps": 0,
+          },
+          "ccmAdditionalData": null,
+          "dcaParams": null,
+          "refundParams": {
+            "minPriceX128": "6616846606368726564647178815965546002365481543",
+            "refundAddress": "3yKDHJgzS2GbZB9qruoadRYtq8597HZifnRju7fHpdRC",
+            "retryDurationBlocks": 100,
+          },
+        },
+        "depositAmount": "1500000000",
+        "destinationAddress": "0xa56a6be23b6cf39d9448ff6e897c29c41c8fbdff",
+        "destinationAsset": "Eth",
+        "destinationChain": "Ethereum",
+        "sourceAsset": "Sol",
+        "sourceChain": "Solana",
+      }
+    `);
+  });
+
+  it('gets the vault swap data for native swaps (to ETH 2)', async () => {
+    mockFetchWithResponses([swapNativeToEthAdditionalParamsDevnet]);
+
+    const data = await findVaultSwapData(
+      'https://solana.rpc',
+      '3fG2FkvUD3eFdpja9XBUsSa2stgENzZWKWqXZjfBEdBEnVE498kTXDaPFdRJnrwoBBp64wuoGKpkqNCnHhQRi8N1',
+    );
+
+    expect(data).toMatchInlineSnapshot(`
+      {
+        "ccmParams": null,
+        "cfParams": {
+          "affiliateFees": [],
+          "boostFee": 0,
+          "brokerFees": {
+            "account": "cFMTNSQQVfBo2HqtekvhLPfZY764kuJDVFG1EvnnDGYxc3LRW",
+            "commissionBps": 0,
+          },
+          "ccmAdditionalData": {
+            "additionalAccounts": [],
+            "cfReceiver": {
+              "isWritable": false,
+              "pubkey": "8pBPaVfTAcjLeNfC187Fkvi9b1XEFhRNJ95BQXXVksmH",
+            },
+            "fallbackAddress": "8sAK3gg2Qm1mP4aPvMGsFsNAMhsgty2hSvJQCPQpib6w",
+          },
+          "dcaParams": null,
+          "refundParams": {
+            "minPriceX128": "6616846606368726564647178815965546002365481543",
+            "refundAddress": "3yKDHJgzS2GbZB9qruoadRYtq8597HZifnRju7fHpdRC",
+            "retryDurationBlocks": 100,
+          },
+        },
+        "depositAmount": "1500000000",
+        "destinationAddress": "0xa56a6be23b6cf39d9448ff6e897c29c41c8fbdff",
+        "destinationAsset": "Eth",
+        "destinationChain": "Ethereum",
+        "sourceAsset": "Sol",
+        "sourceChain": "Solana",
+      }
+    `);
+  });
+
+  it('gets the vault swap data for native swaps (to Arbitrum ETH)', async () => {
+    mockFetchWithResponses([swapNativeToArbDevnet]);
+
+    const data = await findVaultSwapData(
+      'https://solana.rpc',
+      '3fG2FkvUD3eFdpja9XBUsSa2stgENzZWKWqXZjfBEdBEnVE498kTXDaPFdRJnrwoBBp64wuoGKpkqNCnHhQRi8N1',
+    );
+
+    expect(data).toMatchInlineSnapshot(`
+      {
+        "ccmParams": null,
+        "cfParams": {
+          "affiliateFees": [],
+          "boostFee": 0,
+          "brokerFees": {
+            "account": "cFMTNSQQVfBo2HqtekvhLPfZY764kuJDVFG1EvnnDGYxc3LRW",
+            "commissionBps": 0,
+          },
+          "ccmAdditionalData": null,
+          "dcaParams": null,
+          "refundParams": {
+            "minPriceX128": "6616846606368726564647178815965546002365481543",
+            "refundAddress": "3yKDHJgzS2GbZB9qruoadRYtq8597HZifnRju7fHpdRC",
+            "retryDurationBlocks": 100,
+          },
+        },
+        "depositAmount": "1500000000",
+        "destinationAddress": "0xa56a6be23b6cf39d9448ff6e897c29c41c8fbdff",
+        "destinationAsset": "Eth",
+        "destinationChain": "Arbitrum",
+        "sourceAsset": "Sol",
+        "sourceChain": "Solana",
+      }
+    `);
+  });
+
+  it('gets the vault swap data for native swaps (to BTC)', async () => {
+    mockFetchWithResponses([swapNativeToBtcDevnet]);
+
+    const data = await findVaultSwapData(
+      'https://solana.rpc',
+      '3fG2FkvUD3eFdpja9XBUsSa2stgENzZWKWqXZjfBEdBEnVE498kTXDaPFdRJnrwoBBp64wuoGKpkqNCnHhQRi8N1',
+    );
+
+    expect(data).toMatchInlineSnapshot(`
+      {
+        "ccmParams": null,
+        "cfParams": {
+          "affiliateFees": [],
+          "boostFee": 0,
+          "brokerFees": {
+            "account": "cFMTNSQQVfBo2HqtekvhLPfZY764kuJDVFG1EvnnDGYxc3LRW",
+            "commissionBps": 0,
+          },
+          "ccmAdditionalData": null,
+          "dcaParams": null,
+          "refundParams": {
+            "minPriceX128": "147327292452621833387248816535228638",
+            "refundAddress": "3yKDHJgzS2GbZB9qruoadRYtq8597HZifnRju7fHpdRC",
+            "retryDurationBlocks": 100,
+          },
+        },
+        "depositAmount": "1500000000",
+        "destinationAddress": "tb1pdz3akc5wa2gr69v3x87tfg0ka597dxqvfl6zhqx4y202y63cgw0q3rgpm6",
+        "destinationAsset": "Btc",
+        "destinationChain": "Bitcoin",
+        "sourceAsset": "Sol",
+        "sourceChain": "Solana",
+      }
+    `);
+  });
+
+  it('gets the vault swap data for native swaps (to DOT)', async () => {
+    mockFetchWithResponses([swapNativeToDotDevnet]);
+
+    const data = await findVaultSwapData(
+      'https://solana.rpc',
+      '3fG2FkvUD3eFdpja9XBUsSa2stgENzZWKWqXZjfBEdBEnVE498kTXDaPFdRJnrwoBBp64wuoGKpkqNCnHhQRi8N1',
+    );
+
+    expect(data).toMatchInlineSnapshot(`
+      {
+        "ccmParams": null,
+        "cfParams": {
+          "affiliateFees": [],
+          "boostFee": 0,
+          "brokerFees": {
+            "account": "cFMTNSQQVfBo2HqtekvhLPfZY764kuJDVFG1EvnnDGYxc3LRW",
+            "commissionBps": 0,
+          },
+          "ccmAdditionalData": null,
+          "dcaParams": {
+            "chunkIntervalBlocks": 10,
+            "numberOfChunks": 2,
+          },
+          "refundParams": {
+            "minPriceX128": "53139857619480484022967797759999261018420",
+            "refundAddress": "3yKDHJgzS2GbZB9qruoadRYtq8597HZifnRju7fHpdRC",
+            "retryDurationBlocks": 100,
+          },
+        },
+        "depositAmount": "1500000000",
+        "destinationAddress": "1BzDB5n2rfSJwvuCW9deKY9XnUyys8Gy44SoX8tRNDCFBhx",
+        "destinationAsset": "Dot",
+        "destinationChain": "Polkadot",
+        "sourceAsset": "Sol",
+        "sourceChain": "Solana",
+      }
+    `);
+  });
+
+  it('gets the vault swap data for token swaps', async () => {
+    mockFetchWithResponses([swapTokenDevnet]);
+
+    const data = await findVaultSwapData(
+      'https://solana.rpc',
+      '3LWDhFzGAxKt65xKe19iUGmCiHBc5FDSUV8fETr4TavMP98YFEtso6pyf7ZEcZRjNC5Qka8bfQNUfzVP3r2C77Mo',
+    );
+
+    expect(data).toMatchInlineSnapshot(`
+      {
+        "ccmParams": null,
+        "cfParams": {
+          "affiliateFees": [],
+          "boostFee": 0,
+          "brokerFees": {
+            "account": "cFMTNSQQVfBo2HqtekvhLPfZY764kuJDVFG1EvnnDGYxc3LRW",
+            "commissionBps": 0,
+          },
+          "ccmAdditionalData": null,
+          "dcaParams": null,
+          "refundParams": {
+            "minPriceX128": "176416843473861217126367300745109052927311111891",
+            "refundAddress": "3yKDHJgzS2GbZB9qruoadRYtq8597HZifnRju7fHpdRC",
+            "retryDurationBlocks": 100,
+          },
+        },
+        "depositAmount": "20000000",
+        "destinationAddress": "0xa56a6be23b6cf39d9448ff6e897c29c41c8fbdff",
+        "destinationAsset": "Eth",
+        "destinationChain": "Ethereum",
+        "sourceAsset": "SolUsdc",
+        "sourceChain": "Solana",
+      }
+    `);
+  });
+
+  it('handles null tx response', async () => {
+    mockFetchWithResponses([{ jsonrpc: '2.0', id: '1', result: null }]);
+
+    const data = await findVaultSwapData(
+      'https://solana.rpc',
+      '3LWDhFzGAxKt65xKe19iUGmCiHBc5FDSUV8fETr4TavMP98YFEtso6pyf7ZEcZRjNC5Qka8bfQNUfzVP3r2C77Mo',
+    );
+
+    expect(data).toBeNull();
+  });
+
+  it('filters for the desired txs', async () => {
+    mockFetchWithResponses([notVaultSwap]);
+
+    const data = await findVaultSwapData(
+      'https://solana.rpc',
+      '2W194usaXnNPJkxAd8e9t6s1S6EBgQqDxSEmkU6pKtUibErm6FS4BLUa49voJgdz9YEdBeycFt56oFBWUFy7byik',
+    );
+
+    expect(data).toBeNull();
   });
 });

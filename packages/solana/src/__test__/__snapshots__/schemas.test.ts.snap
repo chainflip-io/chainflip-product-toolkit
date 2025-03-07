@@ -1,0 +1,85 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`swapSchema > handles Bitcoin destinations 1`] = `
+{
+  "ccmParams": {
+    "gasAmount": "10",
+    "message": "deadbeef",
+  },
+  "cfParams": {
+    "affiliateFees": [],
+    "boostFee": 0,
+    "brokerFees": {
+      "account": "cFMTNSQQVfBo2HqtekvhLPfZY764kuJDVFG1EvnnDGYxc3LRW",
+      "commissionBps": 0,
+    },
+    "ccmAdditionalData": null,
+    "dcaParams": null,
+    "refundParams": {
+      "minPriceX128": "6616846606368726564647178815965546002365481543",
+      "refundAddress": "3yKDHJgzS2GbZB9qruoadRYtq8597HZifnRju7fHpdRC",
+      "retryDurationBlocks": 100,
+    },
+  },
+  "depositAmount": "100000000",
+  "destinationAddress": "bc1qqt3juqef9azhd0zeuamu9c30pg5xdllvmks2ja",
+  "destinationAsset": "Btc",
+  "destinationChain": "Bitcoin",
+}
+`;
+
+exports[`swapSchema > handles Polkadot destinations 1`] = `
+{
+  "ccmParams": {
+    "gasAmount": "10",
+    "message": "deadbeef",
+  },
+  "cfParams": {
+    "affiliateFees": [],
+    "boostFee": 0,
+    "brokerFees": {
+      "account": "cFMTNSQQVfBo2HqtekvhLPfZY764kuJDVFG1EvnnDGYxc3LRW",
+      "commissionBps": 0,
+    },
+    "ccmAdditionalData": null,
+    "dcaParams": null,
+    "refundParams": {
+      "minPriceX128": "6616846606368726564647178815965546002365481543",
+      "refundAddress": "3yKDHJgzS2GbZB9qruoadRYtq8597HZifnRju7fHpdRC",
+      "retryDurationBlocks": 100,
+    },
+  },
+  "depositAmount": "100000000",
+  "destinationAddress": "1BzDB5n2rfSJwvuCW9deKY9XnUyys8Gy44SoX8tRNDCFBhx",
+  "destinationAsset": "Dot",
+  "destinationChain": "Polkadot",
+}
+`;
+
+exports[`swapSchema > handles Solana destinations 1`] = `
+{
+  "ccmParams": {
+    "gasAmount": "10",
+    "message": "deadbeef",
+  },
+  "cfParams": {
+    "affiliateFees": [],
+    "boostFee": 0,
+    "brokerFees": {
+      "account": "cFMTNSQQVfBo2HqtekvhLPfZY764kuJDVFG1EvnnDGYxc3LRW",
+      "commissionBps": 0,
+    },
+    "ccmAdditionalData": null,
+    "dcaParams": null,
+    "refundParams": {
+      "minPriceX128": "6616846606368726564647178815965546002365481543",
+      "refundAddress": "3yKDHJgzS2GbZB9qruoadRYtq8597HZifnRju7fHpdRC",
+      "retryDurationBlocks": 100,
+    },
+  },
+  "depositAmount": "100000000",
+  "destinationAddress": "3yKDHJgzS2GbZB9qruoadRYtq8597HZifnRju7fHpdRC",
+  "destinationAsset": "SolUsdc",
+  "destinationChain": "Solana",
+}
+`;
