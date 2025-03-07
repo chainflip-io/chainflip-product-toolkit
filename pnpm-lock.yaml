@@ -4,6 +4,11 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+patchedDependencies:
+  scale-ts:
+    hash: 144bf9376e2b0e982cfc2d36bad1c6272c00cfd7b8016ed39f46abb7a53fcf99
+    path: patches/scale-ts.patch
+
 importers:
 
   .:
@@ -72,8 +77,8 @@ importers:
   packages/bitcoin:
     dependencies:
       '@chainflip/utils':
-        specifier: 0.4.0
-        version: 0.4.0
+        specifier: 0.6.0
+        version: 0.6.0
       bitcoinjs-lib:
         specifier: ^7.0.0-rc.0
         version: 7.0.0-rc.0(typescript@5.7.3)
@@ -81,11 +86,11 @@ importers:
   packages/chainspec:
     devDependencies:
       '@chainflip/rpc':
-        specifier: 1.6.9
-        version: 1.6.9
+        specifier: 1.8.6
+        version: 1.8.6
       '@chainflip/utils':
-        specifier: 0.4.0
-        version: 0.4.0
+        specifier: 0.6.0
+        version: 0.6.0
       '@polkadot/types':
         specifier: ^10.11.2
         version: 10.13.1
@@ -117,8 +122,8 @@ importers:
   packages/extrinsics:
     devDependencies:
       '@chainflip/utils':
-        specifier: 0.4.0
-        version: 0.4.0
+        specifier: 0.6.0
+        version: 0.6.0
       '@polkadot/types':
         specifier: ^10.11.2
         version: 10.13.1
@@ -126,15 +131,15 @@ importers:
   packages/processor:
     dependencies:
       '@chainflip/utils':
-        specifier: 0.4.0
-        version: 0.4.0
+        specifier: 0.6.0
+        version: 0.6.0
       zod:
         specifier: ^3.24.2
         version: 3.24.2
     devDependencies:
       '@chainflip/rpc':
-        specifier: 1.6.9
-        version: 1.6.9
+        specifier: 1.8.6
+        version: 1.8.6
       '@polkadot/types':
         specifier: ^10.11.2
         version: 10.13.1
@@ -142,8 +147,8 @@ importers:
   packages/rpc:
     dependencies:
       '@chainflip/utils':
-        specifier: 0.4.0
-        version: 0.4.0
+        specifier: 0.6.0
+        version: 0.6.0
       zod:
         specifier: ^3.24.2
         version: 3.24.2
@@ -165,7 +170,7 @@ importers:
         version: 0.6.0
       scale-ts:
         specifier: ^1.6.1
-        version: 1.6.1
+        version: 1.6.1(patch_hash=144bf9376e2b0e982cfc2d36bad1c6272c00cfd7b8016ed39f46abb7a53fcf99)
     devDependencies:
       '@vitest/ui':
         specifier: 3.0.7
@@ -173,6 +178,9 @@ importers:
 
   packages/solana:
     dependencies:
+      '@chainflip/scale':
+        specifier: ^1.8.0
+        version: 1.8.0
       '@chainflip/utils':
         specifier: 0.6.0
         version: 0.6.0
@@ -184,7 +192,7 @@ importers:
         version: 1.98.0(bufferutil@4.0.8)(utf-8-validate@5.0.10)
       scale-ts:
         specifier: ^1.6.1
-        version: 1.6.1
+        version: 1.6.1(patch_hash=144bf9376e2b0e982cfc2d36bad1c6272c00cfd7b8016ed39f46abb7a53fcf99)
       zod:
         specifier: ^3.24.2
         version: 3.24.2
@@ -243,11 +251,11 @@ packages:
     resolution: {integrity: sha512-6zABk/ECA/QYSCQ1NGiVwwbQerUCZ+TQbp64Q3AgmfNvurHH0j8TtXa1qbShXA6qqkpAj4V5W8pP6mLe1mcMqA==}
     engines: {node: '>=18'}
 
-  '@chainflip/rpc@1.6.9':
-    resolution: {integrity: sha512-FtaoZBey4kIFhWQY5mMMAGXIgzSpZCX0DTnXQqPEn9q5qvt6FoQLDQk9k2IYKOTiIP+XsLy9w/WPPiH7+3BpnQ==}
+  '@chainflip/rpc@1.8.6':
+    resolution: {integrity: sha512-aufMeb0ltGuudujH/H20EHPKsvt+qaYSB7weSy5Vw0ZfhUuQzDvFegXIpDLKajeUVpzaniKIlE2rKk4574nKDA==}
 
-  '@chainflip/utils@0.3.0':
-    resolution: {integrity: sha512-csW8E3lRcSG1udN/kgsOhjZ7bfRrSbgv8Hdh/pzjM+VjQ6Hh46/LuiZHeQR0rQMimfG+lu2Afxk4jeRXRGFWTg==}
+  '@chainflip/scale@1.8.0':
+    resolution: {integrity: sha512-66bT2DQi0kNFZRva0phBuMWCWKamOyfROlKovxcBd6wzZVGFxVqgi73iG1nExaUPlOLJnYc8gQ/blwHidgjvrg==}
 
   '@chainflip/utils@0.4.0':
     resolution: {integrity: sha512-OuMFlgbIbyJ1Kt39zytfGh4HZ5dVY25/a3qb0c1K137+QmhdOuF+R7QSkFPqYAfDG4KhGRqo0rgUtEpaEEcSKA==}
@@ -3015,12 +3023,15 @@ snapshots:
 
   '@bcoe/v8-coverage@1.0.2': {}
 
-  '@chainflip/rpc@1.6.9':
+  '@chainflip/rpc@1.8.6':
     dependencies:
-      '@chainflip/utils': 0.3.0
+      '@chainflip/utils': 0.4.0
       zod: 3.24.2
 
-  '@chainflip/utils@0.3.0': {}
+  '@chainflip/scale@1.8.0':
+    dependencies:
+      '@chainflip/utils': 0.6.0
+      scale-ts: 1.6.1(patch_hash=144bf9376e2b0e982cfc2d36bad1c6272c00cfd7b8016ed39f46abb7a53fcf99)
 
   '@chainflip/utils@0.4.0': {}
 
@@ -5393,7 +5404,7 @@ snapshots:
       es-errors: 1.3.0
       is-regex: 1.1.4
 
-  scale-ts@1.6.1: {}
+  scale-ts@1.6.1(patch_hash=144bf9376e2b0e982cfc2d36bad1c6272c00cfd7b8016ed39f46abb7a53fcf99): {}
 
   semver@6.3.1: {}
 

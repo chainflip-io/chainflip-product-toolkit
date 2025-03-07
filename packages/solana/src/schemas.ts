@@ -1,3 +1,4 @@
+import { assert } from '@chainflip/utils/assertion';
 import * as base58 from '@chainflip/utils/base58';
 import { assetContractId, chainContractId } from '@chainflip/utils/chainflip';
 import { POLKADOT_SS58_PREFIX } from '@chainflip/utils/consts';
@@ -69,9 +70,9 @@ const swapParams = z
         destinationAddress = base58.encode(data.dst_address);
         break;
       default: {
-        // already collecting errors
+        // already collecting errors, add type assertion to ensure we handle all chains
         const _: undefined = chain;
-        success = false;
+        assert(!success, 'expected to be in error state');
       }
     }
 
