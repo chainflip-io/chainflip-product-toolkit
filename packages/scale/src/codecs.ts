@@ -132,7 +132,6 @@ export function createVaultParamsDecoder<T, U, V>(
       } as const;
     } catch (e) {
       errors.push(e as Error);
-      // noop
     }
 
     try {
