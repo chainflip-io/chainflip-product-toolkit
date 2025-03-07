@@ -1,5 +1,6 @@
 import { type Idl } from '@coral-xyz/anchor';
 
+// https://explorer.solana.com/address/J88B7gmadHzTNGiy54c9Ms8BsEXNdB2fntFyhKpk3qoT/anchor-program
 export const mainnet = {
   address: 'J88B7gmadHzTNGiy54c9Ms8BsEXNdB2fntFyhKpk3qoT',
   metadata: {
@@ -276,6 +277,7 @@ export const mainnet = {
   ],
 } as const satisfies Idl;
 
+// https://explorer.solana.com/address/DeL6iGV5RWrWh7cPoEa7tRHM8XURAaB4vPjfX5qVyuWE/anchor-program?cluster=devnet
 export const devnet = {
   address: 'DeL6iGV5RWrWh7cPoEa7tRHM8XURAaB4vPjfX5qVyuWE',
   metadata: {
