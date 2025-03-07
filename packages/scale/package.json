@@ -1,0 +1,46 @@
+{
+  "name": "@chainflip/scale",
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "eslint:check": "pnpm eslint --max-warnings 0 './**/*.ts'",
+    "prettier:base": "prettier ./** --ignore-path=../../.prettierignore",
+    "prettier:check": "pnpm prettier:base --check",
+    "prettier:write": "pnpm prettier:base --write",
+    "clean": "rm -rf dist",
+    "prepublish": "pnpm test run && pnpm build:clean",
+    "build": "tsup",
+    "build:clean": "pnpm clean && pnpm build",
+    "test:ci": "CI=1 pnpm t run",
+    "test": "vitest",
+    "coverage": "vitest run --coverage"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "exports": {
+    "./*": {
+      "require": {
+        "types": "./dist/*.d.cts",
+        "default": "./dist/*.cjs"
+      },
+      "import": {
+        "types": "./dist/*.d.ts",
+        "default": "./dist/*.js"
+      }
+    }
+  },
+  "devDependencies": {
+    "@vitest/ui": "3.0.7"
+  },
+  "dependencies": {
+    "@chainflip/utils": "^0.6.0",
+    "scale-ts": "^1.6.1"
+  },
+  "repository": "https://github.com/chainflip-io/chainflip-product-toolkit.git",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  }
+}
