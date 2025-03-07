@@ -1,6 +1,8 @@
+import * as base58 from '@chainflip/utils/base58';
 import { bytesToHex } from '@chainflip/utils/bytes';
 import { CHAINFLIP_SS58_PREFIX } from '@chainflip/utils/consts';
 import * as ss58 from '@chainflip/utils/ss58';
+import { type HexString } from '@chainflip/utils/types';
 import {
   u32,
   Struct,
@@ -15,11 +17,11 @@ import {
   bool,
 } from 'scale-ts';
 
-const vaultSwapParametersCodec = <T>(address: Codec<T>) =>
+const vaultSwapParametersCodec = <T>(refundAddressCodec: Codec<T>) =>
   Struct({
     refundParams: Struct({
       retryDurationBlocks: u32,
-      refundAddress: address,
+      refundAddress: refundAddressCodec,
       minPriceX128: u256,
     }),
     dcaParams: Option(Struct({ numberOfChunks: u32, chunkIntervalBlocks: u32 })),
@@ -28,23 +30,22 @@ const vaultSwapParametersCodec = <T>(address: Codec<T>) =>
     affiliateFees: Vector(Struct({ account: u8, commissionBps: u8 })),
   });
 
-export const vaultCcmCfParametersCodec = <T>(codec: Codec<T>) =>
+const vaultCcmCfParametersCodec = <T>(refundAddressCodec: Codec<T>) =>
   Enum({
     V0: Struct({
       ccmAdditionalData: Bytes(),
-      vaultSwapParameters: vaultSwapParametersCodec(codec),
+      vaultSwapParameters: vaultSwapParametersCodec(refundAddressCodec),
     }),
   });
 
-export const vaultCfParametersCodec = <T>(codec: Codec<T>) =>
+const vaultCfParametersCodec = <T>(refundAddressCodec: Codec<T>) =>
   Enum({
     V0: Struct({
-      vaultSwapParameters: vaultSwapParametersCodec(codec),
+      vaultSwapParameters: vaultSwapParametersCodec(refundAddressCodec),
     }),
   });
 
-// TODO: test
-export const solVersionedCcmAdditionalDataCodec = Enum({
+const solVersionedCcmAdditionalDataCodec = Enum({
   V0: Struct({
     cf_receiver: Struct({
       pubkey: Bytes(32),
@@ -60,16 +61,74 @@ export const solVersionedCcmAdditionalDataCodec = Enum({
   }),
 });
 
-export const createVaultParamsDecoder = <T, U>(codec: Codec<T>, encodeAddress: (value: T) => U) => {
-  const basicCodec = vaultCfParametersCodec(codec);
-  const additionalDataCodec = vaultCcmCfParametersCodec(codec);
+export type SolanaCcmAdditionalData = {
+  fallbackAddress: string;
+  cfReceiver: { pubkey: string; isWritable: boolean };
+  additionalAccounts: { pubkey: string; isWritable: boolean }[];
+};
+
+export const decodeSolanaAdditionalData = (
+  data: Uint8Array,
+): `0x${string}` | SolanaCcmAdditionalData => {
+  try {
+    const { value } = solVersionedCcmAdditionalDataCodec.dec(data);
+
+    return {
+      fallbackAddress: base58.encode(value.fallback_address),
+      cfReceiver: {
+        pubkey: base58.encode(value.cf_receiver.pubkey),
+        isWritable: value.cf_receiver.is_writable,
+      },
+      additionalAccounts: value.additional_accounts.map((account) => ({
+        pubkey: base58.encode(account.pubkey),
+        isWritable: account.is_writable,
+      })),
+    };
+  } catch {
+    return bytesToHex(data);
+  }
+};
+
+type DecodedParams<Address, CcmAdditionalData> = {
+  ccmAdditionalData: CcmAdditionalData | null;
+  refundParams: {
+    retryDurationBlocks: number;
+    refundAddress: Address;
+    minPriceX128: string;
+  };
+  dcaParams: { numberOfChunks: number; chunkIntervalBlocks: number } | null;
+  boostFee: number;
+  brokerFees: { account: string; commissionBps: number };
+  affiliateFees: { account: number; commissionBps: number }[];
+};
+
+type Result<T, E> =
+  | { ok: true; value: T; reason?: undefined }
+  | { ok: false; value?: undefined; reason: E };
+
+export function createVaultParamsDecoder<T, U>(
+  refundAddressCodec: Codec<T>,
+  encodeAddress: (value: T) => U,
+): (data: Uint8Array) => Result<DecodedParams<U, HexString | null>, Error[]>;
+export function createVaultParamsDecoder<T, U, V>(
+  refundAddressCodec: Codec<T>,
+  encodeAddress: (value: T) => U,
+  decodeAdditionalData: (data: Uint8Array) => V,
+): (data: Uint8Array) => Result<DecodedParams<U, V | null>, Error[]>;
+export function createVaultParamsDecoder<T, U, V>(
+  refundAddressCodec: Codec<T>,
+  encodeAddress: (value: T) => U,
+  decodeAdditionalData?: (data: Uint8Array) => V,
+): (data: Uint8Array) => Result<DecodedParams<U, HexString | V | null>, Error[]> {
+  const basicCodec = vaultCfParametersCodec(refundAddressCodec);
+  const additionalDataCodec = vaultCcmCfParametersCodec(refundAddressCodec);
 
   const tryVariants = (data: Uint8Array) => {
     const errors = [];
     try {
       return {
         ok: true,
-        value: { ccmAdditionalData: undefined, ...basicCodec.dec(data).value },
+        value: { ccmAdditionalData: null, ...basicCodec.dec(data).value },
       } as const;
     } catch (e) {
       errors.push(e as Error);
@@ -93,7 +152,8 @@ export const createVaultParamsDecoder = <T, U>(codec: Codec<T>, encodeAddress: (
     return {
       ok: true,
       value: {
-        ccmAdditionalData: ccmAdditionalData ? bytesToHex(ccmAdditionalData) : null,
+        ccmAdditionalData:
+          ccmAdditionalData && (decodeAdditionalData ?? bytesToHex)(ccmAdditionalData),
         refundParams: {
           retryDurationBlocks: vaultSwapParameters.refundParams.retryDurationBlocks,
           refundAddress: encodeAddress(vaultSwapParameters.refundParams.refundAddress),
@@ -119,4 +179,4 @@ export const createVaultParamsDecoder = <T, U>(codec: Codec<T>, encodeAddress: (
   };
 
   return tryDecodeCfParams;
-};
+}
