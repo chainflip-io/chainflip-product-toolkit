@@ -121,6 +121,7 @@ describe('parsers', () => {
             },
             Solana: {
               SOL: '0x0',
+              USDC: '0x0',
             },
           },
           ingress_fees: {
@@ -142,6 +143,7 @@ describe('parsers', () => {
             },
             Solana: {
               SOL: '0x2f62d048',
+              USDC: '0x0',
             },
           },
           egress_fees: {
@@ -163,6 +165,7 @@ describe('parsers', () => {
             },
             Solana: {
               SOL: '0x4787c48',
+              USDC: '0x0',
             },
           },
           witness_safety_margins: {
@@ -191,6 +194,7 @@ describe('parsers', () => {
             },
             Solana: {
               SOL: '0x1',
+              USDC: '0x1',
             },
           },
           channel_opening_fees: {
@@ -228,6 +232,7 @@ describe('parsers', () => {
             },
             Solana: {
               SOL: null,
+              USDC: null,
             },
           },
           network_fee_hundredth_pips: 1000,
@@ -367,6 +372,56 @@ describe('parsers', () => {
             },
             Arbitrum: {
               ETH: {
+                limit_order_fee_hundredth_pips: 20,
+                range_order_fee_hundredth_pips: 20,
+                range_order_total_fees_earned: {
+                  base: '0x1a96a7c9901240',
+                  quote: '0x210230',
+                },
+                limit_order_total_fees_earned: {
+                  base: '0x0',
+                  quote: '0x0',
+                },
+                range_total_swap_inputs: {
+                  base: '0x1448f64c4ff15c61c0',
+                  quote: '0x192ecd80a2',
+                },
+                limit_total_swap_inputs: {
+                  base: '0x0',
+                  quote: '0x0',
+                },
+                quote_asset: {
+                  chain: 'Ethereum',
+                  asset: 'USDC',
+                },
+              },
+              USDC: {
+                limit_order_fee_hundredth_pips: 20,
+                range_order_fee_hundredth_pips: 20,
+                range_order_total_fees_earned: {
+                  base: '0xaa9c1',
+                  quote: '0x1b1d4b',
+                },
+                limit_order_total_fees_earned: {
+                  base: '0x0',
+                  quote: '0x0',
+                },
+                range_total_swap_inputs: {
+                  base: '0x8228e1e3c',
+                  quote: '0x14afa63498',
+                },
+                limit_total_swap_inputs: {
+                  base: '0x0',
+                  quote: '0x0',
+                },
+                quote_asset: {
+                  chain: 'Ethereum',
+                  asset: 'USDC',
+                },
+              },
+            },
+            Solana: {
+              SOL: {
                 limit_order_fee_hundredth_pips: 20,
                 range_order_fee_hundredth_pips: 20,
                 range_order_total_fees_earned: {
@@ -603,7 +658,54 @@ describe('parsers', () => {
             },
           },
           Solana: {
-            SOL: null,
+            SOL: {
+              limit_order_fee_hundredth_pips: 20,
+              range_order_fee_hundredth_pips: 20,
+              range_order_total_fees_earned: {
+                base: '0x18da0',
+                quote: '0xe9203',
+              },
+              limit_order_total_fees_earned: {
+                base: '0x0',
+                quote: '0x0',
+              },
+              range_total_swap_inputs: {
+                base: '0x12f561efa',
+                quote: '0xb1db4cae8',
+              },
+              limit_total_swap_inputs: {
+                base: '0x0',
+                quote: '0x0',
+              },
+              quote_asset: {
+                chain: 'Ethereum',
+                asset: 'USDC',
+              },
+            },
+            USDC: {
+              limit_order_fee_hundredth_pips: 20,
+              range_order_fee_hundredth_pips: 20,
+              range_order_total_fees_earned: {
+                base: '0x18da0',
+                quote: '0xe9203',
+              },
+              limit_order_total_fees_earned: {
+                base: '0x0',
+                quote: '0x0',
+              },
+              range_total_swap_inputs: {
+                base: '0x12f561efa',
+                quote: '0xb1db4cae8',
+              },
+              limit_total_swap_inputs: {
+                base: '0x0',
+                quote: '0x0',
+              },
+              quote_asset: {
+                chain: 'Ethereum',
+                asset: 'USDC',
+              },
+            },
           },
         },
       });

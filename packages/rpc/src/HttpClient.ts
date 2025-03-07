@@ -11,7 +11,6 @@ import {
 
 export default class HttpClient extends Client {
   private timer: ReturnType<typeof setTimeout> | null = null;
-  private batchDuration = 100;
   private requestMap = new Map<
     string,
     {
@@ -68,8 +67,12 @@ export default class HttpClient extends Client {
     const deferred = deferredPromise<RpcResult<T>>();
     const body = this.formatRequest(method, params);
     this.requestMap.set(body.id, { deferred, body, method });
-    if (this.timer) clearTimeout(this.timer);
-    this.timer = setTimeout(() => this.sendBatch(), this.batchDuration);
+    if (!this.timer) {
+      this.timer = setTimeout(() => {
+        this.timer = null;
+        void this.sendBatch();
+      }, 0);
+    }
     return deferred.promise;
   }
 
