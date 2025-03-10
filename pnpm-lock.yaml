@@ -4,11 +4,6 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
-patchedDependencies:
-  scale-ts:
-    hash: 144bf9376e2b0e982cfc2d36bad1c6272c00cfd7b8016ed39f46abb7a53fcf99
-    path: patches/scale-ts.patch
-
 importers:
 
   .:
@@ -170,7 +165,7 @@ importers:
         version: 0.6.0
       scale-ts:
         specifier: ^1.6.1
-        version: 1.6.1(patch_hash=144bf9376e2b0e982cfc2d36bad1c6272c00cfd7b8016ed39f46abb7a53fcf99)
+        version: 1.6.1
     devDependencies:
       '@vitest/ui':
         specifier: 3.0.7
@@ -192,7 +187,7 @@ importers:
         version: 1.98.0(bufferutil@4.0.8)(utf-8-validate@5.0.10)
       scale-ts:
         specifier: ^1.6.1
-        version: 1.6.1(patch_hash=144bf9376e2b0e982cfc2d36bad1c6272c00cfd7b8016ed39f46abb7a53fcf99)
+        version: 1.6.1
       zod:
         specifier: ^3.24.2
         version: 3.24.2
@@ -3031,7 +3026,7 @@ snapshots:
   '@chainflip/scale@1.8.0':
     dependencies:
       '@chainflip/utils': 0.6.0
-      scale-ts: 1.6.1(patch_hash=144bf9376e2b0e982cfc2d36bad1c6272c00cfd7b8016ed39f46abb7a53fcf99)
+      scale-ts: 1.6.1
 
   '@chainflip/utils@0.4.0': {}
 
@@ -5404,7 +5399,7 @@ snapshots:
       es-errors: 1.3.0
       is-regex: 1.1.4
 
-  scale-ts@1.6.1(patch_hash=144bf9376e2b0e982cfc2d36bad1c6272c00cfd7b8016ed39f46abb7a53fcf99): {}
+  scale-ts@1.6.1: {}
 
   semver@6.3.1: {}
 
