@@ -1,3 +1,4 @@
+import * as fs from 'fs/promises';
 import * as path from 'path';
 import tsconfigPaths from 'vite-tsconfig-paths';
 import { defineConfig } from 'vitest/config';
@@ -28,5 +29,20 @@ export default defineConfig({
       exclude: [...exclude, ...include],
       enabled: true,
     },
+  },
+  resolve: {
+    alias: [
+      {
+        find: 'scale-ts',
+        replacement: '',
+        async customResolver(source, importer) {
+          const packages = (await fs.readdir(path.join(import.meta.dirname, 'packages'))).map((p) =>
+            path.join(import.meta.dirname, 'packages', p),
+          );
+          const pkg = packages.find((p) => importer!.startsWith(p))!;
+          return path.join(pkg, 'node_modules', 'scale-ts', 'dist', 'scale-ts.mjs');
+        },
+      },
+    ],
   },
 });

@@ -1,3 +1,4 @@
+import * as path from 'path';
 import config from '../../vitest.config';
 
 export default {
@@ -12,6 +13,17 @@ export default {
         branches: 97.72,
         functions: 100,
       },
+    },
+  },
+  resolve: {
+    alias: {
+      'scale-ts': path.join(
+        import.meta.dirname,
+        'node_modules',
+        'scale-ts',
+        'dist',
+        'scale-ts.mjs',
+      ),
     },
   },
 };
