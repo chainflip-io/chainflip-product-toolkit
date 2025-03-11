@@ -198,9 +198,6 @@ importers:
       '@types/bn.js':
         specifier: ^5.1.5
         version: 5.1.5
-      '@types/node':
-        specifier: 22.13.8
-        version: 22.13.8
 
   packages/utils:
     dependencies:

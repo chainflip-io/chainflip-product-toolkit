@@ -54,7 +54,6 @@
     "access": "public"
   },
   "devDependencies": {
-    "@types/bn.js": "^5.1.5",
-    "@types/node": "22.13.8"
+    "@types/bn.js": "^5.1.5"
   }
 }
