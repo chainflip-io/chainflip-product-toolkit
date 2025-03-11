@@ -5,12 +5,12 @@ export const CHAINFLIP_BLOCK_TIME_SECONDS = 6;
 export const CHAINFLIP_BLOCKS_PER_YEAR = 5256000;
 
 export const chainflipLinks = {
-  website: 'https://chainflip.io/',
+  website: 'https://chainflip.io',
   discord: 'https://discord.gg/chainflip-community',
   twitter: 'https://twitter.com/chainflip',
   telegram: 'https://t.me/chainflip_io_chat',
-  blog: 'https://blog.chainflip.io/',
-  docs: 'https://docs.chainflip.io/',
+  blog: 'https://blog.chainflip.io',
+  docs: 'https://docs.chainflip.io',
 };
 
 export const chainflipCommunityLinks = {
