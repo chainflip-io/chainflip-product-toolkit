@@ -16,23 +16,12 @@ export default class HttpClient extends Client {
         },
       });
     } catch (error) {
-      for (const [id] of requestMap) {
-        this.handleResponse(
-          { id, success: false, error: new Error('Network error', { cause: error }) },
-          requestMap,
-        );
-      }
-
+      this.handleErrorResponse(new Error('Network error', { cause: error }), requestMap);
       return;
     }
 
     if (!res.ok) {
-      for (const [id] of requestMap) {
-        this.handleResponse(
-          { id, success: false, error: new Error(`HTTP error: ${res.status}`) },
-          requestMap,
-        );
-      }
+      this.handleErrorResponse(new Error(`HTTP error: ${res.status}`), requestMap);
       return;
     }
 
@@ -42,12 +31,7 @@ export default class HttpClient extends Client {
         this.handleResponse({ id: r.id, success: true, result: r }, requestMap);
       }
     } catch (cause) {
-      for (const [id] of requestMap) {
-        this.handleResponse(
-          { id, success: false, error: new Error('Invalid JSON response', { cause }) },
-          requestMap,
-        );
-      }
+      this.handleErrorResponse(new Error('Invalid JSON response', { cause }), requestMap);
     }
   }
 }

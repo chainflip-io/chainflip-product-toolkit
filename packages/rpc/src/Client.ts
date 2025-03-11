@@ -74,6 +74,12 @@ export default abstract class Client {
     }
   }
 
+  protected handleErrorResponse(error: Error, clonedMap: RequestMap) {
+    for (const [id] of clonedMap) {
+      this.handleResponse({ id, success: false, error }, clonedMap);
+    }
+  }
+
   private async handleBatch() {
     const clonedMap = new Map(this.requestMap);
     this.requestMap.clear();

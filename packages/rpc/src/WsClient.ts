@@ -131,12 +131,7 @@ export default class WsClient extends Client {
     }
 
     if (!socket) {
-      for (const [id] of requestMap) {
-        this.handleResponse(
-          { id, success: false, error: new Error('failed to connect') },
-          requestMap,
-        );
-      }
+      this.handleErrorResponse(new Error('failed to connect'), requestMap);
       return;
     }
 
