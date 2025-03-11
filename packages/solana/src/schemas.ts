@@ -3,24 +3,27 @@ import * as base58 from '@chainflip/utils/base58';
 import { assetContractId, chainContractId } from '@chainflip/utils/chainflip';
 import { POLKADOT_SS58_PREFIX } from '@chainflip/utils/consts';
 import * as ss58 from '@chainflip/utils/ss58';
-import anchor from '@coral-xyz/anchor';
+import BN from 'bn.js';
 import { z } from 'zod';
 import { tryDecodeCfParams } from './scale';
 
-const { BN } = anchor;
-
 const entries = Object.entries as <T>(o: T) => [keyof T, T[keyof T]][];
+
+const bnSchema = z
+  .any()
+  .refine((arg) => BN.isBN(arg))
+  .transform((bn) => bn.toString());
 
 const swapParams = z
   .object({
-    amount: z.instanceof(BN).transform((bn) => bn.toString()),
+    amount: bnSchema,
     dst_chain: z.number(),
     dst_address: z.instanceof(Buffer),
     dst_token: z.number(),
     ccm_parameters: z
       .object({
         message: z.instanceof(Buffer),
-        gas_amount: z.instanceof(BN).transform((bn) => bn.toString()),
+        gas_amount: bnSchema,
       })
       .nullable(),
     cf_parameters: z.instanceof(Buffer).transform((buf) => new Uint8Array(buf)),
