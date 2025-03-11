@@ -3,11 +3,9 @@ import * as base58 from '@chainflip/utils/base58';
 import { assetContractId, chainContractId } from '@chainflip/utils/chainflip';
 import { POLKADOT_SS58_PREFIX } from '@chainflip/utils/consts';
 import * as ss58 from '@chainflip/utils/ss58';
-import anchor from '@coral-xyz/anchor';
+import { BN } from '@coral-xyz/anchor';
 import { z } from 'zod';
 import { tryDecodeCfParams } from './scale';
-
-const { BN } = anchor;
 
 const entries = Object.entries as <T>(o: T) => [keyof T, T[keyof T]][];
 
