@@ -24,6 +24,7 @@ import {
   type cfSwapRate,
   type cfSwapRateV3,
   type requestSwapParameterEncoding,
+  type cfFailedCallEvm,
 } from '../parsers';
 
 const supportedAssets = [
@@ -594,6 +595,11 @@ const poolPriceV2: z.input<typeof cfPoolPriceV2> = {
   range_order: '0x404979711cbb0b1702a0b',
 };
 
+const failedCallEvm: z.input<typeof cfFailedCallEvm> = {
+  contract: '0xdeadbeef',
+  data: 'some data i guess',
+};
+
 const isHexString = (value: unknown): value is HexString =>
   typeof value === 'string' && value.startsWith('0x');
 
@@ -605,10 +611,18 @@ describe(HttpClient, () => {
         "broker_request_swap_parameter_encoding",
         "cf_account_info",
         "cf_accounts",
+        "cf_auction_state",
+        "cf_authority_emission_per_block",
         "cf_boost_pool_details",
         "cf_boost_pool_pending_fees",
         "cf_boost_pools_depth",
         "cf_environment",
+        "cf_epoch_duration",
+        "cf_eth_key_manager_address",
+        "cf_eth_state_chain_gateway_address",
+        "cf_failed_call_arbitrum",
+        "cf_failed_call_ethereum",
+        "cf_flip_supply",
         "cf_funding_environment",
         "cf_ingress_egress_environment",
         "cf_pool_depth",
@@ -742,13 +756,36 @@ describe(HttpClient, () => {
         case 'lp_total_balances':
           expect(body.params[0]).toEqual(LP_ACCOUNT_ID);
           return respond(liquidityProviderAccount.balances);
+        case 'cf_failed_call_ethereum':
+        case 'cf_failed_call_arbitrum':
+          if (body.params[0] === 1) return respond(failedCallEvm);
+          return respond(null);
+        case 'cf_authority_emission_per_block':
+          return respond('0x9eafbba30192d84');
+        case 'cf_epoch_duration':
+          return respond(43200);
+        case 'cf_auction_state':
+          return respond({
+            blocks_per_epoch: 43200,
+            current_epoch_started_at: 6892653,
+            redemption_period_as_percentage: 50,
+            min_funding: '0x53444835ec580000',
+            auction_size_range: [3, 150],
+            min_active_bid: '0x765fc937c54c30cabc0',
+          });
+        case 'cf_flip_supply':
+          return respond(['0x0', '0x1']);
+        case 'cf_eth_state_chain_gateway_address':
+        case 'cf_eth_key_manager_address':
         default:
           console.error('Method not found:', body.method);
-          return {
-            id: body.id,
-            jsonrpc: '2.0',
-            error: { code: 1, message: `Method not found: "${body.method as string}"` },
-          };
+          return [
+            {
+              id: body.id,
+              jsonrpc: '2.0',
+              error: { code: 1, message: `Method not found: "${body.method as string}"` },
+            },
+          ];
       }
     }
 
@@ -1237,6 +1274,49 @@ describe(HttpClient, () => {
         }
       `);
       expect(callCounter).toEqual(1);
+    });
+
+    it.each(['cf_failed_call_ethereum', 'cf_failed_call_arbitrum'])(
+      'handles failed calls (%s)',
+      async () => {
+        expect(await client.sendRequest('cf_failed_call_ethereum', 1)).toEqual(failedCallEvm);
+        expect(await client.sendRequest('cf_failed_call_ethereum', 2)).toBeNull();
+      },
+    );
+
+    it('handles cf_flip_supply', async () => {
+      expect(await client.sendRequest('cf_flip_supply')).toMatchInlineSnapshot(`
+        {
+          "offchainFunds": 1n,
+          "totalIssuance": 0n,
+        }
+      `);
+    });
+
+    it('handles cf_authority_emission_per_block', async () => {
+      expect(await client.sendRequest('cf_authority_emission_per_block')).toMatchInlineSnapshot(
+        `714660267981090180n`,
+      );
+    });
+
+    it('handles cf_epoch_duration', async () => {
+      expect(await client.sendRequest('cf_epoch_duration')).toMatchInlineSnapshot(`43200`);
+    });
+
+    it('handles cf_auction_state', async () => {
+      expect(await client.sendRequest('cf_auction_state')).toMatchInlineSnapshot(`
+        {
+          "auction_size_range": [
+            3,
+            150,
+          ],
+          "blocks_per_epoch": 43200,
+          "current_epoch_started_at": 6892653,
+          "min_active_bid": 34937886558754807000000n,
+          "min_funding": 6000000000000000000n,
+          "redemption_period_as_percentage": 50,
+        }
+      `);
     });
 
     it('handles multiple requests with 1 call', async () => {

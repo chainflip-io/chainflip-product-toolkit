@@ -1,5 +1,5 @@
 import { type HexString } from '@chainflip/utils/types';
-import type { z } from 'zod';
+import { z } from 'zod';
 import {
   type AssetAndChain,
   cfBoostPoolDetails,
@@ -26,6 +26,11 @@ import {
   cfSwapRateV3,
   requestSwapParameterEncoding,
   lpTotalBalances,
+  cfFailedCallEvm,
+  numberOrHex,
+  cfAuctionState,
+  cfFlipSuppy,
+  ethereumAddress,
 } from './parsers';
 
 type Nullish<T> = T | null | undefined;
@@ -180,6 +185,14 @@ export type RpcRequest = WithHash<{
   state_getMetadata: [];
   state_getRuntimeVersion: [];
   lp_total_balances: [accountId: string];
+  cf_failed_call_ethereum: [broadcastId: number];
+  cf_failed_call_arbitrum: [broadcastId: number];
+  cf_authority_emission_per_block: [];
+  cf_epoch_duration: [];
+  cf_auction_state: [];
+  cf_flip_supply: [];
+  cf_eth_state_chain_gateway_address: [];
+  cf_eth_key_manager_address: [];
 }> & {
   chain_getBlockHash: [blockHeight?: number];
 };
@@ -209,6 +222,14 @@ export const rpcResult = {
   state_getMetadata: stateGetMetadata,
   state_getRuntimeVersion: stateGetRuntimeVersion,
   lp_total_balances: lpTotalBalances,
+  cf_failed_call_ethereum: cfFailedCallEvm.nullable(),
+  cf_failed_call_arbitrum: cfFailedCallEvm.nullable(),
+  cf_authority_emission_per_block: numberOrHex,
+  cf_epoch_duration: z.number(),
+  cf_auction_state: cfAuctionState,
+  cf_flip_supply: cfFlipSuppy,
+  cf_eth_state_chain_gateway_address: ethereumAddress.nullable(),
+  cf_eth_key_manager_address: ethereumAddress.nullable(),
 } as const satisfies { [K in keyof RpcRequest]: z.ZodTypeAny };
 
 export type RpcMethod = keyof RpcRequest;

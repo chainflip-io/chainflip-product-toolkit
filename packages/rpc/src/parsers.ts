@@ -1,5 +1,6 @@
-import { isNotNullish } from '@chainflip/utils/guard';
+import { isUndefined } from '@chainflip/utils/guard';
 import { isHex } from '@chainflip/utils/string';
+import { type HexString } from '@chainflip/utils/types';
 import { z } from 'zod';
 
 // base types
@@ -71,9 +72,11 @@ const rpcBaseResponse = z.object({
   jsonrpc: z.literal('2.0'),
 });
 
-const nonNullish = z.any().refine(isNotNullish, { message: 'Value must not be null or undefined' });
+const notUndefined = z
+  .any()
+  .refine((v) => !isUndefined(v), { message: 'Value must not be undefined' });
 
-const rpcSuccessResponse = rpcBaseResponse.extend({ result: nonNullish });
+const rpcSuccessResponse = rpcBaseResponse.extend({ result: notUndefined });
 
 const rpcErrorResponse = rpcBaseResponse.extend({
   error: z.object({ code: z.number(), message: z.string() }),
@@ -396,3 +399,26 @@ export const cfBoostPoolPendingFees = z.array(
 );
 
 export const lpTotalBalances = chainAssetMapFactory(numberOrHex, 0);
+
+export const cfFailedCallEvm = z.object({
+  contract: hexString,
+  data: z.string(),
+});
+
+const range = <Z extends z.ZodTypeAny>(parser: Z) => z.tuple([parser, parser]);
+
+export const cfAuctionState = z.object({
+  blocks_per_epoch: z.number(),
+  current_epoch_started_at: z.number(),
+  redemption_period_as_percentage: z.number(),
+  min_funding: numberOrHex,
+  auction_size_range: range(z.number()),
+  min_active_bid: numberOrHex,
+});
+
+export const cfFlipSuppy = range(numberOrHex).transform(([totalIssuance, offchainFunds]) => ({
+  totalIssuance,
+  offchainFunds,
+}));
+
+export const ethereumAddress = z.string().transform<HexString>((address) => `0x${address}`);
