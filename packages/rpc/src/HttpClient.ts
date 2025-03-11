@@ -1,28 +1,11 @@
-import { deferredPromise } from '@chainflip/utils/async';
-import Client, { type Response } from './Client';
-import {
-  type JsonRpcRequest,
-  type JsonRpcResponse,
-  type RpcMethod,
-  type RpcRequest,
-  type RpcResult,
-  rpcResult,
-} from './common';
+import Client, { type RequestMap } from './Client';
+import { type JsonRpcRequest, type JsonRpcResponse, type RpcMethod } from './common';
 
 export default class HttpClient extends Client {
-  private timer: ReturnType<typeof setTimeout> | null = null;
-  private requestMap = new Map<
-    string,
-    {
-      deferred: ReturnType<typeof deferredPromise<RpcResult<RpcMethod>>>;
-      body: JsonRpcRequest<RpcMethod>;
-      method: RpcMethod;
-    }
-  >();
-
-  protected async send<const T extends RpcMethod>(
+  protected override async send<const T extends RpcMethod>(
     request: JsonRpcRequest<T>[],
-  ): Promise<Response[]> {
+    requestMap: RequestMap,
+  ): Promise<void> {
     let res;
     try {
       res = await fetch(this.url, {
@@ -33,78 +16,38 @@ export default class HttpClient extends Client {
         },
       });
     } catch (error) {
-      return request.map((r) => ({
-        id: r.id,
-        success: false,
-        error: new Error('Network error', { cause: error }),
-      }));
+      for (const [id] of requestMap) {
+        this.handleResponse(
+          { id, success: false, error: new Error('Network error', { cause: error }) },
+          requestMap,
+        );
+      }
+
+      return;
     }
 
     if (!res.ok) {
-      return request.map((r) => ({
-        id: r.id,
-        success: false,
-        error: new Error(`HTTP error: ${res.status}`),
-      }));
+      for (const [id] of requestMap) {
+        this.handleResponse(
+          { id, success: false, error: new Error(`HTTP error: ${res.status}`) },
+          requestMap,
+        );
+      }
+      return;
     }
 
     try {
       const jsonRpcResponse = (await res.json()) as JsonRpcResponse[];
-      return jsonRpcResponse.map((r) => ({ id: r.id as string, success: true, result: r }));
+      for (const r of jsonRpcResponse) {
+        this.handleResponse({ id: r.id, success: true, result: r }, requestMap);
+      }
     } catch (cause) {
-      return request.map((r) => ({
-        id: r.id,
-        success: false,
-        error: new Error('Invalid JSON response', { cause }),
-      }));
-    }
-  }
-
-  override sendRequest<const T extends RpcMethod>(
-    method: T,
-    ...params: RpcRequest[T]
-  ): Promise<RpcResult<T>> {
-    const deferred = deferredPromise<RpcResult<T>>();
-    const body = this.formatRequest(method, params);
-    this.requestMap.set(body.id, { deferred, body, method });
-    if (!this.timer) {
-      this.timer = setTimeout(() => {
-        this.timer = null;
-        void this.sendBatch();
-      }, 0);
-    }
-    return deferred.promise;
-  }
-
-  private async sendBatch() {
-    const clonedMap = new Map(this.requestMap);
-    this.requestMap.clear();
-    const requests = [...clonedMap.values()].map((item) => item.body);
-    const responses = await this.send(requests);
-
-    for (const response of responses) {
-      const clonedItem = clonedMap.get(response.id);
-      if (!clonedItem) {
-        continue;
-      }
-
-      if (!response.success) {
-        clonedItem.deferred.reject(response.error);
-        continue;
-      }
-
-      try {
-        const parseResult = this.parseSingleResponse(response);
-        clonedItem.deferred.resolve(rpcResult[clonedItem.method].parse(parseResult.result));
-      } catch (e) {
-        clonedItem.deferred.reject(e as Error);
-      } finally {
-        clonedMap.delete(response.id);
+      for (const [id] of requestMap) {
+        this.handleResponse(
+          { id, success: false, error: new Error('Invalid JSON response', { cause }) },
+          requestMap,
+        );
       }
     }
-
-    clonedMap.forEach((item) => {
-      item.deferred.reject(new Error('Could not find the result for the request'));
-    });
   }
 }

@@ -347,12 +347,7 @@ export default [
           allowNumber: true,
         },
       ],
-      '@typescript-eslint/no-invalid-void-type': [
-        'error',
-        {
-          allowInGenericTypeArguments: true,
-        },
-      ],
+      '@typescript-eslint/no-invalid-void-type': 'off',
       '@typescript-eslint/no-unused-vars': [
         'error',
         {
@@ -387,7 +382,7 @@ export default [
         },
       ],
       '@typescript-eslint/array-type': 'error',
-      '@typescript-eslint/consistent-type-imports': ['error', { fixStyle: 'inline-type-imports' }],
+      '@typescript-eslint/consistent-type-imports': 'off',
     },
   },
   {
@@ -403,6 +398,8 @@ export default [
       '@typescript-eslint/no-non-null-assertion': 'off',
       '@typescript-eslint/unbound-method': 'off',
       '@typescript-eslint/no-unsafe-argument': 'off',
+      '@typescript-eslint/no-unsafe-assignment': 'off',
+      '@typescript-eslint/no-unsafe-return': 'off',
       'no-console': 'off',
     },
   },

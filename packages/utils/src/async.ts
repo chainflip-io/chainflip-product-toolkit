@@ -17,7 +17,6 @@ export const deferredPromise = <T>(): {
 export type DeferredPromise<T> = ReturnType<typeof deferredPromise<T>>;
 
 export const sleep = (ms: number, { signal }: { signal?: AbortSignal } = {}): Promise<void> => {
-  // eslint-disable-next-line @typescript-eslint/no-invalid-void-type
   const deferred = deferredPromise<void>();
 
   const timeout = setTimeout(deferred.resolve, ms);
@@ -82,7 +81,6 @@ export const once = async (
   event: string,
   opts?: { signal?: AbortSignal; timeout?: number },
 ): Promise<void> => {
-  // eslint-disable-next-line @typescript-eslint/no-invalid-void-type
   const deferred = deferredPromise<void>();
   const onSuccess = () => {
     target.removeEventListener('error', onError);

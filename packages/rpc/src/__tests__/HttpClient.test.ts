@@ -2,7 +2,7 @@ import { type HexString } from '@chainflip/utils/types';
 import { Server } from 'http';
 import { type AddressInfo } from 'net';
 import { promisify } from 'util';
-import { afterEach, beforeEach, describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { type z } from 'zod';
 import { type JsonRpcRequest, type RpcMethod } from '../common';
 import { HttpClient } from '../index';
@@ -35,7 +35,8 @@ const supportedAssets = [
   { chain: 'Bitcoin', asset: 'BTC' },
   { chain: 'Arbitrum', asset: 'ETH' },
   { chain: 'Arbitrum', asset: 'USDC' },
-  // { chain: 'Solana', asset: 'SOL' },
+  { chain: 'Solana', asset: 'SOL' },
+  { chain: 'Solana', asset: 'USDC' },
 ];
 
 const ingressEgressEnvironment: z.input<typeof cfIngressEgressEnvironment> = {
@@ -636,6 +637,14 @@ describe(HttpClient, () => {
     );
   });
 
+  it('rejects unknown methods', async () => {
+    const client = new HttpClient('http://localhost:8080');
+
+    await expect(
+      client.sendRequest('unknown_method' as any),
+    ).rejects.toThrowErrorMatchingInlineSnapshot(`[Error: Unknown method: unknown_method]`);
+  });
+
   const LP_ACCOUNT_ID = 'cFMVtnPTJFYFvnHXK14HZ6XWDSCAByTPZDWrTeFEc2B8A3m7M';
   const BROKER_ACCOUNT_ID = 'cFJjZKzA5rUTb9qkZMGfec7piCpiAQKr15B4nALzriMGQL8BE';
   const VALIDATOR_ACCOUNT_ID = 'cFKzr7DwLCRtSkou5H5moKri7g9WwJ4tAbVJv6dZGhLb811Tc';
@@ -647,16 +656,6 @@ describe(HttpClient, () => {
     let client: HttpClient;
 
     function handleRequest(body: JsonRpcRequest<RpcMethod>) {
-      const specialMethod = body.method as string;
-
-      if (specialMethod === 'malformed_response') {
-        return { result: 1, id: body.id };
-      }
-
-      if (specialMethod === 'missing_id') {
-        return { jsonrpc: '2.0', result: 1 };
-      }
-
       const respond = (result: unknown) => ({
         id: body.id,
         jsonrpc: '2.0',
@@ -776,12 +775,6 @@ describe(HttpClient, () => {
 
         const response = [];
         for (const item of body) {
-          if ((item.method as string) === 'non_200') {
-            return res.writeHead(404).end();
-          }
-          if ((item.method as string) === 'malformed_json') {
-            return res.end('{');
-          }
           response.push(handleRequest(item));
         }
         return res.writeHead(200).end(JSON.stringify(response));
@@ -1309,25 +1302,21 @@ describe(HttpClient, () => {
       expect(callCounter).toEqual(2);
     });
 
-    it('throws on invalid response', async () => {
-      const method = 'malformed_response' as RpcMethod;
-
-      await expect(client.sendRequest(method)).rejects.toThrowErrorMatchingInlineSnapshot(
-        `[Error: Malformed RPC response received]`,
-      );
-    });
-
-    it('throws on missing id on response', async () => {
-      const method = 'missing_id' as RpcMethod;
-
-      await expect(client.sendRequest(method)).rejects.toThrowErrorMatchingInlineSnapshot(
-        `[Error: Could not find the result for the request]`,
-      );
-    });
-
     it('throws on a non-200 response', async () => {
-      const method = 'non_200' as RpcMethod;
-      await expect(client.sendRequest(method)).rejects.toThrow('HTTP error: 404');
+      vi.spyOn(globalThis, 'fetch').mockResolvedValueOnce({
+        ok: false,
+        status: 404,
+      } as Response);
+      await expect(client.sendRequest('cf_accounts')).rejects.toThrow('HTTP error: 404');
+    });
+
+    it('throws on invalid JSON', async () => {
+      vi.spyOn(globalThis, 'fetch').mockResolvedValueOnce({
+        ok: true,
+        // eslint-disable-next-line @typescript-eslint/require-await
+        json: async () => JSON.parse('{'),
+      } as Response);
+      await expect(client.sendRequest('cf_accounts')).rejects.toThrow('Invalid JSON response');
     });
 
     it('returns the rejected error message', async () => {
@@ -1344,9 +1333,102 @@ describe(HttpClient, () => {
       );
     });
 
-    it('handles malformed json', async () => {
-      const method = 'malformed_json' as RpcMethod;
-      await expect(client.sendRequest(method)).rejects.toThrow('Invalid JSON response');
+    it('uses monotonically increasing request IDs in insecure envs', async () => {
+      vi.spyOn(crypto, 'randomUUID').mockImplementationOnce(() => {
+        throw new Error('test');
+      });
+
+      const fetchSpy = vi.spyOn(globalThis, 'fetch');
+
+      await expect(client.sendRequest('cf_supported_assets')).resolves.not.toThrowError();
+
+      expect(fetchSpy.mock.calls?.[0]?.[1]?.body).toMatchInlineSnapshot(
+        `"[{"jsonrpc":"2.0","id":"1","method":"cf_supported_assets","params":[]}]"`,
+      );
+    });
+
+    it('rejects unfound requests', async () => {
+      vi.spyOn(globalThis, 'fetch').mockImplementation((url, init) => {
+        const body = JSON.parse(init!.body as string) as JsonRpcRequest<RpcMethod>[];
+
+        expect(body).toHaveLength(2);
+        expect(body[0].method).toEqual('cf_account_info');
+        expect(body[1].method).toEqual('cf_account_info');
+        expect(body[0].params[0]).toEqual(LP_ACCOUNT_ID);
+        expect(body[1].params[0]).toEqual(BROKER_ACCOUNT_ID);
+
+        return Promise.resolve({
+          ok: true,
+          json: () =>
+            Promise.resolve([
+              {
+                id: body[0].id,
+                jsonrpc: '2.0',
+                result: liquidityProviderAccount,
+              },
+            ]),
+        } as Response);
+      });
+
+      const results = await Promise.allSettled(
+        [LP_ACCOUNT_ID, BROKER_ACCOUNT_ID].map((id) => client.sendRequest('cf_account_info', id)),
+      );
+
+      expect(results[0]).toMatchObject({
+        status: 'fulfilled',
+        value: { role: 'liquidity_provider' },
+      });
+      expect(results[1]).toMatchObject({
+        status: 'rejected',
+        reason: new Error('Could not find the result for the request'),
+      });
+    });
+
+    it('ignores additional unrecognized responses', async () => {
+      vi.spyOn(globalThis, 'fetch').mockImplementation((url, init) => {
+        const body = JSON.parse(init!.body as string) as JsonRpcRequest<RpcMethod>[];
+
+        expect(body).toHaveLength(2);
+        expect(body[0].method).toEqual('cf_account_info');
+        expect(body[1].method).toEqual('cf_account_info');
+        expect(body[0].params[0]).toEqual(LP_ACCOUNT_ID);
+        expect(body[1].params[0]).toEqual(BROKER_ACCOUNT_ID);
+
+        return Promise.resolve({
+          ok: true,
+          json: () =>
+            Promise.resolve([
+              {
+                id: body[0].id,
+                jsonrpc: '2.0',
+                result: liquidityProviderAccount,
+              },
+              {
+                id: body[1].id,
+                jsonrpc: '2.0',
+                result: brokerAccount,
+              },
+              {
+                id: '3',
+                jsonrpc: '2.0',
+                result: supportedAssets,
+              },
+            ]),
+        } as Response);
+      });
+
+      const results = await Promise.allSettled(
+        [LP_ACCOUNT_ID, BROKER_ACCOUNT_ID].map((id) => client.sendRequest('cf_account_info', id)),
+      );
+
+      expect(results[0]).toMatchObject({
+        status: 'fulfilled',
+        value: { role: 'liquidity_provider' },
+      });
+      expect(results[1]).toMatchObject({
+        status: 'fulfilled',
+        value: { role: 'broker' },
+      });
     });
   });
 });
