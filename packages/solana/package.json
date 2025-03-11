@@ -1,6 +1,6 @@
 {
   "name": "@chainflip/solana",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "type": "module",
   "scripts": {
     "eslint:check": "pnpm eslint --max-warnings 0 './**/*.ts'",
