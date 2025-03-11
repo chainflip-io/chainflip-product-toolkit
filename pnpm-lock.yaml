@@ -185,12 +185,19 @@ importers:
       '@solana/web3.js':
         specifier: ^1.98.0
         version: 1.98.0(bufferutil@4.0.8)(utf-8-validate@5.0.10)
+      bn.js:
+        specifier: ^5.2.1
+        version: 5.2.1
       scale-ts:
         specifier: ^1.6.1
         version: 1.6.1
       zod:
         specifier: ^3.24.2
         version: 3.24.2
+    devDependencies:
+      '@types/bn.js':
+        specifier: ^5.1.5
+        version: 5.1.5
 
   packages/utils:
     dependencies:
