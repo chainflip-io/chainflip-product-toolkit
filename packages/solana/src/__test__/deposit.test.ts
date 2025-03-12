@@ -1,11 +1,6 @@
 import { Connection } from '@solana/web3.js';
 import { describe, beforeEach, it, vi, expect, type MockInstance } from 'vitest';
-import {
-  findTransactionSignatures,
-  findVaultSwapData,
-  findVaultSwapSignature,
-  parseUrlWithBasicAuth,
-} from '../deposit';
+import { findTransactionSignatures, findVaultSwapData, findVaultSwapSignature } from '../deposit';
 import { mainnet } from '../idls';
 import bigDiff from './fixtures/bigDiff.json';
 import cluster from './fixtures/cluster.json';
@@ -292,19 +287,6 @@ describe(findTransactionSignatures, () => {
   });
 });
 
-describe(parseUrlWithBasicAuth, () => {
-  it('extracts basic auth info into an auth header', () => {
-    expect(parseUrlWithBasicAuth('https://yaboi:p455w0rd@url.org')).toMatchInlineSnapshot(`
-      {
-        "headers": {
-          "Authorization": "Basic eWFib2k6cDQ1NXcwcmQ=",
-        },
-        "url": "https://url.org/",
-      }
-    `);
-  });
-});
-
 describe(findVaultSwapSignature, () => {
   it('it finds the vault swap signature', async () => {
     const spy = vi.spyOn(Connection.prototype, 'getSignaturesForAddress');
@@ -370,28 +352,21 @@ describe(findVaultSwapData, () => {
 
     expect(data).toMatchInlineSnapshot(`
       {
-        "ccmParams": null,
-        "cfParams": {
-          "affiliateFees": [],
-          "boostFee": 0,
-          "brokerFees": {
-            "account": "cFMTNSQQVfBo2HqtekvhLPfZY764kuJDVFG1EvnnDGYxc3LRW",
-            "commissionBps": 0,
-          },
-          "ccmAdditionalData": null,
-          "dcaParams": null,
-          "refundParams": {
-            "minPriceX128": "6616846606368726564647178815965546002365481543",
-            "refundAddress": "3yKDHJgzS2GbZB9qruoadRYtq8597HZifnRju7fHpdRC",
-            "retryDurationBlocks": 100,
-          },
-        },
-        "depositAmount": "1500000000",
+        "affiliateFees": [],
+        "amount": 1500000000n,
+        "brokerFee": 0,
+        "ccmDepositMetadata": null,
+        "dcaParams": null,
+        "depositChainBlockHeight": 365289019,
         "destinationAddress": "0xa56a6be23b6cf39d9448ff6e897c29c41c8fbdff",
-        "destinationAsset": "Eth",
-        "destinationChain": "Ethereum",
-        "sourceAsset": "Sol",
-        "sourceChain": "Solana",
+        "inputAsset": "Sol",
+        "maxBoostFee": 0,
+        "outputAsset": "Eth",
+        "refundParams": {
+          "minPrice": 6616846606368726564647178815965546002365481543n,
+          "refundAddress": "3yKDHJgzS2GbZB9qruoadRYtq8597HZifnRju7fHpdRC",
+          "retryDuration": 100,
+        },
       }
     `);
   });
@@ -409,28 +384,21 @@ describe(findVaultSwapData, () => {
 
     expect(data).toMatchInlineSnapshot(`
       {
-        "ccmParams": null,
-        "cfParams": {
-          "affiliateFees": [],
-          "boostFee": 0,
-          "brokerFees": {
-            "account": "cFMTNSQQVfBo2HqtekvhLPfZY764kuJDVFG1EvnnDGYxc3LRW",
-            "commissionBps": 0,
-          },
-          "ccmAdditionalData": null,
-          "dcaParams": null,
-          "refundParams": {
-            "minPriceX128": "6616846606368726564647178815965546002365481543",
-            "refundAddress": "3yKDHJgzS2GbZB9qruoadRYtq8597HZifnRju7fHpdRC",
-            "retryDurationBlocks": 100,
-          },
-        },
-        "depositAmount": "1500000000",
+        "affiliateFees": [],
+        "amount": 1500000000n,
+        "brokerFee": 0,
+        "ccmDepositMetadata": null,
+        "dcaParams": null,
+        "depositChainBlockHeight": 365289019,
         "destinationAddress": "0xa56a6be23b6cf39d9448ff6e897c29c41c8fbdff",
-        "destinationAsset": "Eth",
-        "destinationChain": "Ethereum",
-        "sourceAsset": "Sol",
-        "sourceChain": "Solana",
+        "inputAsset": "Sol",
+        "maxBoostFee": 0,
+        "outputAsset": "Eth",
+        "refundParams": {
+          "minPrice": 6616846606368726564647178815965546002365481543n,
+          "refundAddress": "3yKDHJgzS2GbZB9qruoadRYtq8597HZifnRju7fHpdRC",
+          "retryDuration": 100,
+        },
       }
     `);
   });
@@ -445,35 +413,21 @@ describe(findVaultSwapData, () => {
 
     expect(data).toMatchInlineSnapshot(`
       {
-        "ccmParams": null,
-        "cfParams": {
-          "affiliateFees": [],
-          "boostFee": 0,
-          "brokerFees": {
-            "account": "cFMTNSQQVfBo2HqtekvhLPfZY764kuJDVFG1EvnnDGYxc3LRW",
-            "commissionBps": 0,
-          },
-          "ccmAdditionalData": {
-            "additionalAccounts": [],
-            "cfReceiver": {
-              "isWritable": false,
-              "pubkey": "8pBPaVfTAcjLeNfC187Fkvi9b1XEFhRNJ95BQXXVksmH",
-            },
-            "fallbackAddress": "8sAK3gg2Qm1mP4aPvMGsFsNAMhsgty2hSvJQCPQpib6w",
-          },
-          "dcaParams": null,
-          "refundParams": {
-            "minPriceX128": "6616846606368726564647178815965546002365481543",
-            "refundAddress": "3yKDHJgzS2GbZB9qruoadRYtq8597HZifnRju7fHpdRC",
-            "retryDurationBlocks": 100,
-          },
-        },
-        "depositAmount": "1500000000",
+        "affiliateFees": [],
+        "amount": 1500000000n,
+        "brokerFee": 0,
+        "ccmDepositMetadata": null,
+        "dcaParams": null,
+        "depositChainBlockHeight": 365289019,
         "destinationAddress": "0xa56a6be23b6cf39d9448ff6e897c29c41c8fbdff",
-        "destinationAsset": "Eth",
-        "destinationChain": "Ethereum",
-        "sourceAsset": "Sol",
-        "sourceChain": "Solana",
+        "inputAsset": "Sol",
+        "maxBoostFee": 0,
+        "outputAsset": "Eth",
+        "refundParams": {
+          "minPrice": 6616846606368726564647178815965546002365481543n,
+          "refundAddress": "3yKDHJgzS2GbZB9qruoadRYtq8597HZifnRju7fHpdRC",
+          "retryDuration": 100,
+        },
       }
     `);
   });
@@ -488,28 +442,21 @@ describe(findVaultSwapData, () => {
 
     expect(data).toMatchInlineSnapshot(`
       {
-        "ccmParams": null,
-        "cfParams": {
-          "affiliateFees": [],
-          "boostFee": 0,
-          "brokerFees": {
-            "account": "cFMTNSQQVfBo2HqtekvhLPfZY764kuJDVFG1EvnnDGYxc3LRW",
-            "commissionBps": 0,
-          },
-          "ccmAdditionalData": null,
-          "dcaParams": null,
-          "refundParams": {
-            "minPriceX128": "6616846606368726564647178815965546002365481543",
-            "refundAddress": "3yKDHJgzS2GbZB9qruoadRYtq8597HZifnRju7fHpdRC",
-            "retryDurationBlocks": 100,
-          },
-        },
-        "depositAmount": "1500000000",
+        "affiliateFees": [],
+        "amount": 1500000000n,
+        "brokerFee": 0,
+        "ccmDepositMetadata": null,
+        "dcaParams": null,
+        "depositChainBlockHeight": 365289019,
         "destinationAddress": "0xa56a6be23b6cf39d9448ff6e897c29c41c8fbdff",
-        "destinationAsset": "Eth",
-        "destinationChain": "Arbitrum",
-        "sourceAsset": "Sol",
-        "sourceChain": "Solana",
+        "inputAsset": "Sol",
+        "maxBoostFee": 0,
+        "outputAsset": "Eth",
+        "refundParams": {
+          "minPrice": 6616846606368726564647178815965546002365481543n,
+          "refundAddress": "3yKDHJgzS2GbZB9qruoadRYtq8597HZifnRju7fHpdRC",
+          "retryDuration": 100,
+        },
       }
     `);
   });
@@ -524,28 +471,21 @@ describe(findVaultSwapData, () => {
 
     expect(data).toMatchInlineSnapshot(`
       {
-        "ccmParams": null,
-        "cfParams": {
-          "affiliateFees": [],
-          "boostFee": 0,
-          "brokerFees": {
-            "account": "cFMTNSQQVfBo2HqtekvhLPfZY764kuJDVFG1EvnnDGYxc3LRW",
-            "commissionBps": 0,
-          },
-          "ccmAdditionalData": null,
-          "dcaParams": null,
-          "refundParams": {
-            "minPriceX128": "147327292452621833387248816535228638",
-            "refundAddress": "3yKDHJgzS2GbZB9qruoadRYtq8597HZifnRju7fHpdRC",
-            "retryDurationBlocks": 100,
-          },
-        },
-        "depositAmount": "1500000000",
+        "affiliateFees": [],
+        "amount": 1500000000n,
+        "brokerFee": 0,
+        "ccmDepositMetadata": null,
+        "dcaParams": null,
+        "depositChainBlockHeight": 365506144,
         "destinationAddress": "tb1pdz3akc5wa2gr69v3x87tfg0ka597dxqvfl6zhqx4y202y63cgw0q3rgpm6",
-        "destinationAsset": "Btc",
-        "destinationChain": "Bitcoin",
-        "sourceAsset": "Sol",
-        "sourceChain": "Solana",
+        "inputAsset": "Sol",
+        "maxBoostFee": 0,
+        "outputAsset": "Btc",
+        "refundParams": {
+          "minPrice": 147327292452621833387248816535228638n,
+          "refundAddress": "3yKDHJgzS2GbZB9qruoadRYtq8597HZifnRju7fHpdRC",
+          "retryDuration": 100,
+        },
       }
     `);
   });
@@ -560,31 +500,24 @@ describe(findVaultSwapData, () => {
 
     expect(data).toMatchInlineSnapshot(`
       {
-        "ccmParams": null,
-        "cfParams": {
-          "affiliateFees": [],
-          "boostFee": 0,
-          "brokerFees": {
-            "account": "cFMTNSQQVfBo2HqtekvhLPfZY764kuJDVFG1EvnnDGYxc3LRW",
-            "commissionBps": 0,
-          },
-          "ccmAdditionalData": null,
-          "dcaParams": {
-            "chunkIntervalBlocks": 10,
-            "numberOfChunks": 2,
-          },
-          "refundParams": {
-            "minPriceX128": "53139857619480484022967797759999261018420",
-            "refundAddress": "3yKDHJgzS2GbZB9qruoadRYtq8597HZifnRju7fHpdRC",
-            "retryDurationBlocks": 100,
-          },
+        "affiliateFees": [],
+        "amount": 1500000000n,
+        "brokerFee": 0,
+        "ccmDepositMetadata": null,
+        "dcaParams": {
+          "chunkInterval": 10,
+          "numberOfChunks": 2,
         },
-        "depositAmount": "1500000000",
+        "depositChainBlockHeight": 365507313,
         "destinationAddress": "1BzDB5n2rfSJwvuCW9deKY9XnUyys8Gy44SoX8tRNDCFBhx",
-        "destinationAsset": "Dot",
-        "destinationChain": "Polkadot",
-        "sourceAsset": "Sol",
-        "sourceChain": "Solana",
+        "inputAsset": "Sol",
+        "maxBoostFee": 0,
+        "outputAsset": "Dot",
+        "refundParams": {
+          "minPrice": 53139857619480484022967797759999261018420n,
+          "refundAddress": "3yKDHJgzS2GbZB9qruoadRYtq8597HZifnRju7fHpdRC",
+          "retryDuration": 100,
+        },
       }
     `);
   });
@@ -599,28 +532,21 @@ describe(findVaultSwapData, () => {
 
     expect(data).toMatchInlineSnapshot(`
       {
-        "ccmParams": null,
-        "cfParams": {
-          "affiliateFees": [],
-          "boostFee": 0,
-          "brokerFees": {
-            "account": "cFMTNSQQVfBo2HqtekvhLPfZY764kuJDVFG1EvnnDGYxc3LRW",
-            "commissionBps": 0,
-          },
-          "ccmAdditionalData": null,
-          "dcaParams": null,
-          "refundParams": {
-            "minPriceX128": "176416843473861217126367300745109052927311111891",
-            "refundAddress": "3yKDHJgzS2GbZB9qruoadRYtq8597HZifnRju7fHpdRC",
-            "retryDurationBlocks": 100,
-          },
-        },
-        "depositAmount": "20000000",
+        "affiliateFees": [],
+        "amount": 20000000n,
+        "brokerFee": 0,
+        "ccmDepositMetadata": null,
+        "dcaParams": null,
+        "depositChainBlockHeight": 365493638,
         "destinationAddress": "0xa56a6be23b6cf39d9448ff6e897c29c41c8fbdff",
-        "destinationAsset": "Eth",
-        "destinationChain": "Ethereum",
-        "sourceAsset": "SolUsdc",
-        "sourceChain": "Solana",
+        "inputAsset": "SolUsdc",
+        "maxBoostFee": 0,
+        "outputAsset": "Eth",
+        "refundParams": {
+          "minPrice": 176416843473861217126367300745109052927311111891n,
+          "refundAddress": "3yKDHJgzS2GbZB9qruoadRYtq8597HZifnRju7fHpdRC",
+          "retryDuration": 100,
+        },
       }
     `);
   });

@@ -1,4 +1,7 @@
-import { assert, unreachable } from '@chainflip/utils/assertion';
+import { type SolanaCcmAdditionalData } from '@chainflip/scale/codecs';
+import { assert } from '@chainflip/utils/assertion';
+import { type HexString, type VaultSwapData } from '@chainflip/utils/types';
+import { parseUrlWithBasicAuth } from '@chainflip/utils/url';
 import { BorshInstructionCoder, type Idl } from '@coral-xyz/anchor';
 import {
   Connection,
@@ -9,23 +12,6 @@ import {
 } from '@solana/web3.js';
 import { devnet, mainnet } from './idls';
 import { swapSchema } from './schemas';
-
-export const parseUrlWithBasicAuth = (url: string) => {
-  const rpcUrl = new URL(url);
-
-  let headers = {};
-  if (rpcUrl.username || rpcUrl.password) {
-    headers = {
-      Authorization: `Basic ${Buffer.from(`${rpcUrl.username}:${rpcUrl.password}`).toString(
-        'base64',
-      )}`,
-    };
-    rpcUrl.username = '';
-    rpcUrl.password = '';
-  }
-
-  return { url: rpcUrl.toString(), headers };
-};
 
 const getSolanaConnection = (solanaEndpoint: string) => {
   const { url, headers } = parseUrlWithBasicAuth(solanaEndpoint);
@@ -230,7 +216,7 @@ export const findTransactionSignatures = async (
   deposits: DepositInfo[],
   fetcher: typeof fetchTransfers = fetchTransfers,
   reportingErrorTolerance = 50,
-) => {
+): Promise<string[][]> => {
   const transfers = await fetcher(rpcUrl, depositAddress, asset, deposits.length);
 
   let error: Error;
@@ -257,7 +243,7 @@ export const findVaultSwapSignature = async (
   solanaEndpoint: string,
   accountAddress: string,
   slot: number,
-) => {
+): Promise<string> => {
   const connection = getSolanaConnection(solanaEndpoint);
 
   const allSignatures = await connection.getSignaturesForAddress(new PublicKey(accountAddress), {
@@ -287,7 +273,15 @@ const findIdlAndInstruction = (
   return { idl: null, instruction: null };
 };
 
-export const findVaultSwapData = async (rpcUrl: string, signature: string) => {
+export const findVaultSwapData = async (
+  rpcUrl: string,
+  signature: string,
+): Promise<VaultSwapData<HexString | SolanaCcmAdditionalData | null> | null> => {
+  const methodToAsset = {
+    x_swap_native: 'Sol',
+    x_swap_token: 'SolUsdc',
+  } as const;
+
   const connection = getSolanaConnection(rpcUrl);
 
   const tx = await connection.getParsedTransaction(signature);
@@ -302,23 +296,9 @@ export const findVaultSwapData = async (rpcUrl: string, signature: string) => {
   const decoded = coder.decode(instruction.data, 'base58');
   const data = swapSchema.parse(decoded);
 
-  switch (data.name) {
-    case 'x_swap_native':
-      return {
-        sourceChain: 'Solana',
-        sourceAsset: 'Sol',
-        ...data.data,
-      };
-    case 'x_swap_token':
-      return {
-        sourceChain: 'Solana',
-        // only works because we only support the USDC. if we add more tokens
-        // we get to have more fun here
-        sourceAsset: 'SolUsdc',
-        ...data.data,
-      };
-    /* v8 ignore next 2 */
-    default:
-      return unreachable(data, 'unexpected program call');
-  }
+  return {
+    depositChainBlockHeight: tx.slot,
+    inputAsset: methodToAsset[data.name],
+    ...data.data,
+  };
 };

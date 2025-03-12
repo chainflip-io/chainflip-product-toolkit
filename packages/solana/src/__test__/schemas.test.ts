@@ -43,6 +43,56 @@ describe('swapSchema', () => {
     expect(result.data).toMatchSnapshot();
   });
 
+  it('renames the affiliate fields', () => {
+    const result = swapSchema.parse({
+      name: 'x_swap_native',
+      data: {
+        swap_native_params: {
+          dst_address: Buffer.from('bc1qqt3juqef9azhd0zeuamu9c30pg5xdllvmks2ja'),
+          dst_chain: chainContractId.Bitcoin,
+          dst_token: assetContractId.Btc,
+          amount: new BN(100000000),
+          ccm_parameters: {
+            message: Buffer.from('deadbeef', 'hex'),
+            gas_amount: new BN(10),
+          },
+          cf_parameters: Buffer.from(
+            '00640000002c247dc239834feac0ecdbc5070a7e0b5d0f462d09e9eba871ad1eb9770448234702e76ed292999b076182db5942de83acb5280100000000000000000000000000009e8d88ae895c9b37b2dead9757a3452f7c2299704d91ddfa444d87723f94fe0c000004011e',
+            'hex',
+          ),
+        },
+      },
+    } as z.input<typeof swapSchema>);
+    expect(result.data).toMatchInlineSnapshot(`
+      {
+        "affiliateFees": [
+          {
+            "accountIndex": 1,
+            "commissionBps": 30,
+          },
+        ],
+        "amount": 100000000n,
+        "brokerFee": 0,
+        "ccmDepositMetadata": {
+          "ccmAdditionalData": null,
+          "channelMetadata": {
+            "gasBudget": "0xa",
+            "message": "0xdeadbeef",
+          },
+        },
+        "dcaParams": null,
+        "destinationAddress": "bc1qqt3juqef9azhd0zeuamu9c30pg5xdllvmks2ja",
+        "maxBoostFee": 0,
+        "outputAsset": "Btc",
+        "refundParams": {
+          "minPrice": 6616846606368726564647178815965546002365481543n,
+          "refundAddress": "3yKDHJgzS2GbZB9qruoadRYtq8597HZifnRju7fHpdRC",
+          "retryDuration": 100,
+        },
+      }
+    `);
+  });
+
   it('collects all the errors', () => {
     expect(() =>
       swapSchema.parse({

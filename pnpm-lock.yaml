@@ -72,8 +72,8 @@ importers:
   packages/bitcoin:
     dependencies:
       '@chainflip/utils':
-        specifier: 0.6.0
-        version: 0.6.0
+        specifier: 0.7.0
+        version: 0.7.0
       bitcoinjs-lib:
         specifier: ^7.0.0-rc.0
         version: 7.0.0-rc.0(typescript@5.7.3)
@@ -84,8 +84,8 @@ importers:
         specifier: 1.8.6
         version: 1.8.6
       '@chainflip/utils':
-        specifier: 0.6.0
-        version: 0.6.0
+        specifier: 0.7.0
+        version: 0.7.0
       '@polkadot/types':
         specifier: ^10.11.2
         version: 10.13.1
@@ -117,8 +117,8 @@ importers:
   packages/extrinsics:
     devDependencies:
       '@chainflip/utils':
-        specifier: 0.6.0
-        version: 0.6.0
+        specifier: 0.7.0
+        version: 0.7.0
       '@polkadot/types':
         specifier: ^10.11.2
         version: 10.13.1
@@ -126,8 +126,8 @@ importers:
   packages/processor:
     dependencies:
       '@chainflip/utils':
-        specifier: 0.6.0
-        version: 0.6.0
+        specifier: 0.7.0
+        version: 0.7.0
       zod:
         specifier: ^3.24.2
         version: 3.24.2
@@ -142,8 +142,8 @@ importers:
   packages/rpc:
     dependencies:
       '@chainflip/utils':
-        specifier: 0.6.0
-        version: 0.6.0
+        specifier: 0.7.0
+        version: 0.7.0
       zod:
         specifier: ^3.24.2
         version: 3.24.2
@@ -177,8 +177,8 @@ importers:
         specifier: ^1.8.0
         version: 1.8.0
       '@chainflip/utils':
-        specifier: 0.6.0
-        version: 0.6.0
+        specifier: 0.7.0
+        version: 0.7.0
       '@coral-xyz/anchor':
         specifier: ^0.31.0
         version: 0.31.0(bufferutil@4.0.8)(utf-8-validate@5.0.10)
@@ -264,6 +264,9 @@ packages:
 
   '@chainflip/utils@0.6.0':
     resolution: {integrity: sha512-ZwyNKv3FVVJw5aOcRf/4rTxCclP+prerxPnTGBrFcBYEYSrPlyx4eI1dc7J35xmKD2yq+vQgwNjCx1h6oJuoPA==}
+
+  '@chainflip/utils@0.7.0':
+    resolution: {integrity: sha512-aTrtmpPkbqojP5wsrpfCgx8uskv9SD1gmq7hWwjfRQT1ucwYGAuUzL9LdREBtiMNB4pfS/J42dRWjbbLmx0j5w==}
 
   '@coral-xyz/anchor-errors@0.31.0':
     resolution: {integrity: sha512-SUERksFSQ+4F11hkROIwHq4mcoSMXJxwVWLoklefi4dU679zVWFVcTq6O7otvjY8wlUaRXeE+iYcQWZTw2ll6w==}
@@ -3031,6 +3034,12 @@ snapshots:
   '@chainflip/utils@0.4.0': {}
 
   '@chainflip/utils@0.6.0':
+    dependencies:
+      '@date-fns/utc': 2.1.0
+      bignumber.js: 9.1.2
+      date-fns: 4.1.0
+
+  '@chainflip/utils@0.7.0':
     dependencies:
       '@date-fns/utc': 2.1.0
       bignumber.js: 9.1.2
