@@ -69,10 +69,11 @@ try {
 
 let newVersion = args['new-version'];
 const packageRoot = path.join(root, 'packages', args.package);
-const packageJSON = JSON.parse(await fs.readFile(path.join(packageRoot, 'package.json'), 'utf-8'));
+const packageJsonPath = path.join(packageRoot, 'package.json');
+const packageJson = JSON.parse(await fs.readFile(packageJsonPath, 'utf-8'));
 
 if (!newVersion) {
-  const currentVersion = packageJSON.version;
+  const currentVersion = packageJson.version;
 
   if (typeof currentVersion !== 'string') {
     console.error('failed to find current version');
@@ -108,11 +109,11 @@ const execCommand = async (cmd: string) => {
 };
 
 const openVersionPR = async () => {
-  const message = `chore(${args.package}): release ${packageJSON.name}/v${newVersion}`;
+  const message = `chore(${args.package}): release ${packageJson.name}/v${newVersion}`;
   const newBranch = `chore/release-${args.package}-${newVersion}`;
   await execCommand(`git switch -c ${newBranch}`);
-  await execCommand(`pnpm --filter ${packageJSON.name} exec pnpm version ${newVersion}`);
-  await execCommand(`git add .`);
+  await execCommand(`pnpm --filter ${packageJson.name} exec pnpm version ${newVersion}`);
+  await execCommand(`git add ${packageJsonPath}`);
   await execCommand(`git commit -m "${message}" --no-verify`);
   await execCommand(`git push origin ${newBranch}`);
   await execCommand(`gh pr create --title "${message}" --body ""`);
