@@ -48,26 +48,30 @@ export default abstract class Client {
   protected handleResponse(response: Response, clonedMap: RequestMap) {
     const clonedItem = clonedMap.get(response.id);
     if (!clonedItem) return;
+    clonedMap.delete(response.id);
+
     if (!response.success) {
       clonedItem.deferred.reject(response.error);
       return;
     }
-    const parseResult = response.result;
 
-    if ('error' in parseResult) {
+    const rpcResponse = response.result;
+
+    if ('error' in rpcResponse) {
       clonedItem.deferred.reject(
-        new Error(`RPC error [${parseResult.error.code}]: ${parseResult.error.message}`),
+        new Error(`RPC error [${rpcResponse.error.code}]: ${rpcResponse.error.message}`),
       );
       return;
     }
 
-    try {
-      clonedItem.deferred.resolve(rpcResult[clonedItem.method].parse(parseResult.result));
-    } catch (error) {
-      clonedItem.deferred.reject(error as Error);
-    } finally {
-      clonedMap.delete(response.id);
+    const parseResult = rpcResult[clonedItem.method].safeParse(rpcResponse.result);
+
+    if (parseResult.error) {
+      clonedItem.deferred.reject(parseResult.error);
+      return;
     }
+
+    clonedItem.deferred.resolve(parseResult.data);
   }
 
   protected handleErrorResponse(error: Error, clonedMap: RequestMap) {
