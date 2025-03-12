@@ -1319,6 +1319,32 @@ describe(HttpClient, () => {
       await expect(client.sendRequest('cf_accounts')).rejects.toThrow('Invalid JSON response');
     });
 
+    it('throws when parsing the result fails', async () => {
+      // eslint-disable-next-line dot-notation
+      client['getRequestId'] = () => '1';
+      vi.spyOn(globalThis, 'fetch').mockResolvedValueOnce({
+        ok: true,
+        // eslint-disable-next-line @typescript-eslint/require-await
+        json: async () => [{ id: '1', jsonrpc: '2.0', result: [['account 1', null]] }],
+      } as Response);
+      await expect(client.sendRequest('cf_accounts')).rejects.toThrowErrorMatchingInlineSnapshot(
+        `
+        [ZodError: [
+          {
+            "code": "invalid_type",
+            "expected": "string",
+            "received": "null",
+            "path": [
+              0,
+              1
+            ],
+            "message": "Expected string, received null"
+          }
+        ]]
+      `,
+      );
+    });
+
     it('returns the rejected error message', async () => {
       await expect(
         client.sendRequest(

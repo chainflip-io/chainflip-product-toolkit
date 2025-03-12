@@ -45,28 +45,24 @@ export default abstract class Client {
     return { jsonrpc: '2.0', id: this.getRequestId(), method, params } as const;
   }
 
-  private parseSingleResponse(response: Response): unknown {
-    if (!response.success) {
-      throw response.error;
-    }
-
-    const parseResult = response.result;
-
-    if ('error' in parseResult) {
-      throw new Error(`RPC error [${parseResult.error.code}]: ${parseResult.error.message}`);
-    }
-
-    return parseResult.result;
-  }
-
   protected handleResponse(response: Response, clonedMap: RequestMap) {
     const clonedItem = clonedMap.get(response.id);
     if (!clonedItem) return;
+    if (!response.success) {
+      clonedItem.deferred.reject(response.error);
+      return;
+    }
+    const parseResult = response.result;
+
+    if ('error' in parseResult) {
+      clonedItem.deferred.reject(
+        new Error(`RPC error [${parseResult.error.code}]: ${parseResult.error.message}`),
+      );
+      return;
+    }
 
     try {
-      const parsedResponse = this.parseSingleResponse(response);
-      const parser = rpcResult[clonedItem.method];
-      clonedItem.deferred.resolve(parser.parse(parsedResponse));
+      clonedItem.deferred.resolve(rpcResult[clonedItem.method].parse(parseResult.result));
     } catch (error) {
       clonedItem.deferred.reject(error as Error);
     } finally {
