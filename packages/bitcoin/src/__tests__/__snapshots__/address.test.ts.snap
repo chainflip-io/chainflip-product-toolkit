@@ -1,0 +1,61 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`bitcoin > encodes and decodes a P2PKH address on backspin > P2PKH on backspin 1`] = `"n37AcBDN48pKxBR5DK1fSDFnzFuMhGq9wy"`;
+
+exports[`bitcoin > encodes and decodes a P2PKH address on mainnet > P2PKH on mainnet 1`] = `"1NbDK88PF7P5B4wTVk3HcJ3U8GJeiSrccq"`;
+
+exports[`bitcoin > encodes and decodes a P2PKH address on perseverance > P2PKH on perseverance 1`] = `"n37AcBDN48pKxBR5DK1fSDFnzFuMhGq9wy"`;
+
+exports[`bitcoin > encodes and decodes a P2PKH address on regtest > P2PKH on regtest 1`] = `"n37AcBDN48pKxBR5DK1fSDFnzFuMhGq9wy"`;
+
+exports[`bitcoin > encodes and decodes a P2PKH address on sisyphos > P2PKH on sisyphos 1`] = `"n37AcBDN48pKxBR5DK1fSDFnzFuMhGq9wy"`;
+
+exports[`bitcoin > encodes and decodes a P2PKH address on testnet > P2PKH on testnet 1`] = `"n37AcBDN48pKxBR5DK1fSDFnzFuMhGq9wy"`;
+
+exports[`bitcoin > encodes and decodes a P2SH address on backspin > P2SH on backspin 1`] = `"2N5XdxPojGTLjs2ZvkpbF9473zL1wftGzPJ"`;
+
+exports[`bitcoin > encodes and decodes a P2SH address on mainnet > P2SH on mainnet 1`] = `"3DyRteshezqPfEwP5gyNX77nmyomu5GW2U"`;
+
+exports[`bitcoin > encodes and decodes a P2SH address on perseverance > P2SH on perseverance 1`] = `"2N5XdxPojGTLjs2ZvkpbF9473zL1wftGzPJ"`;
+
+exports[`bitcoin > encodes and decodes a P2SH address on regtest > P2SH on regtest 1`] = `"2N5XdxPojGTLjs2ZvkpbF9473zL1wftGzPJ"`;
+
+exports[`bitcoin > encodes and decodes a P2SH address on sisyphos > P2SH on sisyphos 1`] = `"2N5XdxPojGTLjs2ZvkpbF9473zL1wftGzPJ"`;
+
+exports[`bitcoin > encodes and decodes a P2SH address on testnet > P2SH on testnet 1`] = `"2N5XdxPojGTLjs2ZvkpbF9473zL1wftGzPJ"`;
+
+exports[`bitcoin > encodes and decodes a P2WPKH address on backspin > P2WPKH on backspin 1`] = `"bcrt1qvwmuc3pjhwju287sjs5vg7467t2jlymnnaxr8m"`;
+
+exports[`bitcoin > encodes and decodes a P2WPKH address on mainnet > P2WPKH on mainnet 1`] = `"bc1qvwmuc3pjhwju287sjs5vg7467t2jlymnmjyatp"`;
+
+exports[`bitcoin > encodes and decodes a P2WPKH address on perseverance > P2WPKH on perseverance 1`] = `"tb1qvwmuc3pjhwju287sjs5vg7467t2jlymn35lwsj"`;
+
+exports[`bitcoin > encodes and decodes a P2WPKH address on regtest > P2WPKH on regtest 1`] = `"bcrt1qvwmuc3pjhwju287sjs5vg7467t2jlymnnaxr8m"`;
+
+exports[`bitcoin > encodes and decodes a P2WPKH address on sisyphos > P2WPKH on sisyphos 1`] = `"tb1qvwmuc3pjhwju287sjs5vg7467t2jlymn35lwsj"`;
+
+exports[`bitcoin > encodes and decodes a P2WPKH address on testnet > P2WPKH on testnet 1`] = `"tb1qvwmuc3pjhwju287sjs5vg7467t2jlymn35lwsj"`;
+
+exports[`bitcoin > encodes and decodes a P2WSH address on backspin > P2WSH on backspin 1`] = `"bcrt1qxg0xyktspurnffsmtlagf80p0pjmcv5n6hgxnkgly0nvhp76ahcq825u3r"`;
+
+exports[`bitcoin > encodes and decodes a P2WSH address on mainnet > P2WSH on mainnet 1`] = `"bc1qxg0xyktspurnffsmtlagf80p0pjmcv5n6hgxnkgly0nvhp76ahcqamg47k"`;
+
+exports[`bitcoin > encodes and decodes a P2WSH address on perseverance > P2WSH on perseverance 1`] = `"tb1qxg0xyktspurnffsmtlagf80p0pjmcv5n6hgxnkgly0nvhp76ahcq2n76ye"`;
+
+exports[`bitcoin > encodes and decodes a P2WSH address on regtest > P2WSH on regtest 1`] = `"bcrt1qxg0xyktspurnffsmtlagf80p0pjmcv5n6hgxnkgly0nvhp76ahcq825u3r"`;
+
+exports[`bitcoin > encodes and decodes a P2WSH address on sisyphos > P2WSH on sisyphos 1`] = `"tb1qxg0xyktspurnffsmtlagf80p0pjmcv5n6hgxnkgly0nvhp76ahcq2n76ye"`;
+
+exports[`bitcoin > encodes and decodes a P2WSH address on testnet > P2WSH on testnet 1`] = `"tb1qxg0xyktspurnffsmtlagf80p0pjmcv5n6hgxnkgly0nvhp76ahcq2n76ye"`;
+
+exports[`bitcoin > encodes and decodes a Taproot address on backspin > Taproot on backspin 1`] = `"bcrt1pdz3akc5wa2gr69v3x87tfg0ka597dxqvfl6zhqx4y202y63cgw0qu6z8wq"`;
+
+exports[`bitcoin > encodes and decodes a Taproot address on mainnet > Taproot on mainnet 1`] = `"bc1pdz3akc5wa2gr69v3x87tfg0ka597dxqvfl6zhqx4y202y63cgw0qxt7wp4"`;
+
+exports[`bitcoin > encodes and decodes a Taproot address on perseverance > Taproot on perseverance 1`] = `"tb1pdz3akc5wa2gr69v3x87tfg0ka597dxqvfl6zhqx4y202y63cgw0q3rgpm6"`;
+
+exports[`bitcoin > encodes and decodes a Taproot address on regtest > Taproot on regtest 1`] = `"bcrt1pdz3akc5wa2gr69v3x87tfg0ka597dxqvfl6zhqx4y202y63cgw0qu6z8wq"`;
+
+exports[`bitcoin > encodes and decodes a Taproot address on sisyphos > Taproot on sisyphos 1`] = `"tb1pdz3akc5wa2gr69v3x87tfg0ka597dxqvfl6zhqx4y202y63cgw0q3rgpm6"`;
+
+exports[`bitcoin > encodes and decodes a Taproot address on testnet > Taproot on testnet 1`] = `"tb1pdz3akc5wa2gr69v3x87tfg0ka597dxqvfl6zhqx4y202y63cgw0q3rgpm6"`;

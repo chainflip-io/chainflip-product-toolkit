@@ -121,9 +121,6 @@ export default [
       // treat var statements as if they were block scoped
       // https://eslint.org/docs/rules/block-scoped-var
       'block-scoped-var': 'error',
-      // require return statements to either always or never specify values
-      // https://eslint.org/docs/rules/consistent-return
-      'consistent-return': 'error',
       // specify curly brace conventions for all control statements
       // https://eslint.org/docs/rules/curly
       curly: ['error', 'multi-line'], // multiline
