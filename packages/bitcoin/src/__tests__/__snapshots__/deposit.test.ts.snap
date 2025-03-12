@@ -1,0 +1,76 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`findVaultSwapData > gets the vault swap data (ArbEth) 1`] = `
+{
+  "ok": true,
+  "value": {
+    "affiliateFees": [],
+    "amount": 500000n,
+    "brokerFee": 0,
+    "ccmDepositMetadata": null,
+    "dcaParams": {
+      "chunkInterval": 1,
+      "numberOfChunks": 2,
+    },
+    "depositAddress": "tb1pjpqkt5ghr3lts922ykufct49trhmkjesmvmrfrq88w7fd0ewwtaq0da2gg",
+    "depositChainBlockHeight": 0,
+    "destinationAddress": "0xa56a6be23b6cf39d9448ff6e897c29c41c8fbdff",
+    "inputAsset": "Btc",
+    "maxBoostFee": 30,
+    "outputAsset": "ArbEth",
+    "refundParams": {
+      "minPrice": 4545705898455570139320688941272888179569345734748n,
+      "refundAddress": "tb1qhjurnfz4qah4rg7ntue6x287ehdvded20rj9vh",
+      "retryDuration": 100,
+    },
+  },
+}
+`;
+
+exports[`findVaultSwapData > gets the vault swap data (Eth) 1`] = `
+{
+  "ok": true,
+  "value": {
+    "affiliateFees": [],
+    "amount": 500000n,
+    "brokerFee": 0,
+    "ccmDepositMetadata": null,
+    "dcaParams": null,
+    "depositAddress": "tb1pjpqkt5ghr3lts922ykufct49trhmkjesmvmrfrq88w7fd0ewwtaq0da2gg",
+    "depositChainBlockHeight": 0,
+    "destinationAddress": "0xa56a6be23b6cf39d9448ff6e897c29c41c8fbdff",
+    "inputAsset": "Btc",
+    "maxBoostFee": 30,
+    "outputAsset": "Eth",
+    "refundParams": {
+      "minPrice": 4545705898455570139320688941272888179569345734748n,
+      "refundAddress": "tb1qhjurnfz4qah4rg7ntue6x287ehdvded20rj9vh",
+      "retryDuration": 100,
+    },
+  },
+}
+`;
+
+exports[`findVaultSwapData > gets the vault swap data (Sol) 1`] = `
+{
+  "ok": true,
+  "value": {
+    "affiliateFees": [],
+    "amount": 500000n,
+    "brokerFee": 0,
+    "ccmDepositMetadata": null,
+    "dcaParams": null,
+    "depositAddress": "tb1pjpqkt5ghr3lts922ykufct49trhmkjesmvmrfrq88w7fd0ewwtaq0da2gg",
+    "depositChainBlockHeight": 0,
+    "destinationAddress": "A8dScaeGChTgzvok95uVAxd44LRkq5ckcpppNVQwkLQb",
+    "inputAsset": "Btc",
+    "maxBoostFee": 30,
+    "outputAsset": "Sol",
+    "refundParams": {
+      "minPrice": 4545705898455570139320688941272888179569345734748n,
+      "refundAddress": "tb1qhjurnfz4qah4rg7ntue6x287ehdvded20rj9vh",
+      "retryDuration": 100,
+    },
+  },
+}
+`;

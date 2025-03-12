@@ -83,6 +83,9 @@ importers:
       scale-ts:
         specifier: ^1.6.1
         version: 1.6.1
+      zod:
+        specifier: ^3.24.2
+        version: 3.24.2
 
   packages/chainspec:
     devDependencies:
