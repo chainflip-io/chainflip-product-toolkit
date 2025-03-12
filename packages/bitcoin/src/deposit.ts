@@ -30,7 +30,7 @@ const contractIdToInternalAsset: Record<number, ChainflipAsset> = Object.fromEnt
   (Object.entries(assetContractId) as [ChainflipAsset, number][]).map(([asset, id]) => [id, asset]),
 );
 
-const encodeChainAddress = (data: Uint8Array, chain: ChainflipChain, network: ChainflipNetwork) => {
+const encodeChainAddress = (data: Uint8Array, chain: ChainflipChain) => {
   switch (chain) {
     case 'Solana':
       return base58.encode(data);
@@ -40,11 +40,11 @@ const encodeChainAddress = (data: Uint8Array, chain: ChainflipChain, network: Ch
     case 'Arbitrum':
       return bytesToHex(data);
     case 'Bitcoin':
-      return encodeAddress(data, 'Taproot', network);
+      throw new Error('Bitcoin addresses must be encoded with encodeAddress');
   }
 };
 
-const parseVaultSwapData = (txOutput: bitcoin.TxOutput, network: ChainflipNetwork) => {
+const parseVaultSwapData = (txOutput: bitcoin.TxOutput) => {
   try {
     // the first two bytes are OP_RETURN
     const data = txOutput.script.slice(2);
@@ -78,7 +78,7 @@ const parseVaultSwapData = (txOutput: bitcoin.TxOutput, network: ChainflipNetwor
       value: {
         ...parameters,
         outputAsset,
-        destinationAddress: encodeChainAddress(destinationAddress, destinationChain, network),
+        destinationAddress: encodeChainAddress(destinationAddress, destinationChain),
       },
     } as const;
   } catch (e) {
@@ -153,7 +153,7 @@ export const findVaultSwapData = async (
 
   if (tx.outs.length !== 3) return null;
 
-  const swapDataResult = parseVaultSwapData(tx.outs[1], network);
+  const swapDataResult = parseVaultSwapData(tx.outs[1]);
 
   if (!swapDataResult.ok) return null;
 
@@ -167,7 +167,7 @@ export const findVaultSwapData = async (
     regtest: bitcoin.networks.regtest,
   };
 
-  const depositAddress = encodeAddress(tx.outs[0].script.slice(2), 'Taproot', 'testnet');
+  const depositAddress = encodeAddress(tx.outs[0].script.slice(2, 34), 'Taproot', network);
 
   const refundAddress = bitcoin.address.fromOutputScript(
     tx.outs[2].script,
