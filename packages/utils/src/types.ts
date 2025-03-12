@@ -12,7 +12,7 @@ export type VaultSwapData<T = never> = {
   outputAsset: ChainflipAsset;
   depositChainBlockHeight: number;
   brokerFee: number;
-  affiliateFees: { account: string; commissionBps: number }[];
+  affiliateFees: { accountIndex: number; commissionBps: number }[];
   maxBoostFee: number;
   dcaParams: {
     chunkInterval: number;
