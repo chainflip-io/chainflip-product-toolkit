@@ -254,7 +254,7 @@ describe(WsClient, () => {
   it('rejects pending requests when the websocket disconnects', async () => {
     await client['connectionReady']();
     const deferred = Promise.withResolvers<any>();
-    client['batchMap'].set('hello world', deferred);
+    client['inFlightRequestMap'].set('hello world', deferred);
     await Promise.all([
       expect(deferred.promise).rejects.toThrowError('disconnected'),
       client.close(),

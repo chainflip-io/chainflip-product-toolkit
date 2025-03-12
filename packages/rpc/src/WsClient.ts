@@ -11,7 +11,7 @@ export default class WsClient extends Client {
   private ws?: WebSocket;
   private reconnectAttempts = 0;
   private emitter = new EventTarget();
-  private batchMap: Map<string, DeferredPromise<JsonRpcResponse>> = new Map();
+  private inFlightRequestMap: Map<string, DeferredPromise<JsonRpcResponse>> = new Map();
   private readonly timeout: number;
   private shouldConnect = true;
 
@@ -21,10 +21,6 @@ export default class WsClient extends Client {
   }
 
   async close() {
-    await this.handleClose();
-  }
-
-  private async handleClose() {
     this.shouldConnect = false;
     if (!this.ws) return;
     await this.handleDisconnect();
@@ -47,11 +43,11 @@ export default class WsClient extends Client {
   private handleDisconnect = async () => {
     this.emitter.dispatchEvent(new Event(DISCONNECT));
 
-    this.batchMap.forEach((request) => {
+    this.inFlightRequestMap.forEach((request) => {
       request.reject(new Error('disconnected'));
     });
 
-    this.batchMap.clear();
+    this.inFlightRequestMap.clear();
 
     if (!this.shouldConnect) return;
 
@@ -73,7 +69,7 @@ export default class WsClient extends Client {
 
     for (const response of responses.data) {
       const { id } = response;
-      this.batchMap.get(id)?.resolve(response);
+      this.inFlightRequestMap.get(id)?.resolve(response);
     }
   };
 
@@ -141,7 +137,7 @@ export default class WsClient extends Client {
     for (const [id] of requestMap) {
       const result = deferredPromise<JsonRpcResponse>();
       const controller = new AbortController();
-      this.batchMap.set(id, result);
+      this.inFlightRequestMap.set(id, result);
       promises.push(
         Promise.race([
           sleep(this.timeout, { signal: controller.signal }).then(
@@ -156,7 +152,7 @@ export default class WsClient extends Client {
             this.handleResponse(response, requestMap);
           })
           .finally(() => {
-            this.batchMap.delete(id);
+            this.inFlightRequestMap.delete(id);
             controller.abort();
           }),
       );
