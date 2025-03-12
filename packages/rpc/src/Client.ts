@@ -33,7 +33,7 @@ export default abstract class Client {
     clonedMap: RequestMap,
   ): Promise<void>;
 
-  private getRequestId() {
+  private getRequestId(): string {
     try {
       return crypto.randomUUID();
     } catch {
@@ -45,42 +45,39 @@ export default abstract class Client {
     return { jsonrpc: '2.0', id: this.getRequestId(), method, params } as const;
   }
 
-  protected handleResponse(response: Response, clonedMap: RequestMap) {
+  protected handleResponse(response: Response, clonedMap: RequestMap): void {
     const clonedItem = clonedMap.get(response.id);
     if (!clonedItem) return;
     clonedMap.delete(response.id);
 
     if (!response.success) {
-      clonedItem.deferred.reject(response.error);
-      return;
+      return clonedItem.deferred.reject(response.error);
     }
 
     const rpcResponse = response.result;
 
     if ('error' in rpcResponse) {
-      clonedItem.deferred.reject(
+      return clonedItem.deferred.reject(
         new Error(`RPC error [${rpcResponse.error.code}]: ${rpcResponse.error.message}`),
       );
-      return;
     }
 
     const parseResult = rpcResult[clonedItem.method].safeParse(rpcResponse.result);
 
     if (parseResult.error) {
-      clonedItem.deferred.reject(parseResult.error);
-      return;
+      return clonedItem.deferred.reject(parseResult.error);
     }
 
     clonedItem.deferred.resolve(parseResult.data);
   }
 
-  protected handleErrorResponse(error: Error, clonedMap: RequestMap) {
+  protected handleErrorResponse(error: Error, clonedMap: RequestMap): void {
     for (const [id] of clonedMap) {
       this.handleResponse({ id, success: false, error }, clonedMap);
     }
   }
 
-  private async handleBatch() {
+  private async handleBatch(): Promise<void> {
     const clonedMap = new Map(this.requestMap);
     this.requestMap.clear();
 
