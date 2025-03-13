@@ -9,7 +9,8 @@
     "prettier:write": "pnpm prettier:base --write",
     "prepublish": "pnpm build && pnpm test run",
     "clean": "rm -rf dist",
-    "build": "pnpm clean && pnpm tsup",
+    "build": "pnpm clean && pnpm tsup:build",
+    "tsup:build": "tsup ./src/index.ts --format esm,cjs --dts --treeshake",
     "test:ci": "CI=1 pnpm t run",
     "test": "vitest"
   },
@@ -26,28 +27,8 @@
     "dist",
     "README.md"
   ],
-  "exports": {
-    "./*": {
-      "require": {
-        "types": "./dist/*.d.cts",
-        "default": "./dist/*.cjs"
-      },
-      "import": {
-        "types": "./dist/*.d.ts",
-        "default": "./dist/*.mjs"
-      }
-    },
-    ".": {
-      "require": {
-        "types": "./dist/index.d.cts",
-        "default": "./dist/index.cjs"
-      },
-      "import": {
-        "types": "./dist/index.d.ts",
-        "default": "./dist/index.mjs"
-      }
-    }
-  },
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
   "repository": "https://github.com/chainflip-io/chainflip-product-toolkit.git",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
