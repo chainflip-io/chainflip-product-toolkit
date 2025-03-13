@@ -190,7 +190,7 @@ describe(findVaultSwapData, () => {
     ).rejects.toThrowErrorMatchingInlineSnapshot(`[Error: RPC error [-32601]: Method not found]`);
   });
 
-  it('returns block 0 if the request fails', async () => {
+  it('returns null for block if the request fails', async () => {
     const nulldata = buildNullData({
       destinationAsset: 'Eth',
       destinationAddress: addresses.Eth,
@@ -209,7 +209,49 @@ describe(findVaultSwapData, () => {
     ).toMatchSnapshot();
   });
 
-  it("returns block 0 if the block isn't found", async () => {
+  it.each([null, undefined])('returns null for block if no hash found', async (blockHash) => {
+    const nulldata = buildNullData({
+      destinationAsset: 'Eth',
+      destinationAddress: addresses.Eth,
+    });
+
+    const txInfo = tx({ nulldata, depositAmount: 1 });
+
+    // @ts-expect-error -- for testing
+    txInfo.result.blockhash = blockHash;
+
+    mockFetch([txInfo, { id: 1, jsonrpc: '2.0', result: {}, error: null }]);
+
+    expect(
+      await findVaultSwapData(
+        'https://bitcoin.rpc',
+        '77a4dcda118d8cd4e537616effeac741ff60dbdb7af0b7f2f54a3a15c0556239',
+      ),
+    ).toMatchSnapshot();
+  });
+
+  it('returns null for block if no hash found', async () => {
+    const nulldata = buildNullData({
+      destinationAsset: 'Eth',
+      destinationAddress: addresses.Eth,
+    });
+
+    const txInfo = tx({ nulldata, depositAmount: 1 });
+
+    // @ts-expect-error -- for testing
+    delete txInfo.result.blockhash;
+
+    mockFetch([txInfo, { id: 1, jsonrpc: '2.0', result: {}, error: null }]);
+
+    expect(
+      await findVaultSwapData(
+        'https://bitcoin.rpc',
+        '77a4dcda118d8cd4e537616effeac741ff60dbdb7af0b7f2f54a3a15c0556239',
+      ),
+    ).toMatchSnapshot();
+  });
+
+  it("returns null for block if the block isn't found", async () => {
     const nulldata = buildNullData({
       destinationAsset: 'Eth',
       destinationAddress: addresses.Eth,

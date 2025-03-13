@@ -139,7 +139,7 @@ exports[`findVaultSwapData > gets the vault swap data (Sol) 1`] = `
 }
 `;
 
-exports[`findVaultSwapData > returns block 0 if the block isn't found 1`] = `
+exports[`findVaultSwapData > returns null for block if no hash found 1`] = `
 {
   "affiliateFees": [],
   "amount": 100000000n,
@@ -153,7 +153,7 @@ exports[`findVaultSwapData > returns block 0 if the block isn't found 1`] = `
     "numberOfChunks": 2,
   },
   "depositAddress": "tb1pjpqkt5ghr3lts922ykufct49trhmkjesmvmrfrq88w7fd0ewwtaq0da2gg",
-  "depositChainBlockHeight": 0,
+  "depositChainBlockHeight": null,
   "destinationAddress": "0xa56a6be23b6cf39d9448ff6e897c29c41c8fbdff",
   "inputAsset": "Btc",
   "maxBoostFee": 0,
@@ -166,7 +166,7 @@ exports[`findVaultSwapData > returns block 0 if the block isn't found 1`] = `
 }
 `;
 
-exports[`findVaultSwapData > returns block 0 if the request fails 1`] = `
+exports[`findVaultSwapData > returns null for block if no hash found 2`] = `
 {
   "affiliateFees": [],
   "amount": 100000000n,
@@ -180,7 +180,88 @@ exports[`findVaultSwapData > returns block 0 if the request fails 1`] = `
     "numberOfChunks": 2,
   },
   "depositAddress": "tb1pjpqkt5ghr3lts922ykufct49trhmkjesmvmrfrq88w7fd0ewwtaq0da2gg",
-  "depositChainBlockHeight": 0,
+  "depositChainBlockHeight": null,
+  "destinationAddress": "0xa56a6be23b6cf39d9448ff6e897c29c41c8fbdff",
+  "inputAsset": "Btc",
+  "maxBoostFee": 0,
+  "outputAsset": "Eth",
+  "refundParams": {
+    "minPrice": 3402823669209384634633746074317682114560000000000n,
+    "refundAddress": "tb1qhjurnfz4qah4rg7ntue6x287ehdvded20rj9vh",
+    "retryDuration": 100,
+  },
+}
+`;
+
+exports[`findVaultSwapData > returns null for block if no hash found 3`] = `
+{
+  "affiliateFees": [],
+  "amount": 100000000n,
+  "brokerFee": {
+    "account": null,
+    "commissionBps": 0,
+  },
+  "ccmDepositMetadata": null,
+  "dcaParams": {
+    "chunkInterval": 1,
+    "numberOfChunks": 2,
+  },
+  "depositAddress": "tb1pjpqkt5ghr3lts922ykufct49trhmkjesmvmrfrq88w7fd0ewwtaq0da2gg",
+  "depositChainBlockHeight": null,
+  "destinationAddress": "0xa56a6be23b6cf39d9448ff6e897c29c41c8fbdff",
+  "inputAsset": "Btc",
+  "maxBoostFee": 0,
+  "outputAsset": "Eth",
+  "refundParams": {
+    "minPrice": 3402823669209384634633746074317682114560000000000n,
+    "refundAddress": "tb1qhjurnfz4qah4rg7ntue6x287ehdvded20rj9vh",
+    "retryDuration": 100,
+  },
+}
+`;
+
+exports[`findVaultSwapData > returns null for block if the block isn't found 1`] = `
+{
+  "affiliateFees": [],
+  "amount": 100000000n,
+  "brokerFee": {
+    "account": null,
+    "commissionBps": 0,
+  },
+  "ccmDepositMetadata": null,
+  "dcaParams": {
+    "chunkInterval": 1,
+    "numberOfChunks": 2,
+  },
+  "depositAddress": "tb1pjpqkt5ghr3lts922ykufct49trhmkjesmvmrfrq88w7fd0ewwtaq0da2gg",
+  "depositChainBlockHeight": null,
+  "destinationAddress": "0xa56a6be23b6cf39d9448ff6e897c29c41c8fbdff",
+  "inputAsset": "Btc",
+  "maxBoostFee": 0,
+  "outputAsset": "Eth",
+  "refundParams": {
+    "minPrice": 3402823669209384634633746074317682114560000000000n,
+    "refundAddress": "tb1qhjurnfz4qah4rg7ntue6x287ehdvded20rj9vh",
+    "retryDuration": 100,
+  },
+}
+`;
+
+exports[`findVaultSwapData > returns null for block if the request fails 1`] = `
+{
+  "affiliateFees": [],
+  "amount": 100000000n,
+  "brokerFee": {
+    "account": null,
+    "commissionBps": 0,
+  },
+  "ccmDepositMetadata": null,
+  "dcaParams": {
+    "chunkInterval": 1,
+    "numberOfChunks": 2,
+  },
+  "depositAddress": "tb1pjpqkt5ghr3lts922ykufct49trhmkjesmvmrfrq88w7fd0ewwtaq0da2gg",
+  "depositChainBlockHeight": null,
   "destinationAddress": "0xa56a6be23b6cf39d9448ff6e897c29c41c8fbdff",
   "inputAsset": "Btc",
   "maxBoostFee": 0,
