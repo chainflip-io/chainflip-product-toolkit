@@ -27,6 +27,9 @@
   "module": "dist/index.mjs",
   "dependencies": {
     "@chainflip/utils": "0.7.0",
-    "bitcoinjs-lib": "^7.0.0-rc.0"
+    "bignumber.js": "^9.1.2",
+    "bitcoinjs-lib": "^7.0.0-rc.0",
+    "scale-ts": "^1.6.1",
+    "zod": "^3.24.2"
   }
 }
