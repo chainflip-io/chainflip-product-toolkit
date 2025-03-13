@@ -37,7 +37,7 @@ const addressVout = z
 
 const txSchema = z.object({
   vout: z.tuple([addressVout, nulldataVout, addressVout]),
-  blockhash: hexString,
+  blockhash: hexString.nullish(),
 });
 
 const blockSchema = z.object({

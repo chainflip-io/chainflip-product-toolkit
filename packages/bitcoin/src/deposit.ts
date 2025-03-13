@@ -52,7 +52,7 @@ const getX128PriceFromAmounts = (depositAmount: bigint, minOutputAmount: bigint)
       .toFixed(0, BigNumber.ROUND_FLOOR),
   );
 
-export type BitcoinVaultSwapData = VaultSwapData & { depositAddress: string };
+export type BitcoinVaultSwapData = VaultSwapData<null> & { depositAddress: string };
 
 export const findVaultSwapData = async (
   url: string,
@@ -66,9 +66,9 @@ export const findVaultSwapData = async (
 
   const amount = tx.vout[0].value;
 
-  const block = await rpc.makeRequest(url, 'getblock', [tx.blockhash, true]).catch(() => ({
-    height: 0,
-  }));
+  const block = tx.blockhash
+    ? await rpc.makeRequest(url, 'getblock', [tx.blockhash, true]).catch(() => null)
+    : null;
 
   return {
     inputAsset: 'Btc' as const,
@@ -92,6 +92,6 @@ export const findVaultSwapData = async (
             numberOfChunks: data.numberOfChunks,
           }
         : null,
-    depositChainBlockHeight: block?.height ?? 0,
+    depositChainBlockHeight: block && block.height,
   };
 };
