@@ -1,67 +1,112 @@
-import { assert } from '@chainflip/utils/assertion';
+import { type DeferredPromise, deferredPromise } from '@chainflip/utils/async';
 import {
   type RpcRequest,
   type RpcMethod,
   type RpcResult,
   rpcResult,
-  rpcResponse,
   type JsonRpcRequest,
+  type JsonRpcResponse,
 } from './common';
 
 export type Response =
-  | { success: true; id: string; result: unknown }
+  | { success: true; id: string; result: JsonRpcResponse }
   | { success: false; id: string; error: Error };
+
+export type RequestMap = Map<
+  string,
+  {
+    deferred: DeferredPromise<RpcResult<RpcMethod>>;
+    body: JsonRpcRequest<RpcMethod>;
+    method: RpcMethod;
+  }
+>;
+
 export default abstract class Client {
   private lastRequestId = 0;
+  private timer: ReturnType<typeof setTimeout> | null = null;
+  private requestMap: RequestMap = new Map();
 
   constructor(protected readonly url: string) {}
 
   protected abstract send<const T extends RpcMethod>(
     data: JsonRpcRequest<T>[],
-  ): Promise<Response[]>;
+    clonedMap: RequestMap,
+  ): Promise<void>;
 
-  protected getRequestId() {
-    return String(++this.lastRequestId);
+  private getRequestId(): string {
+    try {
+      return crypto.randomUUID();
+    } catch {
+      return String(++this.lastRequestId);
+    }
   }
 
-  protected formatRequest<T extends RpcMethod>(
-    method: T,
-    params: RpcRequest[T],
-  ): JsonRpcRequest<T> {
+  private formatRequest<T extends RpcMethod>(method: T, params: RpcRequest[T]): JsonRpcRequest<T> {
     return { jsonrpc: '2.0', id: this.getRequestId(), method, params } as const;
   }
 
-  protected parseSingleResponse(response: Response) {
+  protected handleResponse(response: Response, clonedMap: RequestMap): void {
+    const clonedItem = clonedMap.get(response.id);
+    if (!clonedItem) return;
+    clonedMap.delete(response.id);
+
     if (!response.success) {
-      throw response.error;
+      return clonedItem.deferred.reject(response.error);
     }
 
-    const parseResult = rpcResponse.safeParse(response.result);
+    const rpcResponse = response.result;
 
-    if (!parseResult.success) {
-      throw new Error('Malformed RPC response received');
-    }
-
-    if ('error' in parseResult.data) {
-      throw new Error(
-        `RPC error [${parseResult.data.error.code}]: ${parseResult.data.error.message}`,
+    if ('error' in rpcResponse) {
+      return clonedItem.deferred.reject(
+        new Error(`RPC error [${rpcResponse.error.code}]: ${rpcResponse.error.message}`),
       );
     }
 
-    assert('result' in parseResult.data);
+    const parseResult = rpcResult[clonedItem.method].safeParse(rpcResponse.result);
 
-    return parseResult.data;
+    if (parseResult.error) {
+      return clonedItem.deferred.reject(parseResult.error);
+    }
+
+    clonedItem.deferred.resolve(parseResult.data);
   }
 
-  async sendRequest<const T extends RpcMethod>(
+  protected handleErrorResponse(error: Error, clonedMap: RequestMap): void {
+    for (const [id] of clonedMap) {
+      this.handleResponse({ id, success: false, error }, clonedMap);
+    }
+  }
+
+  private async handleBatch(): Promise<void> {
+    const clonedMap = new Map(this.requestMap);
+    this.requestMap.clear();
+
+    const requests = [...clonedMap.values()].map((item) => item.body);
+
+    await this.send(requests, clonedMap);
+
+    clonedMap.forEach((item) => {
+      item.deferred.reject(new Error('Could not find the result for the request'));
+    });
+  }
+
+  sendRequest<const T extends RpcMethod>(
     method: T,
     ...params: RpcRequest[T]
   ): Promise<RpcResult<T>> {
-    const [response] = await this.send([this.formatRequest(method, params)]);
-    if (!response.success) throw response.error;
-
-    const parseResult = this.parseSingleResponse(response);
-    return rpcResult[method].parse(parseResult.result);
+    if (!rpcResult[method]) {
+      return Promise.reject(new Error(`Unknown method: ${method}`));
+    }
+    const deferred = deferredPromise<RpcResult<T>>();
+    const body = this.formatRequest(method, params);
+    this.requestMap.set(body.id, { deferred, body, method });
+    if (!this.timer) {
+      this.timer = setTimeout(() => {
+        this.timer = null;
+        void this.handleBatch();
+      }, 0);
+    }
+    return deferred.promise;
   }
 
   methods(): RpcMethod[] {

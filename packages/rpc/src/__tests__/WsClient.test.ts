@@ -1,9 +1,21 @@
 /* eslint-disable dot-notation */
+import { sleep } from '@chainflip/utils/async';
 import { once } from 'events';
 import { type Mock, afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { type AddressInfo, WebSocket, WebSocketServer } from 'ws';
+import { type AddressInfo, WebSocketServer } from 'ws';
 import { type JsonRpcRequest, type RpcMethod } from '../common';
 import WsClient from '../WsClient';
+
+vi.mock(
+  '@chainflip/utils/async',
+  async (importActual: () => Promise<typeof import('@chainflip/utils/async')>) => ({
+    ...(await importActual()),
+    sleep: vi.fn<typeof sleep>(async (...args) => {
+      const original = (await importActual()).sleep;
+      return original(...args);
+    }),
+  }),
+);
 
 describe(WsClient, () => {
   let serverClosed = false;
@@ -28,44 +40,64 @@ describe(WsClient, () => {
 
     server.on('connection', (ws) => {
       ws.on('message', (data) => {
-        const rpcRequest = JSON.parse(data.toString()) as JsonRpcRequest<RpcMethod>;
+        const rpcRequests = JSON.parse(data.toString()) as JsonRpcRequest<RpcMethod>[];
 
-        if (rpcRequest.method === 'cf_swap_rate') {
-          ws.send(
-            JSON.stringify({
-              id: rpcRequest.id,
-              jsonrpc: '2.0',
-              result: { intermediary: null, output: '0x1' },
+        ws.send(
+          JSON.stringify(
+            rpcRequests.map((req) => {
+              if (req.method === 'cf_swap_rate') {
+                return {
+                  id: req.id,
+                  jsonrpc: '2.0',
+                  result: { intermediary: null, output: '0x1' },
+                };
+              }
+
+              // tests the timeout logic
+              if (req.method === 'cf_supported_assets') {
+                serverFn?.();
+                // do nothing
+                return {};
+              }
+
+              if (req.method === 'cf_accounts') {
+                return {
+                  id: req.id,
+                  jsonrpc: '2.0',
+                  result: [
+                    ['account 1', ''],
+                    ['account 2', ''],
+                  ],
+                };
+              }
+
+              if (req.method === 'cf_account_info') {
+                if (req.params[0] === 'account 1') {
+                  return {
+                    id: req.id,
+                    jsonrpc: '2.0',
+                    result: { role: 'unregistered', flip_balance: '0x0' },
+                  };
+                }
+                if (req.params[0] === 'account 2') {
+                  return {
+                    id: req.id,
+                    jsonrpc: '2.0',
+                    result: { role: 'unregistered', flip_balance: '0x10' },
+                  };
+                }
+              }
+
+              throw new Error('unreachable');
             }),
-          );
-        }
-
-        // tests the retry logic
-        if (rpcRequest.method === 'cf_environment') {
-          ws.close();
-          serverFn?.();
-        }
-
-        // tests the timeout logic
-        if (rpcRequest.method === 'cf_supported_assets') {
-          serverFn?.();
-          // do nothing
-        }
-
-        // tests malformed response handling
-        if (rpcRequest.method === 'cf_swapping_environment') {
-          serverFn?.();
-          ws.send(JSON.stringify([{}]));
-        }
+          ),
+        );
       });
     });
 
     await once(server, 'listening');
     const address = server.address() as AddressInfo;
-    client = new WsClient(
-      `ws://127.0.0.1:${address.port}`,
-      WebSocket as unknown as typeof globalThis.WebSocket,
-    );
+    client = new WsClient(`ws://127.0.0.1:${address.port}`, { timeout: 1000 });
   });
 
   afterEach(async () => {
@@ -76,60 +108,39 @@ describe(WsClient, () => {
     vi.useRealTimers();
   });
 
-  it('resends messages if a disconnection happens while awaiting a response', async () => {
-    const response = await client.sendRequest(
-      'cf_swap_rate',
-      { asset: 'USDC', chain: 'Ethereum' },
-      { asset: 'FLIP', chain: 'Ethereum' },
-      '0x1',
-    );
-
-    expect(response).toEqual({ intermediary: null, output: 1n });
-
-    killConnections();
-
-    const response2 = await client.sendRequest(
-      'cf_swap_rate',
-      { asset: 'USDC', chain: 'Ethereum' },
-      { asset: 'FLIP', chain: 'Ethereum' },
-      '0x1',
-    );
-    expect(response2).toEqual({ intermediary: null, output: 1n });
-  });
-
   it("doesn't spam the reconnect", async () => {
-    vi.useFakeTimers();
-    const response = await client.sendRequest(
+    const response = client.sendRequest(
       'cf_swap_rate',
       { asset: 'USDC', chain: 'Ethereum' },
       { asset: 'FLIP', chain: 'Ethereum' },
       '0x1',
     );
-    expect(response).toEqual({ intermediary: null, output: 1n });
+    expect(await response).toEqual({ intermediary: null, output: 1n });
 
     killConnections();
     closeServer();
     const connectSpy = vi.spyOn(client, 'connect' as any);
+    expect(connectSpy).not.toHaveBeenCalled();
     await once(client['emitter'], 'DISCONNECT');
 
-    expect(connectSpy).not.toHaveBeenCalled();
+    let resolve!: () => void;
+    const sleepMock = vi.mocked(sleep).mockImplementation(() => {
+      const deferred = Promise.withResolvers<void>();
+      resolve = deferred.resolve;
+      return deferred.promise;
+    });
 
     for (let i = 0; i < 7; i += 1) {
-      const promise = once(client['emitter'], 'DISCONNECT');
-      await vi.advanceTimersToNextTimerAsync();
-      await promise;
+      await once(client['emitter'], 'CONNECTING');
       expect(connectSpy).toHaveBeenCalledTimes(i + 1);
+      await once(client['emitter'], 'DISCONNECT');
+      expect(sleepMock.mock.lastCall?.[0]).toBe(250 * 2 ** i);
+      resolve();
     }
 
-    expect(connectSpy).toHaveBeenCalledTimes(7);
-  });
+    await client.close();
 
-  it('only retries 5 times', async () => {
-    serverFn = vi.fn();
-
-    await expect(client.sendRequest('cf_environment')).rejects.toThrowError('max retries exceeded');
-
-    expect(serverFn).toHaveBeenCalledTimes(5);
+    expect(connectSpy).toHaveBeenCalledTimes(8);
   });
 
   it('reconnects if the socket emits an error', async () => {
@@ -142,7 +153,7 @@ describe(WsClient, () => {
       ),
     ).resolves.not.toThrow();
     expect(client['ws']).toBeDefined();
-    (client['ws'] as unknown as WebSocket).emit('error', new Error('test'));
+    client['ws']?.dispatchEvent(new Event('error'));
     await once(client['emitter'], 'DISCONNECT');
     await expect(
       client.sendRequest(
@@ -155,6 +166,7 @@ describe(WsClient, () => {
   });
 
   it('rejects if no response is received', async () => {
+    client = new WsClient(client['url'], { timeout: 500 });
     await expect(
       client.sendRequest(
         'cf_swap_rate',
@@ -164,15 +176,11 @@ describe(WsClient, () => {
       ),
     ).resolves.not.toThrow();
 
-    vi.useFakeTimers();
     serverFn = vi.fn();
 
     const request = client.sendRequest('cf_supported_assets');
 
-    await Promise.all([
-      vi.advanceTimersToNextTimerAsync(),
-      expect(request).rejects.toThrowError('timeout'),
-    ]);
+    await expect(request).rejects.toThrowError('timeout');
 
     expect(serverFn).toHaveBeenCalledTimes(1);
   });
@@ -194,29 +202,62 @@ describe(WsClient, () => {
     expect(spy).toBeCalledTimes(5);
   });
 
-  it('times out on a malformed response', async () => {
-    await expect(
-      client.sendRequest(
-        'cf_swap_rate',
-        { asset: 'USDC', chain: 'Ethereum' },
-        { asset: 'FLIP', chain: 'Ethereum' },
-        '0x1',
-      ),
-    ).resolves.not.toThrow();
+  it('serves multiple requests at once', async () => {
+    await client['connectionReady']();
 
-    vi.useFakeTimers();
-    serverFn = vi.fn();
-    const request = client.sendRequest('cf_swapping_environment');
+    const spy = vi.spyOn(client['ws']!, 'send');
 
-    await Promise.all([
-      vi.advanceTimersToNextTimerAsync(),
-      expect(request).rejects.toThrowError('timeout'),
+    const accounts = await client.sendRequest('cf_accounts');
+
+    expect(accounts).toEqual([
+      ['account 1', ''],
+      ['account 2', ''],
     ]);
 
-    expect(serverFn).toHaveBeenCalledTimes(1);
+    expect(
+      await Promise.all(accounts.map(([acct]) => client.sendRequest('cf_account_info', acct))),
+    ).toEqual([
+      { role: 'unregistered', flip_balance: 0n },
+      { role: 'unregistered', flip_balance: 16n },
+    ]);
+
+    expect(spy.mock.calls.map((args) => args.map((a) => JSON.parse(a.toString())))).toMatchObject([
+      [
+        [
+          {
+            jsonrpc: '2.0',
+            id: expect.any(String),
+            method: 'cf_accounts',
+            params: [],
+          },
+        ],
+      ],
+      [
+        [
+          {
+            jsonrpc: '2.0',
+            id: expect.any(String),
+            method: 'cf_account_info',
+            params: ['account 1'],
+          },
+          {
+            jsonrpc: '2.0',
+            id: expect.any(String),
+            method: 'cf_account_info',
+            params: ['account 2'],
+          },
+        ],
+      ],
+    ]);
   });
 
-  it('uses the global websocket if none is provided', () => {
-    expect(new WsClient('ws://hello.world')['WebSocket']).toBe(globalThis.WebSocket);
+  it('rejects pending requests when the websocket disconnects', async () => {
+    await client['connectionReady']();
+    const deferred = Promise.withResolvers<any>();
+    client['inFlightRequestMap'].set('hello world', deferred);
+    await Promise.all([
+      expect(deferred.promise).rejects.toThrowError('disconnected'),
+      client.close(),
+    ]);
   });
 });

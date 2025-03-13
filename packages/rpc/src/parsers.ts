@@ -67,7 +67,7 @@ const rename =
     ) as Rename<T, U>;
 
 const rpcBaseResponse = z.object({
-  id: z.union([z.string(), z.number()]),
+  id: z.string(),
   jsonrpc: z.literal('2.0'),
 });
 
