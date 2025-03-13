@@ -10,7 +10,7 @@ export type VaultSwapData<Broker, CcmData = never> = {
   destinationAddress: string;
   inputAsset: ChainflipAsset;
   outputAsset: ChainflipAsset;
-  depositChainBlockHeight: number;
+  depositChainBlockHeight: number | null;
   brokerFee: { account: Broker; commissionBps: number };
   affiliateFees: { accountIndex: number; commissionBps: number }[];
   maxBoostFee: number;
