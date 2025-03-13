@@ -23,8 +23,18 @@
     "dist",
     "README.md"
   ],
-  "main": "dist/index.cjs",
-  "module": "dist/index.mjs",
+  "exports": {
+    ".": {
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      },
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.mjs"
+      }
+    }
+  },
   "dependencies": {
     "@chainflip/utils": "0.7.1",
     "bignumber.js": "^9.1.2",
