@@ -14,7 +14,9 @@ const IGNORED_METHODS = [
 
 describe('types', () => {
   it.each(
-    Object.keys(rpcResult).filter((key) => key.startsWith('cf_') && !IGNORED_METHODS.includes(key)),
+    Object.keys(rpcResult).filter(
+      (key) => !/(state|broker|chain)_/.test(key) && !IGNORED_METHODS.includes(key),
+    ),
   )('has two exports for %s', async (key) => {
     const file = await fs.readFile(path.join(import.meta.dirname, '..', 'types.ts'), 'utf8');
     const exportName = capitalize(key).replace(/_(.)/g, (_, char: string) => char.toUpperCase());

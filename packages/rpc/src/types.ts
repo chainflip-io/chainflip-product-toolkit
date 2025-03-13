@@ -55,6 +55,7 @@ export type CfValidatorAccount = z.output<typeof validator>;
 export type CfLiquidityProviderAccount = z.output<typeof liquidityProvider>;
 
 export type LpTotalBalances = RpcResult<'lp_total_balances'>;
+export type LpTotalBalancesResponse = RpcResponse<'lp_total_balances'>;
 
 export type { RpcLimitOrder, RpcRangeOrder } from './parsers';
 export type { RpcMethod, RpcRequest as RpcParams, RpcResult } from './common';
