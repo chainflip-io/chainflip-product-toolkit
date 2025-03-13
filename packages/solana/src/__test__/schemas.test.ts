@@ -72,7 +72,10 @@ describe('swapSchema', () => {
           },
         ],
         "amount": 100000000n,
-        "brokerFee": 0,
+        "brokerFee": {
+          "account": "cFMTNSQQVfBo2HqtekvhLPfZY764kuJDVFG1EvnnDGYxc3LRW",
+          "commissionBps": 0,
+        },
         "ccmDepositMetadata": {
           "ccmAdditionalData": null,
           "channelMetadata": {

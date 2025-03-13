@@ -354,7 +354,10 @@ describe(findVaultSwapData, () => {
       {
         "affiliateFees": [],
         "amount": 1500000000n,
-        "brokerFee": 0,
+        "brokerFee": {
+          "account": "cFMTNSQQVfBo2HqtekvhLPfZY764kuJDVFG1EvnnDGYxc3LRW",
+          "commissionBps": 0,
+        },
         "ccmDepositMetadata": null,
         "dcaParams": null,
         "depositChainBlockHeight": 365289019,
@@ -386,7 +389,10 @@ describe(findVaultSwapData, () => {
       {
         "affiliateFees": [],
         "amount": 1500000000n,
-        "brokerFee": 0,
+        "brokerFee": {
+          "account": "cFMTNSQQVfBo2HqtekvhLPfZY764kuJDVFG1EvnnDGYxc3LRW",
+          "commissionBps": 0,
+        },
         "ccmDepositMetadata": null,
         "dcaParams": null,
         "depositChainBlockHeight": 365289019,
@@ -415,7 +421,10 @@ describe(findVaultSwapData, () => {
       {
         "affiliateFees": [],
         "amount": 1500000000n,
-        "brokerFee": 0,
+        "brokerFee": {
+          "account": "cFMTNSQQVfBo2HqtekvhLPfZY764kuJDVFG1EvnnDGYxc3LRW",
+          "commissionBps": 0,
+        },
         "ccmDepositMetadata": null,
         "dcaParams": null,
         "depositChainBlockHeight": 365289019,
@@ -444,7 +453,10 @@ describe(findVaultSwapData, () => {
       {
         "affiliateFees": [],
         "amount": 1500000000n,
-        "brokerFee": 0,
+        "brokerFee": {
+          "account": "cFMTNSQQVfBo2HqtekvhLPfZY764kuJDVFG1EvnnDGYxc3LRW",
+          "commissionBps": 0,
+        },
         "ccmDepositMetadata": null,
         "dcaParams": null,
         "depositChainBlockHeight": 365289019,
@@ -473,7 +485,10 @@ describe(findVaultSwapData, () => {
       {
         "affiliateFees": [],
         "amount": 1500000000n,
-        "brokerFee": 0,
+        "brokerFee": {
+          "account": "cFMTNSQQVfBo2HqtekvhLPfZY764kuJDVFG1EvnnDGYxc3LRW",
+          "commissionBps": 0,
+        },
         "ccmDepositMetadata": null,
         "dcaParams": null,
         "depositChainBlockHeight": 365506144,
@@ -502,7 +517,10 @@ describe(findVaultSwapData, () => {
       {
         "affiliateFees": [],
         "amount": 1500000000n,
-        "brokerFee": 0,
+        "brokerFee": {
+          "account": "cFMTNSQQVfBo2HqtekvhLPfZY764kuJDVFG1EvnnDGYxc3LRW",
+          "commissionBps": 0,
+        },
         "ccmDepositMetadata": null,
         "dcaParams": {
           "chunkInterval": 10,
@@ -534,7 +552,10 @@ describe(findVaultSwapData, () => {
       {
         "affiliateFees": [],
         "amount": 20000000n,
-        "brokerFee": 0,
+        "brokerFee": {
+          "account": "cFMTNSQQVfBo2HqtekvhLPfZY764kuJDVFG1EvnnDGYxc3LRW",
+          "commissionBps": 0,
+        },
         "ccmDepositMetadata": null,
         "dcaParams": null,
         "depositChainBlockHeight": 365493638,
