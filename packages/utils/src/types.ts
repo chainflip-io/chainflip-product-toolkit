@@ -5,13 +5,13 @@ export type HexString = `0x${string}`;
 export type Bytelike = Uint8Array | number[] | HexString;
 
 // https://github.com/chainflip-io/chainflip-backend/blob/f9b281c1fa4862da0e8a9007214afa96de5eb6f1/api/bin/chainflip-ingress-egress-tracker/src/witnessing/state_chain.rs#L139
-export type VaultSwapData<T = never> = {
+export type VaultSwapData<Broker, CcmData = never> = {
   amount: bigint;
   destinationAddress: string;
   inputAsset: ChainflipAsset;
   outputAsset: ChainflipAsset;
   depositChainBlockHeight: number;
-  brokerFee: { account: string | null; commissionBps: number };
+  brokerFee: { account: Broker; commissionBps: number };
   affiliateFees: { accountIndex: number; commissionBps: number }[];
   maxBoostFee: number;
   dcaParams: {
@@ -28,6 +28,6 @@ export type VaultSwapData<T = never> = {
       message: HexString;
       gasBudget: HexString;
     };
-    ccmAdditionalData: T;
+    ccmAdditionalData: CcmData;
   } | null;
 };
