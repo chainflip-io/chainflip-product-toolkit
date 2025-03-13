@@ -98,7 +98,3 @@ export const makeRequest = async <T extends keyof RpcRequest & keyof typeof resp
 
   return parseResult.data;
 };
-
-await makeRequest('https://bitcoin-testnet-rpc.publicnode.com/', 'getblock', [
-  '0000000000000082c2468c0cf92ade33aba1b00a131df1afe15a70233caff8e8',
-]);
