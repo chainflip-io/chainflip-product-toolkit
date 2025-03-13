@@ -41,12 +41,18 @@ export type DecodedSegwitAddress = {
   version: number;
 };
 
-export type SegwitAddressType = 'P2WPKH' | 'P2WSH' | 'Taproot';
+export type SegwitAddressType =
+  | 'P2WPKH'
+  | 'P2WSH'
+  | 'P2TR'
+  /** @deprecated repalced by P2TR */
+  | 'Taproot';
 
 const segwitVersions: Record<SegwitAddressType, number> = {
   P2WPKH: 0,
   P2WSH: 0,
   Taproot: 1,
+  P2TR: 1,
 };
 
 const byteLikeToUint8Array = (data: Bytelike): Uint8Array =>
@@ -76,6 +82,7 @@ export const encodeAddress = (
     }
     case 'P2WPKH':
     case 'P2WSH':
+    case 'P2TR':
     case 'Taproot':
       return bitcoin.address.toBech32(bytes, segwitVersions[kind], networkHrp[btcNetwork]);
     default:
