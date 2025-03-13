@@ -7,11 +7,12 @@ import { findVaultSwapData } from '../deposit';
 import { createSwapDataCodec } from '../scale';
 import { tx, block } from './fixtures';
 
-const mockFetch = (...results: unknown[]) =>
+const mockFetch = (results: unknown[], status = 200) =>
   results.reduce(
     (mock: MockInstance<typeof fetch>, result) =>
       mock.mockResolvedValueOnce({
-        ok: true,
+        ok: status === 200,
+        status,
         json: () => Promise.resolve(result),
       } as Response),
     vi.spyOn(globalThis, 'fetch'),
@@ -106,46 +107,87 @@ describe(findVaultSwapData, () => {
         affiliates,
       });
 
-      mockFetch(tx({ nulldata, depositAmount, refundAddress }), block);
+      mockFetch([tx({ nulldata, depositAmount, refundAddress }), block]);
 
-      mockFetch({ result: { height: 3902357 }, error: null, id: 1 });
+      mockFetch([{ result: { height: 3902357 }, error: null, id: 1 }]);
 
       const data = await findVaultSwapData(
         'https://bitcoin.rpc',
         '77a4dcda118d8cd4e537616effeac741ff60dbdb7af0b7f2f54a3a15c0556239',
       );
 
-      expect(data.ok).toBe(true);
       expect(data).toMatchSnapshot();
     },
   );
 
-  it('returns parse errors', async () => {
-    mockFetch(tx({ nulldata: '00', depositAmount: 1 }), block);
-
-    mockFetch({ result: { height: 3902357 }, error: null, id: 1 });
+  it('returns null if the tx is not found', async () => {
+    mockFetch(
+      [
+        {
+          result: null,
+          error: {
+            code: -5,
+            message:
+              'No such mempool or blockchain transaction. Use gettransaction for wallet transactions.',
+          },
+          id: 1,
+        },
+      ],
+      500,
+    );
 
     const data = await findVaultSwapData(
       'https://bitcoin.rpc',
       '77a4dcda118d8cd4e537616effeac741ff60dbdb7af0b7f2f54a3a15c0556239',
     );
 
-    expect(data).toMatchSnapshot();
+    expect(data).toBeNull();
   });
 
-  it('returns rpc errors', async () => {
+  it('returns null if the tx is not a vault swap', async () => {
+    const txInfo = tx({ nulldata: '00', depositAmount: 1 });
+    txInfo.result.vout.splice(1);
+    mockFetch([txInfo]);
+
+    const data = await findVaultSwapData(
+      'https://bitcoin.rpc',
+      '77a4dcda118d8cd4e537616effeac741ff60dbdb7af0b7f2f54a3a15c0556239',
+    );
+
+    expect(data).toBeNull();
+  });
+
+  it('throws parse errors', async () => {
+    mockFetch([tx({ nulldata: '00', depositAmount: 1 }), block]);
+
+    mockFetch([{ result: { height: 3902357 }, error: null, id: 1 }]);
+
+    await expect(
+      findVaultSwapData(
+        'https://bitcoin.rpc',
+        '77a4dcda118d8cd4e537616effeac741ff60dbdb7af0b7f2f54a3a15c0556239',
+      ),
+    ).rejects.toThrowErrorMatchingInlineSnapshot(`[Error: unsupported version]`);
+  });
+
+  it('throws rpc errors', async () => {
     vi.spyOn(globalThis, 'fetch').mockResolvedValueOnce({
       ok: false,
       status: 500,
-      statusText: 'Internal Server Error',
+      json: () =>
+        Promise.resolve({
+          result: null,
+          error: { code: -32601, message: 'Method not found' },
+          id: 1,
+        }),
     } as Response);
 
-    const data = await findVaultSwapData(
-      'https://bitcoin.rpc',
-      '77a4dcda118d8cd4e537616effeac741ff60dbdb7af0b7f2f54a3a15c0556239',
-    );
-
-    expect(data).toMatchSnapshot();
+    await expect(
+      findVaultSwapData(
+        'https://bitcoin.rpc',
+        '77a4dcda118d8cd4e537616effeac741ff60dbdb7af0b7f2f54a3a15c0556239',
+      ),
+    ).rejects.toThrowErrorMatchingInlineSnapshot(`[Error: RPC error [-32601]: Method not found]`);
   });
 
   it('returns block 0 if the request fails', async () => {
@@ -154,24 +196,10 @@ describe(findVaultSwapData, () => {
       destinationAddress: addresses.Eth,
     });
 
-    mockFetch(tx({ nulldata, depositAmount: 1 }));
-
-    vi.spyOn(globalThis, 'fetch').mockRejectedValueOnce(new Error('Network error'));
-
-    expect(
-      await findVaultSwapData(
-        'https://bitcoin.rpc',
-        '77a4dcda118d8cd4e537616effeac741ff60dbdb7af0b7f2f54a3a15c0556239',
-      ),
-    ).toMatchSnapshot();
-  });
-
-  it('returns rpc errors', async () => {
-    mockFetch({
-      id: 1,
-      jsonrpc: '2.0',
-      error: { code: -32601, message: 'Method not found' },
-    });
+    mockFetch([
+      tx({ nulldata, depositAmount: 1 }),
+      { id: 1, jsonrpc: '2.0', result: {}, error: null },
+    ]);
 
     expect(
       await findVaultSwapData(
@@ -181,12 +209,19 @@ describe(findVaultSwapData, () => {
     ).toMatchSnapshot();
   });
 
-  it('returns parse errors', async () => {
-    mockFetch({
-      id: 1,
-      jsonrpc: '2.0',
-      result: {},
+  it("returns block 0 if the block isn't found", async () => {
+    const nulldata = buildNullData({
+      destinationAsset: 'Eth',
+      destinationAddress: addresses.Eth,
     });
+
+    mockFetch([tx({ nulldata, depositAmount: 1 })]);
+    mockFetch(
+      [{ id: 1, jsonrpc: '2.0', result: null, error: { code: -5, message: 'Block not found' } }],
+      500,
+    );
+
+    vi.spyOn(globalThis, 'fetch').mockRejectedValueOnce(new Error('Failed to fetch'));
 
     expect(
       await findVaultSwapData(
@@ -194,5 +229,63 @@ describe(findVaultSwapData, () => {
         '77a4dcda118d8cd4e537616effeac741ff60dbdb7af0b7f2f54a3a15c0556239',
       ),
     ).toMatchSnapshot();
+  });
+
+  it('throws parse errors', async () => {
+    mockFetch([{ id: 1, jsonrpc: '2.0', result: {} }]);
+
+    await expect(
+      findVaultSwapData(
+        'https://bitcoin.rpc',
+        '77a4dcda118d8cd4e537616effeac741ff60dbdb7af0b7f2f54a3a15c0556239',
+      ),
+    ).rejects.toThrowErrorMatchingInlineSnapshot(`
+      [ZodError: [
+        {
+          "code": "invalid_union",
+          "unionErrors": [
+            {
+              "issues": [
+                {
+                  "code": "invalid_type",
+                  "expected": "null",
+                  "received": "object",
+                  "path": [
+                    "result"
+                  ],
+                  "message": "Expected null, received object"
+                },
+                {
+                  "code": "invalid_type",
+                  "expected": "object",
+                  "received": "undefined",
+                  "path": [
+                    "error"
+                  ],
+                  "message": "Required"
+                }
+              ],
+              "name": "ZodError"
+            },
+            {
+              "issues": [
+                {
+                  "code": "invalid_type",
+                  "expected": "null",
+                  "received": "undefined",
+                  "path": [
+                    "error"
+                  ],
+                  "message": "Required"
+                }
+              ],
+              "name": "ZodError"
+            }
+          ],
+          "path": [],
+          "message": "Invalid input"
+        }
+      ]]
+    `);
   });
 });
