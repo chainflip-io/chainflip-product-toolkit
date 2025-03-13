@@ -117,7 +117,7 @@ const swapParams = z
         },
         ccmAdditionalData: data.ccmAdditionalData,
       },
-      brokerFee: 0,
+      brokerFee: data.brokerFees,
       maxBoostFee: 0,
       refundParams: {
         refundAddress: data.refundParams.refundAddress,

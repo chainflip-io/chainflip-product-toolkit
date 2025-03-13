@@ -81,7 +81,7 @@ export const findVaultSwapData = async (
     },
     destinationAddress: data.destinationAddress,
     outputAsset: data.outputAsset,
-    brokerFee: data.brokerFee,
+    brokerFee: { account: null, commissionBps: data.brokerFee },
     affiliateFees: data.affiliates,
     ccmDepositMetadata: null,
     maxBoostFee: data.boostFee,

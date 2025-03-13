@@ -4,7 +4,10 @@ exports[`findVaultSwapData > gets the vault swap data (ArbEth) 1`] = `
 {
   "affiliateFees": [],
   "amount": 10000000n,
-  "brokerFee": 10,
+  "brokerFee": {
+    "account": null,
+    "commissionBps": 10,
+  },
   "ccmDepositMetadata": null,
   "dcaParams": {
     "chunkInterval": 1,
@@ -33,7 +36,10 @@ exports[`findVaultSwapData > gets the vault swap data (Btc) 1`] = `
     },
   ],
   "amount": 10000n,
-  "brokerFee": 20,
+  "brokerFee": {
+    "account": null,
+    "commissionBps": 20,
+  },
   "ccmDepositMetadata": null,
   "dcaParams": {
     "chunkInterval": 1,
@@ -62,7 +68,10 @@ exports[`findVaultSwapData > gets the vault swap data (Dot) 1`] = `
     },
   ],
   "amount": 100000n,
-  "brokerFee": 0,
+  "brokerFee": {
+    "account": null,
+    "commissionBps": 0,
+  },
   "ccmDepositMetadata": null,
   "dcaParams": null,
   "depositAddress": "tb1pjpqkt5ghr3lts922ykufct49trhmkjesmvmrfrq88w7fd0ewwtaq0da2gg",
@@ -83,7 +92,10 @@ exports[`findVaultSwapData > gets the vault swap data (Eth) 1`] = `
 {
   "affiliateFees": [],
   "amount": 100000000n,
-  "brokerFee": 5,
+  "brokerFee": {
+    "account": null,
+    "commissionBps": 5,
+  },
   "ccmDepositMetadata": null,
   "dcaParams": null,
   "depositAddress": "tb1pjpqkt5ghr3lts922ykufct49trhmkjesmvmrfrq88w7fd0ewwtaq0da2gg",
@@ -104,7 +116,10 @@ exports[`findVaultSwapData > gets the vault swap data (Sol) 1`] = `
 {
   "affiliateFees": [],
   "amount": 1000000n,
-  "brokerFee": 15,
+  "brokerFee": {
+    "account": null,
+    "commissionBps": 15,
+  },
   "ccmDepositMetadata": null,
   "dcaParams": {
     "chunkInterval": 20,
@@ -128,7 +143,10 @@ exports[`findVaultSwapData > returns block 0 if the block isn't found 1`] = `
 {
   "affiliateFees": [],
   "amount": 100000000n,
-  "brokerFee": 0,
+  "brokerFee": {
+    "account": null,
+    "commissionBps": 0,
+  },
   "ccmDepositMetadata": null,
   "dcaParams": {
     "chunkInterval": 1,
@@ -152,7 +170,10 @@ exports[`findVaultSwapData > returns block 0 if the request fails 1`] = `
 {
   "affiliateFees": [],
   "amount": 100000000n,
-  "brokerFee": 0,
+  "brokerFee": {
+    "account": null,
+    "commissionBps": 0,
+  },
   "ccmDepositMetadata": null,
   "dcaParams": {
     "chunkInterval": 1,
