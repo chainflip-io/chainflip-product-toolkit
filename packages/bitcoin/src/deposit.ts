@@ -52,10 +52,12 @@ const getX128PriceFromAmounts = (depositAmount: bigint, minOutputAmount: bigint)
       .toFixed(0, BigNumber.ROUND_FLOOR),
   );
 
+export type BitcoinVaultSwapData = VaultSwapData & { depositAddress: string };
+
 export const findVaultSwapData = async (
   url: string,
   txId: string,
-): Promise<(VaultSwapData & { depositAddress: string }) | null> => {
+): Promise<BitcoinVaultSwapData | null> => {
   const tx = await rpc.makeRequest(url, 'getrawtransaction', [txId, true]);
 
   if (!tx) return null;
