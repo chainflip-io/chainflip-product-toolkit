@@ -30,7 +30,7 @@ const vaultSwapParametersCodec = <T>(refundAddressCodec: Codec<T>) =>
     affiliateFees: Vector(Struct({ account: u8, commissionBps: u8 })),
   });
 
-const vaultCcmCfParametersCodec = <T>(refundAddressCodec: Codec<T>) =>
+export const vaultCcmCfParametersCodec = <T>(refundAddressCodec: Codec<T>) =>
   Enum({
     V0: Struct({
       ccmAdditionalData: Bytes(),
@@ -38,14 +38,14 @@ const vaultCcmCfParametersCodec = <T>(refundAddressCodec: Codec<T>) =>
     }),
   });
 
-const vaultCfParametersCodec = <T>(refundAddressCodec: Codec<T>) =>
+export const vaultCfParametersCodec = <T>(refundAddressCodec: Codec<T>) =>
   Enum({
     V0: Struct({
       vaultSwapParameters: vaultSwapParametersCodec(refundAddressCodec),
     }),
   });
 
-const solVersionedCcmAdditionalDataCodec = Enum({
+export const solVersionedCcmAdditionalDataCodec = Enum({
   V0: Struct({
     cf_receiver: Struct({
       pubkey: Bytes(32),

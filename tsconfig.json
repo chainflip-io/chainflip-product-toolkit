@@ -25,6 +25,7 @@
     // "moduleDetection": "auto",                        /* Control what method is used to detect module-format JS files. */
     "paths": {
       "@/chainspec/*": ["./packages/chainspec/src/*"],
+      "@/scale/*": ["./packages/scale/src/*"],
     },
 
     /* Modules */

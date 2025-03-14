@@ -276,7 +276,7 @@ const findIdlAndInstruction = (
 export const findVaultSwapData = async (
   rpcUrl: string,
   signature: string,
-): Promise<VaultSwapData<HexString | SolanaCcmAdditionalData | null> | null> => {
+): Promise<VaultSwapData<string, HexString | SolanaCcmAdditionalData | null> | null> => {
   const methodToAsset = {
     x_swap_native: 'Sol',
     x_swap_token: 'SolUsdc',

@@ -1,5 +1,10 @@
+import * as base58 from '@chainflip/utils/base58';
+import { hexToBytes } from '@chainflip/utils/bytes';
+import { ChainflipAsset } from '@chainflip/utils/chainflip';
+import * as ss58 from '@chainflip/utils/ss58';
 import { Connection } from '@solana/web3.js';
 import { describe, beforeEach, it, vi, expect, type MockInstance } from 'vitest';
+import { SolanaCcmAdditionalData } from '@/scale/codecs';
 import { findTransactionSignatures, findVaultSwapData, findVaultSwapSignature } from '../deposit';
 import { mainnet } from '../idls';
 import bigDiff from './fixtures/bigDiff.json';
@@ -14,11 +19,12 @@ import paginate3 from './fixtures/paginate3.json';
 import simple from './fixtures/simple.json';
 import solusdc from './fixtures/solusdc.json';
 import solusdc2 from './fixtures/solusdc2.json';
-import swapNativeToArbDevnet from './fixtures/swapNativeToArbDevnet.json';
-import swapNativeToBtcDevnet from './fixtures/swapNativeToBtcDevnet.json';
-import swapNativeToDotDevnet from './fixtures/swapNativeToDotDevnet.json';
-import swapNativeToEthAdditionalParamsDevnet from './fixtures/swapNativeToEthAdditionalParamsDevnet.json';
-import swapNativeToEthDevnet from './fixtures/swapNativeToEthDevnet.json';
+import { swapNative } from './fixtures/swapNative';
+// import swapNativeToArbDevnet from './fixtures/swapNativeToArbDevnet.json';
+// import swapNativeToBtcDevnet from './fixtures/swapNativeToBtcDevnet.json';
+// import swapNativeToDotDevnet from './fixtures/swapNativeToDotDevnet.json';
+// import swapNativeToEthAdditionalParamsDevnet from './fixtures/swapNativeToEthAdditionalParamsDevnet.json';
+// import swapNativeToEthDevnet from './fixtures/swapNativeToEthDevnet.json';
 import swapTokenDevnet from './fixtures/swapTokenDevnet.json';
 
 const mockFetchWithResponses = (responses: { jsonrpc: string; result: unknown; id: string }[]) =>
@@ -342,204 +348,6 @@ describe(findVaultSwapSignature, () => {
 });
 
 describe(findVaultSwapData, () => {
-  it('gets the vault swap data for native swaps (to ETH)', async () => {
-    mockFetchWithResponses([swapNativeToEthDevnet]);
-
-    const data = await findVaultSwapData(
-      'https://solana.rpc',
-      '3fG2FkvUD3eFdpja9XBUsSa2stgENzZWKWqXZjfBEdBEnVE498kTXDaPFdRJnrwoBBp64wuoGKpkqNCnHhQRi8N1',
-    );
-
-    expect(data).toMatchInlineSnapshot(`
-      {
-        "affiliateFees": [],
-        "amount": 1500000000n,
-        "brokerFee": {
-          "account": "cFMTNSQQVfBo2HqtekvhLPfZY764kuJDVFG1EvnnDGYxc3LRW",
-          "commissionBps": 0,
-        },
-        "ccmDepositMetadata": null,
-        "dcaParams": null,
-        "depositChainBlockHeight": 365289019,
-        "destinationAddress": "0xa56a6be23b6cf39d9448ff6e897c29c41c8fbdff",
-        "inputAsset": "Sol",
-        "maxBoostFee": 0,
-        "outputAsset": "Eth",
-        "refundParams": {
-          "minPrice": 6616846606368726564647178815965546002365481543n,
-          "refundAddress": "3yKDHJgzS2GbZB9qruoadRYtq8597HZifnRju7fHpdRC",
-          "retryDuration": 100,
-        },
-      }
-    `);
-  });
-
-  it('gets the vault swap data for native swaps (to ETH) with mainnet address', async () => {
-    const rpc = structuredClone(swapNativeToEthDevnet);
-    rpc.result.transaction.message.instructions[0].programId = mainnet.address;
-
-    mockFetchWithResponses([rpc]);
-
-    const data = await findVaultSwapData(
-      'https://solana.rpc',
-      '3fG2FkvUD3eFdpja9XBUsSa2stgENzZWKWqXZjfBEdBEnVE498kTXDaPFdRJnrwoBBp64wuoGKpkqNCnHhQRi8N1',
-    );
-
-    expect(data).toMatchInlineSnapshot(`
-      {
-        "affiliateFees": [],
-        "amount": 1500000000n,
-        "brokerFee": {
-          "account": "cFMTNSQQVfBo2HqtekvhLPfZY764kuJDVFG1EvnnDGYxc3LRW",
-          "commissionBps": 0,
-        },
-        "ccmDepositMetadata": null,
-        "dcaParams": null,
-        "depositChainBlockHeight": 365289019,
-        "destinationAddress": "0xa56a6be23b6cf39d9448ff6e897c29c41c8fbdff",
-        "inputAsset": "Sol",
-        "maxBoostFee": 0,
-        "outputAsset": "Eth",
-        "refundParams": {
-          "minPrice": 6616846606368726564647178815965546002365481543n,
-          "refundAddress": "3yKDHJgzS2GbZB9qruoadRYtq8597HZifnRju7fHpdRC",
-          "retryDuration": 100,
-        },
-      }
-    `);
-  });
-
-  it('gets the vault swap data for native swaps (to ETH 2)', async () => {
-    mockFetchWithResponses([swapNativeToEthAdditionalParamsDevnet]);
-
-    const data = await findVaultSwapData(
-      'https://solana.rpc',
-      '3fG2FkvUD3eFdpja9XBUsSa2stgENzZWKWqXZjfBEdBEnVE498kTXDaPFdRJnrwoBBp64wuoGKpkqNCnHhQRi8N1',
-    );
-
-    expect(data).toMatchInlineSnapshot(`
-      {
-        "affiliateFees": [],
-        "amount": 1500000000n,
-        "brokerFee": {
-          "account": "cFMTNSQQVfBo2HqtekvhLPfZY764kuJDVFG1EvnnDGYxc3LRW",
-          "commissionBps": 0,
-        },
-        "ccmDepositMetadata": null,
-        "dcaParams": null,
-        "depositChainBlockHeight": 365289019,
-        "destinationAddress": "0xa56a6be23b6cf39d9448ff6e897c29c41c8fbdff",
-        "inputAsset": "Sol",
-        "maxBoostFee": 0,
-        "outputAsset": "Eth",
-        "refundParams": {
-          "minPrice": 6616846606368726564647178815965546002365481543n,
-          "refundAddress": "3yKDHJgzS2GbZB9qruoadRYtq8597HZifnRju7fHpdRC",
-          "retryDuration": 100,
-        },
-      }
-    `);
-  });
-
-  it('gets the vault swap data for native swaps (to Arbitrum ETH)', async () => {
-    mockFetchWithResponses([swapNativeToArbDevnet]);
-
-    const data = await findVaultSwapData(
-      'https://solana.rpc',
-      '3fG2FkvUD3eFdpja9XBUsSa2stgENzZWKWqXZjfBEdBEnVE498kTXDaPFdRJnrwoBBp64wuoGKpkqNCnHhQRi8N1',
-    );
-
-    expect(data).toMatchInlineSnapshot(`
-      {
-        "affiliateFees": [],
-        "amount": 1500000000n,
-        "brokerFee": {
-          "account": "cFMTNSQQVfBo2HqtekvhLPfZY764kuJDVFG1EvnnDGYxc3LRW",
-          "commissionBps": 0,
-        },
-        "ccmDepositMetadata": null,
-        "dcaParams": null,
-        "depositChainBlockHeight": 365289019,
-        "destinationAddress": "0xa56a6be23b6cf39d9448ff6e897c29c41c8fbdff",
-        "inputAsset": "Sol",
-        "maxBoostFee": 0,
-        "outputAsset": "Eth",
-        "refundParams": {
-          "minPrice": 6616846606368726564647178815965546002365481543n,
-          "refundAddress": "3yKDHJgzS2GbZB9qruoadRYtq8597HZifnRju7fHpdRC",
-          "retryDuration": 100,
-        },
-      }
-    `);
-  });
-
-  it('gets the vault swap data for native swaps (to BTC)', async () => {
-    mockFetchWithResponses([swapNativeToBtcDevnet]);
-
-    const data = await findVaultSwapData(
-      'https://solana.rpc',
-      '3fG2FkvUD3eFdpja9XBUsSa2stgENzZWKWqXZjfBEdBEnVE498kTXDaPFdRJnrwoBBp64wuoGKpkqNCnHhQRi8N1',
-    );
-
-    expect(data).toMatchInlineSnapshot(`
-      {
-        "affiliateFees": [],
-        "amount": 1500000000n,
-        "brokerFee": {
-          "account": "cFMTNSQQVfBo2HqtekvhLPfZY764kuJDVFG1EvnnDGYxc3LRW",
-          "commissionBps": 0,
-        },
-        "ccmDepositMetadata": null,
-        "dcaParams": null,
-        "depositChainBlockHeight": 365506144,
-        "destinationAddress": "tb1pdz3akc5wa2gr69v3x87tfg0ka597dxqvfl6zhqx4y202y63cgw0q3rgpm6",
-        "inputAsset": "Sol",
-        "maxBoostFee": 0,
-        "outputAsset": "Btc",
-        "refundParams": {
-          "minPrice": 147327292452621833387248816535228638n,
-          "refundAddress": "3yKDHJgzS2GbZB9qruoadRYtq8597HZifnRju7fHpdRC",
-          "retryDuration": 100,
-        },
-      }
-    `);
-  });
-
-  it('gets the vault swap data for native swaps (to DOT)', async () => {
-    mockFetchWithResponses([swapNativeToDotDevnet]);
-
-    const data = await findVaultSwapData(
-      'https://solana.rpc',
-      '3fG2FkvUD3eFdpja9XBUsSa2stgENzZWKWqXZjfBEdBEnVE498kTXDaPFdRJnrwoBBp64wuoGKpkqNCnHhQRi8N1',
-    );
-
-    expect(data).toMatchInlineSnapshot(`
-      {
-        "affiliateFees": [],
-        "amount": 1500000000n,
-        "brokerFee": {
-          "account": "cFMTNSQQVfBo2HqtekvhLPfZY764kuJDVFG1EvnnDGYxc3LRW",
-          "commissionBps": 0,
-        },
-        "ccmDepositMetadata": null,
-        "dcaParams": {
-          "chunkInterval": 10,
-          "numberOfChunks": 2,
-        },
-        "depositChainBlockHeight": 365507313,
-        "destinationAddress": "1BzDB5n2rfSJwvuCW9deKY9XnUyys8Gy44SoX8tRNDCFBhx",
-        "inputAsset": "Sol",
-        "maxBoostFee": 0,
-        "outputAsset": "Dot",
-        "refundParams": {
-          "minPrice": 53139857619480484022967797759999261018420n,
-          "refundAddress": "3yKDHJgzS2GbZB9qruoadRYtq8597HZifnRju7fHpdRC",
-          "retryDuration": 100,
-        },
-      }
-    `);
-  });
-
   it('gets the vault swap data for token swaps', async () => {
     mockFetchWithResponses([swapTokenDevnet]);
 
@@ -593,4 +401,98 @@ describe(findVaultSwapData, () => {
 
     expect(data).toBeNull();
   });
+
+  const address1 = '12MYcNumSQCn81yKRfrk5P5ThM5ivkLiZda979hhKJDR';
+  const address2 = '2BcYzxGN9CeSNo4dF61533xS3ytgwJxRyFYMoNSoZjUp';
+  const ccmAdditionalData: SolanaCcmAdditionalData = {
+    additionalAccounts: [{ pubkey: address1, isWritable: true }],
+    cfReceiver: { pubkey: address2, isWritable: false },
+    fallbackAddress: address2,
+  };
+
+  const assetData = {
+    Eth: {
+      destinationAddress: hexToBytes('0xa56a6be23b6cf39d9448ff6e897c29c41c8fbdff'),
+      brokerCommission: 30,
+      amount: 1e9,
+      retryDurationBlocks: 100,
+      refundAddress: address1,
+      ccmParameters: { message: '0xcafebabe', gasAmount: 420 },
+      ccmAdditionalData,
+    },
+    ArbEth: {
+      destinationAddress: hexToBytes('0xa56a6be23b6cf39d9448ff6e897c29c41c8fbdff'),
+      dcaParams: { numberOfChunks: 1, chunkIntervalBlocks: 2 },
+      brokerCommission: 15,
+      amount: 0.1e9,
+      retryDurationBlocks: 90,
+      refundAddress: address2,
+      ccmParameters: { message: '0xcafebabe', gasAmount: 420 },
+    },
+    Sol: {
+      destinationAddress: base58.decode('A8dScaeGChTgzvok95uVAxd44LRkq5ckcpppNVQwkLQb'),
+      dcaParams: { numberOfChunks: 20, chunkIntervalBlocks: 100 },
+      brokerCommission: 10,
+      amount: 0.01e9,
+      retryDurationBlocks: 80,
+    },
+    Dot: {
+      destinationAddress: ss58.decode('167ZvRqc7V6HrEUSvtV8c3JRUtPjJhHXUpAwhmPktAGj1uzq').data,
+      brokerCommission: 0,
+      amount: 0.001e9,
+      retryDurationBlocks: 69,
+      affiliateFees: [{ account: 1, commissionBps: 10 }],
+    },
+    Btc: {
+      destinationAddress: new TextEncoder().encode('tb1qhjurnfz4qah4rg7ntue6x287ehdvded20rj9vh'),
+      dcaParams: { numberOfChunks: 1, chunkIntervalBlocks: 2 },
+      brokerCommission: 5,
+      amount: 0.0001e9,
+      retryDurationBlocks: 50,
+      affiliateFees: [{ account: 2, commissionBps: 20 }],
+      brokerAccount: 'cFLre1qinRDSoxnQ4sFEXRde58jkmkVMX7B2NFGkgZJ9pQLqF',
+    },
+  } as const satisfies Partial<
+    Record<ChainflipAsset, Omit<Parameters<typeof swapNative>[0], 'destinationAsset'>>
+  >;
+
+  it.each(Object.keys(assetData) as (keyof typeof assetData)[])(
+    'handles swap native for %s on devnet',
+    async (asset) => {
+      mockFetchWithResponses([
+        swapNative({
+          ...assetData[asset],
+          destinationAsset: asset,
+        } as Parameters<typeof swapNative>[0]),
+      ]);
+
+      const data = await findVaultSwapData(
+        'https://solana.rpc',
+        '2W194usaXnNPJkxAd8e9t6s1S6EBgQqDxSEmkU6pKtUibErm6FS4BLUa49voJgdz9YEdBeycFt56oFBWUFy7byik',
+      );
+
+      expect(data).toMatchSnapshot();
+    },
+  );
+
+  it.each(Object.keys(assetData) as (keyof typeof assetData)[])(
+    'handles swap native for %s on mainnet',
+    async (asset) => {
+      const tx = swapNative({
+        ...assetData[asset],
+        destinationAsset: asset,
+      } as Parameters<typeof swapNative>[0]);
+
+      tx.result.transaction.message.instructions[0].programId = mainnet.address;
+
+      mockFetchWithResponses([tx]);
+
+      const data = await findVaultSwapData(
+        'https://solana.rpc',
+        '2W194usaXnNPJkxAd8e9t6s1S6EBgQqDxSEmkU6pKtUibErm6FS4BLUa49voJgdz9YEdBeycFt56oFBWUFy7byik',
+      );
+
+      expect(data).toMatchSnapshot();
+    },
+  );
 });
