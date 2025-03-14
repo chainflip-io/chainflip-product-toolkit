@@ -1,0 +1,317 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`findVaultSwapData > handles swap native for ArbEth on devnet 1`] = `
+{
+  "affiliateFees": [],
+  "amount": 100000000n,
+  "brokerFee": {
+    "account": "cFMTNSQQVfBo2HqtekvhLPfZY764kuJDVFG1EvnnDGYxc3LRW",
+    "commissionBps": 15,
+  },
+  "ccmDepositMetadata": {
+    "ccmAdditionalData": null,
+    "channelMetadata": {
+      "gasBudget": "0x1a4",
+      "message": "0xcafebabe",
+    },
+  },
+  "dcaParams": {
+    "chunkInterval": 2,
+    "numberOfChunks": 1,
+  },
+  "depositChainBlockHeight": 365289019,
+  "destinationAddress": "0xa56a6be23b6cf39d9448ff6e897c29c41c8fbdff",
+  "inputAsset": "Sol",
+  "maxBoostFee": 0,
+  "outputAsset": "ArbEth",
+  "refundParams": {
+    "minPrice": 0n,
+    "refundAddress": "2BcYzxGN9CeSNo4dF61533xS3ytgwJxRyFYMoNSoZjUp",
+    "retryDuration": 90,
+  },
+}
+`;
+
+exports[`findVaultSwapData > handles swap native for ArbEth on mainnet 1`] = `
+{
+  "affiliateFees": [],
+  "amount": 100000000n,
+  "brokerFee": {
+    "account": "cFMTNSQQVfBo2HqtekvhLPfZY764kuJDVFG1EvnnDGYxc3LRW",
+    "commissionBps": 15,
+  },
+  "ccmDepositMetadata": {
+    "ccmAdditionalData": null,
+    "channelMetadata": {
+      "gasBudget": "0x1a4",
+      "message": "0xcafebabe",
+    },
+  },
+  "dcaParams": {
+    "chunkInterval": 2,
+    "numberOfChunks": 1,
+  },
+  "depositChainBlockHeight": 365289019,
+  "destinationAddress": "0xa56a6be23b6cf39d9448ff6e897c29c41c8fbdff",
+  "inputAsset": "Sol",
+  "maxBoostFee": 0,
+  "outputAsset": "ArbEth",
+  "refundParams": {
+    "minPrice": 0n,
+    "refundAddress": "2BcYzxGN9CeSNo4dF61533xS3ytgwJxRyFYMoNSoZjUp",
+    "retryDuration": 90,
+  },
+}
+`;
+
+exports[`findVaultSwapData > handles swap native for Btc on devnet 1`] = `
+{
+  "affiliateFees": [
+    {
+      "accountIndex": 2,
+      "commissionBps": 20,
+    },
+  ],
+  "amount": 100000n,
+  "brokerFee": {
+    "account": "cFLre1qinRDSoxnQ4sFEXRde58jkmkVMX7B2NFGkgZJ9pQLqF",
+    "commissionBps": 5,
+  },
+  "ccmDepositMetadata": null,
+  "dcaParams": {
+    "chunkInterval": 2,
+    "numberOfChunks": 1,
+  },
+  "depositChainBlockHeight": 365289019,
+  "destinationAddress": "tb1qhjurnfz4qah4rg7ntue6x287ehdvded20rj9vh",
+  "inputAsset": "Sol",
+  "maxBoostFee": 0,
+  "outputAsset": "Btc",
+  "refundParams": {
+    "minPrice": 0n,
+    "refundAddress": "3yKDHJgzS2GbZB9qruoadRYtq8597HZifnRju7fHpdRC",
+    "retryDuration": 50,
+  },
+}
+`;
+
+exports[`findVaultSwapData > handles swap native for Btc on mainnet 1`] = `
+{
+  "affiliateFees": [
+    {
+      "accountIndex": 2,
+      "commissionBps": 20,
+    },
+  ],
+  "amount": 100000n,
+  "brokerFee": {
+    "account": "cFLre1qinRDSoxnQ4sFEXRde58jkmkVMX7B2NFGkgZJ9pQLqF",
+    "commissionBps": 5,
+  },
+  "ccmDepositMetadata": null,
+  "dcaParams": {
+    "chunkInterval": 2,
+    "numberOfChunks": 1,
+  },
+  "depositChainBlockHeight": 365289019,
+  "destinationAddress": "tb1qhjurnfz4qah4rg7ntue6x287ehdvded20rj9vh",
+  "inputAsset": "Sol",
+  "maxBoostFee": 0,
+  "outputAsset": "Btc",
+  "refundParams": {
+    "minPrice": 0n,
+    "refundAddress": "3yKDHJgzS2GbZB9qruoadRYtq8597HZifnRju7fHpdRC",
+    "retryDuration": 50,
+  },
+}
+`;
+
+exports[`findVaultSwapData > handles swap native for Dot on devnet 1`] = `
+{
+  "affiliateFees": [
+    {
+      "accountIndex": 1,
+      "commissionBps": 10,
+    },
+  ],
+  "amount": 1000000n,
+  "brokerFee": {
+    "account": "cFMTNSQQVfBo2HqtekvhLPfZY764kuJDVFG1EvnnDGYxc3LRW",
+    "commissionBps": 0,
+  },
+  "ccmDepositMetadata": null,
+  "dcaParams": null,
+  "depositChainBlockHeight": 365289019,
+  "destinationAddress": "167ZvRqc7V6HrEUSvtV8c3JRUtPjJhHXUpAwhmPktAGj1uzq",
+  "inputAsset": "Sol",
+  "maxBoostFee": 0,
+  "outputAsset": "Dot",
+  "refundParams": {
+    "minPrice": 0n,
+    "refundAddress": "3yKDHJgzS2GbZB9qruoadRYtq8597HZifnRju7fHpdRC",
+    "retryDuration": 69,
+  },
+}
+`;
+
+exports[`findVaultSwapData > handles swap native for Dot on mainnet 1`] = `
+{
+  "affiliateFees": [
+    {
+      "accountIndex": 1,
+      "commissionBps": 10,
+    },
+  ],
+  "amount": 1000000n,
+  "brokerFee": {
+    "account": "cFMTNSQQVfBo2HqtekvhLPfZY764kuJDVFG1EvnnDGYxc3LRW",
+    "commissionBps": 0,
+  },
+  "ccmDepositMetadata": null,
+  "dcaParams": null,
+  "depositChainBlockHeight": 365289019,
+  "destinationAddress": "167ZvRqc7V6HrEUSvtV8c3JRUtPjJhHXUpAwhmPktAGj1uzq",
+  "inputAsset": "Sol",
+  "maxBoostFee": 0,
+  "outputAsset": "Dot",
+  "refundParams": {
+    "minPrice": 0n,
+    "refundAddress": "3yKDHJgzS2GbZB9qruoadRYtq8597HZifnRju7fHpdRC",
+    "retryDuration": 69,
+  },
+}
+`;
+
+exports[`findVaultSwapData > handles swap native for Eth on devnet 1`] = `
+{
+  "affiliateFees": [],
+  "amount": 1000000000n,
+  "brokerFee": {
+    "account": "cFMTNSQQVfBo2HqtekvhLPfZY764kuJDVFG1EvnnDGYxc3LRW",
+    "commissionBps": 30,
+  },
+  "ccmDepositMetadata": {
+    "ccmAdditionalData": {
+      "additionalAccounts": [
+        {
+          "isWritable": true,
+          "pubkey": "12MYcNumSQCn81yKRfrk5P5ThM5ivkLiZda979hhKJDR",
+        },
+      ],
+      "cfReceiver": {
+        "isWritable": false,
+        "pubkey": "2BcYzxGN9CeSNo4dF61533xS3ytgwJxRyFYMoNSoZjUp",
+      },
+      "fallbackAddress": "2BcYzxGN9CeSNo4dF61533xS3ytgwJxRyFYMoNSoZjUp",
+    },
+    "channelMetadata": {
+      "gasBudget": "0x1a4",
+      "message": "0xcafebabe",
+    },
+  },
+  "dcaParams": null,
+  "depositChainBlockHeight": 365289019,
+  "destinationAddress": "0xa56a6be23b6cf39d9448ff6e897c29c41c8fbdff",
+  "inputAsset": "Sol",
+  "maxBoostFee": 0,
+  "outputAsset": "Eth",
+  "refundParams": {
+    "minPrice": 0n,
+    "refundAddress": "12MYcNumSQCn81yKRfrk5P5ThM5ivkLiZda979hhKJDR",
+    "retryDuration": 100,
+  },
+}
+`;
+
+exports[`findVaultSwapData > handles swap native for Eth on mainnet 1`] = `
+{
+  "affiliateFees": [],
+  "amount": 1000000000n,
+  "brokerFee": {
+    "account": "cFMTNSQQVfBo2HqtekvhLPfZY764kuJDVFG1EvnnDGYxc3LRW",
+    "commissionBps": 30,
+  },
+  "ccmDepositMetadata": {
+    "ccmAdditionalData": {
+      "additionalAccounts": [
+        {
+          "isWritable": true,
+          "pubkey": "12MYcNumSQCn81yKRfrk5P5ThM5ivkLiZda979hhKJDR",
+        },
+      ],
+      "cfReceiver": {
+        "isWritable": false,
+        "pubkey": "2BcYzxGN9CeSNo4dF61533xS3ytgwJxRyFYMoNSoZjUp",
+      },
+      "fallbackAddress": "2BcYzxGN9CeSNo4dF61533xS3ytgwJxRyFYMoNSoZjUp",
+    },
+    "channelMetadata": {
+      "gasBudget": "0x1a4",
+      "message": "0xcafebabe",
+    },
+  },
+  "dcaParams": null,
+  "depositChainBlockHeight": 365289019,
+  "destinationAddress": "0xa56a6be23b6cf39d9448ff6e897c29c41c8fbdff",
+  "inputAsset": "Sol",
+  "maxBoostFee": 0,
+  "outputAsset": "Eth",
+  "refundParams": {
+    "minPrice": 0n,
+    "refundAddress": "12MYcNumSQCn81yKRfrk5P5ThM5ivkLiZda979hhKJDR",
+    "retryDuration": 100,
+  },
+}
+`;
+
+exports[`findVaultSwapData > handles swap native for Sol on devnet 1`] = `
+{
+  "affiliateFees": [],
+  "amount": 10000000n,
+  "brokerFee": {
+    "account": "cFMTNSQQVfBo2HqtekvhLPfZY764kuJDVFG1EvnnDGYxc3LRW",
+    "commissionBps": 10,
+  },
+  "ccmDepositMetadata": null,
+  "dcaParams": {
+    "chunkInterval": 100,
+    "numberOfChunks": 20,
+  },
+  "depositChainBlockHeight": 365289019,
+  "destinationAddress": "A8dScaeGChTgzvok95uVAxd44LRkq5ckcpppNVQwkLQb",
+  "inputAsset": "Sol",
+  "maxBoostFee": 0,
+  "outputAsset": "Sol",
+  "refundParams": {
+    "minPrice": 0n,
+    "refundAddress": "3yKDHJgzS2GbZB9qruoadRYtq8597HZifnRju7fHpdRC",
+    "retryDuration": 80,
+  },
+}
+`;
+
+exports[`findVaultSwapData > handles swap native for Sol on mainnet 1`] = `
+{
+  "affiliateFees": [],
+  "amount": 10000000n,
+  "brokerFee": {
+    "account": "cFMTNSQQVfBo2HqtekvhLPfZY764kuJDVFG1EvnnDGYxc3LRW",
+    "commissionBps": 10,
+  },
+  "ccmDepositMetadata": null,
+  "dcaParams": {
+    "chunkInterval": 100,
+    "numberOfChunks": 20,
+  },
+  "depositChainBlockHeight": 365289019,
+  "destinationAddress": "A8dScaeGChTgzvok95uVAxd44LRkq5ckcpppNVQwkLQb",
+  "inputAsset": "Sol",
+  "maxBoostFee": 0,
+  "outputAsset": "Sol",
+  "refundParams": {
+    "minPrice": 0n,
+    "refundAddress": "3yKDHJgzS2GbZB9qruoadRYtq8597HZifnRju7fHpdRC",
+    "retryDuration": 80,
+  },
+}
+`;

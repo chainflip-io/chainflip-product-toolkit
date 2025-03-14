@@ -73,6 +73,12 @@ const addresses = {
   Btc: new TextEncoder().encode('tb1qhjurnfz4qah4rg7ntue6x287ehdvded20rj9vh'),
 };
 
+type Mutable<T> = T extends readonly (infer U)[]
+  ? Mutable<U>[]
+  : T extends Record<string | number | symbol, any>
+    ? { -readonly [K in keyof T]: Mutable<T[K]> }
+    : T;
+
 describe(findVaultSwapData, () => {
   const address1 = 'tb1qvwmuc3pjhwju287sjs5vg7467t2jlymn35lwsj';
   const address2 = 'tb1pdz3akc5wa2gr69v3x87tfg0ka597dxqvfl6zhqx4y202y63cgw0q3rgpm6';
@@ -81,8 +87,8 @@ describe(findVaultSwapData, () => {
     ['Eth', 1, 2, 30, 5, 1, 100, address1, undefined],
     ['ArbEth', 1, 2, 15, 10, 0.1, 90, address2, undefined],
     ['Sol', 20, 100, 10, 15, 0.01, 80, undefined, undefined],
-    ['Dot', 1, 2, 0, 0, 0.001, 69, undefined, [{ accountIndex: 1, commissionBps: 10 }] as any[]],
-    ['Btc', 1, 2, 5, 20, 0.0001, 50, undefined, [{ accountIndex: 2, commissionBps: 20 }] as any[]],
+    ['Dot', 1, 2, 0, 0, 0.001, 69, undefined, [{ accountIndex: 1, commissionBps: 10 }]],
+    ['Btc', 1, 2, 5, 20, 0.0001, 50, undefined, [{ accountIndex: 2, commissionBps: 20 }]],
   ] as const)(
     'gets the vault swap data (%s)',
     async (
@@ -104,7 +110,7 @@ describe(findVaultSwapData, () => {
         boostFee,
         brokerFee,
         retryDuration,
-        affiliates,
+        affiliates: affiliates as Mutable<typeof affiliates>,
       });
 
       mockFetch([tx({ nulldata, depositAmount, refundAddress }), block]);
