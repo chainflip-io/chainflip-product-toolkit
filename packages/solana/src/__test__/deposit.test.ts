@@ -405,7 +405,7 @@ describe(findVaultSwapData, () => {
     fallbackAddress: address2,
   };
 
-  const assetData = {
+  const swapData = {
     Eth: {
       destinationAddress: hexToBytes('0xa56a6be23b6cf39d9448ff6e897c29c41c8fbdff'),
       brokerCommission: 30,
@@ -451,12 +451,12 @@ describe(findVaultSwapData, () => {
     Record<ChainflipAsset, Omit<Parameters<typeof swapNative>[0], 'destinationAsset'>>
   >;
 
-  it.each(Object.keys(assetData) as (keyof typeof assetData)[])(
+  it.each(Object.keys(swapData) as (keyof typeof swapData)[])(
     'handles swap native for %s on devnet',
     async (asset) => {
       mockFetchWithResponses([
         swapNative({
-          ...assetData[asset],
+          ...swapData[asset],
           destinationAsset: asset,
         } as Parameters<typeof swapNative>[0]),
       ]);
@@ -470,11 +470,11 @@ describe(findVaultSwapData, () => {
     },
   );
 
-  it.each(Object.keys(assetData) as (keyof typeof assetData)[])(
+  it.each(Object.keys(swapData) as (keyof typeof swapData)[])(
     'handles swap native for %s on mainnet',
     async (asset) => {
       const tx = swapNative({
-        ...assetData[asset],
+        ...swapData[asset],
         destinationAsset: asset,
       } as Parameters<typeof swapNative>[0]);
 
