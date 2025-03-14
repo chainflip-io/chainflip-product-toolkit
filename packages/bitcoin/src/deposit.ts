@@ -86,12 +86,9 @@ export const findVaultSwapData = async (
     ccmDepositMetadata: null,
     maxBoostFee: data.boostFee,
     dcaParams:
-      data.numberOfChunks > 0 && data.chunkInterval > 0
-        ? {
-            chunkInterval: data.chunkInterval,
-            numberOfChunks: data.numberOfChunks,
-          }
-        : null,
+      data.numberOfChunks === 1 && data.chunkInterval === 2
+        ? null
+        : { chunkInterval: data.chunkInterval, numberOfChunks: data.numberOfChunks },
     depositChainBlockHeight: block && block.height,
   };
 };
