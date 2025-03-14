@@ -20,11 +20,6 @@ import simple from './fixtures/simple.json';
 import solusdc from './fixtures/solusdc.json';
 import solusdc2 from './fixtures/solusdc2.json';
 import { swapNative } from './fixtures/swapNative';
-// import swapNativeToArbDevnet from './fixtures/swapNativeToArbDevnet.json';
-// import swapNativeToBtcDevnet from './fixtures/swapNativeToBtcDevnet.json';
-// import swapNativeToDotDevnet from './fixtures/swapNativeToDotDevnet.json';
-// import swapNativeToEthAdditionalParamsDevnet from './fixtures/swapNativeToEthAdditionalParamsDevnet.json';
-// import swapNativeToEthDevnet from './fixtures/swapNativeToEthDevnet.json';
 import swapTokenDevnet from './fixtures/swapTokenDevnet.json';
 
 const mockFetchWithResponses = (responses: { jsonrpc: string; result: unknown; id: string }[]) =>
