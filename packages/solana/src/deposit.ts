@@ -284,7 +284,10 @@ export const findVaultSwapData = async (
 
   const connection = getSolanaConnection(rpcUrl);
 
-  const tx = await connection.getParsedTransaction(signature);
+  const tx = await connection.getParsedTransaction(signature, {
+    commitment: 'confirmed',
+    maxSupportedTransactionVersion: 0,
+  });
 
   if (!tx) return null;
 
