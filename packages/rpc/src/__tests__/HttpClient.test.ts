@@ -601,7 +601,7 @@ describe(HttpClient, () => {
   it('returns all methods', () => {
     expect(new HttpClient('http://localhost:8080').methods()).toMatchInlineSnapshot(`
       [
-        "broker_requestSwapDepositAddress",
+        "broker_request_swap_deposit_address",
         "broker_request_swap_parameter_encoding",
         "cf_account_info",
         "cf_accounts",
@@ -709,7 +709,7 @@ describe(HttpClient, () => {
             default:
               return respond(swapParameterEncodingBitcoin);
           }
-        case 'broker_requestSwapDepositAddress':
+        case 'broker_request_swap_deposit_address':
           return respond(swapDepositAddress);
         case 'cf_boost_pools_depth':
           return respond(boostPoolsDepth);
@@ -1218,7 +1218,7 @@ describe(HttpClient, () => {
     it('requests deposit addresses', async () => {
       expect(
         await client.sendRequest(
-          'broker_requestSwapDepositAddress',
+          'broker_request_swap_deposit_address',
           { asset: 'BTC', chain: 'Bitcoin' },
           { asset: 'ETH', chain: 'Ethereum' },
           '0x4567',
@@ -1226,6 +1226,11 @@ describe(HttpClient, () => {
           { gas_budget: '0x0', message: '0x0' },
           30,
           [{ account: '0x1234', bps: 0 }],
+          {
+            refund_address: '0x4838B106FCe9647Bdf1E7877BF73cE8B0BAD5f97',
+            retry_duration: 100,
+            min_price: '0x1',
+          },
         ),
       ).toMatchInlineSnapshot(`
         {
@@ -1247,7 +1252,7 @@ describe(HttpClient, () => {
           { asset: 'USDC', chain: 'Ethereum' },
         ),
         client.sendRequest(
-          'broker_requestSwapDepositAddress',
+          'broker_request_swap_deposit_address',
           { asset: 'BTC', chain: 'Bitcoin' },
           { asset: 'ETH', chain: 'Ethereum' },
           '0x4567',
@@ -1255,6 +1260,11 @@ describe(HttpClient, () => {
           { gas_budget: '0x0', message: '0x0' },
           30,
           [{ account: '0x1234', bps: 0 }],
+          {
+            refund_address: '0x4838B106FCe9647Bdf1E7877BF73cE8B0BAD5f97',
+            retry_duration: 100,
+            min_price: '0x1',
+          },
         ),
       ]);
       expect(r1).toMatchSnapshot();
@@ -1279,7 +1289,7 @@ describe(HttpClient, () => {
       );
 
       const r2 = await client.sendRequest(
-        'broker_requestSwapDepositAddress',
+        'broker_request_swap_deposit_address',
         { asset: 'BTC', chain: 'Bitcoin' },
         { asset: 'ETH', chain: 'Ethereum' },
         '0x4567',
@@ -1287,6 +1297,11 @@ describe(HttpClient, () => {
         { gas_budget: '0x0', message: '0x0' },
         30,
         [{ account: '0x1234', bps: 0 }],
+        {
+          refund_address: '0x4838B106FCe9647Bdf1E7877BF73cE8B0BAD5f97',
+          retry_duration: 100,
+          min_price: '0x1',
+        },
       );
       expect(r1).toMatchSnapshot();
 

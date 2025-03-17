@@ -99,7 +99,7 @@ type RequestSwapParameterEncodingParams = [
 ];
 
 export type RpcRequest = WithHash<{
-  broker_requestSwapDepositAddress: [
+  broker_request_swap_deposit_address: [
     sourceAsset: UncheckedAssetAndChain,
     destinationAsset: UncheckedAssetAndChain,
     destinationAddress: string,
@@ -185,7 +185,7 @@ export type RpcRequest = WithHash<{
 };
 
 export const rpcResult = {
-  broker_requestSwapDepositAddress: brokerRequestSwapDepositAddress,
+  broker_request_swap_deposit_address: brokerRequestSwapDepositAddress,
   broker_request_swap_parameter_encoding: requestSwapParameterEncoding,
   cf_request_swap_parameter_encoding: requestSwapParameterEncoding,
   cf_accounts: cfAccounts,
