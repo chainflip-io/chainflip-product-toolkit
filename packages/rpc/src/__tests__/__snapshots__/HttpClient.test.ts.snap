@@ -145,6 +145,11 @@ exports[`HttpClient > with server > gets lp total balances 1`] = `
     "ETH": 0n,
     "USDC": 0n,
   },
+  "Assethub": {
+    "DOT": 0n,
+    "USDC": 0n,
+    "USDT": 0n,
+  },
   "Bitcoin": {
     "BTC": 0n,
   },

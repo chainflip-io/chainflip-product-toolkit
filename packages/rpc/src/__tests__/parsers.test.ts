@@ -496,10 +496,62 @@ describe('parsers', () => {
                   asset: 'USDC',
                 },
               },
+              Assethub: {
+                DOT: null,
+                USDC: null,
+                USDT: null,
+              },
+            },
             Assethub: {
-              DOT: null,
+              DOT: {
+                limit_order_fee_hundredth_pips: 20,
+                range_order_fee_hundredth_pips: 20,
+                range_order_total_fees_earned: {
+                  base: '0x6ff3',
+                  quote: '0x0',
+                },
+                limit_order_total_fees_earned: {
+                  base: '0x3fb505a',
+                  quote: '0xeb53',
+                },
+                range_total_swap_inputs: {
+                  base: '0x5568199c',
+                  quote: '0x0',
+                },
+                limit_total_swap_inputs: {
+                  base: '0x309a8bce81d',
+                  quote: '0xb383d1fa',
+                },
+                quote_asset: {
+                  chain: 'Ethereum',
+                  asset: 'USDC',
+                },
+              },
               USDC: null,
-              USDT: null,
+              USDT: {
+                limit_order_fee_hundredth_pips: 5,
+                range_order_fee_hundredth_pips: 5,
+                range_order_total_fees_earned: {
+                  base: '0x18ac',
+                  quote: '0x42c17',
+                },
+                limit_order_total_fees_earned: {
+                  base: '0x19d',
+                  quote: '0xfb',
+                },
+                range_total_swap_inputs: {
+                  base: '0x4b195890',
+                  quote: '0xcbb6eea1b',
+                },
+                limit_total_swap_inputs: {
+                  base: '0x4e400a2',
+                  quote: '0x2fadcfb',
+                },
+                quote_asset: {
+                  chain: 'Ethereum',
+                  asset: 'USDC',
+                },
+              },
             },
           },
         },
