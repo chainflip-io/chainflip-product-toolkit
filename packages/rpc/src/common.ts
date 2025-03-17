@@ -107,7 +107,7 @@ export type RpcRequest = WithHash<{
     ccmMetadata?: Nullish<CcmParams>,
     boostFee?: Nullish<number>,
     affiliateFees?: Nullish<{ account: string; bps: number }[]>,
-    fillOrKillParams?: Nullish<FillOrKillParams>,
+    fillOrKillParams?: FillOrKillParams,
     dcaParams?: Nullish<DcaParams>,
   ];
   broker_request_swap_parameter_encoding: RequestSwapParameterEncodingParams;
