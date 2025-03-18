@@ -961,6 +961,8 @@ describe(HttpClient, () => {
             number_of_chunks: 10,
             chunk_interval: 2,
           },
+          undefined,
+          undefined,
           [
             {
               LimitOrder: {
@@ -1014,8 +1016,8 @@ describe(HttpClient, () => {
             chunk_interval: 2,
           },
           {
-            gas_budget: '0x',
-            message_length: 0,
+            gas_budget: 12345,
+            message_length: 321,
           },
           ['IngressDepositChannel'],
           [

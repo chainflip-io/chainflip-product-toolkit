@@ -151,7 +151,7 @@ export type RpcRequest = WithHash<{
       chunk_interval: number;
     }>,
     ccmData?: Nullish<{
-      gas_budget: HexString;
+      gas_budget: number;
       message_length: number;
     }>,
     excludeFees?: Nullish<SwapFeeType[]>,
