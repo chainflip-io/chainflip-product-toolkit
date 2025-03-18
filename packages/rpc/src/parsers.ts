@@ -10,7 +10,7 @@ export const u256 = hexString.transform((value) => BigInt(value));
 
 export const numberOrHex = z.union([z.number().transform((n) => BigInt(n)), u256]);
 
-const chainAssetMapFactory = <Z extends z.ZodTypeAny>(parser: Z, _defaultValue: z.input<Z>) =>
+const chainAssetMapFactory = <Z extends z.ZodTypeAny>(parser: Z, defaultValue: z.input<Z>) =>
   z.object({
     Bitcoin: z.object({ BTC: parser }),
     Ethereum: z.object({ ETH: parser, USDC: parser, FLIP: parser, USDT: parser }),
@@ -18,13 +18,13 @@ const chainAssetMapFactory = <Z extends z.ZodTypeAny>(parser: Z, _defaultValue: 
     Arbitrum: z.object({ ETH: parser, USDC: parser }),
     Solana: z.object({ SOL: parser, USDC: parser }),
     Assethub: z.object({
-      DOT: parser.default(_defaultValue),
-      USDC: parser.default(_defaultValue),
-      USDT: parser.default(_defaultValue),
+      DOT: parser.default(defaultValue),
+      USDC: parser.default(defaultValue),
+      USDT: parser.default(defaultValue),
     }),
   });
 
-const chainBaseAssetMapFactory = <Z extends z.ZodTypeAny>(parser: Z, _defaultValue: z.input<Z>) =>
+const chainBaseAssetMapFactory = <Z extends z.ZodTypeAny>(parser: Z, defaultValue: z.input<Z>) =>
   z.object({
     Bitcoin: z.object({ BTC: parser }),
     Ethereum: z.object({ ETH: parser, FLIP: parser, USDT: parser }),
@@ -32,20 +32,20 @@ const chainBaseAssetMapFactory = <Z extends z.ZodTypeAny>(parser: Z, _defaultVal
     Arbitrum: z.object({ ETH: parser, USDC: parser }),
     Solana: z.object({ SOL: parser, USDC: parser }),
     Assethub: z.object({
-      DOT: parser.default(_defaultValue),
-      USDC: parser.default(_defaultValue),
-      USDT: parser.default(_defaultValue),
+      DOT: parser.default(defaultValue),
+      USDC: parser.default(defaultValue),
+      USDT: parser.default(defaultValue),
     }),
   });
 
-const chainMapFactory = <Z extends z.ZodTypeAny>(parser: Z, _defaultValue: z.input<Z>) =>
+const chainMapFactory = <Z extends z.ZodTypeAny>(parser: Z, defaultValue: z.input<Z>) =>
   z.object({
     Bitcoin: parser,
     Ethereum: parser,
     Polkadot: parser,
     Arbitrum: parser,
     Solana: parser,
-    Assethub: parser.default(_defaultValue),
+    Assethub: parser.default(defaultValue),
   });
 
 const rpcAssetSchema = z.union([

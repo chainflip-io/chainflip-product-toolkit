@@ -232,6 +232,7 @@ export const chainContractId: Record<ChainflipChain, number> = {
   Bitcoin: 3,
   Arbitrum: 4,
   Solana: 5,
+  Assethub: 6,
 };
 
 export const assetContractId: Record<ChainflipAsset, number> = {
@@ -245,4 +246,7 @@ export const assetContractId: Record<ChainflipAsset, number> = {
   ArbUsdc: 7,
   Sol: 9,
   SolUsdc: 10,
+  HubDot: 11,
+  HubUsdt: 12,
+  HubUsdc: 13,
 };
