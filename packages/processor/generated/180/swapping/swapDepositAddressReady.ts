@@ -23,6 +23,6 @@ export const swappingSwapDepositAddressReady = z.object({
   boostFee: z.number(),
   channelOpeningFee: numberOrHex,
   affiliateFees: z.array(cfPrimitivesBeneficiaryAccountId32),
-  refundParameters: cfChainsChannelRefundParametersEncodedAddress.nullish(),
+  refundParameters: cfChainsChannelRefundParametersEncodedAddress,
   dcaParameters: cfPrimitivesDcaParameters.nullish(),
 });

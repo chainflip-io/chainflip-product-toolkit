@@ -306,7 +306,7 @@ export const palletCfEthereumIngressEgressVaultDepositWitness = z.object({
   txId: hexString,
   brokerFee: cfPrimitivesBeneficiaryAccountId32.nullish(),
   affiliateFees: z.array(cfPrimitivesBeneficiaryAffiliateShortId),
-  refundParams: cfChainsChannelRefundParametersH160.nullish(),
+  refundParams: cfChainsChannelRefundParametersH160,
   dcaParams: cfPrimitivesDcaParameters.nullish(),
   boostFee: z.number(),
 });
@@ -393,7 +393,7 @@ export const palletCfPolkadotIngressEgressVaultDepositWitness = z.object({
   txId: cfPrimitivesTxId,
   brokerFee: cfPrimitivesBeneficiaryAccountId32.nullish(),
   affiliateFees: z.array(cfPrimitivesBeneficiaryAffiliateShortId),
-  refundParams: cfChainsChannelRefundParametersPolkadotAccountId.nullish(),
+  refundParams: cfChainsChannelRefundParametersPolkadotAccountId,
   dcaParams: cfPrimitivesDcaParameters.nullish(),
   boostFee: z.number(),
 });
@@ -489,7 +489,7 @@ export const palletCfBitcoinIngressEgressVaultDepositWitness = z.object({
   txId: hexString,
   brokerFee: cfPrimitivesBeneficiaryAccountId32.nullish(),
   affiliateFees: z.array(cfPrimitivesBeneficiaryAffiliateShortId),
-  refundParams: cfChainsChannelRefundParametersScriptPubkey.nullish(),
+  refundParams: cfChainsChannelRefundParametersScriptPubkey,
   dcaParams: cfPrimitivesDcaParameters.nullish(),
   boostFee: z.number(),
 });
@@ -567,7 +567,7 @@ export const palletCfArbitrumIngressEgressVaultDepositWitness = z.object({
   txId: hexString,
   brokerFee: cfPrimitivesBeneficiaryAccountId32.nullish(),
   affiliateFees: z.array(cfPrimitivesBeneficiaryAffiliateShortId),
-  refundParams: cfChainsChannelRefundParametersH160.nullish(),
+  refundParams: cfChainsChannelRefundParametersH160,
   dcaParams: cfPrimitivesDcaParameters.nullish(),
   boostFee: z.number(),
 });
@@ -663,7 +663,7 @@ export const palletCfSolanaIngressEgressVaultDepositWitness = z.object({
   txId: z.tuple([hexString, numberOrHex]),
   brokerFee: cfPrimitivesBeneficiaryAccountId32.nullish(),
   affiliateFees: z.array(cfPrimitivesBeneficiaryAffiliateShortId),
-  refundParams: cfChainsChannelRefundParametersAddress.nullish(),
+  refundParams: cfChainsChannelRefundParametersAddress,
   dcaParams: cfPrimitivesDcaParameters.nullish(),
   boostFee: z.number(),
 });
