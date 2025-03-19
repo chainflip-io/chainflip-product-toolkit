@@ -80,6 +80,10 @@ export const makeRequest = async <T extends keyof RpcRequest & keyof typeof resp
     }),
   });
 
+  if (res.status !== 200) {
+    throw new Error(`HTTP error [${res.status}]: ${(await res.text()) || res.statusText}`);
+  }
+
   const json: unknown = await res.json();
 
   const result = rpcResponse.parse(json);

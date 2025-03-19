@@ -127,20 +127,17 @@ describe(findVaultSwapData, () => {
   );
 
   it('returns null if the tx is not found', async () => {
-    mockFetch(
-      [
-        {
-          result: null,
-          error: {
-            code: -5,
-            message:
-              'No such mempool or blockchain transaction. Use gettransaction for wallet transactions.',
-          },
-          id: 1,
+    mockFetch([
+      {
+        result: null,
+        error: {
+          code: -5,
+          message:
+            'No such mempool or blockchain transaction. Use gettransaction for wallet transactions.',
         },
-      ],
-      500,
-    );
+        id: 1,
+      },
+    ]);
 
     const data = await findVaultSwapData(
       'https://bitcoin.rpc',
@@ -178,8 +175,8 @@ describe(findVaultSwapData, () => {
 
   it('throws rpc errors', async () => {
     vi.spyOn(globalThis, 'fetch').mockResolvedValueOnce({
-      ok: false,
-      status: 500,
+      ok: true,
+      status: 200,
       json: () =>
         Promise.resolve({
           result: null,
