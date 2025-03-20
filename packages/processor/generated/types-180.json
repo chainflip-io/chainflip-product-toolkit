@@ -9070,76 +9070,73 @@
           }
         },
         "refundParameters": {
-          "type": "option",
-          "value": {
-            "type": "struct",
-            "name": "CfChainsChannelRefundParametersEncodedAddress",
-            "fields": {
-              "retryDuration": {
-                "type": "primitive",
-                "name": "u32"
-              },
-              "refundAddress": {
-                "type": "enum",
-                "name": "cfChainsAddressEncodedAddress",
-                "values": [
-                  {
-                    "name": "Eth",
-                    "value": {
-                      "type": "array",
-                      "value": {
-                        "type": "primitive",
-                        "name": "u8"
-                      },
-                      "length": 20
-                    }
-                  },
-                  {
-                    "name": "Dot",
-                    "value": {
-                      "type": "array",
-                      "value": {
-                        "type": "primitive",
-                        "name": "u8"
-                      },
-                      "length": 32
-                    }
-                  },
-                  {
-                    "name": "Btc",
+          "type": "struct",
+          "name": "CfChainsChannelRefundParametersEncodedAddress",
+          "fields": {
+            "retryDuration": {
+              "type": "primitive",
+              "name": "u32"
+            },
+            "refundAddress": {
+              "type": "enum",
+              "name": "cfChainsAddressEncodedAddress",
+              "values": [
+                {
+                  "name": "Eth",
+                  "value": {
+                    "type": "array",
                     "value": {
                       "type": "primitive",
-                      "name": "Bytes"
-                    }
-                  },
-                  {
-                    "name": "Arb",
-                    "value": {
-                      "type": "array",
-                      "value": {
-                        "type": "primitive",
-                        "name": "u8"
-                      },
-                      "length": 20
-                    }
-                  },
-                  {
-                    "name": "Sol",
-                    "value": {
-                      "type": "array",
-                      "value": {
-                        "type": "primitive",
-                        "name": "u8"
-                      },
-                      "length": 32
-                    }
+                      "name": "u8"
+                    },
+                    "length": 20
                   }
-                ]
-              },
-              "minPrice": {
-                "type": "primitive",
-                "name": "U256"
-              }
+                },
+                {
+                  "name": "Dot",
+                  "value": {
+                    "type": "array",
+                    "value": {
+                      "type": "primitive",
+                      "name": "u8"
+                    },
+                    "length": 32
+                  }
+                },
+                {
+                  "name": "Btc",
+                  "value": {
+                    "type": "primitive",
+                    "name": "Bytes"
+                  }
+                },
+                {
+                  "name": "Arb",
+                  "value": {
+                    "type": "array",
+                    "value": {
+                      "type": "primitive",
+                      "name": "u8"
+                    },
+                    "length": 20
+                  }
+                },
+                {
+                  "name": "Sol",
+                  "value": {
+                    "type": "array",
+                    "value": {
+                      "type": "primitive",
+                      "name": "u8"
+                    },
+                    "length": 32
+                  }
+                }
+              ]
+            },
+            "minPrice": {
+              "type": "primitive",
+              "name": "U256"
             }
           }
         },
@@ -13666,23 +13663,20 @@
                         }
                       },
                       "refundParams": {
-                        "type": "option",
-                        "value": {
-                          "type": "struct",
-                          "name": "CfChainsChannelRefundParametersH160",
-                          "fields": {
-                            "retryDuration": {
-                              "type": "primitive",
-                              "name": "u32"
-                            },
-                            "refundAddress": {
-                              "type": "primitive",
-                              "name": "H160"
-                            },
-                            "minPrice": {
-                              "type": "primitive",
-                              "name": "U256"
-                            }
+                        "type": "struct",
+                        "name": "CfChainsChannelRefundParametersH160",
+                        "fields": {
+                          "retryDuration": {
+                            "type": "primitive",
+                            "name": "u32"
+                          },
+                          "refundAddress": {
+                            "type": "primitive",
+                            "name": "H160"
+                          },
+                          "minPrice": {
+                            "type": "primitive",
+                            "name": "U256"
                           }
                         }
                       },
@@ -14862,6 +14856,15 @@
         "deductionPercent": {
           "type": "primitive",
           "name": "Percent"
+        }
+      }
+    },
+    "WitnessSafetyMarginSet": {
+      "type": "struct",
+      "fields": {
+        "margin": {
+          "type": "primitive",
+          "name": "u64"
         }
       }
     }
@@ -16456,27 +16459,24 @@
                         }
                       },
                       "refundParams": {
-                        "type": "option",
-                        "value": {
-                          "type": "struct",
-                          "name": "CfChainsChannelRefundParametersPolkadotAccountId",
-                          "fields": {
-                            "retryDuration": {
+                        "type": "struct",
+                        "name": "CfChainsChannelRefundParametersPolkadotAccountId",
+                        "fields": {
+                          "retryDuration": {
+                            "type": "primitive",
+                            "name": "u32"
+                          },
+                          "refundAddress": {
+                            "type": "array",
+                            "value": {
                               "type": "primitive",
-                              "name": "u32"
+                              "name": "u8"
                             },
-                            "refundAddress": {
-                              "type": "array",
-                              "value": {
-                                "type": "primitive",
-                                "name": "u8"
-                              },
-                              "length": 32
-                            },
-                            "minPrice": {
-                              "type": "primitive",
-                              "name": "U256"
-                            }
+                            "length": 32
+                          },
+                          "minPrice": {
+                            "type": "primitive",
+                            "name": "U256"
                           }
                         }
                       },
@@ -17522,6 +17522,15 @@
         "deductionPercent": {
           "type": "primitive",
           "name": "Percent"
+        }
+      }
+    },
+    "WitnessSafetyMarginSet": {
+      "type": "struct",
+      "fields": {
+        "margin": {
+          "type": "primitive",
+          "name": "u32"
         }
       }
     }
@@ -19532,96 +19541,93 @@
                         }
                       },
                       "refundParams": {
-                        "type": "option",
-                        "value": {
-                          "type": "struct",
-                          "name": "CfChainsChannelRefundParametersScriptPubkey",
-                          "fields": {
-                            "retryDuration": {
-                              "type": "primitive",
-                              "name": "u32"
-                            },
-                            "refundAddress": {
-                              "type": "enum",
-                              "name": "cfChainsBtcScriptPubkey",
-                              "values": [
-                                {
-                                  "name": "P2PKH",
+                        "type": "struct",
+                        "name": "CfChainsChannelRefundParametersScriptPubkey",
+                        "fields": {
+                          "retryDuration": {
+                            "type": "primitive",
+                            "name": "u32"
+                          },
+                          "refundAddress": {
+                            "type": "enum",
+                            "name": "cfChainsBtcScriptPubkey",
+                            "values": [
+                              {
+                                "name": "P2PKH",
+                                "value": {
+                                  "type": "array",
                                   "value": {
-                                    "type": "array",
-                                    "value": {
+                                    "type": "primitive",
+                                    "name": "u8"
+                                  },
+                                  "length": 20
+                                }
+                              },
+                              {
+                                "name": "P2SH",
+                                "value": {
+                                  "type": "array",
+                                  "value": {
+                                    "type": "primitive",
+                                    "name": "u8"
+                                  },
+                                  "length": 20
+                                }
+                              },
+                              {
+                                "name": "P2WPKH",
+                                "value": {
+                                  "type": "array",
+                                  "value": {
+                                    "type": "primitive",
+                                    "name": "u8"
+                                  },
+                                  "length": 20
+                                }
+                              },
+                              {
+                                "name": "P2WSH",
+                                "value": {
+                                  "type": "array",
+                                  "value": {
+                                    "type": "primitive",
+                                    "name": "u8"
+                                  },
+                                  "length": 32
+                                }
+                              },
+                              {
+                                "name": "Taproot",
+                                "value": {
+                                  "type": "array",
+                                  "value": {
+                                    "type": "primitive",
+                                    "name": "u8"
+                                  },
+                                  "length": 32
+                                }
+                              },
+                              {
+                                "name": "OtherSegwit",
+                                "value": {
+                                  "type": "struct",
+                                  "fields": {
+                                    "version": {
                                       "type": "primitive",
                                       "name": "u8"
                                     },
-                                    "length": 20
-                                  }
-                                },
-                                {
-                                  "name": "P2SH",
-                                  "value": {
-                                    "type": "array",
-                                    "value": {
+                                    "program": {
                                       "type": "primitive",
-                                      "name": "u8"
-                                    },
-                                    "length": 20
-                                  }
-                                },
-                                {
-                                  "name": "P2WPKH",
-                                  "value": {
-                                    "type": "array",
-                                    "value": {
-                                      "type": "primitive",
-                                      "name": "u8"
-                                    },
-                                    "length": 20
-                                  }
-                                },
-                                {
-                                  "name": "P2WSH",
-                                  "value": {
-                                    "type": "array",
-                                    "value": {
-                                      "type": "primitive",
-                                      "name": "u8"
-                                    },
-                                    "length": 32
-                                  }
-                                },
-                                {
-                                  "name": "Taproot",
-                                  "value": {
-                                    "type": "array",
-                                    "value": {
-                                      "type": "primitive",
-                                      "name": "u8"
-                                    },
-                                    "length": 32
-                                  }
-                                },
-                                {
-                                  "name": "OtherSegwit",
-                                  "value": {
-                                    "type": "struct",
-                                    "fields": {
-                                      "version": {
-                                        "type": "primitive",
-                                        "name": "u8"
-                                      },
-                                      "program": {
-                                        "type": "primitive",
-                                        "name": "Bytes"
-                                      }
+                                      "name": "Bytes"
                                     }
                                   }
                                 }
-                              ]
-                            },
-                            "minPrice": {
-                              "type": "primitive",
-                              "name": "U256"
-                            }
+                              }
+                            ]
+                          },
+                          "minPrice": {
+                            "type": "primitive",
+                            "name": "U256"
                           }
                         }
                       },
@@ -21004,6 +21010,15 @@
         "deductionPercent": {
           "type": "primitive",
           "name": "Percent"
+        }
+      }
+    },
+    "WitnessSafetyMarginSet": {
+      "type": "struct",
+      "fields": {
+        "margin": {
+          "type": "primitive",
+          "name": "u64"
         }
       }
     }
@@ -25168,23 +25183,20 @@
                         }
                       },
                       "refundParams": {
-                        "type": "option",
-                        "value": {
-                          "type": "struct",
-                          "name": "CfChainsChannelRefundParametersH160",
-                          "fields": {
-                            "retryDuration": {
-                              "type": "primitive",
-                              "name": "u32"
-                            },
-                            "refundAddress": {
-                              "type": "primitive",
-                              "name": "H160"
-                            },
-                            "minPrice": {
-                              "type": "primitive",
-                              "name": "U256"
-                            }
+                        "type": "struct",
+                        "name": "CfChainsChannelRefundParametersH160",
+                        "fields": {
+                          "retryDuration": {
+                            "type": "primitive",
+                            "name": "u32"
+                          },
+                          "refundAddress": {
+                            "type": "primitive",
+                            "name": "H160"
+                          },
+                          "minPrice": {
+                            "type": "primitive",
+                            "name": "U256"
                           }
                         }
                       },
@@ -26280,6 +26292,15 @@
         "deductionPercent": {
           "type": "primitive",
           "name": "Percent"
+        }
+      }
+    },
+    "WitnessSafetyMarginSet": {
+      "type": "struct",
+      "fields": {
+        "margin": {
+          "type": "primitive",
+          "name": "u64"
         }
       }
     }
@@ -29034,27 +29055,24 @@
                         }
                       },
                       "refundParams": {
-                        "type": "option",
-                        "value": {
-                          "type": "struct",
-                          "name": "CfChainsChannelRefundParametersAddress",
-                          "fields": {
-                            "retryDuration": {
+                        "type": "struct",
+                        "name": "CfChainsChannelRefundParametersAddress",
+                        "fields": {
+                          "retryDuration": {
+                            "type": "primitive",
+                            "name": "u32"
+                          },
+                          "refundAddress": {
+                            "type": "array",
+                            "value": {
                               "type": "primitive",
-                              "name": "u32"
+                              "name": "u8"
                             },
-                            "refundAddress": {
-                              "type": "array",
-                              "value": {
-                                "type": "primitive",
-                                "name": "u8"
-                              },
-                              "length": 32
-                            },
-                            "minPrice": {
-                              "type": "primitive",
-                              "name": "U256"
-                            }
+                            "length": 32
+                          },
+                          "minPrice": {
+                            "type": "primitive",
+                            "name": "U256"
                           }
                         }
                       },
@@ -30148,6 +30166,15 @@
         "deductionPercent": {
           "type": "primitive",
           "name": "Percent"
+        }
+      }
+    },
+    "WitnessSafetyMarginSet": {
+      "type": "struct",
+      "fields": {
+        "margin": {
+          "type": "primitive",
+          "name": "u64"
         }
       }
     }

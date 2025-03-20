@@ -32,6 +32,7 @@ ArbitrumIngressEgress:
     - egressDetails: added
   - UnknownAffiliate: added
   - UnknownBroker: added
+  - WitnessSafetyMarginSet: added
 
 BitcoinIngressEgress:
   - CcmEgressInvalid:
@@ -63,6 +64,7 @@ BitcoinIngressEgress:
     - egressDetails: added
   - UnknownAffiliate: added
   - UnknownBroker: added
+  - WitnessSafetyMarginSet: added
 
 Environment:
   - SolanaGovCallDispatched: added
@@ -97,6 +99,7 @@ EthereumIngressEgress:
     - egressDetails: added
   - UnknownAffiliate: added
   - UnknownBroker: added
+  - WitnessSafetyMarginSet: added
 
 PolkadotIngressEgress:
   - CcmEgressInvalid:
@@ -128,6 +131,7 @@ PolkadotIngressEgress:
     - egressDetails: added
   - UnknownAffiliate: added
   - UnknownBroker: added
+  - WitnessSafetyMarginSet: added
 
 SolanaBroadcaster:
   - TransactionBroadcastRequest:
@@ -170,6 +174,7 @@ SolanaIngressEgress:
     - egressDetails: added
   - UnknownAffiliate: added
   - UnknownBroker: added
+  - WitnessSafetyMarginSet: added
 
 SolanaThresholdSigner:
   - ThresholdSignatureRequest:
@@ -187,7 +192,7 @@ Swapping:
     - brokerId: added
     - channelMetadata: added
     - affiliateFees: changed
-    - refundParameters: changed
+    - refundParameters: added
   - SwapEgressScheduled:
     - egressFee: added
   - SwapRequested:
