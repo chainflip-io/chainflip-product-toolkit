@@ -250,13 +250,18 @@ export const requestSwapParameterEncoding = z.discriminatedUnion('chain', [
 export const unregistered = z.object({
   role: z.literal('unregistered'),
   flip_balance: numberOrHex,
+  asset_balances: chainAssetMapFactory(numberOrHex, 0),
 });
 
 export const broker = z.object({
   role: z.literal('broker'),
+  bond: numberOrHex,
   flip_balance: numberOrHex,
   earned_fees: chainAssetMapFactory(numberOrHex, 0),
   btc_vault_deposit_address: z.string().nullable().optional(),
+  affiliates: z.array(
+    z.object({ account_id: z.string(), short_id: z.number(), withdrawal_address: hexString }),
+  ),
 });
 
 const boostBalances = z.array(

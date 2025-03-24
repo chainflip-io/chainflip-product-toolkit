@@ -1,10 +1,19 @@
 /* eslint-disable dot-notation */
 import { sleep } from '@chainflip/utils/async';
+import { ChainAssetMap } from '@chainflip/utils/chainflip';
 import { once } from 'events';
 import { type Mock, afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { type AddressInfo, WebSocketServer } from 'ws';
 import { type JsonRpcRequest, type RpcMethod } from '../common';
 import WsClient from '../WsClient';
+
+const createChainAssetMap = <T>(value: T): ChainAssetMap<T> => ({
+  Bitcoin: { BTC: value },
+  Ethereum: { ETH: value, FLIP: value, USDC: value, USDT: value },
+  Polkadot: { DOT: value },
+  Arbitrum: { ETH: value, USDC: value },
+  Solana: { SOL: value, USDC: value },
+});
 
 vi.mock(
   '@chainflip/utils/async',
@@ -76,14 +85,22 @@ describe(WsClient, () => {
                   return {
                     id: req.id,
                     jsonrpc: '2.0',
-                    result: { role: 'unregistered', flip_balance: '0x0' },
+                    result: {
+                      role: 'unregistered',
+                      flip_balance: '0x0',
+                      asset_balances: createChainAssetMap('0x0'),
+                    },
                   };
                 }
                 if (req.params[0] === 'account 2') {
                   return {
                     id: req.id,
                     jsonrpc: '2.0',
-                    result: { role: 'unregistered', flip_balance: '0x10' },
+                    result: {
+                      role: 'unregistered',
+                      flip_balance: '0x10',
+                      asset_balances: createChainAssetMap('0x0'),
+                    },
                   };
                 }
               }
@@ -214,12 +231,63 @@ describe(WsClient, () => {
       ['account 2', ''],
     ]);
 
-    expect(
-      await Promise.all(accounts.map(([acct]) => client.sendRequest('cf_account_info', acct))),
-    ).toEqual([
-      { role: 'unregistered', flip_balance: 0n },
-      { role: 'unregistered', flip_balance: 16n },
-    ]);
+    expect(await Promise.all(accounts.map(([acct]) => client.sendRequest('cf_account_info', acct))))
+      .toMatchInlineSnapshot(`
+      [
+        {
+          "asset_balances": {
+            "Arbitrum": {
+              "ETH": 0n,
+              "USDC": 0n,
+            },
+            "Bitcoin": {
+              "BTC": 0n,
+            },
+            "Ethereum": {
+              "ETH": 0n,
+              "FLIP": 0n,
+              "USDC": 0n,
+              "USDT": 0n,
+            },
+            "Polkadot": {
+              "DOT": 0n,
+            },
+            "Solana": {
+              "SOL": 0n,
+              "USDC": 0n,
+            },
+          },
+          "flip_balance": 0n,
+          "role": "unregistered",
+        },
+        {
+          "asset_balances": {
+            "Arbitrum": {
+              "ETH": 0n,
+              "USDC": 0n,
+            },
+            "Bitcoin": {
+              "BTC": 0n,
+            },
+            "Ethereum": {
+              "ETH": 0n,
+              "FLIP": 0n,
+              "USDC": 0n,
+              "USDT": 0n,
+            },
+            "Polkadot": {
+              "DOT": 0n,
+            },
+            "Solana": {
+              "SOL": 0n,
+              "USDC": 0n,
+            },
+          },
+          "flip_balance": 16n,
+          "role": "unregistered",
+        },
+      ]
+    `);
 
     expect(spy.mock.calls.map((args) => args.map((a) => JSON.parse(a.toString())))).toMatchObject([
       [
