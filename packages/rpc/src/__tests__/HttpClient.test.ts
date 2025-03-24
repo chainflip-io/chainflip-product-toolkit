@@ -529,7 +529,13 @@ const brokerAccount: z.input<typeof broker> = {
     },
   },
   btc_vault_deposit_address: 'tb1pqyqszqgpqyqszqgpqyqszqgpqyqszqgpqyqszqgpqyqszqgpqyqsn60vlk',
-  affiliates: [],
+  affiliates: [
+    {
+      account_id: 'cFJjZKzA5rUTb9qkZMGfec7piCpiAQKr15B4nALzriMGQL8BE',
+      short_id: 1,
+      withdrawal_address: '0x9a449133c6a8b4e117840b69e2a1d43634f562d3',
+    },
+  ],
   bond: '0x0',
 };
 
