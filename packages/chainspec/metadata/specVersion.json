@@ -58,5 +58,9 @@
   "180": {
     "hash": "0x592fb8ae7504d97d5d92527a0a495cd0b05a9ed3a7ccc6d122e494e01005ed8f",
     "network": "mainnet"
+  },
+  "190": {
+    "hash": "0xb45926e43c6ebff867aafea7e653ddc10c1a2317624919cc5a14610153e94b55",
+    "network": "localnet"
   }
 }
