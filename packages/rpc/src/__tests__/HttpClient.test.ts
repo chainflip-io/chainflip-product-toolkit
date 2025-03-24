@@ -438,6 +438,13 @@ const swapDepositAddress: z.input<typeof brokerRequestSwapDepositAddress> = {
 const unregisteredAccount: z.input<typeof unregistered> = {
   role: 'unregistered',
   flip_balance: '0x0',
+  asset_balances: {
+    Ethereum: { ETH: '0x0', FLIP: '0x0', USDC: '0x0', USDT: '0x0' },
+    Polkadot: { DOT: '0x0' },
+    Bitcoin: { BTC: '0x0' },
+    Arbitrum: { ETH: '0x0', USDC: '0x0' },
+    Solana: { SOL: '0x0', USDC: '0x0' },
+  },
 };
 
 const liquidityProviderAccount: z.input<typeof liquidityProvider> = {
@@ -522,6 +529,8 @@ const brokerAccount: z.input<typeof broker> = {
     },
   },
   btc_vault_deposit_address: 'tb1pqyqszqgpqyqszqgpqyqszqgpqyqszqgpqyqszqgpqyqszqgpqyqsn60vlk',
+  affiliates: [],
+  bond: '0x0',
 };
 
 const validatorAccount: z.input<typeof validator> = {

@@ -2,6 +2,8 @@
 
 exports[`HttpClient > with server > gets broker account info 1`] = `
 {
+  "affiliates": [],
+  "bond": 0n,
   "btc_vault_deposit_address": "tb1pqyqszqgpqyqszqgpqyqszqgpqyqszqgpqyqszqgpqyqszqgpqyqsn60vlk",
   "earned_fees": {
     "Arbitrum": {
@@ -679,6 +681,28 @@ exports[`HttpClient > with server > gets the ingress/egress environment 1`] = `
 
 exports[`HttpClient > with server > gets unregistered account info 1`] = `
 {
+  "asset_balances": {
+    "Arbitrum": {
+      "ETH": 0n,
+      "USDC": 0n,
+    },
+    "Bitcoin": {
+      "BTC": 0n,
+    },
+    "Ethereum": {
+      "ETH": 0n,
+      "FLIP": 0n,
+      "USDC": 0n,
+      "USDT": 0n,
+    },
+    "Polkadot": {
+      "DOT": 0n,
+    },
+    "Solana": {
+      "SOL": 0n,
+      "USDC": 0n,
+    },
+  },
   "flip_balance": 0n,
   "role": "unregistered",
 }
