@@ -23,6 +23,14 @@ type AccountAliasMap = {
   [account: string]: { name: string; twitter: string | null };
 };
 
+type AccountSmartContractAliasMap = {
+  [account: string]: string;
+};
+
+export const smartContractAliasMap: AccountSmartContractAliasMap = {
+  '0xce16F69375520ab01377ce7B88f5BA8C48F8D666': 'Squid',
+};
+
 export const brokerAliasMap: AccountAliasMap = {
   cFLRQDfEdmnv6d2XfHJNRBQHi4fruPMReLSfvB8WWD2ENbqj7: {
     name: 'Chainflip Swapping',
