@@ -2,7 +2,6 @@
   "name": "chainflip-product-toolkit",
   "version": "1.0.0",
   "description": "",
-  "type": "module",
   "private": true,
   "scripts": {
     "syncpack:list": "pnpm syncpack list-mismatches",
