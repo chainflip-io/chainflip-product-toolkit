@@ -1,4 +1,4 @@
-import config from '../../vitest.config';
+import config from '../../vitest.config.mjs';
 
 export default {
   ...config,
@@ -11,7 +11,6 @@ export default {
         statements: 100,
         branches: 100,
         functions: 100,
-        autoUpdate: true,
       },
     },
   },
