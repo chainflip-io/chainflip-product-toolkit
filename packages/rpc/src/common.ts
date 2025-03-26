@@ -31,6 +31,7 @@ import {
   cfAuctionState,
   cfFlipSuppy,
   ethereumAddress,
+  cfPoolOrderbook,
 } from './parsers';
 
 type Nullish<T> = T | null | undefined;
@@ -181,6 +182,11 @@ export type RpcRequest = WithHash<{
   cf_flip_supply: [];
   cf_eth_state_chain_gateway_address: [];
   cf_eth_key_manager_address: [];
+  cf_pool_orderbook: [
+    baseAsset: UncheckedAssetAndChain,
+    quoteAsset: UncheckedAssetAndChain,
+    orders: number,
+  ];
 }> & {
   chain_getBlockHash: [blockHeight?: number];
 };
@@ -218,6 +224,7 @@ export const rpcResult = {
   cf_flip_supply: cfFlipSuppy,
   cf_eth_state_chain_gateway_address: ethereumAddress.nullable(),
   cf_eth_key_manager_address: ethereumAddress.nullable(),
+  cf_pool_orderbook: cfPoolOrderbook,
 } as const satisfies { [K in keyof RpcRequest]: z.ZodTypeAny };
 
 export type RpcMethod = keyof RpcRequest;

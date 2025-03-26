@@ -25,6 +25,7 @@ import {
   type cfSwapRateV3,
   type requestSwapParameterEncoding,
   type cfFailedCallEvm,
+  cfPoolOrderbook,
 } from '../parsers';
 
 const supportedAssets = [
@@ -615,6 +616,48 @@ const failedCallEvm: z.input<typeof cfFailedCallEvm> = {
   data: 'some data i guess',
 };
 
+const poolOrderbook: z.input<typeof cfPoolOrderbook> = {
+  bids: [
+    { amount: '0x55f851e2d7bc83c14ad', sqrt_price: '0xd15f0592be94b466145' },
+    { amount: '0x589daadcee894407589', sqrt_price: '0xcb1eaa2d98bc8ed9ced' },
+    { amount: '0x5b57dc9506f840eadc5', sqrt_price: '0xc50e175451756ece1ae' },
+    { amount: '0x5118880a126114ef2d4', sqrt_price: '0xbf83a578338b26ebcf7' },
+    { amount: '0x2d17f67c7061204192b', sqrt_price: '0xb976a138141cc2d4e57' },
+    { amount: '0x2e7b4004b903bcb2466', sqrt_price: '0xb3ed03dede60dac4ce7' },
+    { amount: '0x2fe978d13eb00cb0fa0', sqrt_price: '0xae8dba40861a1065d49' },
+    { amount: '0x3162f709195ec1d25b7', sqrt_price: '0xa95780d4deed136e29a' },
+    { amount: '0x32e8137a2a890f4f93d', sqrt_price: '0xa4491dbbe4c9b741213' },
+    { amount: '0x20b98ea8ae40d986cfb', sqrt_price: '0xa04892715869b95d147' },
+  ],
+  asks: [
+    { amount: '0x9e67d06b0f3e2988624', sqrt_price: '0xdafa4e4bc5946cf0be6' },
+    { amount: '0x956b0816a8d5ae06614', sqrt_price: '0xe82630212f398be742e' },
+    { amount: '0x8cf0c9c982b458bcc93', sqrt_price: '0xf61ce32b833bdad2777' },
+    { amount: '0xbbe31cbe858d103b227', sqrt_price: '0x1051d334bf2b575c1551' },
+    { amount: '0xb6685679f25cef1217a', sqrt_price: '0x1149c44de7289ef29bfa' },
+    { amount: '0xac2207bc44a193896b7', sqrt_price: '0x1254020e76deec05c8f7' },
+    { amount: '0xa274b6c69122e0a17f5', sqrt_price: '0x136e31e5bd5e157dede5' },
+    { amount: '0x7d6d1e8f4010f8320bb', sqrt_price: '0x1489d68d729ee77fb616' },
+    { amount: '0x5b41b64d55c3cc4ab83', sqrt_price: '0x15d6943663112a5dde44' },
+    { amount: '0x5613b9aec02a7fce539', sqrt_price: '0x1726da8a7ff3641e3917' },
+    { amount: '0x51317ccc716271e6dcd', sqrt_price: '0x188b59ee0bc46a243b61' },
+    { amount: '0x4c962f29e57c0f3210c', sqrt_price: '0x1a054ac59254f2de9fa4' },
+    { amount: '0x483dca7aa20094b28a6', sqrt_price: '0x1b95f740a9191f0c5cb9' },
+    { amount: '0x442482e6e34054905c3', sqrt_price: '0x1d3ebd6ca0f580c73196' },
+    { amount: '0x4046c3ba8f4da873524', sqrt_price: '0x1f011063248bc3f4048b' },
+    { amount: '0x2e73af47b06bc716f57', sqrt_price: '0x20b5fee70a60f6c7c5de' },
+    { amount: '0x1c4850ee85e22e80163', sqrt_price: '0x22d89a0fb17970737aa1' },
+    { amount: '0x1aad85fa1dd498be69d', sqrt_price: '0x24f12c0a55c8776fbeb6' },
+    { amount: '0x192a09a3529bc53e8b5', sqrt_price: '0x272a04484cee5c40936e' },
+    { amount: '0x11d53c587e5404793d6', sqrt_price: '0x2936741b0557415b0308' },
+    { amount: '0xf', sqrt_price: '0x1279a74590331c4d218f81e4a' },
+    { amount: '0x6', sqrt_price: '0x14a7e9cb8a349120fc9aafb5a' },
+    { amount: '0xd', sqrt_price: '0x11c01aa03be895c58926a5822' },
+    { amount: '0x3', sqrt_price: '0x16a09e667f3bcc908b2fb1366' },
+    { amount: '0x8f5fa7ed76d1087d', sqrt_price: '0x8bd088b7657ea2996f61' },
+  ],
+};
+
 const isHexString = (value: unknown): value is HexString =>
   typeof value === 'string' && value.startsWith('0x');
 
@@ -641,6 +684,7 @@ describe(HttpClient, () => {
         "cf_funding_environment",
         "cf_ingress_egress_environment",
         "cf_pool_depth",
+        "cf_pool_orderbook",
         "cf_pool_orders",
         "cf_pool_price_v2",
         "cf_pools_environment",
@@ -790,6 +834,8 @@ describe(HttpClient, () => {
           });
         case 'cf_flip_supply':
           return respond(['0x0', '0x1']);
+        case 'cf_pool_orderbook':
+          return respond(poolOrderbook);
         case 'cf_eth_state_chain_gateway_address':
         case 'cf_eth_key_manager_address':
         default:
@@ -1337,6 +1383,164 @@ describe(HttpClient, () => {
           "min_active_bid": 34937886558754807000000n,
           "min_funding": 6000000000000000000n,
           "redemption_period_as_percentage": 50,
+        }
+      `);
+    });
+
+    it('handles cf_pool_orderbook', async () => {
+      expect(
+        await client.sendRequest(
+          'cf_pool_orderbook',
+          { chain: 'Ethereum', asset: 'FLIP' },
+          { chain: 'Ethereum', asset: 'USDC' },
+          1000,
+        ),
+      ).toMatchInlineSnapshot(`
+        {
+          "asks": [
+            {
+              "amount": 46753058565446130239012n,
+              "sqrt_price": 64630826319013095607270n,
+            },
+            {
+              "amount": 44100436900143846942228n,
+              "sqrt_price": 68518341775354431960110n,
+            },
+            {
+              "amount": 41598316654751478697107n,
+              "sqrt_price": 72639689558847518484343n,
+            },
+            {
+              "amount": 55454500902567204336167n,
+              "sqrt_price": 77067268995118459000145n,
+            },
+            {
+              "amount": 53837212033998851744122n,
+              "sqrt_price": 81640987742331057904634n,
+            },
+            {
+              "amount": 50804673859249984018103n,
+              "sqrt_price": 86552271380382780606711n,
+            },
+            {
+              "amount": 47948522681948256737269n,
+              "sqrt_price": 91757700510720620096997n,
+            },
+            {
+              "amount": 37019294219495276748987n,
+              "sqrt_price": 96989993734613759931926n,
+            },
+            {
+              "amount": 26934220284744773708675n,
+              "sqrt_price": 103127979204528125632068n,
+            },
+            {
+              "amount": 25405461594188856223033n,
+              "sqrt_price": 109331152920533190719767n,
+            },
+            {
+              "amount": 23964035516204788379085n,
+              "sqrt_price": 115907373144969167780705n,
+            },
+            {
+              "amount": 22604391425554018148620n,
+              "sqrt_price": 122879150148402091564964n,
+            },
+            {
+              "amount": 21321889269198558537894n,
+              "sqrt_price": 130270276330514381823161n,
+            },
+            {
+              "amount": 20112152256132776789443n,
+              "sqrt_price": 138105975597336644497814n,
+            },
+            {
+              "amount": 18971051920722732987684n,
+              "sqrt_price": 146412988540742718981259n,
+            },
+            {
+              "amount": 13710179002383575641943n,
+              "sqrt_price": 154472955790186902963678n,
+            },
+            {
+              "amount": 8347516177464445895011n,
+              "sqrt_price": 164556058424230827752097n,
+            },
+            {
+              "amount": 7873904333807042684573n,
+              "sqrt_price": 174454032148278151200438n,
+            },
+            {
+              "amount": 7427163738277091207349n,
+              "sqrt_price": 184947364664173073044334n,
+            },
+            {
+              "amount": 5263358441301477921750n,
+              "sqrt_price": 194621516264240857154312n,
+            },
+            {
+              "amount": 15n,
+              "sqrt_price": 91484801910019865068323741258n,
+            },
+            {
+              "amount": 6n,
+              "sqrt_price": 102283117989453508542900927322n,
+            },
+            {
+              "amount": 13n,
+              "sqrt_price": 87895754586453540682326497314n,
+            },
+            {
+              "amount": 3n,
+              "sqrt_price": 112045541949572279837463876454n,
+            },
+            {
+              "amount": 10331160708553705597n,
+              "sqrt_price": 660255715340516735938401n,
+            },
+          ],
+          "bids": [
+            {
+              "amount": 25373865255616642815149n,
+              "sqrt_price": 61795464824976308592965n,
+            },
+            {
+              "amount": 26154793830615988860297n,
+              "sqrt_price": 59950378810627830160621n,
+            },
+            {
+              "amount": 26959756955854601891269n,
+              "sqrt_price": 58160383287529860555182n,
+            },
+            {
+              "amount": 23935263102372336825044n,
+              "sqrt_price": 56525027814902774807799n,
+            },
+            {
+              "amount": 13309283002338890750251n,
+              "sqrt_price": 54739133261808415886935n,
+            },
+            {
+              "amount": 13718901296775874421862n,
+              "sqrt_price": 53104734855241885568231n,
+            },
+            {
+              "amount": 14141126367033011408800n,
+              "sqrt_price": 51519136238002961276233n,
+            },
+            {
+              "amount": 14576346210420817470903n,
+              "sqrt_price": 49980880351826531508890n,
+            },
+            {
+              "amount": 15024960765599056984381n,
+              "sqrt_price": 48488553629100335698451n,
+            },
+            {
+              "amount": 9658665922700496104699n,
+              "sqrt_price": 47307334696566458274119n,
+            },
+          ],
         }
       `);
     });
