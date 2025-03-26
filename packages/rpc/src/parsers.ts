@@ -427,3 +427,8 @@ export const cfFlipSuppy = range(numberOrHex).transform(([totalIssuance, offchai
 }));
 
 export const ethereumAddress = z.string().transform<HexString>((address) => `0x${address}`);
+
+export const cfPoolOrderbook = z.object({
+  bids: z.array(z.object({ amount: u256, sqrt_price: u256 })),
+  asks: z.array(z.object({ amount: u256, sqrt_price: u256 })),
+});
