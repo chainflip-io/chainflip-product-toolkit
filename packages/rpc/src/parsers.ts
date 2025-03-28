@@ -259,9 +259,12 @@ export const broker = z.object({
   flip_balance: numberOrHex,
   earned_fees: chainAssetMapFactory(numberOrHex, 0),
   btc_vault_deposit_address: z.string().nullable().optional(),
-  affiliates: z.array(
-    z.object({ account_id: z.string(), short_id: z.number(), withdrawal_address: hexString }),
-  ),
+  affiliates: z
+    .array(
+      z.object({ account_id: z.string(), short_id: z.number(), withdrawal_address: hexString }),
+    )
+    .optional()
+    .default([]),
 });
 
 const boostBalances = z.array(

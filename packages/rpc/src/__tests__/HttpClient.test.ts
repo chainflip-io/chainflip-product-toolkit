@@ -540,6 +540,34 @@ const brokerAccount: z.input<typeof broker> = {
   bond: '0x0',
 };
 
+const brokerAccountNoAffiliates: z.input<typeof broker> = {
+  role: 'broker',
+  flip_balance: '0x123dd89c5bb3f5009',
+  earned_fees: {
+    Ethereum: {
+      ETH: '0x149e76e0f91d2546',
+      FLIP: '0x2233cf5b9f41af4fe',
+      USDC: '0x7293c1a9',
+      USDT: '0x2b7b6186',
+    },
+    Polkadot: {
+      DOT: '0x48b7018d8',
+    },
+    Bitcoin: {
+      BTC: '0xbcbf36',
+    },
+    Arbitrum: {
+      ETH: 0,
+      USDC: 0,
+    },
+    Solana: {
+      SOL: 0,
+      USDC: 0,
+    },
+  },
+  bond: '0x0',
+};
+
 const validatorAccount: z.input<typeof validator> = {
   role: 'validator',
   flip_balance: '0x35670aa54a62ccedacab',
@@ -720,6 +748,7 @@ describe(HttpClient, () => {
 
   const LP_ACCOUNT_ID = 'cFMVtnPTJFYFvnHXK14HZ6XWDSCAByTPZDWrTeFEc2B8A3m7M';
   const BROKER_ACCOUNT_ID = 'cFJjZKzA5rUTb9qkZMGfec7piCpiAQKr15B4nALzriMGQL8BE';
+  const BROKER_ACCOUNT_ID2 = 'cFJjZKzA5rUTb9qkZMGfec7piCpiAQKr15B4nALzriMGQL8BF';
   const VALIDATOR_ACCOUNT_ID = 'cFKzr7DwLCRtSkou5H5moKri7g9WwJ4tAbVJv6dZGhLb811Tc';
 
   describe('with server', () => {
@@ -759,6 +788,8 @@ describe(HttpClient, () => {
               return respond(liquidityProviderAccount);
             case BROKER_ACCOUNT_ID:
               return respond(brokerAccount);
+            case BROKER_ACCOUNT_ID2:
+              return respond(brokerAccountNoAffiliates);
             case VALIDATOR_ACCOUNT_ID:
               return respond(validatorAccount);
             default:
@@ -1168,6 +1199,10 @@ describe(HttpClient, () => {
 
     it('gets broker account info', async () => {
       expect(await client.sendRequest('cf_account_info', BROKER_ACCOUNT_ID)).toMatchSnapshot();
+    });
+
+    it('gets broker account info 2', async () => {
+      expect(await client.sendRequest('cf_account_info', BROKER_ACCOUNT_ID2)).toMatchSnapshot();
     });
 
     it('gets broker vault swap data for bitcoin', async () => {
