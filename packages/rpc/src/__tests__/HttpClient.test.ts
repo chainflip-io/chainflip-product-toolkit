@@ -969,6 +969,11 @@ describe(HttpClient, () => {
               "ETH": null,
               "USDC": null,
             },
+            "AssetHub": {
+              "DOT": null,
+              "USDC": null,
+              "USDT": null,
+            },
             "Bitcoin": {
               "BTC": null,
             },
