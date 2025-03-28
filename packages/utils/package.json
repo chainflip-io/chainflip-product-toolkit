@@ -33,7 +33,7 @@
   },
   "devDependencies": {
     "@noble/hashes": "^1.7.1",
-    "@vitest/ui": "3.0.8"
+    "@vitest/ui": "3.0.9"
   },
   "dependencies": {
     "@date-fns/utc": "^2.1.0",
