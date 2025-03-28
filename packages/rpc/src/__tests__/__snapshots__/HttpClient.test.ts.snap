@@ -38,6 +38,37 @@ exports[`HttpClient > with server > gets broker account info 1`] = `
 }
 `;
 
+exports[`HttpClient > with server > gets broker account info 2 1`] = `
+{
+  "affiliates": [],
+  "bond": 0n,
+  "earned_fees": {
+    "Arbitrum": {
+      "ETH": 0n,
+      "USDC": 0n,
+    },
+    "Bitcoin": {
+      "BTC": 12369718n,
+    },
+    "Ethereum": {
+      "ETH": 1485755635703031110n,
+      "FLIP": 39432662616362382590n,
+      "USDC": 1922285993n,
+      "USDT": 729506182n,
+    },
+    "Polkadot": {
+      "DOT": 19519248600n,
+    },
+    "Solana": {
+      "SOL": 0n,
+      "USDC": 0n,
+    },
+  },
+  "flip_balance": 21031117317233135625n,
+  "role": "broker",
+}
+`;
+
 exports[`HttpClient > with server > gets lp account info 1`] = `
 {
   "balances": {
