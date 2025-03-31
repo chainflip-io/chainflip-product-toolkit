@@ -100,7 +100,7 @@ export const ASSOCIATED_TOKEN_PROGRAM_ID = new PublicKey(
   'ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL',
 );
 
-const getAssociatedTokenAddressSync = (owner: PublicKey, tokenMintAddress: string) => {
+const getAssociatedTokenAddressSync = (owner: PublicKey, tokenMintAddress: TokenMintAddress) => {
   const [address] = PublicKey.findProgramAddressSync(
     [owner.toBuffer(), TOKEN_PROGRAM_ID.toBuffer(), new PublicKey(tokenMintAddress).toBuffer()],
     ASSOCIATED_TOKEN_PROGRAM_ID,
