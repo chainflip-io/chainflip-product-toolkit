@@ -40,9 +40,18 @@ export type Transfer = {
   slot: number;
 };
 
+type SolanaNetwork = 'mainnet' | 'devnet';
+type SupportedToken = 'SolUsdc';
+type TokenMintAddress = string & { __brand: 'TokenMintAddress' };
+
 const addresses = {
-  SolUsdc: 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v',
-};
+  mainnet: {
+    SolUsdc: 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v',
+  },
+  devnet: {
+    SolUsdc: '4zMMC9srt5Ri5X14GAgXhaHii3GnPAEERYPJgZJDncDU',
+  },
+} as Record<SolanaNetwork, Record<SupportedToken, TokenMintAddress>>;
 
 const getSolDiff = (tx: VersionedTransactionResponse, publicKey: PublicKey) => {
   assert(tx.meta !== null, 'tx meta is null');
@@ -61,12 +70,15 @@ const getSolDiff = (tx: VersionedTransactionResponse, publicKey: PublicKey) => {
   return BigInt(diff);
 };
 
-const getTokenDiff = (tx: VersionedTransactionResponse, publicKey: PublicKey, asset: 'SolUsdc') => {
+const getTokenDiff = (
+  tx: VersionedTransactionResponse,
+  publicKey: PublicKey,
+  tokenMintAddress: TokenMintAddress,
+) => {
   assert(tx.meta !== null, 'tx meta is null');
   assert(tx.meta.preTokenBalances != null, 'preTokenBalances is null');
   assert(tx.meta.postTokenBalances != null, 'postTokenBalances is null');
 
-  const tokenMintAddress = addresses[asset];
   const owner = publicKey.toBase58();
 
   const preTokenAmount = tx.meta.preTokenBalances.find(
@@ -88,9 +100,9 @@ export const ASSOCIATED_TOKEN_PROGRAM_ID = new PublicKey(
   'ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL',
 );
 
-const getAssociatedTokenAddressSync = (owner: PublicKey, asset: 'SolUsdc') => {
+const getAssociatedTokenAddressSync = (owner: PublicKey, tokenMintAddress: string) => {
   const [address] = PublicKey.findProgramAddressSync(
-    [owner.toBuffer(), TOKEN_PROGRAM_ID.toBuffer(), new PublicKey(addresses[asset]).toBuffer()],
+    [owner.toBuffer(), TOKEN_PROGRAM_ID.toBuffer(), new PublicKey(tokenMintAddress).toBuffer()],
     ASSOCIATED_TOKEN_PROGRAM_ID,
   );
 
@@ -100,15 +112,16 @@ const getAssociatedTokenAddressSync = (owner: PublicKey, asset: 'SolUsdc') => {
 const fetchTransfers = async (
   rpcUrl: string,
   depositAddressString: string,
-  asset: 'Sol' | 'SolUsdc',
+  tokenMintAddress: TokenMintAddress | undefined,
   depositCount: number,
 ): Promise<Transfer[]> => {
   const conn = getSolanaConnection(rpcUrl);
 
   const depositAddress = new PublicKey(depositAddressString);
 
-  const owner =
-    asset === 'Sol' ? depositAddress : getAssociatedTokenAddressSync(depositAddress, asset);
+  const owner = !tokenMintAddress
+    ? depositAddress
+    : getAssociatedTokenAddressSync(depositAddress, tokenMintAddress);
 
   const results: Transfer[] = [];
 
@@ -129,10 +142,9 @@ const fetchTransfers = async (
         .map((tx, index): Transfer | null => {
           assert(tx !== null, 'tx is null');
 
-          const diff =
-            asset === 'Sol'
-              ? getSolDiff(tx, depositAddress)
-              : getTokenDiff(tx, depositAddress, asset);
+          const diff = !tokenMintAddress
+            ? getSolDiff(tx, depositAddress)
+            : getTokenDiff(tx, depositAddress, tokenMintAddress);
 
           if (diff <= 0n) return null;
 
@@ -214,10 +226,11 @@ export const findTransactionSignatures = async (
   depositAddress: string,
   asset: 'Sol' | 'SolUsdc',
   deposits: DepositInfo[],
-  fetcher: typeof fetchTransfers = fetchTransfers,
+  network: SolanaNetwork,
   reportingErrorTolerance = 50,
 ): Promise<string[][]> => {
-  const transfers = await fetcher(rpcUrl, depositAddress, asset, deposits.length);
+  const tokenMintAddress = asset === 'Sol' ? undefined : addresses[network][asset];
+  const transfers = await fetchTransfers(rpcUrl, depositAddress, tokenMintAddress, deposits.length);
 
   let error: Error;
 
