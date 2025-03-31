@@ -24,7 +24,7 @@ type AccountAliasMap = {
 };
 
 export const smartContractAliasMap = {
-  '0xce16F69375520ab01377ce7B88f5BA8C48F8D666': 'Squid',
+  '0xce16f69375520ab01377ce7b88f5ba8c48f8d666': 'Squid',
   '0xd99ac0681b904991169a4f398b9043781adbe0c3': 'Symbiosis',
 };
 
