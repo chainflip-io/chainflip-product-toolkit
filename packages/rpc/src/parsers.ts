@@ -415,14 +415,19 @@ export const cfFailedCallEvm = z.object({
 
 const range = <Z extends z.ZodTypeAny>(parser: Z) => z.tuple([parser, parser]);
 
-export const cfAuctionState = z.object({
-  blocks_per_epoch: z.number(),
-  current_epoch_started_at: z.number(),
-  redemption_period_as_percentage: z.number(),
-  min_funding: numberOrHex,
-  auction_size_range: range(z.number()),
-  min_active_bid: numberOrHex,
-});
+export const cfAuctionState = z
+  .object({
+    epoch_duration: z.number(),
+    current_epoch_started_at: z.number(),
+    redemption_period_as_percentage: z.number(),
+    min_funding: numberOrHex,
+    auction_size_range: range(z.number()),
+    min_active_bid: numberOrHex,
+  })
+  .transform(({ epoch_duration, ...state }) => ({
+    epoch_duration_blocks: epoch_duration,
+    ...state,
+  }));
 
 export const cfFlipSuppy = range(numberOrHex).transform(([totalIssuance, offchainFunds]) => ({
   totalIssuance,

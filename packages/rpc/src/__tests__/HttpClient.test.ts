@@ -856,7 +856,7 @@ describe(HttpClient, () => {
           return respond(43200);
         case 'cf_auction_state':
           return respond({
-            blocks_per_epoch: 43200,
+            epoch_duration: 43200,
             current_epoch_started_at: 6892653,
             redemption_period_as_percentage: 50,
             min_funding: '0x53444835ec580000',
@@ -1413,8 +1413,8 @@ describe(HttpClient, () => {
             3,
             150,
           ],
-          "blocks_per_epoch": 43200,
           "current_epoch_started_at": 6892653,
+          "epoch_duration_blocks": 43200,
           "min_active_bid": 34937886558754807000000n,
           "min_funding": 6000000000000000000n,
           "redemption_period_as_percentage": 50,
