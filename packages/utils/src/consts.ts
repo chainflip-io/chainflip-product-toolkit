@@ -23,11 +23,7 @@ type AccountAliasMap = {
   [account: string]: { name: string; twitter: string | null };
 };
 
-type AccountSmartContractAliasMap = {
-  [account: string]: string;
-};
-
-export const smartContractAliasMap: AccountSmartContractAliasMap = {
+export const smartContractAliasMap = {
   '0xce16F69375520ab01377ce7B88f5BA8C48F8D666': 'Squid',
   '0xd99ac0681b904991169a4f398b9043781adbe0c3': 'Symbiosis',
 };
