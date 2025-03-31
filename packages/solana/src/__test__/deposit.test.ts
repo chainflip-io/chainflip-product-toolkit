@@ -10,6 +10,7 @@ import { mainnet } from '../idls';
 import bigDiff from './fixtures/bigDiff.json';
 import cluster from './fixtures/cluster.json';
 import combineTxs from './fixtures/combineTxs.json';
+import devnet from './fixtures/devnet.json';
 import doubleTransfer from './fixtures/doubleTransfer.json';
 import maxBlockError from './fixtures/maxBlockError.json';
 import notVaultSwap from './fixtures/notVaultSwap.json';
@@ -49,6 +50,7 @@ describe(findTransactionSignatures, () => {
       'Coxmank2uz3uYs9Z4ZMDDuBY1X9ZmbG1rNHKgA4i1Z5m',
       'Sol',
       [{ amount: 1022887000000n, maxSlot: 313188384 }],
+      'mainnet',
     );
     expect(result).toStrictEqual([
       ['4H3Z8wxSJTzX1YqMG9xGRvtzJ4ji1N55dTdiNSA9ZnRVRyXjyxZscbanvFve6ihhxpBzMDFpLjf22cdn2WwpEtiW'],
@@ -63,6 +65,7 @@ describe(findTransactionSignatures, () => {
       '6CHS241WpfxVC4yGekcjZmN8FrBUDCwZKsKdt85smNub',
       'Sol',
       [{ amount: 1469000000n, maxSlot: 317429934 }],
+      'mainnet',
     );
     expect(result).toStrictEqual([
       ['2fY29J3QxaRQFX44ngQuGMQSdBrMPLubWRrHkjELg3X5Y6fVTyBoha18j58MEcBcLENZoctVPJX6v6cFZnTsjdk8'],
@@ -80,6 +83,7 @@ describe(findTransactionSignatures, () => {
         { amount: 100000000n, maxSlot: 315326189 },
         { amount: 4100010000n, maxSlot: 315261223 },
       ],
+      'mainnet',
     );
     expect(result).toStrictEqual([
       [
@@ -104,6 +108,7 @@ describe(findTransactionSignatures, () => {
         { amount: 90000000n, maxSlot: 315326189 },
         { amount: 4100010000n, maxSlot: 315261223 },
       ],
+      'mainnet',
     );
     await expect(result).rejects.toThrowErrorMatchingInlineSnapshot(
       `[Error: failed to align deposits and transfers]`,
@@ -128,6 +133,7 @@ describe(findTransactionSignatures, () => {
         { amount: 10000000n, maxSlot: 308737114 },
         { amount: 10000000n, maxSlot: 308736318 },
       ],
+      'mainnet',
     );
     expect(result).toStrictEqual([
       ['62gvhpPe1kPv3QdYM99nEXP3LrZjY2QeLxfEFD9Ac4H2TrvSZwy8etiTQhGDQiYovGugAEu5t6PCje47hvTieP5t'],
@@ -158,6 +164,7 @@ describe(findTransactionSignatures, () => {
         { amount: 10000n, maxSlot: Infinity },
         { amount: 150000010000n, maxSlot: 306370166 },
       ],
+      'mainnet',
     );
     expect(result).toStrictEqual([
       ['31VHwvUbZ9oCiMcjZbRFY8qTUnwXzaHSkhxzbVSy5ad5jGR79bVZwPN72Ur5RaMXLTXsa5shzV3PqJuKiRaAqD1d'],
@@ -205,6 +212,7 @@ describe(findTransactionSignatures, () => {
         { amount: 200000000n, maxSlot: 308739405 },
         { amount: 10000000n, maxSlot: 308739222 },
       ],
+      'mainnet',
     );
     expect(result).toStrictEqual([
       ['yq1e2R8NV8vJSDFk2FFJXzQm3Ttz4FDHLMUYJspzknTXZvYfWQHbMGpP6DN2xANJ2Fjkvk3Y117urVoukKAvuq8'],
@@ -252,6 +260,7 @@ describe(findTransactionSignatures, () => {
         '6CHS241WpfxVC4yGekcjZmN8FrBUDCwZKsKdt85smNub',
         'Sol',
         [{ amount: 1469000000n, maxSlot: 317429934 }],
+        'mainnet',
       ),
     ).rejects.toThrowErrorMatchingInlineSnapshot(`[Error: transfers are too new]`);
   });
@@ -264,6 +273,7 @@ describe(findTransactionSignatures, () => {
       'CBdz82ptVQSHzqSdCDXHEWjJMumrTmJxhyFa3C9LoKc5',
       'SolUsdc',
       [{ amount: 561478103n, maxSlot: 318246054 }],
+      'mainnet',
     );
     expect(result).toStrictEqual([
       ['4yLTAfpkufqUsE5Pvd64XoEHcLeRiFbGKLLx6VtZyenN6uEe9fSYJXcogzZtDYi6DACDoqNUQ8f769YXs9FC8Lfz'],
@@ -280,10 +290,25 @@ describe(findTransactionSignatures, () => {
         { amount: 1n, maxSlot: Infinity },
         { amount: 54246510369n, maxSlot: 305625854 },
       ],
+      'mainnet',
     );
     expect(result).toStrictEqual([
       ['4fjPpTxWPouQUDu9bMYqbZc14jKbNXDsXzhvwBygb8Nfoy8evNA5sa11Z1Ue4Ujx6i75d1VNtsYyzj77fbM495vD'],
       ['5kCxRnFfi9zfpRaqJo67VXNeDuTujoKJ2ixPMToERwjEGfrjJ4LH9ciTq6PLrSrfFiLJ1RF3iLC8B6zbxUEAw2it'],
+    ]);
+  });
+
+  it('works with SolUsdc on devnet', async () => {
+    mockFetch(devnet);
+    const result = await findTransactionSignatures(
+      'https://solana.rpc',
+      '8haqznF43DrGmdq78Hz6tTHZExMZeZfe5amVqXjahihG',
+      'SolUsdc',
+      [{ amount: 222108813n, maxSlot: Infinity }],
+      'devnet',
+    );
+    expect(result).toStrictEqual([
+      ['3mYJ5r6ypAD4s6iGJDghKLSd8KukAjhSCW5MoBMZYKmnFvGayKLbxM4FhDavHBdwgLeP8k6PDA8APSVA1Sg4A6cn'],
     ]);
   });
 });
