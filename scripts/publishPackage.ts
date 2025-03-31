@@ -95,12 +95,13 @@ let isDryRun = args['dry-run'];
 
 if (isDryRun) console.log('DRY RUN MODE');
 
-const execCommand = async (cmd: string) => {
-  console.log('executing command %O', cmd);
+const execCommand = async (cmd: string, print = false) => {
+  if (!print) console.log('executing command %O', cmd);
 
   if (!isDryRun) {
     try {
-      await execAsync(cmd);
+      const { stdout } = await execAsync(cmd);
+      if (print) console.log(stdout.trim());
     } catch (error) {
       console.error(error);
       process.exit(1);
@@ -117,6 +118,7 @@ const openVersionPR = async () => {
   await execCommand(`git commit -m "${message}" --no-verify`);
   await execCommand(`git push origin ${newBranch}`);
   await execCommand(`gh pr create --title "${message}" --body ""`);
+  await execCommand(`echo "$(gh pr view --json url --jq '.url')"`, true);
 };
 
 await openVersionPR();
