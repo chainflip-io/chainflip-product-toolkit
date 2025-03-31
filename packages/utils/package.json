@@ -1,6 +1,6 @@
 {
   "name": "@chainflip/utils",
-  "version": "0.7.3",
+  "version": "0.7.4",
   "type": "module",
   "scripts": {
     "eslint:check": "pnpm eslint --max-warnings 0 './**/*.ts'",
