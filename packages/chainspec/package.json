@@ -12,7 +12,7 @@
   "devDependencies": {
     "@chainflip/rpc": "1.8.6",
     "@chainflip/utils": "0.7.0",
-    "@polkadot/types": "^15.8.1",
+    "@polkadot/types": "^15.9.1",
     "prettier": "^3.5.3",
     "zod": "^3.24.2"
   }
