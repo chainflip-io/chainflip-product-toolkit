@@ -383,14 +383,14 @@ export const cfBoostPoolDetails = z.array(
       available_amounts: z.array(boostPoolAmount),
       deposits_pending_finalization: z.array(
         z.object({
-          deposit_id: z.number().transform(BigInt),
+          deposit_id: numberOrHex,
           owed_amounts: z.array(boostPoolAmount),
         }),
       ),
       pending_withdrawals: z.array(
         z.object({
           account_id: z.string(),
-          pending_deposits: z.array(z.bigint()),
+          pending_deposits: numberOrHex,
         }),
       ),
       network_fee_deduction_percent: z.number().optional(),
