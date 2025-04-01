@@ -36715,15 +36715,11 @@
           "name": "palletCfTradingStrategyTradingStrategy",
           "values": [
             {
-              "name": "SellAndBuyAtTicks",
+              "name": "TickZeroCentered",
               "value": {
                 "type": "struct",
                 "fields": {
-                  "sellTick": {
-                    "type": "primitive",
-                    "name": "i32"
-                  },
-                  "buyTick": {
+                  "spreadTick": {
                     "type": "primitive",
                     "name": "i32"
                   },

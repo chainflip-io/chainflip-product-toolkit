@@ -46,7 +46,7 @@ const shortChainToLongChain = {
   Eth: 'Ethereum',
   Dot: 'Polkadot',
   Sol: 'Solana',
-  Hub: 'AssetHub',
+  Hub: 'Assethub',
 } as const;
 
 const addressTransforms: Record<keyof typeof shortChainToLongChain, string | null> = {

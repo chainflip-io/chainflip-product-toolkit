@@ -18,7 +18,7 @@ const chainAssetMapFactory = <Z extends z.ZodTypeAny>(parser: Z, defaultValue: z
     Polkadot: z.object({ DOT: parser }),
     Arbitrum: z.object({ ETH: parser, USDC: parser }),
     Solana: z.object({ SOL: parser, USDC: parser }),
-    AssetHub: z
+    Assethub: z
       .object({ DOT: parser, USDC: parser, USDT: parser })
       .default({ DOT: defaultValue, USDC: defaultValue, USDT: defaultValue }),
   });
@@ -30,7 +30,7 @@ const chainBaseAssetMapFactory = <Z extends z.ZodTypeAny>(parser: Z, defaultValu
     Polkadot: z.object({ DOT: parser }),
     Arbitrum: z.object({ ETH: parser, USDC: parser }),
     Solana: z.object({ SOL: parser, USDC: parser }),
-    AssetHub: z
+    Assethub: z
       .object({ DOT: parser, USDC: parser, USDT: parser })
       .default({ DOT: defaultValue, USDC: defaultValue, USDT: defaultValue }),
   });
@@ -42,7 +42,7 @@ const chainMapFactory = <Z extends z.ZodTypeAny>(parser: Z, defaultValue: z.inpu
     Polkadot: parser,
     Arbitrum: parser,
     Solana: parser,
-    AssetHub: parser.default(defaultValue),
+    Assethub: parser.default(defaultValue),
   });
 
 const rpcAssetSchema = z.union([
@@ -56,9 +56,9 @@ const rpcAssetSchema = z.union([
   z.object({ chain: z.literal('Arbitrum'), asset: z.literal('USDC') }),
   z.object({ chain: z.literal('Solana'), asset: z.literal('SOL') }),
   z.object({ chain: z.literal('Solana'), asset: z.literal('USDC') }),
-  z.object({ chain: z.literal('AssetHub'), asset: z.literal('DOT') }),
-  z.object({ chain: z.literal('AssetHub'), asset: z.literal('USDC') }),
-  z.object({ chain: z.literal('AssetHub'), asset: z.literal('USDT') }),
+  z.object({ chain: z.literal('Assethub'), asset: z.literal('DOT') }),
+  z.object({ chain: z.literal('Assethub'), asset: z.literal('USDC') }),
+  z.object({ chain: z.literal('Assethub'), asset: z.literal('USDT') }),
 ]);
 
 export type AssetAndChain = z.output<typeof rpcAssetSchema>;
@@ -431,10 +431,7 @@ export const cfAuctionState = z
     auction_size_range: range(z.number()),
     min_active_bid: numberOrHex,
   })
-  .transform(({ epoch_duration, ...state }) => ({
-    epoch_duration_blocks: epoch_duration,
-    ...state,
-  }));
+  .transform(rename({ epoch_duration: 'epoch_duration_blocks' }));
 
 export const cfFlipSuppy = range(numberOrHex).transform(([totalIssuance, offchainFunds]) => ({
   totalIssuance,

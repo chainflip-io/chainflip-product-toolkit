@@ -240,7 +240,7 @@ describe(WsClient, () => {
                 "ETH": 0n,
                 "USDC": 0n,
               },
-              "AssetHub": {
+              "Assethub": {
                 "DOT": 0n,
                 "USDC": 0n,
                 "USDT": 0n,
@@ -271,7 +271,7 @@ describe(WsClient, () => {
                 "ETH": 0n,
                 "USDC": 0n,
               },
-              "AssetHub": {
+              "Assethub": {
                 "DOT": 0n,
                 "USDC": 0n,
                 "USDT": 0n,

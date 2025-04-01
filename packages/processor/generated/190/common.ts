@@ -218,7 +218,7 @@ export const cfChainsAddressEncodedAddress = z
       case 'Sol':
         return { chain: 'Solana', address: base58.encode(hexToBytes(value)) } as const;
       case 'Hub':
-        return { chain: 'AssetHub', address: ss58.encode({ data: value, ss58Format: 0 }) } as const;
+        return { chain: 'Assethub', address: ss58.encode({ data: value, ss58Format: 0 }) } as const;
       default:
         throw new Error('Unknown chain');
     }
@@ -941,9 +941,8 @@ export const palletCfAssethubIngressEgressBoostPoolIdAssethub = z.object({
 });
 
 export const palletCfTradingStrategyTradingStrategy = z.object({
-  __kind: z.literal('SellAndBuyAtTicks'),
-  sellTick: z.number(),
-  buyTick: z.number(),
+  __kind: z.literal('TickZeroCentered'),
+  spreadTick: z.number(),
   baseAsset: cfPrimitivesChainsAssetsAnyAsset,
 });
 
