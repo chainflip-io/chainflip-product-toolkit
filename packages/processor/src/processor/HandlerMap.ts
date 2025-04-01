@@ -31,9 +31,9 @@ export const parseSemver = (specId: string): Semver => {
   if (cached) return cached;
   const specNumber = Number.parseInt(specId.split('@')[1], 10);
   if (Number.isNaN(specNumber)) throw new Error('Invalid specId');
-  const n = specNumber.toString();
-  const desiredLenPerPart = Math.ceil(n.length / 3);
-  const padded = n.padStart(desiredLenPerPart * 3, '0');
+  const specStr = specNumber.toString();
+  const desiredLenPerPart = Math.ceil(specStr.length / 3);
+  const padded = specStr.padStart(desiredLenPerPart * 3, '0');
   const major = padded.slice(0, desiredLenPerPart);
   const minor = padded.slice(desiredLenPerPart, desiredLenPerPart * 2);
   const patch = padded.slice(desiredLenPerPart * 2, desiredLenPerPart * 3);
@@ -70,9 +70,9 @@ export default class HandlerMap<T extends string, U> {
   }
 
   getHandler(name: T, specId: string): U | null {
-    const specNumber = parseSemver(specId);
+    const blockSemver = parseSemver(specId);
 
-    const handlerName = `${name}-${specNumber}` as const;
+    const handlerName = `${name}-${blockSemver}` as const;
 
     let handler: U | null | undefined = this.cache.get(handlerName);
 
@@ -80,7 +80,7 @@ export default class HandlerMap<T extends string, U> {
 
     const handlers = this.handlersByName[name] ?? [];
 
-    const index = handlers.findIndex(({ spec }) => compareSemver(spec, specNumber) !== Cmp.Gt);
+    const index = handlers.findIndex(({ spec }) => compareSemver(spec, blockSemver) !== Cmp.Gt);
 
     handler = index === -1 ? null : handlers[index].handler;
 
