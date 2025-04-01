@@ -52,3 +52,6 @@ jobs:
 
       - name: Run Test ${{ matrix.package }} 🧪
         run: pnpm run --filter ${{ matrix.package }} test:ci
+
+      - name: Run build check ${{ matrix.package }}
+        run: pnpm --filter ${{ matrix.package }} exec tsc --noEmit

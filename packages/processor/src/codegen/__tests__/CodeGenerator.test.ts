@@ -137,7 +137,8 @@ describe(CodeGenerator, () => {
     ];
 
     for (const module of modules) {
-      expect(await module.toFormattedString()).toMatchSnapshot(module.name);
+      // eslint-disable-next-line dot-notation
+      expect(await module.toFormattedString()).toMatchSnapshot(module['name']);
     }
   });
 
@@ -220,7 +221,8 @@ describe(CodeGenerator, () => {
     ];
 
     for (const module of modules) {
-      expect(await module.toFormattedString()).toMatchSnapshot(module.name);
+      // eslint-disable-next-line dot-notation
+      expect(await module.toFormattedString()).toMatchSnapshot(module['name']);
     }
   });
 
@@ -244,7 +246,8 @@ describe(CodeGenerator, () => {
     ];
 
     for (const module of modules) {
-      expect(await module.toFormattedString()).toMatchSnapshot(module.name);
+      // eslint-disable-next-line dot-notation
+      expect(await module.toFormattedString()).toMatchSnapshot(module['name']);
     }
   });
 

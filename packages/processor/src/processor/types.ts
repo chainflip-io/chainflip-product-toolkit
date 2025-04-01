@@ -102,10 +102,12 @@ export interface Logger {
 export type EventInfo<P extends ProcessorStore<any, any>> = ReturnType<P['getEventInfo']>;
 export type ExtrinsicInfo<P extends ProcessorStore<any, any>> = ReturnType<P['getExtrinsicInfo']>;
 
+export type Semver = `${string}.${string}.${string}`;
+
 export type ProcessorOptions<T extends ProcessorStore<any, any>> = {
   batchSize?: number;
   transactionTimeout?: number;
-  eventHandlers: { name: string; handler: EventHandler<T>; spec: number }[];
+  eventHandlers: { name: string; handler: EventHandler<T>; spec: Semver }[];
   name: string;
 };
 
