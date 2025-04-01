@@ -23,12 +23,8 @@ const compareSemver = (a: Semver, b: Semver) => {
   return Cmp.Eq;
 };
 
-const cache = new Map<string, Semver>();
-
 export const parseSemver = (specId: string): Semver => {
   // the specId is in the format of "chainflip-node@<specId>"
-  const cached = cache.get(specId);
-  if (cached) return cached;
   const specNumber = Number.parseInt(specId.split('@')[1], 10);
   if (Number.isNaN(specNumber)) throw new Error('Invalid specId');
   const specStr = specNumber.toString();
@@ -37,9 +33,7 @@ export const parseSemver = (specId: string): Semver => {
   const major = padded.slice(0, segmentLength);
   const minor = padded.slice(segmentLength, segmentLength * 2);
   const patch = padded.slice(segmentLength * 2, segmentLength * 3);
-  const semver = `${Number(major)}.${Number(minor)}.${Number(patch)}` as const;
-  cache.set(specId, semver);
-  return semver;
+  return `${Number(major)}.${Number(minor)}.${Number(patch)}`;
 };
 
 export default class HandlerMap<T extends string, U> {
