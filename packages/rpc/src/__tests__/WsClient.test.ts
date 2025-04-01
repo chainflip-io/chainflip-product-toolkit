@@ -233,61 +233,71 @@ describe(WsClient, () => {
 
     expect(await Promise.all(accounts.map(([acct]) => client.sendRequest('cf_account_info', acct))))
       .toMatchInlineSnapshot(`
-      [
-        {
-          "asset_balances": {
-            "Arbitrum": {
-              "ETH": 0n,
-              "USDC": 0n,
+        [
+          {
+            "asset_balances": {
+              "Arbitrum": {
+                "ETH": 0n,
+                "USDC": 0n,
+              },
+              "Assethub": {
+                "DOT": 0n,
+                "USDC": 0n,
+                "USDT": 0n,
+              },
+              "Bitcoin": {
+                "BTC": 0n,
+              },
+              "Ethereum": {
+                "ETH": 0n,
+                "FLIP": 0n,
+                "USDC": 0n,
+                "USDT": 0n,
+              },
+              "Polkadot": {
+                "DOT": 0n,
+              },
+              "Solana": {
+                "SOL": 0n,
+                "USDC": 0n,
+              },
             },
-            "Bitcoin": {
-              "BTC": 0n,
-            },
-            "Ethereum": {
-              "ETH": 0n,
-              "FLIP": 0n,
-              "USDC": 0n,
-              "USDT": 0n,
-            },
-            "Polkadot": {
-              "DOT": 0n,
-            },
-            "Solana": {
-              "SOL": 0n,
-              "USDC": 0n,
-            },
+            "flip_balance": 0n,
+            "role": "unregistered",
           },
-          "flip_balance": 0n,
-          "role": "unregistered",
-        },
-        {
-          "asset_balances": {
-            "Arbitrum": {
-              "ETH": 0n,
-              "USDC": 0n,
+          {
+            "asset_balances": {
+              "Arbitrum": {
+                "ETH": 0n,
+                "USDC": 0n,
+              },
+              "Assethub": {
+                "DOT": 0n,
+                "USDC": 0n,
+                "USDT": 0n,
+              },
+              "Bitcoin": {
+                "BTC": 0n,
+              },
+              "Ethereum": {
+                "ETH": 0n,
+                "FLIP": 0n,
+                "USDC": 0n,
+                "USDT": 0n,
+              },
+              "Polkadot": {
+                "DOT": 0n,
+              },
+              "Solana": {
+                "SOL": 0n,
+                "USDC": 0n,
+              },
             },
-            "Bitcoin": {
-              "BTC": 0n,
-            },
-            "Ethereum": {
-              "ETH": 0n,
-              "FLIP": 0n,
-              "USDC": 0n,
-              "USDT": 0n,
-            },
-            "Polkadot": {
-              "DOT": 0n,
-            },
-            "Solana": {
-              "SOL": 0n,
-              "USDC": 0n,
-            },
+            "flip_balance": 16n,
+            "role": "unregistered",
           },
-          "flip_balance": 16n,
-          "role": "unregistered",
-        },
-      ]
-    `);
+        ]
+      `);
 
     expect(spy.mock.calls.map((args) => args.map((a) => JSON.parse(a.toString())))).toMatchObject([
       [

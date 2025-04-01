@@ -16,6 +16,11 @@ exports[`HttpClient > with server > gets broker account info 1`] = `
       "ETH": 0n,
       "USDC": 0n,
     },
+    "Assethub": {
+      "DOT": 0n,
+      "USDC": 0n,
+      "USDT": 0n,
+    },
     "Bitcoin": {
       "BTC": 12369718n,
     },
@@ -47,6 +52,11 @@ exports[`HttpClient > with server > gets broker account info 2 1`] = `
       "ETH": 0n,
       "USDC": 0n,
     },
+    "Assethub": {
+      "DOT": 0n,
+      "USDC": 0n,
+      "USDT": 0n,
+    },
     "Bitcoin": {
       "BTC": 12369718n,
     },
@@ -76,6 +86,11 @@ exports[`HttpClient > with server > gets lp account info 1`] = `
       "ETH": 0n,
       "USDC": 0n,
     },
+    "Assethub": {
+      "DOT": 0n,
+      "USDC": 0n,
+      "USDT": 0n,
+    },
     "Bitcoin": {
       "BTC": 0n,
     },
@@ -97,6 +112,11 @@ exports[`HttpClient > with server > gets lp account info 1`] = `
     "Arbitrum": {
       "ETH": [],
       "USDC": [],
+    },
+    "Assethub": {
+      "DOT": [],
+      "USDC": [],
+      "USDT": [],
     },
     "Bitcoin": {
       "BTC": [
@@ -128,6 +148,11 @@ exports[`HttpClient > with server > gets lp account info 1`] = `
       "ETH": 0n,
       "USDC": 0n,
     },
+    "Assethub": {
+      "DOT": 0n,
+      "USDC": 0n,
+      "USDT": 0n,
+    },
     "Bitcoin": {
       "BTC": 0n,
     },
@@ -148,6 +173,7 @@ exports[`HttpClient > with server > gets lp account info 1`] = `
   "flip_balance": 4999847340286000000n,
   "refund_addresses": {
     "Arbitrum": null,
+    "Assethub": null,
     "Bitcoin": "bc1qqt3juqef9azhd0zeuamu9c30pg5xdllvmks2ja",
     "Ethereum": "0xacd7c0481fc71dce9e3e8bd4cca5828ce8302629",
     "Polkadot": null,
@@ -162,6 +188,11 @@ exports[`HttpClient > with server > gets lp total balances 1`] = `
   "Arbitrum": {
     "ETH": 0n,
     "USDC": 0n,
+  },
+  "Assethub": {
+    "DOT": 0n,
+    "USDC": 0n,
+    "USDT": 0n,
   },
   "Bitcoin": {
     "BTC": 0n,
@@ -236,6 +267,7 @@ exports[`HttpClient > with server > gets the environment 1`] = `
   "ingress_egress": {
     "channel_opening_fees": {
       "Arbitrum": 0n,
+      "Assethub": 0n,
       "Bitcoin": 0n,
       "Ethereum": 0n,
       "Polkadot": 0n,
@@ -245,6 +277,11 @@ exports[`HttpClient > with server > gets the environment 1`] = `
       "Arbitrum": {
         "ETH": 7998400000000n,
         "USDC": 9985n,
+      },
+      "Assethub": {
+        "DOT": 0n,
+        "USDC": 0n,
+        "USDT": 0n,
       },
       "Bitcoin": {
         "BTC": 176n,
@@ -268,6 +305,11 @@ exports[`HttpClient > with server > gets the environment 1`] = `
         "ETH": 5998800000000n,
         "USDC": 8987n,
       },
+      "Assethub": {
+        "DOT": 0n,
+        "USDC": 0n,
+        "USDT": 0n,
+      },
       "Bitcoin": {
         "BTC": 78n,
       },
@@ -287,6 +329,7 @@ exports[`HttpClient > with server > gets the environment 1`] = `
     },
     "max_swap_retry_duration_blocks": {
       "Arbitrum": 1,
+      "Assethub": 1,
       "Bitcoin": 1,
       "Ethereum": 1,
       "Polkadot": 1,
@@ -296,6 +339,11 @@ exports[`HttpClient > with server > gets the environment 1`] = `
       "Arbitrum": {
         "ETH": 0n,
         "USDC": 0n,
+      },
+      "Assethub": {
+        "DOT": 0n,
+        "USDC": 0n,
+        "USDT": 0n,
       },
       "Bitcoin": {
         "BTC": 0n,
@@ -319,6 +367,11 @@ exports[`HttpClient > with server > gets the environment 1`] = `
         "ETH": 1n,
         "USDC": 1n,
       },
+      "Assethub": {
+        "DOT": 0n,
+        "USDC": 0n,
+        "USDT": 0n,
+      },
       "Bitcoin": {
         "BTC": 600n,
       },
@@ -338,6 +391,7 @@ exports[`HttpClient > with server > gets the environment 1`] = `
     },
     "witness_safety_margins": {
       "Arbitrum": 1,
+      "Assethub": null,
       "Bitcoin": 2,
       "Ethereum": 2,
       "Polkadot": null,
@@ -393,6 +447,80 @@ exports[`HttpClient > with server > gets the environment 1`] = `
           "range_total_swap_inputs": {
             "base": 0n,
             "quote": 0n,
+          },
+        },
+      },
+      "Assethub": {
+        "DOT": {
+          "limit_order_fee_hundredth_pips": 0,
+          "limit_order_total_fees_earned": {
+            "base": "0x0",
+            "quote": "0x0",
+          },
+          "limit_total_swap_inputs": {
+            "base": "0x0",
+            "quote": "0x0",
+          },
+          "quote_asset": {
+            "asset": "USDC",
+            "chain": "Ethereum",
+          },
+          "range_order_fee_hundredth_pips": 0,
+          "range_order_total_fees_earned": {
+            "base": "0x0",
+            "quote": "0x0",
+          },
+          "range_total_swap_inputs": {
+            "base": "0x0",
+            "quote": "0x0",
+          },
+        },
+        "USDC": {
+          "limit_order_fee_hundredth_pips": 0,
+          "limit_order_total_fees_earned": {
+            "base": "0x0",
+            "quote": "0x0",
+          },
+          "limit_total_swap_inputs": {
+            "base": "0x0",
+            "quote": "0x0",
+          },
+          "quote_asset": {
+            "asset": "USDC",
+            "chain": "Ethereum",
+          },
+          "range_order_fee_hundredth_pips": 0,
+          "range_order_total_fees_earned": {
+            "base": "0x0",
+            "quote": "0x0",
+          },
+          "range_total_swap_inputs": {
+            "base": "0x0",
+            "quote": "0x0",
+          },
+        },
+        "USDT": {
+          "limit_order_fee_hundredth_pips": 0,
+          "limit_order_total_fees_earned": {
+            "base": "0x0",
+            "quote": "0x0",
+          },
+          "limit_total_swap_inputs": {
+            "base": "0x0",
+            "quote": "0x0",
+          },
+          "quote_asset": {
+            "asset": "USDC",
+            "chain": "Ethereum",
+          },
+          "range_order_fee_hundredth_pips": 0,
+          "range_order_total_fees_earned": {
+            "base": "0x0",
+            "quote": "0x0",
+          },
+          "range_total_swap_inputs": {
+            "base": "0x0",
+            "quote": "0x0",
           },
         },
       },
@@ -580,6 +708,11 @@ exports[`HttpClient > with server > gets the environment 1`] = `
         "ETH": null,
         "USDC": null,
       },
+      "Assethub": {
+        "DOT": null,
+        "USDC": null,
+        "USDT": null,
+      },
       "Bitcoin": {
         "BTC": null,
       },
@@ -606,6 +739,7 @@ exports[`HttpClient > with server > gets the ingress/egress environment 1`] = `
 {
   "channel_opening_fees": {
     "Arbitrum": 0n,
+    "Assethub": 0n,
     "Bitcoin": 0n,
     "Ethereum": 0n,
     "Polkadot": 0n,
@@ -615,6 +749,11 @@ exports[`HttpClient > with server > gets the ingress/egress environment 1`] = `
     "Arbitrum": {
       "ETH": 7998400000000n,
       "USDC": 9985n,
+    },
+    "Assethub": {
+      "DOT": 0n,
+      "USDC": 0n,
+      "USDT": 0n,
     },
     "Bitcoin": {
       "BTC": 176n,
@@ -638,6 +777,11 @@ exports[`HttpClient > with server > gets the ingress/egress environment 1`] = `
       "ETH": 5998800000000n,
       "USDC": 8987n,
     },
+    "Assethub": {
+      "DOT": 0n,
+      "USDC": 0n,
+      "USDT": 0n,
+    },
     "Bitcoin": {
       "BTC": 78n,
     },
@@ -657,6 +801,7 @@ exports[`HttpClient > with server > gets the ingress/egress environment 1`] = `
   },
   "max_swap_retry_duration_blocks": {
     "Arbitrum": 1,
+    "Assethub": 1,
     "Bitcoin": 1,
     "Ethereum": 1,
     "Polkadot": 1,
@@ -666,6 +811,11 @@ exports[`HttpClient > with server > gets the ingress/egress environment 1`] = `
     "Arbitrum": {
       "ETH": 0n,
       "USDC": 0n,
+    },
+    "Assethub": {
+      "DOT": 0n,
+      "USDC": 0n,
+      "USDT": 0n,
     },
     "Bitcoin": {
       "BTC": 0n,
@@ -689,6 +839,11 @@ exports[`HttpClient > with server > gets the ingress/egress environment 1`] = `
       "ETH": 1n,
       "USDC": 1n,
     },
+    "Assethub": {
+      "DOT": 0n,
+      "USDC": 0n,
+      "USDT": 0n,
+    },
     "Bitcoin": {
       "BTC": 600n,
     },
@@ -708,6 +863,7 @@ exports[`HttpClient > with server > gets the ingress/egress environment 1`] = `
   },
   "witness_safety_margins": {
     "Arbitrum": 1,
+    "Assethub": null,
     "Bitcoin": 2,
     "Ethereum": 2,
     "Polkadot": null,
@@ -722,6 +878,11 @@ exports[`HttpClient > with server > gets unregistered account info 1`] = `
     "Arbitrum": {
       "ETH": 0n,
       "USDC": 0n,
+    },
+    "Assethub": {
+      "DOT": 0n,
+      "USDC": 0n,
+      "USDT": 0n,
     },
     "Bitcoin": {
       "BTC": 0n,
