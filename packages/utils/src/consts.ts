@@ -123,6 +123,10 @@ export const brokerAliasMap: AccountAliasMap = {
     name: 'Moca',
     twitter: '@moca_app',
   },
+  cFPD5DrrsHb7Wi5nmBcFuPDcGRsWhv5Bz6vvzGqFYPFhbR3Sw: {
+    name: 'Squid',
+    twitter: '@squidrouter',
+  },
 } as const;
 
 export const lpAliasMap: AccountAliasMap = {
