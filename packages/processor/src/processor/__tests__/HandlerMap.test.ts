@@ -34,7 +34,9 @@ describe(HandlerMap, () => {
         ? DeepMutable<T[number]>[]
         : T;
 
-  const handlerMap = new HandlerMap(handlers as unknown as DeepMutable<typeof handlers>);
+  const handlerMap = HandlerMap.fromGroupedHandlers(
+    handlers as unknown as DeepMutable<typeof handlers>,
+  );
 
   it.each([
     ['heartbeat', 'chainflip-node@100', handlers[0].handlers[0].handler],

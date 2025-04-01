@@ -1,8 +1,9 @@
-export type Semver = `${string}.${string}.${string}`;
+import type { Semver } from './types';
 
 type Handler<T extends string, U> = {
   name: T;
   handler: U;
+  spec: Semver;
 };
 
 enum Cmp {
@@ -37,21 +38,23 @@ export const parseSemver = (specId: string): Semver => {
 };
 
 export default class HandlerMap<T extends string, U> {
+  static fromGroupedHandlers<N extends string, H>(
+    specs: { spec: Semver; handlers: { name: N; handler: H }[] }[],
+  ) {
+    return new HandlerMap<N, H>(
+      specs.flatMap(({ spec, handlers }) =>
+        handlers.map(({ name, handler }) => ({ spec, name, handler })),
+      ),
+    );
+  }
+
   private cache = new Map<`${T}-${Semver}`, U | null>();
 
   private handlersByName: Record<T, { spec: Semver; handler: U }[]>;
 
-  constructor(
-    specs: {
-      spec: Semver;
-      handlers: Handler<T, U>[];
-    }[],
-  ) {
+  constructor(specs: Handler<T, U>[]) {
     this.handlersByName = specs
       .toSorted((a, b) => compareSemver(b.spec, a.spec))
-      .flatMap(({ spec, handlers }) =>
-        handlers.map(({ name, handler }) => ({ spec, name, handler })),
-      )
       .reduce(
         (acc, { spec, name, handler }) => {
           acc[name] ??= [];
