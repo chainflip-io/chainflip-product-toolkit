@@ -32,11 +32,11 @@ export const parseSemver = (specId: string): Semver => {
   const specNumber = Number.parseInt(specId.split('@')[1], 10);
   if (Number.isNaN(specNumber)) throw new Error('Invalid specId');
   const specStr = specNumber.toString();
-  const desiredLenPerPart = Math.ceil(specStr.length / 3);
-  const padded = specStr.padStart(desiredLenPerPart * 3, '0');
-  const major = padded.slice(0, desiredLenPerPart);
-  const minor = padded.slice(desiredLenPerPart, desiredLenPerPart * 2);
-  const patch = padded.slice(desiredLenPerPart * 2, desiredLenPerPart * 3);
+  const segmentLength = Math.ceil(specStr.length / 3);
+  const padded = specStr.padStart(segmentLength * 3, '0');
+  const major = padded.slice(0, segmentLength);
+  const minor = padded.slice(segmentLength, segmentLength * 2);
+  const patch = padded.slice(segmentLength * 2, segmentLength * 3);
   const semver = `${Number(major)}.${Number(minor)}.${Number(patch)}` as const;
   cache.set(specId, semver);
   return semver;
@@ -80,6 +80,7 @@ export default class HandlerMap<T extends string, U> {
 
     const handlers = this.handlersByName[name] ?? [];
 
+    // find the first handler that is less than or equal to the block semver
     const index = handlers.findIndex(({ spec }) => compareSemver(spec, blockSemver) !== Cmp.Gt);
 
     handler = index === -1 ? null : handlers[index].handler;
