@@ -1,3 +1,10 @@
+type ArrayToMap<T extends readonly string[]> = {
+  [K in T[number]]: K;
+};
+
+const arrayToMap = <const T extends readonly string[]>(array: T): ArrayToMap<T> =>
+  Object.fromEntries(array.map((key) => [key, key])) as ArrayToMap<T>;
+
 export const chainflipAssets = [
   // Ethereum
   'Usdc',
@@ -253,3 +260,109 @@ export const assetContractId: Record<ChainflipAsset, number> = {
   HubUsdt: 12,
   HubUsdc: 13,
 };
+
+export function isValidAssetAndChain(
+  assetAndChain: UncheckedAssetAndChain,
+): assetAndChain is AssetAndChain {
+  const { asset, chain } = assetAndChain;
+  if (!(chain in chainConstants)) return false;
+
+  const validAssets = chainConstants[chain].assets as string[];
+  return validAssets.includes(asset);
+}
+
+export function getInternalAsset(asset: UncheckedAssetAndChain): ChainflipAsset;
+export function getInternalAsset(asset: UncheckedAssetAndChain, assert: true): ChainflipAsset;
+export function getInternalAsset(
+  asset: UncheckedAssetAndChain,
+  assert: boolean,
+): ChainflipAsset | null;
+export function getInternalAsset(asset: UncheckedAssetAndChain, assert = true) {
+  if (!isValidAssetAndChain(asset)) {
+    if (assert) {
+      throw new Error(`invalid asset and chain combination: ${JSON.stringify(asset)}`);
+    }
+
+    return null;
+  }
+
+  const ChainflipAssetMap = arrayToMap(chainflipAssets);
+  const RpcAssetMap = arrayToMap(rpcAssets);
+  const ChainMap = arrayToMap(chainflipChains);
+
+  const map: ChainAssetMap<ChainflipAsset> = {
+    [ChainMap.Ethereum]: {
+      [RpcAssetMap.USDC]: ChainflipAssetMap.Usdc,
+      [RpcAssetMap.FLIP]: ChainflipAssetMap.Flip,
+      [RpcAssetMap.ETH]: ChainflipAssetMap.Eth,
+      [RpcAssetMap.USDT]: ChainflipAssetMap.Usdt,
+    },
+    [ChainMap.Bitcoin]: {
+      [RpcAssetMap.BTC]: ChainflipAssetMap.Btc,
+    },
+    [ChainMap.Polkadot]: {
+      [RpcAssetMap.DOT]: ChainflipAssetMap.Dot,
+    },
+    [ChainMap.Arbitrum]: {
+      [RpcAssetMap.USDC]: ChainflipAssetMap.ArbUsdc,
+      [RpcAssetMap.ETH]: ChainflipAssetMap.ArbEth,
+    },
+    [ChainMap.Solana]: {
+      [RpcAssetMap.SOL]: ChainflipAssetMap.Sol,
+      [RpcAssetMap.USDC]: ChainflipAssetMap.SolUsdc,
+    },
+    [ChainMap.Assethub]: {
+      [RpcAssetMap.USDC]: ChainflipAssetMap.HubUsdc,
+      [RpcAssetMap.USDT]: ChainflipAssetMap.HubUsdt,
+      [RpcAssetMap.DOT]: ChainflipAssetMap.HubDot,
+    },
+  };
+
+  const chain = map[asset.chain];
+
+  return chain[asset.asset as keyof typeof chain] as ChainflipAsset;
+}
+
+export function getInternalAssets(data: {
+  srcAsset: RpcAsset;
+  srcChain: ChainflipChain;
+  destAsset: RpcAsset;
+  destChain: ChainflipChain;
+}): { srcAsset: ChainflipAsset; destAsset: ChainflipAsset };
+export function getInternalAssets(
+  data: {
+    srcAsset: RpcAsset;
+    srcChain: ChainflipChain;
+    destAsset: RpcAsset;
+    destChain: ChainflipChain;
+  },
+  assert: true,
+): { srcAsset: ChainflipAsset; destAsset: ChainflipAsset };
+export function getInternalAssets(
+  data: {
+    srcAsset: RpcAsset;
+    srcChain: ChainflipChain;
+    destAsset: RpcAsset;
+    destChain: ChainflipChain;
+  },
+  assert: boolean,
+): { srcAsset: ChainflipAsset | null; destAsset: ChainflipAsset | null };
+export function getInternalAssets(
+  {
+    srcAsset,
+    srcChain,
+    destAsset,
+    destChain,
+  }: {
+    srcAsset: RpcAsset;
+    srcChain: ChainflipChain;
+    destAsset: RpcAsset;
+    destChain: ChainflipChain;
+  },
+  assert = true,
+) {
+  return {
+    srcAsset: getInternalAsset({ asset: srcAsset, chain: srcChain }, assert),
+    destAsset: getInternalAsset({ asset: destAsset, chain: destChain }, assert),
+  };
+}
