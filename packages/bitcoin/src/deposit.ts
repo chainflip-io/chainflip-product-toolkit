@@ -13,6 +13,7 @@ const encodeChainAddress = (data: Uint8Array, asset: ChainflipAsset) => {
   switch (assetConstants[asset].chain) {
     case 'Solana':
       return base58.encode(data);
+    case 'Assethub':
     case 'Polkadot':
       return ss58.encode({ data, ss58Format: POLKADOT_SS58_PREFIX });
     case 'Ethereum':
