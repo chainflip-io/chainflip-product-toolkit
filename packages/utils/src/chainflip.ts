@@ -1,10 +1,3 @@
-type ArrayToMap<T extends readonly string[]> = {
-  [K in T[number]]: K;
-};
-
-const arrayToMap = <const T extends readonly string[]>(array: T): ArrayToMap<T> =>
-  Object.fromEntries(array.map((key) => [key, key])) as ArrayToMap<T>;
-
 export const chainflipAssets = [
   // Ethereum
   'Usdc',
@@ -286,40 +279,35 @@ export function getInternalAsset(asset: UncheckedAssetAndChain, assert = true) {
     return null;
   }
 
-  const ChainflipAssetMap = arrayToMap(chainflipAssets);
-  const RpcAssetMap = arrayToMap(rpcAssets);
-  const ChainMap = arrayToMap(chainflipChains);
-
   const map: ChainAssetMap<ChainflipAsset> = {
-    [ChainMap.Ethereum]: {
-      [RpcAssetMap.USDC]: ChainflipAssetMap.Usdc,
-      [RpcAssetMap.FLIP]: ChainflipAssetMap.Flip,
-      [RpcAssetMap.ETH]: ChainflipAssetMap.Eth,
-      [RpcAssetMap.USDT]: ChainflipAssetMap.Usdt,
+    Ethereum: {
+      USDC: 'Usdc',
+      FLIP: 'Flip',
+      ETH: 'Eth',
+      USDT: 'Usdt',
     },
-    [ChainMap.Bitcoin]: {
-      [RpcAssetMap.BTC]: ChainflipAssetMap.Btc,
+    Bitcoin: {
+      BTC: 'Btc',
     },
-    [ChainMap.Polkadot]: {
-      [RpcAssetMap.DOT]: ChainflipAssetMap.Dot,
+    Polkadot: {
+      DOT: 'Dot',
     },
-    [ChainMap.Arbitrum]: {
-      [RpcAssetMap.USDC]: ChainflipAssetMap.ArbUsdc,
-      [RpcAssetMap.ETH]: ChainflipAssetMap.ArbEth,
+    Arbitrum: {
+      USDC: 'ArbUsdc',
+      ETH: 'ArbEth',
     },
-    [ChainMap.Solana]: {
-      [RpcAssetMap.SOL]: ChainflipAssetMap.Sol,
-      [RpcAssetMap.USDC]: ChainflipAssetMap.SolUsdc,
+    Solana: {
+      SOL: 'Sol',
+      USDC: 'SolUsdc',
     },
-    [ChainMap.Assethub]: {
-      [RpcAssetMap.USDC]: ChainflipAssetMap.HubUsdc,
-      [RpcAssetMap.USDT]: ChainflipAssetMap.HubUsdt,
-      [RpcAssetMap.DOT]: ChainflipAssetMap.HubDot,
+    Assethub: {
+      USDC: 'HubUsdc',
+      USDT: 'HubUsdt',
+      DOT: 'HubDot',
     },
   };
 
   const chain = map[asset.chain];
-
   return chain[asset.asset as keyof typeof chain] as ChainflipAsset;
 }
 
