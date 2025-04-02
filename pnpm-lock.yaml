@@ -72,8 +72,8 @@ importers:
   packages/bitcoin:
     dependencies:
       '@chainflip/utils':
-        specifier: 0.7.2
-        version: 0.7.2
+        specifier: 0.8.2
+        version: 0.8.2
       bignumber.js:
         specifier: ^9.1.2
         version: 9.1.2
@@ -90,11 +90,11 @@ importers:
   packages/chainspec:
     devDependencies:
       '@chainflip/rpc':
-        specifier: 1.8.6
-        version: 1.8.6
+        specifier: 1.8.15
+        version: 1.8.15
       '@chainflip/utils':
-        specifier: 0.7.0
-        version: 0.7.0
+        specifier: 0.8.2
+        version: 0.8.2
       '@polkadot/types':
         specifier: ^15.9.1
         version: 15.9.1
@@ -126,8 +126,8 @@ importers:
   packages/extrinsics:
     devDependencies:
       '@chainflip/utils':
-        specifier: 0.7.0
-        version: 0.7.0
+        specifier: 0.8.2
+        version: 0.8.2
       '@polkadot/types':
         specifier: ^15.9.1
         version: 15.9.1
@@ -135,24 +135,39 @@ importers:
   packages/processor:
     dependencies:
       '@chainflip/utils':
-        specifier: 0.7.0
-        version: 0.7.0
+        specifier: 0.8.2
+        version: 0.8.2
       zod:
         specifier: ^3.24.2
         version: 3.24.2
     devDependencies:
       '@chainflip/rpc':
-        specifier: 1.8.6
-        version: 1.8.6
+        specifier: 1.8.15
+        version: 1.8.15
       '@polkadot/types':
         specifier: ^15.9.1
         version: 15.9.1
 
+  packages/redis:
+    dependencies:
+      '@chainflip/utils':
+        specifier: 0.8.2
+        version: 0.8.2
+      bignumber.js:
+        specifier: ^9.1.2
+        version: 9.1.2
+      ioredis:
+        specifier: ^5.6.0
+        version: 5.6.0
+      zod:
+        specifier: ^3.24.2
+        version: 3.24.2
+
   packages/rpc:
     dependencies:
       '@chainflip/utils':
-        specifier: 0.7.0
-        version: 0.7.0
+        specifier: 0.8.2
+        version: 0.8.2
       zod:
         specifier: ^3.24.2
         version: 3.24.2
@@ -170,8 +185,8 @@ importers:
   packages/scale:
     dependencies:
       '@chainflip/utils':
-        specifier: ^0.6.0
-        version: 0.6.0
+        specifier: ^0.8.2
+        version: 0.8.2
       scale-ts:
         specifier: ^1.6.1
         version: 1.6.1
@@ -186,8 +201,8 @@ importers:
         specifier: ^1.8.0
         version: 1.8.0
       '@chainflip/utils':
-        specifier: 0.7.2
-        version: 0.7.2
+        specifier: 0.8.2
+        version: 0.8.2
       '@coral-xyz/anchor':
         specifier: ^0.31.0
         version: 0.31.0(bufferutil@4.0.8)(utf-8-validate@5.0.10)
@@ -262,14 +277,11 @@ packages:
     resolution: {integrity: sha512-6zABk/ECA/QYSCQ1NGiVwwbQerUCZ+TQbp64Q3AgmfNvurHH0j8TtXa1qbShXA6qqkpAj4V5W8pP6mLe1mcMqA==}
     engines: {node: '>=18'}
 
-  '@chainflip/rpc@1.8.6':
-    resolution: {integrity: sha512-aufMeb0ltGuudujH/H20EHPKsvt+qaYSB7weSy5Vw0ZfhUuQzDvFegXIpDLKajeUVpzaniKIlE2rKk4574nKDA==}
+  '@chainflip/rpc@1.8.15':
+    resolution: {integrity: sha512-VhwJU8fu+mrZleQgJIZR2P6gJ6DLhjC3w5fZ91w3ZqyDLDpYpFPyzCjTqq3BwyHOSNqdGTRTCLhfg58d2AeEEw==}
 
   '@chainflip/scale@1.8.0':
     resolution: {integrity: sha512-66bT2DQi0kNFZRva0phBuMWCWKamOyfROlKovxcBd6wzZVGFxVqgi73iG1nExaUPlOLJnYc8gQ/blwHidgjvrg==}
-
-  '@chainflip/utils@0.4.0':
-    resolution: {integrity: sha512-OuMFlgbIbyJ1Kt39zytfGh4HZ5dVY25/a3qb0c1K137+QmhdOuF+R7QSkFPqYAfDG4KhGRqo0rgUtEpaEEcSKA==}
 
   '@chainflip/utils@0.6.0':
     resolution: {integrity: sha512-ZwyNKv3FVVJw5aOcRf/4rTxCclP+prerxPnTGBrFcBYEYSrPlyx4eI1dc7J35xmKD2yq+vQgwNjCx1h6oJuoPA==}
@@ -277,8 +289,8 @@ packages:
   '@chainflip/utils@0.7.0':
     resolution: {integrity: sha512-aTrtmpPkbqojP5wsrpfCgx8uskv9SD1gmq7hWwjfRQT1ucwYGAuUzL9LdREBtiMNB4pfS/J42dRWjbbLmx0j5w==}
 
-  '@chainflip/utils@0.7.2':
-    resolution: {integrity: sha512-DJ37gbbNVEy/YFcK9oQ19Ro83hUwCFyP2fA//Vatit1Z4nWPKgBmyQtYQLdjfcwrOhvQeYi7DcxfVU0YwOaP2g==}
+  '@chainflip/utils@0.8.2':
+    resolution: {integrity: sha512-wVWSdd1i8+RY4IPqCLdsr/b2Y5cGTzSv6kE/nKhFhcUPELUO0YTRoVote/mUQ/Kd9MiQFaDiS1AEtcPZ0H2W6w==}
 
   '@coral-xyz/anchor-errors@0.31.0':
     resolution: {integrity: sha512-SUERksFSQ+4F11hkROIwHq4mcoSMXJxwVWLoklefi4dU679zVWFVcTq6O7otvjY8wlUaRXeE+iYcQWZTw2ll6w==}
@@ -690,6 +702,9 @@ packages:
   '@humanwhocodes/retry@0.4.2':
     resolution: {integrity: sha512-xeO57FpIu4p1Ri3Jq/EXq4ClRm86dVF2z/+kvFnyqVYRavTZmaFaUBbWCOuuTh0o/g7DSsk6kc2vrS4Vl5oPOQ==}
     engines: {node: '>=18.18'}
+
+  '@ioredis/commands@1.2.0':
+    resolution: {integrity: sha512-Sx1pU8EM64o2BrqNpEO1CNLtKQwyhuXuqyfH7oGKCk+1a33d2r5saW8zNwm3j6BTExtjrv2BxTgzzkMwts6vGg==}
 
   '@isaacs/cliui@8.0.2':
     resolution: {integrity: sha512-O8jcjabXaleOG9DQ0+ARXWZBTfnP4WNAqzuiJK7ll44AmxGKv/J2M4TPjxjY3znBCfvBXFzucm1twdyFybFqEA==}
@@ -1387,6 +1402,10 @@ packages:
     resolution: {integrity: sha512-BSeNnyus75C4//NQ9gQt1/csTXyo/8Sb+afLAkzAptFuMsod9HFokGNudZpi/oQV73hnVK+sR+5PVRMd+Dr7YQ==}
     engines: {node: '>=12'}
 
+  cluster-key-slot@1.1.2:
+    resolution: {integrity: sha512-RMr0FhtfXemyinomL4hrWcYJxmX6deFdCxpJzhDttxgO1+bcCnkk+9drydLVDmAMG7NE6aN/fl4F7ucU/90gAA==}
+    engines: {node: '>=0.10.0'}
+
   color-convert@2.0.1:
     resolution: {integrity: sha512-RRECPsj7iu/xb5oKYcsFHSppFNnsj/52OVTRKb4zP5onXwVF3zVmmToNcOfGC+CRDpfK/U584fMg38ZHCaElKQ==}
     engines: {node: '>=7.0.0'}
@@ -1485,6 +1504,10 @@ packages:
   delay@5.0.0:
     resolution: {integrity: sha512-ReEBKkIfe4ya47wlPYf/gu5ib6yUG0/Aez0JQZQz94kiWtRQvZIQbTiehsnwHvLSWJnQdhVeqYue7Id1dKr0qw==}
     engines: {node: '>=10'}
+
+  denque@2.1.0:
+    resolution: {integrity: sha512-HVQE3AAb/pxF8fQAoiqpvg9i3evqug3hoiwakOyZAwJm+6vZehbkYXZ0l4JxS+I3QxM97v5aaRNhj8v5oBhekw==}
+    engines: {node: '>=0.10'}
 
   doctrine@2.1.0:
     resolution: {integrity: sha512-35mSku4ZXK0vfCuHEDAwt55dg2jNajHZ1odvF+8SSr82EsZY4QmXfuWso8oEd8zRhVObSN18aM0CjSdoBX7zIw==}
@@ -1923,6 +1946,10 @@ packages:
     resolution: {integrity: sha512-NGnrKwXzSms2qUUih/ILZ5JBqNTSa1+ZmP6flaIp6KmSElgE9qdndzS3cqjrDovwFdmwsGsLdeFgB6suw+1e9g==}
     engines: {node: '>= 0.4'}
 
+  ioredis@5.6.0:
+    resolution: {integrity: sha512-tBZlIIWbndeWBWCXWZiqtOF/yxf6yZX3tAlTJ7nfo5jhd6dctNxF7QnYlZLZ1a0o0pDoen7CgZqO+zjNaFbJAg==}
+    engines: {node: '>=12.22.0'}
+
   is-array-buffer@3.0.4:
     resolution: {integrity: sha512-wcjaerHw0ydZwfhiKbXJWLDY8A7yV7KhjQOpb83hGgGfId/aQa4TOvwyzn2PuswW2gPCYEL/nEAiSVpdOj1lXw==}
     engines: {node: '>= 0.4'}
@@ -2130,6 +2157,12 @@ packages:
   locate-path@6.0.0:
     resolution: {integrity: sha512-iPZK6eYjbxRu3uB4/WZ3EsEIMJFMqAoopl3R+zuq0UjcAm/MO6KCweDgPfP3elTztoKP3KtnVHxTn2NHBSDVUw==}
     engines: {node: '>=10'}
+
+  lodash.defaults@4.2.0:
+    resolution: {integrity: sha512-qjxPLHd3r5DnsdGacqOMU6pb/avJzdh9tFX2ymgoZE27BmjXrNy/y4LoaiTeAb+O3gL8AfpJGtqfX/ae2leYYQ==}
+
+  lodash.isarguments@3.1.0:
+    resolution: {integrity: sha512-chi4NHZlZqZD18a0imDHnZPrDeBbTtVN7GXMwuGdRH9qotxAjYs3aVLKc7zNOG9eddR5Ksd8rvFEBc9SsggPpg==}
 
   lodash.merge@4.6.2:
     resolution: {integrity: sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==}
@@ -2410,6 +2443,14 @@ packages:
     resolution: {integrity: sha512-GDhwkLfywWL2s6vEjyhri+eXmfH6j1L7JE27WhqLeYzoh/A3DBaYGEj2H/HFZCn/kMfim73FXxEJTw06WtxQwg==}
     engines: {node: '>= 14.18.0'}
 
+  redis-errors@1.2.0:
+    resolution: {integrity: sha512-1qny3OExCf0UvUV/5wpYKf2YwPcOqXzkwKKSmKHiE6ZMQs5heeE/c8eXK+PNllPvmjgAbfnsbpkGZWy8cBpn9w==}
+    engines: {node: '>=4'}
+
+  redis-parser@3.0.0:
+    resolution: {integrity: sha512-DJnGAeenTdpMEH6uAJRK/uiyEIH9WVsUmoLwzudwGJUwZPp80PDBWPHXSAGNPwNvIXAbe7MSUB1zQFugFml66A==}
+    engines: {node: '>=4'}
+
   regenerator-runtime@0.14.1:
     resolution: {integrity: sha512-dYnhHh0nJoMfnkZs6GmmhFknAGRrLznOu5nc9ML+EJxGvrx6H7teuevqVqCuPcPK//3eDrrjQhehXVx9cnkGdw==}
 
@@ -2540,6 +2581,9 @@ packages:
 
   stackback@0.0.2:
     resolution: {integrity: sha512-1XMJE5fQo1jGH6Y/7ebnwPOBEkIEnT4QF32d5R1+VXdXveM0IBMJt8zfaxX1P3QhVwrYe+576+jkANtSS2mBbw==}
+
+  standard-as-callback@2.1.0:
+    resolution: {integrity: sha512-qoRRSyROncaz1z0mvYqIE4lCd9p2R90i6GxW3uZv5ucSu8tU7B5HXUP1gG8pVZsYNVaXjk8ClXHPttLyxAL48A==}
 
   std-env@3.8.0:
     resolution: {integrity: sha512-Bc3YwwCB+OzldMxOXJIIvC6cPRWr/LxOp48CdQTOkPyk/t4JWWJbrilwBd7RJzKV8QW7tJkcgAmeuLLJugl5/w==}
@@ -3025,17 +3069,15 @@ snapshots:
 
   '@bcoe/v8-coverage@1.0.2': {}
 
-  '@chainflip/rpc@1.8.6':
+  '@chainflip/rpc@1.8.15':
     dependencies:
-      '@chainflip/utils': 0.4.0
+      '@chainflip/utils': 0.7.0
       zod: 3.24.2
 
   '@chainflip/scale@1.8.0':
     dependencies:
       '@chainflip/utils': 0.6.0
       scale-ts: 1.6.1
-
-  '@chainflip/utils@0.4.0': {}
 
   '@chainflip/utils@0.6.0':
     dependencies:
@@ -3049,7 +3091,7 @@ snapshots:
       bignumber.js: 9.1.2
       date-fns: 4.1.0
 
-  '@chainflip/utils@0.7.2':
+  '@chainflip/utils@0.8.2':
     dependencies:
       '@date-fns/utc': 2.1.0
       bignumber.js: 9.1.2
@@ -3336,6 +3378,8 @@ snapshots:
   '@humanwhocodes/retry@0.3.1': {}
 
   '@humanwhocodes/retry@0.4.2': {}
+
+  '@ioredis/commands@1.2.0': {}
 
   '@isaacs/cliui@8.0.2':
     dependencies:
@@ -4155,6 +4199,8 @@ snapshots:
       strip-ansi: 6.0.1
       wrap-ansi: 7.0.0
 
+  cluster-key-slot@1.1.2: {}
+
   color-convert@2.0.1:
     dependencies:
       color-name: 1.1.4
@@ -4245,6 +4291,8 @@ snapshots:
       object-keys: 1.1.1
 
   delay@5.0.0: {}
+
+  denque@2.1.0: {}
 
   doctrine@2.1.0:
     dependencies:
@@ -4865,6 +4913,20 @@ snapshots:
       hasown: 2.0.2
       side-channel: 1.0.6
 
+  ioredis@5.6.0:
+    dependencies:
+      '@ioredis/commands': 1.2.0
+      cluster-key-slot: 1.1.2
+      debug: 4.4.0
+      denque: 2.1.0
+      lodash.defaults: 4.2.0
+      lodash.isarguments: 3.1.0
+      redis-errors: 1.2.0
+      redis-parser: 3.0.0
+      standard-as-callback: 2.1.0
+    transitivePeerDependencies:
+      - supports-color
+
   is-array-buffer@3.0.4:
     dependencies:
       call-bind: 1.0.7
@@ -5073,6 +5135,10 @@ snapshots:
   locate-path@6.0.0:
     dependencies:
       p-locate: 5.0.0
+
+  lodash.defaults@4.2.0: {}
+
+  lodash.isarguments@3.1.0: {}
 
   lodash.merge@4.6.2: {}
 
@@ -5319,6 +5385,12 @@ snapshots:
 
   readdirp@4.1.2: {}
 
+  redis-errors@1.2.0: {}
+
+  redis-parser@3.0.0:
+    dependencies:
+      redis-errors: 1.2.0
+
   regenerator-runtime@0.14.1: {}
 
   regexp.prototype.flags@1.5.3:
@@ -5478,6 +5550,8 @@ snapshots:
       whatwg-url: 7.1.0
 
   stackback@0.0.2: {}
+
+  standard-as-callback@2.1.0: {}
 
   std-env@3.8.0: {}
 
