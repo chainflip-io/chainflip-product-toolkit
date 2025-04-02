@@ -1,5 +1,68 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
+exports[`HttpClient > with server > gets all the trading strategies 1`] = `
+[
+  {
+    "balance": [
+      [
+        {
+          "asset": "USDC",
+          "chain": "Ethereum",
+        },
+        49949999997n,
+      ],
+      [
+        {
+          "asset": "USDT",
+          "chain": "Ethereum",
+        },
+        37295972067n,
+      ],
+    ],
+    "lp_id": "cFL8fmgKZcchhtLagBH2GKfsuWxBqUaD5CYE1m7DFb8DBSLJ1",
+    "strategy": {
+      "TickZeroCentered": {
+        "base_asset": {
+          "asset": "USDT",
+          "chain": "Ethereum",
+        },
+        "spread_tick": 1,
+      },
+    },
+    "strategy_id": "cFLR4dN8x2vz3Vbcye1wMJfikfFFuUT7M9DiY58W82bEqdgvX",
+  },
+  {
+    "balance": [
+      [
+        {
+          "asset": "USDC",
+          "chain": "Ethereum",
+        },
+        0n,
+      ],
+      [
+        {
+          "asset": "USDT",
+          "chain": "Ethereum",
+        },
+        23000000000n,
+      ],
+    ],
+    "lp_id": "cFPdef3hF5zEwbWUG6ZaCJ3X7mTvEeAog7HxZ8QyFcCgDVGDM",
+    "strategy": {
+      "TickZeroCentered": {
+        "base_asset": {
+          "asset": "USDT",
+          "chain": "Ethereum",
+        },
+        "spread_tick": 1,
+      },
+    },
+    "strategy_id": "cFJu7R6mEVwbkDJr9ttC1LwpqHmQH6GnmqSgY9trQvHvuBYwp",
+  },
+]
+`;
+
 exports[`HttpClient > with server > gets broker account info 1`] = `
 {
   "affiliates": [

@@ -7,7 +7,9 @@ import {
   cfPoolsEnvironment,
   cfPoolDepth,
   cfAccounts,
+  cfGetTradingStrategies,
 } from '../parsers';
+import { tradingStrategies } from './fixtures';
 
 describe('parsers', () => {
   describe('numberOrHex', () => {
@@ -919,6 +921,14 @@ describe('parsers', () => {
         'Chainflip Testnet LP BOOST',
       ]);
       expect(result[1]).toEqual(['cFNYfLm7YEjWenMB7pBRGMTaawyhYLcRxgrNUqsvZBrKNXvfw', '']);
+    });
+  });
+
+  describe('cfGetTradingStrategies', () => {
+    it('parses the cfGetTradingStrategies response', () => {
+      const result = cfGetTradingStrategies.parse(tradingStrategies);
+
+      expect(result.length).toEqual(2);
     });
   });
 });

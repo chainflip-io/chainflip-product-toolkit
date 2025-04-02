@@ -32,6 +32,7 @@ import {
   cfFlipSuppy,
   ethereumAddress,
   cfPoolOrderbook,
+  cfGetTradingStrategies,
 } from './parsers';
 
 type Nullish<T> = T | null | undefined;
@@ -187,6 +188,7 @@ export type RpcRequest = WithHash<{
     quoteAsset: UncheckedAssetAndChain,
     orders: number,
   ];
+  cf_get_trading_strategies: [accountId?: Nullish<string>];
 }> & {
   chain_getBlockHash: [blockHeight?: number];
 };
@@ -225,6 +227,7 @@ export const rpcResult = {
   cf_eth_state_chain_gateway_address: ethereumAddress.nullable(),
   cf_eth_key_manager_address: ethereumAddress.nullable(),
   cf_pool_orderbook: cfPoolOrderbook,
+  cf_get_trading_strategies: cfGetTradingStrategies.nullable(),
 } as const satisfies { [K in keyof RpcRequest]: z.ZodTypeAny };
 
 export type RpcMethod = keyof RpcRequest;
