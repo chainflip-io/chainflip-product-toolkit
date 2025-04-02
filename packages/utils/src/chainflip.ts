@@ -253,3 +253,104 @@ export const assetContractId: Record<ChainflipAsset, number> = {
   HubUsdt: 12,
   HubUsdc: 13,
 };
+
+export function isValidAssetAndChain(
+  assetAndChain: UncheckedAssetAndChain,
+): assetAndChain is AssetAndChain {
+  const { asset, chain } = assetAndChain;
+  if (!(chain in chainConstants)) return false;
+
+  const validAssets = chainConstants[chain].assets as string[];
+  return validAssets.includes(asset);
+}
+
+export function getInternalAsset(asset: UncheckedAssetAndChain): ChainflipAsset;
+export function getInternalAsset(asset: UncheckedAssetAndChain, assert: true): ChainflipAsset;
+export function getInternalAsset(
+  asset: UncheckedAssetAndChain,
+  assert: boolean,
+): ChainflipAsset | null;
+export function getInternalAsset(asset: UncheckedAssetAndChain, assert = true) {
+  if (!isValidAssetAndChain(asset)) {
+    if (assert) {
+      throw new Error(`invalid asset and chain combination: ${JSON.stringify(asset)}`);
+    }
+
+    return null;
+  }
+
+  const map: ChainAssetMap<ChainflipAsset> = {
+    Ethereum: {
+      USDC: 'Usdc',
+      FLIP: 'Flip',
+      ETH: 'Eth',
+      USDT: 'Usdt',
+    },
+    Bitcoin: {
+      BTC: 'Btc',
+    },
+    Polkadot: {
+      DOT: 'Dot',
+    },
+    Arbitrum: {
+      USDC: 'ArbUsdc',
+      ETH: 'ArbEth',
+    },
+    Solana: {
+      SOL: 'Sol',
+      USDC: 'SolUsdc',
+    },
+    Assethub: {
+      USDC: 'HubUsdc',
+      USDT: 'HubUsdt',
+      DOT: 'HubDot',
+    },
+  };
+
+  const chain = map[asset.chain];
+  return chain[asset.asset as keyof typeof chain] as ChainflipAsset;
+}
+
+export function getInternalAssets(data: {
+  srcAsset: RpcAsset;
+  srcChain: ChainflipChain;
+  destAsset: RpcAsset;
+  destChain: ChainflipChain;
+}): { srcAsset: ChainflipAsset; destAsset: ChainflipAsset };
+export function getInternalAssets(
+  data: {
+    srcAsset: RpcAsset;
+    srcChain: ChainflipChain;
+    destAsset: RpcAsset;
+    destChain: ChainflipChain;
+  },
+  assert: true,
+): { srcAsset: ChainflipAsset; destAsset: ChainflipAsset };
+export function getInternalAssets(
+  data: {
+    srcAsset: RpcAsset;
+    srcChain: ChainflipChain;
+    destAsset: RpcAsset;
+    destChain: ChainflipChain;
+  },
+  assert: boolean,
+): { srcAsset: ChainflipAsset | null; destAsset: ChainflipAsset | null };
+export function getInternalAssets(
+  {
+    srcAsset,
+    srcChain,
+    destAsset,
+    destChain,
+  }: {
+    srcAsset: RpcAsset;
+    srcChain: ChainflipChain;
+    destAsset: RpcAsset;
+    destChain: ChainflipChain;
+  },
+  assert = true,
+) {
+  return {
+    srcAsset: getInternalAsset({ asset: srcAsset, chain: srcChain }, assert),
+    destAsset: getInternalAsset({ asset: destAsset, chain: destChain }, assert),
+  };
+}
