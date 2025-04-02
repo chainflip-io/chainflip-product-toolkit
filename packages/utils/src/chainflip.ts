@@ -169,36 +169,42 @@ export const assetConstants = {
 export const chainConstants = {
   Ethereum: {
     assets: ['Eth', 'Flip', 'Usdc', 'Usdt'],
+    rpcAssets: ['ETH', 'FLIP', 'USDC', 'USDT'],
     gasAsset: 'Eth',
     addressType: 'Eth',
     blockTimeSeconds: 12,
   },
   Polkadot: {
     assets: ['Dot'],
+    rpcAssets: ['DOT'],
     gasAsset: 'Dot',
     addressType: 'Dot',
     blockTimeSeconds: 6,
   },
   Bitcoin: {
     assets: ['Btc'],
+    rpcAssets: ['BTC'],
     gasAsset: 'Btc',
     addressType: 'Btc',
     blockTimeSeconds: 10 * 60,
   },
   Arbitrum: {
     assets: ['ArbUsdc', 'ArbEth'],
+    rpcAssets: ['USDC', 'ETH'],
     gasAsset: 'ArbEth',
     addressType: 'Arb',
     blockTimeSeconds: 0.26,
   },
   Solana: {
     assets: ['Sol', 'SolUsdc'],
+    rpcAssets: ['SOL', 'USDC'],
     gasAsset: 'Sol',
     addressType: 'Sol',
     blockTimeSeconds: 0.8,
   },
   Assethub: {
     assets: ['HubDot', 'HubUsdt', 'HubUsdc'],
+    rpcAssets: ['DOT', 'USDT', 'USDC'],
     gasAsset: 'HubDot',
     addressType: 'Hub',
     blockTimeSeconds: 12,
@@ -207,6 +213,7 @@ export const chainConstants = {
   ChainflipChain,
   {
     assets: ChainflipAsset[];
+    rpcAssets: RpcAsset[];
     gasAsset: ChainflipAsset;
     addressType: AddressType;
     blockTimeSeconds: number;
@@ -260,7 +267,7 @@ export function isValidAssetAndChain(
   const { asset, chain } = assetAndChain;
   if (!(chain in chainConstants)) return false;
 
-  const validAssets = chainConstants[chain].assets as string[];
+  const validAssets = chainConstants[chain].rpcAssets as string[];
   return validAssets.includes(asset);
 }
 
