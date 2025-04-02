@@ -457,4 +457,4 @@ export const cfTradingStrategy = z.object({
   balance: z.array(z.tuple([rpcAssetSchema, numberOrHex])),
 });
 
-export const cfGetTradingStrategies = z.array(cfTradingStrategy);
+export const cfGetTradingStrategies = z.array(cfTradingStrategy).default([]);

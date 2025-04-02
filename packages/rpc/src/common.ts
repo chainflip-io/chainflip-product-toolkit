@@ -227,7 +227,7 @@ export const rpcResult = {
   cf_eth_state_chain_gateway_address: ethereumAddress.nullable(),
   cf_eth_key_manager_address: ethereumAddress.nullable(),
   cf_pool_orderbook: cfPoolOrderbook,
-  cf_get_trading_strategies: cfGetTradingStrategies.nullable(),
+  cf_get_trading_strategies: cfGetTradingStrategies,
 } as const satisfies { [K in keyof RpcRequest]: z.ZodTypeAny };
 
 export type RpcMethod = keyof RpcRequest;
