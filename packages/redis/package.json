@@ -1,6 +1,6 @@
 {
-  "name": "@chainflip/bitcoin",
-  "version": "1.2.4",
+  "name": "@chainflip/redis",
+  "version": "0.1.0",
   "type": "module",
   "scripts": {
     "eslint:check": "pnpm eslint --max-warnings 0 './**/*.ts'",
