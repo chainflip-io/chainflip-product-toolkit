@@ -444,3 +444,17 @@ export const cfPoolOrderbook = z.object({
   bids: z.array(z.object({ amount: u256, sqrt_price: u256 })),
   asks: z.array(z.object({ amount: u256, sqrt_price: u256 })),
 });
+
+export const cfTradingStrategy = z.object({
+  lp_id: z.string(),
+  strategy_id: z.string(),
+  strategy: z.object({
+    TickZeroCentered: z.object({
+      spread_tick: z.number(),
+      base_asset: rpcAssetSchema,
+    }),
+  }),
+  balance: z.array(z.tuple([rpcAssetSchema, numberOrHex])),
+});
+
+export const cfGetTradingStrategies = z.array(cfTradingStrategy).default([]);
