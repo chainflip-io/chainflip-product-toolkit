@@ -71,6 +71,7 @@ const addresses = {
   Sol: base58.decode('A8dScaeGChTgzvok95uVAxd44LRkq5ckcpppNVQwkLQb'),
   Dot: ss58.decode('167ZvRqc7V6HrEUSvtV8c3JRUtPjJhHXUpAwhmPktAGj1uzq').data,
   Btc: new TextEncoder().encode('tb1qhjurnfz4qah4rg7ntue6x287ehdvded20rj9vh'),
+  HubDot: ss58.decode('167ZvRqc7V6HrEUSvtV8c3JRUtPjJhHXUpAwhmPktAGj1uzq').data,
 };
 
 type Mutable<T> = T extends readonly (infer U)[]
@@ -88,6 +89,7 @@ describe(findVaultSwapData, () => {
     ['ArbEth', 1, 2, 15, 10, 0.1, 90, address2, undefined],
     ['Sol', 20, 100, 10, 15, 0.01, 80, undefined, undefined],
     ['Dot', 1, 2, 0, 0, 0.001, 69, undefined, [{ accountIndex: 1, commissionBps: 10 }]],
+    ['HubDot', 1, 2, 0, 0, 0.001, 69, undefined, [{ accountIndex: 1, commissionBps: 10 }]],
     ['Btc', 1, 2, 5, 20, 0.0001, 50, undefined, [{ accountIndex: 2, commissionBps: 20 }]],
   ] as const)(
     'gets the vault swap data (%s)',

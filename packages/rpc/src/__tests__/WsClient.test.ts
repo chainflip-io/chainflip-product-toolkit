@@ -13,6 +13,7 @@ const createChainAssetMap = <T>(value: T): ChainAssetMap<T> => ({
   Polkadot: { DOT: value },
   Arbitrum: { ETH: value, USDC: value },
   Solana: { SOL: value, USDC: value },
+  Assethub: { DOT: value, USDC: value, USDT: value },
 });
 
 vi.mock(

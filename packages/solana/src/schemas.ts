@@ -65,6 +65,7 @@ const swapParams = z
       case 'Bitcoin':
         destinationAddress = params.dst_address.toString('utf8');
         break;
+      case 'Assethub':
       case 'Polkadot':
         destinationAddress = ss58.encode({
           data: params.dst_address,

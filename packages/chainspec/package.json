@@ -10,8 +10,8 @@
     "test": "vitest"
   },
   "devDependencies": {
-    "@chainflip/rpc": "1.8.6",
-    "@chainflip/utils": "0.7.0",
+    "@chainflip/rpc": "1.8.15",
+    "@chainflip/utils": "0.8.2",
     "@polkadot/types": "^15.9.1",
     "prettier": "^3.5.3",
     "zod": "^3.24.2"

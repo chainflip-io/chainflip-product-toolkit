@@ -11,6 +11,7 @@ const addressByteLengths: Record<ChainflipChain, number | undefined> = {
   Ethereum: 20,
   Solana: 32,
   Polkadot: 32,
+  Assethub: 32,
 };
 
 export const createSwapDataCodec = (asset: ChainflipAsset) =>

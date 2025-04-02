@@ -15,6 +15,11 @@ describe('swapSchema', () => {
       ss58.decode('1BzDB5n2rfSJwvuCW9deKY9XnUyys8Gy44SoX8tRNDCFBhx').data,
     ],
     [
+      'Assethub',
+      assetContractId.HubDot,
+      ss58.decode('1BzDB5n2rfSJwvuCW9deKY9XnUyys8Gy44SoX8tRNDCFBhx').data,
+    ],
+    [
       'Solana',
       assetContractId.SolUsdc,
       base58.decode('3yKDHJgzS2GbZB9qruoadRYtq8597HZifnRju7fHpdRC'),
