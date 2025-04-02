@@ -17,12 +17,12 @@ import Redis from 'ioredis';
 import { z } from 'zod';
 import { transformKeysToCamelCase } from './utils';
 
-export const uncheckedAssetAndChain = z.object({
+const uncheckedAssetAndChain = z.object({
   asset: z.string(),
   chain: z.string(),
 });
 
-export const assetAndChain = uncheckedAssetAndChain
+const assetAndChain = uncheckedAssetAndChain
   .refine(
     (value): value is AssetAndChain => isValidAssetAndChain(value as UncheckedAssetAndChain),
     { message: 'Invalid asset and chain' },
