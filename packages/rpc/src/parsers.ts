@@ -138,13 +138,16 @@ export const cfIngressEgressEnvironment = z
     witness_safety_margins: chainMapFactory(z.number().nullable(), null),
     egress_dust_limits: chainAssetMapFactory(numberOrHex, 0),
     channel_opening_fees: chainMapFactory(numberOrHex, 0),
-    max_swap_retry_duration_blocks: chainMapFactory(z.number(), 0),
   })
   .transform(rename({ egress_dust_limits: 'minimum_egress_amounts' }));
 
 export const cfSwappingEnvironment = z.object({
   maximum_swap_amounts: chainAssetMapFactory(numberOrHex.nullable(), null),
   network_fee_hundredth_pips: z.number(),
+  swap_retry_delay_blocks: z.number().optional(),
+  max_swap_retry_duration_blocks: z.number().optional(),
+  max_swap_request_duration_blocks: z.number().optional(),
+  minimum_chunk_size: chainAssetMapFactory(numberOrHex.nullable(), null).optional(),
 });
 
 export const cfFundingEnvironment = z.object({

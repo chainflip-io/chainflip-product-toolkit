@@ -315,6 +315,8 @@ describe(HttpClient, () => {
     it('gets the swapping environment', async () => {
       expect(await client.sendRequest('cf_swapping_environment')).toMatchInlineSnapshot(`
         {
+          "max_swap_request_duration_blocks": 14400,
+          "max_swap_retry_duration_blocks": 600,
           "maximum_swap_amounts": {
             "Arbitrum": {
               "ETH": null,
@@ -342,7 +344,35 @@ describe(HttpClient, () => {
               "USDC": null,
             },
           },
+          "minimum_chunk_size": {
+            "Arbitrum": {
+              "ETH": 200000000000000000n,
+              "USDC": 1000000000n,
+            },
+            "Assethub": {
+              "DOT": null,
+              "USDC": null,
+              "USDT": null,
+            },
+            "Bitcoin": {
+              "BTC": 2000000n,
+            },
+            "Ethereum": {
+              "ETH": 200000000000000000n,
+              "FLIP": 1000000000000000000000n,
+              "USDC": 1000000000n,
+              "USDT": 1000000000n,
+            },
+            "Polkadot": {
+              "DOT": 2000000000000n,
+            },
+            "Solana": {
+              "SOL": 5000000000n,
+              "USDC": 1000000000n,
+            },
+          },
           "network_fee_hundredth_pips": 1000,
+          "swap_retry_delay_blocks": 5,
         }
       `);
     });
