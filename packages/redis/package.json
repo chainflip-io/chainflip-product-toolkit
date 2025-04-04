@@ -26,8 +26,8 @@
   "main": "dist/index.cjs",
   "module": "dist/index.js",
   "dependencies": {
-    "@chainflip/utils": "0.8.2",
-    "bignumber.js": "^9.1.2",
+    "@chainflip/utils": "0.8.3",
+    "bignumber.js": "^9.2.0",
     "ioredis": "^5.6.0",
     "zod": "^3.24.2"
   }

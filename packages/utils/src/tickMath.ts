@@ -1,4 +1,4 @@
-import { BigNumber } from 'bignumber.js';
+import BigNumber from 'bignumber.js';
 import { assetConstants, type ChainflipAsset } from './chainflip';
 
 export const MIN_TICK = -887272;

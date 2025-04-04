@@ -5,7 +5,7 @@ import { type ChainflipAsset, assetConstants, assetContractId } from '@chainflip
 import { POLKADOT_SS58_PREFIX } from '@chainflip/utils/consts';
 import * as ss58 from '@chainflip/utils/ss58';
 import { type VaultSwapData } from '@chainflip/utils/types';
-import { BigNumber } from 'bignumber.js';
+import BigNumber from 'bignumber.js';
 import * as rpc from './rpc';
 import { createSwapDataCodec } from './scale';
 

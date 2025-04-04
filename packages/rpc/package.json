@@ -15,12 +15,12 @@
     "coverage": "vitest run --coverage"
   },
   "dependencies": {
-    "@chainflip/utils": "0.8.2",
+    "@chainflip/utils": "0.8.3",
     "zod": "^3.24.2"
   },
   "devDependencies": {
-    "@types/node": "^22.13.14",
-    "@types/ws": "^8.18.0",
+    "@types/node": "^22.14.0",
+    "@types/ws": "^8.18.1",
     "ws": "^8.18.1"
   },
   "files": [

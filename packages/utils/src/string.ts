@@ -21,6 +21,8 @@ export const uncapitalize = <const T extends string>(str: T): Uncapitalize<T> =>
 
 export const isHex = (str: string): str is HexString => /^0x[\da-f]+$/i.test(str);
 
+export const isBytes = (str: string) => /^(0x)?[\da-f]*$/i.test(str) && str.length % 2 === 0;
+
 // eg: 0x...123
 export const abbreviate = (
   text: string | undefined | null,
