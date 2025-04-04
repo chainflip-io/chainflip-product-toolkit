@@ -8,6 +8,7 @@ import {
   cfPoolDepth,
   cfAccounts,
   cfGetTradingStrategies,
+  cfSwappingEnvironment,
 } from '../parsers';
 import { tradingStrategies } from './fixtures';
 
@@ -227,14 +228,6 @@ describe('parsers', () => {
             Solana: '0x0',
             Assethub: '0x0',
           },
-          max_swap_retry_duration_blocks: {
-            Ethereum: 5,
-            Bitcoin: 2,
-            Arbitrum: 30,
-            Polkadot: 30,
-            Solana: 10,
-            Assethub: 30,
-          },
         },
         swapping: {
           maximum_swap_amounts: {
@@ -265,6 +258,31 @@ describe('parsers', () => {
             },
           },
           network_fee_hundredth_pips: 1000,
+          swap_retry_delay_blocks: 5,
+          max_swap_retry_duration_blocks: 600,
+          max_swap_request_duration_blocks: 14400,
+          minimum_chunk_size: {
+            Ethereum: {
+              ETH: '0x2c68af0bb140000',
+              FLIP: '0x3635c9adc5dea00000',
+              USDC: '0x3b9aca00',
+              USDT: '0x3b9aca00',
+            },
+            Polkadot: {
+              DOT: '0x1d1a94a2000',
+            },
+            Bitcoin: {
+              BTC: '0x1e8480',
+            },
+            Arbitrum: {
+              ETH: '0x2c68af0bb140000',
+              USDC: '0x3b9aca00',
+            },
+            Solana: {
+              SOL: '0x12a05f200',
+              USDC: '0x3b9aca00',
+            },
+          },
         },
         funding: {
           redemption_tax: '0x4563918244f40000',
@@ -555,6 +573,61 @@ describe('parsers', () => {
                 },
               },
             },
+          },
+        },
+      });
+    });
+  });
+
+  describe('cfSwappingEnvironment', () => {
+    it('parses the cfSwappingEnvironment response', () => {
+      cfSwappingEnvironment.parse({
+        maximum_swap_amounts: {
+          Ethereum: {
+            ETH: null,
+            FLIP: null,
+            USDC: null,
+            USDT: null,
+          },
+          Polkadot: {
+            DOT: null,
+          },
+          Bitcoin: {
+            BTC: null,
+          },
+          Arbitrum: {
+            ETH: null,
+            USDC: null,
+          },
+          Solana: {
+            SOL: null,
+            USDC: null,
+          },
+        },
+        network_fee_hundredth_pips: 1000,
+        swap_retry_delay_blocks: 5,
+        max_swap_retry_duration_blocks: 600,
+        max_swap_request_duration_blocks: 14400,
+        minimum_chunk_size: {
+          Ethereum: {
+            ETH: '0x2c68af0bb140000',
+            FLIP: '0x3635c9adc5dea00000',
+            USDC: '0x3b9aca00',
+            USDT: '0x3b9aca00',
+          },
+          Polkadot: {
+            DOT: '0x1d1a94a2000',
+          },
+          Bitcoin: {
+            BTC: '0x1e8480',
+          },
+          Arbitrum: {
+            ETH: '0x2c68af0bb140000',
+            USDC: '0x3b9aca00',
+          },
+          Solana: {
+            SOL: '0x12a05f200',
+            USDC: '0x3b9aca00',
           },
         },
       });

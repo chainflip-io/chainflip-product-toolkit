@@ -390,14 +390,6 @@ exports[`HttpClient > with server > gets the environment 1`] = `
         "USDC": 0n,
       },
     },
-    "max_swap_retry_duration_blocks": {
-      "Arbitrum": 1,
-      "Assethub": 1,
-      "Bitcoin": 1,
-      "Ethereum": 1,
-      "Polkadot": 1,
-      "Solana": 1,
-    },
     "minimum_deposit_amounts": {
       "Arbitrum": {
         "ETH": 0n,
@@ -766,6 +758,8 @@ exports[`HttpClient > with server > gets the environment 1`] = `
     },
   },
   "swapping": {
+    "max_swap_request_duration_blocks": 14400,
+    "max_swap_retry_duration_blocks": 600,
     "maximum_swap_amounts": {
       "Arbitrum": {
         "ETH": null,
@@ -793,7 +787,35 @@ exports[`HttpClient > with server > gets the environment 1`] = `
         "USDC": null,
       },
     },
+    "minimum_chunk_size": {
+      "Arbitrum": {
+        "ETH": 200000000000000000n,
+        "USDC": 1000000000n,
+      },
+      "Assethub": {
+        "DOT": null,
+        "USDC": null,
+        "USDT": null,
+      },
+      "Bitcoin": {
+        "BTC": 2000000n,
+      },
+      "Ethereum": {
+        "ETH": 200000000000000000n,
+        "FLIP": 1000000000000000000000n,
+        "USDC": 1000000000n,
+        "USDT": 1000000000n,
+      },
+      "Polkadot": {
+        "DOT": 2000000000000n,
+      },
+      "Solana": {
+        "SOL": 5000000000n,
+        "USDC": 1000000000n,
+      },
+    },
     "network_fee_hundredth_pips": 1000,
+    "swap_retry_delay_blocks": 5,
   },
 }
 `;
@@ -861,14 +883,6 @@ exports[`HttpClient > with server > gets the ingress/egress environment 1`] = `
       "SOL": 176n,
       "USDC": 0n,
     },
-  },
-  "max_swap_retry_duration_blocks": {
-    "Arbitrum": 1,
-    "Assethub": 1,
-    "Bitcoin": 1,
-    "Ethereum": 1,
-    "Polkadot": 1,
-    "Solana": 1,
   },
   "minimum_deposit_amounts": {
     "Arbitrum": {

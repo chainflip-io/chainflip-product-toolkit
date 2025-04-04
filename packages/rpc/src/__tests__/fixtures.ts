@@ -83,14 +83,6 @@ export const ingressEgressEnvironment: z.input<typeof cfIngressEgressEnvironment
     Solana: '0x0',
     Assethub: '0x0',
   },
-  max_swap_retry_duration_blocks: {
-    Arbitrum: 1,
-    Ethereum: 1,
-    Polkadot: 1,
-    Bitcoin: 1,
-    Solana: 1,
-    Assethub: 1,
-  },
 };
 
 export const swappingEnvironment: z.input<typeof cfSwappingEnvironment> = {
@@ -122,6 +114,31 @@ export const swappingEnvironment: z.input<typeof cfSwappingEnvironment> = {
     },
   },
   network_fee_hundredth_pips: 1000,
+  swap_retry_delay_blocks: 5,
+  max_swap_retry_duration_blocks: 600,
+  max_swap_request_duration_blocks: 14400,
+  minimum_chunk_size: {
+    Ethereum: {
+      ETH: '0x2c68af0bb140000',
+      FLIP: '0x3635c9adc5dea00000',
+      USDC: '0x3b9aca00',
+      USDT: '0x3b9aca00',
+    },
+    Polkadot: {
+      DOT: '0x1d1a94a2000',
+    },
+    Bitcoin: {
+      BTC: '0x1e8480',
+    },
+    Arbitrum: {
+      ETH: '0x2c68af0bb140000',
+      USDC: '0x3b9aca00',
+    },
+    Solana: {
+      SOL: '0x12a05f200',
+      USDC: '0x3b9aca00',
+    },
+  },
 };
 
 export const fundingEnvironment: z.input<typeof cfFundingEnvironment> = {
