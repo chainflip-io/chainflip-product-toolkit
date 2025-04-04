@@ -4,6 +4,7 @@
     "chainspec",
     "extrinsics",
     "processor",
+    "redis",
     "rpc",
     "solana",
     "utils"
