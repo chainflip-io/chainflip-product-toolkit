@@ -1,4 +1,5 @@
-export type ChainflipNetwork = 'mainnet' | 'perseverance' | 'sisyphos' | 'backspin';
+import { ChainflipNetwork } from '@chainflip/utils/chainflip';
+
 export type BitcoinNetwork = 'mainnet' | 'testnet' | 'regtest';
 
 export const networkMap: Record<ChainflipNetwork | BitcoinNetwork, BitcoinNetwork> = {

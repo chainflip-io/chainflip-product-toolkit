@@ -2,6 +2,7 @@ import { describe, it, expect } from 'vitest';
 import {
   abbreviate,
   capitalize,
+  isBytes,
   isHex,
   isInteger,
   split,
@@ -56,6 +57,15 @@ describe(isHex, () => {
   it('checks if the string is a hex string', () => {
     expect(isHex('0x123')).toBe(true);
     expect(isHex('123')).toBe(false);
+  });
+});
+
+describe(isBytes, () => {
+  it('checks if the string is a bytes string', () => {
+    expect(isBytes('0x1234abcdef')).toBe(true);
+    expect(isBytes('0x123')).toBe(false);
+    expect(isBytes('1234abcdef')).toBe(true);
+    expect(isBytes('123')).toBe(false);
   });
 });
 
