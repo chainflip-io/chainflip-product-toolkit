@@ -138,7 +138,7 @@ export const cfIngressEgressEnvironment = z
     witness_safety_margins: chainMapFactory(z.number().nullable(), null),
     egress_dust_limits: chainAssetMapFactory(numberOrHex, 0),
     channel_opening_fees: chainMapFactory(numberOrHex, 0),
-    max_swap_retry_duration_blocks: chainMapFactory(z.number(), 0),
+    max_swap_retry_duration_blocks: chainMapFactory(z.number(), 0).optional(),
   })
   .transform(rename({ egress_dust_limits: 'minimum_egress_amounts' }));
 
