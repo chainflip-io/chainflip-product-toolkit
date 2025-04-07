@@ -1,5 +1,6 @@
 import { type Interval } from 'date-fns';
-import { describe, expect, it, vi } from 'vitest';
+import { describe, expect, it } from 'vitest';
+import { spyOn } from '@/testing';
 import {
   addUtcDays,
   differenceInTimeAgo,
@@ -64,7 +65,7 @@ describe('differenceInTimeAgo', () => {
     ['47 hours', 170400000],
     // ['2 days', 172800000], // TODO: ignored because of Daylight saving issue
   ])('displays the proper time as %s ago', (expected, time) => {
-    vi.spyOn(Date, 'now').mockImplementation(() => now);
+    spyOn(Date, 'now').mockImplementation(() => now);
     expect(differenceInTimeAgo(new Date(Date.now() - time).toISOString(), false)).toBe(expected);
   });
 
@@ -80,7 +81,7 @@ describe('differenceInTimeAgo', () => {
     ['47 hours', 170400000, false],
     ['2 days', 180400000, false],
   ])('displays the proper time as %s ago', (expected, time, ago) => {
-    vi.spyOn(Date, 'now').mockImplementation(() => now);
+    spyOn(Date, 'now').mockImplementation(() => now);
     expect(differenceInTimeAgo(new Date(Date.now() - time).toISOString(), ago)).toBe(expected);
   });
 });

@@ -2,7 +2,8 @@ import * as base58 from '@chainflip/utils/base58';
 import { hexToBytes } from '@chainflip/utils/bytes';
 import { assetConstants, assetContractId, type ChainflipAsset } from '@chainflip/utils/chainflip';
 import * as ss58 from '@chainflip/utils/ss58';
-import { describe, expect, it, type MockInstance, vi } from 'vitest';
+import { describe, expect, it, type MockInstance } from 'vitest';
+import { spyOn } from '@/testing';
 import { findVaultSwapData } from '../deposit';
 import { createSwapDataCodec } from '../scale';
 import { tx, block } from './fixtures';
@@ -15,7 +16,7 @@ const mockFetch = (results: unknown[], status = 200) =>
         status,
         json: () => Promise.resolve(result),
       } as Response),
-    vi.spyOn(globalThis, 'fetch'),
+    spyOn(globalThis, 'fetch'),
   );
 
 const buildNullData = ({
@@ -176,7 +177,7 @@ describe(findVaultSwapData, () => {
   });
 
   it('throws rpc errors', async () => {
-    vi.spyOn(globalThis, 'fetch').mockResolvedValueOnce({
+    spyOn(globalThis, 'fetch').mockResolvedValueOnce({
       ok: true,
       status: 200,
       json: () =>
@@ -268,7 +269,7 @@ describe(findVaultSwapData, () => {
       500,
     );
 
-    vi.spyOn(globalThis, 'fetch').mockRejectedValueOnce(new Error('Failed to fetch'));
+    spyOn(globalThis, 'fetch').mockRejectedValueOnce(new Error('Failed to fetch'));
 
     expect(
       await findVaultSwapData(

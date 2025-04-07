@@ -4,6 +4,7 @@ import { ChainAssetMap } from '@chainflip/utils/chainflip';
 import { once } from 'events';
 import { type Mock, afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { type AddressInfo, WebSocketServer } from 'ws';
+import { spyOn } from '@/testing';
 import { type JsonRpcRequest, type RpcMethod } from '../common';
 import WsClient from '../WsClient';
 
@@ -137,7 +138,7 @@ describe(WsClient, () => {
 
     killConnections();
     closeServer();
-    const connectSpy = vi.spyOn(client, 'connect' as any);
+    const connectSpy = spyOn(client, 'connect' as any);
     expect(connectSpy).not.toHaveBeenCalled();
     await once(client['emitter'], 'DISCONNECT');
 
@@ -223,7 +224,7 @@ describe(WsClient, () => {
   it('serves multiple requests at once', async () => {
     await client['connectionReady']();
 
-    const spy = vi.spyOn(client['ws']!, 'send');
+    const spy = spyOn(client['ws']!, 'send');
 
     const accounts = await client.sendRequest('cf_accounts');
 

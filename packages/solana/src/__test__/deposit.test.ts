@@ -5,6 +5,7 @@ import * as ss58 from '@chainflip/utils/ss58';
 import { Connection } from '@solana/web3.js';
 import { describe, beforeEach, it, vi, expect, type MockInstance } from 'vitest';
 import { SolanaCcmAdditionalData } from '@/scale/codecs';
+import { spyOn } from '@/testing';
 import { findTransactionSignatures, findVaultSwapData, findVaultSwapSignature } from '../deposit';
 import { mainnet } from '../idls';
 import bigDiff from './fixtures/bigDiff.json';
@@ -31,7 +32,7 @@ const mockFetchWithResponses = (responses: { jsonrpc: string; result: unknown; i
         status: 200,
         text: () => Promise.resolve(JSON.stringify(res)),
       } as any),
-    vi.spyOn(globalThis, 'fetch'),
+    spyOn(globalThis, 'fetch'),
   );
 
 describe(findTransactionSignatures, () => {
@@ -40,7 +41,7 @@ describe(findTransactionSignatures, () => {
 
   beforeEach(() => {
     vi.restoreAllMocks();
-    vi.spyOn(globalThis, 'fetch').mockRejectedValue(Error('unhandled fetch'));
+    spyOn(globalThis, 'fetch').mockRejectedValue(Error('unhandled fetch'));
   });
 
   it('gets SOL transfer transaction hashes', async () => {
@@ -315,7 +316,7 @@ describe(findTransactionSignatures, () => {
 
 describe(findVaultSwapSignature, () => {
   it('it finds the vault swap signature', async () => {
-    const spy = vi.spyOn(Connection.prototype, 'getSignaturesForAddress');
+    const spy = spyOn(Connection.prototype, 'getSignaturesForAddress');
 
     mockFetchWithResponses([
       {
