@@ -1,5 +1,6 @@
 import * as fs from 'fs/promises';
 import { describe, expect, it, vi } from 'vitest';
+import { spyOn } from '@/testing';
 import CodeGenerator from '../CodeGenerator';
 
 vi.mock('fs/promises');
@@ -173,7 +174,7 @@ describe(CodeGenerator, () => {
   });
 
   it('throws if it does not find the expected event', () => {
-    vi.spyOn(console, 'error').mockImplementation(() => {});
+    spyOn(console, 'error').mockImplementation(() => {});
     const iter = new CodeGenerator({ trackedItems: new Set(['Enums.EventOne']) }).generate({
       Primitives: Object.fromEntries(primitives.map((name) => [name, { type: 'primitive', name }])),
     });
@@ -185,7 +186,7 @@ describe(CodeGenerator, () => {
   });
 
   it('throws on unhandled types', () => {
-    vi.spyOn(console, 'error').mockImplementation(() => {});
+    spyOn(console, 'error').mockImplementation(() => {});
 
     expect(() => [
       ...new CodeGenerator().generate({
@@ -273,7 +274,7 @@ describe(CodeGenerator, () => {
   });
 
   it('throws on unsupported primitives', () => {
-    vi.spyOn(console, 'error').mockImplementation(() => {});
+    spyOn(console, 'error').mockImplementation(() => {});
     expect(() => [
       ...new CodeGenerator().generate({
         Primitives: {
@@ -285,7 +286,7 @@ describe(CodeGenerator, () => {
   });
 
   it('writes a formatted module to disk', async () => {
-    const spy = vi.spyOn(fs, 'writeFile');
+    const spy = spyOn(fs, 'writeFile');
 
     const modules = [
       ...new CodeGenerator().generate({

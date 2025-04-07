@@ -2,8 +2,9 @@ import { type HexString } from '@chainflip/utils/types';
 import { Server } from 'http';
 import { type AddressInfo } from 'net';
 import { promisify } from 'util';
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { type z } from 'zod';
+import { spyOn } from '@/testing';
 import { type JsonRpcRequest, type RpcMethod } from '../common';
 import { HttpClient } from '../index';
 import { type AssetAndChain, type cfSwapRate } from '../parsers';
@@ -1044,7 +1045,7 @@ describe(HttpClient, () => {
     });
 
     it('throws on a non-200 response', async () => {
-      vi.spyOn(globalThis, 'fetch').mockResolvedValueOnce({
+      spyOn(globalThis, 'fetch').mockResolvedValueOnce({
         ok: false,
         status: 404,
       } as Response);
@@ -1052,7 +1053,7 @@ describe(HttpClient, () => {
     });
 
     it('throws on invalid JSON', async () => {
-      vi.spyOn(globalThis, 'fetch').mockResolvedValueOnce({
+      spyOn(globalThis, 'fetch').mockResolvedValueOnce({
         ok: true,
         // eslint-disable-next-line @typescript-eslint/require-await
         json: async () => JSON.parse('{'),
@@ -1063,7 +1064,7 @@ describe(HttpClient, () => {
     it('throws when parsing the result fails', async () => {
       // eslint-disable-next-line dot-notation
       client['getRequestId'] = () => '1';
-      vi.spyOn(globalThis, 'fetch').mockResolvedValueOnce({
+      spyOn(globalThis, 'fetch').mockResolvedValueOnce({
         ok: true,
         // eslint-disable-next-line @typescript-eslint/require-await
         json: async () => [{ id: '1', jsonrpc: '2.0', result: [['account 1', null]] }],
@@ -1101,11 +1102,11 @@ describe(HttpClient, () => {
     });
 
     it('uses monotonically increasing request IDs in insecure envs', async () => {
-      vi.spyOn(crypto, 'randomUUID').mockImplementationOnce(() => {
+      spyOn(crypto, 'randomUUID').mockImplementationOnce(() => {
         throw new Error('test');
       });
 
-      const fetchSpy = vi.spyOn(globalThis, 'fetch');
+      const fetchSpy = spyOn(globalThis, 'fetch');
 
       await expect(client.sendRequest('cf_supported_assets')).resolves.not.toThrowError();
 
@@ -1115,7 +1116,7 @@ describe(HttpClient, () => {
     });
 
     it('rejects unfound requests', async () => {
-      vi.spyOn(globalThis, 'fetch').mockImplementation((url, init) => {
+      spyOn(globalThis, 'fetch').mockImplementation((url, init) => {
         const body = JSON.parse(init!.body as string) as JsonRpcRequest<RpcMethod>[];
 
         expect(body).toHaveLength(2);
@@ -1152,7 +1153,7 @@ describe(HttpClient, () => {
     });
 
     it('ignores additional unrecognized responses', async () => {
-      vi.spyOn(globalThis, 'fetch').mockImplementation((url, init) => {
+      spyOn(globalThis, 'fetch').mockImplementation((url, init) => {
         const body = JSON.parse(init!.body as string) as JsonRpcRequest<RpcMethod>[];
 
         expect(body).toHaveLength(2);

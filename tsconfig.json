@@ -26,6 +26,7 @@
     "paths": {
       "@/chainspec/*": ["./packages/chainspec/src/*"],
       "@/scale/*": ["./packages/scale/src/*"],
+      "@/testing": ["./packages/testing/src/index"],
     },
 
     /* Modules */

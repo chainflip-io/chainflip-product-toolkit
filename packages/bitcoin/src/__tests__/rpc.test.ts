@@ -1,9 +1,10 @@
-import { describe, expect, it, vi } from 'vitest';
+import { describe, expect, it } from 'vitest';
+import { spyOn } from '@/testing';
 import { makeRequest } from '../rpc';
 
 describe(makeRequest, () => {
   it.each(['some error', ''])('throws on HTTP error', async (message) => {
-    vi.spyOn(globalThis, 'fetch').mockResolvedValueOnce({
+    spyOn(globalThis, 'fetch').mockResolvedValueOnce({
       status: 401,
       statusText: 'Unauthorized',
       text: () => Promise.resolve(message),
