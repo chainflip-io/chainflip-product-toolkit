@@ -1,6 +1,6 @@
 import * as fs from 'fs/promises';
 import * as path from 'path';
-import tsconfigPaths from 'vite-tsconfig-paths';
+// import tsconfigPaths from 'vite-tsconfig-paths';
 import { defineConfig } from 'vitest/config';
 
 const exclude = [
@@ -16,11 +16,11 @@ const exclude = [
 const include = ['**/*.test.ts', '**/*.test.tsx'];
 
 export default defineConfig({
-  plugins: [
-    tsconfigPaths({
-      projects: [path.join(import.meta.dirname, 'tsconfig.json')],
-    }),
-  ],
+  // plugins: [
+  //   tsconfigPaths({
+  //     projects: [path.join(import.meta.dirname, 'tsconfig.json')],
+  //   }),
+  // ],
   test: {
     restoreMocks: true,
     exclude,
