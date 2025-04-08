@@ -23,7 +23,12 @@
     "dist",
     "README.md"
   ],
-  "module": "dist/index.js",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
   "dependencies": {
     "@chainflip/utils": "^0.8.3",
     "vitest": "3.1.1"
