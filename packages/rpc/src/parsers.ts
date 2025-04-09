@@ -461,3 +461,13 @@ export const cfTradingStrategy = z.object({
 });
 
 export const cfGetTradingStrategies = z.array(cfTradingStrategy).default([]);
+
+export const cfAvailablePools = z.array(
+  z.object({
+    base: rpcAssetSchema.refine(
+      (a): a is Exclude<AssetAndChain, { chain: 'Ethereum'; asset: 'USDC' }> =>
+        a.chain !== 'Ethereum' || a.asset !== 'USDC',
+    ),
+    quote: z.object({ chain: z.literal('Ethereum'), asset: z.literal('USDC') }),
+  }),
+);

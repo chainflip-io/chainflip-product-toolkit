@@ -9,6 +9,7 @@ import { type JsonRpcRequest, type RpcMethod } from '../common';
 import { HttpClient } from '../index';
 import { type AssetAndChain, type cfSwapRate } from '../parsers';
 import {
+  availablePools,
   boostPoolsDepth,
   brokerAccount,
   brokerAccountNoAffiliates,
@@ -48,6 +49,7 @@ describe(HttpClient, () => {
         "cf_accounts",
         "cf_auction_state",
         "cf_authority_emission_per_block",
+        "cf_available_pools",
         "cf_boost_pool_details",
         "cf_boost_pool_pending_fees",
         "cf_boost_pools_depth",
@@ -219,6 +221,8 @@ describe(HttpClient, () => {
           return respond(poolOrderbook);
         case 'cf_get_trading_strategies':
           return respond(tradingStrategies);
+        case 'cf_available_pools':
+          return respond(availablePools);
         case 'cf_eth_state_chain_gateway_address':
         case 'cf_eth_key_manager_address':
         default:
@@ -969,6 +973,103 @@ describe(HttpClient, () => {
 
     it('gets all the trading strategies', async () => {
       expect(await client.sendRequest('cf_get_trading_strategies')).toMatchSnapshot();
+    });
+
+    it('handles cf_available_pools', async () => {
+      expect(await client.sendRequest('cf_available_pools')).toMatchInlineSnapshot(`
+        [
+          {
+            "base": {
+              "asset": "ETH",
+              "chain": "Ethereum",
+            },
+            "quote": {
+              "asset": "USDC",
+              "chain": "Ethereum",
+            },
+          },
+          {
+            "base": {
+              "asset": "USDC",
+              "chain": "Arbitrum",
+            },
+            "quote": {
+              "asset": "USDC",
+              "chain": "Ethereum",
+            },
+          },
+          {
+            "base": {
+              "asset": "USDC",
+              "chain": "Solana",
+            },
+            "quote": {
+              "asset": "USDC",
+              "chain": "Ethereum",
+            },
+          },
+          {
+            "base": {
+              "asset": "DOT",
+              "chain": "Polkadot",
+            },
+            "quote": {
+              "asset": "USDC",
+              "chain": "Ethereum",
+            },
+          },
+          {
+            "base": {
+              "asset": "FLIP",
+              "chain": "Ethereum",
+            },
+            "quote": {
+              "asset": "USDC",
+              "chain": "Ethereum",
+            },
+          },
+          {
+            "base": {
+              "asset": "ETH",
+              "chain": "Arbitrum",
+            },
+            "quote": {
+              "asset": "USDC",
+              "chain": "Ethereum",
+            },
+          },
+          {
+            "base": {
+              "asset": "BTC",
+              "chain": "Bitcoin",
+            },
+            "quote": {
+              "asset": "USDC",
+              "chain": "Ethereum",
+            },
+          },
+          {
+            "base": {
+              "asset": "SOL",
+              "chain": "Solana",
+            },
+            "quote": {
+              "asset": "USDC",
+              "chain": "Ethereum",
+            },
+          },
+          {
+            "base": {
+              "asset": "USDT",
+              "chain": "Ethereum",
+            },
+            "quote": {
+              "asset": "USDC",
+              "chain": "Ethereum",
+            },
+          },
+        ]
+      `);
     });
 
     it('handles multiple requests with 1 call', async () => {
