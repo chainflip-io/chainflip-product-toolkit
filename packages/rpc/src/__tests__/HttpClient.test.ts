@@ -1068,6 +1068,36 @@ describe(HttpClient, () => {
               "chain": "Ethereum",
             },
           },
+          {
+            "base": {
+              "asset": "DOT",
+              "chain": "Assethub",
+            },
+            "quote": {
+              "asset": "USDC",
+              "chain": "Ethereum",
+            },
+          },
+          {
+            "base": {
+              "asset": "USDT",
+              "chain": "Assethub",
+            },
+            "quote": {
+              "asset": "USDC",
+              "chain": "Ethereum",
+            },
+          },
+          {
+            "base": {
+              "asset": "USDC",
+              "chain": "Assethub",
+            },
+            "quote": {
+              "asset": "USDC",
+              "chain": "Ethereum",
+            },
+          },
         ]
       `);
     });

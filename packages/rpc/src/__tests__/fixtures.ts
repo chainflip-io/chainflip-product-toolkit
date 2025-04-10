@@ -796,4 +796,7 @@ export const availablePools: CfAvailablePools = [
   { base: { chain: 'Bitcoin', asset: 'BTC' }, quote: { chain: 'Ethereum', asset: 'USDC' } },
   { base: { chain: 'Solana', asset: 'SOL' }, quote: { chain: 'Ethereum', asset: 'USDC' } },
   { base: { chain: 'Ethereum', asset: 'USDT' }, quote: { chain: 'Ethereum', asset: 'USDC' } },
+  { base: { chain: 'Assethub', asset: 'DOT' }, quote: { chain: 'Ethereum', asset: 'USDC' } },
+  { base: { chain: 'Assethub', asset: 'USDT' }, quote: { chain: 'Ethereum', asset: 'USDC' } },
+  { base: { chain: 'Assethub', asset: 'USDC' }, quote: { chain: 'Ethereum', asset: 'USDC' } },
 ];
