@@ -1,6 +1,5 @@
 import { z } from 'zod';
 import { cfGetTradingStrategies } from '../parsers';
-
 import {
   type broker,
   type brokerRequestSwapDepositAddress,
@@ -20,6 +19,7 @@ import {
   type cfFailedCallEvm,
   type cfPoolOrderbook,
 } from '../parsers';
+import { CfAvailablePools } from '../types';
 
 export const supportedAssets = [
   { chain: 'Ethereum', asset: 'ETH' },
@@ -784,4 +784,19 @@ export const tradingStrategies: z.input<typeof cfGetTradingStrategies> = [
       ],
     ],
   },
+];
+
+export const availablePools: CfAvailablePools = [
+  { base: { chain: 'Ethereum', asset: 'ETH' }, quote: { chain: 'Ethereum', asset: 'USDC' } },
+  { base: { chain: 'Arbitrum', asset: 'USDC' }, quote: { chain: 'Ethereum', asset: 'USDC' } },
+  { base: { chain: 'Solana', asset: 'USDC' }, quote: { chain: 'Ethereum', asset: 'USDC' } },
+  { base: { chain: 'Polkadot', asset: 'DOT' }, quote: { chain: 'Ethereum', asset: 'USDC' } },
+  { base: { chain: 'Ethereum', asset: 'FLIP' }, quote: { chain: 'Ethereum', asset: 'USDC' } },
+  { base: { chain: 'Arbitrum', asset: 'ETH' }, quote: { chain: 'Ethereum', asset: 'USDC' } },
+  { base: { chain: 'Bitcoin', asset: 'BTC' }, quote: { chain: 'Ethereum', asset: 'USDC' } },
+  { base: { chain: 'Solana', asset: 'SOL' }, quote: { chain: 'Ethereum', asset: 'USDC' } },
+  { base: { chain: 'Ethereum', asset: 'USDT' }, quote: { chain: 'Ethereum', asset: 'USDC' } },
+  { base: { chain: 'Assethub', asset: 'DOT' }, quote: { chain: 'Ethereum', asset: 'USDC' } },
+  { base: { chain: 'Assethub', asset: 'USDT' }, quote: { chain: 'Ethereum', asset: 'USDC' } },
+  { base: { chain: 'Assethub', asset: 'USDC' }, quote: { chain: 'Ethereum', asset: 'USDC' } },
 ];
