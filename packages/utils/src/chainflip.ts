@@ -331,8 +331,8 @@ export function getInternalAsset(asset: UncheckedAssetAndChain, assert = true) {
     },
   };
 
-  const chain = map[asset.chain];
-  const internalAsset = chain[asset.asset as keyof typeof chain] as ChainflipAsset | undefined;
+  const chain = map[asset.chain] as ChainAssetMap<ChainflipAsset>[ChainflipChain] | undefined;
+  const internalAsset = chain?.[asset.asset as keyof typeof chain] as ChainflipAsset | undefined;
 
   if (internalAsset) return internalAsset;
   if (assert) throw new Error(`invalid asset and chain combination: ${JSON.stringify(asset)}`);
