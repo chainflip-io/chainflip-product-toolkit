@@ -68,8 +68,12 @@ export type BaseChainAssetMap<T> = {
 };
 
 export type AssetAndChain = {
-  [C in ChainflipChain]: { chain: C; asset: keyof ChainAssetMap<unknown>[C] };
+  [C in ChainflipChain]: {
+    [A in keyof ChainAssetMap<unknown>[C]]: { chain: C; asset: A };
+  }[keyof ChainAssetMap<unknown>[C]];
 }[ChainflipChain];
+
+export type BaseAssetAndChain = Exclude<AssetAndChain, { chain: 'Ethereum'; asset: 'USDC' }>;
 
 export type ChainMap<T> = {
   [C in ChainflipChain]: T;
@@ -290,16 +294,8 @@ export const assetContractId: InternalAssetMap<number> = {
   HubUsdc: 13,
 };
 
-export function isValidAssetAndChain(
-  assetAndChain: UncheckedAssetAndChain,
-): assetAndChain is AssetAndChain {
-  const { asset, chain } = assetAndChain;
-  if (!(chain in chainConstants)) return false;
-
-  const validAssets = chainConstants[chain].assets as string[];
-  return validAssets.includes(asset);
-}
-
+export function getInternalAsset(asset: BaseAssetAndChain): BaseChainflipAsset;
+export function getInternalAsset(asset: AssetAndChain): ChainflipAsset;
 export function getInternalAsset(asset: UncheckedAssetAndChain): ChainflipAsset;
 export function getInternalAsset(asset: UncheckedAssetAndChain, assert: true): ChainflipAsset;
 export function getInternalAsset(
@@ -307,14 +303,6 @@ export function getInternalAsset(
   assert: boolean,
 ): ChainflipAsset | null;
 export function getInternalAsset(asset: UncheckedAssetAndChain, assert = true) {
-  if (!isValidAssetAndChain(asset)) {
-    if (assert) {
-      throw new Error(`invalid asset and chain combination: ${JSON.stringify(asset)}`);
-    }
-
-    return null;
-  }
-
   const map: ChainAssetMap<ChainflipAsset> = {
     Ethereum: {
       USDC: 'Usdc',
@@ -343,8 +331,19 @@ export function getInternalAsset(asset: UncheckedAssetAndChain, assert = true) {
     },
   };
 
-  const chain = map[asset.chain];
-  return chain[asset.asset as keyof typeof chain] as ChainflipAsset;
+  const chain = map[asset.chain] as ChainAssetMap<ChainflipAsset>[ChainflipChain] | undefined;
+  const internalAsset = chain?.[asset.asset as keyof typeof chain] as ChainflipAsset | undefined;
+
+  if (internalAsset) return internalAsset;
+  if (assert) throw new Error(`invalid asset and chain combination: ${JSON.stringify(asset)}`);
+  return null;
+}
+
+export function isValidAssetAndChain(
+  assetAndChain: UncheckedAssetAndChain,
+): assetAndChain is AssetAndChain {
+  const asset = getInternalAsset(assetAndChain, false);
+  return asset !== null;
 }
 
 export function getInternalAssets(data: {
