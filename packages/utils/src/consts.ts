@@ -131,6 +131,10 @@ export const brokerAliasMap: AccountAliasMap = {
     name: 'Symbiosis',
     twitter: '@symbiosis_fi',
   },
+  cFLvH2ZA3J5dsDdrDuV1Eyh9Jk6yasijtKQagGhMDKoKBU3pc: {
+    name: 'LeoDex',
+    twitter: null,
+  },
 } as const;
 
 export const lpAliasMap: AccountAliasMap = {
