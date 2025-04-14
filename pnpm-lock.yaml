@@ -75,8 +75,8 @@ importers:
         specifier: 0.8.3
         version: 0.8.3
       bignumber.js:
-        specifier: ^9.2.0
-        version: 9.2.0
+        specifier: ^9.2.1
+        version: 9.2.1
       bitcoinjs-lib:
         specifier: 7.0.0-rc.0
         version: 7.0.0-rc.0(typescript@5.8.3)
@@ -154,8 +154,8 @@ importers:
         specifier: 0.8.3
         version: 0.8.3
       bignumber.js:
-        specifier: ^9.2.0
-        version: 9.2.0
+        specifier: ^9.2.1
+        version: 9.2.1
       ioredis:
         specifier: ^5.6.1
         version: 5.6.1
@@ -238,8 +238,8 @@ importers:
         specifier: ^2.1.0
         version: 2.1.0
       bignumber.js:
-        specifier: ^9.2.0
-        version: 9.2.0
+        specifier: ^9.2.1
+        version: 9.2.1
       date-fns:
         specifier: 4.1.0
         version: 4.1.0
@@ -1408,9 +1408,8 @@ packages:
     resolution: {integrity: sha512-trfYco6AoZ+rKhKnxA0hgX0HAbVP/s808/EuDSe2JDzUnCp/xAsli35Orvk67UrTEcwuxZqYZDmfA2RXJgxVvA==}
     engines: {node: '>= 10.0.0'}
 
-  bignumber.js@9.2.0:
-    resolution: {integrity: sha512-JocpCSOixzy5XFJi2ub6IMmV/G9i8Lrm2lZvwBv9xPdglmZM0ufDVBbjbrfU/zuLvBfD7Bv2eYxz9i+OHTgkew==}
-    deprecated: pkg version number incorrect
+  bignumber.js@9.2.1:
+    resolution: {integrity: sha512-+NzaKgOUvInq9TIUZ1+DRspzf/HApkCwD4btfuasFTdrfnOxqx853TgDpMolp+uv4RpRp7bPcEU2zKr9+fRmyw==}
 
   bindings@1.5.0:
     resolution: {integrity: sha512-p2q/t/mhvuOj/UeLlV6566GD/guowlr0hHxClI0W9m7MWYkL1F0hLo+0Aexs9HSPCtR1SXQ0TD3MMKrXZajbiQ==}
@@ -3225,19 +3224,19 @@ snapshots:
   '@chainflip/utils@0.6.0':
     dependencies:
       '@date-fns/utc': 2.1.0
-      bignumber.js: 9.2.0
+      bignumber.js: 9.2.1
       date-fns: 4.1.0
 
   '@chainflip/utils@0.8.2':
     dependencies:
       '@date-fns/utc': 2.1.0
-      bignumber.js: 9.2.0
+      bignumber.js: 9.2.1
       date-fns: 4.1.0
 
   '@chainflip/utils@0.8.3':
     dependencies:
       '@date-fns/utc': 2.1.0
-      bignumber.js: 9.2.0
+      bignumber.js: 9.2.1
       date-fns: 4.1.0
 
   '@coral-xyz/anchor-errors@0.31.0': {}
@@ -4267,7 +4266,7 @@ snapshots:
     dependencies:
       bindings: 1.5.0
 
-  bignumber.js@9.2.0: {}
+  bignumber.js@9.2.1: {}
 
   bindings@1.5.0:
     dependencies:
