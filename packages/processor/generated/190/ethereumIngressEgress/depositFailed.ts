@@ -1,12 +1,12 @@
 import { z } from 'zod';
 import {
   numberOrHex,
-  palletCfEthereumIngressEgressDepositFailedDetails,
+  palletCfEthereumIngressEgressDepositFailedDetailsEthereum,
   palletCfEthereumIngressEgressDepositFailedReason,
 } from '../common';
 
 export const ethereumIngressEgressDepositFailed = z.object({
   blockHeight: numberOrHex,
   reason: palletCfEthereumIngressEgressDepositFailedReason,
-  details: palletCfEthereumIngressEgressDepositFailedDetails,
+  details: palletCfEthereumIngressEgressDepositFailedDetailsEthereum,
 });

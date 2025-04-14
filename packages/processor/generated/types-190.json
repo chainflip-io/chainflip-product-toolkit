@@ -665,6 +665,10 @@
                       "withdrawalEnabled": {
                         "type": "primitive",
                         "name": "bool"
+                      },
+                      "internalSwapsEnabled": {
+                        "type": "primitive",
+                        "name": "bool"
                       }
                     }
                   },
@@ -1406,12 +1410,53 @@
         }
       }
     },
-    "SlashingRateUpdated": {
+    "PalletConfigUpdated": {
       "type": "struct",
       "fields": {
-        "slashingRate": {
-          "type": "primitive",
-          "name": "Permill"
+        "update": {
+          "type": "enum",
+          "name": "palletCfFlipPalletConfigUpdate",
+          "values": [
+            {
+              "name": "SetSlashingRate",
+              "value": {
+                "type": "primitive",
+                "name": "Permill"
+              }
+            },
+            {
+              "name": "SetFeeScalingRate",
+              "value": {
+                "type": "enum",
+                "name": "palletCfFlipOnChargeTransactionFeeScalingRateConfig",
+                "values": [
+                  {
+                    "name": "DelayedExponential",
+                    "value": {
+                      "type": "struct",
+                      "fields": {
+                        "threshold": {
+                          "type": "primitive",
+                          "name": "u16"
+                        },
+                        "exponent": {
+                          "type": "primitive",
+                          "name": "u16"
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "name": "NoScaling",
+                    "value": {
+                      "type": "primitive",
+                      "name": "null"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
         }
       }
     }
@@ -10797,122 +10842,6 @@
         }
       }
     },
-    "MaximumSwapAmountSet": {
-      "type": "struct",
-      "fields": {
-        "asset": {
-          "type": "enum",
-          "name": "cfPrimitivesChainsAssetsAnyAsset",
-          "values": [
-            {
-              "name": "__Unused0",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            },
-            {
-              "name": "Eth",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            },
-            {
-              "name": "Flip",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            },
-            {
-              "name": "Usdc",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            },
-            {
-              "name": "Dot",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            },
-            {
-              "name": "Btc",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            },
-            {
-              "name": "ArbEth",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            },
-            {
-              "name": "ArbUsdc",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            },
-            {
-              "name": "Usdt",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            },
-            {
-              "name": "Sol",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            },
-            {
-              "name": "SolUsdc",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            },
-            {
-              "name": "HubDot",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            },
-            {
-              "name": "HubUsdt",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            },
-            {
-              "name": "HubUsdc",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            }
-          ]
-        },
-        "amount": {
-          "type": "option",
-          "value": {
-            "type": "primitive",
-            "name": "u128"
-          }
-        }
-      }
-    },
     "SwapAmountConfiscated": {
       "type": "struct",
       "fields": {
@@ -11726,155 +11655,6 @@
         }
       }
     },
-    "BuyIntervalSet": {
-      "type": "struct",
-      "fields": {
-        "buyInterval": {
-          "type": "primitive",
-          "name": "u32"
-        }
-      }
-    },
-    "SwapRetryDelaySet": {
-      "type": "struct",
-      "fields": {
-        "swapRetryDelay": {
-          "type": "primitive",
-          "name": "u32"
-        }
-      }
-    },
-    "MaxSwapRetryDurationSet": {
-      "type": "struct",
-      "fields": {
-        "blocks": {
-          "type": "primitive",
-          "name": "u32"
-        }
-      }
-    },
-    "MaxSwapRequestDurationSet": {
-      "type": "struct",
-      "fields": {
-        "blocks": {
-          "type": "primitive",
-          "name": "u32"
-        }
-      }
-    },
-    "MinimumChunkSizeSet": {
-      "type": "struct",
-      "fields": {
-        "asset": {
-          "type": "enum",
-          "name": "cfPrimitivesChainsAssetsAnyAsset",
-          "values": [
-            {
-              "name": "__Unused0",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            },
-            {
-              "name": "Eth",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            },
-            {
-              "name": "Flip",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            },
-            {
-              "name": "Usdc",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            },
-            {
-              "name": "Dot",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            },
-            {
-              "name": "Btc",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            },
-            {
-              "name": "ArbEth",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            },
-            {
-              "name": "ArbUsdc",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            },
-            {
-              "name": "Usdt",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            },
-            {
-              "name": "Sol",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            },
-            {
-              "name": "SolUsdc",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            },
-            {
-              "name": "HubDot",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            },
-            {
-              "name": "HubUsdt",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            },
-            {
-              "name": "HubUsdc",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            }
-          ]
-        },
-        "amount": {
-          "type": "primitive",
-          "name": "u128"
-        }
-      }
-    },
     "PrivateBrokerChannelOpened": {
       "type": "struct",
       "fields": {
@@ -11919,24 +11699,6 @@
         "affiliateId": {
           "type": "primitive",
           "name": "AccountId32"
-        }
-      }
-    },
-    "BrokerBondSet": {
-      "type": "struct",
-      "fields": {
-        "bond": {
-          "type": "primitive",
-          "name": "u128"
-        }
-      }
-    },
-    "MinimumNetworkFeeSet": {
-      "type": "struct",
-      "fields": {
-        "minFee": {
-          "type": "primitive",
-          "name": "u128"
         }
       }
     },
@@ -12179,6 +11941,361 @@
         "amount": {
           "type": "primitive",
           "name": "u128"
+        }
+      }
+    },
+    "PalletConfigUpdated": {
+      "type": "struct",
+      "fields": {
+        "update": {
+          "type": "enum",
+          "name": "palletCfSwappingPalletConfigUpdate",
+          "values": [
+            {
+              "name": "MaximumSwapAmount",
+              "value": {
+                "type": "struct",
+                "fields": {
+                  "asset": {
+                    "type": "enum",
+                    "name": "cfPrimitivesChainsAssetsAnyAsset",
+                    "values": [
+                      {
+                        "name": "__Unused0",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      },
+                      {
+                        "name": "Eth",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      },
+                      {
+                        "name": "Flip",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      },
+                      {
+                        "name": "Usdc",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      },
+                      {
+                        "name": "Dot",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      },
+                      {
+                        "name": "Btc",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      },
+                      {
+                        "name": "ArbEth",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      },
+                      {
+                        "name": "ArbUsdc",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      },
+                      {
+                        "name": "Usdt",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      },
+                      {
+                        "name": "Sol",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      },
+                      {
+                        "name": "SolUsdc",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      },
+                      {
+                        "name": "HubDot",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      },
+                      {
+                        "name": "HubUsdt",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      },
+                      {
+                        "name": "HubUsdc",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      }
+                    ]
+                  },
+                  "amount": {
+                    "type": "option",
+                    "value": {
+                      "type": "primitive",
+                      "name": "u128"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "name": "SwapRetryDelay",
+              "value": {
+                "type": "struct",
+                "fields": {
+                  "delay": {
+                    "type": "primitive",
+                    "name": "u32"
+                  }
+                }
+              }
+            },
+            {
+              "name": "FlipBuyInterval",
+              "value": {
+                "type": "struct",
+                "fields": {
+                  "interval": {
+                    "type": "primitive",
+                    "name": "u32"
+                  }
+                }
+              }
+            },
+            {
+              "name": "SetMaxSwapRetryDuration",
+              "value": {
+                "type": "struct",
+                "fields": {
+                  "blocks": {
+                    "type": "primitive",
+                    "name": "u32"
+                  }
+                }
+              }
+            },
+            {
+              "name": "SetMaxSwapRequestDuration",
+              "value": {
+                "type": "struct",
+                "fields": {
+                  "blocks": {
+                    "type": "primitive",
+                    "name": "u32"
+                  }
+                }
+              }
+            },
+            {
+              "name": "SetMinimumChunkSize",
+              "value": {
+                "type": "struct",
+                "fields": {
+                  "asset": {
+                    "type": "enum",
+                    "name": "cfPrimitivesChainsAssetsAnyAsset",
+                    "values": [
+                      {
+                        "name": "__Unused0",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      },
+                      {
+                        "name": "Eth",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      },
+                      {
+                        "name": "Flip",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      },
+                      {
+                        "name": "Usdc",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      },
+                      {
+                        "name": "Dot",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      },
+                      {
+                        "name": "Btc",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      },
+                      {
+                        "name": "ArbEth",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      },
+                      {
+                        "name": "ArbUsdc",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      },
+                      {
+                        "name": "Usdt",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      },
+                      {
+                        "name": "Sol",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      },
+                      {
+                        "name": "SolUsdc",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      },
+                      {
+                        "name": "HubDot",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      },
+                      {
+                        "name": "HubUsdt",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      },
+                      {
+                        "name": "HubUsdc",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      }
+                    ]
+                  },
+                  "size_": {
+                    "type": "primitive",
+                    "name": "u128"
+                  }
+                }
+              }
+            },
+            {
+              "name": "SetBrokerBond",
+              "value": {
+                "type": "struct",
+                "fields": {
+                  "bond": {
+                    "type": "primitive",
+                    "name": "u128"
+                  }
+                }
+              }
+            },
+            {
+              "name": "SetMinimumNetworkFee",
+              "value": {
+                "type": "struct",
+                "fields": {
+                  "minFee": {
+                    "type": "primitive",
+                    "name": "u128"
+                  }
+                }
+              }
+            },
+            {
+              "name": "SetInternalSwapNetworkFee",
+              "value": {
+                "type": "struct",
+                "fields": {
+                  "fee": {
+                    "type": "primitive",
+                    "name": "Permill"
+                  }
+                }
+              }
+            },
+            {
+              "name": "SetInternalSwapMinimumNetworkFee",
+              "value": {
+                "type": "struct",
+                "fields": {
+                  "minFee": {
+                    "type": "primitive",
+                    "name": "u128"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "VaultSwapMinimumBrokerFeeSet": {
+      "type": "struct",
+      "fields": {
+        "brokerId": {
+          "type": "primitive",
+          "name": "AccountId32"
+        },
+        "minimumFeeBps": {
+          "type": "primitive",
+          "name": "u16"
         }
       }
     }
@@ -13085,6 +13202,133 @@
                       "type": "primitive",
                       "name": "u64"
                     }
+                  }
+                }
+              }
+            },
+            {
+              "name": "Refund",
+              "value": {
+                "type": "struct",
+                "fields": {
+                  "egressId": {
+                    "type": "option",
+                    "value": {
+                      "type": "tuple",
+                      "values": [
+                        {
+                          "type": "enum",
+                          "name": "cfPrimitivesChainsForeignChain",
+                          "values": [
+                            {
+                              "name": "__Unused0",
+                              "value": {
+                                "type": "primitive",
+                                "name": "null"
+                              }
+                            },
+                            {
+                              "name": "Ethereum",
+                              "value": {
+                                "type": "primitive",
+                                "name": "null"
+                              }
+                            },
+                            {
+                              "name": "Polkadot",
+                              "value": {
+                                "type": "primitive",
+                                "name": "null"
+                              }
+                            },
+                            {
+                              "name": "Bitcoin",
+                              "value": {
+                                "type": "primitive",
+                                "name": "null"
+                              }
+                            },
+                            {
+                              "name": "Arbitrum",
+                              "value": {
+                                "type": "primitive",
+                                "name": "null"
+                              }
+                            },
+                            {
+                              "name": "Solana",
+                              "value": {
+                                "type": "primitive",
+                                "name": "null"
+                              }
+                            },
+                            {
+                              "name": "Assethub",
+                              "value": {
+                                "type": "primitive",
+                                "name": "null"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "primitive",
+                          "name": "u64"
+                        }
+                      ]
+                    }
+                  },
+                  "reason": {
+                    "type": "enum",
+                    "name": "palletCfEthereumIngressEgressRefundReason",
+                    "values": [
+                      {
+                        "name": "InvalidBrokerFees",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      },
+                      {
+                        "name": "InvalidRefundParameters",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      },
+                      {
+                        "name": "InvalidDcaParameters",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      },
+                      {
+                        "name": "CcmUnsupportedForTargetChain",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      },
+                      {
+                        "name": "CcmInvalidMetadata",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      },
+                      {
+                        "name": "InvalidDestinationAddress",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      }
+                    ]
+                  },
+                  "amount": {
+                    "type": "primitive",
+                    "name": "u128"
                   }
                 }
               }
@@ -14137,57 +14381,15 @@
                   }
                 ]
               }
-            },
-            {
-              "name": "InvalidDestinationAddress",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            },
-            {
-              "name": "InvalidBrokerFees",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            },
-            {
-              "name": "InvalidRefundParameters",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            },
-            {
-              "name": "InvalidDcaParameters",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            },
-            {
-              "name": "CcmUnsupportedForTargetChain",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            },
-            {
-              "name": "CcmInvalidMetadata",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
             }
           ]
         },
         "details": {
           "type": "enum",
-          "name": "palletCfEthereumIngressEgressDepositFailedDetails",
+          "name": "palletCfEthereumIngressEgressDepositFailedDetailsEthereum",
           "values": [
             {
-              "name": "DepositChannel",
+              "name": "DepositChannelEthereum",
               "value": {
                 "type": "struct",
                 "fields": {
@@ -14259,13 +14461,13 @@
               }
             },
             {
-              "name": "Vault",
+              "name": "VaultEthereum",
               "value": {
                 "type": "struct",
                 "fields": {
                   "vaultWitness": {
                     "type": "struct",
-                    "name": "PalletCfEthereumIngressEgressVaultDepositWitness",
+                    "name": "PalletCfEthereumIngressEgressVaultDepositWitnessEthereum",
                     "fields": {
                       "inputAsset": {
                         "type": "enum",
@@ -15585,6 +15787,133 @@
                   }
                 }
               }
+            },
+            {
+              "name": "Refund",
+              "value": {
+                "type": "struct",
+                "fields": {
+                  "egressId": {
+                    "type": "option",
+                    "value": {
+                      "type": "tuple",
+                      "values": [
+                        {
+                          "type": "enum",
+                          "name": "cfPrimitivesChainsForeignChain",
+                          "values": [
+                            {
+                              "name": "__Unused0",
+                              "value": {
+                                "type": "primitive",
+                                "name": "null"
+                              }
+                            },
+                            {
+                              "name": "Ethereum",
+                              "value": {
+                                "type": "primitive",
+                                "name": "null"
+                              }
+                            },
+                            {
+                              "name": "Polkadot",
+                              "value": {
+                                "type": "primitive",
+                                "name": "null"
+                              }
+                            },
+                            {
+                              "name": "Bitcoin",
+                              "value": {
+                                "type": "primitive",
+                                "name": "null"
+                              }
+                            },
+                            {
+                              "name": "Arbitrum",
+                              "value": {
+                                "type": "primitive",
+                                "name": "null"
+                              }
+                            },
+                            {
+                              "name": "Solana",
+                              "value": {
+                                "type": "primitive",
+                                "name": "null"
+                              }
+                            },
+                            {
+                              "name": "Assethub",
+                              "value": {
+                                "type": "primitive",
+                                "name": "null"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "primitive",
+                          "name": "u64"
+                        }
+                      ]
+                    }
+                  },
+                  "reason": {
+                    "type": "enum",
+                    "name": "palletCfEthereumIngressEgressRefundReason",
+                    "values": [
+                      {
+                        "name": "InvalidBrokerFees",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      },
+                      {
+                        "name": "InvalidRefundParameters",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      },
+                      {
+                        "name": "InvalidDcaParameters",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      },
+                      {
+                        "name": "CcmUnsupportedForTargetChain",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      },
+                      {
+                        "name": "CcmInvalidMetadata",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      },
+                      {
+                        "name": "InvalidDestinationAddress",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      }
+                    ]
+                  },
+                  "amount": {
+                    "type": "primitive",
+                    "name": "u128"
+                  }
+                }
+              }
             }
           ]
         },
@@ -15973,6 +16302,15 @@
           "name": "Percent"
         }
       }
+    },
+    "WitnessSafetyMarginSet": {
+      "type": "struct",
+      "fields": {
+        "margin": {
+          "type": "primitive",
+          "name": "u64"
+        }
+      }
     }
   },
   "PolkadotIngressEgress": {
@@ -16082,6 +16420,133 @@
                       "type": "primitive",
                       "name": "u64"
                     }
+                  }
+                }
+              }
+            },
+            {
+              "name": "Refund",
+              "value": {
+                "type": "struct",
+                "fields": {
+                  "egressId": {
+                    "type": "option",
+                    "value": {
+                      "type": "tuple",
+                      "values": [
+                        {
+                          "type": "enum",
+                          "name": "cfPrimitivesChainsForeignChain",
+                          "values": [
+                            {
+                              "name": "__Unused0",
+                              "value": {
+                                "type": "primitive",
+                                "name": "null"
+                              }
+                            },
+                            {
+                              "name": "Ethereum",
+                              "value": {
+                                "type": "primitive",
+                                "name": "null"
+                              }
+                            },
+                            {
+                              "name": "Polkadot",
+                              "value": {
+                                "type": "primitive",
+                                "name": "null"
+                              }
+                            },
+                            {
+                              "name": "Bitcoin",
+                              "value": {
+                                "type": "primitive",
+                                "name": "null"
+                              }
+                            },
+                            {
+                              "name": "Arbitrum",
+                              "value": {
+                                "type": "primitive",
+                                "name": "null"
+                              }
+                            },
+                            {
+                              "name": "Solana",
+                              "value": {
+                                "type": "primitive",
+                                "name": "null"
+                              }
+                            },
+                            {
+                              "name": "Assethub",
+                              "value": {
+                                "type": "primitive",
+                                "name": "null"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "primitive",
+                          "name": "u64"
+                        }
+                      ]
+                    }
+                  },
+                  "reason": {
+                    "type": "enum",
+                    "name": "palletCfPolkadotIngressEgressRefundReason",
+                    "values": [
+                      {
+                        "name": "InvalidBrokerFees",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      },
+                      {
+                        "name": "InvalidRefundParameters",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      },
+                      {
+                        "name": "InvalidDcaParameters",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      },
+                      {
+                        "name": "CcmUnsupportedForTargetChain",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      },
+                      {
+                        "name": "CcmInvalidMetadata",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      },
+                      {
+                        "name": "InvalidDestinationAddress",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      }
+                    ]
+                  },
+                  "amount": {
+                    "type": "primitive",
+                    "name": "u128"
                   }
                 }
               }
@@ -17071,57 +17536,15 @@
                   }
                 ]
               }
-            },
-            {
-              "name": "InvalidDestinationAddress",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            },
-            {
-              "name": "InvalidBrokerFees",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            },
-            {
-              "name": "InvalidRefundParameters",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            },
-            {
-              "name": "InvalidDcaParameters",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            },
-            {
-              "name": "CcmUnsupportedForTargetChain",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            },
-            {
-              "name": "CcmInvalidMetadata",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
             }
           ]
         },
         "details": {
           "type": "enum",
-          "name": "palletCfPolkadotIngressEgressDepositFailedDetails",
+          "name": "palletCfPolkadotIngressEgressDepositFailedDetailsPolkadot",
           "values": [
             {
-              "name": "DepositChannel",
+              "name": "DepositChannelPolkadot",
               "value": {
                 "type": "struct",
                 "fields": {
@@ -17164,13 +17587,13 @@
               }
             },
             {
-              "name": "Vault",
+              "name": "VaultPolkadot",
               "value": {
                 "type": "struct",
                 "fields": {
                   "vaultWitness": {
                     "type": "struct",
-                    "name": "PalletCfPolkadotIngressEgressVaultDepositWitness",
+                    "name": "PalletCfPolkadotIngressEgressVaultDepositWitnessPolkadot",
                     "fields": {
                       "inputAsset": {
                         "type": "enum",
@@ -18429,6 +18852,133 @@
                   }
                 }
               }
+            },
+            {
+              "name": "Refund",
+              "value": {
+                "type": "struct",
+                "fields": {
+                  "egressId": {
+                    "type": "option",
+                    "value": {
+                      "type": "tuple",
+                      "values": [
+                        {
+                          "type": "enum",
+                          "name": "cfPrimitivesChainsForeignChain",
+                          "values": [
+                            {
+                              "name": "__Unused0",
+                              "value": {
+                                "type": "primitive",
+                                "name": "null"
+                              }
+                            },
+                            {
+                              "name": "Ethereum",
+                              "value": {
+                                "type": "primitive",
+                                "name": "null"
+                              }
+                            },
+                            {
+                              "name": "Polkadot",
+                              "value": {
+                                "type": "primitive",
+                                "name": "null"
+                              }
+                            },
+                            {
+                              "name": "Bitcoin",
+                              "value": {
+                                "type": "primitive",
+                                "name": "null"
+                              }
+                            },
+                            {
+                              "name": "Arbitrum",
+                              "value": {
+                                "type": "primitive",
+                                "name": "null"
+                              }
+                            },
+                            {
+                              "name": "Solana",
+                              "value": {
+                                "type": "primitive",
+                                "name": "null"
+                              }
+                            },
+                            {
+                              "name": "Assethub",
+                              "value": {
+                                "type": "primitive",
+                                "name": "null"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "primitive",
+                          "name": "u64"
+                        }
+                      ]
+                    }
+                  },
+                  "reason": {
+                    "type": "enum",
+                    "name": "palletCfPolkadotIngressEgressRefundReason",
+                    "values": [
+                      {
+                        "name": "InvalidBrokerFees",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      },
+                      {
+                        "name": "InvalidRefundParameters",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      },
+                      {
+                        "name": "InvalidDcaParameters",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      },
+                      {
+                        "name": "CcmUnsupportedForTargetChain",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      },
+                      {
+                        "name": "CcmInvalidMetadata",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      },
+                      {
+                        "name": "InvalidDestinationAddress",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      }
+                    ]
+                  },
+                  "amount": {
+                    "type": "primitive",
+                    "name": "u128"
+                  }
+                }
+              }
             }
           ]
         },
@@ -18729,6 +19279,15 @@
           "name": "Percent"
         }
       }
+    },
+    "WitnessSafetyMarginSet": {
+      "type": "struct",
+      "fields": {
+        "margin": {
+          "type": "primitive",
+          "name": "u32"
+        }
+      }
     }
   },
   "BitcoinIngressEgress": {
@@ -18980,6 +19539,133 @@
                       "type": "primitive",
                       "name": "u64"
                     }
+                  }
+                }
+              }
+            },
+            {
+              "name": "Refund",
+              "value": {
+                "type": "struct",
+                "fields": {
+                  "egressId": {
+                    "type": "option",
+                    "value": {
+                      "type": "tuple",
+                      "values": [
+                        {
+                          "type": "enum",
+                          "name": "cfPrimitivesChainsForeignChain",
+                          "values": [
+                            {
+                              "name": "__Unused0",
+                              "value": {
+                                "type": "primitive",
+                                "name": "null"
+                              }
+                            },
+                            {
+                              "name": "Ethereum",
+                              "value": {
+                                "type": "primitive",
+                                "name": "null"
+                              }
+                            },
+                            {
+                              "name": "Polkadot",
+                              "value": {
+                                "type": "primitive",
+                                "name": "null"
+                              }
+                            },
+                            {
+                              "name": "Bitcoin",
+                              "value": {
+                                "type": "primitive",
+                                "name": "null"
+                              }
+                            },
+                            {
+                              "name": "Arbitrum",
+                              "value": {
+                                "type": "primitive",
+                                "name": "null"
+                              }
+                            },
+                            {
+                              "name": "Solana",
+                              "value": {
+                                "type": "primitive",
+                                "name": "null"
+                              }
+                            },
+                            {
+                              "name": "Assethub",
+                              "value": {
+                                "type": "primitive",
+                                "name": "null"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "primitive",
+                          "name": "u64"
+                        }
+                      ]
+                    }
+                  },
+                  "reason": {
+                    "type": "enum",
+                    "name": "palletCfBitcoinIngressEgressRefundReason",
+                    "values": [
+                      {
+                        "name": "InvalidBrokerFees",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      },
+                      {
+                        "name": "InvalidRefundParameters",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      },
+                      {
+                        "name": "InvalidDcaParameters",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      },
+                      {
+                        "name": "CcmUnsupportedForTargetChain",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      },
+                      {
+                        "name": "CcmInvalidMetadata",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      },
+                      {
+                        "name": "InvalidDestinationAddress",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      }
+                    ]
+                  },
+                  "amount": {
+                    "type": "primitive",
+                    "name": "u64"
                   }
                 }
               }
@@ -19969,57 +20655,15 @@
                   }
                 ]
               }
-            },
-            {
-              "name": "InvalidDestinationAddress",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            },
-            {
-              "name": "InvalidBrokerFees",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            },
-            {
-              "name": "InvalidRefundParameters",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            },
-            {
-              "name": "InvalidDcaParameters",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            },
-            {
-              "name": "CcmUnsupportedForTargetChain",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            },
-            {
-              "name": "CcmInvalidMetadata",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
             }
           ]
         },
         "details": {
           "type": "enum",
-          "name": "palletCfBitcoinIngressEgressDepositFailedDetails",
+          "name": "palletCfBitcoinIngressEgressDepositFailedDetailsBitcoin",
           "values": [
             {
-              "name": "DepositChannel",
+              "name": "DepositChannelBitcoin",
               "value": {
                 "type": "struct",
                 "fields": {
@@ -20204,13 +20848,13 @@
               }
             },
             {
-              "name": "Vault",
+              "name": "VaultBitcoin",
               "value": {
                 "type": "struct",
                 "fields": {
                   "vaultWitness": {
                     "type": "struct",
-                    "name": "PalletCfBitcoinIngressEgressVaultDepositWitness",
+                    "name": "PalletCfBitcoinIngressEgressVaultDepositWitnessBitcoin",
                     "fields": {
                       "inputAsset": {
                         "type": "enum",
@@ -21881,6 +22525,133 @@
                   }
                 }
               }
+            },
+            {
+              "name": "Refund",
+              "value": {
+                "type": "struct",
+                "fields": {
+                  "egressId": {
+                    "type": "option",
+                    "value": {
+                      "type": "tuple",
+                      "values": [
+                        {
+                          "type": "enum",
+                          "name": "cfPrimitivesChainsForeignChain",
+                          "values": [
+                            {
+                              "name": "__Unused0",
+                              "value": {
+                                "type": "primitive",
+                                "name": "null"
+                              }
+                            },
+                            {
+                              "name": "Ethereum",
+                              "value": {
+                                "type": "primitive",
+                                "name": "null"
+                              }
+                            },
+                            {
+                              "name": "Polkadot",
+                              "value": {
+                                "type": "primitive",
+                                "name": "null"
+                              }
+                            },
+                            {
+                              "name": "Bitcoin",
+                              "value": {
+                                "type": "primitive",
+                                "name": "null"
+                              }
+                            },
+                            {
+                              "name": "Arbitrum",
+                              "value": {
+                                "type": "primitive",
+                                "name": "null"
+                              }
+                            },
+                            {
+                              "name": "Solana",
+                              "value": {
+                                "type": "primitive",
+                                "name": "null"
+                              }
+                            },
+                            {
+                              "name": "Assethub",
+                              "value": {
+                                "type": "primitive",
+                                "name": "null"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "primitive",
+                          "name": "u64"
+                        }
+                      ]
+                    }
+                  },
+                  "reason": {
+                    "type": "enum",
+                    "name": "palletCfBitcoinIngressEgressRefundReason",
+                    "values": [
+                      {
+                        "name": "InvalidBrokerFees",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      },
+                      {
+                        "name": "InvalidRefundParameters",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      },
+                      {
+                        "name": "InvalidDcaParameters",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      },
+                      {
+                        "name": "CcmUnsupportedForTargetChain",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      },
+                      {
+                        "name": "CcmInvalidMetadata",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      },
+                      {
+                        "name": "InvalidDestinationAddress",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      }
+                    ]
+                  },
+                  "amount": {
+                    "type": "primitive",
+                    "name": "u64"
+                  }
+                }
+              }
             }
           ]
         },
@@ -22305,6 +23076,15 @@
         "deductionPercent": {
           "type": "primitive",
           "name": "Percent"
+        }
+      }
+    },
+    "WitnessSafetyMarginSet": {
+      "type": "struct",
+      "fields": {
+        "margin": {
+          "type": "primitive",
+          "name": "u64"
         }
       }
     }
@@ -25411,6 +26191,133 @@
                   }
                 }
               }
+            },
+            {
+              "name": "Refund",
+              "value": {
+                "type": "struct",
+                "fields": {
+                  "egressId": {
+                    "type": "option",
+                    "value": {
+                      "type": "tuple",
+                      "values": [
+                        {
+                          "type": "enum",
+                          "name": "cfPrimitivesChainsForeignChain",
+                          "values": [
+                            {
+                              "name": "__Unused0",
+                              "value": {
+                                "type": "primitive",
+                                "name": "null"
+                              }
+                            },
+                            {
+                              "name": "Ethereum",
+                              "value": {
+                                "type": "primitive",
+                                "name": "null"
+                              }
+                            },
+                            {
+                              "name": "Polkadot",
+                              "value": {
+                                "type": "primitive",
+                                "name": "null"
+                              }
+                            },
+                            {
+                              "name": "Bitcoin",
+                              "value": {
+                                "type": "primitive",
+                                "name": "null"
+                              }
+                            },
+                            {
+                              "name": "Arbitrum",
+                              "value": {
+                                "type": "primitive",
+                                "name": "null"
+                              }
+                            },
+                            {
+                              "name": "Solana",
+                              "value": {
+                                "type": "primitive",
+                                "name": "null"
+                              }
+                            },
+                            {
+                              "name": "Assethub",
+                              "value": {
+                                "type": "primitive",
+                                "name": "null"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "primitive",
+                          "name": "u64"
+                        }
+                      ]
+                    }
+                  },
+                  "reason": {
+                    "type": "enum",
+                    "name": "palletCfArbitrumIngressEgressRefundReason",
+                    "values": [
+                      {
+                        "name": "InvalidBrokerFees",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      },
+                      {
+                        "name": "InvalidRefundParameters",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      },
+                      {
+                        "name": "InvalidDcaParameters",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      },
+                      {
+                        "name": "CcmUnsupportedForTargetChain",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      },
+                      {
+                        "name": "CcmInvalidMetadata",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      },
+                      {
+                        "name": "InvalidDestinationAddress",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      }
+                    ]
+                  },
+                  "amount": {
+                    "type": "primitive",
+                    "name": "u128"
+                  }
+                }
+              }
             }
           ]
         },
@@ -26418,57 +27325,15 @@
                   }
                 ]
               }
-            },
-            {
-              "name": "InvalidDestinationAddress",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            },
-            {
-              "name": "InvalidBrokerFees",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            },
-            {
-              "name": "InvalidRefundParameters",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            },
-            {
-              "name": "InvalidDcaParameters",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            },
-            {
-              "name": "CcmUnsupportedForTargetChain",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            },
-            {
-              "name": "CcmInvalidMetadata",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
             }
           ]
         },
         "details": {
           "type": "enum",
-          "name": "palletCfArbitrumIngressEgressDepositFailedDetails",
+          "name": "palletCfArbitrumIngressEgressDepositFailedDetailsArbitrum",
           "values": [
             {
-              "name": "DepositChannel",
+              "name": "DepositChannelArbitrum",
               "value": {
                 "type": "struct",
                 "fields": {
@@ -26526,13 +27391,13 @@
               }
             },
             {
-              "name": "Vault",
+              "name": "VaultArbitrum",
               "value": {
                 "type": "struct",
                 "fields": {
                   "vaultWitness": {
                     "type": "struct",
-                    "name": "PalletCfArbitrumIngressEgressVaultDepositWitness",
+                    "name": "PalletCfArbitrumIngressEgressVaultDepositWitnessArbitrum",
                     "fields": {
                       "inputAsset": {
                         "type": "enum",
@@ -27810,6 +28675,133 @@
                   }
                 }
               }
+            },
+            {
+              "name": "Refund",
+              "value": {
+                "type": "struct",
+                "fields": {
+                  "egressId": {
+                    "type": "option",
+                    "value": {
+                      "type": "tuple",
+                      "values": [
+                        {
+                          "type": "enum",
+                          "name": "cfPrimitivesChainsForeignChain",
+                          "values": [
+                            {
+                              "name": "__Unused0",
+                              "value": {
+                                "type": "primitive",
+                                "name": "null"
+                              }
+                            },
+                            {
+                              "name": "Ethereum",
+                              "value": {
+                                "type": "primitive",
+                                "name": "null"
+                              }
+                            },
+                            {
+                              "name": "Polkadot",
+                              "value": {
+                                "type": "primitive",
+                                "name": "null"
+                              }
+                            },
+                            {
+                              "name": "Bitcoin",
+                              "value": {
+                                "type": "primitive",
+                                "name": "null"
+                              }
+                            },
+                            {
+                              "name": "Arbitrum",
+                              "value": {
+                                "type": "primitive",
+                                "name": "null"
+                              }
+                            },
+                            {
+                              "name": "Solana",
+                              "value": {
+                                "type": "primitive",
+                                "name": "null"
+                              }
+                            },
+                            {
+                              "name": "Assethub",
+                              "value": {
+                                "type": "primitive",
+                                "name": "null"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "primitive",
+                          "name": "u64"
+                        }
+                      ]
+                    }
+                  },
+                  "reason": {
+                    "type": "enum",
+                    "name": "palletCfArbitrumIngressEgressRefundReason",
+                    "values": [
+                      {
+                        "name": "InvalidBrokerFees",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      },
+                      {
+                        "name": "InvalidRefundParameters",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      },
+                      {
+                        "name": "InvalidDcaParameters",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      },
+                      {
+                        "name": "CcmUnsupportedForTargetChain",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      },
+                      {
+                        "name": "CcmInvalidMetadata",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      },
+                      {
+                        "name": "InvalidDestinationAddress",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      }
+                    ]
+                  },
+                  "amount": {
+                    "type": "primitive",
+                    "name": "u128"
+                  }
+                }
+              }
             }
           ]
         },
@@ -28140,6 +29132,15 @@
         "deductionPercent": {
           "type": "primitive",
           "name": "Percent"
+        }
+      }
+    },
+    "WitnessSafetyMarginSet": {
+      "type": "struct",
+      "fields": {
+        "margin": {
+          "type": "primitive",
+          "name": "u64"
         }
       }
     }
@@ -29477,6 +30478,133 @@
                   }
                 }
               }
+            },
+            {
+              "name": "Refund",
+              "value": {
+                "type": "struct",
+                "fields": {
+                  "egressId": {
+                    "type": "option",
+                    "value": {
+                      "type": "tuple",
+                      "values": [
+                        {
+                          "type": "enum",
+                          "name": "cfPrimitivesChainsForeignChain",
+                          "values": [
+                            {
+                              "name": "__Unused0",
+                              "value": {
+                                "type": "primitive",
+                                "name": "null"
+                              }
+                            },
+                            {
+                              "name": "Ethereum",
+                              "value": {
+                                "type": "primitive",
+                                "name": "null"
+                              }
+                            },
+                            {
+                              "name": "Polkadot",
+                              "value": {
+                                "type": "primitive",
+                                "name": "null"
+                              }
+                            },
+                            {
+                              "name": "Bitcoin",
+                              "value": {
+                                "type": "primitive",
+                                "name": "null"
+                              }
+                            },
+                            {
+                              "name": "Arbitrum",
+                              "value": {
+                                "type": "primitive",
+                                "name": "null"
+                              }
+                            },
+                            {
+                              "name": "Solana",
+                              "value": {
+                                "type": "primitive",
+                                "name": "null"
+                              }
+                            },
+                            {
+                              "name": "Assethub",
+                              "value": {
+                                "type": "primitive",
+                                "name": "null"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "primitive",
+                          "name": "u64"
+                        }
+                      ]
+                    }
+                  },
+                  "reason": {
+                    "type": "enum",
+                    "name": "palletCfSolanaIngressEgressRefundReason",
+                    "values": [
+                      {
+                        "name": "InvalidBrokerFees",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      },
+                      {
+                        "name": "InvalidRefundParameters",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      },
+                      {
+                        "name": "InvalidDcaParameters",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      },
+                      {
+                        "name": "CcmUnsupportedForTargetChain",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      },
+                      {
+                        "name": "CcmInvalidMetadata",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      },
+                      {
+                        "name": "InvalidDestinationAddress",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      }
+                    ]
+                  },
+                  "amount": {
+                    "type": "primitive",
+                    "name": "u64"
+                  }
+                }
+              }
             }
           ]
         },
@@ -30484,57 +31612,15 @@
                   }
                 ]
               }
-            },
-            {
-              "name": "InvalidDestinationAddress",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            },
-            {
-              "name": "InvalidBrokerFees",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            },
-            {
-              "name": "InvalidRefundParameters",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            },
-            {
-              "name": "InvalidDcaParameters",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            },
-            {
-              "name": "CcmUnsupportedForTargetChain",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            },
-            {
-              "name": "CcmInvalidMetadata",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
             }
           ]
         },
         "details": {
           "type": "enum",
-          "name": "palletCfSolanaIngressEgressDepositFailedDetails",
+          "name": "palletCfSolanaIngressEgressDepositFailedDetailsSolana",
           "values": [
             {
-              "name": "DepositChannel",
+              "name": "DepositChannelSolana",
               "value": {
                 "type": "struct",
                 "fields": {
@@ -30584,13 +31670,13 @@
               }
             },
             {
-              "name": "Vault",
+              "name": "VaultSolana",
               "value": {
                 "type": "struct",
                 "fields": {
                   "vaultWitness": {
                     "type": "struct",
-                    "name": "PalletCfSolanaIngressEgressVaultDepositWitness",
+                    "name": "PalletCfSolanaIngressEgressVaultDepositWitnessSolana",
                     "fields": {
                       "inputAsset": {
                         "type": "enum",
@@ -31873,6 +32959,133 @@
                   }
                 }
               }
+            },
+            {
+              "name": "Refund",
+              "value": {
+                "type": "struct",
+                "fields": {
+                  "egressId": {
+                    "type": "option",
+                    "value": {
+                      "type": "tuple",
+                      "values": [
+                        {
+                          "type": "enum",
+                          "name": "cfPrimitivesChainsForeignChain",
+                          "values": [
+                            {
+                              "name": "__Unused0",
+                              "value": {
+                                "type": "primitive",
+                                "name": "null"
+                              }
+                            },
+                            {
+                              "name": "Ethereum",
+                              "value": {
+                                "type": "primitive",
+                                "name": "null"
+                              }
+                            },
+                            {
+                              "name": "Polkadot",
+                              "value": {
+                                "type": "primitive",
+                                "name": "null"
+                              }
+                            },
+                            {
+                              "name": "Bitcoin",
+                              "value": {
+                                "type": "primitive",
+                                "name": "null"
+                              }
+                            },
+                            {
+                              "name": "Arbitrum",
+                              "value": {
+                                "type": "primitive",
+                                "name": "null"
+                              }
+                            },
+                            {
+                              "name": "Solana",
+                              "value": {
+                                "type": "primitive",
+                                "name": "null"
+                              }
+                            },
+                            {
+                              "name": "Assethub",
+                              "value": {
+                                "type": "primitive",
+                                "name": "null"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "primitive",
+                          "name": "u64"
+                        }
+                      ]
+                    }
+                  },
+                  "reason": {
+                    "type": "enum",
+                    "name": "palletCfSolanaIngressEgressRefundReason",
+                    "values": [
+                      {
+                        "name": "InvalidBrokerFees",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      },
+                      {
+                        "name": "InvalidRefundParameters",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      },
+                      {
+                        "name": "InvalidDcaParameters",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      },
+                      {
+                        "name": "CcmUnsupportedForTargetChain",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      },
+                      {
+                        "name": "CcmInvalidMetadata",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      },
+                      {
+                        "name": "InvalidDestinationAddress",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      }
+                    ]
+                  },
+                  "amount": {
+                    "type": "primitive",
+                    "name": "u64"
+                  }
+                }
+              }
             }
           ]
         },
@@ -32205,6 +33418,15 @@
         "deductionPercent": {
           "type": "primitive",
           "name": "Percent"
+        }
+      }
+    },
+    "WitnessSafetyMarginSet": {
+      "type": "struct",
+      "fields": {
+        "margin": {
+          "type": "primitive",
+          "name": "u64"
         }
       }
     }
@@ -33898,6 +35120,133 @@
                   }
                 }
               }
+            },
+            {
+              "name": "Refund",
+              "value": {
+                "type": "struct",
+                "fields": {
+                  "egressId": {
+                    "type": "option",
+                    "value": {
+                      "type": "tuple",
+                      "values": [
+                        {
+                          "type": "enum",
+                          "name": "cfPrimitivesChainsForeignChain",
+                          "values": [
+                            {
+                              "name": "__Unused0",
+                              "value": {
+                                "type": "primitive",
+                                "name": "null"
+                              }
+                            },
+                            {
+                              "name": "Ethereum",
+                              "value": {
+                                "type": "primitive",
+                                "name": "null"
+                              }
+                            },
+                            {
+                              "name": "Polkadot",
+                              "value": {
+                                "type": "primitive",
+                                "name": "null"
+                              }
+                            },
+                            {
+                              "name": "Bitcoin",
+                              "value": {
+                                "type": "primitive",
+                                "name": "null"
+                              }
+                            },
+                            {
+                              "name": "Arbitrum",
+                              "value": {
+                                "type": "primitive",
+                                "name": "null"
+                              }
+                            },
+                            {
+                              "name": "Solana",
+                              "value": {
+                                "type": "primitive",
+                                "name": "null"
+                              }
+                            },
+                            {
+                              "name": "Assethub",
+                              "value": {
+                                "type": "primitive",
+                                "name": "null"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "primitive",
+                          "name": "u64"
+                        }
+                      ]
+                    }
+                  },
+                  "reason": {
+                    "type": "enum",
+                    "name": "palletCfAssethubIngressEgressRefundReason",
+                    "values": [
+                      {
+                        "name": "InvalidBrokerFees",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      },
+                      {
+                        "name": "InvalidRefundParameters",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      },
+                      {
+                        "name": "InvalidDcaParameters",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      },
+                      {
+                        "name": "CcmUnsupportedForTargetChain",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      },
+                      {
+                        "name": "CcmInvalidMetadata",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      },
+                      {
+                        "name": "InvalidDestinationAddress",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      }
+                    ]
+                  },
+                  "amount": {
+                    "type": "primitive",
+                    "name": "u128"
+                  }
+                }
+              }
             }
           ]
         },
@@ -34926,57 +36275,15 @@
                   }
                 ]
               }
-            },
-            {
-              "name": "InvalidDestinationAddress",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            },
-            {
-              "name": "InvalidBrokerFees",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            },
-            {
-              "name": "InvalidRefundParameters",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            },
-            {
-              "name": "InvalidDcaParameters",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            },
-            {
-              "name": "CcmUnsupportedForTargetChain",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
-            },
-            {
-              "name": "CcmInvalidMetadata",
-              "value": {
-                "type": "primitive",
-                "name": "null"
-              }
             }
           ]
         },
         "details": {
           "type": "enum",
-          "name": "palletCfAssethubIngressEgressDepositFailedDetails",
+          "name": "palletCfAssethubIngressEgressDepositFailedDetailsAssethub",
           "values": [
             {
-              "name": "DepositChannel",
+              "name": "DepositChannelAssethub",
               "value": {
                 "type": "struct",
                 "fields": {
@@ -35033,13 +36340,13 @@
               }
             },
             {
-              "name": "Vault",
+              "name": "VaultAssethub",
               "value": {
                 "type": "struct",
                 "fields": {
                   "vaultWitness": {
                     "type": "struct",
-                    "name": "PalletCfAssethubIngressEgressVaultDepositWitness",
+                    "name": "PalletCfAssethubIngressEgressVaultDepositWitnessAssethub",
                     "fields": {
                       "inputAsset": {
                         "type": "enum",
@@ -36340,6 +37647,133 @@
                   }
                 }
               }
+            },
+            {
+              "name": "Refund",
+              "value": {
+                "type": "struct",
+                "fields": {
+                  "egressId": {
+                    "type": "option",
+                    "value": {
+                      "type": "tuple",
+                      "values": [
+                        {
+                          "type": "enum",
+                          "name": "cfPrimitivesChainsForeignChain",
+                          "values": [
+                            {
+                              "name": "__Unused0",
+                              "value": {
+                                "type": "primitive",
+                                "name": "null"
+                              }
+                            },
+                            {
+                              "name": "Ethereum",
+                              "value": {
+                                "type": "primitive",
+                                "name": "null"
+                              }
+                            },
+                            {
+                              "name": "Polkadot",
+                              "value": {
+                                "type": "primitive",
+                                "name": "null"
+                              }
+                            },
+                            {
+                              "name": "Bitcoin",
+                              "value": {
+                                "type": "primitive",
+                                "name": "null"
+                              }
+                            },
+                            {
+                              "name": "Arbitrum",
+                              "value": {
+                                "type": "primitive",
+                                "name": "null"
+                              }
+                            },
+                            {
+                              "name": "Solana",
+                              "value": {
+                                "type": "primitive",
+                                "name": "null"
+                              }
+                            },
+                            {
+                              "name": "Assethub",
+                              "value": {
+                                "type": "primitive",
+                                "name": "null"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "primitive",
+                          "name": "u64"
+                        }
+                      ]
+                    }
+                  },
+                  "reason": {
+                    "type": "enum",
+                    "name": "palletCfAssethubIngressEgressRefundReason",
+                    "values": [
+                      {
+                        "name": "InvalidBrokerFees",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      },
+                      {
+                        "name": "InvalidRefundParameters",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      },
+                      {
+                        "name": "InvalidDcaParameters",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      },
+                      {
+                        "name": "CcmUnsupportedForTargetChain",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      },
+                      {
+                        "name": "CcmInvalidMetadata",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      },
+                      {
+                        "name": "InvalidDestinationAddress",
+                        "value": {
+                          "type": "primitive",
+                          "name": "null"
+                        }
+                      }
+                    ]
+                  },
+                  "amount": {
+                    "type": "primitive",
+                    "name": "u128"
+                  }
+                }
+              }
             }
           ]
         },
@@ -36694,6 +38128,15 @@
         "deductionPercent": {
           "type": "primitive",
           "name": "Percent"
+        }
+      }
+    },
+    "WitnessSafetyMarginSet": {
+      "type": "struct",
+      "fields": {
+        "margin": {
+          "type": "primitive",
+          "name": "u32"
         }
       }
     }
