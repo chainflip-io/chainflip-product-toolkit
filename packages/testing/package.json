@@ -30,7 +30,7 @@
     }
   },
   "dependencies": {
-    "@chainflip/utils": "^0.8.3",
+    "@chainflip/utils": "^0.8.6",
     "vitest": "3.1.1"
   }
 }
