@@ -133,7 +133,7 @@ export const brokerAliasMap: AccountAliasMap = {
   },
   cFLvH2ZA3J5dsDdrDuV1Eyh9Jk6yasijtKQagGhMDKoKBU3pc: {
     name: 'LeoDex',
-    twitter: null,
+    twitter: '@leodexio',
   },
 } as const;
 
