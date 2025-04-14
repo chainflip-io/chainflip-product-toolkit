@@ -13,13 +13,17 @@ ArbitrumIngressEgress:
   - CcmEgressInvalid:
     - egressId: added
     - error: added
+  - DepositBoosted:
+    - action: added
   - DepositFailed:
-    - details: added
+    - reason: removed
+    - details: changed
+  - DepositFinalised:
+    - action: added
   - FailedToBuildAllBatchCall:
     - error: added
   - TransferFallbackRequested:
     - egressDetails: added
-  - WitnessSafetyMarginSet: removed
 
 AssetBalances:
   - AccountCredited:
@@ -43,13 +47,17 @@ BitcoinIngressEgress:
   - CcmEgressInvalid:
     - egressId: added
     - error: added
+  - DepositBoosted:
+    - action: added
   - DepositFailed:
-    - details: added
+    - reason: removed
+    - details: changed
+  - DepositFinalised:
+    - action: added
   - FailedToBuildAllBatchCall:
     - error: added
   - TransferFallbackRequested:
     - egressDetails: added
-  - WitnessSafetyMarginSet: removed
 
 Emissions:
   - NetworkFeeBurned:
@@ -68,13 +76,21 @@ EthereumIngressEgress:
   - CcmEgressInvalid:
     - egressId: added
     - error: added
+  - DepositBoosted:
+    - action: added
   - DepositFailed:
-    - details: added
+    - reason: removed
+    - details: changed
+  - DepositFinalised:
+    - action: added
   - FailedToBuildAllBatchCall:
     - error: added
   - TransferFallbackRequested:
     - egressDetails: added
-  - WitnessSafetyMarginSet: removed
+
+Flip:
+  - PalletConfigUpdated: added
+  - SlashingRateUpdated: removed
 
 LiquidityPools:
   - AssetSwapped:
@@ -122,13 +138,17 @@ PolkadotIngressEgress:
   - CcmEgressInvalid:
     - egressId: added
     - error: added
+  - DepositBoosted:
+    - action: added
   - DepositFailed:
-    - details: added
+    - reason: removed
+    - details: changed
+  - DepositFinalised:
+    - action: added
   - FailedToBuildAllBatchCall:
     - error: added
   - TransferFallbackRequested:
     - egressDetails: added
-  - WitnessSafetyMarginSet: removed
 
 Reputation:
   - OffencePenalty:
@@ -144,13 +164,17 @@ SolanaIngressEgress:
   - CcmEgressInvalid:
     - egressId: added
     - error: added
+  - DepositBoosted:
+    - action: added
   - DepositFailed:
-    - details: added
+    - reason: removed
+    - details: changed
+  - DepositFinalised:
+    - action: added
   - FailedToBuildAllBatchCall:
     - error: added
   - TransferFallbackRequested:
     - egressDetails: added
-  - WitnessSafetyMarginSet: removed
 
 SolanaThresholdSigner:
   - ThresholdSignatureRequest:
@@ -159,11 +183,15 @@ SolanaThresholdSigner:
 Swapping:
   - BatchSwapFailed:
     - asset: added
+  - BrokerBondSet: removed
+  - BuyIntervalSet: removed
   - CreditedOnChain: added
-  - MaximumSwapAmountSet:
-    - asset: added
-  - MinimumChunkSizeSet:
-    - asset: added
+  - MaxSwapRequestDurationSet: removed
+  - MaxSwapRetryDurationSet: removed
+  - MaximumSwapAmountSet: removed
+  - MinimumChunkSizeSet: removed
+  - MinimumNetworkFeeSet: removed
+  - PalletConfigUpdated: added
   - RefundEgressIgnored:
     - asset: added
   - RefundEgressScheduled:
@@ -194,6 +222,8 @@ Swapping:
     - origin: added
     - requestType: added
     - refundParameters: changed
+  - SwapRetryDelaySet: removed
+  - VaultSwapMinimumBrokerFeeSet: added
   - WithdrawalRequested:
     - egressId: added
     - egressAsset: added
