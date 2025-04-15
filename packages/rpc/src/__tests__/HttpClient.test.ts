@@ -23,6 +23,7 @@ import {
   poolPriceV2,
   poolsEnvironment,
   runtimeVersion,
+  safeModeStatuses,
   supportedAssets,
   swapDepositAddress,
   swapParameterEncodingBitcoin,
@@ -69,6 +70,7 @@ describe(HttpClient, () => {
         "cf_pool_price_v2",
         "cf_pools_environment",
         "cf_request_swap_parameter_encoding",
+        "cf_safe_mode_statuses",
         "cf_supported_assets",
         "cf_swap_rate",
         "cf_swap_rate_v2",
@@ -223,6 +225,8 @@ describe(HttpClient, () => {
           return respond(tradingStrategies);
         case 'cf_available_pools':
           return respond(availablePools);
+        case 'cf_safe_mode_statuses':
+          return respond(safeModeStatuses);
         case 'cf_eth_state_chain_gateway_address':
         case 'cf_eth_key_manager_address':
         default:

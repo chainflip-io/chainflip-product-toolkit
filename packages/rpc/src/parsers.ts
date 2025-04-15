@@ -471,3 +471,127 @@ export const cfAvailablePools = z.array(
     quote: z.object({ chain: z.literal('Ethereum'), asset: z.literal('USDC') }),
   }),
 );
+
+export const cfSafeModeStatuses = z.object({
+  emissions: z.object({
+    emissions_sync_enabled: z.boolean(),
+  }),
+  funding: z.object({
+    redeem_enabled: z.boolean(),
+  }),
+  swapping: z.object({
+    swaps_enabled: z.boolean(),
+    withdrawals_enabled: z.boolean(),
+    broker_registration_enabled: z.boolean(),
+  }),
+  liquidity_provider: z.object({
+    deposit_enabled: z.boolean(),
+    withdrawal_enabled: z.boolean(),
+    internal_swaps_enabled: z.boolean().optional().default(false),
+  }),
+  validator: z.object({
+    authority_rotation_enabled: z.boolean(),
+    start_bidding_enabled: z.boolean(),
+    stop_bidding_enabled: z.boolean(),
+  }),
+  pools: z.object({
+    range_order_update_enabled: z.boolean(),
+    limit_order_update_enabled: z.boolean(),
+  }),
+  trading_strategies: z
+    .object({
+      strategy_updates_enabled: z.boolean(),
+      strategy_closure_enabled: z.boolean(),
+      strategy_execution_enabled: z.boolean(),
+    })
+    // TODO(1.9): remove
+    .optional()
+    .default({
+      strategy_updates_enabled: false,
+      strategy_closure_enabled: false,
+      strategy_execution_enabled: false,
+    }),
+  reputation: z.object({
+    reporting_enabled: z.boolean(),
+  }),
+  asset_balances: z.object({
+    reconciliation_enabled: z.boolean(),
+  }),
+  threshold_signature_evm: z.object({
+    slashing_enabled: z.boolean(),
+  }),
+  threshold_signature_bitcoin: z.object({
+    slashing_enabled: z.boolean(),
+  }),
+  threshold_signature_polkadot: z.object({
+    slashing_enabled: z.boolean(),
+  }),
+  threshold_signature_solana: z.object({
+    slashing_enabled: z.boolean(),
+  }),
+  broadcast_ethereum: z.object({
+    retry_enabled: z.boolean(),
+  }),
+  broadcast_bitcoin: z.object({
+    retry_enabled: z.boolean(),
+  }),
+  broadcast_polkadot: z.object({
+    retry_enabled: z.boolean(),
+  }),
+  broadcast_arbitrum: z.object({
+    retry_enabled: z.boolean(),
+  }),
+  broadcast_solana: z.object({
+    retry_enabled: z.boolean(),
+  }),
+  broadcast_assethub: z
+    .object({ retry_enabled: z.boolean() })
+    // TODO(1.9): remove
+    .optional()
+    .default({ retry_enabled: false }),
+  ingress_egress_ethereum: z.object({
+    boost_deposits_enabled: z.boolean(),
+    add_boost_funds_enabled: z.boolean(),
+    stop_boosting_enabled: z.boolean(),
+    deposits_enabled: z.boolean(),
+  }),
+  ingress_egress_bitcoin: z.object({
+    boost_deposits_enabled: z.boolean(),
+    add_boost_funds_enabled: z.boolean(),
+    stop_boosting_enabled: z.boolean(),
+    deposits_enabled: z.boolean(),
+  }),
+  ingress_egress_polkadot: z.object({
+    boost_deposits_enabled: z.boolean(),
+    add_boost_funds_enabled: z.boolean(),
+    stop_boosting_enabled: z.boolean(),
+    deposits_enabled: z.boolean(),
+  }),
+  ingress_egress_arbitrum: z.object({
+    boost_deposits_enabled: z.boolean(),
+    add_boost_funds_enabled: z.boolean(),
+    stop_boosting_enabled: z.boolean(),
+    deposits_enabled: z.boolean(),
+  }),
+  ingress_egress_solana: z.object({
+    boost_deposits_enabled: z.boolean(),
+    add_boost_funds_enabled: z.boolean(),
+    stop_boosting_enabled: z.boolean(),
+    deposits_enabled: z.boolean(),
+  }),
+  ingress_egress_assethub: z
+    .object({
+      boost_deposits_enabled: z.boolean(),
+      add_boost_funds_enabled: z.boolean(),
+      stop_boosting_enabled: z.boolean(),
+      deposits_enabled: z.boolean(),
+    })
+    // TODO(1.9): remove
+    .optional()
+    .default({
+      boost_deposits_enabled: false,
+      add_boost_funds_enabled: false,
+      stop_boosting_enabled: false,
+      deposits_enabled: false,
+    }),
+});
