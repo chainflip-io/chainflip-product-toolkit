@@ -1,68 +1,5 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`HttpClient > with server > gets all the trading strategies 1`] = `
-[
-  {
-    "balance": [
-      [
-        {
-          "asset": "USDC",
-          "chain": "Ethereum",
-        },
-        49949999997n,
-      ],
-      [
-        {
-          "asset": "USDT",
-          "chain": "Ethereum",
-        },
-        37295972067n,
-      ],
-    ],
-    "lp_id": "cFL8fmgKZcchhtLagBH2GKfsuWxBqUaD5CYE1m7DFb8DBSLJ1",
-    "strategy": {
-      "TickZeroCentered": {
-        "base_asset": {
-          "asset": "USDT",
-          "chain": "Ethereum",
-        },
-        "spread_tick": 1,
-      },
-    },
-    "strategy_id": "cFLR4dN8x2vz3Vbcye1wMJfikfFFuUT7M9DiY58W82bEqdgvX",
-  },
-  {
-    "balance": [
-      [
-        {
-          "asset": "USDC",
-          "chain": "Ethereum",
-        },
-        0n,
-      ],
-      [
-        {
-          "asset": "USDT",
-          "chain": "Ethereum",
-        },
-        23000000000n,
-      ],
-    ],
-    "lp_id": "cFPdef3hF5zEwbWUG6ZaCJ3X7mTvEeAog7HxZ8QyFcCgDVGDM",
-    "strategy": {
-      "TickZeroCentered": {
-        "base_asset": {
-          "asset": "USDT",
-          "chain": "Ethereum",
-        },
-        "spread_tick": 1,
-      },
-    },
-    "strategy_id": "cFJu7R6mEVwbkDJr9ttC1LwpqHmQH6GnmqSgY9trQvHvuBYwp",
-  },
-]
-`;
-
 exports[`HttpClient > with server > gets broker account info 1`] = `
 {
   "affiliates": [
@@ -321,7 +258,227 @@ exports[`HttpClient > with server > gets pools orders 1`] = `
 }
 `;
 
-exports[`HttpClient > with server > gets the environment 1`] = `
+exports[`HttpClient > with server > gets unregistered account info 1`] = `
+{
+  "asset_balances": {
+    "Arbitrum": {
+      "ETH": 0n,
+      "USDC": 0n,
+    },
+    "Assethub": {
+      "DOT": 0n,
+      "USDC": 0n,
+      "USDT": 0n,
+    },
+    "Bitcoin": {
+      "BTC": 0n,
+    },
+    "Ethereum": {
+      "ETH": 0n,
+      "FLIP": 0n,
+      "USDC": 0n,
+      "USDT": 0n,
+    },
+    "Polkadot": {
+      "DOT": 0n,
+    },
+    "Solana": {
+      "SOL": 0n,
+      "USDC": 0n,
+    },
+  },
+  "flip_balance": 0n,
+  "role": "unregistered",
+}
+`;
+
+exports[`HttpClient > with server > gets validator account info 1`] = `
+{
+  "apy_bp": 970,
+  "bond": 225033425976807428934928n,
+  "bound_redeem_address": "0x9a449133c6a8b4e117840b69e2a1d43634f562d3",
+  "flip_balance": 252186205332783022058667n,
+  "is_bidding": true,
+  "is_current_authority": true,
+  "is_current_backup": false,
+  "is_online": true,
+  "is_qualified": true,
+  "keyholder_epochs": [
+    197,
+    198,
+  ],
+  "last_heartbeat": 2930096,
+  "reputation_points": 2880,
+  "restricted_balances": {},
+  "role": "validator",
+}
+`;
+
+exports[`HttpClient > with server > handles cf_auction_state 1`] = `
+{
+  "auction_size_range": [
+    3,
+    150,
+  ],
+  "current_epoch_started_at": 6892653,
+  "epoch_duration_blocks": 43200,
+  "min_active_bid": 34937886558754807000000n,
+  "min_funding": 6000000000000000000n,
+  "redemption_period_as_percentage": 50,
+}
+`;
+
+exports[`HttpClient > with server > handles cf_authority_emission_per_block 1`] = `714660267981090180n`;
+
+exports[`HttpClient > with server > handles cf_available_pools 1`] = `
+[
+  {
+    "base": {
+      "asset": "ETH",
+      "chain": "Ethereum",
+    },
+    "quote": {
+      "asset": "USDC",
+      "chain": "Ethereum",
+    },
+  },
+  {
+    "base": {
+      "asset": "USDC",
+      "chain": "Arbitrum",
+    },
+    "quote": {
+      "asset": "USDC",
+      "chain": "Ethereum",
+    },
+  },
+  {
+    "base": {
+      "asset": "USDC",
+      "chain": "Solana",
+    },
+    "quote": {
+      "asset": "USDC",
+      "chain": "Ethereum",
+    },
+  },
+  {
+    "base": {
+      "asset": "DOT",
+      "chain": "Polkadot",
+    },
+    "quote": {
+      "asset": "USDC",
+      "chain": "Ethereum",
+    },
+  },
+  {
+    "base": {
+      "asset": "FLIP",
+      "chain": "Ethereum",
+    },
+    "quote": {
+      "asset": "USDC",
+      "chain": "Ethereum",
+    },
+  },
+  {
+    "base": {
+      "asset": "ETH",
+      "chain": "Arbitrum",
+    },
+    "quote": {
+      "asset": "USDC",
+      "chain": "Ethereum",
+    },
+  },
+  {
+    "base": {
+      "asset": "BTC",
+      "chain": "Bitcoin",
+    },
+    "quote": {
+      "asset": "USDC",
+      "chain": "Ethereum",
+    },
+  },
+  {
+    "base": {
+      "asset": "SOL",
+      "chain": "Solana",
+    },
+    "quote": {
+      "asset": "USDC",
+      "chain": "Ethereum",
+    },
+  },
+  {
+    "base": {
+      "asset": "USDT",
+      "chain": "Ethereum",
+    },
+    "quote": {
+      "asset": "USDC",
+      "chain": "Ethereum",
+    },
+  },
+  {
+    "base": {
+      "asset": "DOT",
+      "chain": "Assethub",
+    },
+    "quote": {
+      "asset": "USDC",
+      "chain": "Ethereum",
+    },
+  },
+  {
+    "base": {
+      "asset": "USDT",
+      "chain": "Assethub",
+    },
+    "quote": {
+      "asset": "USDC",
+      "chain": "Ethereum",
+    },
+  },
+  {
+    "base": {
+      "asset": "USDC",
+      "chain": "Assethub",
+    },
+    "quote": {
+      "asset": "USDC",
+      "chain": "Ethereum",
+    },
+  },
+]
+`;
+
+exports[`HttpClient > with server > handles cf_boost_pools_depth 1`] = `
+[
+  {
+    "asset": "BTC",
+    "available_amount": 10021000n,
+    "chain": "Bitcoin",
+    "tier": 5,
+  },
+  {
+    "asset": "BTC",
+    "available_amount": 10000000n,
+    "chain": "Bitcoin",
+    "tier": 30,
+  },
+  {
+    "asset": "BTC",
+    "available_amount": 10000000n,
+    "chain": "Bitcoin",
+    "tier": 10,
+  },
+]
+`;
+
+exports[`HttpClient > with server > handles cf_environment 1`] = `
 {
   "funding": {
     "minimum_funding_amount": 10000000000000000000n,
@@ -820,7 +977,86 @@ exports[`HttpClient > with server > gets the environment 1`] = `
 }
 `;
 
-exports[`HttpClient > with server > gets the ingress/egress environment 1`] = `
+exports[`HttpClient > with server > handles cf_epoch_duration 1`] = `43200`;
+
+exports[`HttpClient > with server > handles cf_flip_supply 1`] = `
+{
+  "offchainFunds": 1n,
+  "totalIssuance": 0n,
+}
+`;
+
+exports[`HttpClient > with server > handles cf_funding_environment 1`] = `
+{
+  "minimum_funding_amount": 10000000000000000000n,
+  "redemption_tax": 5000000000000000000n,
+}
+`;
+
+exports[`HttpClient > with server > handles cf_get_trading_strategies 1`] = `
+[
+  {
+    "balance": [
+      [
+        {
+          "asset": "USDC",
+          "chain": "Ethereum",
+        },
+        49949999997n,
+      ],
+      [
+        {
+          "asset": "USDT",
+          "chain": "Ethereum",
+        },
+        37295972067n,
+      ],
+    ],
+    "lp_id": "cFL8fmgKZcchhtLagBH2GKfsuWxBqUaD5CYE1m7DFb8DBSLJ1",
+    "strategy": {
+      "TickZeroCentered": {
+        "base_asset": {
+          "asset": "USDT",
+          "chain": "Ethereum",
+        },
+        "spread_tick": 1,
+      },
+    },
+    "strategy_id": "cFLR4dN8x2vz3Vbcye1wMJfikfFFuUT7M9DiY58W82bEqdgvX",
+  },
+  {
+    "balance": [
+      [
+        {
+          "asset": "USDC",
+          "chain": "Ethereum",
+        },
+        0n,
+      ],
+      [
+        {
+          "asset": "USDT",
+          "chain": "Ethereum",
+        },
+        23000000000n,
+      ],
+    ],
+    "lp_id": "cFPdef3hF5zEwbWUG6ZaCJ3X7mTvEeAog7HxZ8QyFcCgDVGDM",
+    "strategy": {
+      "TickZeroCentered": {
+        "base_asset": {
+          "asset": "USDT",
+          "chain": "Ethereum",
+        },
+        "spread_tick": 1,
+      },
+    },
+    "strategy_id": "cFJu7R6mEVwbkDJr9ttC1LwpqHmQH6GnmqSgY9trQvHvuBYwp",
+  },
+]
+`;
+
+exports[`HttpClient > with server > handles cf_ingress_egress_environment 1`] = `
 {
   "channel_opening_fees": {
     "Arbitrum": 0n,
@@ -949,61 +1185,222 @@ exports[`HttpClient > with server > gets the ingress/egress environment 1`] = `
 }
 `;
 
-exports[`HttpClient > with server > gets unregistered account info 1`] = `
+exports[`HttpClient > with server > handles cf_safe_mode_statuses 1`] = `
 {
   "asset_balances": {
-    "Arbitrum": {
-      "ETH": 0n,
-      "USDC": 0n,
-    },
-    "Assethub": {
-      "DOT": 0n,
-      "USDC": 0n,
-      "USDT": 0n,
-    },
-    "Bitcoin": {
-      "BTC": 0n,
-    },
-    "Ethereum": {
-      "ETH": 0n,
-      "FLIP": 0n,
-      "USDC": 0n,
-      "USDT": 0n,
-    },
-    "Polkadot": {
-      "DOT": 0n,
-    },
-    "Solana": {
-      "SOL": 0n,
-      "USDC": 0n,
-    },
+    "reconciliation_enabled": true,
   },
-  "flip_balance": 0n,
-  "role": "unregistered",
+  "broadcast_arbitrum": {
+    "retry_enabled": true,
+  },
+  "broadcast_assethub": {
+    "retry_enabled": true,
+  },
+  "broadcast_bitcoin": {
+    "retry_enabled": true,
+  },
+  "broadcast_ethereum": {
+    "retry_enabled": true,
+  },
+  "broadcast_polkadot": {
+    "retry_enabled": true,
+  },
+  "broadcast_solana": {
+    "retry_enabled": true,
+  },
+  "emissions": {
+    "emissions_sync_enabled": true,
+  },
+  "funding": {
+    "redeem_enabled": true,
+  },
+  "ingress_egress_arbitrum": {
+    "add_boost_funds_enabled": true,
+    "boost_deposits_enabled": true,
+    "deposits_enabled": true,
+    "stop_boosting_enabled": true,
+  },
+  "ingress_egress_assethub": {
+    "add_boost_funds_enabled": true,
+    "boost_deposits_enabled": true,
+    "deposits_enabled": true,
+    "stop_boosting_enabled": true,
+  },
+  "ingress_egress_bitcoin": {
+    "add_boost_funds_enabled": true,
+    "boost_deposits_enabled": true,
+    "deposits_enabled": true,
+    "stop_boosting_enabled": true,
+  },
+  "ingress_egress_ethereum": {
+    "add_boost_funds_enabled": true,
+    "boost_deposits_enabled": true,
+    "deposits_enabled": true,
+    "stop_boosting_enabled": true,
+  },
+  "ingress_egress_polkadot": {
+    "add_boost_funds_enabled": true,
+    "boost_deposits_enabled": true,
+    "deposits_enabled": true,
+    "stop_boosting_enabled": true,
+  },
+  "ingress_egress_solana": {
+    "add_boost_funds_enabled": true,
+    "boost_deposits_enabled": true,
+    "deposits_enabled": true,
+    "stop_boosting_enabled": true,
+  },
+  "liquidity_provider": {
+    "deposit_enabled": true,
+    "internal_swaps_enabled": true,
+    "withdrawal_enabled": true,
+  },
+  "pools": {
+    "limit_order_update_enabled": true,
+    "range_order_update_enabled": true,
+  },
+  "reputation": {
+    "reporting_enabled": true,
+  },
+  "swapping": {
+    "broker_registration_enabled": true,
+    "swaps_enabled": true,
+    "withdrawals_enabled": true,
+  },
+  "threshold_signature_bitcoin": {
+    "slashing_enabled": true,
+  },
+  "threshold_signature_evm": {
+    "slashing_enabled": true,
+  },
+  "threshold_signature_polkadot": {
+    "slashing_enabled": true,
+  },
+  "threshold_signature_solana": {
+    "slashing_enabled": true,
+  },
+  "trading_strategies": {
+    "strategy_closure_enabled": true,
+    "strategy_execution_enabled": true,
+    "strategy_updates_enabled": true,
+  },
+  "validator": {
+    "authority_rotation_enabled": true,
+    "start_bidding_enabled": true,
+    "stop_bidding_enabled": true,
+  },
 }
 `;
 
-exports[`HttpClient > with server > gets validator account info 1`] = `
+exports[`HttpClient > with server > handles cf_supported_assets 1`] = `
+[
+  {
+    "asset": "ETH",
+    "chain": "Ethereum",
+  },
+  {
+    "asset": "FLIP",
+    "chain": "Ethereum",
+  },
+  {
+    "asset": "USDC",
+    "chain": "Ethereum",
+  },
+  {
+    "asset": "USDT",
+    "chain": "Ethereum",
+  },
+  {
+    "asset": "DOT",
+    "chain": "Polkadot",
+  },
+  {
+    "asset": "BTC",
+    "chain": "Bitcoin",
+  },
+  {
+    "asset": "ETH",
+    "chain": "Arbitrum",
+  },
+  {
+    "asset": "USDC",
+    "chain": "Arbitrum",
+  },
+  {
+    "asset": "SOL",
+    "chain": "Solana",
+  },
+  {
+    "asset": "USDC",
+    "chain": "Solana",
+  },
+]
+`;
+
+exports[`HttpClient > with server > handles cf_swapping_environment 1`] = `
 {
-  "apy_bp": 970,
-  "bond": 225033425976807428934928n,
-  "bound_redeem_address": "0x9a449133c6a8b4e117840b69e2a1d43634f562d3",
-  "flip_balance": 252186205332783022058667n,
-  "is_bidding": true,
-  "is_current_authority": true,
-  "is_current_backup": false,
-  "is_online": true,
-  "is_qualified": true,
-  "keyholder_epochs": [
-    197,
-    198,
-  ],
-  "last_heartbeat": 2930096,
-  "reputation_points": 2880,
-  "restricted_balances": {},
-  "role": "validator",
+  "max_swap_request_duration_blocks": 14400,
+  "max_swap_retry_duration_blocks": 600,
+  "maximum_swap_amounts": {
+    "Arbitrum": {
+      "ETH": null,
+      "USDC": null,
+    },
+    "Assethub": {
+      "DOT": null,
+      "USDC": null,
+      "USDT": null,
+    },
+    "Bitcoin": {
+      "BTC": null,
+    },
+    "Ethereum": {
+      "ETH": 65536n,
+      "FLIP": null,
+      "USDC": null,
+      "USDT": null,
+    },
+    "Polkadot": {
+      "DOT": null,
+    },
+    "Solana": {
+      "SOL": null,
+      "USDC": null,
+    },
+  },
+  "minimum_chunk_size": {
+    "Arbitrum": {
+      "ETH": 200000000000000000n,
+      "USDC": 1000000000n,
+    },
+    "Assethub": {
+      "DOT": null,
+      "USDC": null,
+      "USDT": null,
+    },
+    "Bitcoin": {
+      "BTC": 2000000n,
+    },
+    "Ethereum": {
+      "ETH": 200000000000000000n,
+      "FLIP": 1000000000000000000000n,
+      "USDC": 1000000000n,
+      "USDT": 1000000000n,
+    },
+    "Polkadot": {
+      "DOT": 2000000000000n,
+    },
+    "Solana": {
+      "SOL": 5000000000n,
+      "USDC": 1000000000n,
+    },
+  },
+  "network_fee_hundredth_pips": 1000,
+  "swap_retry_delay_blocks": 5,
 }
 `;
+
+exports[`HttpClient > with server > handles chain_getBlockHash 1`] = `"0x5678"`;
 
 exports[`HttpClient > with server > handles multiple requests separately if they are sent far apart 1`] = `
 {
@@ -1092,5 +1489,73 @@ exports[`HttpClient > with server > handles multiple requests with 1 call 1`] = 
       "type": "range",
     },
   ],
+}
+`;
+
+exports[`HttpClient > with server > handles state_getMetadata 1`] = `"0x1234"`;
+
+exports[`HttpClient > with server > handles state_getRuntimeVersion 1`] = `
+{
+  "apis": [
+    [
+      "0xb7fb30db9d96703a",
+      1,
+    ],
+    [
+      "0xdf6acb689907609b",
+      4,
+    ],
+    [
+      "0x37e397fc7c91f5e4",
+      2,
+    ],
+    [
+      "0x40fe3ad401f8959a",
+      6,
+    ],
+    [
+      "0xd2bc9897eed08f15",
+      3,
+    ],
+    [
+      "0xf78b278be53f454c",
+      2,
+    ],
+    [
+      "0xdd718d5cc53262d4",
+      1,
+    ],
+    [
+      "0xab3c0572291feb8b",
+      1,
+    ],
+    [
+      "0xed99c5acb25eedf5",
+      3,
+    ],
+    [
+      "0xbc9d89904f5b923f",
+      1,
+    ],
+    [
+      "0x37c8bb1350a9a2a8",
+      4,
+    ],
+    [
+      "0xf3ff14d5ab527059",
+      3,
+    ],
+    [
+      "0xfbc577b9d747efd6",
+      1,
+    ],
+  ],
+  "authoringVersion": 1,
+  "implName": "chainflip-node",
+  "implVersion": 1,
+  "specName": "chainflip-node",
+  "specVersion": 141,
+  "stateVersion": 1,
+  "transactionVersion": 12,
 }
 `;
