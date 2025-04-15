@@ -5,7 +5,7 @@ import { promisify } from 'util';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { type z } from 'zod';
 import { spyOn } from '@/testing';
-import { type JsonRpcRequest, type RpcMethod } from '../common';
+import { RpcRequest, type JsonRpcRequest, type RpcMethod } from '../common';
 import { HttpClient } from '../index';
 import { type AssetAndChain, type cfSwapRate } from '../parsers';
 import {
@@ -308,127 +308,29 @@ describe(HttpClient, () => {
       `);
     });
 
-    it('gets the funding environment', async () => {
-      expect(await client.sendRequest('cf_funding_environment')).toMatchInlineSnapshot(`
-        {
-          "minimum_funding_amount": 10000000000000000000n,
-          "redemption_tax": 5000000000000000000n,
-        }
-      `);
-    });
+    type SimpleRpcMethod = {
+      [K in keyof RpcRequest]: RpcRequest[K] extends [at?: string | null | undefined] ? K : never;
+    }[keyof RpcRequest];
 
-    it('gets the ingress/egress environment', async () => {
-      expect(await client.sendRequest('cf_ingress_egress_environment')).toMatchSnapshot();
-    });
-
-    it('gets the swapping environment', async () => {
-      expect(await client.sendRequest('cf_swapping_environment')).toMatchInlineSnapshot(`
-        {
-          "max_swap_request_duration_blocks": 14400,
-          "max_swap_retry_duration_blocks": 600,
-          "maximum_swap_amounts": {
-            "Arbitrum": {
-              "ETH": null,
-              "USDC": null,
-            },
-            "Assethub": {
-              "DOT": null,
-              "USDC": null,
-              "USDT": null,
-            },
-            "Bitcoin": {
-              "BTC": null,
-            },
-            "Ethereum": {
-              "ETH": 65536n,
-              "FLIP": null,
-              "USDC": null,
-              "USDT": null,
-            },
-            "Polkadot": {
-              "DOT": null,
-            },
-            "Solana": {
-              "SOL": null,
-              "USDC": null,
-            },
-          },
-          "minimum_chunk_size": {
-            "Arbitrum": {
-              "ETH": 200000000000000000n,
-              "USDC": 1000000000n,
-            },
-            "Assethub": {
-              "DOT": null,
-              "USDC": null,
-              "USDT": null,
-            },
-            "Bitcoin": {
-              "BTC": 2000000n,
-            },
-            "Ethereum": {
-              "ETH": 200000000000000000n,
-              "FLIP": 1000000000000000000000n,
-              "USDC": 1000000000n,
-              "USDT": 1000000000n,
-            },
-            "Polkadot": {
-              "DOT": 2000000000000n,
-            },
-            "Solana": {
-              "SOL": 5000000000n,
-              "USDC": 1000000000n,
-            },
-          },
-          "network_fee_hundredth_pips": 1000,
-          "swap_retry_delay_blocks": 5,
-        }
-      `);
-    });
-
-    it('gets the environment', async () => {
-      expect(await client.sendRequest('cf_environment')).toMatchSnapshot();
-    });
-
-    it('gets the metadata', async () => {
-      expect(await client.sendRequest('state_getMetadata')).toBe('0x1234');
-    });
-
-    it('gets the supported assets', async () => {
-      expect(await client.sendRequest('cf_supported_assets')).toEqual(supportedAssets);
-    });
-
-    it('gets the block hash', async () => {
-      expect(await client.sendRequest('chain_getBlockHash')).toEqual('0x5678');
-    });
-
-    it('gets the runtime version', async () => {
-      expect(await client.sendRequest('state_getRuntimeVersion')).toEqual(runtimeVersion);
-    });
-
-    it('gets the boost pools', async () => {
-      expect(await client.sendRequest('cf_boost_pools_depth')).toMatchInlineSnapshot(`
-        [
-          {
-            "asset": "BTC",
-            "available_amount": 10021000n,
-            "chain": "Bitcoin",
-            "tier": 5,
-          },
-          {
-            "asset": "BTC",
-            "available_amount": 10000000n,
-            "chain": "Bitcoin",
-            "tier": 30,
-          },
-          {
-            "asset": "BTC",
-            "available_amount": 10000000n,
-            "chain": "Bitcoin",
-            "tier": 10,
-          },
-        ]
-      `);
+    it.each([
+      'cf_funding_environment',
+      'cf_ingress_egress_environment',
+      'cf_swapping_environment',
+      'cf_environment',
+      'state_getMetadata',
+      'cf_supported_assets',
+      'chain_getBlockHash',
+      'state_getRuntimeVersion',
+      'cf_boost_pools_depth',
+      'cf_flip_supply',
+      'cf_authority_emission_per_block',
+      'cf_epoch_duration',
+      'cf_auction_state',
+      'cf_get_trading_strategies',
+      'cf_available_pools',
+      'cf_safe_mode_statuses',
+    ] as SimpleRpcMethod[])('handles %s', async (method) => {
+      expect(await client.sendRequest(method)).toMatchSnapshot();
     });
 
     it('does the swap rate v2', async () => {
@@ -782,41 +684,6 @@ describe(HttpClient, () => {
       },
     );
 
-    it('handles cf_flip_supply', async () => {
-      expect(await client.sendRequest('cf_flip_supply')).toMatchInlineSnapshot(`
-        {
-          "offchainFunds": 1n,
-          "totalIssuance": 0n,
-        }
-      `);
-    });
-
-    it('handles cf_authority_emission_per_block', async () => {
-      expect(await client.sendRequest('cf_authority_emission_per_block')).toMatchInlineSnapshot(
-        `714660267981090180n`,
-      );
-    });
-
-    it('handles cf_epoch_duration', async () => {
-      expect(await client.sendRequest('cf_epoch_duration')).toMatchInlineSnapshot(`43200`);
-    });
-
-    it('handles cf_auction_state', async () => {
-      expect(await client.sendRequest('cf_auction_state')).toMatchInlineSnapshot(`
-        {
-          "auction_size_range": [
-            3,
-            150,
-          ],
-          "current_epoch_started_at": 6892653,
-          "epoch_duration_blocks": 43200,
-          "min_active_bid": 34937886558754807000000n,
-          "min_funding": 6000000000000000000n,
-          "redemption_period_as_percentage": 50,
-        }
-      `);
-    });
-
     it('handles cf_pool_orderbook', async () => {
       expect(
         await client.sendRequest(
@@ -972,137 +839,6 @@ describe(HttpClient, () => {
             },
           ],
         }
-      `);
-    });
-
-    it('gets all the trading strategies', async () => {
-      expect(await client.sendRequest('cf_get_trading_strategies')).toMatchSnapshot();
-    });
-
-    it('handles cf_available_pools', async () => {
-      expect(await client.sendRequest('cf_available_pools')).toMatchInlineSnapshot(`
-        [
-          {
-            "base": {
-              "asset": "ETH",
-              "chain": "Ethereum",
-            },
-            "quote": {
-              "asset": "USDC",
-              "chain": "Ethereum",
-            },
-          },
-          {
-            "base": {
-              "asset": "USDC",
-              "chain": "Arbitrum",
-            },
-            "quote": {
-              "asset": "USDC",
-              "chain": "Ethereum",
-            },
-          },
-          {
-            "base": {
-              "asset": "USDC",
-              "chain": "Solana",
-            },
-            "quote": {
-              "asset": "USDC",
-              "chain": "Ethereum",
-            },
-          },
-          {
-            "base": {
-              "asset": "DOT",
-              "chain": "Polkadot",
-            },
-            "quote": {
-              "asset": "USDC",
-              "chain": "Ethereum",
-            },
-          },
-          {
-            "base": {
-              "asset": "FLIP",
-              "chain": "Ethereum",
-            },
-            "quote": {
-              "asset": "USDC",
-              "chain": "Ethereum",
-            },
-          },
-          {
-            "base": {
-              "asset": "ETH",
-              "chain": "Arbitrum",
-            },
-            "quote": {
-              "asset": "USDC",
-              "chain": "Ethereum",
-            },
-          },
-          {
-            "base": {
-              "asset": "BTC",
-              "chain": "Bitcoin",
-            },
-            "quote": {
-              "asset": "USDC",
-              "chain": "Ethereum",
-            },
-          },
-          {
-            "base": {
-              "asset": "SOL",
-              "chain": "Solana",
-            },
-            "quote": {
-              "asset": "USDC",
-              "chain": "Ethereum",
-            },
-          },
-          {
-            "base": {
-              "asset": "USDT",
-              "chain": "Ethereum",
-            },
-            "quote": {
-              "asset": "USDC",
-              "chain": "Ethereum",
-            },
-          },
-          {
-            "base": {
-              "asset": "DOT",
-              "chain": "Assethub",
-            },
-            "quote": {
-              "asset": "USDC",
-              "chain": "Ethereum",
-            },
-          },
-          {
-            "base": {
-              "asset": "USDT",
-              "chain": "Assethub",
-            },
-            "quote": {
-              "asset": "USDC",
-              "chain": "Ethereum",
-            },
-          },
-          {
-            "base": {
-              "asset": "USDC",
-              "chain": "Assethub",
-            },
-            "quote": {
-              "asset": "USDC",
-              "chain": "Ethereum",
-            },
-          },
-        ]
       `);
     });
 
