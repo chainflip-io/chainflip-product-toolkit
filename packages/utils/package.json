@@ -37,7 +37,7 @@
   },
   "dependencies": {
     "@date-fns/utc": "^2.1.0",
-    "bignumber.js": "^9.2.1",
+    "bignumber.js": "^9.3.0",
     "date-fns": "4.1.0"
   },
   "repository": "https://github.com/chainflip-io/chainflip-product-toolkit.git",
