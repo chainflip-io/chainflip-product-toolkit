@@ -35,6 +35,7 @@ import {
   cfGetTradingStrategies,
   cfAvailablePools,
   cfSafeModeStatuses,
+  cfGetTradingStrategyLimits,
 } from './parsers';
 
 type Nullish<T> = T | null | undefined;
@@ -191,6 +192,7 @@ export type RpcRequest = WithHash<{
     orders: number,
   ];
   cf_get_trading_strategies: [accountId?: Nullish<string>];
+  cf_get_trading_strategy_limits: [];
   cf_available_pools: [];
   cf_safe_mode_statuses: [];
 }> & {
@@ -232,6 +234,7 @@ export const rpcResult = {
   cf_eth_key_manager_address: ethereumAddress.nullable(),
   cf_pool_orderbook: cfPoolOrderbook,
   cf_get_trading_strategies: cfGetTradingStrategies,
+  cf_get_trading_strategy_limits: cfGetTradingStrategyLimits,
   cf_available_pools: cfAvailablePools,
   cf_safe_mode_statuses: cfSafeModeStatuses,
 } as const satisfies { [K in keyof RpcRequest]: z.ZodTypeAny };

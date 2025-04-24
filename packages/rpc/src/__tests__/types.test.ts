@@ -21,6 +21,7 @@ describe('types', () => {
     const file = await fs.readFile(path.join(import.meta.dirname, '..', 'types.ts'), 'utf8');
     const exportName = capitalize(key).replace(/_(.)/g, (_, char: string) => char.toUpperCase());
 
+    console.log(exportName);
     expect(file).toMatch(new RegExp(`export type ${exportName} =\\s+RpcResult<'${key}'>;`));
     expect(file).toMatch(
       new RegExp(`export type ${exportName}Response =\\s+RpcResponse<'${key}'>;`),

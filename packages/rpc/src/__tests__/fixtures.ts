@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { cfGetTradingStrategies } from '../parsers';
+import { cfGetTradingStrategies, cfGetTradingStrategyLimits } from '../parsers';
 import {
   type broker,
   type brokerRequestSwapDepositAddress,
@@ -785,6 +785,63 @@ export const tradingStrategies: z.input<typeof cfGetTradingStrategies> = [
     ],
   },
 ];
+
+export const tradingStrategiesLimits: z.input<typeof cfGetTradingStrategyLimits> = {
+  minimum_deployment_amount: {
+    Ethereum: {
+      ETH: null,
+      FLIP: null,
+      USDC: 20000000000,
+      USDT: 20000000000,
+    },
+    Polkadot: {
+      DOT: null,
+    },
+    Bitcoin: {
+      BTC: null,
+    },
+    Arbitrum: {
+      ETH: null,
+      USDC: 20000000000,
+    },
+    Solana: {
+      SOL: null,
+      USDC: 20000000000,
+    },
+    Assethub: {
+      DOT: null,
+      USDT: null,
+      USDC: null,
+    },
+  },
+  minimum_added_funds_amount: {
+    Ethereum: {
+      ETH: null,
+      FLIP: null,
+      USDC: 10000000,
+      USDT: 10000000,
+    },
+    Polkadot: {
+      DOT: null,
+    },
+    Bitcoin: {
+      BTC: null,
+    },
+    Arbitrum: {
+      ETH: null,
+      USDC: 10000000,
+    },
+    Solana: {
+      SOL: null,
+      USDC: 10000000,
+    },
+    Assethub: {
+      DOT: null,
+      USDT: null,
+      USDC: null,
+    },
+  },
+};
 
 export const availablePools: CfAvailablePools = [
   { base: { chain: 'Ethereum', asset: 'ETH' }, quote: { chain: 'Ethereum', asset: 'USDC' } },

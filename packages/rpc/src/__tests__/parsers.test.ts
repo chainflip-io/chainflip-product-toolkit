@@ -8,9 +8,10 @@ import {
   cfPoolDepth,
   cfAccounts,
   cfGetTradingStrategies,
+  cfGetTradingStrategyLimits,
   cfSwappingEnvironment,
 } from '../parsers';
-import { tradingStrategies } from './fixtures';
+import { tradingStrategies, tradingStrategiesLimits } from './fixtures';
 
 describe('parsers', () => {
   describe('numberOrHex', () => {
@@ -1002,6 +1003,17 @@ describe('parsers', () => {
       const result = cfGetTradingStrategies.parse(tradingStrategies);
 
       expect(result.length).toEqual(2);
+    });
+  });
+  describe('cfGetTradingStrategyLimits', () => {
+    it('parses the cfGetTradingStrategyLimits response', () => {
+      const result = cfGetTradingStrategyLimits.parse(tradingStrategiesLimits);
+
+      expect(result.minimum_deployment_amount.Arbitrum.USDC).toEqual(20000000000);
+      expect(result.minimum_deployment_amount.Bitcoin.BTC).toEqual(null);
+
+      expect(result.minimum_added_funds_amount.Solana.USDC).toEqual(10000000);
+      expect(result.minimum_added_funds_amount.Ethereum.ETH).toEqual(null);
     });
   });
 });
