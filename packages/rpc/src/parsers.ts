@@ -462,6 +462,11 @@ export const cfTradingStrategy = z.object({
 
 export const cfGetTradingStrategies = z.array(cfTradingStrategy).default([]);
 
+export const cfGetTradingStrategyLimits = z.object({
+  minimum_deployment_amount: chainAssetMapFactory(z.number().nullable(), null),
+  minimum_added_funds_amount: chainAssetMapFactory(z.number().nullable(), null),
+});
+
 export const cfAvailablePools = z.array(
   z.object({
     base: rpcAssetSchema.refine(

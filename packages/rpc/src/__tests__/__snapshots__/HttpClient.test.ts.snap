@@ -1056,6 +1056,65 @@ exports[`HttpClient > with server > handles cf_get_trading_strategies 1`] = `
 ]
 `;
 
+exports[`HttpClient > with server > handles cf_get_trading_strategy_limits 1`] = `
+{
+  "minimum_added_funds_amount": {
+    "Arbitrum": {
+      "ETH": null,
+      "USDC": 10000000,
+    },
+    "Assethub": {
+      "DOT": null,
+      "USDC": null,
+      "USDT": null,
+    },
+    "Bitcoin": {
+      "BTC": null,
+    },
+    "Ethereum": {
+      "ETH": null,
+      "FLIP": null,
+      "USDC": 10000000,
+      "USDT": 10000000,
+    },
+    "Polkadot": {
+      "DOT": null,
+    },
+    "Solana": {
+      "SOL": null,
+      "USDC": 10000000,
+    },
+  },
+  "minimum_deployment_amount": {
+    "Arbitrum": {
+      "ETH": null,
+      "USDC": 20000000000,
+    },
+    "Assethub": {
+      "DOT": null,
+      "USDC": null,
+      "USDT": null,
+    },
+    "Bitcoin": {
+      "BTC": null,
+    },
+    "Ethereum": {
+      "ETH": null,
+      "FLIP": null,
+      "USDC": 20000000000,
+      "USDT": 20000000000,
+    },
+    "Polkadot": {
+      "DOT": null,
+    },
+    "Solana": {
+      "SOL": null,
+      "USDC": 20000000000,
+    },
+  },
+}
+`;
+
 exports[`HttpClient > with server > handles cf_ingress_egress_environment 1`] = `
 {
   "channel_opening_fees": {

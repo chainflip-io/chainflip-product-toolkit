@@ -33,6 +33,7 @@ import {
   swapRateV2,
   swapRateV3,
   tradingStrategies,
+  tradingStrategiesLimits,
   unregisteredAccount,
   validatorAccount,
 } from './fixtures';
@@ -63,6 +64,7 @@ describe(HttpClient, () => {
         "cf_flip_supply",
         "cf_funding_environment",
         "cf_get_trading_strategies",
+        "cf_get_trading_strategy_limits",
         "cf_ingress_egress_environment",
         "cf_pool_depth",
         "cf_pool_orderbook",
@@ -223,6 +225,8 @@ describe(HttpClient, () => {
           return respond(poolOrderbook);
         case 'cf_get_trading_strategies':
           return respond(tradingStrategies);
+        case 'cf_get_trading_strategy_limits':
+          return respond(tradingStrategiesLimits);
         case 'cf_available_pools':
           return respond(availablePools);
         case 'cf_safe_mode_statuses':
@@ -327,6 +331,7 @@ describe(HttpClient, () => {
       'cf_epoch_duration',
       'cf_auction_state',
       'cf_get_trading_strategies',
+      'cf_get_trading_strategy_limits',
       'cf_available_pools',
       'cf_safe_mode_statuses',
     ] as SimpleRpcMethod[])('handles %s', async (method) => {

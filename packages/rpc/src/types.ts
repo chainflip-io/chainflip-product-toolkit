@@ -26,6 +26,7 @@ export type CfSwapRate = RpcResult<'cf_swap_rate'>;
 export type CfSwapRateV2 = RpcResult<'cf_swap_rate_v2'>;
 export type CfSwapRateV3 = RpcResult<'cf_swap_rate_v3'>;
 export type CfGetTradingStrategies = RpcResult<'cf_get_trading_strategies'>;
+export type CfGetTradingStrategyLimits = RpcResult<'cf_get_trading_strategy_limits'>;
 export type CfAvailablePools = RpcResult<'cf_available_pools'>;
 export type CfSafeModeStatuses = RpcResult<'cf_safe_mode_statuses'>;
 
@@ -54,6 +55,7 @@ export type CfSwapRateResponse = RpcResponse<'cf_swap_rate'>;
 export type CfSwapRateV2Response = RpcResponse<'cf_swap_rate_v2'>;
 export type CfSwapRateV3Response = RpcResponse<'cf_swap_rate_v3'>;
 export type CfGetTradingStrategiesResponse = RpcResponse<'cf_get_trading_strategies'>;
+export type CfGetTradingStrategyLimitsResponse = RpcResponse<'cf_get_trading_strategy_limits'>;
 export type CfAvailablePoolsResponse = RpcResponse<'cf_available_pools'>;
 export type CfSafeModeStatusesResponse = RpcResponse<'cf_safe_mode_statuses'>;
 
