@@ -45,8 +45,8 @@ importers:
         specifier: ^3.5.3
         version: 3.5.3
       syncpack:
-        specifier: ^13.0.3
-        version: 13.0.3(typescript@5.8.3)
+        specifier: ^13.0.4
+        version: 13.0.4(typescript@5.8.3)
       tsup:
         specifier: ^8.4.0
         version: 8.4.0(postcss@8.5.3)(tsx@4.19.3)(typescript@5.8.3)(yaml@2.7.1)
@@ -317,12 +317,6 @@ packages:
 
   '@date-fns/utc@2.1.0':
     resolution: {integrity: sha512-176grgAgU2U303rD2/vcOmNg0kGPbhzckuH1TEP2al7n0AQipZIy9P15usd2TKQCG1g+E1jX/ZVQSzs4sUDwgA==}
-
-  '@effect/schema@0.75.5':
-    resolution: {integrity: sha512-TQInulTVCuF+9EIbJpyLP6dvxbQJMphrnRqgexm/Ze39rSjfhJuufF7XvU3SxTgg3HnL7B/kpORTJbHhlE6thw==}
-    deprecated: this package has been merged into the main effect package
-    peerDependencies:
-      effect: ^3.9.2
 
   '@esbuild/aix-ppc64@0.25.2':
     resolution: {integrity: sha512-wCIboOL2yXZym2cgm6mlA742s9QeJ8DjGVaL39dLN4rRwrOgOyYSnOaFPhKZGLb2ngj4EyfAFjsNJwPXZvseag==}
@@ -1287,8 +1281,8 @@ packages:
   eastasianwidth@0.2.0:
     resolution: {integrity: sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==}
 
-  effect@3.14.8:
-    resolution: {integrity: sha512-cHV6Mc2gb1e6l+CxhCeZm1JOzE4C9Mp7MhqHNFuAcSds2c2f23ZAb1ef4gBRHMIcdJ5sr3KGm+Xn+4z/UByE8w==}
+  effect@3.14.14:
+    resolution: {integrity: sha512-Dbt9MAZHqM1UAip41RrZnypzLa/hJJGHXIVS9MbgU0L+UoJTFXToWIwWmHY/OcaQVNlf/1YxpMrD3xtxoDP/qw==}
 
   emoji-regex@10.4.0:
     resolution: {integrity: sha512-EC+0oUMY1Rqm4O6LLrgjtYDvcVYTy7chDnM4Q7030tP4Kwj3u/pR6gP9ygnp2CJMK5Gq+9Q2oqmrFJAz01DXjw==}
@@ -1676,8 +1670,8 @@ packages:
     resolution: {integrity: sha512-hsBTNUqQTDwkWtcdYI2i06Y/nUBEsNEDJKjWdigLvegy8kDuJAS8uRlpkkcQpyEXL0Z/pjDy5HBmMjRCJ2gq+g==}
     engines: {node: '>= 4'}
 
-  ignore@7.0.3:
-    resolution: {integrity: sha512-bAH5jbK/F3T3Jls4I0SO1hmPR0dKU0a7+SY6n1yzRtG54FLO8d6w/nxLFX2Nb7dBu6cCWXPaAME6cYqFUMmuCA==}
+  ignore@7.0.4:
+    resolution: {integrity: sha512-gJzzk+PQNznz8ysRrC0aOkBNVRBDtE1n53IqyqEf3PXrYwomFs5q4pGMizBMJF+ykh03insJ27hB8gSrD2Hn8A==}
     engines: {node: '>= 4'}
 
   import-fresh@3.3.1:
@@ -2469,8 +2463,8 @@ packages:
     resolution: {integrity: sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==}
     engines: {node: '>= 0.4'}
 
-  syncpack@13.0.3:
-    resolution: {integrity: sha512-ZKrdDVmOUBWeaTVaxRnfwtqBJ5rMzMo7Lfdp04wtORwHEcvrq6M+NzCwS4PPIhTucD005wD8wumy90Ucz3lwXg==}
+  syncpack@13.0.4:
+    resolution: {integrity: sha512-kJ9VlRxNCsBD5pJAE29oXeBYbPLhEySQmK4HdpsLv81I6fcDDW17xeJqMwiU3H7/woAVsbgq25DJNS8BeiN5+w==}
     engines: {node: '>=18.18.0'}
     hasBin: true
 
@@ -2939,11 +2933,6 @@ snapshots:
       buffer-layout: 1.2.2
 
   '@date-fns/utc@2.1.0': {}
-
-  '@effect/schema@0.75.5(effect@3.14.8)':
-    dependencies:
-      effect: 3.14.8
-      fast-check: 3.23.2
 
   '@esbuild/aix-ppc64@0.25.2':
     optional: true
@@ -3962,7 +3951,7 @@ snapshots:
 
   eastasianwidth@0.2.0: {}
 
-  effect@3.14.8:
+  effect@3.14.14:
     dependencies:
       '@standard-schema/spec': 1.0.0
       fast-check: 3.23.2
@@ -4464,7 +4453,7 @@ snapshots:
     dependencies:
       '@sindresorhus/merge-streams': 2.3.0
       fast-glob: 3.3.3
-      ignore: 7.0.3
+      ignore: 7.0.4
       path-type: 6.0.0
       slash: 5.1.0
       unicorn-magic: 0.3.0
@@ -4515,7 +4504,7 @@ snapshots:
 
   ignore@5.3.2: {}
 
-  ignore@7.0.3: {}
+  ignore@7.0.4: {}
 
   import-fresh@3.3.1:
     dependencies:
@@ -5349,14 +5338,13 @@ snapshots:
 
   supports-preserve-symlinks-flag@1.0.0: {}
 
-  syncpack@13.0.3(typescript@5.8.3):
+  syncpack@13.0.4(typescript@5.8.3):
     dependencies:
-      '@effect/schema': 0.75.5(effect@3.14.8)
       chalk: 5.4.1
       chalk-template: 1.1.0
       commander: 13.1.0
       cosmiconfig: 9.0.0(typescript@5.8.3)
-      effect: 3.14.8
+      effect: 3.14.14
       enquirer: 2.4.1
       fast-check: 3.23.2
       globby: 14.1.0
