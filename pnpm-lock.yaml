@@ -84,8 +84,8 @@ importers:
         specifier: ^1.6.1
         version: 1.6.1
       zod:
-        specifier: ^3.24.3
-        version: 3.24.3
+        specifier: ^3.24.4
+        version: 3.24.4
 
   packages/chainspec:
     devDependencies:
@@ -102,8 +102,8 @@ importers:
         specifier: ^3.5.3
         version: 3.5.3
       zod:
-        specifier: ^3.24.3
-        version: 3.24.3
+        specifier: ^3.24.4
+        version: 3.24.4
 
   packages/eslint-config:
     dependencies:
@@ -138,8 +138,8 @@ importers:
         specifier: 0.8.6
         version: 0.8.6
       zod:
-        specifier: ^3.24.3
-        version: 3.24.3
+        specifier: ^3.24.4
+        version: 3.24.4
     devDependencies:
       '@chainflip/rpc':
         specifier: 1.9.3
@@ -160,8 +160,8 @@ importers:
         specifier: ^5.6.1
         version: 5.6.1
       zod:
-        specifier: ^3.24.3
-        version: 3.24.3
+        specifier: ^3.24.4
+        version: 3.24.4
 
   packages/rpc:
     dependencies:
@@ -169,8 +169,8 @@ importers:
         specifier: 0.8.6
         version: 0.8.6
       zod:
-        specifier: ^3.24.3
-        version: 3.24.3
+        specifier: ^3.24.4
+        version: 3.24.4
     devDependencies:
       '@types/node':
         specifier: ^22.14.1
@@ -216,8 +216,8 @@ importers:
         specifier: ^1.6.1
         version: 1.6.1
       zod:
-        specifier: ^3.24.3
-        version: 3.24.3
+        specifier: ^3.24.4
+        version: 3.24.4
     devDependencies:
       '@types/bn.js':
         specifier: ^5.1.6
@@ -3273,9 +3273,6 @@ packages:
     peerDependencies:
       zod: ^3.24.1
 
-  zod@3.24.3:
-    resolution: {integrity: sha512-HhY1oqzWCQWuUqvBFnsyrtZRhyPeR7SUGv+C4+MsisMuVfSPx8HpwWqH8tRahSlt6M3PiFAcoeFhZAqIXTxoSg==}
-
   zod@3.24.4:
     resolution: {integrity: sha512-OdqJE9UDRPwWsrHjLN2F8bPxvwJBK22EHLWtanu0LSYr5YqzsaaW3RMgmjwr8Rypg5k+meEJdSPXJZXE/yqOMg==}
 
@@ -3314,7 +3311,7 @@ snapshots:
   '@chainflip/rpc@1.9.3':
     dependencies:
       '@chainflip/utils': 0.8.2
-      zod: 3.24.3
+      zod: 3.24.4
 
   '@chainflip/scale@1.8.0':
     dependencies:
@@ -6574,7 +6571,5 @@ snapshots:
   zod-to-json-schema@3.24.5(zod@3.24.4):
     dependencies:
       zod: 3.24.4
-
-  zod@3.24.3: {}
 
   zod@3.24.4: {}
