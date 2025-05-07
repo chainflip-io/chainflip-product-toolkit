@@ -1,3 +1,4 @@
+import { bytesToHex } from '@chainflip/utils/bytes';
 import { type HexString } from '@chainflip/utils/types';
 import { Server } from 'http';
 import { type AddressInfo } from 'net';
@@ -570,7 +571,7 @@ describe(HttpClient, () => {
           {
             chain: 'Solana',
             from: 'oQPnhXAbLbMuKHESaGrbXT17CyvWCpLyERSJA9HCYd7',
-            event_data_account: 'HTox3DgDcrzsK5RvduHnW9Fu7m3QaQr3VwQ9oDmrnfr6',
+            seed: bytesToHex(crypto.getRandomValues(new Uint8Array(32))),
             input_amount: '0x11111',
             refund_parameters: {
               refund_address: '0x4838B106FCe9647Bdf1E7877BF73cE8B0BAD5f97',
