@@ -97,7 +97,7 @@ type RequestSwapParameterEncodingParams = [
     | {
         chain: 'Solana';
         from: string;
-        event_data_account: string;
+        seed: HexString;
         input_amount: string;
         refund_parameters: FillOrKillParams;
         from_token_account?: string;
