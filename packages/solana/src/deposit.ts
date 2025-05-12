@@ -225,6 +225,7 @@ export class TransactionMatchingError extends Error {
   constructor(
     message: string,
     public cause: Error,
+    public deposits: DepositInfo[],
     public transfers: Transfer[],
   ) {
     super(message);
@@ -260,7 +261,7 @@ export const findTransactionSignatures = async (
     }
   }
 
-  throw new TransactionMatchingError(error!.message, error!, transfers);
+  throw new TransactionMatchingError(error!.message, error!, deposits, transfers);
 };
 
 export const findVaultSwapSignature = async (

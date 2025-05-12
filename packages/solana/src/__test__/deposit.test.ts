@@ -121,6 +121,18 @@ describe(findTransactionSignatures, () => {
       `[TransactionMatchingError: failed to align deposits and transfers]`,
     );
     expect(result).toBeInstanceOf(TransactionMatchingError);
+    expect((result as TransactionMatchingError).deposits).toMatchInlineSnapshot(`
+      [
+        {
+          "amount": 90000000n,
+          "maxSlot": 315326189,
+        },
+        {
+          "amount": 4100010000n,
+          "maxSlot": 315261223,
+        },
+      ]
+    `);
     expect((result as TransactionMatchingError).transfers).toMatchInlineSnapshot(`
       [
         {
