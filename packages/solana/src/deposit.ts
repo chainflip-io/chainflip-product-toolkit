@@ -134,7 +134,8 @@ const fetchTransfers = async (
 
     const transactions = await conn.getTransactions(
       sigs.map((s) => s.signature),
-      { maxSupportedTransactionVersion: 0 },
+      // `commitment` is a load-bearing flag. this function can collapse without it
+      { commitment: 'confirmed', maxSupportedTransactionVersion: 0 },
     );
 
     results.push(
