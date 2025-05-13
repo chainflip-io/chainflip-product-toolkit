@@ -229,8 +229,7 @@ export class TransactionMatchingError extends Error {
     public transfers: Transfer[],
   ) {
     super(message);
-    this.name = TransactionMatchingError.name;
-    Error.captureStackTrace(this, TransactionMatchingError);
+    this.name = this.constructor.name;
   }
 }
 
