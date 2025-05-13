@@ -29,7 +29,6 @@ describe('swapSchema', () => {
       name: 'x_swap_native',
       data: {
         swap_native_params: {
-          // @ts-expect-error -- it's fine
           dst_address: Buffer.from(address),
           dst_chain: chainContractId[chain],
           dst_token: asset,
