@@ -130,33 +130,33 @@ const fetchTransfers = async (
   for (let i = 0; i < 5; i += 1) {
     const sigs = await conn.getSignaturesForAddress(owner, { limit: 20, before });
 
+    sigs.sort((a, b) => b.slot - a.slot);
+
     assert(sigs.length > 0, 'failed to find signatures');
 
     const transactions = await conn.getTransactions(
       sigs.map((s) => s.signature),
-      // `commitment` is a load-bearing flag. this function can collapse without it
-      { commitment: 'confirmed', maxSupportedTransactionVersion: 0 },
+      { maxSupportedTransactionVersion: 0 },
     );
 
     results.push(
-      ...transactions
-        .map((tx, index): Transfer | null => {
-          assert(tx !== null, 'tx is null');
+      ...sigs.flatMap((sig) => {
+        const txs = transactions.filter(
+          (tx) => tx !== null && tx.transaction.signatures.includes(sig.signature),
+        );
 
-          const diff = !tokenMintAddress
-            ? getSolDiff(tx, depositAddress)
-            : getTokenDiff(tx, depositAddress, tokenMintAddress);
+        assert(txs.length === 1, 'failed to find matching transaction signature');
 
-          if (diff <= 0n) return null;
+        const tx = txs[0]!;
 
-          return {
-            amount: diff,
-            signature: sigs[index].signature,
-            slot: sigs[index].slot,
-          };
-        })
-        .filter((transfer) => transfer !== null)
-        .sort((a, b) => b.slot - a.slot),
+        const diff = !tokenMintAddress
+          ? getSolDiff(tx, depositAddress)
+          : getTokenDiff(tx, depositAddress, tokenMintAddress);
+
+        if (diff <= 0n) return [];
+
+        return [{ amount: diff, signature: sig.signature, slot: sig.slot }];
+      }),
     );
 
     if (results.length >= depositCount) return results;

@@ -28,6 +28,7 @@ import solusdc from './fixtures/solusdc.json';
 import solusdc2 from './fixtures/solusdc2.json';
 import { swapNative } from './fixtures/swapNative';
 import swapTokenDevnet from './fixtures/swapTokenDevnet.json';
+import unsorted from './fixtures/unsorted.json';
 
 const mockFetchWithResponses = (responses: { jsonrpc: string; result: unknown; id: string }[]) =>
   responses.reduce(
@@ -355,6 +356,24 @@ describe(findTransactionSignatures, () => {
     );
     expect(result).toStrictEqual([
       ['3mYJ5r6ypAD4s6iGJDghKLSd8KukAjhSCW5MoBMZYKmnFvGayKLbxM4FhDavHBdwgLeP8k6PDA8APSVA1Sg4A6cn'],
+    ]);
+  });
+
+  it('handles out of order txs', async () => {
+    mockFetch(unsorted);
+    const result = await findTransactionSignatures(
+      'https://solana.rpc',
+      'D2J9iUNMegbHLXEBeqq4JwUrWxYVEJkBQ5BzBsmSYEjj',
+      'Sol',
+      [
+        { amount: 100000n, maxSlot: Infinity },
+        { amount: 427077240n, maxSlot: Infinity },
+      ],
+      'mainnet',
+    );
+    expect(result).toStrictEqual([
+      ['4stUE2eQCmdnxBMYuTDZfEhqKJfeSCzhJpvtD4xtFRfZ8PYVpDK4R4dd3u4k7GFwb1bLnRLvdBvoVpvbctGTfbEQ'],
+      ['2VjrqbZ3LwLN1bDvFW9bLEYmcQAMmB5kCXSeUBHFDc2imAkK9ij9cgPNDPJeqfTVirVvYbLCfAWFnEUUTguwbUB5'],
     ]);
   });
 });
