@@ -6,7 +6,12 @@ import { Connection } from '@solana/web3.js';
 import { describe, beforeEach, it, vi, expect, type MockInstance } from 'vitest';
 import { SolanaCcmAdditionalData } from '@/scale/codecs';
 import { spyOn } from '@/testing';
-import { findTransactionSignatures, findVaultSwapData, findVaultSwapSignature } from '../deposit';
+import {
+  findTransactionSignatures,
+  findVaultSwapData,
+  findVaultSwapSignature,
+  TransactionMatchingError,
+} from '../deposit';
 import { mainnet } from '../idls';
 import bigDiff from './fixtures/bigDiff.json';
 import cluster from './fixtures/cluster.json';
@@ -101,7 +106,7 @@ describe(findTransactionSignatures, () => {
   it('throws if it cannot align the deposits and transfers', async () => {
     mockFetch(combineTxs);
 
-    const result = findTransactionSignatures(
+    const result = await findTransactionSignatures(
       'https://solana.rpc',
       '2p1mhPq93ob1NnKYR1PH2tKhqMdQTPPJFEtjt6tYWn5p',
       'Sol',
@@ -110,10 +115,48 @@ describe(findTransactionSignatures, () => {
         { amount: 4100010000n, maxSlot: 315261223 },
       ],
       'mainnet',
+    ).catch((e) => e);
+
+    expect(result).toMatchInlineSnapshot(
+      `[TransactionMatchingError: failed to align deposits and transfers]`,
     );
-    await expect(result).rejects.toThrowErrorMatchingInlineSnapshot(
-      `[Error: failed to align deposits and transfers]`,
-    );
+    expect(result).toBeInstanceOf(TransactionMatchingError);
+    expect((result as TransactionMatchingError).deposits).toMatchInlineSnapshot(`
+      [
+        {
+          "amount": 90000000n,
+          "maxSlot": 315326189,
+        },
+        {
+          "amount": 4100010000n,
+          "maxSlot": 315261223,
+        },
+      ]
+    `);
+    expect((result as TransactionMatchingError).transfers).toMatchInlineSnapshot(`
+      [
+        {
+          "amount": 90000000n,
+          "signature": "2XqRkbCsNMpVtD1vDPM7enDS3iQ6Nrs5JYsrG9VMaXkXJw2LYbbm3A9TsREm7GCub8FgWXpsZYeK9dY6Aj6N1jy8",
+          "slot": 315262424,
+        },
+        {
+          "amount": 10000000n,
+          "signature": "5btZpyhXnFKjxneTWFDqchWg7VALamw1xnDM2QUnKCamhJGxiHPjiE7A39LNjbQ7MAADmJETKbtC5htwhUoaNuXG",
+          "slot": 315260820,
+        },
+        {
+          "amount": 10000n,
+          "signature": "3pR4gJe2dBiaP38e83FegpNxE4eKaVmReCEhi4DFpv2tAnKqKTHER3NW8TzQS6JnbzaArCfbMWypc9h162X6ZqGB",
+          "slot": 315260540,
+        },
+        {
+          "amount": 4100000000n,
+          "signature": "3dwQQgUfipMYDLKq5uUqR5dw4vRLvEkr824AkaPaCNYAQM2yfPrCNW2oDqvRQfM9pjw4UwuY2x1L5ppWbBiJWAvC",
+          "slot": 315260432,
+        },
+      ]
+    `);
   });
 
   it('handles this cluster', async () => {
@@ -263,7 +306,9 @@ describe(findTransactionSignatures, () => {
         [{ amount: 1469000000n, maxSlot: 317429934 }],
         'mainnet',
       ),
-    ).rejects.toThrowErrorMatchingInlineSnapshot(`[Error: transfers are too new]`);
+    ).rejects.toThrowErrorMatchingInlineSnapshot(
+      `[TransactionMatchingError: transfers are too new]`,
+    );
   });
 
   it('works with SolUsdc transfers from RPC', async () => {

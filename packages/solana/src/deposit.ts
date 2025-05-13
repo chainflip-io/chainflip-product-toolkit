@@ -221,6 +221,18 @@ const tryToAlignDepositsAndTransfers = (
   return results;
 };
 
+export class TransactionMatchingError extends Error {
+  constructor(
+    message: string,
+    public cause: Error,
+    public deposits: DepositInfo[],
+    public transfers: Transfer[],
+  ) {
+    super(message);
+    this.name = this.constructor.name;
+  }
+}
+
 export const findTransactionSignatures = async (
   rpcUrl: string,
   depositAddress: string,
@@ -248,8 +260,7 @@ export const findTransactionSignatures = async (
     }
   }
 
-  // eslint-disable-next-line no-throw-literal -- false positive
-  throw error!;
+  throw new TransactionMatchingError(error!.message, error!, deposits, transfers);
 };
 
 export const findVaultSwapSignature = async (
