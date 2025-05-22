@@ -106,7 +106,11 @@ export default abstract class Client {
         void this.handleBatch();
       }, 0);
     }
-    return deferred.promise;
+
+    return deferred.promise.catch((error) => {
+      if (error instanceof Error) Error.captureStackTrace(error);
+      throw error;
+    });
   }
 
   methods(): RpcMethod[] {
