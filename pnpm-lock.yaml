@@ -84,8 +84,8 @@ importers:
         specifier: ^1.6.1
         version: 1.6.1
       zod:
-        specifier: ^3.24.4
-        version: 3.24.4
+        specifier: ^3.25.28
+        version: 3.25.28
 
   packages/chainspec:
     devDependencies:
@@ -102,8 +102,8 @@ importers:
         specifier: ^3.5.3
         version: 3.5.3
       zod:
-        specifier: ^3.24.4
-        version: 3.24.4
+        specifier: ^3.25.28
+        version: 3.25.28
 
   packages/eslint-config:
     dependencies:
@@ -138,8 +138,8 @@ importers:
         specifier: 0.8.6
         version: 0.8.6
       zod:
-        specifier: ^3.24.4
-        version: 3.24.4
+        specifier: ^3.25.28
+        version: 3.25.28
     devDependencies:
       '@chainflip/rpc':
         specifier: 1.9.3
@@ -160,8 +160,8 @@ importers:
         specifier: ^5.6.1
         version: 5.6.1
       zod:
-        specifier: ^3.24.4
-        version: 3.24.4
+        specifier: ^3.25.28
+        version: 3.25.28
 
   packages/rpc:
     dependencies:
@@ -169,8 +169,8 @@ importers:
         specifier: 0.8.6
         version: 0.8.6
       zod:
-        specifier: ^3.24.4
-        version: 3.24.4
+        specifier: ^3.25.28
+        version: 3.25.28
     devDependencies:
       '@types/node':
         specifier: ^22.15.21
@@ -216,8 +216,8 @@ importers:
         specifier: ^1.6.1
         version: 1.6.1
       zod:
-        specifier: ^3.24.4
-        version: 3.24.4
+        specifier: ^3.25.28
+        version: 3.25.28
     devDependencies:
       '@types/bn.js':
         specifier: ^5.1.6
@@ -3344,8 +3344,8 @@ packages:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
 
-  zod@3.24.4:
-    resolution: {integrity: sha512-OdqJE9UDRPwWsrHjLN2F8bPxvwJBK22EHLWtanu0LSYr5YqzsaaW3RMgmjwr8Rypg5k+meEJdSPXJZXE/yqOMg==}
+  zod@3.25.28:
+    resolution: {integrity: sha512-/nt/67WYKnr5by3YS7LroZJbtcCBurDKKPBPWWzaxvVCGuG/NOsiKkrjoOhI8mJ+SQUXEbUzeB3S+6XDUEEj7Q==}
 
 snapshots:
 
@@ -3382,7 +3382,7 @@ snapshots:
   '@chainflip/rpc@1.9.3':
     dependencies:
       '@chainflip/utils': 0.8.2
-      zod: 3.24.4
+      zod: 3.25.28
 
   '@chainflip/scale@1.8.0':
     dependencies:
@@ -6607,4 +6607,4 @@ snapshots:
 
   yocto-queue@0.1.0: {}
 
-  zod@3.24.4: {}
+  zod@3.25.28: {}
