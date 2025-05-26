@@ -115,6 +115,10 @@ export const brokerAliasMap: AccountAliasMap = {
     name: 'Cake Wallet',
     twitter: '@cakewallet',
   },
+  cFJibLYo59hWoy93d9AgGzR6NfvRywcPFN4SEzhJP2toA7Ffu: {
+    name: 'Trust Wallet',
+    twitter: '@TrustWallet',
+  },
   cFLre1qinRDSoxnQ4sFEXRde58jkmkVMX7B2NFGkgZJ9pQLqF: {
     name: 'Trust Wallet',
     twitter: '@TrustWallet',
