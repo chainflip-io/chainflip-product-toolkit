@@ -19,7 +19,7 @@
     "zod": "^3.25.28"
   },
   "devDependencies": {
-    "@types/node": "^22.15.21",
+    "@types/node": "^22.15.29",
     "@types/ws": "^8.18.1",
     "ws": "^8.18.2"
   },
