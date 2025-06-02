@@ -99,10 +99,6 @@ export const brokerAliasMap: AccountAliasMap = {
     name: 'SwapperXYZ',
     twitter: null,
   },
-  cFNddmecxrTKfytLwV3s7KpBjmsvFAX8xUnrXfnvd4yqtr4vC: {
-    name: 'Dexifier',
-    twitter: '@DexifierX',
-  },
   cFNwtr2mPhpUEB5AyJq38DqMKMkSdzaL9548hajN2DRTwh7Mq: {
     name: 'SwapKit',
     twitter: '@SwapKitPowered',
@@ -127,7 +123,15 @@ export const brokerAliasMap: AccountAliasMap = {
     name: 'Trust Wallet',
     twitter: '@TrustWallet',
   },
+  cFNddmecxrTKfytLwV3s7KpBjmsvFAX8xUnrXfnvd4yqtr4vC: {
+    name: 'Dexifier',
+    twitter: '@DexifierX',
+  },
   cFKCm1mNBmVH2Lwyp2NTzPa1JNs4KYt19pX3yjbTy7GdCr3aB: {
+    name: 'Dexifier',
+    twitter: '@DexifierX',
+  },
+  cFN2adJMj49HPc8kUbrMunf7SSmrg6v77kTgZXgGFjtS9YyGB: {
     name: 'Dexifier',
     twitter: '@DexifierX',
   },
