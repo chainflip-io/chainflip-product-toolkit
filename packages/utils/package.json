@@ -31,6 +31,13 @@
       }
     }
   },
+  "typesVersions": {
+    "*": {
+      "*": [
+        "dist/*.d.ts"
+      ]
+    }
+  },
   "devDependencies": {
     "@noble/hashes": "^1.8.0",
     "@vitest/ui": "3.1.1"
