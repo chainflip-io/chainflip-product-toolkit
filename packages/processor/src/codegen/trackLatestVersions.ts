@@ -29,20 +29,30 @@ const deepEqual = <T>(a: T, b: T): boolean => {
 class FinalTwo {
   static from(other: FinalTwo | undefined, newVersion: number) {
     const instance = new FinalTwo(newVersion);
-    if (other) instance.old = other.new;
+    if (other) {
+      // it's not impossible for an event to be reintroduced but it hasn't happened yet
+      assert(!other.deleted, 'unexpected new version after event was already deleted');
+      instance.old = other.new;
+    }
     return instance;
   }
 
   old: number | null = null;
   new: number;
+  private deleted = false;
 
   private constructor(newVersion: number) {
     this.new = newVersion;
   }
 
   toString() {
-    if (this.old === null) return this.new.toString();
-    return `${this.old} => ${this.new}`;
+    const newVersion = this.deleted ? 'DELETED' : this.new.toString();
+    if (this.old === null) return newVersion;
+    return `${this.old} => ${newVersion}`;
+  }
+
+  markDeleted() {
+    this.deleted = true;
   }
 }
 
@@ -74,7 +84,7 @@ const trackLatestVersions: GenerateHook<Map<string, Map<string, FinalTwo>>> = (a
     const newEventNames = new Set(Object.keys(newEvents));
     const deletedEvents = new Set(Object.keys(oldEvents)).difference(newEventNames);
     for (const event of deletedEvents) {
-      acc.get(pallet)?.delete(event);
+      acc.get(pallet)?.get(event)?.markDeleted();
     }
     for (const eventName of newEventNames) {
       if (!deepEqual(oldEvents[eventName], newEvents[eventName])) {

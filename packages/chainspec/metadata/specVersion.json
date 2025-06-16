@@ -60,7 +60,11 @@
     "network": "mainnet"
   },
   "190": {
-    "hash": "0x88f1b7bbc701aca5cc3cb193cb38eca186506a85c93be120aa799834b55c2ae1",
-    "network": "backspin"
+    "hash": "0x0b258ae89ee6c20a906bbd4197e7ac67ad76aa3d53f16a70d7d845d2bb7f3623",
+    "network": "mainnet"
+  },
+  "11000": {
+    "hash": "0x718b352e55e09813b18a9bfefd29420c5a66fb51a8c7a7dfb3b464e6362f867b",
+    "network": "localnet"
   }
 }
