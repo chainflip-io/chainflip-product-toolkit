@@ -51,7 +51,7 @@ class FinalTwo {
     return `${this.old} => ${newVersion}`;
   }
 
-  delete() {
+  markDeleted() {
     this.deleted = true;
   }
 }
@@ -84,7 +84,7 @@ const trackLatestVersions: GenerateHook<Map<string, Map<string, FinalTwo>>> = (a
     const newEventNames = new Set(Object.keys(newEvents));
     const deletedEvents = new Set(Object.keys(oldEvents)).difference(newEventNames);
     for (const event of deletedEvents) {
-      acc.get(pallet)?.get(event)?.delete();
+      acc.get(pallet)?.get(event)?.markDeleted();
     }
     for (const eventName of newEventNames) {
       if (!deepEqual(oldEvents[eventName], newEvents[eventName])) {
