@@ -151,22 +151,40 @@ export type RpcRequest = WithHash<{
     amount: `0x${string}`,
     additionalOrders?: Nullish<AdditionalOrder[]>,
   ];
-  cf_swap_rate_v3: [
-    fromAsset: UncheckedAssetAndChain,
-    toAsset: UncheckedAssetAndChain,
-    amount: `0x${string}`,
-    brokerComission: number,
-    dcaParams?: Nullish<{
-      number_of_chunks: number;
-      chunk_interval: number;
-    }>,
-    ccmData?: Nullish<{
-      gas_budget: number;
-      message_length: number;
-    }>,
-    excludeFees?: Nullish<SwapFeeType[]>,
-    additionalOrders?: Nullish<AdditionalOrder[]>,
-  ];
+  cf_swap_rate_v3:
+    | [
+        fromAsset: UncheckedAssetAndChain,
+        toAsset: UncheckedAssetAndChain,
+        amount: `0x${string}`,
+        brokerComission: number,
+        dcaParams?: Nullish<{
+          number_of_chunks: number;
+          chunk_interval: number;
+        }>,
+        ccmData?: Nullish<{
+          gas_budget: number;
+          message_length: number;
+        }>,
+        excludeFees?: Nullish<SwapFeeType[]>,
+        additionalOrders?: Nullish<AdditionalOrder[]>,
+      ]
+    | [
+        fromAsset: UncheckedAssetAndChain,
+        toAsset: UncheckedAssetAndChain,
+        amount: `0x${string}`,
+        brokerComission: number,
+        dcaParams?: Nullish<{
+          number_of_chunks: number;
+          chunk_interval: number;
+        }>,
+        ccmData?: Nullish<{
+          gas_budget: number;
+          message_length: number;
+        }>,
+        excludeFees?: Nullish<SwapFeeType[]>,
+        additionalOrders?: Nullish<AdditionalOrder[]>,
+        isInternal?: Nullish<boolean>,
+      ];
   cf_boost_pools_depth: [];
   cf_boost_pool_details: [asset?: UncheckedAssetAndChain | null];
   cf_boost_pool_pending_fees: [asset?: UncheckedAssetAndChain | null];
