@@ -72,7 +72,7 @@ export default class CodeGenerator extends BaseCodeGenerator {
   }
 
   protected override generatePrimitive(def: PrimitiveType): CodegenResult {
-    switch (def.name) {
+    switch (def.value) {
       case 'u8':
       case 'u16':
       case 'u32':
@@ -86,16 +86,16 @@ export default class CodeGenerator extends BaseCodeGenerator {
       case 'H160':
         return new Code('Uint8Array').asType();
       default:
-        throw new Error(`Method not implemented for primitive type: ${def.name}`);
+        throw new Error(`Method not implemented for primitive type: ${def.value}`);
     }
   }
 
   protected override generateEnum(def: EnumType): CodegenResult {
-    const identifier = this.getKnownIdentifier(def.name);
+    const identifier = this.getKnownIdentifier(def.$name);
     if (this.registry.types.has(identifier)) return new Identifier(identifier).asType();
 
     const isSimpleEnum = def.values.every(
-      (value) => value.value.type === 'primitive' && value.value.name === 'null',
+      (value) => value.value.type === 'primitive' && value.value.value === 'null',
     );
 
     let members: CodegenResult[];
@@ -125,7 +125,7 @@ export default class CodeGenerator extends BaseCodeGenerator {
   }
 
   protected override generateArray(def: ArrayType): CodegenResult {
-    if (def.value.type === 'primitive' && def.value.name === 'u8') {
+    if (def.value.type === 'primitive' && def.value.value === 'u8') {
       return new Code('Uint8Array').asType();
     }
 
