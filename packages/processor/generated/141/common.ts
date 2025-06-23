@@ -111,11 +111,6 @@ export const palletCfEnvironmentSafeModeUpdate = z.discriminatedUnion('__kind', 
   }),
 ]);
 
-export const cfChainsBtcUtxoSelectionConsolidationParameters = z.object({
-  consolidationThreshold: z.number(),
-  consolidationSize: z.number(),
-});
-
 export const cfChainsBtcUtxoId = z.object({ txId: hexString, vout: z.number() });
 
 export const numericString = z

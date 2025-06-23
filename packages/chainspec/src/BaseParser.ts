@@ -29,20 +29,20 @@ const isSi = <T extends TypeDef>(
 ): type is T & { info: TypeDefInfo.Si; type: `Lookup${number}` } =>
   type.info === TypeDefInfo.Si && /^Lookup\d+$/.test(type.type);
 
-export type PrimitiveType = { type: 'primitive'; name: string };
+export type PrimitiveType = { type: 'primitive'; value: string };
 
 export const isPrimitiveType = (type: ResolvedType): type is PrimitiveType =>
   type.type === 'primitive';
 
 export type EnumType = {
   type: 'enum';
-  name: string;
+  $name: string;
   values: { name: string; value: ResolvedType }[];
 };
 
 export type StructType = {
   type: 'struct';
-  name?: string;
+  $name?: string;
   fields: Record<string, ResolvedType>;
   additionalFields?: Record<string, string>;
 };
@@ -109,7 +109,7 @@ export default abstract class BaseParser {
 
         const result: EnumType = {
           type: 'enum',
-          name: uncapitalize(type.lookupName),
+          $name: uncapitalize(type.lookupName),
           values: [],
         };
 
@@ -127,7 +127,7 @@ export default abstract class BaseParser {
 
         const result: StructType = {
           type: 'struct',
-          name: type.lookupName ?? this.genericNamespace(type.namespace),
+          $name: type.lookupName ?? this.genericNamespace(type.namespace),
           fields: {},
         };
 
@@ -144,9 +144,9 @@ export default abstract class BaseParser {
         assert(hasSub(type));
         return this.resolveType(type.sub);
       case TypeDefInfo.Null:
-        return { type: 'primitive', name: 'null' };
+        return { type: 'primitive', value: 'null' };
       case TypeDefInfo.Plain:
-        return { type: 'primitive', name: type.type };
+        return { type: 'primitive', value: type.type };
       case TypeDefInfo.BTreeSet:
       case TypeDefInfo.Vec:
       case TypeDefInfo.VecFixed:
@@ -173,7 +173,7 @@ export default abstract class BaseParser {
         assert(hasSubs(type));
         return {
           type: 'enum',
-          name: uncapitalize(type.typeName!),
+          $name: uncapitalize(type.typeName!),
           values: [
             {
               name: 'Ok',

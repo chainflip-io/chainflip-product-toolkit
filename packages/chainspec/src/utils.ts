@@ -9,15 +9,25 @@ type Change = { path: string[]; type: ChangeType };
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 // a function to deep diff two metadata objects
 function* diff(a: any, b: any, path: string[] = []): Generator<Change> {
-  const addedKeys = Object.keys(b)
-    .filter((key) => b[key] !== undefined)
-    .filter((key) => !a[key]);
-  const removedKeys = Object.keys(a)
-    .filter((key) => a[key] !== undefined)
-    .filter((key) => !b[key]);
-  const commonKeys = Object.keys(a)
-    .filter((key) => a[key] !== undefined)
-    .filter((key) => b[key]);
+  const addedKeys = new Set(
+    Object.keys(b)
+      .filter((key) => b[key] !== undefined)
+      .filter((key) => !a[key]),
+  );
+  const removedKeys = new Set(
+    Object.keys(a)
+      .filter((key) => a[key] !== undefined)
+      .filter((key) => !b[key]),
+  );
+  const commonKeys = new Set(
+    Object.keys(a)
+      .filter((key) => a[key] !== undefined)
+      .filter((key) => b[key]),
+  );
+
+  addedKeys.delete('$name');
+  removedKeys.delete('$name');
+  commonKeys.delete('$name');
 
   for (const key of addedKeys) {
     yield { path: [...path, key], type: 'added' };
@@ -123,7 +133,7 @@ export const diffSpecs = (a: ParsedMetadata, b: ParsedMetadata) => {
       // if a new pallet was added
       Object.keys(b[pallet])
         .map((e) => `${pallet}.${e}`)
-        .forEach((ev) => changedOrAddedEvents.add(ev), changedOrAddedEvents);
+        .forEach((ev) => changedOrAddedEvents.add(ev));
     }
   }
 

@@ -99,7 +99,6 @@ LiquidityPools:
   - LimitOrderUpdated:
     - baseAsset: added
     - quoteAsset: added
-    - sellAmountChange: changed
   - NewPoolCreated:
     - baseAsset: added
     - quoteAsset: added
@@ -114,7 +113,6 @@ LiquidityPools:
   - RangeOrderUpdated:
     - baseAsset: added
     - quoteAsset: added
-    - sizeChange: changed
 
 LiquidityProvider:
   - AssetTransferred:
@@ -221,7 +219,7 @@ Swapping:
     - outputAsset: added
     - origin: added
     - requestType: added
-    - refundParameters: changed
+    - refundParameters: added
   - SwapRetryDelaySet: removed
   - VaultSwapMinimumBrokerFeeSet: added
   - WithdrawalRequested:

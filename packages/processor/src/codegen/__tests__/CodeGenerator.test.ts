@@ -31,24 +31,26 @@ describe(CodeGenerator, () => {
     const modules = [
       ...new CodeGenerator().generate({
         Primitives: Object.fromEntries(
-          primitives.map((name) => [name, { type: 'primitive', name }]),
+          primitives.map((value) => [value, { type: 'primitive', value }]),
         ),
         Structs: {
           EventOne: {
             type: 'struct',
             fields: {
-              ...Object.fromEntries(primitives.map((name) => [name, { type: 'primitive', name }])),
               ...Object.fromEntries(
-                primitives.map((name) => [
-                  `${name}Nullable`,
-                  { type: 'option', value: { type: 'primitive', name } },
+                primitives.map((value) => [value, { type: 'primitive', value }]),
+              ),
+              ...Object.fromEntries(
+                primitives.map((value) => [
+                  `${value}Nullable`,
+                  { type: 'option', value: { type: 'primitive', value } },
                 ]),
               ),
               u32Array: {
                 type: 'array',
                 value: {
                   type: 'primitive',
-                  name: 'u32',
+                  value: 'u32',
                 },
               },
               u32ArrayWithLength: {
@@ -56,7 +58,7 @@ describe(CodeGenerator, () => {
                 length: 3,
                 value: {
                   type: 'primitive',
-                  name: 'u32',
+                  value: 'u32',
                 },
               },
               bytes: {
@@ -64,52 +66,52 @@ describe(CodeGenerator, () => {
                 length: 32,
                 value: {
                   type: 'primitive',
-                  name: 'u8',
+                  value: 'u8',
                 },
               },
               tuple: {
                 type: 'tuple',
                 values: [
-                  { type: 'primitive', name: 'u32' },
-                  { type: 'primitive', name: 'bool' },
-                  { type: 'primitive', name: 'AccountId32' },
+                  { type: 'primitive', value: 'u32' },
+                  { type: 'primitive', value: 'bool' },
+                  { type: 'primitive', value: 'AccountId32' },
                 ],
               },
               range: {
                 type: 'range',
-                value: { type: 'primitive', name: 'u128' },
+                value: { type: 'primitive', value: 'u128' },
               },
               map: {
                 type: 'map',
                 key: {
                   type: 'tuple',
                   values: [
-                    { type: 'primitive', name: 'AccountId32' },
-                    { type: 'primitive', name: 'u32' },
+                    { type: 'primitive', value: 'AccountId32' },
+                    { type: 'primitive', value: 'u32' },
                   ],
                 },
                 value: {
                   type: 'struct',
-                  name: 'mapValue',
+                  $name: 'mapValue',
                   fields: {
-                    value: { type: 'primitive', name: 'u32' },
+                    value: { type: 'primitive', value: 'u32' },
                     moneySymbol: {
                       type: 'enum',
-                      name: 'moneySymbol',
-                      values: [{ name: 'Flip', value: { type: 'primitive', name: 'null' } }],
+                      $name: 'moneySymbol',
+                      values: [{ name: 'Flip', value: { type: 'primitive', value: 'null' } }],
                     },
                   },
                 },
               },
               flattenedEnumThing: {
                 type: 'enum',
-                name: 'enumWithFlattenedField',
+                $name: 'enumWithFlattenedField',
                 values: [
                   {
                     name: 'One',
                     value: {
                       type: 'struct',
-                      fields: { field: { type: 'primitive', name: 'u32' } },
+                      fields: { field: { type: 'primitive', value: 'u32' } },
                     },
                   },
                 ],
@@ -118,8 +120,8 @@ describe(CodeGenerator, () => {
                 type: 'array',
                 value: {
                   type: 'enum',
-                  name: 'moneySymbol',
-                  values: [{ name: 'Flip', value: { type: 'primitive', name: 'null' } }],
+                  $name: 'moneySymbol',
+                  values: [{ name: 'Flip', value: { type: 'primitive', value: 'null' } }],
                 },
               },
             },
@@ -128,9 +130,12 @@ describe(CodeGenerator, () => {
         Enums: {
           EventOne: {
             type: 'enum',
-            name: 'myEnum',
+            $name: 'myEnum',
             values: [
-              ...primitives.map((name) => ({ name, value: { type: 'primitive' as const, name } })),
+              ...primitives.map((name) => ({
+                name,
+                value: { type: 'primitive' as const, value: name },
+              })),
             ],
           },
         },
@@ -151,16 +156,16 @@ describe(CodeGenerator, () => {
     const modules = [
       ...new CodeGenerator({ trackedItems: new Set(['Enums.EventOne']) }).generate({
         Primitives: Object.fromEntries(
-          primitives.map((name) => [name, { type: 'primitive', name }]),
+          primitives.map((value) => [value, { type: 'primitive', value }]),
         ),
         Enums: {
           EventOne: {
             type: 'enum',
-            name: 'myEnum',
+            $name: 'myEnum',
             values: [
-              { name: 'Flip', value: { type: 'primitive', name: 'null' } },
-              { name: 'Usdc', value: { type: 'primitive', name: 'null' } },
-              { name: 'Eth', value: { type: 'primitive', name: 'null' } },
+              { name: 'Flip', value: { type: 'primitive', value: 'null' } },
+              { name: 'Usdc', value: { type: 'primitive', value: 'null' } },
+              { name: 'Eth', value: { type: 'primitive', value: 'null' } },
             ],
           },
         },
@@ -176,7 +181,9 @@ describe(CodeGenerator, () => {
   it('throws if it does not find the expected event', () => {
     spyOn(console, 'error').mockImplementation(() => {});
     const iter = new CodeGenerator({ trackedItems: new Set(['Enums.EventOne']) }).generate({
-      Primitives: Object.fromEntries(primitives.map((name) => [name, { type: 'primitive', name }])),
+      Primitives: Object.fromEntries(
+        primitives.map((value) => [value, { type: 'primitive', value }]),
+      ),
     });
 
     expect(() => iter.next()).toThrowErrorMatchingInlineSnapshot(
@@ -205,16 +212,16 @@ describe(CodeGenerator, () => {
         PalletOne: {
           EventOne: {
             type: 'struct',
-            name: 'reusedStruct',
+            $name: 'reusedStruct',
             fields: {
-              field: { type: 'primitive', name: 'u32' },
+              field: { type: 'primitive', value: 'u32' },
             },
           },
           AnotherEvent: {
             type: 'struct',
-            name: 'reusedStruct',
+            $name: 'reusedStruct',
             fields: {
-              field: { type: 'primitive', name: 'u32' },
+              field: { type: 'primitive', value: 'u32' },
             },
           },
         },
@@ -233,13 +240,13 @@ describe(CodeGenerator, () => {
         PalletOne: {
           EventOne: {
             type: 'enum',
-            name: 'cfChainsAddressEncodedAddress',
+            $name: 'cfChainsAddressEncodedAddress',
             values: [
-              { name: 'Eth', value: { type: 'primitive', name: 'null' } },
-              { name: 'Dot', value: { type: 'primitive', name: 'null' } },
-              { name: 'Sol', value: { type: 'primitive', name: 'null' } },
-              { name: 'Btc', value: { type: 'primitive', name: 'null' } },
-              { name: 'Arb', value: { type: 'primitive', name: 'null' } },
+              { name: 'Eth', value: { type: 'primitive', value: 'null' } },
+              { name: 'Dot', value: { type: 'primitive', value: 'null' } },
+              { name: 'Sol', value: { type: 'primitive', value: 'null' } },
+              { name: 'Btc', value: { type: 'primitive', value: 'null' } },
+              { name: 'Arb', value: { type: 'primitive', value: 'null' } },
             ],
           },
         },
@@ -258,14 +265,14 @@ describe(CodeGenerator, () => {
         PalletOne: {
           EventOne: {
             type: 'enum',
-            name: 'cfChainsAddressEncodedAddress',
+            $name: 'cfChainsAddressEncodedAddress',
             values: [
-              { name: 'Eth', value: { type: 'primitive', name: 'null' } },
-              { name: 'Dot', value: { type: 'primitive', name: 'null' } },
-              { name: 'Sol', value: { type: 'primitive', name: 'null' } },
-              { name: 'Btc', value: { type: 'primitive', name: 'null' } },
-              { name: 'Arb', value: { type: 'primitive', name: 'null' } },
-              { name: 'Ton', value: { type: 'primitive', name: 'null' } },
+              { name: 'Eth', value: { type: 'primitive', value: 'null' } },
+              { name: 'Dot', value: { type: 'primitive', value: 'null' } },
+              { name: 'Sol', value: { type: 'primitive', value: 'null' } },
+              { name: 'Btc', value: { type: 'primitive', value: 'null' } },
+              { name: 'Arb', value: { type: 'primitive', value: 'null' } },
+              { name: 'Ton', value: { type: 'primitive', value: 'null' } },
             ],
           },
         },
@@ -278,7 +285,7 @@ describe(CodeGenerator, () => {
     expect(() => [
       ...new CodeGenerator().generate({
         Primitives: {
-          Event: { type: 'primitive', name: 'unknown' },
+          Event: { type: 'primitive', value: 'unknown' },
         },
       }),
     ]).toThrowErrorMatchingInlineSnapshot(`[Error: Unsupported primitive: unknown]`);
@@ -293,9 +300,9 @@ describe(CodeGenerator, () => {
         PalletOne: {
           EventOne: {
             type: 'struct',
-            name: 'reusedStruct',
+            $name: 'reusedStruct',
             fields: {
-              field: { type: 'primitive', name: 'u32' },
+              field: { type: 'primitive', value: 'u32' },
             },
           },
         },

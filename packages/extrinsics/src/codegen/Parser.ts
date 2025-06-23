@@ -23,7 +23,7 @@ export default class Parser extends BaseParser {
     if (this.depth < 20) {
       result = super.resolveType(type);
     } else {
-      result = { type: 'primitive', name: 'null' };
+      result = { type: 'primitive', value: 'null' };
     }
     this.depth -= 1;
     return result;

@@ -7,8 +7,6 @@ ArbitrumIngressEgress:
   - BoostPoolCreated: removed
   - CcmEgressInvalid:
     - error: added
-  - DepositFailed:
-    - details: changed
   - FailedToBuildAllBatchCall:
     - error: added
   - InvalidCcmRefunded: added
@@ -21,8 +19,6 @@ AssethubIngressEgress:
   - BoostPoolCreated: removed
   - CcmEgressInvalid:
     - error: added
-  - DepositFailed:
-    - details: changed
   - FailedToBuildAllBatchCall:
     - error: added
   - InvalidCcmRefunded: added
@@ -35,8 +31,6 @@ BitcoinIngressEgress:
   - BoostPoolCreated: removed
   - CcmEgressInvalid:
     - error: added
-  - DepositFailed:
-    - details: changed
   - FailedToBuildAllBatchCall:
     - error: added
   - InvalidCcmRefunded: added
@@ -55,8 +49,6 @@ EthereumIngressEgress:
   - BoostPoolCreated: removed
   - CcmEgressInvalid:
     - error: added
-  - DepositFailed:
-    - details: changed
   - FailedToBuildAllBatchCall:
     - error: added
   - InvalidCcmRefunded: added
@@ -72,8 +64,6 @@ PolkadotIngressEgress:
   - BoostPoolCreated: removed
   - CcmEgressInvalid:
     - error: added
-  - DepositFailed:
-    - details: changed
   - FailedToBuildAllBatchCall:
     - error: added
   - InvalidCcmRefunded: added
@@ -82,7 +72,7 @@ PolkadotIngressEgress:
 
 SolanaElections:
   - UnknownElection:
-    - 1: changed
+    - 1: added
 
 SolanaIngressEgress:
   - BoostDelaySet: added
@@ -90,8 +80,6 @@ SolanaIngressEgress:
   - BoostPoolCreated: removed
   - CcmEgressInvalid:
     - error: added
-  - DepositFailed:
-    - details: changed
   - FailedToBuildAllBatchCall:
     - error: added
   - InvalidCcmRefunded: added
@@ -106,9 +94,9 @@ Swapping:
   - RefundedOnChain:
     - refundFee: added
   - SwapDepositAddressReady:
-    - channelMetadata: changed
+    - channelMetadata: added
   - SwapRequested:
-    - requestType: changed
+    - requestType: added
 
 TradingStrategy:
   - StrategyDeployed:

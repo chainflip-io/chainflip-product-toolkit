@@ -1,9 +1,9 @@
 BitcoinBroadcaster:
   - BroadcastSuccess:
     - transactionRef: added
-    - transactionOutId: added
+    - transactionOutId: removed
   - TransactionBroadcastRequest:
-    - transactionOutId: added
+    - transactionOutId: removed
 
 BitcoinChainTracking:
   - FeeMultiplierUpdated: added
@@ -12,11 +12,11 @@ BitcoinIngressEgress:
   - ChannelOpeningFeePaid: added
   - ChannelOpeningFeeSet: added
   - DepositIgnored:
-    - depositDetails: added
+    - depositDetails: removed
   - DepositReceived:
-    - depositDetails: added
+    - depositDetails: removed
   - DepositWitnessRejected:
-    - depositWitness: added
+    - depositWitness: removed
   - FailedToBuildAllBatchCall: added
 
 BitcoinThresholdSigner:
@@ -148,7 +148,6 @@ LiquidityPools:
   - LimitOrderUpdated:
     - baseAsset: added
     - quoteAsset: added
-    - side: changed
   - NewPoolCreated:
     - baseAsset: added
     - quoteAsset: added
@@ -158,8 +157,6 @@ LiquidityPools:
   - RangeOrderUpdated:
     - baseAsset: added
     - quoteAsset: added
-    - sizeChange: changed
-    - collectedFees: changed
 
 LiquidityProvider:
   - AccountCredited:
@@ -263,7 +260,7 @@ Swapping:
     - executeAt: added
     - sourceAsset: added
     - destinationAsset: added
-    - swapType: changed
+    - swapType: added
   - WithdrawalRequested:
     - egressAsset: added
 

@@ -10,23 +10,23 @@ ArbitrumIngressEgress:
   - DepositBoosted:
     - maxBoostFeeBps: added
     - originType: added
-    - depositAddress: added
-    - channelId: added
+    - depositAddress: changed
+    - channelId: changed
     - action: removed
   - DepositFailed: added
   - DepositFinalised:
     - maxBoostFeeBps: added
     - originType: added
-    - depositAddress: added
+    - depositAddress: changed
     - action: removed
-    - channelId: added
+    - channelId: changed
   - DepositIgnored: removed
   - DepositWitnessRejected: removed
   - FailedToBuildAllBatchCall:
     - error: added
   - InsufficientBoostLiquidity:
     - originType: added
-    - channelId: added
+    - channelId: changed
   - NetworkFeeDeductionFromBoostSet: added
   - TransferFallbackRequested:
     - egressDetails: added
@@ -43,7 +43,7 @@ BitcoinIngressEgress:
     - maxBoostFeeBps: added
     - originType: added
     - depositAddress: added
-    - channelId: added
+    - channelId: changed
     - action: removed
   - DepositFailed: added
   - DepositFinalised:
@@ -51,14 +51,14 @@ BitcoinIngressEgress:
     - originType: added
     - depositAddress: added
     - action: removed
-    - channelId: added
+    - channelId: changed
   - DepositIgnored: removed
   - DepositWitnessRejected: removed
   - FailedToBuildAllBatchCall:
     - error: added
   - InsufficientBoostLiquidity:
     - originType: added
-    - channelId: added
+    - channelId: changed
   - NetworkFeeDeductionFromBoostSet: added
   - TransferFallbackRequested:
     - egressDetails: added
@@ -77,23 +77,23 @@ EthereumIngressEgress:
   - DepositBoosted:
     - maxBoostFeeBps: added
     - originType: added
-    - depositAddress: added
-    - channelId: added
+    - depositAddress: changed
+    - channelId: changed
     - action: removed
   - DepositFailed: added
   - DepositFinalised:
     - maxBoostFeeBps: added
     - originType: added
-    - depositAddress: added
+    - depositAddress: changed
     - action: removed
-    - channelId: added
+    - channelId: changed
   - DepositIgnored: removed
   - DepositWitnessRejected: removed
   - FailedToBuildAllBatchCall:
     - error: added
   - InsufficientBoostLiquidity:
     - originType: added
-    - channelId: added
+    - channelId: changed
   - NetworkFeeDeductionFromBoostSet: added
   - TransferFallbackRequested:
     - egressDetails: added
@@ -110,7 +110,7 @@ PolkadotIngressEgress:
     - maxBoostFeeBps: added
     - originType: added
     - depositAddress: removed
-    - channelId: added
+    - channelId: changed
     - action: removed
   - DepositFailed: added
   - DepositFinalised:
@@ -118,14 +118,14 @@ PolkadotIngressEgress:
     - originType: added
     - depositAddress: removed
     - action: removed
-    - channelId: added
+    - channelId: changed
   - DepositIgnored: removed
   - DepositWitnessRejected: removed
   - FailedToBuildAllBatchCall:
     - error: added
   - InsufficientBoostLiquidity:
     - originType: added
-    - channelId: added
+    - channelId: changed
   - NetworkFeeDeductionFromBoostSet: added
   - TransferFallbackRequested:
     - egressDetails: added
@@ -149,7 +149,7 @@ SolanaIngressEgress:
     - maxBoostFeeBps: added
     - originType: added
     - depositAddress: removed
-    - channelId: added
+    - channelId: changed
     - action: removed
   - DepositFailed: added
   - DepositFinalised:
@@ -157,14 +157,14 @@ SolanaIngressEgress:
     - originType: added
     - depositAddress: removed
     - action: removed
-    - channelId: added
+    - channelId: changed
   - DepositIgnored: removed
   - DepositWitnessRejected: removed
   - FailedToBuildAllBatchCall:
     - error: added
   - InsufficientBoostLiquidity:
     - originType: added
-    - channelId: added
+    - channelId: changed
   - NetworkFeeDeductionFromBoostSet: added
   - TransactionRejectionRequestExpired:
     - txId: added
@@ -175,10 +175,6 @@ SolanaIngressEgress:
   - UnknownAffiliate: added
   - UnknownBroker: added
   - WitnessSafetyMarginSet: added
-
-SolanaThresholdSigner:
-  - ThresholdSignatureRequest:
-    - payload: changed
 
 Swapping:
   - AffiliateRegistration: added
@@ -191,7 +187,6 @@ Swapping:
   - SwapDepositAddressReady:
     - brokerId: added
     - channelMetadata: added
-    - affiliateFees: changed
     - refundParameters: added
   - SwapEgressScheduled:
     - egressFee: added
@@ -199,7 +194,6 @@ Swapping:
     - brokerFees: added
     - origin: added
     - requestType: removed
-    - refundParameters: changed
   - SwapScheduled:
     - swapType: removed
   - WithdrawalRequested:

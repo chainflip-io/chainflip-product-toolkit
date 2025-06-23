@@ -9,7 +9,6 @@ exports[`extrinsic codegen > generates the code in the desired format > /160/CHA
     - dcaParameters: added
     - sourceAsset: added
     - destinationAsset: added
-    - refundParameters: changed
 "
 `;
 
