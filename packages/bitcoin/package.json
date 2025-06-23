@@ -40,6 +40,6 @@
     "bignumber.js": "^9.3.0",
     "bitcoinjs-lib": "7.0.0-rc.0",
     "scale-ts": "^1.6.1",
-    "zod": "^3.25.64"
+    "zod": "^3.25.67"
   }
 }
