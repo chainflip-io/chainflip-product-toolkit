@@ -39,8 +39,6 @@ Environment:
     - safeMode: added
   - StaleUtxosDiscarded: added
   - UpdatedArbAsset: added
-  - UtxoConsolidationParametersUpdated:
-    - params: changed
 
 EthereumIngressEgress:
   - BatchBroadcastRequested:

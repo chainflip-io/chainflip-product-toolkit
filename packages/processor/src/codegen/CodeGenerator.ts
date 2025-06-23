@@ -21,7 +21,7 @@ const nameToIdentifier = (name: string): string =>
     .replace(/(?:::|_)(.)/g, (_, c: string) => c.toUpperCase())
     .replace(/^./, (c) => c.toLowerCase());
 
-const isNull = (type: ResolvedType) => type.type === 'primitive' && type.name === 'null';
+const isNull = (type: ResolvedType) => type.type === 'primitive' && type.value === 'null';
 
 const hexString = new Code(
   "z.string().refine((v): v is `0x${string}` => /^0x[\\da-f]*$/i.test(v), { message: 'Invalid hex string' })",
@@ -104,13 +104,13 @@ export default class CodeGenerator extends BaseCodeGenerator {
         }
       })`;
 
-    this.registry.types.set(def.name, new Code(generated, dependencies));
+    this.registry.types.set(def.$name, new Code(generated, dependencies));
 
-    return new Identifier(def.name);
+    return new Identifier(def.$name);
   }
 
   protected override generatePrimitive(def: PrimitiveType): CodegenResult {
-    switch (def.name) {
+    switch (def.value) {
       case 'i8':
       case 'u8':
       case 'i16':
@@ -147,13 +147,13 @@ export default class CodeGenerator extends BaseCodeGenerator {
         return new Code('z.null()');
     }
 
-    throw new Error(`Unsupported primitive: ${def.name}`);
+    throw new Error(`Unsupported primitive: ${def.value}`);
   }
 
   protected override generateEnum(def: EnumType): Identifier {
-    if (this.registry.types.has(def.name)) return new Identifier(def.name);
+    if (this.registry.types.has(def.$name)) return new Identifier(def.$name);
 
-    if (def.name === 'cfChainsAddressEncodedAddress') {
+    if (def.$name === 'cfChainsAddressEncodedAddress') {
       return this.generateEncodedAddressEnum(def);
     }
 
@@ -176,7 +176,7 @@ export default class CodeGenerator extends BaseCodeGenerator {
         }
 
         // if the struct has no name, it is not actually a struct but an enum variant w/ named fields
-        if (v.value.type === 'struct' && v.value.name === undefined) {
+        if (v.value.type === 'struct' && v.value.$name === undefined) {
           const value = this.generateStruct({
             ...v.value,
             additionalFields: {
@@ -203,13 +203,13 @@ export default class CodeGenerator extends BaseCodeGenerator {
       }
     }
 
-    this.registry.types.set(def.name, new Code(generated, dependencies));
+    this.registry.types.set(def.$name, new Code(generated, dependencies));
 
-    return new Identifier(def.name);
+    return new Identifier(def.$name);
   }
 
   protected override generateStruct(def: StructType): CodegenResult {
-    const structIdent = def.name && nameToIdentifier(def.name);
+    const structIdent = def.$name && nameToIdentifier(def.$name);
 
     if (structIdent && this.registry.types.has(structIdent)) {
       return new Identifier(structIdent);
@@ -251,7 +251,7 @@ export default class CodeGenerator extends BaseCodeGenerator {
 
   protected override generateArray(def: ArrayType): CodegenResult {
     if (def.length) {
-      if (isPrimitiveType(def.value) && def.value.name === 'u8') {
+      if (isPrimitiveType(def.value) && def.value.value === 'u8') {
         this.registry.types.set('hexString', hexString);
         return new Identifier('hexString');
       }

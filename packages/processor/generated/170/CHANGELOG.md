@@ -26,15 +26,15 @@ BitcoinIngressEgress:
   - CcmFailed: added
   - CcmFallbackScheduled: added
   - DepositBoosted:
-    - depositDetails: changed
+    - depositDetails: added
   - DepositChannelLifetimeSet: added
   - DepositFinalised:
-    - depositDetails: changed
+    - depositDetails: added
   - DepositIgnored:
-    - depositDetails: changed
+    - depositDetails: added
     - reason: added
   - DepositWitnessRejected:
-    - depositWitness: changed
+    - depositWitness: added
   - FailedToBuildAllBatchCall:
     - error: added
   - TransactionRejectedByBroker: added
@@ -109,7 +109,7 @@ Reputation:
 SolanaBroadcaster:
   - PalletConfigUpdated: added
   - TransactionBroadcastRequest:
-    - transactionPayload: changed
+    - transactionPayload: added
 
 SolanaIngressEgress:
   - BoostedDepositLost: added

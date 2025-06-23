@@ -3,7 +3,7 @@ New or removed pallets:
 
 ArbitrumIngressEgress:
   - CcmEgressInvalid:
-    - error: changed
+    - error: removed
   - DepositBoosted:
     - action: added
   - DepositFinalised:
@@ -16,7 +16,7 @@ AssetBalances:
 
 BitcoinIngressEgress:
   - CcmEgressInvalid:
-    - error: changed
+    - error: removed
   - DepositBoosted:
     - action: added
   - DepositFinalised:
@@ -31,7 +31,7 @@ Environment:
 
 EthereumIngressEgress:
   - CcmEgressInvalid:
-    - error: changed
+    - error: removed
   - DepositBoosted:
     - action: added
   - DepositFinalised:
@@ -71,7 +71,7 @@ LiquidityProvider:
 
 PolkadotIngressEgress:
   - CcmEgressInvalid:
-    - error: changed
+    - error: removed
   - DepositBoosted:
     - action: added
   - DepositFinalised:
@@ -99,7 +99,7 @@ SolanaIngressEgress:
   - BoostPoolCreated:
     - boostPool: added
   - CcmEgressInvalid:
-    - error: changed
+    - error: removed
   - DepositBoosted:
     - asset: added
     - amounts: changed
@@ -142,7 +142,7 @@ Swapping:
   - CcmDepositReceived: removed
   - CcmEgressScheduled: removed
   - CcmFailed:
-    - depositMetadata: changed
+    - depositMetadata: added
     - origin: added
   - MaxSwapRequestDurationSet: added
   - MaxSwapRetryDurationSet: added
@@ -167,7 +167,6 @@ Swapping:
     - dcaParameters: added
     - sourceAsset: added
     - destinationAsset: added
-    - refundParameters: changed
   - SwapEgressIgnored:
     - swapRequestId: added
     - swapId: removed
@@ -205,6 +204,6 @@ Swapping:
     - origin: removed
     - brokerCommission: removed
     - brokerFee: removed
-    - swapType: changed
+    - swapType: added
   - WithdrawalRequested:
     - egressAsset: added

@@ -54,8 +54,8 @@ LiquidityPools:
   - RangeOrderUpdated:
     - quoteAsset: added
     - pairAsset: removed
-    - sizeChange: changed
-    - collectedFees: changed
+    - sizeChange: added
+    - collectedFees: added
   - ScheduledLimitOrderUpdateDispatchFailure: added
   - ScheduledLimitOrderUpdateDispatchSuccess: added
 

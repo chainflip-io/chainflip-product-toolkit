@@ -589,25 +589,6 @@ export const cfTraitsScheduledEgressDetailsArbitrum = z.object({
   feeWithheld: numberOrHex,
 });
 
-export const solPrimMessageHeader = z.object({
-  numRequiredSignatures: z.number(),
-  numReadonlySignedAccounts: z.number(),
-  numReadonlyUnsignedAccounts: z.number(),
-});
-
-export const solPrimCompiledInstruction = z.object({
-  programIdIndex: z.number(),
-  accounts: hexString,
-  data: hexString,
-});
-
-export const cfChainsSolSolTxCoreTransactionLegacyLegacyMessage = z.object({
-  header: solPrimMessageHeader,
-  accountKeys: z.array(hexString),
-  recentBlockhash: hexString,
-  instructions: z.array(solPrimCompiledInstruction),
-});
-
 export const cfChainsSolSolanaTransactionData = z.object({
   serializedTransaction: hexString,
   skipPreflight: z.boolean(),
