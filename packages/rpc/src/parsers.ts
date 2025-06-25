@@ -61,6 +61,19 @@ const rpcAssetSchema = z.union([
   z.object({ chain: z.literal('Assethub'), asset: z.literal('USDT') }),
 ]);
 
+const networkFee = z.object({
+  standard_rate_and_minimum: z.object({
+    rate: numberOrHex,
+    minimum: numberOrHex,
+  }),
+  rates: chainAssetMapFactory(numberOrHex, 0),
+});
+
+const networkFees = z.object({
+  regular_network_fee: networkFee,
+  internal_swap_network_fee: networkFee,
+});
+
 export type AssetAndChain = z.output<typeof rpcAssetSchema>;
 
 type Rename<T, U extends Record<string, string>> = Omit<T, keyof U> & {
@@ -148,6 +161,7 @@ export const cfSwappingEnvironment = z.object({
   max_swap_retry_duration_blocks: z.number().optional(),
   max_swap_request_duration_blocks: z.number().optional(),
   minimum_chunk_size: chainAssetMapFactory(numberOrHex.nullable(), null).optional(),
+  network_fees: networkFees.optional(), // TODO(1.10): remove optional
 });
 
 export const cfFundingEnvironment = z.object({

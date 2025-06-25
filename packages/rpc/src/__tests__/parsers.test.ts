@@ -284,6 +284,74 @@ describe('parsers', () => {
               USDC: '0x3b9aca00',
             },
           },
+          network_fees: {
+            regular_network_fee: {
+              standard_rate_and_minimum: {
+                rate: 0,
+                minimum: 0,
+              },
+              rates: {
+                Ethereum: {
+                  ETH: 0,
+                  FLIP: 0,
+                  USDC: 0,
+                  USDT: 0,
+                },
+                Polkadot: {
+                  DOT: 0,
+                },
+                Bitcoin: {
+                  BTC: 0,
+                },
+                Arbitrum: {
+                  ETH: 0,
+                  USDC: 0,
+                },
+                Solana: {
+                  SOL: 0,
+                  USDC: 0,
+                },
+                Assethub: {
+                  DOT: 0,
+                  USDT: 0,
+                  USDC: 0,
+                },
+              },
+            },
+            internal_swap_network_fee: {
+              standard_rate_and_minimum: {
+                rate: 0,
+                minimum: 0,
+              },
+              rates: {
+                Ethereum: {
+                  ETH: 0,
+                  FLIP: 0,
+                  USDC: 0,
+                  USDT: 0,
+                },
+                Polkadot: {
+                  DOT: 0,
+                },
+                Bitcoin: {
+                  BTC: 0,
+                },
+                Arbitrum: {
+                  ETH: 0,
+                  USDC: 0,
+                },
+                Solana: {
+                  SOL: 0,
+                  USDC: 0,
+                },
+                Assethub: {
+                  DOT: 0,
+                  USDT: 0,
+                  USDC: 0,
+                },
+              },
+            },
+          },
         },
         funding: {
           redemption_tax: '0x4563918244f40000',
@@ -629,6 +697,74 @@ describe('parsers', () => {
           Solana: {
             SOL: '0x12a05f200',
             USDC: '0x3b9aca00',
+          },
+        },
+        network_fees: {
+          regular_network_fee: {
+            standard_rate_and_minimum: {
+              rate: 0,
+              minimum: 0,
+            },
+            rates: {
+              Ethereum: {
+                ETH: 0,
+                FLIP: 0,
+                USDC: 0,
+                USDT: 0,
+              },
+              Polkadot: {
+                DOT: 0,
+              },
+              Bitcoin: {
+                BTC: 0,
+              },
+              Arbitrum: {
+                ETH: 0,
+                USDC: 0,
+              },
+              Solana: {
+                SOL: 0,
+                USDC: 0,
+              },
+              Assethub: {
+                DOT: 0,
+                USDT: 0,
+                USDC: 0,
+              },
+            },
+          },
+          internal_swap_network_fee: {
+            standard_rate_and_minimum: {
+              rate: 0,
+              minimum: 0,
+            },
+            rates: {
+              Ethereum: {
+                ETH: 0,
+                FLIP: 0,
+                USDC: 0,
+                USDT: 0,
+              },
+              Polkadot: {
+                DOT: 0,
+              },
+              Bitcoin: {
+                BTC: 0,
+              },
+              Arbitrum: {
+                ETH: 0,
+                USDC: 0,
+              },
+              Solana: {
+                SOL: 0,
+                USDC: 0,
+              },
+              Assethub: {
+                DOT: 0,
+                USDT: 0,
+                USDC: 0,
+              },
+            },
           },
         },
       });
