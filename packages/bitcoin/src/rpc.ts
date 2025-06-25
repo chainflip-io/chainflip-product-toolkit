@@ -88,7 +88,7 @@ export const makeRequest = async <T extends keyof RpcRequest & keyof typeof resp
     json = JSON.parse(text);
   } catch {
     if (res.status !== 200) {
-      throw new Error(`HTTP error [${res.status}]: ${(await res.text()) || res.statusText}`);
+      throw new Error(`HTTP error [${res.status}]: ${text || res.statusText}`);
     }
 
     throw new Error(`Invalid JSON response: ${text}`);
