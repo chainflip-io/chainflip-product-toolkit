@@ -80,11 +80,19 @@ export const makeRequest = async <T extends keyof RpcRequest & keyof typeof resp
     }),
   });
 
-  if (res.status !== 200) {
-    throw new Error(`HTTP error [${res.status}]: ${(await res.text()) || res.statusText}`);
-  }
+  const text = await res.text();
 
-  const json: unknown = await res.json();
+  let json: unknown;
+
+  try {
+    json = JSON.parse(text);
+  } catch {
+    if (res.status !== 200) {
+      throw new Error(`HTTP error [${res.status}]: ${(await res.text()) || res.statusText}`);
+    }
+
+    throw new Error(`Invalid JSON response: ${text}`);
+  }
 
   const result = rpcResponse.parse(json);
 

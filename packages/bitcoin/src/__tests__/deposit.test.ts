@@ -14,7 +14,7 @@ const mockFetch = (results: unknown[], status = 200) =>
       mock.mockResolvedValueOnce({
         ok: status === 200,
         status,
-        json: () => Promise.resolve(result),
+        text: () => Promise.resolve(JSON.stringify(result)),
       } as Response),
     spyOn(globalThis, 'fetch'),
   );
@@ -180,12 +180,14 @@ describe(findVaultSwapData, () => {
     spyOn(globalThis, 'fetch').mockResolvedValueOnce({
       ok: true,
       status: 200,
-      json: () =>
-        Promise.resolve({
-          result: null,
-          error: { code: -32601, message: 'Method not found' },
-          id: 1,
-        }),
+      text: () =>
+        Promise.resolve(
+          JSON.stringify({
+            result: null,
+            error: { code: -32601, message: 'Method not found' },
+            id: 1,
+          }),
+        ),
     } as Response);
 
     await expect(
