@@ -491,7 +491,7 @@ export const cfAvailablePools = z.array(
   }),
 );
 
-export const cfSafeModeStatuses = z.object({
+const cfSafeModeStatusesBase = z.object({
   emissions: z.object({
     emissions_sync_enabled: z.boolean(),
   }),
@@ -563,54 +563,79 @@ export const cfSafeModeStatuses = z.object({
   broadcast_solana: z.object({
     retry_enabled: z.boolean(),
   }),
-  broadcast_assethub: z
-    .object({ retry_enabled: z.boolean() })
-    // TODO(1.9): remove
-    .optional()
-    .default({ retry_enabled: false }),
-  ingress_egress_ethereum: z.object({
-    boost_deposits_enabled: z.boolean(),
-    add_boost_funds_enabled: z.boolean(),
-    stop_boosting_enabled: z.boolean(),
-    deposits_enabled: z.boolean(),
+  broadcast_assethub: z.object({
+    retry_enabled: z.boolean(),
   }),
-  ingress_egress_bitcoin: z.object({
-    boost_deposits_enabled: z.boolean(),
-    add_boost_funds_enabled: z.boolean(),
-    stop_boosting_enabled: z.boolean(),
-    deposits_enabled: z.boolean(),
-  }),
-  ingress_egress_polkadot: z.object({
-    boost_deposits_enabled: z.boolean(),
-    add_boost_funds_enabled: z.boolean(),
-    stop_boosting_enabled: z.boolean(),
-    deposits_enabled: z.boolean(),
-  }),
-  ingress_egress_arbitrum: z.object({
-    boost_deposits_enabled: z.boolean(),
-    add_boost_funds_enabled: z.boolean(),
-    stop_boosting_enabled: z.boolean(),
-    deposits_enabled: z.boolean(),
-  }),
-  ingress_egress_solana: z.object({
-    boost_deposits_enabled: z.boolean(),
-    add_boost_funds_enabled: z.boolean(),
-    stop_boosting_enabled: z.boolean(),
-    deposits_enabled: z.boolean(),
-  }),
-  ingress_egress_assethub: z
-    .object({
+});
+
+export const cfSafeModeStatuses = z.union([
+  // TODO(1.10): remove
+  cfSafeModeStatusesBase.extend({
+    ingress_egress_ethereum: z.object({
       boost_deposits_enabled: z.boolean(),
       add_boost_funds_enabled: z.boolean(),
       stop_boosting_enabled: z.boolean(),
       deposits_enabled: z.boolean(),
-    })
-    // TODO(1.9): remove
-    .optional()
-    .default({
-      boost_deposits_enabled: false,
-      add_boost_funds_enabled: false,
-      stop_boosting_enabled: false,
-      deposits_enabled: false,
     }),
-});
+    ingress_egress_bitcoin: z.object({
+      boost_deposits_enabled: z.boolean(),
+      add_boost_funds_enabled: z.boolean(),
+      stop_boosting_enabled: z.boolean(),
+      deposits_enabled: z.boolean(),
+    }),
+    ingress_egress_polkadot: z.object({
+      boost_deposits_enabled: z.boolean(),
+      add_boost_funds_enabled: z.boolean(),
+      stop_boosting_enabled: z.boolean(),
+      deposits_enabled: z.boolean(),
+    }),
+    ingress_egress_arbitrum: z.object({
+      boost_deposits_enabled: z.boolean(),
+      add_boost_funds_enabled: z.boolean(),
+      stop_boosting_enabled: z.boolean(),
+      deposits_enabled: z.boolean(),
+    }),
+    ingress_egress_solana: z.object({
+      boost_deposits_enabled: z.boolean(),
+      add_boost_funds_enabled: z.boolean(),
+      stop_boosting_enabled: z.boolean(),
+      deposits_enabled: z.boolean(),
+    }),
+    ingress_egress_assethub: z.object({
+      boost_deposits_enabled: z.boolean(),
+      add_boost_funds_enabled: z.boolean(),
+      stop_boosting_enabled: z.boolean(),
+      deposits_enabled: z.boolean(),
+    }),
+  }),
+  cfSafeModeStatusesBase.extend({
+    lending_pools: z.object({
+      add_boost_funds_enabled: z.boolean(),
+      stop_boosting_enabled: z.boolean(),
+    }),
+    ingress_egress_ethereum: z.object({
+      boost_deposits_enabled: z.boolean(),
+      deposits_enabled: z.boolean(),
+    }),
+    ingress_egress_bitcoin: z.object({
+      boost_deposits_enabled: z.boolean(),
+      deposits_enabled: z.boolean(),
+    }),
+    ingress_egress_polkadot: z.object({
+      boost_deposits_enabled: z.boolean(),
+      deposits_enabled: z.boolean(),
+    }),
+    ingress_egress_arbitrum: z.object({
+      boost_deposits_enabled: z.boolean(),
+      deposits_enabled: z.boolean(),
+    }),
+    ingress_egress_solana: z.object({
+      boost_deposits_enabled: z.boolean(),
+      deposits_enabled: z.boolean(),
+    }),
+    ingress_egress_assethub: z.object({
+      boost_deposits_enabled: z.boolean(),
+      deposits_enabled: z.boolean(),
+    }),
+  }),
+]);
