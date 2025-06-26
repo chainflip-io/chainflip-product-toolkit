@@ -3,7 +3,7 @@ import { type HexString } from '@chainflip/utils/types';
 import { Server } from 'http';
 import { type AddressInfo } from 'net';
 import { promisify } from 'util';
-import { afterEach, beforeEach, describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { type z } from 'zod';
 import { spyOn } from '@/testing';
 import { RpcRequest, type JsonRpcRequest, type RpcMethod } from '../common';
@@ -25,6 +25,7 @@ import {
   poolsEnvironment,
   runtimeVersion,
   safeModeStatuses,
+  safeModeStatuses190,
   supportedAssets,
   swapDepositAddress,
   swapParameterEncodingBitcoin,
@@ -231,6 +232,7 @@ describe(HttpClient, () => {
         case 'cf_available_pools':
           return respond(availablePools);
         case 'cf_safe_mode_statuses':
+          if (body.id === '1.9') return respond(safeModeStatuses190);
           return respond(safeModeStatuses);
         case 'cf_eth_state_chain_gateway_address':
         case 'cf_eth_key_manager_address':
@@ -318,24 +320,26 @@ describe(HttpClient, () => {
     }[keyof RpcRequest];
 
     it.each([
-      'cf_funding_environment',
-      'cf_ingress_egress_environment',
-      'cf_swapping_environment',
-      'cf_environment',
-      'state_getMetadata',
-      'cf_supported_assets',
-      'chain_getBlockHash',
-      'state_getRuntimeVersion',
-      'cf_boost_pools_depth',
-      'cf_flip_supply',
-      'cf_authority_emission_per_block',
-      'cf_epoch_duration',
-      'cf_auction_state',
-      'cf_get_trading_strategies',
-      'cf_get_trading_strategy_limits',
-      'cf_available_pools',
-      'cf_safe_mode_statuses',
-    ] as SimpleRpcMethod[])('handles %s', async (method) => {
+      ['cf_funding_environment'],
+      ['cf_ingress_egress_environment'],
+      ['cf_swapping_environment'],
+      ['cf_environment'],
+      ['state_getMetadata'],
+      ['cf_supported_assets'],
+      ['chain_getBlockHash'],
+      ['state_getRuntimeVersion'],
+      ['cf_boost_pools_depth'],
+      ['cf_flip_supply'],
+      ['cf_authority_emission_per_block'],
+      ['cf_epoch_duration'],
+      ['cf_auction_state'],
+      ['cf_get_trading_strategies'],
+      ['cf_get_trading_strategy_limits'],
+      ['cf_available_pools'],
+      ['cf_safe_mode_statuses', '1.9'],
+      ['cf_safe_mode_statuses'],
+    ] as [SimpleRpcMethod, string?][])('handles %s', async (method, id) => {
+      if (id) vi.spyOn(crypto, 'randomUUID').mockImplementationOnce(() => id as any);
       expect(await client.sendRequest(method)).toMatchSnapshot();
     });
 
