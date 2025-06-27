@@ -17,12 +17,21 @@ describe('types', () => {
     Object.keys(rpcResult).filter(
       (key) => !/(state|broker|chain)_/.test(key) && !IGNORED_METHODS.includes(key),
     ),
-  )('has two exports for %s', async (key) => {
+  )('has a result export', async (key) => {
     const file = await fs.readFile(path.join(import.meta.dirname, '..', 'types.ts'), 'utf8');
     const exportName = capitalize(key).replace(/_(.)/g, (_, char: string) => char.toUpperCase());
 
-    console.log(exportName);
     expect(file).toMatch(new RegExp(`export type ${exportName} =\\s+RpcResult<'${key}'>;`));
+  });
+
+  it.each(
+    Object.keys(rpcResult).filter(
+      (key) => !/(state|broker|chain)_/.test(key) && !IGNORED_METHODS.includes(key),
+    ),
+  )('has a response export', async (key) => {
+    const file = await fs.readFile(path.join(import.meta.dirname, '..', 'types.ts'), 'utf8');
+    const exportName = capitalize(key).replace(/_(.)/g, (_, char: string) => char.toUpperCase());
+
     expect(file).toMatch(
       new RegExp(`export type ${exportName}Response =\\s+RpcResponse<'${key}'>;`),
     );

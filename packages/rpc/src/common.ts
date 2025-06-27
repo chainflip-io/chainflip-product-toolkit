@@ -36,6 +36,7 @@ import {
   cfAvailablePools,
   cfSafeModeStatuses,
   cfGetTradingStrategyLimits,
+  hexString,
 } from './parsers';
 
 type Nullish<T> = T | null | undefined;
@@ -108,6 +109,18 @@ type RequestSwapParameterEncodingParams = [
   dcaParams?: Nullish<DcaParams>,
 ];
 
+type EncodeCfParametersParams = [
+  sourceAsset: UncheckedAssetAndChain,
+  destinationAsset: UncheckedAssetAndChain,
+  destinationAddress: string,
+  brokerCommission: number,
+  refundParameters: FillOrKillParams,
+  ccmParams?: Nullish<CcmParams>,
+  boostFee?: Nullish<number>,
+  affiliateFees?: Nullish<{ account: string; bps: number }[]>,
+  dcaParams?: Nullish<DcaParams>,
+];
+
 export type RpcRequest = WithHash<{
   broker_request_swap_deposit_address: [
     sourceAsset: UncheckedAssetAndChain,
@@ -125,6 +138,8 @@ export type RpcRequest = WithHash<{
     brokerAccountId: string,
     ...RequestSwapParameterEncodingParams,
   ];
+  broker_encode_cf_parameters: EncodeCfParametersParams;
+  cf_encode_cf_parameters: [brokerAccountId: string, ...EncodeCfParametersParams];
   cf_account_info: [accountId: string];
   cf_accounts: [];
   cf_environment: [];
@@ -255,6 +270,8 @@ export const rpcResult = {
   cf_get_trading_strategy_limits: cfGetTradingStrategyLimits,
   cf_available_pools: cfAvailablePools,
   cf_safe_mode_statuses: cfSafeModeStatuses,
+  broker_encode_cf_parameters: hexString,
+  cf_encode_cf_parameters: hexString,
 } as const satisfies { [K in keyof RpcRequest]: z.ZodTypeAny };
 
 export type RpcMethod = keyof RpcRequest;
