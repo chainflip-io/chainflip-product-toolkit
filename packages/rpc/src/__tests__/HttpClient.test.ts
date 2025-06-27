@@ -47,6 +47,7 @@ describe(HttpClient, () => {
   it('returns all methods', () => {
     expect(new HttpClient('http://localhost:8080').methods()).toMatchInlineSnapshot(`
       [
+        "broker_encode_cf_parameters",
         "broker_request_swap_deposit_address",
         "broker_request_swap_parameter_encoding",
         "cf_account_info",
@@ -57,6 +58,7 @@ describe(HttpClient, () => {
         "cf_boost_pool_details",
         "cf_boost_pool_pending_fees",
         "cf_boost_pools_depth",
+        "cf_encode_cf_parameters",
         "cf_environment",
         "cf_epoch_duration",
         "cf_eth_key_manager_address",
