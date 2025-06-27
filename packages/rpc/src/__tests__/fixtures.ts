@@ -622,6 +622,7 @@ export const validatorAccount: z.input<typeof validator> = {
   bound_redeem_address: '0x9a449133c6a8b4e117840b69e2a1d43634f562d3',
   apy_bp: 970,
   restricted_balances: {},
+  estimated_redeemable_balance: '0x0',
 };
 
 export const poolOrders: z.input<typeof cfPoolOrders> = {
