@@ -325,6 +325,7 @@ export const validator = z.object({
   bound_redeem_address: hexString.nullable(),
   apy_bp: z.number().nullable(),
   restricted_balances: z.record(hexString, numberOrHex),
+  estimated_redeemable_balance: numberOrHex.optional(), // TODO(1.10): remove optional
 });
 
 export const cfAccountInfo = z.discriminatedUnion('role', [
