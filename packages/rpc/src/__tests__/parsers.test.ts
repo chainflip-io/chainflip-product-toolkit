@@ -1138,7 +1138,7 @@ describe('parsers', () => {
     it('parses the cfGetTradingStrategies response', () => {
       const result = cfGetTradingStrategies.parse(tradingStrategies);
 
-      expect(result.length).toEqual(2);
+      expect(result.length).toEqual(4);
     });
   });
   describe('cfGetTradingStrategyLimits', () => {

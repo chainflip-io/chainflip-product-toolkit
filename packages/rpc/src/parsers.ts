@@ -466,12 +466,30 @@ export const cfPoolOrderbook = z.object({
 export const cfTradingStrategy = z.object({
   lp_id: z.string(),
   strategy_id: z.string(),
-  strategy: z.object({
-    TickZeroCentered: z.object({
-      spread_tick: z.number(),
-      base_asset: rpcAssetSchema,
+  strategy: z.union([
+    z.object({
+      TickZeroCentered: z.object({
+        spread_tick: z.number(),
+        base_asset: rpcAssetSchema,
+      }),
     }),
-  }),
+    z.object({
+      SimpleBuySell: z.object({
+        buy_tick: z.number(),
+        sell_tick: z.number(),
+        base_asset: rpcAssetSchema,
+      }),
+    }),
+    z.object({
+      InventoryBased: z.object({
+        min_buy_tick: z.number(),
+        max_buy_tick: z.number(),
+        min_sell_tick: z.number(),
+        max_sell_tick: z.number(),
+        base_asset: rpcAssetSchema,
+      }),
+    }),
+  ]),
   balance: z.array(z.tuple([rpcAssetSchema, numberOrHex])),
 });
 
