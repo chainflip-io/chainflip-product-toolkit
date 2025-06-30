@@ -1054,6 +1054,68 @@ exports[`HttpClient > with server > handles cf_get_trading_strategies 1`] = `
     },
     "strategy_id": "cFJu7R6mEVwbkDJr9ttC1LwpqHmQH6GnmqSgY9trQvHvuBYwp",
   },
+  {
+    "balance": [
+      [
+        {
+          "asset": "USDC",
+          "chain": "Ethereum",
+        },
+        0n,
+      ],
+      [
+        {
+          "asset": "USDT",
+          "chain": "Ethereum",
+        },
+        23000000000n,
+      ],
+    ],
+    "lp_id": "cFJt3kyUdXvaoarfxJDLrFmHFqkXUgnVZ4zqqDLLTRjbJosmK",
+    "strategy": {
+      "SimpleBuySell": {
+        "base_asset": {
+          "asset": "USDT",
+          "chain": "Ethereum",
+        },
+        "buy_tick": -10,
+        "sell_tick": 2,
+      },
+    },
+    "strategy_id": "cFNz3kSjvCHubkrtfYtBkzY2WpACDmXqQ9YGxbMgRD2iu1LCc",
+  },
+  {
+    "balance": [
+      [
+        {
+          "asset": "USDC",
+          "chain": "Ethereum",
+        },
+        0n,
+      ],
+      [
+        {
+          "asset": "USDT",
+          "chain": "Ethereum",
+        },
+        23000000000n,
+      ],
+    ],
+    "lp_id": "cFJt3kyUdXvaoarfxJDLrFmHFqkXUgnVZ4zqqDLLTRjbJosmK",
+    "strategy": {
+      "InventoryBased": {
+        "base_asset": {
+          "asset": "USDT",
+          "chain": "Ethereum",
+        },
+        "max_buy_tick": -1,
+        "max_sell_tick": 8,
+        "min_buy_tick": -10,
+        "min_sell_tick": 2,
+      },
+    },
+    "strategy_id": "cFJr8vEYc1mr1CEsdRugUJqdyBnyNdq8idNFKmQ2AaYbDz1Zm",
+  },
 ]
 `;
 

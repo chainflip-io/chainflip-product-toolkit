@@ -785,6 +785,68 @@ export const tradingStrategies: z.input<typeof cfGetTradingStrategies> = [
       ],
     ],
   },
+  {
+    lp_id: 'cFJt3kyUdXvaoarfxJDLrFmHFqkXUgnVZ4zqqDLLTRjbJosmK',
+    strategy_id: 'cFNz3kSjvCHubkrtfYtBkzY2WpACDmXqQ9YGxbMgRD2iu1LCc',
+    strategy: {
+      SimpleBuySell: {
+        buy_tick: -10,
+        sell_tick: 2,
+        base_asset: {
+          chain: 'Ethereum',
+          asset: 'USDT',
+        },
+      },
+    },
+    balance: [
+      [
+        {
+          chain: 'Ethereum',
+          asset: 'USDC',
+        },
+        '0x0',
+      ],
+      [
+        {
+          chain: 'Ethereum',
+          asset: 'USDT',
+        },
+        '0x55ae82600',
+      ],
+    ],
+  },
+  {
+    lp_id: 'cFJt3kyUdXvaoarfxJDLrFmHFqkXUgnVZ4zqqDLLTRjbJosmK',
+    strategy_id: 'cFJr8vEYc1mr1CEsdRugUJqdyBnyNdq8idNFKmQ2AaYbDz1Zm',
+    strategy: {
+      InventoryBased: {
+        min_sell_tick: 2,
+        max_sell_tick: 8,
+        min_buy_tick: -10,
+        max_buy_tick: -1,
+        base_asset: {
+          chain: 'Ethereum',
+          asset: 'USDT',
+        },
+      },
+    },
+    balance: [
+      [
+        {
+          chain: 'Ethereum',
+          asset: 'USDC',
+        },
+        '0x0',
+      ],
+      [
+        {
+          chain: 'Ethereum',
+          asset: 'USDT',
+        },
+        '0x55ae82600',
+      ],
+    ],
+  },
 ];
 
 export const tradingStrategiesLimits: z.input<typeof cfGetTradingStrategyLimits> = {
