@@ -726,10 +726,6 @@
                     "type": "struct",
                     "$name": "PalletCfLendingPoolsPalletSafeMode",
                     "fields": {
-                      "boostDepositsEnabled": {
-                        "type": "primitive",
-                        "value": "bool"
-                      },
                       "addBoostFundsEnabled": {
                         "type": "primitive",
                         "value": "bool"
@@ -3026,6 +3022,18 @@
                   "percentage": {
                     "type": "primitive",
                     "value": "Percent"
+                  }
+                }
+              }
+            },
+            {
+              "name": "MinimumAuctionBid",
+              "value": {
+                "type": "struct",
+                "fields": {
+                  "minimumFlipBid": {
+                    "type": "primitive",
+                    "value": "u32"
                   }
                 }
               }
@@ -14884,58 +14892,6 @@
         }
       }
     },
-    "MinimumDepositSet": {
-      "type": "struct",
-      "fields": {
-        "asset": {
-          "type": "enum",
-          "$name": "cfPrimitivesChainsAssetsEthAsset",
-          "values": [
-            {
-              "name": "Eth",
-              "value": {
-                "type": "primitive",
-                "value": "null"
-              }
-            },
-            {
-              "name": "Flip",
-              "value": {
-                "type": "primitive",
-                "value": "null"
-              }
-            },
-            {
-              "name": "Usdc",
-              "value": {
-                "type": "primitive",
-                "value": "null"
-              }
-            },
-            {
-              "name": "Usdt",
-              "value": {
-                "type": "primitive",
-                "value": "null"
-              }
-            }
-          ]
-        },
-        "minimumDeposit": {
-          "type": "primitive",
-          "value": "u128"
-        }
-      }
-    },
-    "DepositChannelLifetimeSet": {
-      "type": "struct",
-      "fields": {
-        "lifetime": {
-          "type": "primitive",
-          "value": "u64"
-        }
-      }
-    },
     "DepositFailed": {
       "type": "struct",
       "fields": {
@@ -16682,15 +16638,6 @@
         }
       }
     },
-    "ChannelOpeningFeeSet": {
-      "type": "struct",
-      "fields": {
-        "fee": {
-          "type": "primitive",
-          "value": "u128"
-        }
-      }
-    },
     "DepositBoosted": {
       "type": "struct",
       "fields": {
@@ -17188,24 +17135,6 @@
         }
       }
     },
-    "WitnessSafetyMarginSet": {
-      "type": "struct",
-      "fields": {
-        "margin": {
-          "type": "primitive",
-          "value": "u64"
-        }
-      }
-    },
-    "BoostDelaySet": {
-      "type": "struct",
-      "fields": {
-        "delayBlocks": {
-          "type": "primitive",
-          "value": "u32"
-        }
-      }
-    },
     "InvalidCcmRefunded": {
       "type": "struct",
       "fields": {
@@ -17250,6 +17179,157 @@
         "destinationAddress": {
           "type": "primitive",
           "value": "H160"
+        }
+      }
+    },
+    "PalletConfigUpdated": {
+      "type": "struct",
+      "fields": {
+        "update": {
+          "type": "enum",
+          "$name": "palletCfEthereumIngressEgressPalletConfigUpdateEthereum",
+          "values": [
+            {
+              "name": "ChannelOpeningFeeEthereum",
+              "value": {
+                "type": "struct",
+                "fields": {
+                  "fee": {
+                    "type": "primitive",
+                    "value": "u128"
+                  }
+                }
+              }
+            },
+            {
+              "name": "SetMinimumDepositEthereum",
+              "value": {
+                "type": "struct",
+                "fields": {
+                  "asset": {
+                    "type": "enum",
+                    "$name": "cfPrimitivesChainsAssetsEthAsset",
+                    "values": [
+                      {
+                        "name": "Eth",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      },
+                      {
+                        "name": "Flip",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      },
+                      {
+                        "name": "Usdc",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      },
+                      {
+                        "name": "Usdt",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      }
+                    ]
+                  },
+                  "minimumDeposit": {
+                    "type": "primitive",
+                    "value": "u128"
+                  }
+                }
+              }
+            },
+            {
+              "name": "SetDepositChannelLifetimeEthereum",
+              "value": {
+                "type": "struct",
+                "fields": {
+                  "lifetime": {
+                    "type": "primitive",
+                    "value": "u64"
+                  }
+                }
+              }
+            },
+            {
+              "name": "SetWitnessSafetyMarginEthereum",
+              "value": {
+                "type": "struct",
+                "fields": {
+                  "margin": {
+                    "type": "primitive",
+                    "value": "u64"
+                  }
+                }
+              }
+            },
+            {
+              "name": "SetBoostDelayEthereum",
+              "value": {
+                "type": "struct",
+                "fields": {
+                  "delayBlocks": {
+                    "type": "primitive",
+                    "value": "u32"
+                  }
+                }
+              }
+            },
+            {
+              "name": "SetMaximumPreallocatedChannelsEthereum",
+              "value": {
+                "type": "struct",
+                "fields": {
+                  "accountRole": {
+                    "type": "enum",
+                    "$name": "cfPrimitivesAccountRole",
+                    "values": [
+                      {
+                        "name": "Unregistered",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      },
+                      {
+                        "name": "Validator",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      },
+                      {
+                        "name": "LiquidityProvider",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      },
+                      {
+                        "name": "Broker",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      }
+                    ]
+                  },
+                  "numChannels": {
+                    "type": "primitive",
+                    "value": "u8"
+                  }
+                }
+              }
+            }
+          ]
         }
       }
     }
@@ -18433,37 +18513,6 @@
               }
             ]
           }
-        }
-      }
-    },
-    "MinimumDepositSet": {
-      "type": "struct",
-      "fields": {
-        "asset": {
-          "type": "enum",
-          "$name": "cfPrimitivesChainsAssetsDotAsset",
-          "values": [
-            {
-              "name": "Dot",
-              "value": {
-                "type": "primitive",
-                "value": "null"
-              }
-            }
-          ]
-        },
-        "minimumDeposit": {
-          "type": "primitive",
-          "value": "u128"
-        }
-      }
-    },
-    "DepositChannelLifetimeSet": {
-      "type": "struct",
-      "fields": {
-        "lifetime": {
-          "type": "primitive",
-          "value": "u32"
         }
       }
     },
@@ -20152,15 +20201,6 @@
         }
       }
     },
-    "ChannelOpeningFeeSet": {
-      "type": "struct",
-      "fields": {
-        "fee": {
-          "type": "primitive",
-          "value": "u128"
-        }
-      }
-    },
     "DepositBoosted": {
       "type": "struct",
       "fields": {
@@ -20604,24 +20644,6 @@
         }
       }
     },
-    "WitnessSafetyMarginSet": {
-      "type": "struct",
-      "fields": {
-        "margin": {
-          "type": "primitive",
-          "value": "u32"
-        }
-      }
-    },
-    "BoostDelaySet": {
-      "type": "struct",
-      "fields": {
-        "delayBlocks": {
-          "type": "primitive",
-          "value": "u32"
-        }
-      }
-    },
     "InvalidCcmRefunded": {
       "type": "struct",
       "fields": {
@@ -20649,6 +20671,136 @@
             "value": "u8"
           },
           "length": 32
+        }
+      }
+    },
+    "PalletConfigUpdated": {
+      "type": "struct",
+      "fields": {
+        "update": {
+          "type": "enum",
+          "$name": "palletCfPolkadotIngressEgressPalletConfigUpdatePolkadot",
+          "values": [
+            {
+              "name": "ChannelOpeningFeePolkadot",
+              "value": {
+                "type": "struct",
+                "fields": {
+                  "fee": {
+                    "type": "primitive",
+                    "value": "u128"
+                  }
+                }
+              }
+            },
+            {
+              "name": "SetMinimumDepositPolkadot",
+              "value": {
+                "type": "struct",
+                "fields": {
+                  "asset": {
+                    "type": "enum",
+                    "$name": "cfPrimitivesChainsAssetsDotAsset",
+                    "values": [
+                      {
+                        "name": "Dot",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      }
+                    ]
+                  },
+                  "minimumDeposit": {
+                    "type": "primitive",
+                    "value": "u128"
+                  }
+                }
+              }
+            },
+            {
+              "name": "SetDepositChannelLifetimePolkadot",
+              "value": {
+                "type": "struct",
+                "fields": {
+                  "lifetime": {
+                    "type": "primitive",
+                    "value": "u32"
+                  }
+                }
+              }
+            },
+            {
+              "name": "SetWitnessSafetyMarginPolkadot",
+              "value": {
+                "type": "struct",
+                "fields": {
+                  "margin": {
+                    "type": "primitive",
+                    "value": "u32"
+                  }
+                }
+              }
+            },
+            {
+              "name": "SetBoostDelayPolkadot",
+              "value": {
+                "type": "struct",
+                "fields": {
+                  "delayBlocks": {
+                    "type": "primitive",
+                    "value": "u32"
+                  }
+                }
+              }
+            },
+            {
+              "name": "SetMaximumPreallocatedChannelsPolkadot",
+              "value": {
+                "type": "struct",
+                "fields": {
+                  "accountRole": {
+                    "type": "enum",
+                    "$name": "cfPrimitivesAccountRole",
+                    "values": [
+                      {
+                        "name": "Unregistered",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      },
+                      {
+                        "name": "Validator",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      },
+                      {
+                        "name": "LiquidityProvider",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      },
+                      {
+                        "name": "Broker",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      }
+                    ]
+                  },
+                  "numChannels": {
+                    "type": "primitive",
+                    "value": "u8"
+                  }
+                }
+              }
+            }
+          ]
         }
       }
     }
@@ -21974,37 +22126,6 @@
               }
             ]
           }
-        }
-      }
-    },
-    "MinimumDepositSet": {
-      "type": "struct",
-      "fields": {
-        "asset": {
-          "type": "enum",
-          "$name": "cfPrimitivesChainsAssetsBtcAsset",
-          "values": [
-            {
-              "name": "Btc",
-              "value": {
-                "type": "primitive",
-                "value": "null"
-              }
-            }
-          ]
-        },
-        "minimumDeposit": {
-          "type": "primitive",
-          "value": "u64"
-        }
-      }
-    },
-    "DepositChannelLifetimeSet": {
-      "type": "struct",
-      "fields": {
-        "lifetime": {
-          "type": "primitive",
-          "value": "u64"
         }
       }
     },
@@ -24105,15 +24226,6 @@
         }
       }
     },
-    "ChannelOpeningFeeSet": {
-      "type": "struct",
-      "fields": {
-        "fee": {
-          "type": "primitive",
-          "value": "u128"
-        }
-      }
-    },
     "DepositBoosted": {
       "type": "struct",
       "fields": {
@@ -24825,24 +24937,6 @@
         }
       }
     },
-    "WitnessSafetyMarginSet": {
-      "type": "struct",
-      "fields": {
-        "margin": {
-          "type": "primitive",
-          "value": "u64"
-        }
-      }
-    },
-    "BoostDelaySet": {
-      "type": "struct",
-      "fields": {
-        "delayBlocks": {
-          "type": "primitive",
-          "value": "u32"
-        }
-      }
-    },
     "InvalidCcmRefunded": {
       "type": "struct",
       "fields": {
@@ -24934,6 +25028,136 @@
                   "program": {
                     "type": "primitive",
                     "value": "Bytes"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "PalletConfigUpdated": {
+      "type": "struct",
+      "fields": {
+        "update": {
+          "type": "enum",
+          "$name": "palletCfBitcoinIngressEgressPalletConfigUpdateBitcoin",
+          "values": [
+            {
+              "name": "ChannelOpeningFeeBitcoin",
+              "value": {
+                "type": "struct",
+                "fields": {
+                  "fee": {
+                    "type": "primitive",
+                    "value": "u128"
+                  }
+                }
+              }
+            },
+            {
+              "name": "SetMinimumDepositBitcoin",
+              "value": {
+                "type": "struct",
+                "fields": {
+                  "asset": {
+                    "type": "enum",
+                    "$name": "cfPrimitivesChainsAssetsBtcAsset",
+                    "values": [
+                      {
+                        "name": "Btc",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      }
+                    ]
+                  },
+                  "minimumDeposit": {
+                    "type": "primitive",
+                    "value": "u64"
+                  }
+                }
+              }
+            },
+            {
+              "name": "SetDepositChannelLifetimeBitcoin",
+              "value": {
+                "type": "struct",
+                "fields": {
+                  "lifetime": {
+                    "type": "primitive",
+                    "value": "u64"
+                  }
+                }
+              }
+            },
+            {
+              "name": "SetWitnessSafetyMarginBitcoin",
+              "value": {
+                "type": "struct",
+                "fields": {
+                  "margin": {
+                    "type": "primitive",
+                    "value": "u64"
+                  }
+                }
+              }
+            },
+            {
+              "name": "SetBoostDelayBitcoin",
+              "value": {
+                "type": "struct",
+                "fields": {
+                  "delayBlocks": {
+                    "type": "primitive",
+                    "value": "u32"
+                  }
+                }
+              }
+            },
+            {
+              "name": "SetMaximumPreallocatedChannelsBitcoin",
+              "value": {
+                "type": "struct",
+                "fields": {
+                  "accountRole": {
+                    "type": "enum",
+                    "$name": "cfPrimitivesAccountRole",
+                    "values": [
+                      {
+                        "name": "Unregistered",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      },
+                      {
+                        "name": "Validator",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      },
+                      {
+                        "name": "LiquidityProvider",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      },
+                      {
+                        "name": "Broker",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      }
+                    ]
+                  },
+                  "numChannels": {
+                    "type": "primitive",
+                    "value": "u8"
                   }
                 }
               }
@@ -29131,44 +29355,6 @@
         }
       }
     },
-    "MinimumDepositSet": {
-      "type": "struct",
-      "fields": {
-        "asset": {
-          "type": "enum",
-          "$name": "cfPrimitivesChainsAssetsArbAsset",
-          "values": [
-            {
-              "name": "ArbEth",
-              "value": {
-                "type": "primitive",
-                "value": "null"
-              }
-            },
-            {
-              "name": "ArbUsdc",
-              "value": {
-                "type": "primitive",
-                "value": "null"
-              }
-            }
-          ]
-        },
-        "minimumDeposit": {
-          "type": "primitive",
-          "value": "u128"
-        }
-      }
-    },
-    "DepositChannelLifetimeSet": {
-      "type": "struct",
-      "fields": {
-        "lifetime": {
-          "type": "primitive",
-          "value": "u64"
-        }
-      }
-    },
     "DepositFailed": {
       "type": "struct",
       "fields": {
@@ -30873,15 +31059,6 @@
         }
       }
     },
-    "ChannelOpeningFeeSet": {
-      "type": "struct",
-      "fields": {
-        "fee": {
-          "type": "primitive",
-          "value": "u128"
-        }
-      }
-    },
     "DepositBoosted": {
       "type": "struct",
       "fields": {
@@ -31351,24 +31528,6 @@
         }
       }
     },
-    "WitnessSafetyMarginSet": {
-      "type": "struct",
-      "fields": {
-        "margin": {
-          "type": "primitive",
-          "value": "u64"
-        }
-      }
-    },
-    "BoostDelaySet": {
-      "type": "struct",
-      "fields": {
-        "delayBlocks": {
-          "type": "primitive",
-          "value": "u32"
-        }
-      }
-    },
     "InvalidCcmRefunded": {
       "type": "struct",
       "fields": {
@@ -31399,6 +31558,143 @@
         "destinationAddress": {
           "type": "primitive",
           "value": "H160"
+        }
+      }
+    },
+    "PalletConfigUpdated": {
+      "type": "struct",
+      "fields": {
+        "update": {
+          "type": "enum",
+          "$name": "palletCfArbitrumIngressEgressPalletConfigUpdateArbitrum",
+          "values": [
+            {
+              "name": "ChannelOpeningFeeArbitrum",
+              "value": {
+                "type": "struct",
+                "fields": {
+                  "fee": {
+                    "type": "primitive",
+                    "value": "u128"
+                  }
+                }
+              }
+            },
+            {
+              "name": "SetMinimumDepositArbitrum",
+              "value": {
+                "type": "struct",
+                "fields": {
+                  "asset": {
+                    "type": "enum",
+                    "$name": "cfPrimitivesChainsAssetsArbAsset",
+                    "values": [
+                      {
+                        "name": "ArbEth",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      },
+                      {
+                        "name": "ArbUsdc",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      }
+                    ]
+                  },
+                  "minimumDeposit": {
+                    "type": "primitive",
+                    "value": "u128"
+                  }
+                }
+              }
+            },
+            {
+              "name": "SetDepositChannelLifetimeArbitrum",
+              "value": {
+                "type": "struct",
+                "fields": {
+                  "lifetime": {
+                    "type": "primitive",
+                    "value": "u64"
+                  }
+                }
+              }
+            },
+            {
+              "name": "SetWitnessSafetyMarginArbitrum",
+              "value": {
+                "type": "struct",
+                "fields": {
+                  "margin": {
+                    "type": "primitive",
+                    "value": "u64"
+                  }
+                }
+              }
+            },
+            {
+              "name": "SetBoostDelayArbitrum",
+              "value": {
+                "type": "struct",
+                "fields": {
+                  "delayBlocks": {
+                    "type": "primitive",
+                    "value": "u32"
+                  }
+                }
+              }
+            },
+            {
+              "name": "SetMaximumPreallocatedChannelsArbitrum",
+              "value": {
+                "type": "struct",
+                "fields": {
+                  "accountRole": {
+                    "type": "enum",
+                    "$name": "cfPrimitivesAccountRole",
+                    "values": [
+                      {
+                        "name": "Unregistered",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      },
+                      {
+                        "name": "Validator",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      },
+                      {
+                        "name": "LiquidityProvider",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      },
+                      {
+                        "name": "Broker",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      }
+                    ]
+                  },
+                  "numChannels": {
+                    "type": "primitive",
+                    "value": "u8"
+                  }
+                }
+              }
+            }
+          ]
         }
       }
     }
@@ -33822,44 +34118,6 @@
         }
       }
     },
-    "MinimumDepositSet": {
-      "type": "struct",
-      "fields": {
-        "asset": {
-          "type": "enum",
-          "$name": "cfPrimitivesChainsAssetsSolAsset",
-          "values": [
-            {
-              "name": "Sol",
-              "value": {
-                "type": "primitive",
-                "value": "null"
-              }
-            },
-            {
-              "name": "SolUsdc",
-              "value": {
-                "type": "primitive",
-                "value": "null"
-              }
-            }
-          ]
-        },
-        "minimumDeposit": {
-          "type": "primitive",
-          "value": "u64"
-        }
-      }
-    },
-    "DepositChannelLifetimeSet": {
-      "type": "struct",
-      "fields": {
-        "lifetime": {
-          "type": "primitive",
-          "value": "u64"
-        }
-      }
-    },
     "DepositFailed": {
       "type": "struct",
       "fields": {
@@ -35569,15 +35827,6 @@
         }
       }
     },
-    "ChannelOpeningFeeSet": {
-      "type": "struct",
-      "fields": {
-        "fee": {
-          "type": "primitive",
-          "value": "u128"
-        }
-      }
-    },
     "DepositBoosted": {
       "type": "struct",
       "fields": {
@@ -36041,24 +36290,6 @@
         }
       }
     },
-    "WitnessSafetyMarginSet": {
-      "type": "struct",
-      "fields": {
-        "margin": {
-          "type": "primitive",
-          "value": "u64"
-        }
-      }
-    },
-    "BoostDelaySet": {
-      "type": "struct",
-      "fields": {
-        "delayBlocks": {
-          "type": "primitive",
-          "value": "u32"
-        }
-      }
-    },
     "InvalidCcmRefunded": {
       "type": "struct",
       "fields": {
@@ -36093,6 +36324,143 @@
             "value": "u8"
           },
           "length": 32
+        }
+      }
+    },
+    "PalletConfigUpdated": {
+      "type": "struct",
+      "fields": {
+        "update": {
+          "type": "enum",
+          "$name": "palletCfSolanaIngressEgressPalletConfigUpdateSolana",
+          "values": [
+            {
+              "name": "ChannelOpeningFeeSolana",
+              "value": {
+                "type": "struct",
+                "fields": {
+                  "fee": {
+                    "type": "primitive",
+                    "value": "u128"
+                  }
+                }
+              }
+            },
+            {
+              "name": "SetMinimumDepositSolana",
+              "value": {
+                "type": "struct",
+                "fields": {
+                  "asset": {
+                    "type": "enum",
+                    "$name": "cfPrimitivesChainsAssetsSolAsset",
+                    "values": [
+                      {
+                        "name": "Sol",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      },
+                      {
+                        "name": "SolUsdc",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      }
+                    ]
+                  },
+                  "minimumDeposit": {
+                    "type": "primitive",
+                    "value": "u64"
+                  }
+                }
+              }
+            },
+            {
+              "name": "SetDepositChannelLifetimeSolana",
+              "value": {
+                "type": "struct",
+                "fields": {
+                  "lifetime": {
+                    "type": "primitive",
+                    "value": "u64"
+                  }
+                }
+              }
+            },
+            {
+              "name": "SetWitnessSafetyMarginSolana",
+              "value": {
+                "type": "struct",
+                "fields": {
+                  "margin": {
+                    "type": "primitive",
+                    "value": "u64"
+                  }
+                }
+              }
+            },
+            {
+              "name": "SetBoostDelaySolana",
+              "value": {
+                "type": "struct",
+                "fields": {
+                  "delayBlocks": {
+                    "type": "primitive",
+                    "value": "u32"
+                  }
+                }
+              }
+            },
+            {
+              "name": "SetMaximumPreallocatedChannelsSolana",
+              "value": {
+                "type": "struct",
+                "fields": {
+                  "accountRole": {
+                    "type": "enum",
+                    "$name": "cfPrimitivesAccountRole",
+                    "values": [
+                      {
+                        "name": "Unregistered",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      },
+                      {
+                        "name": "Validator",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      },
+                      {
+                        "name": "LiquidityProvider",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      },
+                      {
+                        "name": "Broker",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      }
+                    ]
+                  },
+                  "numChannels": {
+                    "type": "primitive",
+                    "value": "u8"
+                  }
+                }
+              }
+            }
+          ]
         }
       }
     }
@@ -38893,51 +39261,6 @@
         }
       }
     },
-    "MinimumDepositSet": {
-      "type": "struct",
-      "fields": {
-        "asset": {
-          "type": "enum",
-          "$name": "cfPrimitivesChainsAssetsHubAsset",
-          "values": [
-            {
-              "name": "HubDot",
-              "value": {
-                "type": "primitive",
-                "value": "null"
-              }
-            },
-            {
-              "name": "HubUsdt",
-              "value": {
-                "type": "primitive",
-                "value": "null"
-              }
-            },
-            {
-              "name": "HubUsdc",
-              "value": {
-                "type": "primitive",
-                "value": "null"
-              }
-            }
-          ]
-        },
-        "minimumDeposit": {
-          "type": "primitive",
-          "value": "u128"
-        }
-      }
-    },
-    "DepositChannelLifetimeSet": {
-      "type": "struct",
-      "fields": {
-        "lifetime": {
-          "type": "primitive",
-          "value": "u32"
-        }
-      }
-    },
     "DepositFailed": {
       "type": "struct",
       "fields": {
@@ -40665,15 +40988,6 @@
         }
       }
     },
-    "ChannelOpeningFeeSet": {
-      "type": "struct",
-      "fields": {
-        "fee": {
-          "type": "primitive",
-          "value": "u128"
-        }
-      }
-    },
     "DepositBoosted": {
       "type": "struct",
       "fields": {
@@ -41145,24 +41459,6 @@
         }
       }
     },
-    "WitnessSafetyMarginSet": {
-      "type": "struct",
-      "fields": {
-        "margin": {
-          "type": "primitive",
-          "value": "u32"
-        }
-      }
-    },
-    "BoostDelaySet": {
-      "type": "struct",
-      "fields": {
-        "delayBlocks": {
-          "type": "primitive",
-          "value": "u32"
-        }
-      }
-    },
     "InvalidCcmRefunded": {
       "type": "struct",
       "fields": {
@@ -41204,6 +41500,150 @@
             "value": "u8"
           },
           "length": 32
+        }
+      }
+    },
+    "PalletConfigUpdated": {
+      "type": "struct",
+      "fields": {
+        "update": {
+          "type": "enum",
+          "$name": "palletCfAssethubIngressEgressPalletConfigUpdateAssethub",
+          "values": [
+            {
+              "name": "ChannelOpeningFeeAssethub",
+              "value": {
+                "type": "struct",
+                "fields": {
+                  "fee": {
+                    "type": "primitive",
+                    "value": "u128"
+                  }
+                }
+              }
+            },
+            {
+              "name": "SetMinimumDepositAssethub",
+              "value": {
+                "type": "struct",
+                "fields": {
+                  "asset": {
+                    "type": "enum",
+                    "$name": "cfPrimitivesChainsAssetsHubAsset",
+                    "values": [
+                      {
+                        "name": "HubDot",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      },
+                      {
+                        "name": "HubUsdt",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      },
+                      {
+                        "name": "HubUsdc",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      }
+                    ]
+                  },
+                  "minimumDeposit": {
+                    "type": "primitive",
+                    "value": "u128"
+                  }
+                }
+              }
+            },
+            {
+              "name": "SetDepositChannelLifetimeAssethub",
+              "value": {
+                "type": "struct",
+                "fields": {
+                  "lifetime": {
+                    "type": "primitive",
+                    "value": "u32"
+                  }
+                }
+              }
+            },
+            {
+              "name": "SetWitnessSafetyMarginAssethub",
+              "value": {
+                "type": "struct",
+                "fields": {
+                  "margin": {
+                    "type": "primitive",
+                    "value": "u32"
+                  }
+                }
+              }
+            },
+            {
+              "name": "SetBoostDelayAssethub",
+              "value": {
+                "type": "struct",
+                "fields": {
+                  "delayBlocks": {
+                    "type": "primitive",
+                    "value": "u32"
+                  }
+                }
+              }
+            },
+            {
+              "name": "SetMaximumPreallocatedChannelsAssethub",
+              "value": {
+                "type": "struct",
+                "fields": {
+                  "accountRole": {
+                    "type": "enum",
+                    "$name": "cfPrimitivesAccountRole",
+                    "values": [
+                      {
+                        "name": "Unregistered",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      },
+                      {
+                        "name": "Validator",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      },
+                      {
+                        "name": "LiquidityProvider",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      },
+                      {
+                        "name": "Broker",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      }
+                    ]
+                  },
+                  "numChannels": {
+                    "type": "primitive",
+                    "value": "u8"
+                  }
+                }
+              }
+            }
+          ]
         }
       }
     }
@@ -41350,6 +41790,134 @@
                     "value": "i32"
                   },
                   "sellTick": {
+                    "type": "primitive",
+                    "value": "i32"
+                  },
+                  "baseAsset": {
+                    "type": "enum",
+                    "$name": "cfPrimitivesChainsAssetsAnyAsset",
+                    "values": [
+                      {
+                        "name": "__Unused0",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      },
+                      {
+                        "name": "Eth",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      },
+                      {
+                        "name": "Flip",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      },
+                      {
+                        "name": "Usdc",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      },
+                      {
+                        "name": "Dot",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      },
+                      {
+                        "name": "Btc",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      },
+                      {
+                        "name": "ArbEth",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      },
+                      {
+                        "name": "ArbUsdc",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      },
+                      {
+                        "name": "Usdt",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      },
+                      {
+                        "name": "Sol",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      },
+                      {
+                        "name": "SolUsdc",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      },
+                      {
+                        "name": "HubDot",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      },
+                      {
+                        "name": "HubUsdt",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      },
+                      {
+                        "name": "HubUsdc",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "name": "InventoryBased",
+              "value": {
+                "type": "struct",
+                "fields": {
+                  "minBuyTick": {
+                    "type": "primitive",
+                    "value": "i32"
+                  },
+                  "maxBuyTick": {
+                    "type": "primitive",
+                    "value": "i32"
+                  },
+                  "minSellTick": {
+                    "type": "primitive",
+                    "value": "i32"
+                  },
+                  "maxSellTick": {
                     "type": "primitive",
                     "value": "i32"
                   },

@@ -37,7 +37,6 @@ export const palletCfTradingStrategyPalletSafeMode = z.object({
 });
 
 export const palletCfLendingPoolsPalletSafeMode = z.object({
-  boostDepositsEnabled: z.boolean(),
   addBoostFundsEnabled: z.boolean(),
   stopBoostingEnabled: z.boolean(),
 });
@@ -174,6 +173,34 @@ export const accountId = z
       .transform<`0x${string}`>((v) => `0x${v}`),
   ])
   .transform((value) => ss58.encode({ data: value, ss58Format: 2112 }));
+
+export const palletCfValidatorAuctionResolverSetSizeParameters = z.object({
+  minSize: z.number(),
+  maxSize: z.number(),
+  maxExpansion: z.number(),
+});
+
+export const cfPrimitivesSemVer = z.object({
+  major: z.number(),
+  minor: z.number(),
+  patch: z.number(),
+});
+
+export const palletCfValidatorPalletConfigUpdate = z.discriminatedUnion('__kind', [
+  z.object({ __kind: z.literal('RegistrationBondPercentage'), percentage: z.number() }),
+  z.object({ __kind: z.literal('AuctionBidCutoffPercentage'), percentage: z.number() }),
+  z.object({ __kind: z.literal('RedemptionPeriodAsPercentage'), percentage: z.number() }),
+  z.object({ __kind: z.literal('BackupRewardNodePercentage'), percentage: z.number() }),
+  z.object({ __kind: z.literal('EpochDuration'), blocks: z.number() }),
+  z.object({ __kind: z.literal('AuthoritySetMinSize'), minSize: z.number() }),
+  z.object({
+    __kind: z.literal('AuctionParameters'),
+    parameters: palletCfValidatorAuctionResolverSetSizeParameters,
+  }),
+  z.object({ __kind: z.literal('MinimumReportedCfeVersion'), version: cfPrimitivesSemVer }),
+  z.object({ __kind: z.literal('MaxAuthoritySetContractionPercentage'), percentage: z.number() }),
+  z.object({ __kind: z.literal('MinimumAuctionBid'), minimumFlipBid: z.number() }),
+]);
 
 export const simpleEnum = <U extends string, T extends readonly [U, ...U[]]>(values: T) =>
   z.object({ __kind: z.enum(values) }).transform(({ __kind }) => __kind!);
@@ -470,7 +497,54 @@ export const cfChainsAllBatchError = z.discriminatedUnion('__kind', [
 
 export const cfPrimitivesChainsAssetsEthAsset = simpleEnum(['Eth', 'Flip', 'Usdc', 'Usdt']);
 
+export const cfPrimitivesAccountRole = simpleEnum([
+  'Unregistered',
+  'Validator',
+  'LiquidityProvider',
+  'Broker',
+]);
+
+export const palletCfEthereumIngressEgressPalletConfigUpdateEthereum = z.discriminatedUnion(
+  '__kind',
+  [
+    z.object({ __kind: z.literal('ChannelOpeningFeeEthereum'), fee: numberOrHex }),
+    z.object({
+      __kind: z.literal('SetMinimumDepositEthereum'),
+      asset: cfPrimitivesChainsAssetsEthAsset,
+      minimumDeposit: numberOrHex,
+    }),
+    z.object({ __kind: z.literal('SetDepositChannelLifetimeEthereum'), lifetime: numberOrHex }),
+    z.object({ __kind: z.literal('SetWitnessSafetyMarginEthereum'), margin: numberOrHex }),
+    z.object({ __kind: z.literal('SetBoostDelayEthereum'), delayBlocks: z.number() }),
+    z.object({
+      __kind: z.literal('SetMaximumPreallocatedChannelsEthereum'),
+      accountRole: cfPrimitivesAccountRole,
+      numChannels: z.number(),
+    }),
+  ],
+);
+
 export const cfPrimitivesChainsAssetsDotAsset = simpleEnum(['Dot']);
+
+export const palletCfPolkadotIngressEgressPalletConfigUpdatePolkadot = z.discriminatedUnion(
+  '__kind',
+  [
+    z.object({ __kind: z.literal('ChannelOpeningFeePolkadot'), fee: numberOrHex }),
+    z.object({
+      __kind: z.literal('SetMinimumDepositPolkadot'),
+      asset: cfPrimitivesChainsAssetsDotAsset,
+      minimumDeposit: numberOrHex,
+    }),
+    z.object({ __kind: z.literal('SetDepositChannelLifetimePolkadot'), lifetime: z.number() }),
+    z.object({ __kind: z.literal('SetWitnessSafetyMarginPolkadot'), margin: z.number() }),
+    z.object({ __kind: z.literal('SetBoostDelayPolkadot'), delayBlocks: z.number() }),
+    z.object({
+      __kind: z.literal('SetMaximumPreallocatedChannelsPolkadot'),
+      accountRole: cfPrimitivesAccountRole,
+      numChannels: z.number(),
+    }),
+  ],
+);
 
 export const cfPrimitivesChainsAssetsBtcAsset = simpleEnum(['Btc']);
 
@@ -483,9 +557,66 @@ export const cfChainsBtcScriptPubkey = z.discriminatedUnion('__kind', [
   z.object({ __kind: z.literal('OtherSegwit'), version: z.number(), program: hexString }),
 ]);
 
+export const palletCfBitcoinIngressEgressPalletConfigUpdateBitcoin = z.discriminatedUnion(
+  '__kind',
+  [
+    z.object({ __kind: z.literal('ChannelOpeningFeeBitcoin'), fee: numberOrHex }),
+    z.object({
+      __kind: z.literal('SetMinimumDepositBitcoin'),
+      asset: cfPrimitivesChainsAssetsBtcAsset,
+      minimumDeposit: numberOrHex,
+    }),
+    z.object({ __kind: z.literal('SetDepositChannelLifetimeBitcoin'), lifetime: numberOrHex }),
+    z.object({ __kind: z.literal('SetWitnessSafetyMarginBitcoin'), margin: numberOrHex }),
+    z.object({ __kind: z.literal('SetBoostDelayBitcoin'), delayBlocks: z.number() }),
+    z.object({
+      __kind: z.literal('SetMaximumPreallocatedChannelsBitcoin'),
+      accountRole: cfPrimitivesAccountRole,
+      numChannels: z.number(),
+    }),
+  ],
+);
+
 export const cfPrimitivesChainsAssetsArbAsset = simpleEnum(['ArbEth', 'ArbUsdc']);
 
+export const palletCfArbitrumIngressEgressPalletConfigUpdateArbitrum = z.discriminatedUnion(
+  '__kind',
+  [
+    z.object({ __kind: z.literal('ChannelOpeningFeeArbitrum'), fee: numberOrHex }),
+    z.object({
+      __kind: z.literal('SetMinimumDepositArbitrum'),
+      asset: cfPrimitivesChainsAssetsArbAsset,
+      minimumDeposit: numberOrHex,
+    }),
+    z.object({ __kind: z.literal('SetDepositChannelLifetimeArbitrum'), lifetime: numberOrHex }),
+    z.object({ __kind: z.literal('SetWitnessSafetyMarginArbitrum'), margin: numberOrHex }),
+    z.object({ __kind: z.literal('SetBoostDelayArbitrum'), delayBlocks: z.number() }),
+    z.object({
+      __kind: z.literal('SetMaximumPreallocatedChannelsArbitrum'),
+      accountRole: cfPrimitivesAccountRole,
+      numChannels: z.number(),
+    }),
+  ],
+);
+
 export const cfPrimitivesChainsAssetsSolAsset = simpleEnum(['Sol', 'SolUsdc']);
+
+export const palletCfSolanaIngressEgressPalletConfigUpdateSolana = z.discriminatedUnion('__kind', [
+  z.object({ __kind: z.literal('ChannelOpeningFeeSolana'), fee: numberOrHex }),
+  z.object({
+    __kind: z.literal('SetMinimumDepositSolana'),
+    asset: cfPrimitivesChainsAssetsSolAsset,
+    minimumDeposit: numberOrHex,
+  }),
+  z.object({ __kind: z.literal('SetDepositChannelLifetimeSolana'), lifetime: numberOrHex }),
+  z.object({ __kind: z.literal('SetWitnessSafetyMarginSolana'), margin: numberOrHex }),
+  z.object({ __kind: z.literal('SetBoostDelaySolana'), delayBlocks: z.number() }),
+  z.object({
+    __kind: z.literal('SetMaximumPreallocatedChannelsSolana'),
+    accountRole: cfPrimitivesAccountRole,
+    numChannels: z.number(),
+  }),
+]);
 
 export const palletCfElectionsElectoralSystemsCompositeTuple7ImplsCompositeElectionIdentifierExtra =
   z.discriminatedUnion('__kind', [
@@ -500,6 +631,26 @@ export const palletCfElectionsElectoralSystemsCompositeTuple7ImplsCompositeElect
 
 export const cfPrimitivesChainsAssetsHubAsset = simpleEnum(['HubDot', 'HubUsdt', 'HubUsdc']);
 
+export const palletCfAssethubIngressEgressPalletConfigUpdateAssethub = z.discriminatedUnion(
+  '__kind',
+  [
+    z.object({ __kind: z.literal('ChannelOpeningFeeAssethub'), fee: numberOrHex }),
+    z.object({
+      __kind: z.literal('SetMinimumDepositAssethub'),
+      asset: cfPrimitivesChainsAssetsHubAsset,
+      minimumDeposit: numberOrHex,
+    }),
+    z.object({ __kind: z.literal('SetDepositChannelLifetimeAssethub'), lifetime: z.number() }),
+    z.object({ __kind: z.literal('SetWitnessSafetyMarginAssethub'), margin: z.number() }),
+    z.object({ __kind: z.literal('SetBoostDelayAssethub'), delayBlocks: z.number() }),
+    z.object({
+      __kind: z.literal('SetMaximumPreallocatedChannelsAssethub'),
+      accountRole: cfPrimitivesAccountRole,
+      numChannels: z.number(),
+    }),
+  ],
+);
+
 export const palletCfTradingStrategyTradingStrategy = z.discriminatedUnion('__kind', [
   z.object({
     __kind: z.literal('TickZeroCentered'),
@@ -510,6 +661,14 @@ export const palletCfTradingStrategyTradingStrategy = z.discriminatedUnion('__ki
     __kind: z.literal('SimpleBuySell'),
     buyTick: z.number(),
     sellTick: z.number(),
+    baseAsset: cfPrimitivesChainsAssetsAnyAsset,
+  }),
+  z.object({
+    __kind: z.literal('InventoryBased'),
+    minBuyTick: z.number(),
+    maxBuyTick: z.number(),
+    minSellTick: z.number(),
+    maxSellTick: z.number(),
     baseAsset: cfPrimitivesChainsAssetsAnyAsset,
   }),
 ]);
