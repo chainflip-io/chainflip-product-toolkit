@@ -2,40 +2,52 @@ New or removed pallets:
   LendingPools: added
 
 ArbitrumIngressEgress:
-  - BoostDelaySet: added
   - BoostFundsAdded: removed
   - BoostPoolCreated: removed
   - CcmEgressInvalid:
     - error: added
+  - ChannelOpeningFeeSet: removed
+  - DepositChannelLifetimeSet: removed
   - FailedToBuildAllBatchCall:
     - error: added
   - InvalidCcmRefunded: added
+  - MinimumDepositSet: removed
   - NetworkFeeDeductionFromBoostSet: removed
+  - PalletConfigUpdated: added
   - StoppedBoosting: removed
+  - WitnessSafetyMarginSet: removed
 
 AssethubIngressEgress:
-  - BoostDelaySet: added
   - BoostFundsAdded: removed
   - BoostPoolCreated: removed
   - CcmEgressInvalid:
     - error: added
+  - ChannelOpeningFeeSet: removed
+  - DepositChannelLifetimeSet: removed
   - FailedToBuildAllBatchCall:
     - error: added
   - InvalidCcmRefunded: added
+  - MinimumDepositSet: removed
   - NetworkFeeDeductionFromBoostSet: removed
+  - PalletConfigUpdated: added
   - StoppedBoosting: removed
+  - WitnessSafetyMarginSet: removed
 
 BitcoinIngressEgress:
-  - BoostDelaySet: added
   - BoostFundsAdded: removed
   - BoostPoolCreated: removed
   - CcmEgressInvalid:
     - error: added
+  - ChannelOpeningFeeSet: removed
+  - DepositChannelLifetimeSet: removed
   - FailedToBuildAllBatchCall:
     - error: added
   - InvalidCcmRefunded: added
+  - MinimumDepositSet: removed
   - NetworkFeeDeductionFromBoostSet: removed
+  - PalletConfigUpdated: added
   - StoppedBoosting: removed
+  - WitnessSafetyMarginSet: removed
 
 Environment:
   - RuntimeSafeModeUpdated:
@@ -44,47 +56,59 @@ Environment:
     - govCall: added
 
 EthereumIngressEgress:
-  - BoostDelaySet: added
   - BoostFundsAdded: removed
   - BoostPoolCreated: removed
   - CcmEgressInvalid:
     - error: added
+  - ChannelOpeningFeeSet: removed
+  - DepositChannelLifetimeSet: removed
   - FailedToBuildAllBatchCall:
     - error: added
   - InvalidCcmRefunded: added
+  - MinimumDepositSet: removed
   - NetworkFeeDeductionFromBoostSet: removed
+  - PalletConfigUpdated: added
   - StoppedBoosting: removed
+  - WitnessSafetyMarginSet: removed
 
 Funding:
   - Rebalance: added
 
 PolkadotIngressEgress:
-  - BoostDelaySet: added
   - BoostFundsAdded: removed
   - BoostPoolCreated: removed
   - CcmEgressInvalid:
     - error: added
+  - ChannelOpeningFeeSet: removed
+  - DepositChannelLifetimeSet: removed
   - FailedToBuildAllBatchCall:
     - error: added
   - InvalidCcmRefunded: added
+  - MinimumDepositSet: removed
   - NetworkFeeDeductionFromBoostSet: removed
+  - PalletConfigUpdated: added
   - StoppedBoosting: removed
+  - WitnessSafetyMarginSet: removed
 
 SolanaElections:
   - UnknownElection:
     - 1: added
 
 SolanaIngressEgress:
-  - BoostDelaySet: added
   - BoostFundsAdded: removed
   - BoostPoolCreated: removed
   - CcmEgressInvalid:
     - error: added
+  - ChannelOpeningFeeSet: removed
+  - DepositChannelLifetimeSet: removed
   - FailedToBuildAllBatchCall:
     - error: added
   - InvalidCcmRefunded: added
+  - MinimumDepositSet: removed
   - NetworkFeeDeductionFromBoostSet: removed
+  - PalletConfigUpdated: added
   - StoppedBoosting: removed
+  - WitnessSafetyMarginSet: removed
 
 Swapping:
   - PalletConfigUpdated:
@@ -101,3 +125,7 @@ Swapping:
 TradingStrategy:
   - StrategyDeployed:
     - strategy: added
+
+Validator:
+  - PalletConfigUpdated:
+    - update: added
