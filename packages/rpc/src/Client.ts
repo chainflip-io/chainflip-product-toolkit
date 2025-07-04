@@ -21,6 +21,10 @@ export type RequestMap = Map<
   }
 >;
 
+export type ClientOpts = {
+  archiveNodeUrl?: string;
+};
+
 export default abstract class Client {
   private lastRequestId = 0;
   private timer: ReturnType<typeof setTimeout> | null = null;
@@ -29,7 +33,7 @@ export default abstract class Client {
 
   constructor(
     protected readonly url: string,
-    opts: { archiveNodeUrl?: string } = {},
+    opts: ClientOpts = {},
   ) {
     this.archiveNodeUrl = opts.archiveNodeUrl;
   }
