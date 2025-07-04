@@ -111,6 +111,143 @@ describe(HttpClient, () => {
   const BROKER_ACCOUNT_ID2 = 'cFJjZKzA5rUTb9qkZMGfec7piCpiAQKr15B4nALzriMGQL8BF';
   const VALIDATOR_ACCOUNT_ID = 'cFKzr7DwLCRtSkou5H5moKri7g9WwJ4tAbVJv6dZGhLb811Tc';
 
+  describe('with archive node', () => {
+    it('uses the archive node for already discarded blocks', async () => {
+      vi.spyOn(crypto, 'randomUUID').mockReturnValue('1-1-1-1-1');
+      vi.spyOn(globalThis, 'fetch')
+        .mockResolvedValueOnce({
+          ok: true,
+          json: () =>
+            Promise.resolve([
+              {
+                jsonrpc: '2.0',
+                error: {
+                  code: -32022,
+                  message: 'Unknown block: State already discarded for 0x1234',
+                },
+                id: '1-1-1-1-1',
+              },
+            ]),
+        } as Response)
+        .mockResolvedValueOnce({
+          ok: true,
+          json: () =>
+            Promise.resolve([
+              {
+                jsonrpc: '2.0',
+                result: [['hello', 'world']],
+                id: '1-1-1-1-1',
+              },
+            ]),
+        } as Response);
+
+      const client = new HttpClient('http://cf.rpc', { archiveNodeUrl: 'http://cf.archive' });
+
+      expect(await client.sendRequest('cf_accounts', '0x1234')).toEqual([['hello', 'world']]);
+      expect(vi.mocked(fetch).mock.calls).toMatchInlineSnapshot(`
+        [
+          [
+            "http://cf.rpc",
+            {
+              "body": "[{"jsonrpc":"2.0","id":"1-1-1-1-1","method":"cf_accounts","params":["0x1234"]}]",
+              "headers": {
+                "Content-Type": "application/json",
+              },
+              "method": "POST",
+            },
+          ],
+          [
+            "http://cf.archive",
+            {
+              "body": "[{"jsonrpc":"2.0","id":"1-1-1-1-1","method":"cf_accounts","params":["0x1234"]}]",
+              "headers": {
+                "Content-Type": "application/json",
+              },
+              "method": "POST",
+            },
+          ],
+        ]
+      `);
+    });
+
+    it('does not use the archive for other unknown blocks', async () => {
+      vi.spyOn(crypto, 'randomUUID').mockReturnValue('1-1-1-1-1');
+      vi.spyOn(globalThis, 'fetch').mockResolvedValueOnce({
+        ok: true,
+        json: () =>
+          Promise.resolve([
+            {
+              jsonrpc: '2.0',
+              error: {
+                code: -32022,
+                message: 'Unknown block: Header was not found in the database: 0x1234',
+              },
+              id: '1-1-1-1-1',
+            },
+          ]),
+      } as Response);
+
+      const client = new HttpClient('http://cf.rpc', { archiveNodeUrl: 'http://cf.archive' });
+
+      await expect(
+        client.sendRequest('cf_accounts', '0x1234'),
+      ).rejects.toThrowErrorMatchingInlineSnapshot(
+        `[Error: RPC error [-32022]: Unknown block: Header was not found in the database: 0x1234]`,
+      );
+      expect(vi.mocked(fetch).mock.calls).toMatchInlineSnapshot(`
+        [
+          [
+            "http://cf.rpc",
+            {
+              "body": "[{"jsonrpc":"2.0","id":"1-1-1-1-1","method":"cf_accounts","params":["0x1234"]}]",
+              "headers": {
+                "Content-Type": "application/json",
+              },
+              "method": "POST",
+            },
+          ],
+        ]
+      `);
+    });
+
+    it('returns the first error if there is no archive node url', async () => {
+      vi.spyOn(crypto, 'randomUUID').mockReturnValue('1-1-1-1-1');
+      vi.spyOn(globalThis, 'fetch').mockResolvedValueOnce({
+        ok: true,
+        json: () =>
+          Promise.resolve([
+            {
+              jsonrpc: '2.0',
+              error: { code: -32022, message: 'Unknown block: State already discarded for 0x1234' },
+              id: '1-1-1-1-1',
+            },
+          ]),
+      } as Response);
+
+      const client = new HttpClient('http://cf.rpc');
+
+      await expect(
+        client.sendRequest('cf_accounts', '0x1234'),
+      ).rejects.toThrowErrorMatchingInlineSnapshot(
+        `[Error: RPC error [-32022]: Unknown block: State already discarded for 0x1234]`,
+      );
+      expect(vi.mocked(fetch).mock.calls).toMatchInlineSnapshot(`
+        [
+          [
+            "http://cf.rpc",
+            {
+              "body": "[{"jsonrpc":"2.0","id":"1-1-1-1-1","method":"cf_accounts","params":["0x1234"]}]",
+              "headers": {
+                "Content-Type": "application/json",
+              },
+              "method": "POST",
+            },
+          ],
+        ]
+      `);
+    });
+  });
+
   describe('with server', () => {
     let server: Server;
     let callCounter = 0;
