@@ -1,6 +1,6 @@
 import { deferredPromise, type DeferredPromise, once, sleep } from '@chainflip/utils/async';
 import { z } from 'zod';
-import Client, { type RequestMap } from './Client';
+import Client, { ClientOpts, type RequestMap } from './Client';
 import { type JsonRpcRequest, type JsonRpcResponse, type RpcMethod, rpcResponse } from './common';
 
 const CONNECTING = 'CONNECTING';
@@ -15,8 +15,8 @@ export default class WsClient extends Client {
   private readonly timeout: number;
   private shouldConnect = true;
 
-  constructor(url: string, { timeout = 30_000 }: { timeout?: number } = {}) {
-    super(url);
+  constructor(url: string, { timeout = 30_000, ...opts }: { timeout?: number } & ClientOpts = {}) {
+    super(url, opts);
     this.timeout = timeout;
   }
 
