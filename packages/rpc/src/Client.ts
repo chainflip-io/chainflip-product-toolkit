@@ -25,8 +25,14 @@ export default abstract class Client {
   private lastRequestId = 0;
   private timer: ReturnType<typeof setTimeout> | null = null;
   private requestMap: RequestMap = new Map();
+  private readonly archiveNodeUrl?: string;
 
-  constructor(protected readonly url: string) {}
+  constructor(
+    protected readonly url: string,
+    opts: { archiveNodeUrl?: string } = {},
+  ) {
+    this.archiveNodeUrl = opts.archiveNodeUrl;
+  }
 
   protected abstract send<const T extends RpcMethod>(
     data: JsonRpcRequest<T>[],
@@ -108,7 +114,18 @@ export default abstract class Client {
     }
 
     return deferred.promise.catch((error) => {
-      if (error instanceof Error) Error.captureStackTrace(error);
+      if (error instanceof Error) {
+        if (
+          this.archiveNodeUrl &&
+          error.message.includes('Unknown block: State already discarded')
+        ) {
+          return new (this.constructor as { new (url: string): Client })(
+            this.archiveNodeUrl,
+          ).sendRequest(method, ...params);
+        }
+
+        Error.captureStackTrace(error);
+      }
       throw error;
     });
   }
