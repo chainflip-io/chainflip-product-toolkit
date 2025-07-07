@@ -12,7 +12,7 @@
   },
   "devDependencies": {
     "@chainflip/rpc": "1.9.3",
-    "@polkadot/types": "^16.2.2"
+    "@polkadot/types": "^16.3.1"
   },
   "scripts": {
     "eslint:check": "pnpm eslint --max-warnings 0 './**/*.ts'",
