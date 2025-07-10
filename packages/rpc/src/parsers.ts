@@ -448,6 +448,7 @@ export const cfAuctionState = z
     min_funding: numberOrHex,
     auction_size_range: range(z.number()),
     min_active_bid: numberOrHex,
+    min_bid: numberOrHex.optional().default(0), // TODO(1.10): remove optional
   })
   .transform(rename({ epoch_duration: 'epoch_duration_blocks' }));
 

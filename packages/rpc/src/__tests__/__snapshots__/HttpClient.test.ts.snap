@@ -318,13 +318,14 @@ exports[`HttpClient > with server > gets validator account info 1`] = `
 exports[`HttpClient > with server > handles cf_auction_state 1`] = `
 {
   "auction_size_range": [
-    3,
+    2,
     150,
   ],
-  "current_epoch_started_at": 6892653,
-  "epoch_duration_blocks": 43200,
-  "min_active_bid": 34937886558754807000000n,
-  "min_funding": 6000000000000000000n,
+  "current_epoch_started_at": 7062012,
+  "epoch_duration_blocks": 1200,
+  "min_active_bid": 34500394838834294080488n,
+  "min_bid": 0n,
+  "min_funding": 10000000000000000000n,
   "redemption_period_as_percentage": 50,
 }
 `;
