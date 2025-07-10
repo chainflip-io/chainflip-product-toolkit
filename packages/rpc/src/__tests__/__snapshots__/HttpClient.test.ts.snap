@@ -1420,21 +1420,27 @@ exports[`HttpClient > with server > handles cf_safe_mode_statuses 2`] = `
     "reconciliation_enabled": true,
   },
   "broadcast_arbitrum": {
+    "egress_witnessing_enabled": true,
     "retry_enabled": true,
   },
   "broadcast_assethub": {
+    "egress_witnessing_enabled": true,
     "retry_enabled": true,
   },
   "broadcast_bitcoin": {
+    "egress_witnessing_enabled": true,
     "retry_enabled": true,
   },
   "broadcast_ethereum": {
+    "egress_witnessing_enabled": true,
     "retry_enabled": true,
   },
   "broadcast_polkadot": {
+    "egress_witnessing_enabled": true,
     "retry_enabled": true,
   },
   "broadcast_solana": {
+    "egress_witnessing_enabled": true,
     "retry_enabled": true,
   },
   "emissions": {
@@ -1445,27 +1451,39 @@ exports[`HttpClient > with server > handles cf_safe_mode_statuses 2`] = `
   },
   "ingress_egress_arbitrum": {
     "boost_deposits_enabled": true,
-    "deposits_enabled": true,
+    "deposit_channel_creation_enabled": true,
+    "deposit_channel_witnessing_enabled": true,
+    "vault_deposit_witnessing_enabled": true,
   },
   "ingress_egress_assethub": {
     "boost_deposits_enabled": true,
-    "deposits_enabled": true,
+    "deposit_channel_creation_enabled": true,
+    "deposit_channel_witnessing_enabled": true,
+    "vault_deposit_witnessing_enabled": true,
   },
   "ingress_egress_bitcoin": {
     "boost_deposits_enabled": true,
-    "deposits_enabled": true,
+    "deposit_channel_creation_enabled": true,
+    "deposit_channel_witnessing_enabled": true,
+    "vault_deposit_witnessing_enabled": true,
   },
   "ingress_egress_ethereum": {
     "boost_deposits_enabled": true,
-    "deposits_enabled": true,
+    "deposit_channel_creation_enabled": true,
+    "deposit_channel_witnessing_enabled": true,
+    "vault_deposit_witnessing_enabled": true,
   },
   "ingress_egress_polkadot": {
     "boost_deposits_enabled": true,
-    "deposits_enabled": true,
+    "deposit_channel_creation_enabled": true,
+    "deposit_channel_witnessing_enabled": true,
+    "vault_deposit_witnessing_enabled": true,
   },
   "ingress_egress_solana": {
     "boost_deposits_enabled": true,
-    "deposits_enabled": true,
+    "deposit_channel_creation_enabled": true,
+    "deposit_channel_witnessing_enabled": true,
+    "vault_deposit_witnessing_enabled": true,
   },
   "lending_pools": {
     "add_boost_funds_enabled": true,

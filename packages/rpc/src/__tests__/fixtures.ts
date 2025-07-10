@@ -1057,6 +1057,10 @@ export const safeModeStatuses: CfSafeModeStatuses = {
     strategy_closure_enabled: true,
     strategy_execution_enabled: true,
   },
+  lending_pools: {
+    add_boost_funds_enabled: true,
+    stop_boosting_enabled: true,
+  },
   reputation: {
     reporting_enabled: true,
   },
@@ -1077,49 +1081,62 @@ export const safeModeStatuses: CfSafeModeStatuses = {
   },
   broadcast_ethereum: {
     retry_enabled: true,
+    egress_witnessing_enabled: true,
   },
   broadcast_bitcoin: {
     retry_enabled: true,
+    egress_witnessing_enabled: true,
   },
   broadcast_polkadot: {
     retry_enabled: true,
+    egress_witnessing_enabled: true,
   },
   broadcast_arbitrum: {
     retry_enabled: true,
+    egress_witnessing_enabled: true,
   },
   broadcast_solana: {
     retry_enabled: true,
+    egress_witnessing_enabled: true,
   },
   broadcast_assethub: {
     retry_enabled: true,
+    egress_witnessing_enabled: true,
   },
-  lending_pools: {
-    add_boost_funds_enabled: true,
-    stop_boosting_enabled: true,
-  },
-  // witnesser: 'CodeGreen', // didn't know all the states here, probably not needed
   ingress_egress_ethereum: {
     boost_deposits_enabled: true,
-    deposits_enabled: true,
+    deposit_channel_creation_enabled: true,
+    deposit_channel_witnessing_enabled: true,
+    vault_deposit_witnessing_enabled: true,
   },
   ingress_egress_bitcoin: {
     boost_deposits_enabled: true,
-    deposits_enabled: true,
+    deposit_channel_creation_enabled: true,
+    deposit_channel_witnessing_enabled: true,
+    vault_deposit_witnessing_enabled: true,
   },
   ingress_egress_polkadot: {
     boost_deposits_enabled: true,
-    deposits_enabled: true,
+    deposit_channel_creation_enabled: true,
+    deposit_channel_witnessing_enabled: true,
+    vault_deposit_witnessing_enabled: true,
   },
   ingress_egress_arbitrum: {
     boost_deposits_enabled: true,
-    deposits_enabled: true,
+    deposit_channel_creation_enabled: true,
+    deposit_channel_witnessing_enabled: true,
+    vault_deposit_witnessing_enabled: true,
   },
   ingress_egress_solana: {
     boost_deposits_enabled: true,
-    deposits_enabled: true,
+    deposit_channel_creation_enabled: true,
+    deposit_channel_witnessing_enabled: true,
+    vault_deposit_witnessing_enabled: true,
   },
   ingress_egress_assethub: {
     boost_deposits_enabled: true,
-    deposits_enabled: true,
+    deposit_channel_creation_enabled: true,
+    deposit_channel_witnessing_enabled: true,
+    vault_deposit_witnessing_enabled: true,
   },
 };
