@@ -1,6 +1,6 @@
 {
   "name": "@chainflip/rpc",
-  "version": "1.10.3",
+  "version": "1.10.4",
   "type": "module",
   "scripts": {
     "eslint:check": "pnpm eslint --max-warnings 0 './**/*.ts'",
