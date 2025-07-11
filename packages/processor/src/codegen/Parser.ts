@@ -163,6 +163,12 @@ export default class Parser extends BaseParser {
           type: 'range',
           value: this.resolveType(type.sub),
         };
+      case TypeDefInfo.RangeInclusive:
+        assert(hasSub(type));
+        return {
+          type: 'range',
+          value: this.resolveType(type.sub),
+        };
       case TypeDefInfo.BTreeMap:
         assert(hasSubs(type, 2));
 

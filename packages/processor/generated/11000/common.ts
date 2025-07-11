@@ -47,7 +47,10 @@ export const palletCfAssetBalancesPalletSafeMode = z.object({ reconciliationEnab
 
 export const palletCfThresholdSignaturePalletSafeMode = z.object({ slashingEnabled: z.boolean() });
 
-export const palletCfBroadcastPalletSafeMode = z.object({ retryEnabled: z.boolean() });
+export const palletCfBroadcastPalletSafeMode = z.object({
+  retryEnabled: z.boolean(),
+  egressWitnessingEnabled: z.boolean(),
+});
 
 export const stateChainRuntimeSafeModeWitnesserCallPermission = z.object({
   governance: z.boolean(),
@@ -88,7 +91,9 @@ export const palletCfWitnesserPalletSafeMode = z.discriminatedUnion('__kind', [
 
 export const palletCfIngressEgressPalletSafeMode = z.object({
   boostDepositsEnabled: z.boolean(),
-  depositsEnabled: z.boolean(),
+  depositChannelCreationEnabled: z.boolean(),
+  depositChannelWitnessingEnabled: z.boolean(),
+  vaultDepositWitnessingEnabled: z.boolean(),
 });
 
 export const stateChainRuntimeSafeModeInnerRuntimeSafeMode = z.object({
@@ -482,6 +487,96 @@ export const cfChainsExecutexSwapAndCallError = z.discriminatedUnion('__kind', [
   z.object({ __kind: z.literal('AuxDataNotReady') }),
 ]);
 
+export const palletCfEthereumIngressEgressDepositFailedReason = z.discriminatedUnion('__kind', [
+  z.object({ __kind: z.literal('BelowMinimumDeposit') }),
+  z.object({ __kind: z.literal('NotEnoughToPayFees') }),
+  z.object({ __kind: z.literal('TransactionRejectedByBroker') }),
+  z.object({ __kind: z.literal('DepositWitnessRejected'), value: spRuntimeDispatchError }),
+]);
+
+export const cfPrimitivesChainsAssetsEthAsset = simpleEnum(['Eth', 'Flip', 'Usdc', 'Usdt']);
+
+export const cfChainsEvmDepositDetails = z.object({ txHashes: z.array(hexString).nullish() });
+
+export const palletCfEthereumIngressEgressDepositWitnessEthereum = z.object({
+  depositAddress: hexString,
+  asset: cfPrimitivesChainsAssetsEthAsset,
+  amount: numberOrHex,
+  depositDetails: cfChainsEvmDepositDetails,
+});
+
+export const cfChainsCcmChannelMetadataCcmAdditionalData = z.object({
+  message: hexString,
+  gasBudget: numberOrHex,
+  ccmAdditionalData: hexString,
+});
+
+export const cfChainsBtcScriptPubkey = z.discriminatedUnion('__kind', [
+  z.object({ __kind: z.literal('P2PKH'), value: hexString }),
+  z.object({ __kind: z.literal('P2SH'), value: hexString }),
+  z.object({ __kind: z.literal('P2WPKH'), value: hexString }),
+  z.object({ __kind: z.literal('P2WSH'), value: hexString }),
+  z.object({ __kind: z.literal('Taproot'), value: hexString }),
+  z.object({ __kind: z.literal('OtherSegwit'), version: z.number(), program: hexString }),
+]);
+
+export const cfChainsAddressForeignChainAddress = z.discriminatedUnion('__kind', [
+  z.object({ __kind: z.literal('Eth'), value: hexString }),
+  z.object({ __kind: z.literal('Dot'), value: hexString }),
+  z.object({ __kind: z.literal('Btc'), value: cfChainsBtcScriptPubkey }),
+  z.object({ __kind: z.literal('Arb'), value: hexString }),
+  z.object({ __kind: z.literal('Sol'), value: hexString }),
+  z.object({ __kind: z.literal('Hub'), value: hexString }),
+]);
+
+export const cfChainsCcmDepositMetadata = z.object({
+  channelMetadata: cfChainsCcmChannelMetadataCcmAdditionalData,
+  sourceChain: cfPrimitivesChainsForeignChain,
+  sourceAddress: cfChainsAddressForeignChainAddress.nullish(),
+});
+
+export const cfPrimitivesBeneficiaryAffiliateShortId = z.object({
+  account: z.number(),
+  bps: z.number(),
+});
+
+export const cfChainsChannelRefundParametersH160 = z.object({
+  retryDuration: z.number(),
+  refundAddress: hexString,
+  minPrice: numberOrHex,
+});
+
+export const palletCfEthereumIngressEgressVaultDepositWitnessEthereum = z.object({
+  inputAsset: cfPrimitivesChainsAssetsEthAsset,
+  depositAddress: hexString.nullish(),
+  channelId: numberOrHex.nullish(),
+  depositAmount: numberOrHex,
+  depositDetails: cfChainsEvmDepositDetails,
+  outputAsset: cfPrimitivesChainsAssetsAnyAsset,
+  destinationAddress: cfChainsAddressEncodedAddress,
+  depositMetadata: cfChainsCcmDepositMetadata.nullish(),
+  txId: hexString,
+  brokerFee: cfPrimitivesBeneficiaryAccountId32.nullish(),
+  affiliateFees: z.array(cfPrimitivesBeneficiaryAffiliateShortId),
+  refundParams: cfChainsChannelRefundParametersH160,
+  dcaParams: cfPrimitivesDcaParameters.nullish(),
+  boostFee: z.number(),
+});
+
+export const palletCfEthereumIngressEgressDepositFailedDetailsEthereum = z.discriminatedUnion(
+  '__kind',
+  [
+    z.object({
+      __kind: z.literal('DepositFailedDepositChannelVariantEthereum'),
+      depositWitness: palletCfEthereumIngressEgressDepositWitnessEthereum,
+    }),
+    z.object({
+      __kind: z.literal('DepositFailedVaultVariantEthereum'),
+      vaultWitness: palletCfEthereumIngressEgressVaultDepositWitnessEthereum,
+    }),
+  ],
+);
+
 export const cfChainsAllBatchError = z.discriminatedUnion('__kind', [
   z.object({ __kind: z.literal('NotRequired') }),
   z.object({ __kind: z.literal('UnsupportedToken') }),
@@ -494,8 +589,6 @@ export const cfChainsAllBatchError = z.discriminatedUnion('__kind', [
   }),
   z.object({ __kind: z.literal('DispatchError'), value: spRuntimeDispatchError }),
 ]);
-
-export const cfPrimitivesChainsAssetsEthAsset = simpleEnum(['Eth', 'Flip', 'Usdc', 'Usdt']);
 
 export const cfPrimitivesAccountRole = simpleEnum([
   'Unregistered',
@@ -524,7 +617,58 @@ export const palletCfEthereumIngressEgressPalletConfigUpdateEthereum = z.discrim
   ],
 );
 
+export const palletCfPolkadotIngressEgressDepositFailedReason = z.discriminatedUnion('__kind', [
+  z.object({ __kind: z.literal('BelowMinimumDeposit') }),
+  z.object({ __kind: z.literal('NotEnoughToPayFees') }),
+  z.object({ __kind: z.literal('TransactionRejectedByBroker') }),
+  z.object({ __kind: z.literal('DepositWitnessRejected'), value: spRuntimeDispatchError }),
+]);
+
 export const cfPrimitivesChainsAssetsDotAsset = simpleEnum(['Dot']);
+
+export const palletCfPolkadotIngressEgressDepositWitnessPolkadot = z.object({
+  depositAddress: hexString,
+  asset: cfPrimitivesChainsAssetsDotAsset,
+  amount: numberOrHex,
+  depositDetails: z.number(),
+});
+
+export const cfChainsChannelRefundParametersPolkadotAccountId = z.object({
+  retryDuration: z.number(),
+  refundAddress: hexString,
+  minPrice: numberOrHex,
+});
+
+export const palletCfPolkadotIngressEgressVaultDepositWitnessPolkadot = z.object({
+  inputAsset: cfPrimitivesChainsAssetsDotAsset,
+  depositAddress: hexString.nullish(),
+  channelId: numberOrHex.nullish(),
+  depositAmount: numberOrHex,
+  depositDetails: z.number(),
+  outputAsset: cfPrimitivesChainsAssetsAnyAsset,
+  destinationAddress: cfChainsAddressEncodedAddress,
+  depositMetadata: cfChainsCcmDepositMetadata.nullish(),
+  txId: cfPrimitivesTxId,
+  brokerFee: cfPrimitivesBeneficiaryAccountId32.nullish(),
+  affiliateFees: z.array(cfPrimitivesBeneficiaryAffiliateShortId),
+  refundParams: cfChainsChannelRefundParametersPolkadotAccountId,
+  dcaParams: cfPrimitivesDcaParameters.nullish(),
+  boostFee: z.number(),
+});
+
+export const palletCfPolkadotIngressEgressDepositFailedDetailsPolkadot = z.discriminatedUnion(
+  '__kind',
+  [
+    z.object({
+      __kind: z.literal('DepositFailedDepositChannelVariantPolkadot'),
+      depositWitness: palletCfPolkadotIngressEgressDepositWitnessPolkadot,
+    }),
+    z.object({
+      __kind: z.literal('DepositFailedVaultVariantPolkadot'),
+      vaultWitness: palletCfPolkadotIngressEgressVaultDepositWitnessPolkadot,
+    }),
+  ],
+);
 
 export const palletCfPolkadotIngressEgressPalletConfigUpdatePolkadot = z.discriminatedUnion(
   '__kind',
@@ -546,16 +690,80 @@ export const palletCfPolkadotIngressEgressPalletConfigUpdatePolkadot = z.discrim
   ],
 );
 
+export const palletCfBitcoinIngressEgressDepositFailedReason = z.discriminatedUnion('__kind', [
+  z.object({ __kind: z.literal('BelowMinimumDeposit') }),
+  z.object({ __kind: z.literal('NotEnoughToPayFees') }),
+  z.object({ __kind: z.literal('TransactionRejectedByBroker') }),
+  z.object({ __kind: z.literal('DepositWitnessRejected'), value: spRuntimeDispatchError }),
+]);
+
 export const cfPrimitivesChainsAssetsBtcAsset = simpleEnum(['Btc']);
 
-export const cfChainsBtcScriptPubkey = z.discriminatedUnion('__kind', [
-  z.object({ __kind: z.literal('P2PKH'), value: hexString }),
-  z.object({ __kind: z.literal('P2SH'), value: hexString }),
-  z.object({ __kind: z.literal('P2WPKH'), value: hexString }),
-  z.object({ __kind: z.literal('P2WSH'), value: hexString }),
-  z.object({ __kind: z.literal('Taproot'), value: hexString }),
-  z.object({ __kind: z.literal('OtherSegwit'), version: z.number(), program: hexString }),
-]);
+export const cfChainsBtcUtxoId = z.object({ txId: hexString, vout: z.number() });
+
+export const cfChainsBtcBitcoinScript = z.object({ bytes: hexString });
+
+export const cfChainsBtcDepositAddressTapscriptPath = z.object({
+  salt: z.number(),
+  tweakedPubkeyBytes: hexString,
+  tapleafHash: hexString,
+  unlockScript: cfChainsBtcBitcoinScript,
+});
+
+export const cfChainsBtcDepositAddress = z.object({
+  pubkeyX: hexString,
+  scriptPath: cfChainsBtcDepositAddressTapscriptPath.nullish(),
+});
+
+export const cfChainsBtcUtxo = z.object({
+  id: cfChainsBtcUtxoId,
+  amount: numberOrHex,
+  depositAddress: cfChainsBtcDepositAddress,
+});
+
+export const palletCfBitcoinIngressEgressDepositWitnessBitcoin = z.object({
+  depositAddress: cfChainsBtcScriptPubkey,
+  asset: cfPrimitivesChainsAssetsBtcAsset,
+  amount: numberOrHex,
+  depositDetails: cfChainsBtcUtxo,
+});
+
+export const cfChainsChannelRefundParametersScriptPubkey = z.object({
+  retryDuration: z.number(),
+  refundAddress: cfChainsBtcScriptPubkey,
+  minPrice: numberOrHex,
+});
+
+export const palletCfBitcoinIngressEgressVaultDepositWitnessBitcoin = z.object({
+  inputAsset: cfPrimitivesChainsAssetsBtcAsset,
+  depositAddress: cfChainsBtcScriptPubkey.nullish(),
+  channelId: numberOrHex.nullish(),
+  depositAmount: numberOrHex,
+  depositDetails: cfChainsBtcUtxo,
+  outputAsset: cfPrimitivesChainsAssetsAnyAsset,
+  destinationAddress: cfChainsAddressEncodedAddress,
+  depositMetadata: cfChainsCcmDepositMetadata.nullish(),
+  txId: hexString,
+  brokerFee: cfPrimitivesBeneficiaryAccountId32.nullish(),
+  affiliateFees: z.array(cfPrimitivesBeneficiaryAffiliateShortId),
+  refundParams: cfChainsChannelRefundParametersScriptPubkey,
+  dcaParams: cfPrimitivesDcaParameters.nullish(),
+  boostFee: z.number(),
+});
+
+export const palletCfBitcoinIngressEgressDepositFailedDetailsBitcoin = z.discriminatedUnion(
+  '__kind',
+  [
+    z.object({
+      __kind: z.literal('DepositFailedDepositChannelVariantBitcoin'),
+      depositWitness: palletCfBitcoinIngressEgressDepositWitnessBitcoin,
+    }),
+    z.object({
+      __kind: z.literal('DepositFailedVaultVariantBitcoin'),
+      vaultWitness: palletCfBitcoinIngressEgressVaultDepositWitnessBitcoin,
+    }),
+  ],
+);
 
 export const palletCfBitcoinIngressEgressPalletConfigUpdateBitcoin = z.discriminatedUnion(
   '__kind',
@@ -577,7 +785,52 @@ export const palletCfBitcoinIngressEgressPalletConfigUpdateBitcoin = z.discrimin
   ],
 );
 
+export const palletCfArbitrumIngressEgressDepositFailedReason = z.discriminatedUnion('__kind', [
+  z.object({ __kind: z.literal('BelowMinimumDeposit') }),
+  z.object({ __kind: z.literal('NotEnoughToPayFees') }),
+  z.object({ __kind: z.literal('TransactionRejectedByBroker') }),
+  z.object({ __kind: z.literal('DepositWitnessRejected'), value: spRuntimeDispatchError }),
+]);
+
 export const cfPrimitivesChainsAssetsArbAsset = simpleEnum(['ArbEth', 'ArbUsdc']);
+
+export const palletCfArbitrumIngressEgressDepositWitnessArbitrum = z.object({
+  depositAddress: hexString,
+  asset: cfPrimitivesChainsAssetsArbAsset,
+  amount: numberOrHex,
+  depositDetails: cfChainsEvmDepositDetails,
+});
+
+export const palletCfArbitrumIngressEgressVaultDepositWitnessArbitrum = z.object({
+  inputAsset: cfPrimitivesChainsAssetsArbAsset,
+  depositAddress: hexString.nullish(),
+  channelId: numberOrHex.nullish(),
+  depositAmount: numberOrHex,
+  depositDetails: cfChainsEvmDepositDetails,
+  outputAsset: cfPrimitivesChainsAssetsAnyAsset,
+  destinationAddress: cfChainsAddressEncodedAddress,
+  depositMetadata: cfChainsCcmDepositMetadata.nullish(),
+  txId: hexString,
+  brokerFee: cfPrimitivesBeneficiaryAccountId32.nullish(),
+  affiliateFees: z.array(cfPrimitivesBeneficiaryAffiliateShortId),
+  refundParams: cfChainsChannelRefundParametersH160,
+  dcaParams: cfPrimitivesDcaParameters.nullish(),
+  boostFee: z.number(),
+});
+
+export const palletCfArbitrumIngressEgressDepositFailedDetailsArbitrum = z.discriminatedUnion(
+  '__kind',
+  [
+    z.object({
+      __kind: z.literal('DepositFailedDepositChannelVariantArbitrum'),
+      depositWitness: palletCfArbitrumIngressEgressDepositWitnessArbitrum,
+    }),
+    z.object({
+      __kind: z.literal('DepositFailedVaultVariantArbitrum'),
+      vaultWitness: palletCfArbitrumIngressEgressVaultDepositWitnessArbitrum,
+    }),
+  ],
+);
 
 export const palletCfArbitrumIngressEgressPalletConfigUpdateArbitrum = z.discriminatedUnion(
   '__kind',
@@ -599,7 +852,56 @@ export const palletCfArbitrumIngressEgressPalletConfigUpdateArbitrum = z.discrim
   ],
 );
 
+export const palletCfSolanaIngressEgressDepositFailedReason = z.discriminatedUnion('__kind', [
+  z.object({ __kind: z.literal('BelowMinimumDeposit') }),
+  z.object({ __kind: z.literal('NotEnoughToPayFees') }),
+  z.object({ __kind: z.literal('TransactionRejectedByBroker') }),
+  z.object({ __kind: z.literal('DepositWitnessRejected'), value: spRuntimeDispatchError }),
+]);
+
 export const cfPrimitivesChainsAssetsSolAsset = simpleEnum(['Sol', 'SolUsdc']);
+
+export const palletCfSolanaIngressEgressDepositWitnessSolana = z.object({
+  depositAddress: hexString,
+  asset: cfPrimitivesChainsAssetsSolAsset,
+  amount: numberOrHex,
+});
+
+export const cfChainsChannelRefundParametersAddress = z.object({
+  retryDuration: z.number(),
+  refundAddress: hexString,
+  minPrice: numberOrHex,
+});
+
+export const palletCfSolanaIngressEgressVaultDepositWitnessSolana = z.object({
+  inputAsset: cfPrimitivesChainsAssetsSolAsset,
+  depositAddress: hexString.nullish(),
+  channelId: numberOrHex.nullish(),
+  depositAmount: numberOrHex,
+  outputAsset: cfPrimitivesChainsAssetsAnyAsset,
+  destinationAddress: cfChainsAddressEncodedAddress,
+  depositMetadata: cfChainsCcmDepositMetadata.nullish(),
+  txId: z.tuple([hexString, numberOrHex]),
+  brokerFee: cfPrimitivesBeneficiaryAccountId32.nullish(),
+  affiliateFees: z.array(cfPrimitivesBeneficiaryAffiliateShortId),
+  refundParams: cfChainsChannelRefundParametersAddress,
+  dcaParams: cfPrimitivesDcaParameters.nullish(),
+  boostFee: z.number(),
+});
+
+export const palletCfSolanaIngressEgressDepositFailedDetailsSolana = z.discriminatedUnion(
+  '__kind',
+  [
+    z.object({
+      __kind: z.literal('DepositFailedDepositChannelVariantSolana'),
+      depositWitness: palletCfSolanaIngressEgressDepositWitnessSolana,
+    }),
+    z.object({
+      __kind: z.literal('DepositFailedVaultVariantSolana'),
+      vaultWitness: palletCfSolanaIngressEgressVaultDepositWitnessSolana,
+    }),
+  ],
+);
 
 export const palletCfSolanaIngressEgressPalletConfigUpdateSolana = z.discriminatedUnion('__kind', [
   z.object({ __kind: z.literal('ChannelOpeningFeeSolana'), fee: numberOrHex }),
@@ -629,7 +931,52 @@ export const palletCfElectionsElectoralSystemsCompositeTuple7ImplsCompositeElect
     z.object({ __kind: z.literal('G') }),
   ]);
 
+export const palletCfAssethubIngressEgressDepositFailedReason = z.discriminatedUnion('__kind', [
+  z.object({ __kind: z.literal('BelowMinimumDeposit') }),
+  z.object({ __kind: z.literal('NotEnoughToPayFees') }),
+  z.object({ __kind: z.literal('TransactionRejectedByBroker') }),
+  z.object({ __kind: z.literal('DepositWitnessRejected'), value: spRuntimeDispatchError }),
+]);
+
 export const cfPrimitivesChainsAssetsHubAsset = simpleEnum(['HubDot', 'HubUsdt', 'HubUsdc']);
+
+export const palletCfAssethubIngressEgressDepositWitnessAssethub = z.object({
+  depositAddress: hexString,
+  asset: cfPrimitivesChainsAssetsHubAsset,
+  amount: numberOrHex,
+  depositDetails: z.number(),
+});
+
+export const palletCfAssethubIngressEgressVaultDepositWitnessAssethub = z.object({
+  inputAsset: cfPrimitivesChainsAssetsHubAsset,
+  depositAddress: hexString.nullish(),
+  channelId: numberOrHex.nullish(),
+  depositAmount: numberOrHex,
+  depositDetails: z.number(),
+  outputAsset: cfPrimitivesChainsAssetsAnyAsset,
+  destinationAddress: cfChainsAddressEncodedAddress,
+  depositMetadata: cfChainsCcmDepositMetadata.nullish(),
+  txId: cfPrimitivesTxId,
+  brokerFee: cfPrimitivesBeneficiaryAccountId32.nullish(),
+  affiliateFees: z.array(cfPrimitivesBeneficiaryAffiliateShortId),
+  refundParams: cfChainsChannelRefundParametersPolkadotAccountId,
+  dcaParams: cfPrimitivesDcaParameters.nullish(),
+  boostFee: z.number(),
+});
+
+export const palletCfAssethubIngressEgressDepositFailedDetailsAssethub = z.discriminatedUnion(
+  '__kind',
+  [
+    z.object({
+      __kind: z.literal('DepositFailedDepositChannelVariantAssethub'),
+      depositWitness: palletCfAssethubIngressEgressDepositWitnessAssethub,
+    }),
+    z.object({
+      __kind: z.literal('DepositFailedVaultVariantAssethub'),
+      vaultWitness: palletCfAssethubIngressEgressVaultDepositWitnessAssethub,
+    }),
+  ],
+);
 
 export const palletCfAssethubIngressEgressPalletConfigUpdateAssethub = z.discriminatedUnion(
   '__kind',
@@ -681,4 +1028,12 @@ export const palletCfLendingPoolsPalletConfigUpdate = z.object({
 export const palletCfLendingPoolsBoostPoolId = z.object({
   asset: cfPrimitivesChainsAssetsAnyAsset,
   tier: z.number(),
+});
+
+export const palletCfElectionsElectoralSystemsCompositeTuple6ImplsCompositeElectionIdentifierExtra =
+  simpleEnum(['A', 'B', 'C', 'D', 'EE', 'FF']);
+
+export const stateChainRuntimeChainflipBitcoinElectionsBitcoinElectoralEvents = z.object({
+  __kind: z.literal('ReorgDetected'),
+  reorgedBlocks: z.object({ start: numberOrHex, end: numberOrHex }),
 });

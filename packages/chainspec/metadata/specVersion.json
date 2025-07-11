@@ -64,7 +64,7 @@
     "network": "mainnet"
   },
   "11000": {
-    "hash": "0x0470c7dd54dff289e663cafae952da6941c11686b00dfb7c93f0d401721453bc",
-    "network": "backspin"
+    "hash": "0x794786808a13ef6c17c37dbbf5a50a60873d945cdcfe4b9d0164dec76c3079ed",
+    "network": "sisyphos"
   }
 }
