@@ -145,7 +145,7 @@ describe(HttpClient, () => {
       const client = new HttpClient('http://cf.rpc', { archiveNodeUrl: 'http://cf.archive' });
 
       const listener = vi.fn();
-      client.addEventListener('archiveNodeFallback', listener);
+      client.eventTarget.addEventListener('archiveNodeFallback', listener);
 
       expect(await client.sendRequest('cf_accounts', '0x1234')).toEqual([['hello', 'world']]);
       expect(vi.mocked(fetch).mock.calls).toMatchInlineSnapshot(`
