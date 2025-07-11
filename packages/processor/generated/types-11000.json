@@ -803,6 +803,10 @@
                       "retryEnabled": {
                         "type": "primitive",
                         "value": "bool"
+                      },
+                      "egressWitnessingEnabled": {
+                        "type": "primitive",
+                        "value": "bool"
                       }
                     }
                   },
@@ -811,6 +815,10 @@
                     "$name": "PalletCfBroadcastPalletSafeMode",
                     "fields": {
                       "retryEnabled": {
+                        "type": "primitive",
+                        "value": "bool"
+                      },
+                      "egressWitnessingEnabled": {
                         "type": "primitive",
                         "value": "bool"
                       }
@@ -823,6 +831,10 @@
                       "retryEnabled": {
                         "type": "primitive",
                         "value": "bool"
+                      },
+                      "egressWitnessingEnabled": {
+                        "type": "primitive",
+                        "value": "bool"
                       }
                     }
                   },
@@ -831,6 +843,10 @@
                     "$name": "PalletCfBroadcastPalletSafeMode",
                     "fields": {
                       "retryEnabled": {
+                        "type": "primitive",
+                        "value": "bool"
+                      },
+                      "egressWitnessingEnabled": {
                         "type": "primitive",
                         "value": "bool"
                       }
@@ -843,6 +859,10 @@
                       "retryEnabled": {
                         "type": "primitive",
                         "value": "bool"
+                      },
+                      "egressWitnessingEnabled": {
+                        "type": "primitive",
+                        "value": "bool"
                       }
                     }
                   },
@@ -851,6 +871,10 @@
                     "$name": "PalletCfBroadcastPalletSafeMode",
                     "fields": {
                       "retryEnabled": {
+                        "type": "primitive",
+                        "value": "bool"
+                      },
+                      "egressWitnessingEnabled": {
                         "type": "primitive",
                         "value": "bool"
                       }
@@ -993,7 +1017,15 @@
                         "type": "primitive",
                         "value": "bool"
                       },
-                      "depositsEnabled": {
+                      "depositChannelCreationEnabled": {
+                        "type": "primitive",
+                        "value": "bool"
+                      },
+                      "depositChannelWitnessingEnabled": {
+                        "type": "primitive",
+                        "value": "bool"
+                      },
+                      "vaultDepositWitnessingEnabled": {
                         "type": "primitive",
                         "value": "bool"
                       }
@@ -1007,7 +1039,15 @@
                         "type": "primitive",
                         "value": "bool"
                       },
-                      "depositsEnabled": {
+                      "depositChannelCreationEnabled": {
+                        "type": "primitive",
+                        "value": "bool"
+                      },
+                      "depositChannelWitnessingEnabled": {
+                        "type": "primitive",
+                        "value": "bool"
+                      },
+                      "vaultDepositWitnessingEnabled": {
                         "type": "primitive",
                         "value": "bool"
                       }
@@ -1021,7 +1061,15 @@
                         "type": "primitive",
                         "value": "bool"
                       },
-                      "depositsEnabled": {
+                      "depositChannelCreationEnabled": {
+                        "type": "primitive",
+                        "value": "bool"
+                      },
+                      "depositChannelWitnessingEnabled": {
+                        "type": "primitive",
+                        "value": "bool"
+                      },
+                      "vaultDepositWitnessingEnabled": {
                         "type": "primitive",
                         "value": "bool"
                       }
@@ -1035,7 +1083,15 @@
                         "type": "primitive",
                         "value": "bool"
                       },
-                      "depositsEnabled": {
+                      "depositChannelCreationEnabled": {
+                        "type": "primitive",
+                        "value": "bool"
+                      },
+                      "depositChannelWitnessingEnabled": {
+                        "type": "primitive",
+                        "value": "bool"
+                      },
+                      "vaultDepositWitnessingEnabled": {
                         "type": "primitive",
                         "value": "bool"
                       }
@@ -1049,7 +1105,15 @@
                         "type": "primitive",
                         "value": "bool"
                       },
-                      "depositsEnabled": {
+                      "depositChannelCreationEnabled": {
+                        "type": "primitive",
+                        "value": "bool"
+                      },
+                      "depositChannelWitnessingEnabled": {
+                        "type": "primitive",
+                        "value": "bool"
+                      },
+                      "vaultDepositWitnessingEnabled": {
                         "type": "primitive",
                         "value": "bool"
                       }
@@ -1063,7 +1127,15 @@
                         "type": "primitive",
                         "value": "bool"
                       },
-                      "depositsEnabled": {
+                      "depositChannelCreationEnabled": {
+                        "type": "primitive",
+                        "value": "bool"
+                      },
+                      "depositChannelWitnessingEnabled": {
+                        "type": "primitive",
+                        "value": "bool"
+                      },
+                      "vaultDepositWitnessingEnabled": {
                         "type": "primitive",
                         "value": "bool"
                       }
@@ -15163,7 +15235,7 @@
           "$name": "palletCfEthereumIngressEgressDepositFailedDetailsEthereum",
           "values": [
             {
-              "name": "DepositChannelEthereum",
+              "name": "DepositFailedDepositChannelVariantEthereum",
               "value": {
                 "type": "struct",
                 "fields": {
@@ -15235,7 +15307,7 @@
               }
             },
             {
-              "name": "VaultEthereum",
+              "name": "DepositFailedVaultVariantEthereum",
               "value": {
                 "type": "struct",
                 "fields": {
@@ -18787,7 +18859,7 @@
           "$name": "palletCfPolkadotIngressEgressDepositFailedDetailsPolkadot",
           "values": [
             {
-              "name": "DepositChannelPolkadot",
+              "name": "DepositFailedDepositChannelVariantPolkadot",
               "value": {
                 "type": "struct",
                 "fields": {
@@ -18830,7 +18902,7 @@
               }
             },
             {
-              "name": "VaultPolkadot",
+              "name": "DepositFailedVaultVariantPolkadot",
               "value": {
                 "type": "struct",
                 "fields": {
@@ -22400,7 +22472,7 @@
           "$name": "palletCfBitcoinIngressEgressDepositFailedDetailsBitcoin",
           "values": [
             {
-              "name": "DepositChannelBitcoin",
+              "name": "DepositFailedDepositChannelVariantBitcoin",
               "value": {
                 "type": "struct",
                 "fields": {
@@ -22585,7 +22657,7 @@
               }
             },
             {
-              "name": "VaultBitcoin",
+              "name": "DepositFailedVaultVariantBitcoin",
               "value": {
                 "type": "struct",
                 "fields": {
@@ -29626,7 +29698,7 @@
           "$name": "palletCfArbitrumIngressEgressDepositFailedDetailsArbitrum",
           "values": [
             {
-              "name": "DepositChannelArbitrum",
+              "name": "DepositFailedDepositChannelVariantArbitrum",
               "value": {
                 "type": "struct",
                 "fields": {
@@ -29684,7 +29756,7 @@
               }
             },
             {
-              "name": "VaultArbitrum",
+              "name": "DepositFailedVaultVariantArbitrum",
               "value": {
                 "type": "struct",
                 "fields": {
@@ -34389,7 +34461,7 @@
           "$name": "palletCfSolanaIngressEgressDepositFailedDetailsSolana",
           "values": [
             {
-              "name": "DepositChannelSolana",
+              "name": "DepositFailedDepositChannelVariantSolana",
               "value": {
                 "type": "struct",
                 "fields": {
@@ -34439,7 +34511,7 @@
               }
             },
             {
-              "name": "VaultSolana",
+              "name": "DepositFailedVaultVariantSolana",
               "value": {
                 "type": "struct",
                 "fields": {
@@ -36545,6 +36617,10 @@
           ]
         }
       ]
+    },
+    "ElectoralEvent": {
+      "type": "primitive",
+      "value": "null"
     }
   },
   "SolanaChainTracking": {
@@ -39532,7 +39608,7 @@
           "$name": "palletCfAssethubIngressEgressDepositFailedDetailsAssethub",
           "values": [
             {
-              "name": "DepositChannelAssethub",
+              "name": "DepositFailedDepositChannelVariantAssethub",
               "value": {
                 "type": "struct",
                 "fields": {
@@ -39589,7 +39665,7 @@
               }
             },
             {
-              "name": "VaultAssethub",
+              "name": "DepositFailedVaultVariantAssethub",
               "value": {
                 "type": "struct",
                 "fields": {
@@ -42930,6 +43006,102 @@
           }
         }
       }
+    }
+  },
+  "BitcoinElections": {
+    "CorruptStorage": {
+      "type": "primitive",
+      "value": "null"
+    },
+    "Uninitialized": {
+      "type": "primitive",
+      "value": "null"
+    },
+    "AllVotesCleared": {
+      "type": "primitive",
+      "value": "null"
+    },
+    "AllVotesNotCleared": {
+      "type": "primitive",
+      "value": "null"
+    },
+    "UnknownElection": {
+      "type": "tuple",
+      "values": [
+        {
+          "type": "primitive",
+          "value": "u64"
+        },
+        {
+          "type": "enum",
+          "$name": "palletCfElectionsElectoralSystemsCompositeTuple6ImplsCompositeElectionIdentifierExtra",
+          "values": [
+            {
+              "name": "A",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "B",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "C",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "D",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "EE",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "FF",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "ElectoralEvent": {
+      "type": "enum",
+      "$name": "stateChainRuntimeChainflipBitcoinElectionsBitcoinElectoralEvents",
+      "values": [
+        {
+          "name": "ReorgDetected",
+          "value": {
+            "type": "struct",
+            "fields": {
+              "reorgedBlocks": {
+                "type": "range",
+                "value": {
+                  "type": "primitive",
+                  "value": "u64"
+                }
+              }
+            }
+          }
+        }
+      ]
     }
   }
 }

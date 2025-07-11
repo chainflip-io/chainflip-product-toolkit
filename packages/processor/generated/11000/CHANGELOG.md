@@ -1,4 +1,5 @@
 New or removed pallets:
+  BitcoinElections: added
   LendingPools: added
 
 ArbitrumIngressEgress:
@@ -8,6 +9,8 @@ ArbitrumIngressEgress:
     - error: added
   - ChannelOpeningFeeSet: removed
   - DepositChannelLifetimeSet: removed
+  - DepositFailed:
+    - details: changed
   - FailedToBuildAllBatchCall:
     - error: added
   - InvalidCcmRefunded: added
@@ -24,6 +27,8 @@ AssethubIngressEgress:
     - error: added
   - ChannelOpeningFeeSet: removed
   - DepositChannelLifetimeSet: removed
+  - DepositFailed:
+    - details: changed
   - FailedToBuildAllBatchCall:
     - error: added
   - InvalidCcmRefunded: added
@@ -40,6 +45,8 @@ BitcoinIngressEgress:
     - error: added
   - ChannelOpeningFeeSet: removed
   - DepositChannelLifetimeSet: removed
+  - DepositFailed:
+    - details: changed
   - FailedToBuildAllBatchCall:
     - error: added
   - InvalidCcmRefunded: added
@@ -62,6 +69,8 @@ EthereumIngressEgress:
     - error: added
   - ChannelOpeningFeeSet: removed
   - DepositChannelLifetimeSet: removed
+  - DepositFailed:
+    - details: changed
   - FailedToBuildAllBatchCall:
     - error: added
   - InvalidCcmRefunded: added
@@ -81,6 +90,8 @@ PolkadotIngressEgress:
     - error: added
   - ChannelOpeningFeeSet: removed
   - DepositChannelLifetimeSet: removed
+  - DepositFailed:
+    - details: changed
   - FailedToBuildAllBatchCall:
     - error: added
   - InvalidCcmRefunded: added
@@ -91,6 +102,7 @@ PolkadotIngressEgress:
   - WitnessSafetyMarginSet: removed
 
 SolanaElections:
+  - ElectoralEvent: added
   - UnknownElection:
     - 1: added
 
@@ -101,6 +113,8 @@ SolanaIngressEgress:
     - error: added
   - ChannelOpeningFeeSet: removed
   - DepositChannelLifetimeSet: removed
+  - DepositFailed:
+    - details: changed
   - FailedToBuildAllBatchCall:
     - error: added
   - InvalidCcmRefunded: added
