@@ -10,6 +10,7 @@ import { RpcRequest, type JsonRpcRequest, type RpcMethod } from '../common';
 import { HttpClient } from '../index';
 import { type AssetAndChain, type cfSwapRate } from '../parsers';
 import {
+  auctionState,
   availablePools,
   boostPoolsDepth,
   brokerAccount,
@@ -143,6 +144,9 @@ describe(HttpClient, () => {
 
       const client = new HttpClient('http://cf.rpc', { archiveNodeUrl: 'http://cf.archive' });
 
+      const listener = vi.fn();
+      client.addEventListener('archiveNodeFallback', listener);
+
       expect(await client.sendRequest('cf_accounts', '0x1234')).toEqual([['hello', 'world']]);
       expect(vi.mocked(fetch).mock.calls).toMatchInlineSnapshot(`
         [
@@ -167,6 +171,15 @@ describe(HttpClient, () => {
             },
           ],
         ]
+      `);
+      expect(listener).toHaveBeenCalled();
+      expect((listener.mock.lastCall as [CustomEvent])[0].detail).toMatchInlineSnapshot(`
+        {
+          "method": "cf_accounts",
+          "params": [
+            "0x1234",
+          ],
+        }
       `);
     });
 
@@ -352,14 +365,7 @@ describe(HttpClient, () => {
         case 'cf_epoch_duration':
           return respond(43200);
         case 'cf_auction_state':
-          return respond({
-            epoch_duration: 43200,
-            current_epoch_started_at: 6892653,
-            redemption_period_as_percentage: 50,
-            min_funding: '0x53444835ec580000',
-            auction_size_range: [3, 150],
-            min_active_bid: '0x765fc937c54c30cabc0',
-          });
+          return respond(auctionState);
         case 'cf_flip_supply':
           return respond(['0x0', '0x1']);
         case 'cf_pool_orderbook':

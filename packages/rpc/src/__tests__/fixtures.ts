@@ -1,5 +1,10 @@
 import { z } from 'zod';
-import { cfGetTradingStrategies, cfGetTradingStrategyLimits } from '../parsers';
+import {
+  cfAuctionState,
+  cfGetTradingStrategies,
+  cfGetTradingStrategyLimits,
+  cfSafeModeStatuses,
+} from '../parsers';
 import {
   type broker,
   type brokerRequestSwapDepositAddress,
@@ -19,7 +24,7 @@ import {
   type cfFailedCallEvm,
   type cfPoolOrderbook,
 } from '../parsers';
-import { CfAvailablePools, CfSafeModeStatuses } from '../types';
+import { CfAvailablePools } from '../types';
 
 export const supportedAssets = [
   { chain: 'Ethereum', asset: 'ETH' },
@@ -921,7 +926,7 @@ export const availablePools: CfAvailablePools = [
   { base: { chain: 'Assethub', asset: 'USDC' }, quote: { chain: 'Ethereum', asset: 'USDC' } },
 ];
 
-export const safeModeStatuses190: CfSafeModeStatuses = {
+export const safeModeStatuses190: z.input<typeof cfSafeModeStatuses> = {
   emissions: {
     emissions_sync_enabled: true,
   },
@@ -1026,7 +1031,7 @@ export const safeModeStatuses190: CfSafeModeStatuses = {
     deposits_enabled: true,
   },
 };
-export const safeModeStatuses: CfSafeModeStatuses = {
+export const safeModeStatuses: z.input<typeof cfSafeModeStatuses> = {
   emissions: {
     emissions_sync_enabled: true,
   },
@@ -1057,6 +1062,10 @@ export const safeModeStatuses: CfSafeModeStatuses = {
     strategy_closure_enabled: true,
     strategy_execution_enabled: true,
   },
+  lending_pools: {
+    add_boost_funds_enabled: true,
+    stop_boosting_enabled: true,
+  },
   reputation: {
     reporting_enabled: true,
   },
@@ -1077,49 +1086,72 @@ export const safeModeStatuses: CfSafeModeStatuses = {
   },
   broadcast_ethereum: {
     retry_enabled: true,
+    egress_witnessing_enabled: true,
   },
   broadcast_bitcoin: {
     retry_enabled: true,
+    egress_witnessing_enabled: true,
   },
   broadcast_polkadot: {
     retry_enabled: true,
+    egress_witnessing_enabled: true,
   },
   broadcast_arbitrum: {
     retry_enabled: true,
+    egress_witnessing_enabled: true,
   },
   broadcast_solana: {
     retry_enabled: true,
+    egress_witnessing_enabled: true,
   },
   broadcast_assethub: {
     retry_enabled: true,
+    egress_witnessing_enabled: true,
   },
-  lending_pools: {
-    add_boost_funds_enabled: true,
-    stop_boosting_enabled: true,
-  },
-  // witnesser: 'CodeGreen', // didn't know all the states here, probably not needed
   ingress_egress_ethereum: {
     boost_deposits_enabled: true,
-    deposits_enabled: true,
+    deposit_channel_creation_enabled: true,
+    deposit_channel_witnessing_enabled: true,
+    vault_deposit_witnessing_enabled: true,
   },
   ingress_egress_bitcoin: {
     boost_deposits_enabled: true,
-    deposits_enabled: true,
+    deposit_channel_creation_enabled: true,
+    deposit_channel_witnessing_enabled: true,
+    vault_deposit_witnessing_enabled: true,
   },
   ingress_egress_polkadot: {
     boost_deposits_enabled: true,
-    deposits_enabled: true,
+    deposit_channel_creation_enabled: true,
+    deposit_channel_witnessing_enabled: true,
+    vault_deposit_witnessing_enabled: true,
   },
   ingress_egress_arbitrum: {
     boost_deposits_enabled: true,
-    deposits_enabled: true,
+    deposit_channel_creation_enabled: true,
+    deposit_channel_witnessing_enabled: true,
+    vault_deposit_witnessing_enabled: true,
   },
   ingress_egress_solana: {
     boost_deposits_enabled: true,
-    deposits_enabled: true,
+    deposit_channel_creation_enabled: true,
+    deposit_channel_witnessing_enabled: true,
+    vault_deposit_witnessing_enabled: true,
   },
   ingress_egress_assethub: {
     boost_deposits_enabled: true,
-    deposits_enabled: true,
+    deposit_channel_creation_enabled: true,
+    deposit_channel_witnessing_enabled: true,
+    vault_deposit_witnessing_enabled: true,
   },
+};
+
+export const auctionState: z.input<typeof cfAuctionState> = {
+  epoch_duration: 1200,
+  current_epoch_started_at: 7062012,
+  redemption_period_as_percentage: 50,
+  min_funding: '0x8ac7230489e80000',
+  min_bid: '0x0',
+  auction_size_range: [2, 150],
+  min_active_bid: '0x74e4528aafe6e30c3e8',
 };

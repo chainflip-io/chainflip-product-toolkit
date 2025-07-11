@@ -448,6 +448,7 @@ export const cfAuctionState = z
     min_funding: numberOrHex,
     auction_size_range: range(z.number()),
     min_active_bid: numberOrHex,
+    min_bid: numberOrHex.optional().default(0), // TODO(1.10): remove optional
   })
   .transform(rename({ epoch_duration: 'epoch_duration_blocks' }));
 
@@ -510,6 +511,19 @@ export const cfAvailablePools = z.array(
   }),
 );
 
+const broadcastPalletSafeModeStatuses = z.object({
+  retry_enabled: z.boolean(),
+  // TODO(1.10): make not optional
+  egress_witnessing_enabled: z.boolean().optional(),
+});
+
+const ingressEgressPalletSafeModeStatuses = z.object({
+  boost_deposits_enabled: z.boolean(),
+  deposit_channel_creation_enabled: z.boolean(),
+  deposit_channel_witnessing_enabled: z.boolean(),
+  vault_deposit_witnessing_enabled: z.boolean(),
+});
+
 const cfSafeModeStatusesBase = z.object({
   emissions: z.object({
     emissions_sync_enabled: z.boolean(),
@@ -567,24 +581,12 @@ const cfSafeModeStatusesBase = z.object({
   threshold_signature_solana: z.object({
     slashing_enabled: z.boolean(),
   }),
-  broadcast_ethereum: z.object({
-    retry_enabled: z.boolean(),
-  }),
-  broadcast_bitcoin: z.object({
-    retry_enabled: z.boolean(),
-  }),
-  broadcast_polkadot: z.object({
-    retry_enabled: z.boolean(),
-  }),
-  broadcast_arbitrum: z.object({
-    retry_enabled: z.boolean(),
-  }),
-  broadcast_solana: z.object({
-    retry_enabled: z.boolean(),
-  }),
-  broadcast_assethub: z.object({
-    retry_enabled: z.boolean(),
-  }),
+  broadcast_ethereum: broadcastPalletSafeModeStatuses,
+  broadcast_bitcoin: broadcastPalletSafeModeStatuses,
+  broadcast_polkadot: broadcastPalletSafeModeStatuses,
+  broadcast_arbitrum: broadcastPalletSafeModeStatuses,
+  broadcast_solana: broadcastPalletSafeModeStatuses,
+  broadcast_assethub: broadcastPalletSafeModeStatuses,
 });
 
 export const cfSafeModeStatuses = z.union([
@@ -632,29 +634,11 @@ export const cfSafeModeStatuses = z.union([
       add_boost_funds_enabled: z.boolean(),
       stop_boosting_enabled: z.boolean(),
     }),
-    ingress_egress_ethereum: z.object({
-      boost_deposits_enabled: z.boolean(),
-      deposits_enabled: z.boolean(),
-    }),
-    ingress_egress_bitcoin: z.object({
-      boost_deposits_enabled: z.boolean(),
-      deposits_enabled: z.boolean(),
-    }),
-    ingress_egress_polkadot: z.object({
-      boost_deposits_enabled: z.boolean(),
-      deposits_enabled: z.boolean(),
-    }),
-    ingress_egress_arbitrum: z.object({
-      boost_deposits_enabled: z.boolean(),
-      deposits_enabled: z.boolean(),
-    }),
-    ingress_egress_solana: z.object({
-      boost_deposits_enabled: z.boolean(),
-      deposits_enabled: z.boolean(),
-    }),
-    ingress_egress_assethub: z.object({
-      boost_deposits_enabled: z.boolean(),
-      deposits_enabled: z.boolean(),
-    }),
+    ingress_egress_ethereum: ingressEgressPalletSafeModeStatuses,
+    ingress_egress_bitcoin: ingressEgressPalletSafeModeStatuses,
+    ingress_egress_polkadot: ingressEgressPalletSafeModeStatuses,
+    ingress_egress_arbitrum: ingressEgressPalletSafeModeStatuses,
+    ingress_egress_solana: ingressEgressPalletSafeModeStatuses,
+    ingress_egress_assethub: ingressEgressPalletSafeModeStatuses,
   }),
 ]);

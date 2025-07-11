@@ -25,7 +25,7 @@ export type ClientOpts = {
   archiveNodeUrl?: string;
 };
 
-export default abstract class Client {
+export default abstract class Client extends EventTarget {
   private lastRequestId = 0;
   private timer: ReturnType<typeof setTimeout> | null = null;
   private requestMap: RequestMap = new Map();
@@ -35,6 +35,7 @@ export default abstract class Client {
     protected readonly url: string,
     opts: ClientOpts = {},
   ) {
+    super();
     this.archiveNodeUrl = opts.archiveNodeUrl;
   }
 
@@ -123,6 +124,9 @@ export default abstract class Client {
           this.archiveNodeUrl &&
           error.message.includes('Unknown block: State already discarded')
         ) {
+          this.dispatchEvent(
+            new CustomEvent('archiveNodeFallback', { detail: { method, params } }),
+          );
           return new (this.constructor as { new (url: string): Client })(
             this.archiveNodeUrl,
           ).sendRequest(method, ...params);
