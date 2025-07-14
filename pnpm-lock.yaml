@@ -75,8 +75,8 @@ importers:
         specifier: 0.8.6
         version: 0.8.6
       bignumber.js:
-        specifier: ^9.3.0
-        version: 9.3.0
+        specifier: ^9.3.1
+        version: 9.3.1
       bitcoinjs-lib:
         specifier: 7.0.0-rc.0
         version: 7.0.0-rc.0(typescript@5.8.3)
@@ -154,8 +154,8 @@ importers:
         specifier: 0.8.6
         version: 0.8.6
       bignumber.js:
-        specifier: ^9.3.0
-        version: 9.3.0
+        specifier: ^9.3.1
+        version: 9.3.1
       ioredis:
         specifier: ^5.6.1
         version: 5.6.1
@@ -238,8 +238,8 @@ importers:
         specifier: ^2.1.0
         version: 2.1.0
       bignumber.js:
-        specifier: ^9.3.0
-        version: 9.3.0
+        specifier: ^9.3.1
+        version: 9.3.1
       date-fns:
         specifier: 4.1.0
         version: 4.1.0
@@ -1560,8 +1560,8 @@ packages:
   bech32@2.0.0:
     resolution: {integrity: sha512-LcknSilhIGatDAsY1ak2I8VtGaHNhgMSYVxFrGLXv+xLHytaKZKcaUJJUE7qmBr7h33o5YQwP55pMI0xmkpJwg==}
 
-  bignumber.js@9.3.0:
-    resolution: {integrity: sha512-EM7aMFTXbptt/wZdMlBv2t8IViwQL+h6SLHosp8Yf0dqJMTnY6iL32opnAB6kAdL0SZPuvcAzFr31o0c/R3/RA==}
+  bignumber.js@9.3.1:
+    resolution: {integrity: sha512-Ko0uX15oIUS7wJ3Rb30Fs6SkVbLmPBAKdlm7q9+ak9bbIeFf0MwuBsQV6z7+X768/cHsfg+WlysDWJcmthjsjQ==}
 
   bip174@3.0.0-rc.1:
     resolution: {integrity: sha512-+8P3BpSairVNF2Nee6Ksdc1etIjWjBOi/MH0MwKtq9YaYp+S2Hk2uvup0e8hCT4IKlS58nXJyyQVmW92zPoD4Q==}
@@ -3481,19 +3481,19 @@ snapshots:
   '@chainflip/utils@0.6.0':
     dependencies:
       '@date-fns/utc': 2.1.0
-      bignumber.js: 9.3.0
+      bignumber.js: 9.3.1
       date-fns: 4.1.0
 
   '@chainflip/utils@0.8.2':
     dependencies:
       '@date-fns/utc': 2.1.0
-      bignumber.js: 9.3.0
+      bignumber.js: 9.3.1
       date-fns: 4.1.0
 
   '@chainflip/utils@0.8.6':
     dependencies:
       '@date-fns/utc': 2.1.0
-      bignumber.js: 9.3.0
+      bignumber.js: 9.3.1
       date-fns: 4.1.0
 
   '@coral-xyz/anchor-errors@0.31.1': {}
@@ -4623,7 +4623,7 @@ snapshots:
 
   bech32@2.0.0: {}
 
-  bignumber.js@9.3.0: {}
+  bignumber.js@9.3.1: {}
 
   bip174@3.0.0-rc.1:
     dependencies:
