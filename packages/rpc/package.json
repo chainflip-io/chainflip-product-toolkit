@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "@chainflip/utils": "0.8.6",
-    "zod": "^3.25.75"
+    "zod": "^4.0.5"
   },
   "devDependencies": {
     "@types/node": "^24.0.10",
