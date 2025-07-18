@@ -163,6 +163,10 @@ export const brokerAliasMap: AccountAliasMap = {
     name: 'Gem Wallet',
     twitter: '@GemWalletApp',
   },
+  cFKpid38PmmZ8V81AHaZAhHzzpRbsf7Xw5PYt5ajTXAUvHoTQ: {
+    name: 'Li.Fi',
+    twitter: '@lifiprotocol',
+  },
 } as const;
 
 export const lpAliasMap: AccountAliasMap = {
