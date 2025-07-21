@@ -159,6 +159,10 @@ export const brokerAliasMap: AccountAliasMap = {
     name: 'LeoDex',
     twitter: '@leodexio',
   },
+  cFKfDAGNTYdxJQm4TavKw1WGQqEv7K5QzbdmR2s6fuHorPfP5: {
+    name: 'LeoDex',
+    twitter: '@leodexio',
+  },
   cFNDSNTJMRwL773EzoCLn3n2kFSvBHMhEoHDKaHdkDWUa6XVD: {
     name: 'Gem Wallet',
     twitter: '@GemWalletApp',
