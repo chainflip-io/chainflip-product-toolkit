@@ -107,28 +107,6 @@ export function readAssetValue<T>(
   return chainValues[assetConstants[asset].symbol as keyof typeof chainValues];
 }
 
-function requireAllChainflipAssets<T extends ChainflipAsset[]>(
-  assets: T & ([ChainflipAsset] extends [T[number]] ? unknown : ['Missing some ChainflipAssets']),
-) {
-  return assets;
-}
-
-export const orderedChainflipAssets = requireAllChainflipAssets([
-  'Btc',
-  'Eth',
-  'Sol',
-  'Usdt',
-  'Usdc',
-  'Flip',
-  'SolUsdc',
-  'ArbUsdc',
-  'ArbEth',
-  'Dot',
-  'HubDot',
-  'HubUsdt',
-  'HubUsdc',
-]);
-
 export const assetConstants = {
   Eth: {
     chain: 'Ethereum',
