@@ -1,6 +1,6 @@
 import type { z } from 'zod';
 import type { RpcResponse, RpcResult } from './common';
-import type { broker, liquidityProvider, unregistered, validator } from './parsers';
+import type { broker, liquidityProvider, operator, unregistered, validator } from './parsers';
 
 export type CfAccountInfo = RpcResult<'cf_account_info'>;
 export type CfAccounts = RpcResult<'cf_accounts'>;
@@ -65,6 +65,7 @@ export type CfUnregisteredAccount = z.output<typeof unregistered>;
 export type CfBrokerAccount = z.output<typeof broker>;
 export type CfValidatorAccount = z.output<typeof validator>;
 export type CfLiquidityProviderAccount = z.output<typeof liquidityProvider>;
+export type CfOperatorAccount = z.output<typeof operator>;
 
 export type LpTotalBalances = RpcResult<'lp_total_balances'>;
 export type LpTotalBalancesResponse = RpcResponse<'lp_total_balances'>;
