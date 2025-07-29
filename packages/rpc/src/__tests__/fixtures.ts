@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import {
+  cfAccountInfo,
   cfAuctionState,
   cfGetTradingStrategies,
   cfGetTradingStrategyLimits,
@@ -1154,4 +1155,17 @@ export const auctionState: z.input<typeof cfAuctionState> = {
   min_bid: '0x0',
   auction_size_range: [2, 150],
   min_active_bid: '0x74e4528aafe6e30c3e8',
+};
+
+export const cfAccountInfoOperator: z.input<typeof cfAccountInfo> = {
+  role: 'operator',
+  managed_validators: {
+    cFNkiayhWvppDY5zSzG8rAYMaqbunLBAAbBQcAgFF4x1jaMSy: '0x8ac7201ac3947280',
+  },
+  settings: {
+    fee_bps: 1000,
+    delegation_acceptance: 'Allow',
+  },
+  blocked: ['cFNfitvPd2acNNFgijVN3Ls4gG112PZPq7sY2FGtPgEk25wV9'],
+  delegators: {},
 };

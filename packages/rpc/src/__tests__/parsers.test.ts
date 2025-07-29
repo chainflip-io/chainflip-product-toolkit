@@ -1,3 +1,4 @@
+import assert from 'assert';
 import { describe, expect, it } from 'vitest';
 import {
   cfBoostPoolDetails,
@@ -10,8 +11,9 @@ import {
   cfGetTradingStrategies,
   cfGetTradingStrategyLimits,
   cfSwappingEnvironment,
+  cfAccountInfo,
 } from '../parsers';
-import { tradingStrategies, tradingStrategiesLimits } from './fixtures';
+import { cfAccountInfoOperator, tradingStrategies, tradingStrategiesLimits } from './fixtures';
 
 describe('parsers', () => {
   describe('numberOrHex', () => {
@@ -1150,6 +1152,27 @@ describe('parsers', () => {
 
       expect(result.minimum_added_funds_amount.Solana.USDC).toEqual(10000000);
       expect(result.minimum_added_funds_amount.Ethereum.ETH).toEqual(null);
+    });
+  });
+
+  describe('cfAccountInfo', () => {
+    it('parses the cfAccountInfo for an operator', () => {
+      const result = cfAccountInfo.parse(cfAccountInfoOperator);
+
+      expect(result.role).toEqual('operator');
+
+      assert(result.role === 'operator');
+
+      expect(result.allowed).toEqual([]);
+      expect(result.blocked).toEqual(['cFNfitvPd2acNNFgijVN3Ls4gG112PZPq7sY2FGtPgEk25wV9']);
+      expect(result.delegators).toEqual({});
+      expect(result.managed_validators).toEqual({
+        cFNkiayhWvppDY5zSzG8rAYMaqbunLBAAbBQcAgFF4x1jaMSy: 9999996796922000000n,
+      });
+      expect(result.settings).toEqual({
+        fee_bps: 1000,
+        delegation_acceptance: true,
+      });
     });
   });
 });
