@@ -291,6 +291,20 @@ export const broker = z.object({
     .default([]),
 });
 
+export const operator = z.object({
+  role: z.literal('operator'),
+  managed_validators: z.record(z.string(), numberOrHex),
+  delegators: z.record(z.string(), numberOrHex),
+  settings: z.object({
+    fee_bps: z.number(),
+    delegation_acceptance: z
+      .union([z.literal('Allow'), z.literal('Deny')])
+      .transform((value) => value === 'Allow'),
+  }),
+  allowed: z.array(z.string()).optional().default([]),
+  blocked: z.array(z.string()).optional().default([]),
+});
+
 const boostBalances = z.array(
   z.object({
     fee_tier: z.number(),
@@ -331,6 +345,7 @@ export const validator = z.object({
 export const cfAccountInfo = z.discriminatedUnion('role', [
   unregistered,
   broker,
+  operator,
   liquidityProvider,
   validator,
 ]);
