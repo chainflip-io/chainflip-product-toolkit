@@ -66,5 +66,9 @@
   "11000": {
     "hash": "0x794786808a13ef6c17c37dbbf5a50a60873d945cdcfe4b9d0164dec76c3079ed",
     "network": "sisyphos"
+  },
+  "11100": {
+    "hash": "0xfa728611d3a998dc139e783409d81e19465226dad7a0b7f4afd712c79a4709da",
+    "network": "backspin"
   }
 }
