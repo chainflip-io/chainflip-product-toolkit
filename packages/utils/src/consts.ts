@@ -33,6 +33,10 @@ export const brokerAliasMap: AccountAliasMap = {
     name: 'Chainflip Swapping',
     twitter: '@Chainflip',
   },
+  cFJySAo3RbrtKWWb9J86jqnfTjpDCXAQ4bcJR9kt6S37i7eey: {
+    name: 'swap.chainflip.io',
+    twitter: '@Chainflip',
+  },
   cFN1AfNQBEBCkuNAV37WWw34bCAdiW5e5sHTY4LaaRWiBSh7B: {
     name: 'BlockSwap',
     twitter: '@BlockswapBot',
