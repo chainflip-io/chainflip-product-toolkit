@@ -1,0 +1,41 @@
+{
+  "name": "@chainflip/delegation",
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "eslint:check": "pnpm eslint --max-warnings 0 './**/*.ts'",
+    "prettier:base": "prettier ./** --ignore-path=../../.prettierignore",
+    "prettier:check": "pnpm prettier:base --check",
+    "prettier:write": "pnpm prettier:base --write",
+    "prepublish": "pnpm build && pnpm test run",
+    "clean": "rm -rf dist",
+    "build": "pnpm clean && pnpm tsup:build",
+    "tsup:build": "tsup ./src/index.ts --format esm,cjs --dts --treeshake",
+    "test:ci": "CI=1 pnpm t run",
+    "test": "vitest"
+  },
+  "dependencies": {
+    "@chainflip/utils": "^0.8.16"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "exports": {
+    ".": {
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      },
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      }
+    }
+  },
+  "repository": "https://github.com/chainflip-io/chainflip-product-toolkit.git",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  }
+}
