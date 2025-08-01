@@ -2,6 +2,7 @@
   "package": [
     "bitcoin",
     "chainspec",
+    "delegation",
     "extrinsics",
     "processor",
     "redis",
