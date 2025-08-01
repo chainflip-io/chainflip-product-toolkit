@@ -105,6 +105,12 @@ importers:
         specifier: ^3.25.75
         version: 3.25.75
 
+  packages/delegation:
+    dependencies:
+      '@chainflip/utils':
+        specifier: ^0.8.16
+        version: 0.8.16
+
   packages/eslint-config:
     dependencies:
       '@eslint/js':
@@ -294,6 +300,9 @@ packages:
 
   '@chainflip/utils@0.6.0':
     resolution: {integrity: sha512-ZwyNKv3FVVJw5aOcRf/4rTxCclP+prerxPnTGBrFcBYEYSrPlyx4eI1dc7J35xmKD2yq+vQgwNjCx1h6oJuoPA==}
+
+  '@chainflip/utils@0.8.16':
+    resolution: {integrity: sha512-V6dlqEGGkfJMzRuFsQkLNATsuH1WTUYmeufBgQHoMpJ88bIY/VSzl+DLd9uQjb/BGpIXgLqYG+QD7xBca7Wh9g==}
 
   '@chainflip/utils@0.8.2':
     resolution: {integrity: sha512-wVWSdd1i8+RY4IPqCLdsr/b2Y5cGTzSv6kE/nKhFhcUPELUO0YTRoVote/mUQ/Kd9MiQFaDiS1AEtcPZ0H2W6w==}
@@ -2948,6 +2957,7 @@ packages:
   source-map@0.8.0-beta.0:
     resolution: {integrity: sha512-2ymg6oRBpebeZi9UUNsgQ89bhx01TcTkmNTGnNO88imTmbSgy4nfujrgVEFKWpMTEGA11EDkTt7mqObTPdigIA==}
     engines: {node: '>= 8'}
+    deprecated: The work that was done in this beta branch won't be included in future versions
 
   stackback@0.0.2:
     resolution: {integrity: sha512-1XMJE5fQo1jGH6Y/7ebnwPOBEkIEnT4QF32d5R1+VXdXveM0IBMJt8zfaxX1P3QhVwrYe+576+jkANtSS2mBbw==}
@@ -3475,6 +3485,12 @@ snapshots:
       scale-ts: 1.6.1
 
   '@chainflip/utils@0.6.0':
+    dependencies:
+      '@date-fns/utc': 2.1.0
+      bignumber.js: 9.3.1
+      date-fns: 4.1.0
+
+  '@chainflip/utils@0.8.16':
     dependencies:
       '@date-fns/utc': 2.1.0
       bignumber.js: 9.3.1
