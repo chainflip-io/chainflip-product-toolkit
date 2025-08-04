@@ -1140,6 +1140,16 @@
                         "value": "bool"
                       }
                     }
+                  },
+                  "electionsGeneric": {
+                    "type": "struct",
+                    "$name": "StateChainRuntimeChainflipGenericElectionsGenericElectionsSafeMode",
+                    "fields": {
+                      "oraclePriceElections": {
+                        "type": "primitive",
+                        "value": "bool"
+                      }
+                    }
                   }
                 }
               }
@@ -43892,6 +43902,187 @@
                 "value": {
                   "type": "primitive",
                   "value": "u64"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  },
+  "GenericElections": {
+    "CorruptStorage": {
+      "type": "primitive",
+      "value": "null"
+    },
+    "Uninitialized": {
+      "type": "primitive",
+      "value": "null"
+    },
+    "AllVotesCleared": {
+      "type": "primitive",
+      "value": "null"
+    },
+    "AllVotesNotCleared": {
+      "type": "primitive",
+      "value": "null"
+    },
+    "UnknownElection": {
+      "type": "tuple",
+      "values": [
+        {
+          "type": "primitive",
+          "value": "u64"
+        },
+        {
+          "type": "enum",
+          "$name": "palletCfElectionsElectoralSystemsCompositeTuple1ImplsCompositeElectionIdentifierExtra",
+          "values": [
+            {
+              "name": "A",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "ElectoralEvent": {
+      "type": "enum",
+      "$name": "stateChainRuntimeChainflipGenericElectionsGenericElectoralEvents",
+      "values": [
+        {
+          "name": "OraclePricesUpdated",
+          "value": {
+            "type": "struct",
+            "fields": {
+              "prices": {
+                "type": "array",
+                "value": {
+                  "type": "struct",
+                  "$name": "StateChainRuntimeChainflipGenericElectionsOraclePriceUpdate",
+                  "fields": {
+                    "price": {
+                      "type": "primitive",
+                      "value": "U256"
+                    },
+                    "baseAsset": {
+                      "type": "enum",
+                      "$name": "palletCfElectionsElectoralSystemsOraclePricePricePriceAsset",
+                      "values": [
+                        {
+                          "name": "Btc",
+                          "value": {
+                            "type": "primitive",
+                            "value": "null"
+                          }
+                        },
+                        {
+                          "name": "Eth",
+                          "value": {
+                            "type": "primitive",
+                            "value": "null"
+                          }
+                        },
+                        {
+                          "name": "Sol",
+                          "value": {
+                            "type": "primitive",
+                            "value": "null"
+                          }
+                        },
+                        {
+                          "name": "Usdc",
+                          "value": {
+                            "type": "primitive",
+                            "value": "null"
+                          }
+                        },
+                        {
+                          "name": "Usdt",
+                          "value": {
+                            "type": "primitive",
+                            "value": "null"
+                          }
+                        },
+                        {
+                          "name": "Usd",
+                          "value": {
+                            "type": "primitive",
+                            "value": "null"
+                          }
+                        },
+                        {
+                          "name": "Fine",
+                          "value": {
+                            "type": "primitive",
+                            "value": "null"
+                          }
+                        }
+                      ]
+                    },
+                    "quoteAsset": {
+                      "type": "enum",
+                      "$name": "palletCfElectionsElectoralSystemsOraclePricePricePriceAsset",
+                      "values": [
+                        {
+                          "name": "Btc",
+                          "value": {
+                            "type": "primitive",
+                            "value": "null"
+                          }
+                        },
+                        {
+                          "name": "Eth",
+                          "value": {
+                            "type": "primitive",
+                            "value": "null"
+                          }
+                        },
+                        {
+                          "name": "Sol",
+                          "value": {
+                            "type": "primitive",
+                            "value": "null"
+                          }
+                        },
+                        {
+                          "name": "Usdc",
+                          "value": {
+                            "type": "primitive",
+                            "value": "null"
+                          }
+                        },
+                        {
+                          "name": "Usdt",
+                          "value": {
+                            "type": "primitive",
+                            "value": "null"
+                          }
+                        },
+                        {
+                          "name": "Usd",
+                          "value": {
+                            "type": "primitive",
+                            "value": "null"
+                          }
+                        },
+                        {
+                          "name": "Fine",
+                          "value": {
+                            "type": "primitive",
+                            "value": "null"
+                          }
+                        }
+                      ]
+                    },
+                    "updatedAtOracleTimestamp": {
+                      "type": "primitive",
+                      "value": "u64"
+                    }
+                  }
                 }
               }
             }

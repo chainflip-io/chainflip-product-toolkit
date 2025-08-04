@@ -36,5 +36,7 @@ Voila! You should see the auto-generated code inserted in the respective places.
 ### How to re-run for the same version
 
 1. Remove the `packages/chainspec/metadata/{version}.scale` file.
-2. Make sure the block hash for the specific version we are targeting is correct.
-3. Run `./scripts/generate.ts`
+2. Remove the `packages/processor/generated/types-{version}.json` file.
+3. Remove the `packages/processor/generated/{version}` folder.
+4. Make sure the block hash for the specific version we are targeting is correct.
+5. Run `./scripts/generate.ts`
