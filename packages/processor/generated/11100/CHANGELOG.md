@@ -1,3 +1,6 @@
+New or removed pallets:
+  GenericElections: added
+
 AccountRoles:
   - AccountRoleDeregistered:
     - role: added
@@ -23,6 +26,10 @@ BitcoinIngressEgress:
     - details: added
   - PalletConfigUpdated:
     - update: added
+
+Environment:
+  - RuntimeSafeModeUpdated:
+    - safeMode: added
 
 EthereumIngressEgress:
   - DepositFailed:

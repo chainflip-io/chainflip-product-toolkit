@@ -3,6 +3,143 @@ import * as ss58 from '@chainflip/utils/ss58';
 import * as base58 from '@chainflip/utils/base58';
 import { hexToBytes } from '@chainflip/utils/bytes';
 
+export const palletCfEmissionsPalletSafeMode = z.object({ emissionsSyncEnabled: z.boolean() });
+
+export const palletCfFundingPalletSafeMode = z.object({ redeemEnabled: z.boolean() });
+
+export const palletCfSwappingPalletSafeMode = z.object({
+  swapsEnabled: z.boolean(),
+  withdrawalsEnabled: z.boolean(),
+  brokerRegistrationEnabled: z.boolean(),
+});
+
+export const palletCfLpPalletSafeMode = z.object({
+  depositEnabled: z.boolean(),
+  withdrawalEnabled: z.boolean(),
+  internalSwapsEnabled: z.boolean(),
+});
+
+export const palletCfValidatorPalletSafeMode = z.object({
+  authorityRotationEnabled: z.boolean(),
+  startBiddingEnabled: z.boolean(),
+  stopBiddingEnabled: z.boolean(),
+});
+
+export const palletCfPoolsPalletSafeMode = z.object({
+  rangeOrderUpdateEnabled: z.boolean(),
+  limitOrderUpdateEnabled: z.boolean(),
+});
+
+export const palletCfTradingStrategyPalletSafeMode = z.object({
+  strategyUpdatesEnabled: z.boolean(),
+  strategyClosureEnabled: z.boolean(),
+  strategyExecutionEnabled: z.boolean(),
+});
+
+export const palletCfLendingPoolsPalletSafeMode = z.object({
+  addBoostFundsEnabled: z.boolean(),
+  stopBoostingEnabled: z.boolean(),
+});
+
+export const palletCfReputationPalletSafeMode = z.object({ reportingEnabled: z.boolean() });
+
+export const palletCfAssetBalancesPalletSafeMode = z.object({ reconciliationEnabled: z.boolean() });
+
+export const palletCfThresholdSignaturePalletSafeMode = z.object({ slashingEnabled: z.boolean() });
+
+export const palletCfBroadcastPalletSafeMode = z.object({
+  retryEnabled: z.boolean(),
+  egressWitnessingEnabled: z.boolean(),
+});
+
+export const stateChainRuntimeSafeModeWitnesserCallPermission = z.object({
+  governance: z.boolean(),
+  funding: z.boolean(),
+  swapping: z.boolean(),
+  ethereumBroadcast: z.boolean(),
+  ethereumChainTracking: z.boolean(),
+  ethereumIngressEgress: z.boolean(),
+  ethereumVault: z.boolean(),
+  polkadotBroadcast: z.boolean(),
+  polkadotChainTracking: z.boolean(),
+  polkadotIngressEgress: z.boolean(),
+  polkadotVault: z.boolean(),
+  bitcoinBroadcast: z.boolean(),
+  bitcoinChainTracking: z.boolean(),
+  bitcoinIngressEgress: z.boolean(),
+  bitcoinVault: z.boolean(),
+  arbitrumBroadcast: z.boolean(),
+  arbitrumChainTracking: z.boolean(),
+  arbitrumIngressEgress: z.boolean(),
+  arbitrumVault: z.boolean(),
+  solanaBroadcast: z.boolean(),
+  solanaVault: z.boolean(),
+  assethubBroadcast: z.boolean(),
+  assethubChainTracking: z.boolean(),
+  assethubIngressEgress: z.boolean(),
+  assethubVault: z.boolean(),
+});
+
+export const palletCfWitnesserPalletSafeMode = z.discriminatedUnion('__kind', [
+  z.object({ __kind: z.literal('CodeGreen') }),
+  z.object({ __kind: z.literal('CodeRed') }),
+  z.object({
+    __kind: z.literal('CodeAmber'),
+    value: stateChainRuntimeSafeModeWitnesserCallPermission,
+  }),
+]);
+
+export const palletCfIngressEgressPalletSafeMode = z.object({
+  boostDepositsEnabled: z.boolean(),
+  depositChannelCreationEnabled: z.boolean(),
+  depositChannelWitnessingEnabled: z.boolean(),
+  vaultDepositWitnessingEnabled: z.boolean(),
+});
+
+export const stateChainRuntimeChainflipGenericElectionsGenericElectionsSafeMode = z.object({
+  oraclePriceElections: z.boolean(),
+});
+
+export const stateChainRuntimeSafeModeInnerRuntimeSafeMode = z.object({
+  emissions: palletCfEmissionsPalletSafeMode,
+  funding: palletCfFundingPalletSafeMode,
+  swapping: palletCfSwappingPalletSafeMode,
+  liquidityProvider: palletCfLpPalletSafeMode,
+  validator: palletCfValidatorPalletSafeMode,
+  pools: palletCfPoolsPalletSafeMode,
+  tradingStrategies: palletCfTradingStrategyPalletSafeMode,
+  lendingPools: palletCfLendingPoolsPalletSafeMode,
+  reputation: palletCfReputationPalletSafeMode,
+  assetBalances: palletCfAssetBalancesPalletSafeMode,
+  thresholdSignatureEvm: palletCfThresholdSignaturePalletSafeMode,
+  thresholdSignatureBitcoin: palletCfThresholdSignaturePalletSafeMode,
+  thresholdSignaturePolkadot: palletCfThresholdSignaturePalletSafeMode,
+  thresholdSignatureSolana: palletCfThresholdSignaturePalletSafeMode,
+  broadcastEthereum: palletCfBroadcastPalletSafeMode,
+  broadcastBitcoin: palletCfBroadcastPalletSafeMode,
+  broadcastPolkadot: palletCfBroadcastPalletSafeMode,
+  broadcastArbitrum: palletCfBroadcastPalletSafeMode,
+  broadcastSolana: palletCfBroadcastPalletSafeMode,
+  broadcastAssethub: palletCfBroadcastPalletSafeMode,
+  witnesser: palletCfWitnesserPalletSafeMode,
+  ingressEgressEthereum: palletCfIngressEgressPalletSafeMode,
+  ingressEgressBitcoin: palletCfIngressEgressPalletSafeMode,
+  ingressEgressPolkadot: palletCfIngressEgressPalletSafeMode,
+  ingressEgressArbitrum: palletCfIngressEgressPalletSafeMode,
+  ingressEgressSolana: palletCfIngressEgressPalletSafeMode,
+  ingressEgressAssethub: palletCfIngressEgressPalletSafeMode,
+  electionsGeneric: stateChainRuntimeChainflipGenericElectionsGenericElectionsSafeMode,
+});
+
+export const palletCfEnvironmentSafeModeUpdate = z.discriminatedUnion('__kind', [
+  z.object({ __kind: z.literal('CodeRed') }),
+  z.object({ __kind: z.literal('CodeGreen') }),
+  z.object({
+    __kind: z.literal('CodeAmber'),
+    value: stateChainRuntimeSafeModeInnerRuntimeSafeMode,
+  }),
+]);
+
 export const hexString = z
   .string()
   .refine((v): v is `0x${string}` => /^0x[\da-f]*$/i.test(v), { message: 'Invalid hex string' });
@@ -731,3 +868,28 @@ export const palletCfAssethubIngressEgressPalletConfigUpdateAssethub = z.discrim
     }),
   ],
 );
+
+export const palletCfElectionsElectoralSystemsCompositeTuple1ImplsCompositeElectionIdentifierExtra =
+  simpleEnum(['A']);
+
+export const palletCfElectionsElectoralSystemsOraclePricePricePriceAsset = simpleEnum([
+  'Btc',
+  'Eth',
+  'Sol',
+  'Usdc',
+  'Usdt',
+  'Usd',
+  'Fine',
+]);
+
+export const stateChainRuntimeChainflipGenericElectionsOraclePriceUpdate = z.object({
+  price: numberOrHex,
+  baseAsset: palletCfElectionsElectoralSystemsOraclePricePricePriceAsset,
+  quoteAsset: palletCfElectionsElectoralSystemsOraclePricePricePriceAsset,
+  updatedAtOracleTimestamp: numberOrHex,
+});
+
+export const stateChainRuntimeChainflipGenericElectionsGenericElectoralEvents = z.object({
+  __kind: z.literal('OraclePricesUpdated'),
+  prices: z.array(stateChainRuntimeChainflipGenericElectionsOraclePriceUpdate),
+});
