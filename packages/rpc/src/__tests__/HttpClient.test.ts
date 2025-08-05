@@ -15,6 +15,7 @@ import {
   boostPoolsDepth,
   brokerAccount,
   brokerAccountNoAffiliates,
+  cfOraclePrice,
   environment,
   failedCallEvm,
   fundingEnvironment,
@@ -71,6 +72,7 @@ describe(HttpClient, () => {
         "cf_get_trading_strategies",
         "cf_get_trading_strategy_limits",
         "cf_ingress_egress_environment",
+        "cf_oracle_prices",
         "cf_pool_depth",
         "cf_pool_orderbook",
         "cf_pool_orders",
@@ -379,6 +381,8 @@ describe(HttpClient, () => {
         case 'cf_safe_mode_statuses':
           if (body.id === '1.9') return respond(safeModeStatuses190);
           return respond(safeModeStatuses);
+        case 'cf_oracle_prices':
+          return respond(cfOraclePrice);
         case 'cf_eth_state_chain_gateway_address':
         case 'cf_eth_key_manager_address':
         default:
@@ -994,6 +998,48 @@ describe(HttpClient, () => {
             },
           ],
         }
+      `);
+    });
+
+    it('handles cf_oracle_prices', async () => {
+      expect(await client.sendRequest('cf_oracle_prices')).toMatchInlineSnapshot(`
+        [
+          {
+            "base_asset": "Btc",
+            "price": 44236707699722000250238698966129867489280000000000n,
+            "quote_asset": "Usd",
+            "updated_at_oracle_timestamp": 1754318883,
+            "updated_at_statechain_block": 43871,
+          },
+          {
+            "base_asset": "Eth",
+            "price": 340282366920938463463374607431n,
+            "quote_asset": "Usd",
+            "updated_at_oracle_timestamp": 1754056071,
+            "updated_at_statechain_block": 69,
+          },
+          {
+            "base_asset": "Sol",
+            "price": 34028236692093846346337460743176821145n,
+            "quote_asset": "Usd",
+            "updated_at_oracle_timestamp": 1754056071,
+            "updated_at_statechain_block": 69,
+          },
+          {
+            "base_asset": "Usdc",
+            "price": 340282366920938463463374607431768211456n,
+            "quote_asset": "Usd",
+            "updated_at_oracle_timestamp": 1752662428,
+            "updated_at_statechain_block": 9,
+          },
+          {
+            "base_asset": "Usdt",
+            "price": 340282366920938463463374607431768211456n,
+            "quote_asset": "Usd",
+            "updated_at_oracle_timestamp": 1752662431,
+            "updated_at_statechain_block": 9,
+          },
+        ]
       `);
     });
 

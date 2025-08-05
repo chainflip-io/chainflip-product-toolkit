@@ -974,6 +974,74 @@ exports[`HttpClient > with server > handles cf_environment 1`] = `
       },
     },
     "network_fee_hundredth_pips": 1000,
+    "network_fees": {
+      "internal_swap_network_fee": {
+        "rates": {
+          "Arbitrum": {
+            "ETH": 0n,
+            "USDC": 0n,
+          },
+          "Assethub": {
+            "DOT": 0n,
+            "USDC": 0n,
+            "USDT": 0n,
+          },
+          "Bitcoin": {
+            "BTC": 0n,
+          },
+          "Ethereum": {
+            "ETH": 0n,
+            "FLIP": 0n,
+            "USDC": 0n,
+            "USDT": 0n,
+          },
+          "Polkadot": {
+            "DOT": 0n,
+          },
+          "Solana": {
+            "SOL": 0n,
+            "USDC": 0n,
+          },
+        },
+        "standard_rate_and_minimum": {
+          "minimum": 0n,
+          "rate": 0n,
+        },
+      },
+      "regular_network_fee": {
+        "rates": {
+          "Arbitrum": {
+            "ETH": 0n,
+            "USDC": 0n,
+          },
+          "Assethub": {
+            "DOT": 0n,
+            "USDC": 0n,
+            "USDT": 0n,
+          },
+          "Bitcoin": {
+            "BTC": 0n,
+          },
+          "Ethereum": {
+            "ETH": 0n,
+            "FLIP": 0n,
+            "USDC": 0n,
+            "USDT": 0n,
+          },
+          "Polkadot": {
+            "DOT": 0n,
+          },
+          "Solana": {
+            "SOL": 0n,
+            "USDC": 0n,
+          },
+        },
+        "standard_rate_and_minimum": {
+          "minimum": 0n,
+          "rate": 0n,
+        },
+      },
+    },
     "swap_retry_delay_blocks": 5,
   },
 }
@@ -1636,6 +1704,74 @@ exports[`HttpClient > with server > handles cf_swapping_environment 1`] = `
     },
   },
   "network_fee_hundredth_pips": 1000,
+  "network_fees": {
+    "internal_swap_network_fee": {
+      "rates": {
+        "Arbitrum": {
+          "ETH": 0n,
+          "USDC": 0n,
+        },
+        "Assethub": {
+          "DOT": 0n,
+          "USDC": 0n,
+          "USDT": 0n,
+        },
+        "Bitcoin": {
+          "BTC": 0n,
+        },
+        "Ethereum": {
+          "ETH": 0n,
+          "FLIP": 0n,
+          "USDC": 0n,
+          "USDT": 0n,
+        },
+        "Polkadot": {
+          "DOT": 0n,
+        },
+        "Solana": {
+          "SOL": 0n,
+          "USDC": 0n,
+        },
+      },
+      "standard_rate_and_minimum": {
+        "minimum": 0n,
+        "rate": 0n,
+      },
+    },
+    "regular_network_fee": {
+      "rates": {
+        "Arbitrum": {
+          "ETH": 0n,
+          "USDC": 0n,
+        },
+        "Assethub": {
+          "DOT": 0n,
+          "USDC": 0n,
+          "USDT": 0n,
+        },
+        "Bitcoin": {
+          "BTC": 0n,
+        },
+        "Ethereum": {
+          "ETH": 0n,
+          "FLIP": 0n,
+          "USDC": 0n,
+          "USDT": 0n,
+        },
+        "Polkadot": {
+          "DOT": 0n,
+        },
+        "Solana": {
+          "SOL": 0n,
+          "USDC": 0n,
+        },
+      },
+      "standard_rate_and_minimum": {
+        "minimum": 0n,
+        "rate": 0n,
+      },
+    },
+  },
   "swap_retry_delay_blocks": 5,
 }
 `;

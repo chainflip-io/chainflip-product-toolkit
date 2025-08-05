@@ -72,8 +72,8 @@ importers:
   packages/bitcoin:
     dependencies:
       '@chainflip/utils':
-        specifier: 0.8.6
-        version: 0.8.6
+        specifier: 0.8.17
+        version: 0.8.17
       bignumber.js:
         specifier: ^9.3.1
         version: 9.3.1
@@ -93,8 +93,8 @@ importers:
         specifier: 1.9.3
         version: 1.9.3
       '@chainflip/utils':
-        specifier: 0.8.6
-        version: 0.8.6
+        specifier: 0.8.17
+        version: 0.8.17
       '@polkadot/types':
         specifier: ^16.4.2
         version: 16.4.2
@@ -108,8 +108,8 @@ importers:
   packages/delegation:
     dependencies:
       '@chainflip/utils':
-        specifier: ^0.8.16
-        version: 0.8.16
+        specifier: ^0.8.17
+        version: 0.8.17
 
   packages/eslint-config:
     dependencies:
@@ -132,8 +132,8 @@ importers:
   packages/extrinsics:
     devDependencies:
       '@chainflip/utils':
-        specifier: 0.8.6
-        version: 0.8.6
+        specifier: 0.8.17
+        version: 0.8.17
       '@polkadot/types':
         specifier: ^16.4.2
         version: 16.4.2
@@ -141,8 +141,8 @@ importers:
   packages/processor:
     dependencies:
       '@chainflip/utils':
-        specifier: 0.8.6
-        version: 0.8.6
+        specifier: 0.8.17
+        version: 0.8.17
       zod:
         specifier: ^3.25.75
         version: 3.25.75
@@ -172,8 +172,8 @@ importers:
   packages/rpc:
     dependencies:
       '@chainflip/utils':
-        specifier: 0.8.6
-        version: 0.8.6
+        specifier: 0.8.17
+        version: 0.8.17
       zod:
         specifier: ^3.25.75
         version: 3.25.75
@@ -191,8 +191,8 @@ importers:
   packages/scale:
     dependencies:
       '@chainflip/utils':
-        specifier: ^0.8.6
-        version: 0.8.6
+        specifier: ^0.8.17
+        version: 0.8.17
       scale-ts:
         specifier: ^1.6.1
         version: 1.6.1
@@ -207,8 +207,8 @@ importers:
         specifier: ^1.8.0
         version: 1.8.0
       '@chainflip/utils':
-        specifier: 0.8.6
-        version: 0.8.6
+        specifier: 0.8.17
+        version: 0.8.17
       '@coral-xyz/anchor':
         specifier: ^0.31.1
         version: 0.31.1(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)
@@ -232,8 +232,8 @@ importers:
   packages/testing:
     dependencies:
       '@chainflip/utils':
-        specifier: ^0.8.6
-        version: 0.8.6
+        specifier: ^0.8.17
+        version: 0.8.17
       vitest:
         specifier: 3.1.1
         version: 3.1.1(@types/node@24.1.0)(@vitest/ui@3.1.1)(tsx@4.20.3)(yaml@2.8.0)
@@ -301,8 +301,8 @@ packages:
   '@chainflip/utils@0.6.0':
     resolution: {integrity: sha512-ZwyNKv3FVVJw5aOcRf/4rTxCclP+prerxPnTGBrFcBYEYSrPlyx4eI1dc7J35xmKD2yq+vQgwNjCx1h6oJuoPA==}
 
-  '@chainflip/utils@0.8.16':
-    resolution: {integrity: sha512-V6dlqEGGkfJMzRuFsQkLNATsuH1WTUYmeufBgQHoMpJ88bIY/VSzl+DLd9uQjb/BGpIXgLqYG+QD7xBca7Wh9g==}
+  '@chainflip/utils@0.8.17':
+    resolution: {integrity: sha512-+PYWamkxlMwxbOTmxzyyZOQrop2roCYqWH6rLj/AVxm10RykQsiWiVRp5nqEHjhQMjpAoQPRJk/s3G8pJI0TQg==}
 
   '@chainflip/utils@0.8.2':
     resolution: {integrity: sha512-wVWSdd1i8+RY4IPqCLdsr/b2Y5cGTzSv6kE/nKhFhcUPELUO0YTRoVote/mUQ/Kd9MiQFaDiS1AEtcPZ0H2W6w==}
@@ -3490,7 +3490,7 @@ snapshots:
       bignumber.js: 9.3.1
       date-fns: 4.1.0
 
-  '@chainflip/utils@0.8.16':
+  '@chainflip/utils@0.8.17':
     dependencies:
       '@date-fns/utc': 2.1.0
       bignumber.js: 9.3.1
