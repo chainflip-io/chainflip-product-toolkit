@@ -1,3 +1,4 @@
+import { type PriceAsset } from '@chainflip/utils/chainflip';
 import { type HexString } from '@chainflip/utils/types';
 import { z } from 'zod';
 import {
@@ -37,6 +38,7 @@ import {
   cfSafeModeStatuses,
   cfGetTradingStrategyLimits,
   hexString,
+  cfOraclePrices,
 } from './parsers';
 
 type Nullish<T> = T | null | undefined;
@@ -228,6 +230,7 @@ export type RpcRequest = WithHash<{
   cf_get_trading_strategy_limits: [];
   cf_available_pools: [];
   cf_safe_mode_statuses: [];
+  cf_oracle_prices: [oraclePricePair?: Nullish<[PriceAsset, PriceAsset]>];
 }> & {
   chain_getBlockHash: [blockHeight?: number];
 };
@@ -272,6 +275,7 @@ export const rpcResult = {
   cf_safe_mode_statuses: cfSafeModeStatuses,
   broker_encode_cf_parameters: hexString,
   cf_encode_cf_parameters: hexString,
+  cf_oracle_prices: cfOraclePrices,
 } as const satisfies { [K in keyof RpcRequest]: z.ZodTypeAny };
 
 export type RpcMethod = keyof RpcRequest;

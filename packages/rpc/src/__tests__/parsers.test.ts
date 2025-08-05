@@ -12,8 +12,14 @@ import {
   cfGetTradingStrategyLimits,
   cfSwappingEnvironment,
   cfAccountInfo,
+  cfOraclePrices,
 } from '../parsers';
-import { cfAccountInfoOperator, tradingStrategies, tradingStrategiesLimits } from './fixtures';
+import {
+  cfAccountInfoOperator,
+  cfOraclePrice,
+  tradingStrategies,
+  tradingStrategiesLimits,
+} from './fixtures';
 
 describe('parsers', () => {
   describe('numberOrHex', () => {
@@ -1173,6 +1179,13 @@ describe('parsers', () => {
         fee_bps: 1000,
         delegation_acceptance: true,
       });
+    });
+  });
+
+  describe('cfOraclePrices', () => {
+    it('parses the cfOraclePrices response', () => {
+      const result = cfOraclePrices.parse(cfOraclePrice);
+      expect(result.length).toEqual(5);
     });
   });
 });

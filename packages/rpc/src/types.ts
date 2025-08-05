@@ -30,6 +30,7 @@ export type CfSwappingEnvironment = RpcResult<'cf_swapping_environment'>;
 export type CfSwapRate = RpcResult<'cf_swap_rate'>;
 export type CfSwapRateV2 = RpcResult<'cf_swap_rate_v2'>;
 export type CfSwapRateV3 = RpcResult<'cf_swap_rate_v3'>;
+export type CfOraclePrices = RpcResult<'cf_oracle_prices'>;
 
 export type CfAccountInfoResponse = RpcResponse<'cf_account_info'>;
 export type CfAccountsResponse = RpcResponse<'cf_accounts'>;
@@ -60,6 +61,7 @@ export type CfSwappingEnvironmentResponse = RpcResponse<'cf_swapping_environment
 export type CfSwapRateResponse = RpcResponse<'cf_swap_rate'>;
 export type CfSwapRateV2Response = RpcResponse<'cf_swap_rate_v2'>;
 export type CfSwapRateV3Response = RpcResponse<'cf_swap_rate_v3'>;
+export type CfOraclePricesResponse = RpcResponse<'cf_oracle_prices'>;
 
 export type CfUnregisteredAccount = z.output<typeof unregistered>;
 export type CfBrokerAccount = z.output<typeof broker>;

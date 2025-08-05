@@ -1,3 +1,4 @@
+import { priceAssets } from '@chainflip/utils/chainflip';
 import { isUndefined } from '@chainflip/utils/guard';
 import { isHex } from '@chainflip/utils/string';
 import { type HexString } from '@chainflip/utils/types';
@@ -161,7 +162,7 @@ export const cfSwappingEnvironment = z.object({
   max_swap_retry_duration_blocks: z.number().optional(),
   max_swap_request_duration_blocks: z.number().optional(),
   minimum_chunk_size: chainAssetMapFactory(numberOrHex.nullable(), null).optional(),
-  network_fees: networkFees.optional(), // TODO(1.10): remove optional
+  network_fees: networkFees,
 });
 
 export const cfFundingEnvironment = z.object({
@@ -339,7 +340,7 @@ export const validator = z.object({
   bound_redeem_address: hexString.nullable(),
   apy_bp: z.number().nullable(),
   restricted_balances: z.record(hexString, numberOrHex),
-  estimated_redeemable_balance: numberOrHex.optional(), // TODO(1.10): remove optional
+  estimated_redeemable_balance: numberOrHex,
 });
 
 export const cfAccountInfo = z.discriminatedUnion('role', [
@@ -463,7 +464,7 @@ export const cfAuctionState = z
     min_funding: numberOrHex,
     auction_size_range: range(z.number()),
     min_active_bid: numberOrHex,
-    min_bid: numberOrHex.optional().default(0), // TODO(1.10): remove optional
+    min_bid: numberOrHex,
   })
   .transform(rename({ epoch_duration: 'epoch_duration_blocks' }));
 
@@ -526,6 +527,16 @@ export const cfAvailablePools = z.array(
   }),
 );
 
+export const cfOraclePrices = z.array(
+  z.object({
+    price: numberOrHex,
+    updated_at_oracle_timestamp: z.number(),
+    updated_at_statechain_block: z.number(),
+    base_asset: z.enum(priceAssets),
+    quote_asset: z.enum(priceAssets),
+  }),
+);
+
 const broadcastPalletSafeModeStatuses = z.object({
   retry_enabled: z.boolean(),
   // TODO(1.10): make not optional
@@ -565,19 +576,11 @@ const cfSafeModeStatusesBase = z.object({
     range_order_update_enabled: z.boolean(),
     limit_order_update_enabled: z.boolean(),
   }),
-  trading_strategies: z
-    .object({
-      strategy_updates_enabled: z.boolean(),
-      strategy_closure_enabled: z.boolean(),
-      strategy_execution_enabled: z.boolean(),
-    })
-    // TODO(1.9): remove
-    .optional()
-    .default({
-      strategy_updates_enabled: false,
-      strategy_closure_enabled: false,
-      strategy_execution_enabled: false,
-    }),
+  trading_strategies: z.object({
+    strategy_updates_enabled: z.boolean(),
+    strategy_closure_enabled: z.boolean(),
+    strategy_execution_enabled: z.boolean(),
+  }),
   reputation: z.object({
     reporting_enabled: z.boolean(),
   }),

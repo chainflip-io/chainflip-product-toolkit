@@ -4,6 +4,7 @@ import {
   cfAuctionState,
   cfGetTradingStrategies,
   cfGetTradingStrategyLimits,
+  cfOraclePrices,
   cfSafeModeStatuses,
 } from '../parsers';
 import {
@@ -143,6 +144,74 @@ export const swappingEnvironment: z.input<typeof cfSwappingEnvironment> = {
     Solana: {
       SOL: '0x12a05f200',
       USDC: '0x3b9aca00',
+    },
+  },
+  network_fees: {
+    regular_network_fee: {
+      standard_rate_and_minimum: {
+        rate: 0,
+        minimum: 0,
+      },
+      rates: {
+        Ethereum: {
+          ETH: 0,
+          FLIP: 0,
+          USDC: 0,
+          USDT: 0,
+        },
+        Polkadot: {
+          DOT: 0,
+        },
+        Bitcoin: {
+          BTC: 0,
+        },
+        Arbitrum: {
+          ETH: 0,
+          USDC: 0,
+        },
+        Solana: {
+          SOL: 0,
+          USDC: 0,
+        },
+        Assethub: {
+          DOT: 0,
+          USDT: 0,
+          USDC: 0,
+        },
+      },
+    },
+    internal_swap_network_fee: {
+      standard_rate_and_minimum: {
+        rate: 0,
+        minimum: 0,
+      },
+      rates: {
+        Ethereum: {
+          ETH: 0,
+          FLIP: 0,
+          USDC: 0,
+          USDT: 0,
+        },
+        Polkadot: {
+          DOT: 0,
+        },
+        Bitcoin: {
+          BTC: 0,
+        },
+        Arbitrum: {
+          ETH: 0,
+          USDC: 0,
+        },
+        Solana: {
+          SOL: 0,
+          USDC: 0,
+        },
+        Assethub: {
+          DOT: 0,
+          USDT: 0,
+          USDC: 0,
+        },
+      },
     },
   },
 };
@@ -1169,3 +1238,41 @@ export const cfAccountInfoOperator: z.input<typeof cfAccountInfo> = {
   blocked: ['cFNfitvPd2acNNFgijVN3Ls4gG112PZPq7sY2FGtPgEk25wV9'],
   delegators: {},
 };
+
+export const cfOraclePrice: z.input<typeof cfOraclePrices> = [
+  {
+    price: '0x1e449a940000000000000000000000000000000000',
+    updated_at_oracle_timestamp: 1754318883,
+    updated_at_statechain_block: 43871,
+    base_asset: 'Btc',
+    quote_asset: 'Usd',
+  },
+  {
+    price: '0x44b82fa09b5a52cb98b405447',
+    updated_at_oracle_timestamp: 1754056071,
+    updated_at_statechain_block: 69,
+    base_asset: 'Eth',
+    quote_asset: 'Usd',
+  },
+  {
+    price: '0x19999999999999999999999999999999',
+    updated_at_oracle_timestamp: 1754056071,
+    updated_at_statechain_block: 69,
+    base_asset: 'Sol',
+    quote_asset: 'Usd',
+  },
+  {
+    price: '0x100000000000000000000000000000000',
+    updated_at_oracle_timestamp: 1752662428,
+    updated_at_statechain_block: 9,
+    base_asset: 'Usdc',
+    quote_asset: 'Usd',
+  },
+  {
+    price: '0x100000000000000000000000000000000',
+    updated_at_oracle_timestamp: 1752662431,
+    updated_at_statechain_block: 9,
+    base_asset: 'Usdt',
+    quote_asset: 'Usd',
+  },
+];
