@@ -23,6 +23,10 @@ export const chainflipAssets = [
 export type ChainflipAsset = (typeof chainflipAssets)[number];
 
 export const assetSymbols = ['USDC', 'USDT', 'FLIP', 'DOT', 'ETH', 'BTC', 'SOL'] as const;
+
+export const priceAssets = ['Btc', 'Eth', 'Sol', 'Usdc', 'Usdt', 'Usd'] as const;
+export type PriceAsset = (typeof priceAssets)[number];
+
 /** @deprecated use `assetSymbols` instead */
 export const rpcAssets = assetSymbols;
 export type AssetSymbol = (typeof assetSymbols)[number];
