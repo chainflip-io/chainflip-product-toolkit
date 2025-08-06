@@ -43,7 +43,7 @@
     "@vitest/ui": "3.1.1"
   },
   "dependencies": {
-    "@date-fns/utc": "^2.1.0",
+    "@date-fns/utc": "^2.1.1",
     "bignumber.js": "^9.3.1",
     "date-fns": "4.1.0"
   },
