@@ -1,4 +1,3 @@
-import assert from 'assert';
 import { describe, expect, it } from 'vitest';
 import {
   cfBoostPoolDetails,
