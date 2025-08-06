@@ -1165,20 +1165,24 @@ describe('parsers', () => {
     it('parses the cfAccountInfo for an operator', () => {
       const result = cfAccountInfo.parse(cfAccountInfoOperator);
 
-      expect(result.role).toEqual('operator');
-
-      assert(result.role === 'operator');
-
-      expect(result.allowed).toEqual([]);
-      expect(result.blocked).toEqual(['cFNfitvPd2acNNFgijVN3Ls4gG112PZPq7sY2FGtPgEk25wV9']);
-      expect(result.delegators).toEqual({});
-      expect(result.managed_validators).toEqual({
-        cFNkiayhWvppDY5zSzG8rAYMaqbunLBAAbBQcAgFF4x1jaMSy: 9999996796922000000n,
-      });
-      expect(result.settings).toEqual({
-        fee_bps: 1000,
-        delegation_acceptance: true,
-      });
+      expect(result).toMatchInlineSnapshot(`
+        {
+          "allowed": [],
+          "blocked": [
+            "cFNfitvPd2acNNFgijVN3Ls4gG112PZPq7sY2FGtPgEk25wV9",
+          ],
+          "delegators": {},
+          "flip_balance": 9999998929147000000n,
+          "managed_validators": {
+            "cFNkiayhWvppDY5zSzG8rAYMaqbunLBAAbBQcAgFF4x1jaMSy": 9999996796922000000n,
+          },
+          "role": "operator",
+          "settings": {
+            "delegation_acceptance": "Allow",
+            "fee_bps": 1000,
+          },
+        }
+      `);
     });
   });
 

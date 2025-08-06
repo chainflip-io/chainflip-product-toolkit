@@ -1237,6 +1237,7 @@ export const cfAccountInfoOperator: z.input<typeof cfAccountInfo> = {
   },
   blocked: ['cFNfitvPd2acNNFgijVN3Ls4gG112PZPq7sY2FGtPgEk25wV9'],
   delegators: {},
+  flip_balance: '0x8ac7220b3617f4c0',
 };
 
 export const cfOraclePrice: z.input<typeof cfOraclePrices> = [
