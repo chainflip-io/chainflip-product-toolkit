@@ -293,14 +293,13 @@ export const broker = z.object({
 });
 
 export const operator = z.object({
+  flip_balance: numberOrHex,
   role: z.literal('operator'),
   managed_validators: z.record(z.string(), numberOrHex),
   delegators: z.record(z.string(), numberOrHex),
   settings: z.object({
     fee_bps: z.number(),
-    delegation_acceptance: z
-      .union([z.literal('Allow'), z.literal('Deny')])
-      .transform((value) => value === 'Allow'),
+    delegation_acceptance: z.enum(['Allow', 'Deny']),
   }),
   allowed: z.array(z.string()).optional().default([]),
   blocked: z.array(z.string()).optional().default([]),
