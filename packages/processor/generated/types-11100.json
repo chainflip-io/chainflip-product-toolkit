@@ -13581,6 +13581,15 @@
           "value": "u16"
         }
       }
+    },
+    "SwapCanceled": {
+      "type": "struct",
+      "fields": {
+        "swapId": {
+          "type": "primitive",
+          "value": "u64"
+        }
+      }
     }
   },
   "LiquidityProvider": {
