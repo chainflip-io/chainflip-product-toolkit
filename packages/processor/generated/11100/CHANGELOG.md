@@ -50,6 +50,7 @@ SolanaIngressEgress:
     - update: added
 
 Swapping:
+  - SwapCanceled: added
   - SwapDepositAddressReady:
     - refundParameters: added
   - SwapRequested:
