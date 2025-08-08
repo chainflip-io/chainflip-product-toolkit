@@ -295,7 +295,7 @@ export const broker = z.object({
 export const operator = z.object({
   flip_balance: numberOrHex,
   role: z.literal('operator'),
-  managed_validators: z.record(z.string(), numberOrHex),
+  managed_validators: z.record(accountId, numberOrHex),
   delegators: z.record(accountId, numberOrHex),
   settings: z.object({
     fee_bps: z.number(),
