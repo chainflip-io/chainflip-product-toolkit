@@ -10,17 +10,20 @@ import { RpcRequest, type JsonRpcRequest, type RpcMethod } from '../common';
 import { HttpClient } from '../index';
 import { type AssetAndChain, type cfSwapRate } from '../parsers';
 import {
+  accounts,
   auctionState,
   availablePools,
   boostPoolsDepth,
+  BROKER_ACCOUNT_ID,
+  BROKER_ACCOUNT_ID2,
   brokerAccount,
-  brokerAccountNoAffiliates,
   cfOraclePrice,
   environment,
   failedCallEvm,
   fundingEnvironment,
   ingressEgressEnvironment,
   liquidityProviderAccount,
+  LP_ACCOUNT_ID,
   poolOrderbook,
   poolOrders,
   poolPriceV2,
@@ -39,7 +42,8 @@ import {
   tradingStrategies,
   tradingStrategiesLimits,
   unregisteredAccount,
-  validatorAccount,
+  VALIDATOR_ACCOUNT_ID,
+  VALIDATOR_ACCOUNT_ID2,
 } from './fixtures';
 
 const isHexString = (value: unknown): value is HexString =>
@@ -108,11 +112,6 @@ describe(HttpClient, () => {
       client.sendRequest('unknown_method' as any),
     ).rejects.toThrowErrorMatchingInlineSnapshot(`[Error: Unknown method: unknown_method]`);
   });
-
-  const LP_ACCOUNT_ID = 'cFMVtnPTJFYFvnHXK14HZ6XWDSCAByTPZDWrTeFEc2B8A3m7M';
-  const BROKER_ACCOUNT_ID = 'cFJjZKzA5rUTb9qkZMGfec7piCpiAQKr15B4nALzriMGQL8BE';
-  const BROKER_ACCOUNT_ID2 = 'cFJjZKzA5rUTb9qkZMGfec7piCpiAQKr15B4nALzriMGQL8BF';
-  const VALIDATOR_ACCOUNT_ID = 'cFKzr7DwLCRtSkou5H5moKri7g9WwJ4tAbVJv6dZGhLb811Tc';
 
   describe('with archive node', () => {
     it('uses the archive node for already discarded blocks', async () => {
@@ -297,13 +296,11 @@ describe(HttpClient, () => {
         case 'cf_account_info':
           switch (body.params[0]) {
             case LP_ACCOUNT_ID:
-              return respond(liquidityProviderAccount);
             case BROKER_ACCOUNT_ID:
-              return respond(brokerAccount);
             case BROKER_ACCOUNT_ID2:
-              return respond(brokerAccountNoAffiliates);
             case VALIDATOR_ACCOUNT_ID:
-              return respond(validatorAccount);
+            case VALIDATOR_ACCOUNT_ID2:
+              return respond(accounts[body.params[0]]);
             default:
               return respond(unregisteredAccount);
           }
@@ -647,6 +644,10 @@ describe(HttpClient, () => {
 
     it('gets validator account info', async () => {
       expect(await client.sendRequest('cf_account_info', VALIDATOR_ACCOUNT_ID)).toMatchSnapshot();
+    });
+
+    it('gets validator account info with an operator', async () => {
+      expect(await client.sendRequest('cf_account_info', VALIDATOR_ACCOUNT_ID2)).toMatchSnapshot();
     });
 
     it('gets lp account info', async () => {
