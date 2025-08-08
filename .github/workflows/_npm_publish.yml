@@ -70,11 +70,11 @@ jobs:
 
       - name: Build 🏗️
         env:
-          NODE_OPTIONS: '--max_old_space_size=8192'
+          NODE_OPTIONS: '--max-old-space-size=16384'
         run: ${{ inputs.build_cmd }}
 
       - name: Publish npm package 📦
         env:
-          NODE_OPTIONS: '--max_old_space_size=8192'
+          NODE_OPTIONS: '--max-old-space-size=16384'
           NODE_AUTH_TOKEN: ${{ secrets.node_auth_token }}
         run: ${{ inputs.publish_cmd }}
