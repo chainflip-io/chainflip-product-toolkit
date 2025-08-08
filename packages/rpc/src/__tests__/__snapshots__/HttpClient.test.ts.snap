@@ -315,6 +315,30 @@ exports[`HttpClient > with server > gets validator account info 1`] = `
 }
 `;
 
+exports[`HttpClient > with server > gets validator account info with an operator 1`] = `
+{
+  "apy_bp": 970,
+  "bond": 225033425976807428934928n,
+  "bound_redeem_address": "0x9a449133c6a8b4e117840b69e2a1d43634f562d3",
+  "estimated_redeemable_balance": 0n,
+  "flip_balance": 252186205332783022058667n,
+  "is_bidding": true,
+  "is_current_authority": true,
+  "is_current_backup": false,
+  "is_online": true,
+  "is_qualified": true,
+  "keyholder_epochs": [
+    197,
+    198,
+  ],
+  "last_heartbeat": 2930096,
+  "operator": "cFM7AjUFjqtrRStbEuNRYzEpjAqKEWP3om8FydieAhbqpqRKz",
+  "reputation_points": 2880,
+  "restricted_balances": {},
+  "role": "validator",
+}
+`;
+
 exports[`HttpClient > with server > handles cf_auction_state 1`] = `
 {
   "auction_size_range": [

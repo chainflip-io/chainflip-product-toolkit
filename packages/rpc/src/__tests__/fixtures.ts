@@ -700,6 +700,39 @@ export const validatorAccount: z.input<typeof validator> = {
   estimated_redeemable_balance: '0x0',
 };
 
+export const validatorAccount2: z.input<typeof validator> = {
+  role: 'validator',
+  flip_balance: '0x35670aa54a62ccedacab',
+  bond: '0x2fa71622a7b77fdf4d10',
+  last_heartbeat: 2930096,
+  reputation_points: 2880,
+  keyholder_epochs: [197, 198],
+  is_current_authority: true,
+  is_current_backup: false,
+  is_qualified: true,
+  is_online: true,
+  is_bidding: true,
+  bound_redeem_address: '0x9a449133c6a8b4e117840b69e2a1d43634f562d3',
+  apy_bp: 970,
+  restricted_balances: {},
+  estimated_redeemable_balance: '0x0',
+  operator: 'cFM7AjUFjqtrRStbEuNRYzEpjAqKEWP3om8FydieAhbqpqRKz',
+};
+
+export const VALIDATOR_ACCOUNT_ID = 'cFKzr7DwLCRtSkou5H5moKri7g9WwJ4tAbVJv6dZGhLb811Tc';
+export const VALIDATOR_ACCOUNT_ID2 = 'cFJ6qQZ3ybhMDPt7KXDUUj3aLC2DXaPm8rCLCfLEsyMRH2AXK';
+export const LP_ACCOUNT_ID = 'cFMVtnPTJFYFvnHXK14HZ6XWDSCAByTPZDWrTeFEc2B8A3m7M';
+export const BROKER_ACCOUNT_ID = 'cFJjZKzA5rUTb9qkZMGfec7piCpiAQKr15B4nALzriMGQL8BE';
+export const BROKER_ACCOUNT_ID2 = 'cFMmWJ1U3x1wZFo4qf36XKG8BxejtMvkKE9DZEt2UtASGMBMf';
+
+export const accounts: Record<`cF${string}`, z.input<typeof cfAccountInfo>> = {
+  [VALIDATOR_ACCOUNT_ID]: validatorAccount,
+  [VALIDATOR_ACCOUNT_ID2]: validatorAccount2,
+  [LP_ACCOUNT_ID]: liquidityProviderAccount,
+  [BROKER_ACCOUNT_ID]: brokerAccount,
+  [BROKER_ACCOUNT_ID2]: brokerAccountNoAffiliates,
+};
+
 export const poolOrders: z.input<typeof cfPoolOrders> = {
   limit_orders: {
     asks: [

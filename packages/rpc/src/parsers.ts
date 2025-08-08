@@ -272,6 +272,8 @@ export const requestSwapParameterEncoding = z.discriminatedUnion('chain', [
   }),
 ]);
 
+const accountId = z.string().refine((val): val is `cF${string}` => val.startsWith('cF'));
+
 export const unregistered = z.object({
   role: z.literal('unregistered'),
   flip_balance: numberOrHex,
@@ -285,9 +287,7 @@ export const broker = z.object({
   earned_fees: chainAssetMapFactory(numberOrHex, 0),
   btc_vault_deposit_address: z.string().nullable().optional(),
   affiliates: z
-    .array(
-      z.object({ account_id: z.string(), short_id: z.number(), withdrawal_address: hexString }),
-    )
+    .array(z.object({ account_id: accountId, short_id: z.number(), withdrawal_address: hexString }))
     .optional()
     .default([]),
 });
@@ -295,14 +295,14 @@ export const broker = z.object({
 export const operator = z.object({
   flip_balance: numberOrHex,
   role: z.literal('operator'),
-  managed_validators: z.record(z.string(), numberOrHex),
-  delegators: z.record(z.string(), numberOrHex),
+  managed_validators: z.record(accountId, numberOrHex),
+  delegators: z.record(accountId, numberOrHex),
   settings: z.object({
     fee_bps: z.number(),
     delegation_acceptance: z.enum(['Allow', 'Deny']),
   }),
-  allowed: z.array(z.string()).optional().default([]),
-  blocked: z.array(z.string()).optional().default([]),
+  allowed: z.array(accountId).optional().default([]),
+  blocked: z.array(accountId).optional().default([]),
 });
 
 const boostBalances = z.array(
@@ -340,6 +340,7 @@ export const validator = z.object({
   apy_bp: z.number().nullable(),
   restricted_balances: z.record(hexString, numberOrHex),
   estimated_redeemable_balance: numberOrHex,
+  operator: accountId.optional(),
 });
 
 export const cfAccountInfo = z.discriminatedUnion('role', [
