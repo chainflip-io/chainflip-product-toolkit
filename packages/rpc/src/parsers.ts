@@ -463,7 +463,7 @@ export const cfAuctionState = z
     redemption_period_as_percentage: z.number(),
     min_funding: numberOrHex,
     auction_size_range: range(z.number()),
-    min_active_bid: numberOrHex,
+    min_active_bid: numberOrHex.nullable(),
     min_bid: numberOrHex,
   })
   .transform(rename({ epoch_duration: 'epoch_duration_blocks' }));
