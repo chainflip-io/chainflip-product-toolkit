@@ -32,7 +32,8 @@ export function timedMethod<P extends ProcessorStore<any, any>, I extends Indexe
     const start = performance.now();
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
     const result = await method.apply(this, args);
-    this.timings[propertyKey] = performance.now() - start;
+    this.timings[propertyKey as Exclude<keyof typeof this.timings, 'eventHandlers'>] =
+      performance.now() - start;
     // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     return result;
   };
@@ -54,9 +55,10 @@ export default class Processor<P extends ProcessorStore<unknown, unknown>, I ext
   protected readonly startHeight: number = -1;
 
   protected timings = {
+    total: 0,
     extrinsicHandlers: 0,
     eventHandlers: {} as Record<string, number[]>,
-  } as Record<string, number | Record<string, number[]>>;
+  };
 
   constructor(
     { batchSize, transactionTimeout, eventHandlers, name }: ProcessorOptions<P>,
@@ -73,6 +75,7 @@ export default class Processor<P extends ProcessorStore<unknown, unknown>, I ext
 
   protected async preBlockHook(_store: P, _block: Block): Promise<void> {
     this.timings = {
+      total: performance.now(),
       extrinsicHandlers: 0,
       eventHandlers: {} as Record<string, number[]>,
     };
@@ -137,7 +140,7 @@ export default class Processor<P extends ProcessorStore<unknown, unknown>, I ext
     if (handler === null) return null;
 
     this.timings.eventHandlers ??= {};
-    const timing = this.timings.eventHandlers as Record<string, number[]>;
+    const timing = this.timings.eventHandlers;
     return (async (args) => {
       timing[name] ??= [];
       const start = performance.now();
@@ -214,7 +217,7 @@ export default class Processor<P extends ProcessorStore<unknown, unknown>, I ext
       timings: {
         ...this.timings,
         eventHandlers: Object.fromEntries(
-          Object.entries(this.timings.eventHandlers as Record<string, number[]>)
+          Object.entries(this.timings.eventHandlers)
             .map(([key, value]) => {
               const total = sum(value);
               eventHandlerCount += value.length;
@@ -249,6 +252,38 @@ export default class Processor<P extends ProcessorStore<unknown, unknown>, I ext
   stop() {
     this.logger.info('stopping processing of blocks');
     this.running = false;
+  }
+
+  private logTimings(block: Block) {
+    this.timings.total = performance.now() - this.timings.total;
+
+    let eventHandlersTotal = 0;
+    let eventHandlerCount = 0;
+    this.logger.info('processBlock timings', {
+      block: block.height,
+      timings: {
+        ...this.timings,
+        eventHandlers: Object.fromEntries(
+          Object.entries(this.timings.eventHandlers)
+            .map(([key, value]) => {
+              const total = sum(value);
+              eventHandlerCount += value.length;
+              eventHandlersTotal += total;
+              return [key, { average: average(value), count: value.length, total }] as const;
+            })
+            .concat([
+              [
+                'overall',
+                {
+                  total: eventHandlersTotal,
+                  count: eventHandlerCount,
+                  average: eventHandlersTotal / eventHandlerCount,
+                },
+              ],
+            ]),
+        ),
+      },
+    });
   }
 
   async start() {
@@ -311,6 +346,7 @@ export default class Processor<P extends ProcessorStore<unknown, unknown>, I ext
               await this.handleBlock(txClient, block);
               await this.postBlockHook(txClient, block);
               await this.updateState(txClient, block);
+              this.logTimings(block);
             },
             { timeout: this.transactionTimeout },
           );
