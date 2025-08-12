@@ -210,33 +210,6 @@ export default class Processor<P extends ProcessorStore<unknown, unknown>, I ext
         }
       }
     }
-
-    let eventHandlersTotal = 0;
-    let eventHandlerCount = 0;
-    this.logger.info(`processBlock ${block.height} timings:`, {
-      timings: {
-        ...this.timings,
-        eventHandlers: Object.fromEntries(
-          Object.entries(this.timings.eventHandlers)
-            .map(([key, value]) => {
-              const total = sum(value);
-              eventHandlerCount += value.length;
-              eventHandlersTotal += total;
-              return [key, { average: average(value), count: value.length, total }] as const;
-            })
-            .concat([
-              [
-                'overall',
-                {
-                  total: eventHandlersTotal,
-                  count: eventHandlerCount,
-                  average: eventHandlersTotal / eventHandlerCount,
-                },
-              ],
-            ]),
-        ),
-      },
-    });
   }
 
   private async updateState(store: P, block: Block) {
