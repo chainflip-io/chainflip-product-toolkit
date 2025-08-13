@@ -52,5 +52,6 @@ jobs:
       package_scope: '@chainflip-io'
       build_cmd: pnpm --filter @chainflip/${{ needs.get-release-context.outputs.publish }} build
       publish_cmd: pnpm --filter @chainflip/${{ needs.get-release-context.outputs.publish }} publish --tag ${{ needs.get-release-context.outputs.publish-tag }}
+      runs_on: digitalocean
     secrets:
       node_auth_token: ${{ secrets.CF_NPM_JS_PACKAGES_READ_WRITE }}
