@@ -32,8 +32,7 @@ export function timedMethod<P extends ProcessorStore<any, any>, I extends Indexe
     const start = performance.now();
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
     const result = await method.apply(this, args);
-    this.timings[propertyKey as Exclude<keyof typeof this.timings, 'eventHandlers'>] =
-      performance.now() - start;
+    this.timings[propertyKey] = performance.now() - start;
     // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     return result;
   };
@@ -58,7 +57,7 @@ export default class Processor<P extends ProcessorStore<unknown, unknown>, I ext
     total: 0,
     extrinsicHandlers: 0,
     eventHandlers: {} as Record<string, number[]>,
-  };
+  } as Record<string, number | Record<string, number[]>>;
 
   constructor(
     { batchSize, transactionTimeout, eventHandlers, name }: ProcessorOptions<P>,
@@ -140,7 +139,7 @@ export default class Processor<P extends ProcessorStore<unknown, unknown>, I ext
     if (handler === null) return null;
 
     this.timings.eventHandlers ??= {};
-    const timing = this.timings.eventHandlers;
+    const timing = this.timings.eventHandlers as Record<string, number[]>;
     return (async (args) => {
       timing[name] ??= [];
       const start = performance.now();
@@ -228,7 +227,7 @@ export default class Processor<P extends ProcessorStore<unknown, unknown>, I ext
   }
 
   private logTimings(block: Block) {
-    this.timings.total = performance.now() - this.timings.total;
+    this.timings.total = performance.now() - (this.timings.total as number);
 
     let eventHandlersTotal = 0;
     let eventHandlerCount = 0;
@@ -237,7 +236,7 @@ export default class Processor<P extends ProcessorStore<unknown, unknown>, I ext
       timings: {
         ...this.timings,
         eventHandlers: Object.fromEntries(
-          Object.entries(this.timings.eventHandlers)
+          Object.entries(this.timings.eventHandlers as Record<string, number[]>)
             .map(([key, value]) => {
               const total = sum(value);
               eventHandlerCount += value.length;
