@@ -110,6 +110,9 @@ importers:
       '@chainflip/utils':
         specifier: ^0.8.17
         version: 0.8.17
+      scale-ts:
+        specifier: ^1.6.1
+        version: 1.6.1
 
   packages/eslint-config:
     dependencies:

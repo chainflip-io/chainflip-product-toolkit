@@ -15,7 +15,8 @@
     "test": "vitest"
   },
   "dependencies": {
-    "@chainflip/utils": "^0.8.17"
+    "@chainflip/utils": "^0.8.17",
+    "scale-ts": "^1.6.1"
   },
   "files": [
     "dist",
