@@ -26,7 +26,7 @@ type CallData =
       maxBid?: bigint | undefined;
     };
 
-const encodeInnerCallData = (data: CallData): CodecType<typeof DelegationApi> => {
+const buildDelegationApiData = (data: CallData): CodecType<typeof DelegationApi> => {
   switch (data.call) {
     case 'delegate':
       return {
@@ -43,5 +43,5 @@ const encodeInnerCallData = (data: CallData): CodecType<typeof DelegationApi> =>
   }
 };
 
-export const buildDelegationCallData = (data: CallData): `0x${string}` =>
-  bytesToHex(EthereumSCApi.enc({ tag: 'Delegation', value: encodeInnerCallData(data) }));
+export const serializeDelegationCall = (data: CallData): `0x${string}` =>
+  bytesToHex(EthereumSCApi.enc({ tag: 'Delegation', value: buildDelegationApiData(data) }));
