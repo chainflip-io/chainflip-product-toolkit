@@ -1,8 +1,8 @@
-import { assert } from '@chainflip/utils/assertion';
+import { assert, unreachable } from '@chainflip/utils/assertion';
 import { bytesToHex } from '@chainflip/utils/bytes';
 import { CHAINFLIP_SS58_PREFIX } from '@chainflip/utils/consts';
 import * as ss58 from '@chainflip/utils/ss58';
-import { DelegationApi } from './codecs';
+import { EthereumSCApi } from './codecs';
 
 export const ethereumAddressToAccountId = (address: `0x${string}`): `cF${string}` => {
   assert(address.startsWith('0x') && address.length === 42, 'Invalid Ethereum address format');
@@ -28,20 +28,27 @@ type CallData =
   | { type: 'undelegate' }
   | { type: 'setMaxBid'; maybeMaxBid?: bigint | undefined };
 
-export const buildCallData = (data: CallData): `0x${string}` => {
+const encodeInnerCallData = (data: CallData) => {
   switch (data.type) {
     case 'delegate':
-      return bytesToHex(
-        DelegationApi.enc({
-          tag: 'Delegate',
-          value: { operator: ss58.decode(data.operator).data },
-        }),
-      );
+      return {
+        tag: 'Delegate',
+        value: { operator: ss58.decode(data.operator).data },
+      } as const;
     case 'undelegate':
-      return bytesToHex(DelegationApi.enc({ tag: 'Undelegate', value: undefined }));
+      return { tag: 'Undelegate', value: undefined } as const;
     case 'setMaxBid':
-      return bytesToHex(
-        DelegationApi.enc({ tag: 'SetMaxBid', value: { maybeMaxBid: data.maybeMaxBid } }),
-      );
+      return { tag: 'SetMaxBid', value: { maybeMaxBid: data.maybeMaxBid } } as const;
+    default:
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+      return unreachable(data, `Unsupported call type: ${(data as any)?.type}`);
   }
 };
+
+export const buildCallData = (data: CallData): `0x${string}` =>
+  bytesToHex(
+    EthereumSCApi.enc({
+      tag: 'Delegation',
+      value: encodeInnerCallData(data),
+    }),
+  );

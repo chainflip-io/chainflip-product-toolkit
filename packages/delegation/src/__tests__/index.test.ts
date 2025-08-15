@@ -46,20 +46,29 @@ describe(buildCallData, () => {
         type: 'delegate',
         operator: 'cFMjXCTxTHVkSqbKzeVwJ25TJxLqc1Vn9usPgUGmZhsyvHRQZ',
       }),
-    ).toStrictEqual('0x00aadef2b57f70666b05f95dd3d223bc85df6c03b28d36f8cc2026383d8428af23');
+    ).toStrictEqual('0x0000aadef2b57f70666b05f95dd3d223bc85df6c03b28d36f8cc2026383d8428af23');
   });
 
   it('builds the Undelegate call data', () => {
-    expect(buildCallData({ type: 'undelegate' })).toStrictEqual('0x01');
+    expect(buildCallData({ type: 'undelegate' })).toStrictEqual('0x0001');
   });
 
   it('builds the SetMaxBid call data with a max bid', () => {
     expect(buildCallData({ type: 'setMaxBid', maybeMaxBid: BigInt(10e18) })).toStrictEqual(
-      '0x02010000e8890423c78a0000000000000000',
+      '0x0002010000e8890423c78a0000000000000000',
     );
   });
 
   it('builds the SetMaxBid call data without a max bid', () => {
-    expect(buildCallData({ type: 'setMaxBid' })).toStrictEqual('0x0200');
+    expect(buildCallData({ type: 'setMaxBid' })).toStrictEqual('0x000200');
+  });
+
+  it('throws for unsupported call types', () => {
+    expect(() =>
+      buildCallData({
+        // @ts-expect-error type doesn't exist
+        type: 'unsupported',
+      }),
+    ).toThrow('Unsupported call type');
   });
 });
