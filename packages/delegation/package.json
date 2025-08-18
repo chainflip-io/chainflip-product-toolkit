@@ -18,6 +18,9 @@
     "@chainflip/utils": "^0.8.17",
     "scale-ts": "^1.6.1"
   },
+  "peerDependencies": {
+    "viem": "^2.34.0"
+  },
   "files": [
     "dist",
     "README.md"
