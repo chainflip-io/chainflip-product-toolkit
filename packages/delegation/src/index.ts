@@ -3,9 +3,9 @@ import { bytesToHex } from '@chainflip/utils/bytes';
 import { ChainflipNetwork } from '@chainflip/utils/chainflip';
 import { CHAINFLIP_SS58_PREFIX } from '@chainflip/utils/consts';
 import * as ss58 from '@chainflip/utils/ss58';
-import type { Account, WalletClient } from 'viem';
+import { erc20Abi, type PublicClient, type WalletClient } from 'viem';
 import { scUtils } from './abis';
-import { SC_UTILS_ADDRESS } from './constants';
+import { FLIP_ADDRESSES, SC_UTILS_ADDRESSES } from './constants';
 import { serializeDelegationCall } from './scale';
 
 export const ethereumAddressToAccountId = (address: `0x${string}`): `cF${string}` => {
@@ -29,7 +29,8 @@ export const accountIdToEthereumAddress = (accountId: `cF${string}`): `0x${strin
 
 export class DelegationSDK {
   constructor(
-    private readonly client: WalletClient,
+    private readonly walletClient: WalletClient,
+    private readonly publicClient: PublicClient,
     private readonly network: ChainflipNetwork,
     private readonly options?: { rpcUrl?: string },
   ) {}
@@ -40,50 +41,90 @@ export class DelegationSDK {
     return serializeDelegationCall(data);
   }
 
-  private async withAccount<T>(cb: (account: Account) => Promise<T>): Promise<T> {
-    const { account } = this.client;
+  private getAccount() {
+    const { account } = this.walletClient;
 
     assert(account !== undefined, 'no account provided for delegation call');
 
-    return cb(account);
+    return account;
   }
 
-  async delegate(amount: bigint, operator: `cF${string}`): Promise<`0x${string}`> {
-    return this.withAccount(async (account) =>
-      this.client.writeContract({
-        address: SC_UTILS_ADDRESS[this.network],
-        abi: scUtils,
-        functionName: 'depositToScGateway',
-        args: [amount, await this.encodeScBytes({ call: 'delegate', operator })],
-        chain: this.client.chain,
+  private async approveFlip(requiredAmount: bigint) {
+    const scUtilsAddress = SC_UTILS_ADDRESSES[this.network];
+    const flipAddress = FLIP_ADDRESSES[this.network];
+    const account = this.getAccount();
+
+    const currentAllowance = await this.publicClient.readContract({
+      abi: erc20Abi,
+      functionName: 'allowance',
+      args: [account.address, scUtilsAddress],
+      address: flipAddress,
+    });
+
+    if (currentAllowance < requiredAmount) {
+      const hash = await this.walletClient.writeContract({
+        abi: erc20Abi,
+        functionName: 'approve',
+        args: [scUtilsAddress, requiredAmount - currentAllowance],
         account,
-      }),
-    );
+        chain: this.walletClient.chain,
+        address: flipAddress,
+      });
+
+      await this.publicClient.waitForTransactionReceipt({ hash });
+    }
   }
 
-  async undelegate(): Promise<`0x${string}`> {
-    return this.withAccount(async (account) =>
-      this.client.writeContract({
-        address: SC_UTILS_ADDRESS[this.network],
-        abi: scUtils,
-        functionName: 'callSc',
-        args: [await this.encodeScBytes({ call: 'undelegate' })],
-        chain: this.client.chain,
-        account,
-      }),
-    );
+  async delegate(amount: bigint, operator: `cF${string}`) {
+    await this.approveFlip(amount);
+
+    const { request } = await this.publicClient.simulateContract({
+      address: SC_UTILS_ADDRESSES[this.network],
+      abi: scUtils,
+      functionName: 'depositToScGateway',
+      args: [amount, await this.encodeScBytes({ call: 'delegate', operator })],
+      chain: this.walletClient.chain,
+      account: this.getAccount(),
+    });
+
+    const hash = await this.walletClient.writeContract(request);
+
+    await this.publicClient.waitForTransactionReceipt({ hash });
+
+    return hash;
   }
 
-  async setMaxBid(maxBid?: bigint): Promise<`0x${string}`> {
-    return this.withAccount(async (account) =>
-      this.client.writeContract({
-        address: SC_UTILS_ADDRESS[this.network],
-        abi: scUtils,
-        functionName: 'callSc',
-        args: [await this.encodeScBytes({ call: 'setMaxBid', maxBid })],
-        chain: this.client.chain,
-        account,
-      }),
-    );
+  async undelegate() {
+    const { request } = await this.publicClient.simulateContract({
+      address: SC_UTILS_ADDRESSES[this.network],
+      abi: scUtils,
+      functionName: 'callSc',
+      args: [await this.encodeScBytes({ call: 'undelegate' })],
+      chain: this.walletClient.chain,
+      account: this.getAccount(),
+    });
+
+    const hash = await this.walletClient.writeContract(request);
+
+    await this.publicClient.waitForTransactionReceipt({ hash });
+
+    return hash;
+  }
+
+  async setMaxBid(maxBid?: bigint) {
+    const { request } = await this.publicClient.simulateContract({
+      address: SC_UTILS_ADDRESSES[this.network],
+      abi: scUtils,
+      functionName: 'callSc',
+      args: [await this.encodeScBytes({ call: 'setMaxBid', maxBid })],
+      chain: this.walletClient.chain,
+      account: this.getAccount(),
+    });
+
+    const hash = await this.walletClient.writeContract(request);
+
+    await this.publicClient.waitForTransactionReceipt({ hash });
+
+    return hash;
   }
 }

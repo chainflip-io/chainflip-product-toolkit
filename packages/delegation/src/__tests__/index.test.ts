@@ -1,8 +1,15 @@
 import * as ss58 from '@chainflip/utils/ss58';
-import type { WalletClient } from 'viem';
+import { type PublicClient, type WalletClient } from 'viem';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { scUtils } from '../abis.js';
 import { accountIdToEthereumAddress, DelegationSDK, ethereumAddressToAccountId } from '../index.js';
+
+vi.mock('../abis.js', () => ({
+  scUtils: `{{ SC UTILS ABI }}`,
+}));
+
+vi.mock('viem', () => ({
+  erc20Abi: '{{ ERC20 ABI }}',
+}));
 
 describe(ethereumAddressToAccountId, () => {
   it('converts an Ethereum address to a Chainflip account ID', () => {
@@ -42,117 +49,277 @@ describe(accountIdToEthereumAddress, () => {
 });
 
 describe(DelegationSDK, () => {
-  let client: WalletClient;
+  let walletclient: WalletClient;
+  let publicClient: PublicClient;
+  let count = 0;
 
   beforeEach(() => {
-    client = {
+    count = 0;
+    walletclient = {
       account: `0xa56A6be23b6Cf39D9448FF6e897C29c41c8fbDFF`,
-      writeContract: vi.fn().mockResolvedValue('tx hash'),
+      writeContract: vi.fn().mockImplementation(() => `tx hash ${count++}`),
       chain: 'client chain',
     } as unknown as WalletClient;
+    publicClient = {
+      readContract: vi.fn(),
+      simulateContract: vi.fn().mockImplementation((args) => ({ request: args })),
+      waitForTransactionReceipt: vi.fn(),
+    } as unknown as PublicClient;
   });
 
   describe(DelegationSDK.prototype.delegate, () => {
-    it('delegates FLIP', async () => {
-      const sdk = new DelegationSDK(client, 'backspin');
+    it('delegates FLIP with approval', async () => {
+      const sdk = new DelegationSDK(walletclient, publicClient, 'backspin');
+
+      vi.mocked(publicClient.readContract).mockResolvedValueOnce(BigInt(2.5e18));
 
       expect(
         await sdk.delegate(BigInt(10e18), 'cFMjXCTxTHVkSqbKzeVwJ25TJxLqc1Vn9usPgUGmZhsyvHRQZ'),
-      ).toEqual('tx hash');
-      const [[{ abi, ...call }]] = vi.mocked(client.writeContract).mock.calls;
+      ).toEqual('tx hash 1');
 
-      expect(abi).toEqual(scUtils);
-
-      expect(call).toMatchInlineSnapshot(
-        `
-        {
-          "account": "0xa56A6be23b6Cf39D9448FF6e897C29c41c8fbDFF",
-          "address": "0xc5a5C42992dECbae36851359345FE25997F5C42d",
-          "args": [
-            10000000000000000000n,
-            "0x0000aadef2b57f70666b05f95dd3d223bc85df6c03b28d36f8cc2026383d8428af23",
+      expect(vi.mocked(publicClient.simulateContract).mock.calls).toMatchInlineSnapshot(`
+        [
+          [
+            {
+              "abi": "{{ SC UTILS ABI }}",
+              "account": "0xa56A6be23b6Cf39D9448FF6e897C29c41c8fbDFF",
+              "address": "0xc5a5C42992dECbae36851359345FE25997F5C42d",
+              "args": [
+                10000000000000000000n,
+                "0x0000aadef2b57f70666b05f95dd3d223bc85df6c03b28d36f8cc2026383d8428af23",
+              ],
+              "chain": "client chain",
+              "functionName": "depositToScGateway",
+            },
           ],
-          "chain": "client chain",
-          "functionName": "depositToScGateway",
-        }
-      `,
-      );
+        ]
+      `);
+      expect(vi.mocked(publicClient.readContract).mock.calls).toMatchInlineSnapshot(`
+        [
+          [
+            {
+              "abi": "{{ ERC20 ABI }}",
+              "address": "0x10C6E9530F1C1AF873a391030a1D9E8ed0630D26",
+              "args": [
+                undefined,
+                "0xc5a5C42992dECbae36851359345FE25997F5C42d",
+              ],
+              "functionName": "allowance",
+            },
+          ],
+        ]
+      `);
+      expect(vi.mocked(walletclient.writeContract).mock.calls).toMatchInlineSnapshot(`
+        [
+          [
+            {
+              "abi": "{{ ERC20 ABI }}",
+              "account": "0xa56A6be23b6Cf39D9448FF6e897C29c41c8fbDFF",
+              "address": "0x10C6E9530F1C1AF873a391030a1D9E8ed0630D26",
+              "args": [
+                "0xc5a5C42992dECbae36851359345FE25997F5C42d",
+                7500000000000000000n,
+              ],
+              "chain": "client chain",
+              "functionName": "approve",
+            },
+          ],
+          [
+            {
+              "abi": "{{ SC UTILS ABI }}",
+              "account": "0xa56A6be23b6Cf39D9448FF6e897C29c41c8fbDFF",
+              "address": "0xc5a5C42992dECbae36851359345FE25997F5C42d",
+              "args": [
+                10000000000000000000n,
+                "0x0000aadef2b57f70666b05f95dd3d223bc85df6c03b28d36f8cc2026383d8428af23",
+              ],
+              "chain": "client chain",
+              "functionName": "depositToScGateway",
+            },
+          ],
+        ]
+      `);
+    });
+
+    it('delegates FLIP without approval', async () => {
+      const sdk = new DelegationSDK(walletclient, publicClient, 'backspin');
+
+      vi.mocked(publicClient.readContract).mockResolvedValueOnce(BigInt(10e18));
+
+      expect(
+        await sdk.delegate(BigInt(10e18), 'cFMjXCTxTHVkSqbKzeVwJ25TJxLqc1Vn9usPgUGmZhsyvHRQZ'),
+      ).toEqual('tx hash 0');
+
+      expect(vi.mocked(publicClient.simulateContract).mock.calls).toMatchInlineSnapshot(`
+        [
+          [
+            {
+              "abi": "{{ SC UTILS ABI }}",
+              "account": "0xa56A6be23b6Cf39D9448FF6e897C29c41c8fbDFF",
+              "address": "0xc5a5C42992dECbae36851359345FE25997F5C42d",
+              "args": [
+                10000000000000000000n,
+                "0x0000aadef2b57f70666b05f95dd3d223bc85df6c03b28d36f8cc2026383d8428af23",
+              ],
+              "chain": "client chain",
+              "functionName": "depositToScGateway",
+            },
+          ],
+        ]
+      `);
+      expect(vi.mocked(publicClient.readContract).mock.calls).toMatchInlineSnapshot(`
+        [
+          [
+            {
+              "abi": "{{ ERC20 ABI }}",
+              "address": "0x10C6E9530F1C1AF873a391030a1D9E8ed0630D26",
+              "args": [
+                undefined,
+                "0xc5a5C42992dECbae36851359345FE25997F5C42d",
+              ],
+              "functionName": "allowance",
+            },
+          ],
+        ]
+      `);
+      expect(vi.mocked(walletclient.writeContract).mock.calls).toMatchInlineSnapshot(`
+        [
+          [
+            {
+              "abi": "{{ SC UTILS ABI }}",
+              "account": "0xa56A6be23b6Cf39D9448FF6e897C29c41c8fbDFF",
+              "address": "0xc5a5C42992dECbae36851359345FE25997F5C42d",
+              "args": [
+                10000000000000000000n,
+                "0x0000aadef2b57f70666b05f95dd3d223bc85df6c03b28d36f8cc2026383d8428af23",
+              ],
+              "chain": "client chain",
+              "functionName": "depositToScGateway",
+            },
+          ],
+        ]
+      `);
     });
   });
 
   describe(DelegationSDK.prototype.undelegate, () => {
     it('undelegates', async () => {
-      const sdk = new DelegationSDK(client, 'backspin');
+      const sdk = new DelegationSDK(walletclient, publicClient, 'backspin');
 
-      expect(await sdk.undelegate()).toEqual('tx hash');
-      expect(client.writeContract).toHaveBeenCalledTimes(1);
-      const [[{ abi, ...call }]] = vi.mocked(client.writeContract).mock.calls;
-
-      expect(abi).toEqual(scUtils);
-
-      expect(call).toMatchInlineSnapshot(
-        `
-        {
-          "account": "0xa56A6be23b6Cf39D9448FF6e897C29c41c8fbDFF",
-          "address": "0xc5a5C42992dECbae36851359345FE25997F5C42d",
-          "args": [
-            "0x0001",
+      expect(await sdk.undelegate()).toEqual('tx hash 0');
+      expect(vi.mocked(publicClient.simulateContract).mock.calls).toMatchInlineSnapshot(`
+        [
+          [
+            {
+              "abi": "{{ SC UTILS ABI }}",
+              "account": "0xa56A6be23b6Cf39D9448FF6e897C29c41c8fbDFF",
+              "address": "0xc5a5C42992dECbae36851359345FE25997F5C42d",
+              "args": [
+                "0x0001",
+              ],
+              "chain": "client chain",
+              "functionName": "callSc",
+            },
           ],
-          "chain": "client chain",
-          "functionName": "callSc",
-        }
-      `,
-      );
+        ]
+      `);
+      expect(vi.mocked(publicClient.readContract).mock.calls).toMatchInlineSnapshot(`[]`);
+      expect(vi.mocked(walletclient.writeContract).mock.calls).toMatchInlineSnapshot(`
+        [
+          [
+            {
+              "abi": "{{ SC UTILS ABI }}",
+              "account": "0xa56A6be23b6Cf39D9448FF6e897C29c41c8fbDFF",
+              "address": "0xc5a5C42992dECbae36851359345FE25997F5C42d",
+              "args": [
+                "0x0001",
+              ],
+              "chain": "client chain",
+              "functionName": "callSc",
+            },
+          ],
+        ]
+      `);
     });
   });
 
   describe(DelegationSDK.prototype.setMaxBid, () => {
     it('sets the max bid to the provided value', async () => {
-      const sdk = new DelegationSDK(client, 'backspin');
+      const sdk = new DelegationSDK(walletclient, publicClient, 'backspin');
 
-      expect(await sdk.setMaxBid(BigInt(10e18))).toEqual('tx hash');
-      expect(client.writeContract).toHaveBeenCalledTimes(1);
-      const [[{ abi, ...call }]] = vi.mocked(client.writeContract).mock.calls;
-
-      expect(abi).toEqual(scUtils);
-
-      expect(call).toMatchInlineSnapshot(
-        `
-        {
-          "account": "0xa56A6be23b6Cf39D9448FF6e897C29c41c8fbDFF",
-          "address": "0xc5a5C42992dECbae36851359345FE25997F5C42d",
-          "args": [
-            "0x0002010000e8890423c78a0000000000000000",
+      expect(await sdk.setMaxBid(BigInt(10e18))).toEqual('tx hash 0');
+      expect(vi.mocked(publicClient.simulateContract).mock.calls).toMatchInlineSnapshot(`
+        [
+          [
+            {
+              "abi": "{{ SC UTILS ABI }}",
+              "account": "0xa56A6be23b6Cf39D9448FF6e897C29c41c8fbDFF",
+              "address": "0xc5a5C42992dECbae36851359345FE25997F5C42d",
+              "args": [
+                "0x0002010000e8890423c78a0000000000000000",
+              ],
+              "chain": "client chain",
+              "functionName": "callSc",
+            },
           ],
-          "chain": "client chain",
-          "functionName": "callSc",
-        }
-      `,
-      );
+        ]
+      `);
+      expect(vi.mocked(publicClient.readContract).mock.calls).toMatchInlineSnapshot(`[]`);
+      expect(vi.mocked(walletclient.writeContract).mock.calls).toMatchInlineSnapshot(`
+        [
+          [
+            {
+              "abi": "{{ SC UTILS ABI }}",
+              "account": "0xa56A6be23b6Cf39D9448FF6e897C29c41c8fbDFF",
+              "address": "0xc5a5C42992dECbae36851359345FE25997F5C42d",
+              "args": [
+                "0x0002010000e8890423c78a0000000000000000",
+              ],
+              "chain": "client chain",
+              "functionName": "callSc",
+            },
+          ],
+        ]
+      `);
     });
 
     it('sets the max bid with no amount', async () => {
-      const sdk = new DelegationSDK(client, 'backspin');
+      const sdk = new DelegationSDK(walletclient, publicClient, 'backspin');
 
-      expect(await sdk.setMaxBid()).toEqual('tx hash');
-      expect(client.writeContract).toHaveBeenCalledTimes(1);
-      const [[{ abi, ...call }]] = vi.mocked(client.writeContract).mock.calls;
-
-      expect(abi).toEqual(scUtils);
-
-      expect(call).toMatchInlineSnapshot(
-        `
-        {
-          "account": "0xa56A6be23b6Cf39D9448FF6e897C29c41c8fbDFF",
-          "address": "0xc5a5C42992dECbae36851359345FE25997F5C42d",
-          "args": [
-            "0x000200",
+      expect(await sdk.setMaxBid()).toEqual('tx hash 0');
+      expect(vi.mocked(publicClient.simulateContract).mock.calls).toMatchInlineSnapshot(`
+        [
+          [
+            {
+              "abi": "{{ SC UTILS ABI }}",
+              "account": "0xa56A6be23b6Cf39D9448FF6e897C29c41c8fbDFF",
+              "address": "0xc5a5C42992dECbae36851359345FE25997F5C42d",
+              "args": [
+                "0x000200",
+              ],
+              "chain": "client chain",
+              "functionName": "callSc",
+            },
           ],
-          "chain": "client chain",
-          "functionName": "callSc",
-        }
-      `,
-      );
+        ]
+      `);
+      expect(vi.mocked(publicClient.readContract).mock.calls).toMatchInlineSnapshot(`[]`);
+      expect(vi.mocked(walletclient.writeContract).mock.calls).toMatchInlineSnapshot(`
+        [
+          [
+            {
+              "abi": "{{ SC UTILS ABI }}",
+              "account": "0xa56A6be23b6Cf39D9448FF6e897C29c41c8fbDFF",
+              "address": "0xc5a5C42992dECbae36851359345FE25997F5C42d",
+              "args": [
+                "0x000200",
+              ],
+              "chain": "client chain",
+              "functionName": "callSc",
+            },
+          ],
+        ]
+      `);
     });
   });
 });

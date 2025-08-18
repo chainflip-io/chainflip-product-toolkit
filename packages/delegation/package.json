@@ -16,9 +16,7 @@
   },
   "dependencies": {
     "@chainflip/utils": "^0.8.17",
-    "scale-ts": "^1.6.1"
-  },
-  "peerDependencies": {
+    "scale-ts": "^1.6.1",
     "viem": "^2.34.0"
   },
   "files": [
