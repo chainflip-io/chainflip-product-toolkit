@@ -373,4 +373,92 @@ describe(DelegationSDK, () => {
       `);
     });
   });
+
+  describe(DelegationSDK.prototype.redeem, () => {
+    it('calls redeem with an amount', async () => {
+      const sdk = new DelegationSDK(walletclient, publicClient, 'backspin');
+
+      await sdk.redeem('0xa56A6be23b6Cf39D9448FF6e897C29c41c8fbDFF', BigInt(10e18));
+
+      expect(calls).toMatchInlineSnapshot(`
+        [
+          {
+            "args": {
+              "abi": "{{ SC UTILS ABI }}",
+              "account": "0xa56A6be23b6Cf39D9448FF6e897C29c41c8fbDFF",
+              "address": "0xc5a5C42992dECbae36851359345FE25997F5C42d",
+              "args": [
+                "0x0003010000e8890423c78a0000000000000000a56a6be23b6cf39d9448ff6e897c29c41c8fbdff00",
+              ],
+              "chain": "client chain",
+              "functionName": "callSc",
+            },
+            "type": "simulateContract",
+          },
+          {
+            "args": {
+              "abi": "{{ SC UTILS ABI }}",
+              "account": "0xa56A6be23b6Cf39D9448FF6e897C29c41c8fbDFF",
+              "address": "0xc5a5C42992dECbae36851359345FE25997F5C42d",
+              "args": [
+                "0x0003010000e8890423c78a0000000000000000a56a6be23b6cf39d9448ff6e897c29c41c8fbdff00",
+              ],
+              "chain": "client chain",
+              "functionName": "callSc",
+            },
+            "type": "writeContract",
+          },
+          {
+            "args": {
+              "hash": "tx hash 0",
+            },
+            "type": "waitForTransactionReceipt",
+          },
+        ]
+      `);
+    });
+
+    it('calls redeem without an amount', async () => {
+      const sdk = new DelegationSDK(walletclient, publicClient, 'backspin');
+
+      await sdk.redeem('0xa56A6be23b6Cf39D9448FF6e897C29c41c8fbDFF');
+
+      expect(calls).toMatchInlineSnapshot(`
+        [
+          {
+            "args": {
+              "abi": "{{ SC UTILS ABI }}",
+              "account": "0xa56A6be23b6Cf39D9448FF6e897C29c41c8fbDFF",
+              "address": "0xc5a5C42992dECbae36851359345FE25997F5C42d",
+              "args": [
+                "0x000300a56a6be23b6cf39d9448ff6e897c29c41c8fbdff00",
+              ],
+              "chain": "client chain",
+              "functionName": "callSc",
+            },
+            "type": "simulateContract",
+          },
+          {
+            "args": {
+              "abi": "{{ SC UTILS ABI }}",
+              "account": "0xa56A6be23b6Cf39D9448FF6e897C29c41c8fbDFF",
+              "address": "0xc5a5C42992dECbae36851359345FE25997F5C42d",
+              "args": [
+                "0x000300a56a6be23b6cf39d9448ff6e897c29c41c8fbdff00",
+              ],
+              "chain": "client chain",
+              "functionName": "callSc",
+            },
+            "type": "writeContract",
+          },
+          {
+            "args": {
+              "hash": "tx hash 0",
+            },
+            "type": "waitForTransactionReceipt",
+          },
+        ]
+      `);
+    });
+  });
 });
