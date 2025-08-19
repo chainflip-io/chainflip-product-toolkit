@@ -62,7 +62,7 @@ export class DelegationSDK {
     });
 
     if (currentAllowance < requiredAmount) {
-      const hash = await this.walletClient.writeContract({
+      const { request } = await this.publicClient.simulateContract({
         abi: erc20Abi,
         functionName: 'approve',
         args: [scUtilsAddress, requiredAmount - currentAllowance],
@@ -70,6 +70,8 @@ export class DelegationSDK {
         chain: this.walletClient.chain,
         address: flipAddress,
       });
+
+      const hash = await this.walletClient.writeContract(request);
 
       await this.publicClient.waitForTransactionReceipt({ hash });
     }

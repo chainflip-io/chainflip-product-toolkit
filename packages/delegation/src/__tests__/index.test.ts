@@ -119,6 +119,20 @@ describe(DelegationSDK, () => {
               "chain": "client chain",
               "functionName": "approve",
             },
+            "type": "simulateContract",
+          },
+          {
+            "args": {
+              "abi": "{{ ERC20 ABI }}",
+              "account": "0xa56A6be23b6Cf39D9448FF6e897C29c41c8fbDFF",
+              "address": "0x10C6E9530F1C1AF873a391030a1D9E8ed0630D26",
+              "args": [
+                "0xc5a5C42992dECbae36851359345FE25997F5C42d",
+                7500000000000000000n,
+              ],
+              "chain": "client chain",
+              "functionName": "approve",
+            },
             "type": "writeContract",
           },
           {
