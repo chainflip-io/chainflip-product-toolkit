@@ -75,7 +75,7 @@ export class DelegationSDK {
     }
   }
 
-  async delegate(amount: bigint, operator: `cF${string}`) {
+  async delegate(amount: bigint, operator: `cF${string}`): Promise<`0x${string}`> {
     await this.approveFlip(amount);
 
     const { request } = await this.publicClient.simulateContract({
@@ -94,7 +94,7 @@ export class DelegationSDK {
     return hash;
   }
 
-  async undelegate() {
+  async undelegate(): Promise<`0x${string}`> {
     const { request } = await this.publicClient.simulateContract({
       address: SC_UTILS_ADDRESSES[this.network],
       abi: scUtils,
@@ -111,7 +111,7 @@ export class DelegationSDK {
     return hash;
   }
 
-  async setMaxBid(maxBid?: bigint) {
+  async setMaxBid(maxBid?: bigint): Promise<`0x${string}`> {
     const { request } = await this.publicClient.simulateContract({
       address: SC_UTILS_ADDRESSES[this.network],
       abi: scUtils,
