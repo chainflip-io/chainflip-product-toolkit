@@ -57,6 +57,7 @@ const buildDelegationApiData = (data: CallData): CodecType<typeof DelegationApi>
               ? { tag: 'Max', value: undefined }
               : { tag: 'Exact', value: data.amount },
           address: hexToBytes(data.address),
+          // The executor field is always set to undefined because executor functionality is not currently supported.
           executor: undefined,
         },
       };
