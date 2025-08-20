@@ -1,5 +1,5 @@
 import { unreachable } from '@chainflip/utils/assertion';
-import { bytesToHex } from '@chainflip/utils/bytes';
+import { bytesToHex, hexToBytes } from '@chainflip/utils/bytes';
 import * as ss58 from '@chainflip/utils/ss58';
 import { _void, Bytes, CodecType, Enum, Option, Struct, u128 } from 'scale-ts';
 
@@ -11,19 +11,30 @@ const DelegationApi = Enum({
   SetMaxBid: Struct({
     maybeMaxBid: Option(u128),
   }),
+  Redeem: Struct({
+    amount: Enum({ Max: _void, Exact: u128 }),
+    address: Bytes(20),
+    executor: Option(Bytes(20)),
+  }),
 });
 
 export const EthereumSCApi = Enum({
   Delegation: DelegationApi,
 });
 
-type CallData =
+export type CallData =
   | { call: 'delegate'; operator: `cF${string}` }
   | { call: 'undelegate' }
   | {
       call: 'setMaxBid';
       /** The new max bid, if set to `undefined`, it will be */
       maxBid?: bigint | undefined;
+    }
+  | {
+      call: 'redeem';
+      /** The amount to redeem, if `undefined`, all available FLIP will be redeemed */
+      amount?: bigint | undefined;
+      address: `0x${string}`;
     };
 
 const buildDelegationApiData = (data: CallData): CodecType<typeof DelegationApi> => {
@@ -37,6 +48,19 @@ const buildDelegationApiData = (data: CallData): CodecType<typeof DelegationApi>
       return { tag: 'Undelegate', value: undefined } as const;
     case 'setMaxBid':
       return { tag: 'SetMaxBid', value: { maybeMaxBid: data.maxBid } } as const;
+    case 'redeem':
+      return {
+        tag: 'Redeem',
+        value: {
+          amount:
+            data.amount === undefined
+              ? { tag: 'Max', value: undefined }
+              : { tag: 'Exact', value: data.amount },
+          address: hexToBytes(data.address),
+          // The executor field is always set to undefined because executor functionality is not currently supported.
+          executor: undefined,
+        },
+      };
     default:
       // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
       return unreachable(data, `Unsupported call type: ${(data as any)?.type}`);

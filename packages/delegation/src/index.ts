@@ -6,7 +6,7 @@ import * as ss58 from '@chainflip/utils/ss58';
 import { erc20Abi, type PublicClient, type WalletClient } from 'viem';
 import { scUtils } from './abis';
 import { FLIP_ADDRESSES, SC_UTILS_ADDRESSES } from './constants';
-import { serializeDelegationCall } from './scale';
+import { CallData, serializeDelegationCall } from './scale';
 
 export const ethereumAddressToAccountId = (address: `0x${string}`): `cF${string}` => {
   assert(address.startsWith('0x') && address.length === 42, 'Invalid Ethereum address format');
@@ -37,7 +37,7 @@ export class DelegationSDK {
 
   /** this will be replaced with an RPC call */
   // eslint-disable-next-line @typescript-eslint/require-await
-  private async encodeScBytes(data: Parameters<typeof serializeDelegationCall>[0]) {
+  private async encodeScBytes(data: CallData) {
     return serializeDelegationCall(data);
   }
 
@@ -96,12 +96,12 @@ export class DelegationSDK {
     return hash;
   }
 
-  async undelegate(): Promise<`0x${string}`> {
+  private async executeCallSc(data: CallData): Promise<`0x${string}`> {
     const { request } = await this.publicClient.simulateContract({
       address: SC_UTILS_ADDRESSES[this.network],
       abi: scUtils,
       functionName: 'callSc',
-      args: [await this.encodeScBytes({ call: 'undelegate' })],
+      args: [await this.encodeScBytes(data)],
       chain: this.walletClient.chain,
       account: this.getAccount(),
     });
@@ -113,20 +113,15 @@ export class DelegationSDK {
     return hash;
   }
 
-  async setMaxBid(maxBid?: bigint): Promise<`0x${string}`> {
-    const { request } = await this.publicClient.simulateContract({
-      address: SC_UTILS_ADDRESSES[this.network],
-      abi: scUtils,
-      functionName: 'callSc',
-      args: [await this.encodeScBytes({ call: 'setMaxBid', maxBid })],
-      chain: this.walletClient.chain,
-      account: this.getAccount(),
-    });
+  undelegate(): Promise<`0x${string}`> {
+    return this.executeCallSc({ call: 'undelegate' });
+  }
 
-    const hash = await this.walletClient.writeContract(request);
+  setMaxBid(maxBid?: bigint): Promise<`0x${string}`> {
+    return this.executeCallSc({ call: 'setMaxBid', maxBid });
+  }
 
-    await this.publicClient.waitForTransactionReceipt({ hash });
-
-    return hash;
+  redeem(address: `0x${string}`, amount?: bigint): Promise<`0x${string}`> {
+    return this.executeCallSc({ call: 'redeem', address, amount });
   }
 }
