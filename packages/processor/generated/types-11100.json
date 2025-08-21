@@ -2052,6 +2052,515 @@
           "value": "u128"
         }
       }
+    },
+    "SCCallExecuted": {
+      "type": "struct",
+      "fields": {
+        "caller": {
+          "type": "primitive",
+          "value": "AccountId32"
+        },
+        "scCall": {
+          "type": "enum",
+          "$name": "stateChainRuntimeChainflipEthereumScCallsEthereumSCApi",
+          "values": [
+            {
+              "name": "Delegation",
+              "value": {
+                "type": "enum",
+                "$name": "stateChainRuntimeChainflipEthereumScCallsDelegationApi",
+                "values": [
+                  {
+                    "name": "Delegate",
+                    "value": {
+                      "type": "struct",
+                      "fields": {
+                        "operator": {
+                          "type": "primitive",
+                          "value": "AccountId32"
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "name": "Undelegate",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  },
+                  {
+                    "name": "SetMaxBid",
+                    "value": {
+                      "type": "struct",
+                      "fields": {
+                        "maybeMaxBid": {
+                          "type": "option",
+                          "value": {
+                            "type": "primitive",
+                            "value": "u128"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "name": "Redeem",
+                    "value": {
+                      "type": "struct",
+                      "fields": {
+                        "amount": {
+                          "type": "enum",
+                          "$name": "palletCfFundingRedemptionAmount",
+                          "values": [
+                            {
+                              "name": "Max",
+                              "value": {
+                                "type": "primitive",
+                                "value": "null"
+                              }
+                            },
+                            {
+                              "name": "Exact",
+                              "value": {
+                                "type": "primitive",
+                                "value": "u128"
+                              }
+                            }
+                          ]
+                        },
+                        "address": {
+                          "type": "primitive",
+                          "value": "H160"
+                        },
+                        "executor": {
+                          "type": "option",
+                          "value": {
+                            "type": "primitive",
+                            "value": "H160"
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "ethTxHash": {
+          "type": "array",
+          "value": {
+            "type": "primitive",
+            "value": "u8"
+          },
+          "length": 32
+        }
+      }
+    },
+    "SCCallCannotBeExecuted": {
+      "type": "struct",
+      "fields": {
+        "caller": {
+          "type": "primitive",
+          "value": "AccountId32"
+        },
+        "scCall": {
+          "type": "enum",
+          "$name": "stateChainRuntimeChainflipEthereumScCallsEthereumSCApi",
+          "values": [
+            {
+              "name": "Delegation",
+              "value": {
+                "type": "enum",
+                "$name": "stateChainRuntimeChainflipEthereumScCallsDelegationApi",
+                "values": [
+                  {
+                    "name": "Delegate",
+                    "value": {
+                      "type": "struct",
+                      "fields": {
+                        "operator": {
+                          "type": "primitive",
+                          "value": "AccountId32"
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "name": "Undelegate",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  },
+                  {
+                    "name": "SetMaxBid",
+                    "value": {
+                      "type": "struct",
+                      "fields": {
+                        "maybeMaxBid": {
+                          "type": "option",
+                          "value": {
+                            "type": "primitive",
+                            "value": "u128"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "name": "Redeem",
+                    "value": {
+                      "type": "struct",
+                      "fields": {
+                        "amount": {
+                          "type": "enum",
+                          "$name": "palletCfFundingRedemptionAmount",
+                          "values": [
+                            {
+                              "name": "Max",
+                              "value": {
+                                "type": "primitive",
+                                "value": "null"
+                              }
+                            },
+                            {
+                              "name": "Exact",
+                              "value": {
+                                "type": "primitive",
+                                "value": "u128"
+                              }
+                            }
+                          ]
+                        },
+                        "address": {
+                          "type": "primitive",
+                          "value": "H160"
+                        },
+                        "executor": {
+                          "type": "option",
+                          "value": {
+                            "type": "primitive",
+                            "value": "H160"
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "callError": {
+          "type": "struct",
+          "$name": "SpRuntimeDispatchErrorWithPostInfo",
+          "fields": {
+            "postInfo": {
+              "type": "struct",
+              "$name": "FrameSupportDispatchPostDispatchInfo",
+              "fields": {
+                "actualWeight": {
+                  "type": "option",
+                  "value": {
+                    "type": "struct",
+                    "$name": "SpWeightsWeightV2Weight",
+                    "fields": {
+                      "refTime": {
+                        "type": "primitive",
+                        "value": "u64"
+                      },
+                      "proofSize": {
+                        "type": "primitive",
+                        "value": "u64"
+                      }
+                    }
+                  }
+                },
+                "paysFee": {
+                  "type": "enum",
+                  "$name": "frameSupportDispatchPays",
+                  "values": [
+                    {
+                      "name": "Yes",
+                      "value": {
+                        "type": "primitive",
+                        "value": "null"
+                      }
+                    },
+                    {
+                      "name": "No",
+                      "value": {
+                        "type": "primitive",
+                        "value": "null"
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            "error": {
+              "type": "enum",
+              "$name": "spRuntimeDispatchError",
+              "values": [
+                {
+                  "name": "Other",
+                  "value": {
+                    "type": "primitive",
+                    "value": "null"
+                  }
+                },
+                {
+                  "name": "CannotLookup",
+                  "value": {
+                    "type": "primitive",
+                    "value": "null"
+                  }
+                },
+                {
+                  "name": "BadOrigin",
+                  "value": {
+                    "type": "primitive",
+                    "value": "null"
+                  }
+                },
+                {
+                  "name": "Module",
+                  "value": {
+                    "type": "struct",
+                    "$name": "SpRuntimeModuleError",
+                    "fields": {
+                      "index": {
+                        "type": "primitive",
+                        "value": "u8"
+                      },
+                      "error": {
+                        "type": "array",
+                        "value": {
+                          "type": "primitive",
+                          "value": "u8"
+                        },
+                        "length": 4
+                      }
+                    }
+                  }
+                },
+                {
+                  "name": "ConsumerRemaining",
+                  "value": {
+                    "type": "primitive",
+                    "value": "null"
+                  }
+                },
+                {
+                  "name": "NoProviders",
+                  "value": {
+                    "type": "primitive",
+                    "value": "null"
+                  }
+                },
+                {
+                  "name": "TooManyConsumers",
+                  "value": {
+                    "type": "primitive",
+                    "value": "null"
+                  }
+                },
+                {
+                  "name": "Token",
+                  "value": {
+                    "type": "enum",
+                    "$name": "spRuntimeTokenError",
+                    "values": [
+                      {
+                        "name": "FundsUnavailable",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      },
+                      {
+                        "name": "OnlyProvider",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      },
+                      {
+                        "name": "BelowMinimum",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      },
+                      {
+                        "name": "CannotCreate",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      },
+                      {
+                        "name": "UnknownAsset",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      },
+                      {
+                        "name": "Frozen",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      },
+                      {
+                        "name": "Unsupported",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      },
+                      {
+                        "name": "CannotCreateHold",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      },
+                      {
+                        "name": "NotExpendable",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      },
+                      {
+                        "name": "Blocked",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "Arithmetic",
+                  "value": {
+                    "type": "enum",
+                    "$name": "spArithmeticArithmeticError",
+                    "values": [
+                      {
+                        "name": "Underflow",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      },
+                      {
+                        "name": "Overflow",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      },
+                      {
+                        "name": "DivisionByZero",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "Transactional",
+                  "value": {
+                    "type": "enum",
+                    "$name": "spRuntimeTransactionalError",
+                    "values": [
+                      {
+                        "name": "LimitReached",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      },
+                      {
+                        "name": "NoLayer",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "Exhausted",
+                  "value": {
+                    "type": "primitive",
+                    "value": "null"
+                  }
+                },
+                {
+                  "name": "Corruption",
+                  "value": {
+                    "type": "primitive",
+                    "value": "null"
+                  }
+                },
+                {
+                  "name": "Unavailable",
+                  "value": {
+                    "type": "primitive",
+                    "value": "null"
+                  }
+                },
+                {
+                  "name": "RootNotAllowed",
+                  "value": {
+                    "type": "primitive",
+                    "value": "null"
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "ethTxHash": {
+          "type": "array",
+          "value": {
+            "type": "primitive",
+            "value": "u8"
+          },
+          "length": 32
+        }
+      }
+    },
+    "SCCallCannotBeDecoded": {
+      "type": "struct",
+      "fields": {
+        "caller": {
+          "type": "primitive",
+          "value": "AccountId32"
+        },
+        "scCallBytes": {
+          "type": "primitive",
+          "value": "Bytes"
+        },
+        "ethTxHash": {
+          "type": "array",
+          "value": {
+            "type": "primitive",
+            "value": "u8"
+          },
+          "length": 32
+        }
+      }
     }
   },
   "AccountRoles": {
@@ -3321,6 +3830,35 @@
         "operator": {
           "type": "primitive",
           "value": "AccountId32"
+        }
+      }
+    },
+    "UnDelegationFinalized": {
+      "type": "struct",
+      "fields": {
+        "delegator": {
+          "type": "primitive",
+          "value": "AccountId32"
+        },
+        "epoch": {
+          "type": "primitive",
+          "value": "u32"
+        }
+      }
+    },
+    "MaxBidUpdated": {
+      "type": "struct",
+      "fields": {
+        "delegator": {
+          "type": "primitive",
+          "value": "AccountId32"
+        },
+        "maxBid": {
+          "type": "option",
+          "value": {
+            "type": "primitive",
+            "value": "u128"
+          }
         }
       }
     }
@@ -9883,6 +10421,13 @@
                     }
                   }
                 }
+              },
+              "maxOraclePriceSlippage": {
+                "type": "option",
+                "value": {
+                  "type": "primitive",
+                  "value": "u16"
+                }
               }
             }
           }
@@ -10569,6 +11114,13 @@
                     "value": "Bytes"
                   }
                 }
+              }
+            },
+            "maxOraclePriceSlippage": {
+              "type": "option",
+              "value": {
+                "type": "primitive",
+                "value": "u16"
               }
             }
           }
@@ -16494,6 +17046,13 @@
                                 }
                               }
                             }
+                          },
+                          "maxOraclePriceSlippage": {
+                            "type": "option",
+                            "value": {
+                              "type": "primitive",
+                              "value": "u16"
+                            }
                           }
                         }
                       },
@@ -20101,6 +20660,13 @@
                                   "value": "Bytes"
                                 }
                               }
+                            }
+                          },
+                          "maxOraclePriceSlippage": {
+                            "type": "option",
+                            "value": {
+                              "type": "primitive",
+                              "value": "u16"
                             }
                           }
                         }
@@ -24085,6 +24651,13 @@
                                   "value": "Bytes"
                                 }
                               }
+                            }
+                          },
+                          "maxOraclePriceSlippage": {
+                            "type": "option",
+                            "value": {
+                              "type": "primitive",
+                              "value": "u16"
                             }
                           }
                         }
@@ -31013,6 +31586,13 @@
                                 }
                               }
                             }
+                          },
+                          "maxOraclePriceSlippage": {
+                            "type": "option",
+                            "value": {
+                              "type": "primitive",
+                              "value": "u16"
+                            }
                           }
                         }
                       },
@@ -35804,6 +36384,13 @@
                                   "value": "Bytes"
                                 }
                               }
+                            }
+                          },
+                          "maxOraclePriceSlippage": {
+                            "type": "option",
+                            "value": {
+                              "type": "primitive",
+                              "value": "u16"
                             }
                           }
                         }
@@ -40990,6 +41577,13 @@
                                   "value": "Bytes"
                                 }
                               }
+                            }
+                          },
+                          "maxOraclePriceSlippage": {
+                            "type": "option",
+                            "value": {
+                              "type": "primitive",
+                              "value": "u16"
                             }
                           }
                         }
