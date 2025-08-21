@@ -154,8 +154,91 @@ export const accountId = z
   ])
   .transform((value) => ss58.encode({ data: value, ss58Format: 2112 }));
 
+export const numericString = z
+  .string()
+  .refine((v) => /^\d+$/.test(v), { message: 'Invalid numeric string' });
+
+export const numberOrHex = z
+  .union([z.number(), hexString, numericString])
+  .transform((n) => BigInt(n));
+
+export const palletCfFundingRedemptionAmount = z.discriminatedUnion('__kind', [
+  z.object({ __kind: z.literal('Max') }),
+  z.object({ __kind: z.literal('Exact'), value: numberOrHex }),
+]);
+
+export const stateChainRuntimeChainflipEthereumScCallsDelegationApi = z.discriminatedUnion(
+  '__kind',
+  [
+    z.object({ __kind: z.literal('Delegate'), operator: accountId }),
+    z.object({ __kind: z.literal('Undelegate') }),
+    z.object({ __kind: z.literal('SetMaxBid'), maybeMaxBid: numberOrHex.nullish() }),
+    z.object({
+      __kind: z.literal('Redeem'),
+      amount: palletCfFundingRedemptionAmount,
+      address: hexString,
+      executor: hexString.nullish(),
+    }),
+  ],
+);
+
+export const stateChainRuntimeChainflipEthereumScCallsEthereumSCApi = z.object({
+  __kind: z.literal('Delegation'),
+  value: stateChainRuntimeChainflipEthereumScCallsDelegationApi,
+});
+
+export const spWeightsWeightV2Weight = z.object({ refTime: numberOrHex, proofSize: numberOrHex });
+
 export const simpleEnum = <U extends string, T extends readonly [U, ...U[]]>(values: T) =>
   z.object({ __kind: z.enum(values) }).transform(({ __kind }) => __kind!);
+
+export const frameSupportDispatchPays = simpleEnum(['Yes', 'No']);
+
+export const frameSupportDispatchPostDispatchInfo = z.object({
+  actualWeight: spWeightsWeightV2Weight.nullish(),
+  paysFee: frameSupportDispatchPays,
+});
+
+export const spRuntimeModuleError = z.object({ index: z.number(), error: hexString });
+
+export const spRuntimeTokenError = simpleEnum([
+  'FundsUnavailable',
+  'OnlyProvider',
+  'BelowMinimum',
+  'CannotCreate',
+  'UnknownAsset',
+  'Frozen',
+  'Unsupported',
+  'CannotCreateHold',
+  'NotExpendable',
+  'Blocked',
+]);
+
+export const spArithmeticArithmeticError = simpleEnum(['Underflow', 'Overflow', 'DivisionByZero']);
+
+export const spRuntimeTransactionalError = simpleEnum(['LimitReached', 'NoLayer']);
+
+export const spRuntimeDispatchError = z.discriminatedUnion('__kind', [
+  z.object({ __kind: z.literal('Other') }),
+  z.object({ __kind: z.literal('CannotLookup') }),
+  z.object({ __kind: z.literal('BadOrigin') }),
+  z.object({ __kind: z.literal('Module'), value: spRuntimeModuleError }),
+  z.object({ __kind: z.literal('ConsumerRemaining') }),
+  z.object({ __kind: z.literal('NoProviders') }),
+  z.object({ __kind: z.literal('TooManyConsumers') }),
+  z.object({ __kind: z.literal('Token'), value: spRuntimeTokenError }),
+  z.object({ __kind: z.literal('Arithmetic'), value: spArithmeticArithmeticError }),
+  z.object({ __kind: z.literal('Transactional'), value: spRuntimeTransactionalError }),
+  z.object({ __kind: z.literal('Exhausted') }),
+  z.object({ __kind: z.literal('Corruption') }),
+  z.object({ __kind: z.literal('Unavailable') }),
+  z.object({ __kind: z.literal('RootNotAllowed') }),
+]);
+
+export const spRuntimeDispatchErrorWithPostInfo = z.object({
+  postInfo: frameSupportDispatchPostDispatchInfo,
+  error: spRuntimeDispatchError,
+});
 
 export const cfPrimitivesAccountRole = simpleEnum([
   'Unregistered',
@@ -171,14 +254,6 @@ export const palletCfValidatorDelegationOperatorSettings = z.object({
   feeBps: z.number(),
   delegationAcceptance: palletCfValidatorDelegationDelegationAcceptance,
 });
-
-export const numericString = z
-  .string()
-  .refine((v) => /^\d+$/.test(v), { message: 'Invalid numeric string' });
-
-export const numberOrHex = z
-  .union([z.number(), hexString, numericString])
-  .transform((n) => BigInt(n));
 
 export const cfPrimitivesChainsAssetsAnyAsset = simpleEnum([
   'Eth',
@@ -353,6 +428,7 @@ export const cfChainsRefundParametersChannelRefundParametersAccountOrAddress = z
   refundAddress: cfChainsRefundParametersAccountOrAddress,
   minPrice: numberOrHex,
   refundCcmMetadata: cfChainsCcmDepositMetadataForeignChainAddress.nullish(),
+  maxOraclePriceSlippage: z.number().nullish(),
 });
 
 export const cfPrimitivesDcaParameters = z.object({
@@ -371,43 +447,8 @@ export const cfChainsRefundParametersChannelRefundParametersEncodedAddress = z.o
   refundAddress: cfChainsAddressEncodedAddress,
   minPrice: numberOrHex,
   refundCcmMetadata: cfChainsCcmChannelMetadataCcmAdditionalData.nullish(),
+  maxOraclePriceSlippage: z.number().nullish(),
 });
-
-export const spRuntimeModuleError = z.object({ index: z.number(), error: hexString });
-
-export const spRuntimeTokenError = simpleEnum([
-  'FundsUnavailable',
-  'OnlyProvider',
-  'BelowMinimum',
-  'CannotCreate',
-  'UnknownAsset',
-  'Frozen',
-  'Unsupported',
-  'CannotCreateHold',
-  'NotExpendable',
-  'Blocked',
-]);
-
-export const spArithmeticArithmeticError = simpleEnum(['Underflow', 'Overflow', 'DivisionByZero']);
-
-export const spRuntimeTransactionalError = simpleEnum(['LimitReached', 'NoLayer']);
-
-export const spRuntimeDispatchError = z.discriminatedUnion('__kind', [
-  z.object({ __kind: z.literal('Other') }),
-  z.object({ __kind: z.literal('CannotLookup') }),
-  z.object({ __kind: z.literal('BadOrigin') }),
-  z.object({ __kind: z.literal('Module'), value: spRuntimeModuleError }),
-  z.object({ __kind: z.literal('ConsumerRemaining') }),
-  z.object({ __kind: z.literal('NoProviders') }),
-  z.object({ __kind: z.literal('TooManyConsumers') }),
-  z.object({ __kind: z.literal('Token'), value: spRuntimeTokenError }),
-  z.object({ __kind: z.literal('Arithmetic'), value: spArithmeticArithmeticError }),
-  z.object({ __kind: z.literal('Transactional'), value: spRuntimeTransactionalError }),
-  z.object({ __kind: z.literal('Exhausted') }),
-  z.object({ __kind: z.literal('Corruption') }),
-  z.object({ __kind: z.literal('Unavailable') }),
-  z.object({ __kind: z.literal('RootNotAllowed') }),
-]);
 
 export const palletCfEthereumIngressEgressDepositFailedReason = z.discriminatedUnion('__kind', [
   z.object({ __kind: z.literal('BelowMinimumDeposit') }),
@@ -443,6 +484,7 @@ export const cfChainsRefundParametersChannelRefundParametersH160 = z.object({
   refundAddress: hexString,
   minPrice: numberOrHex,
   refundCcmMetadata: cfChainsCcmChannelMetadataCcmAdditionalData.nullish(),
+  maxOraclePriceSlippage: z.number().nullish(),
 });
 
 export const palletCfEthereumIngressEgressVaultDepositWitnessEthereum = z.object({
@@ -517,6 +559,7 @@ export const cfChainsRefundParametersChannelRefundParametersPolkadotAccountId = 
   refundAddress: hexString,
   minPrice: numberOrHex,
   refundCcmMetadata: cfChainsCcmChannelMetadataCcmAdditionalData.nullish(),
+  maxOraclePriceSlippage: z.number().nullish(),
 });
 
 export const palletCfPolkadotIngressEgressVaultDepositWitnessPolkadot = z.object({
@@ -613,6 +656,7 @@ export const cfChainsRefundParametersChannelRefundParametersScriptPubkey = z.obj
   refundAddress: cfChainsBtcScriptPubkey,
   minPrice: numberOrHex,
   refundCcmMetadata: cfChainsCcmChannelMetadataCcmAdditionalData.nullish(),
+  maxOraclePriceSlippage: z.number().nullish(),
 });
 
 export const palletCfBitcoinIngressEgressVaultDepositWitnessBitcoin = z.object({
@@ -753,6 +797,7 @@ export const cfChainsRefundParametersChannelRefundParametersAddress = z.object({
   refundAddress: hexString,
   minPrice: numberOrHex,
   refundCcmMetadata: cfChainsCcmChannelMetadataCcmAdditionalData.nullish(),
+  maxOraclePriceSlippage: z.number().nullish(),
 });
 
 export const palletCfSolanaIngressEgressVaultDepositWitnessSolana = z.object({

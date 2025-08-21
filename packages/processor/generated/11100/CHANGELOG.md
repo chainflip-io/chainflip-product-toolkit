@@ -37,6 +37,11 @@ EthereumIngressEgress:
   - PalletConfigUpdated:
     - update: added
 
+Funding:
+  - SCCallCannotBeDecoded: added
+  - SCCallCannotBeExecuted: added
+  - SCCallExecuted: added
+
 PolkadotIngressEgress:
   - DepositFailed:
     - details: added
@@ -60,8 +65,10 @@ Validator:
   - Delegated: added
   - DelegatorAllowed: added
   - DelegatorBlocked: added
+  - MaxBidUpdated: added
   - OperatorAcceptedByValidator: added
   - OperatorSettingsUpdated: added
   - UnDelegated: added
+  - UnDelegationFinalized: added
   - ValidatorClaimed: added
   - ValidatorRemovedFromOperator: added
