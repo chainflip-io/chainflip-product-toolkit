@@ -42,35 +42,28 @@ const buildNullData = ({
   affiliates?: { accountIndex: number; commissionBps: number }[];
   maxOraclePriceSlippage?: number;
 }) => {
+  const common = {
+    retryDuration,
+    affiliates,
+    boostFee,
+    brokerFee,
+    chunkInterval,
+    numberOfChunks,
+    minOutputAmount,
+  };
+
   const bytes = maxOraclePriceSlippage
     ? createSwapDataCodecV1(destinationAsset).enc({
         version: 1,
         destinationAsset: assetContractId[destinationAsset],
         destinationAddress,
-        parameters: {
-          retryDuration,
-          affiliates,
-          boostFee,
-          brokerFee,
-          chunkInterval,
-          numberOfChunks,
-          minOutputAmount,
-          maxOraclePriceSlippage,
-        },
+        parameters: { ...common, maxOraclePriceSlippage },
       })
     : createSwapDataCodecV0(destinationAsset).enc({
         version: 0,
         destinationAsset: assetContractId[destinationAsset],
         destinationAddress,
-        parameters: {
-          retryDuration,
-          affiliates,
-          boostFee,
-          brokerFee,
-          chunkInterval,
-          numberOfChunks,
-          minOutputAmount,
-        },
+        parameters: common,
       });
 
   return [

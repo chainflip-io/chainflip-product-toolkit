@@ -14,6 +14,7 @@ const addressByteLengths: Record<ChainflipChain, number | undefined> = {
   Assethub: 32,
 };
 
+// TODO: remove after 1.11 is live on all networks
 export const createSwapDataCodecV0 = (asset: ChainflipAsset) =>
   Struct({
     version: u8,
