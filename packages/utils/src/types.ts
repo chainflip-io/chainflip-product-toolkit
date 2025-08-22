@@ -30,4 +30,5 @@ export type VaultSwapData<Broker, CcmData = never> = {
     };
     ccmAdditionalData: CcmData;
   } | null;
+  maxOraclePriceSlippage: number | null;
 };
