@@ -457,6 +457,7 @@ describe(findVaultSwapData, () => {
         "maxBoostFee": 0,
         "outputAsset": "Eth",
         "refundParams": {
+          "maxOraclePriceSlippage": null,
           "minPrice": 176416843473861217126367300745109052927311111891n,
           "refundAddress": "3yKDHJgzS2GbZB9qruoadRYtq8597HZifnRju7fHpdRC",
           "retryDuration": 100,
