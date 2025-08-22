@@ -108,8 +108,8 @@ importers:
   packages/delegation:
     dependencies:
       '@chainflip/utils':
-        specifier: ^0.8.17
-        version: 0.8.17
+        specifier: ^0.8.18
+        version: 0.8.18
       scale-ts:
         specifier: ^1.6.1
         version: 1.6.1
@@ -197,8 +197,8 @@ importers:
   packages/scale:
     dependencies:
       '@chainflip/utils':
-        specifier: ^0.8.17
-        version: 0.8.17
+        specifier: ^0.8.18
+        version: 0.8.18
       scale-ts:
         specifier: ^1.6.1
         version: 1.6.1
@@ -238,8 +238,8 @@ importers:
   packages/testing:
     dependencies:
       '@chainflip/utils':
-        specifier: ^0.8.17
-        version: 0.8.17
+        specifier: ^0.8.18
+        version: 0.8.18
       vitest:
         specifier: 3.1.1
         version: 3.1.1(@types/node@24.3.0)(@vitest/ui@3.1.1)(tsx@4.20.4)(yaml@2.8.1)
@@ -312,6 +312,9 @@ packages:
 
   '@chainflip/utils@0.8.17':
     resolution: {integrity: sha512-+PYWamkxlMwxbOTmxzyyZOQrop2roCYqWH6rLj/AVxm10RykQsiWiVRp5nqEHjhQMjpAoQPRJk/s3G8pJI0TQg==}
+
+  '@chainflip/utils@0.8.18':
+    resolution: {integrity: sha512-qaKtasZSfCcEICR3Bo6IUabOkBsmldsKmDbGTRr0WBQlUyOA2SNwZRN9EP73ZQofWyI3luRN2tFGS54O3bYazQ==}
 
   '@chainflip/utils@0.8.2':
     resolution: {integrity: sha512-wVWSdd1i8+RY4IPqCLdsr/b2Y5cGTzSv6kE/nKhFhcUPELUO0YTRoVote/mUQ/Kd9MiQFaDiS1AEtcPZ0H2W6w==}
@@ -3554,6 +3557,12 @@ snapshots:
   '@chainflip/utils@0.8.17':
     dependencies:
       '@date-fns/utc': 2.1.0
+      bignumber.js: 9.3.1
+      date-fns: 4.1.0
+
+  '@chainflip/utils@0.8.18':
+    dependencies:
+      '@date-fns/utc': 2.1.1
       bignumber.js: 9.3.1
       date-fns: 4.1.0
 
