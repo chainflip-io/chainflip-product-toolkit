@@ -87,6 +87,7 @@ export const findVaultSwapData = async (
       refundAddress: tx.vout[2].scriptPubKey.address,
       retryDuration: data.retryDuration,
       minPrice: getX128PriceFromAmounts(amount, data.minOutputAmount),
+      maxOraclePriceSlippage: 'maxOraclePriceSlippage' in data ? data.maxOraclePriceSlippage : null,
     },
     destinationAddress: data.destinationAddress,
     outputAsset: data.outputAsset,
@@ -99,6 +100,5 @@ export const findVaultSwapData = async (
         ? null
         : { chunkInterval: data.chunkInterval, numberOfChunks: data.numberOfChunks },
     depositChainBlockHeight: block && block.height,
-    maxOraclePriceSlippage: 'maxOraclePriceSlippage' in data ? data.maxOraclePriceSlippage : null,
   };
 };
