@@ -7,7 +7,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@chainflip/utils": "0.8.17",
+    "@chainflip/utils": "0.8.18",
     "zod": "^3.25.75"
   },
   "devDependencies": {
