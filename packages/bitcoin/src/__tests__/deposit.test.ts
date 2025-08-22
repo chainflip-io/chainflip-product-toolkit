@@ -5,7 +5,7 @@ import * as ss58 from '@chainflip/utils/ss58';
 import { describe, expect, it, type MockInstance } from 'vitest';
 import { spyOn } from '@/testing';
 import { findVaultSwapData } from '../deposit';
-import { createSwapDataCodec } from '../scale';
+import { createSwapDataCodecV0, createSwapDataCodecV1 } from '../scale';
 import { tx, block } from './fixtures';
 
 const mockFetch = (results: unknown[], status = 200) =>
@@ -29,6 +29,7 @@ const buildNullData = ({
   boostFee = 0,
   brokerFee = 0,
   affiliates = [],
+  maxOraclePriceSlippage,
 }: {
   destinationAsset: ChainflipAsset;
   destinationAddress: Uint8Array;
@@ -39,23 +40,31 @@ const buildNullData = ({
   boostFee?: number;
   brokerFee?: number;
   affiliates?: { accountIndex: number; commissionBps: number }[];
+  maxOraclePriceSlippage?: number;
 }) => {
-  const codec = createSwapDataCodec(destinationAsset);
+  const common = {
+    retryDuration,
+    affiliates,
+    boostFee,
+    brokerFee,
+    chunkInterval,
+    numberOfChunks,
+    minOutputAmount,
+  };
 
-  const bytes = codec.enc({
-    version: 0,
-    destinationAsset: assetContractId[destinationAsset],
-    destinationAddress,
-    parameters: {
-      retryDuration,
-      affiliates,
-      boostFee,
-      brokerFee,
-      chunkInterval,
-      numberOfChunks,
-      minOutputAmount,
-    },
-  });
+  const bytes = maxOraclePriceSlippage
+    ? createSwapDataCodecV1(destinationAsset).enc({
+        version: 1,
+        destinationAsset: assetContractId[destinationAsset],
+        destinationAddress,
+        parameters: { ...common, maxOraclePriceSlippage },
+      })
+    : createSwapDataCodecV0(destinationAsset).enc({
+        version: 0,
+        destinationAsset: assetContractId[destinationAsset],
+        destinationAddress,
+        parameters: common,
+      });
 
   return [
     0x6a, // OP_RETURN
@@ -86,12 +95,12 @@ describe(findVaultSwapData, () => {
   const address2 = 'tb1pdz3akc5wa2gr69v3x87tfg0ka597dxqvfl6zhqx4y202y63cgw0q3rgpm6';
 
   it.each([
-    ['Eth', 1, 2, 30, 5, 1, 100, address1, undefined],
-    ['ArbEth', 1, 2, 15, 10, 0.1, 90, address2, undefined],
-    ['Sol', 20, 100, 10, 15, 0.01, 80, undefined, undefined],
-    ['Dot', 1, 2, 0, 0, 0.001, 69, undefined, [{ accountIndex: 1, commissionBps: 10 }]],
-    ['HubDot', 1, 2, 0, 0, 0.001, 69, undefined, [{ accountIndex: 1, commissionBps: 10 }]],
-    ['Btc', 1, 2, 5, 20, 0.0001, 50, undefined, [{ accountIndex: 2, commissionBps: 20 }]],
+    ['Eth', 1, 2, 30, 5, 1, 100, address1, undefined, undefined],
+    ['ArbEth', 1, 2, 15, 10, 0.1, 90, address2, undefined, undefined],
+    ['Sol', 20, 100, 10, 15, 0.01, 80, undefined, undefined, undefined],
+    ['Dot', 1, 2, 0, 0, 0.001, 69, undefined, [{ accountIndex: 1, commissionBps: 10 }], undefined],
+    ['HubDot', 1, 2, 0, 0, 0.001, 69, undefined, [{ accountIndex: 1, commissionBps: 10 }], 1],
+    ['Btc', 1, 2, 5, 20, 0.0001, 50, undefined, [{ accountIndex: 2, commissionBps: 20 }], 5],
   ] as const)(
     'gets the vault swap data (%s)',
     async (
@@ -104,6 +113,7 @@ describe(findVaultSwapData, () => {
       retryDuration,
       refundAddress,
       affiliates,
+      maxOraclePriceSlippage,
     ) => {
       const nulldata = buildNullData({
         destinationAsset,
@@ -114,6 +124,7 @@ describe(findVaultSwapData, () => {
         brokerFee,
         retryDuration,
         affiliates: affiliates as Mutable<typeof affiliates>,
+        maxOraclePriceSlippage,
       });
 
       mockFetch([tx({ nulldata, depositAmount, refundAddress }), block]);

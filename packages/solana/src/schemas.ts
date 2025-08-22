@@ -124,6 +124,8 @@ const swapParams = z
         refundAddress: data.refundParams.refundAddress,
         minPrice: BigInt(data.refundParams.minPriceX128),
         retryDuration: data.refundParams.retryDurationBlocks,
+        // TODO: update schema for new network version
+        maxOraclePriceSlippage: null,
       },
     };
   });

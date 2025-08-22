@@ -25,6 +25,7 @@ exports[`findVaultSwapData > handles swap native for ArbEth on devnet 1`] = `
   "maxBoostFee": 0,
   "outputAsset": "ArbEth",
   "refundParams": {
+    "maxOraclePriceSlippage": null,
     "minPrice": 0n,
     "refundAddress": "2BcYzxGN9CeSNo4dF61533xS3ytgwJxRyFYMoNSoZjUp",
     "retryDuration": 90,
@@ -57,6 +58,7 @@ exports[`findVaultSwapData > handles swap native for ArbEth on mainnet 1`] = `
   "maxBoostFee": 0,
   "outputAsset": "ArbEth",
   "refundParams": {
+    "maxOraclePriceSlippage": null,
     "minPrice": 0n,
     "refundAddress": "2BcYzxGN9CeSNo4dF61533xS3ytgwJxRyFYMoNSoZjUp",
     "retryDuration": 90,
@@ -88,6 +90,7 @@ exports[`findVaultSwapData > handles swap native for Btc on devnet 1`] = `
   "maxBoostFee": 0,
   "outputAsset": "Btc",
   "refundParams": {
+    "maxOraclePriceSlippage": null,
     "minPrice": 0n,
     "refundAddress": "3yKDHJgzS2GbZB9qruoadRYtq8597HZifnRju7fHpdRC",
     "retryDuration": 50,
@@ -119,6 +122,7 @@ exports[`findVaultSwapData > handles swap native for Btc on mainnet 1`] = `
   "maxBoostFee": 0,
   "outputAsset": "Btc",
   "refundParams": {
+    "maxOraclePriceSlippage": null,
     "minPrice": 0n,
     "refundAddress": "3yKDHJgzS2GbZB9qruoadRYtq8597HZifnRju7fHpdRC",
     "retryDuration": 50,
@@ -147,6 +151,7 @@ exports[`findVaultSwapData > handles swap native for Dot on devnet 1`] = `
   "maxBoostFee": 0,
   "outputAsset": "Dot",
   "refundParams": {
+    "maxOraclePriceSlippage": null,
     "minPrice": 0n,
     "refundAddress": "3yKDHJgzS2GbZB9qruoadRYtq8597HZifnRju7fHpdRC",
     "retryDuration": 69,
@@ -175,6 +180,7 @@ exports[`findVaultSwapData > handles swap native for Dot on mainnet 1`] = `
   "maxBoostFee": 0,
   "outputAsset": "Dot",
   "refundParams": {
+    "maxOraclePriceSlippage": null,
     "minPrice": 0n,
     "refundAddress": "3yKDHJgzS2GbZB9qruoadRYtq8597HZifnRju7fHpdRC",
     "retryDuration": 69,
@@ -216,6 +222,7 @@ exports[`findVaultSwapData > handles swap native for Eth on devnet 1`] = `
   "maxBoostFee": 0,
   "outputAsset": "Eth",
   "refundParams": {
+    "maxOraclePriceSlippage": null,
     "minPrice": 0n,
     "refundAddress": "12MYcNumSQCn81yKRfrk5P5ThM5ivkLiZda979hhKJDR",
     "retryDuration": 100,
@@ -257,6 +264,7 @@ exports[`findVaultSwapData > handles swap native for Eth on mainnet 1`] = `
   "maxBoostFee": 0,
   "outputAsset": "Eth",
   "refundParams": {
+    "maxOraclePriceSlippage": null,
     "minPrice": 0n,
     "refundAddress": "12MYcNumSQCn81yKRfrk5P5ThM5ivkLiZda979hhKJDR",
     "retryDuration": 100,
@@ -283,6 +291,7 @@ exports[`findVaultSwapData > handles swap native for Sol on devnet 1`] = `
   "maxBoostFee": 0,
   "outputAsset": "Sol",
   "refundParams": {
+    "maxOraclePriceSlippage": null,
     "minPrice": 0n,
     "refundAddress": "3yKDHJgzS2GbZB9qruoadRYtq8597HZifnRju7fHpdRC",
     "retryDuration": 80,
@@ -309,6 +318,7 @@ exports[`findVaultSwapData > handles swap native for Sol on mainnet 1`] = `
   "maxBoostFee": 0,
   "outputAsset": "Sol",
   "refundParams": {
+    "maxOraclePriceSlippage": null,
     "minPrice": 0n,
     "refundAddress": "3yKDHJgzS2GbZB9qruoadRYtq8597HZifnRju7fHpdRC",
     "retryDuration": 80,

@@ -7,7 +7,7 @@ import * as ss58 from '@chainflip/utils/ss58';
 import { type VaultSwapData } from '@chainflip/utils/types';
 import BigNumber from 'bignumber.js';
 import * as rpc from './rpc';
-import { createSwapDataCodec } from './scale';
+import { createSwapDataCodecV0, createSwapDataCodecV1, UtxoDataV0, UtxoDataV1 } from './scale';
 
 const encodeChainAddress = (data: Uint8Array, asset: ChainflipAsset) => {
   switch (assetConstants[asset].chain) {
@@ -30,13 +30,21 @@ const contractIdToInternalAsset: Record<number, ChainflipAsset> = Object.fromEnt
 
 const parseVaultSwapData = (data: Uint8Array) => {
   const version = data[0];
-  // only supported version (and only version)
-  assert(version === 0, 'unsupported version');
   const contractId = data[1];
   const outputAsset = contractIdToInternalAsset[contractId];
-  assert(outputAsset, 'unknown asset contract id');
 
-  const { destinationAddress, parameters } = createSwapDataCodec(outputAsset).dec(data);
+  let destinationAddress: Uint8Array;
+  let parameters: UtxoDataV0 | UtxoDataV1;
+
+  if (version === 1) {
+    ({ destinationAddress, parameters } = createSwapDataCodecV1(outputAsset).dec(data));
+  } else if (version === 0) {
+    ({ destinationAddress, parameters } = createSwapDataCodecV0(outputAsset).dec(data));
+  } else {
+    throw new Error('unsupported version');
+  }
+
+  assert(outputAsset, 'unknown asset contract id');
 
   return {
     ...parameters,
@@ -79,6 +87,7 @@ export const findVaultSwapData = async (
       refundAddress: tx.vout[2].scriptPubKey.address,
       retryDuration: data.retryDuration,
       minPrice: getX128PriceFromAmounts(amount, data.minOutputAmount),
+      maxOraclePriceSlippage: 'maxOraclePriceSlippage' in data ? data.maxOraclePriceSlippage : null,
     },
     destinationAddress: data.destinationAddress,
     outputAsset: data.outputAsset,
