@@ -58,7 +58,7 @@ describe(DelegationSDK, () => {
     count = 0;
     calls.length = 0;
     walletclient = {
-      account: `0xa56A6be23b6Cf39D9448FF6e897C29c41c8fbDFF`,
+      account: { address: '0xa56A6be23b6Cf39D9448FF6e897C29c41c8fbDFF' },
       writeContract: vi.fn().mockImplementation((args) => {
         calls.push({ type: 'writeContract', args });
         return `tx hash ${count++}`;
@@ -81,111 +81,8 @@ describe(DelegationSDK, () => {
   });
 
   describe(DelegationSDK.prototype.delegate, () => {
-    it('delegates FLIP with approval', async () => {
+    it('delegates FLIP', async () => {
       const sdk = new DelegationSDK(walletclient, publicClient, 'backspin');
-
-      vi.mocked(publicClient.readContract).mockImplementationOnce((args) => {
-        calls.push({ type: 'readContract', args });
-        return Promise.resolve(BigInt(2.5e18));
-      });
-
-      expect(
-        await sdk.delegate(BigInt(10e18), 'cFMjXCTxTHVkSqbKzeVwJ25TJxLqc1Vn9usPgUGmZhsyvHRQZ'),
-      ).toEqual('tx hash 1');
-
-      expect(calls).toMatchInlineSnapshot(`
-        [
-          {
-            "args": {
-              "abi": "{{ ERC20 ABI }}",
-              "address": "0x10C6E9530F1C1AF873a391030a1D9E8ed0630D26",
-              "args": [
-                undefined,
-                "0xc5a5C42992dECbae36851359345FE25997F5C42d",
-              ],
-              "functionName": "allowance",
-            },
-            "type": "readContract",
-          },
-          {
-            "args": {
-              "abi": "{{ ERC20 ABI }}",
-              "account": "0xa56A6be23b6Cf39D9448FF6e897C29c41c8fbDFF",
-              "address": "0x10C6E9530F1C1AF873a391030a1D9E8ed0630D26",
-              "args": [
-                "0xc5a5C42992dECbae36851359345FE25997F5C42d",
-                7500000000000000000n,
-              ],
-              "chain": "client chain",
-              "functionName": "approve",
-            },
-            "type": "simulateContract",
-          },
-          {
-            "args": {
-              "abi": "{{ ERC20 ABI }}",
-              "account": "0xa56A6be23b6Cf39D9448FF6e897C29c41c8fbDFF",
-              "address": "0x10C6E9530F1C1AF873a391030a1D9E8ed0630D26",
-              "args": [
-                "0xc5a5C42992dECbae36851359345FE25997F5C42d",
-                7500000000000000000n,
-              ],
-              "chain": "client chain",
-              "functionName": "approve",
-            },
-            "type": "writeContract",
-          },
-          {
-            "args": {
-              "hash": "tx hash 0",
-            },
-            "type": "waitForTransactionReceipt",
-          },
-          {
-            "args": {
-              "abi": "{{ SC UTILS ABI }}",
-              "account": "0xa56A6be23b6Cf39D9448FF6e897C29c41c8fbDFF",
-              "address": "0xc5a5C42992dECbae36851359345FE25997F5C42d",
-              "args": [
-                10000000000000000000n,
-                "0x0000aadef2b57f70666b05f95dd3d223bc85df6c03b28d36f8cc2026383d8428af23",
-              ],
-              "chain": "client chain",
-              "functionName": "depositToScGateway",
-            },
-            "type": "simulateContract",
-          },
-          {
-            "args": {
-              "abi": "{{ SC UTILS ABI }}",
-              "account": "0xa56A6be23b6Cf39D9448FF6e897C29c41c8fbDFF",
-              "address": "0xc5a5C42992dECbae36851359345FE25997F5C42d",
-              "args": [
-                10000000000000000000n,
-                "0x0000aadef2b57f70666b05f95dd3d223bc85df6c03b28d36f8cc2026383d8428af23",
-              ],
-              "chain": "client chain",
-              "functionName": "depositToScGateway",
-            },
-            "type": "writeContract",
-          },
-          {
-            "args": {
-              "hash": "tx hash 1",
-            },
-            "type": "waitForTransactionReceipt",
-          },
-        ]
-      `);
-    });
-
-    it('delegates FLIP without approval', async () => {
-      const sdk = new DelegationSDK(walletclient, publicClient, 'backspin');
-
-      vi.mocked(publicClient.readContract).mockImplementationOnce((args) => {
-        calls.push({ type: 'readContract', args });
-        return Promise.resolve(BigInt(10e18));
-      });
 
       expect(
         await sdk.delegate(BigInt(10e18), 'cFMjXCTxTHVkSqbKzeVwJ25TJxLqc1Vn9usPgUGmZhsyvHRQZ'),
@@ -195,20 +92,10 @@ describe(DelegationSDK, () => {
         [
           {
             "args": {
-              "abi": "{{ ERC20 ABI }}",
-              "address": "0x10C6E9530F1C1AF873a391030a1D9E8ed0630D26",
-              "args": [
-                undefined,
-                "0xc5a5C42992dECbae36851359345FE25997F5C42d",
-              ],
-              "functionName": "allowance",
-            },
-            "type": "readContract",
-          },
-          {
-            "args": {
               "abi": "{{ SC UTILS ABI }}",
-              "account": "0xa56A6be23b6Cf39D9448FF6e897C29c41c8fbDFF",
+              "account": {
+                "address": "0xa56A6be23b6Cf39D9448FF6e897C29c41c8fbDFF",
+              },
               "address": "0xc5a5C42992dECbae36851359345FE25997F5C42d",
               "args": [
                 10000000000000000000n,
@@ -222,7 +109,9 @@ describe(DelegationSDK, () => {
           {
             "args": {
               "abi": "{{ SC UTILS ABI }}",
-              "account": "0xa56A6be23b6Cf39D9448FF6e897C29c41c8fbDFF",
+              "account": {
+                "address": "0xa56A6be23b6Cf39D9448FF6e897C29c41c8fbDFF",
+              },
               "address": "0xc5a5C42992dECbae36851359345FE25997F5C42d",
               "args": [
                 10000000000000000000n,
@@ -254,7 +143,9 @@ describe(DelegationSDK, () => {
           {
             "args": {
               "abi": "{{ SC UTILS ABI }}",
-              "account": "0xa56A6be23b6Cf39D9448FF6e897C29c41c8fbDFF",
+              "account": {
+                "address": "0xa56A6be23b6Cf39D9448FF6e897C29c41c8fbDFF",
+              },
               "address": "0xc5a5C42992dECbae36851359345FE25997F5C42d",
               "args": [
                 "0x0001",
@@ -267,7 +158,9 @@ describe(DelegationSDK, () => {
           {
             "args": {
               "abi": "{{ SC UTILS ABI }}",
-              "account": "0xa56A6be23b6Cf39D9448FF6e897C29c41c8fbDFF",
+              "account": {
+                "address": "0xa56A6be23b6Cf39D9448FF6e897C29c41c8fbDFF",
+              },
               "address": "0xc5a5C42992dECbae36851359345FE25997F5C42d",
               "args": [
                 "0x0001",
@@ -298,7 +191,9 @@ describe(DelegationSDK, () => {
           {
             "args": {
               "abi": "{{ SC UTILS ABI }}",
-              "account": "0xa56A6be23b6Cf39D9448FF6e897C29c41c8fbDFF",
+              "account": {
+                "address": "0xa56A6be23b6Cf39D9448FF6e897C29c41c8fbDFF",
+              },
               "address": "0xc5a5C42992dECbae36851359345FE25997F5C42d",
               "args": [
                 "0x0002010000e8890423c78a0000000000000000",
@@ -311,7 +206,9 @@ describe(DelegationSDK, () => {
           {
             "args": {
               "abi": "{{ SC UTILS ABI }}",
-              "account": "0xa56A6be23b6Cf39D9448FF6e897C29c41c8fbDFF",
+              "account": {
+                "address": "0xa56A6be23b6Cf39D9448FF6e897C29c41c8fbDFF",
+              },
               "address": "0xc5a5C42992dECbae36851359345FE25997F5C42d",
               "args": [
                 "0x0002010000e8890423c78a0000000000000000",
@@ -340,7 +237,9 @@ describe(DelegationSDK, () => {
           {
             "args": {
               "abi": "{{ SC UTILS ABI }}",
-              "account": "0xa56A6be23b6Cf39D9448FF6e897C29c41c8fbDFF",
+              "account": {
+                "address": "0xa56A6be23b6Cf39D9448FF6e897C29c41c8fbDFF",
+              },
               "address": "0xc5a5C42992dECbae36851359345FE25997F5C42d",
               "args": [
                 "0x000200",
@@ -353,7 +252,9 @@ describe(DelegationSDK, () => {
           {
             "args": {
               "abi": "{{ SC UTILS ABI }}",
-              "account": "0xa56A6be23b6Cf39D9448FF6e897C29c41c8fbDFF",
+              "account": {
+                "address": "0xa56A6be23b6Cf39D9448FF6e897C29c41c8fbDFF",
+              },
               "address": "0xc5a5C42992dECbae36851359345FE25997F5C42d",
               "args": [
                 "0x000200",
@@ -385,7 +286,9 @@ describe(DelegationSDK, () => {
           {
             "args": {
               "abi": "{{ SC UTILS ABI }}",
-              "account": "0xa56A6be23b6Cf39D9448FF6e897C29c41c8fbDFF",
+              "account": {
+                "address": "0xa56A6be23b6Cf39D9448FF6e897C29c41c8fbDFF",
+              },
               "address": "0xc5a5C42992dECbae36851359345FE25997F5C42d",
               "args": [
                 "0x0003010000e8890423c78a0000000000000000a56a6be23b6cf39d9448ff6e897c29c41c8fbdff00",
@@ -398,7 +301,9 @@ describe(DelegationSDK, () => {
           {
             "args": {
               "abi": "{{ SC UTILS ABI }}",
-              "account": "0xa56A6be23b6Cf39D9448FF6e897C29c41c8fbDFF",
+              "account": {
+                "address": "0xa56A6be23b6Cf39D9448FF6e897C29c41c8fbDFF",
+              },
               "address": "0xc5a5C42992dECbae36851359345FE25997F5C42d",
               "args": [
                 "0x0003010000e8890423c78a0000000000000000a56a6be23b6cf39d9448ff6e897c29c41c8fbdff00",
@@ -428,7 +333,9 @@ describe(DelegationSDK, () => {
           {
             "args": {
               "abi": "{{ SC UTILS ABI }}",
-              "account": "0xa56A6be23b6Cf39D9448FF6e897C29c41c8fbDFF",
+              "account": {
+                "address": "0xa56A6be23b6Cf39D9448FF6e897C29c41c8fbDFF",
+              },
               "address": "0xc5a5C42992dECbae36851359345FE25997F5C42d",
               "args": [
                 "0x000300a56a6be23b6cf39d9448ff6e897c29c41c8fbdff00",
@@ -441,7 +348,9 @@ describe(DelegationSDK, () => {
           {
             "args": {
               "abi": "{{ SC UTILS ABI }}",
-              "account": "0xa56A6be23b6Cf39D9448FF6e897C29c41c8fbDFF",
+              "account": {
+                "address": "0xa56A6be23b6Cf39D9448FF6e897C29c41c8fbDFF",
+              },
               "address": "0xc5a5C42992dECbae36851359345FE25997F5C42d",
               "args": [
                 "0x000300a56a6be23b6cf39d9448ff6e897c29c41c8fbdff00",
@@ -456,6 +365,100 @@ describe(DelegationSDK, () => {
               "hash": "tx hash 0",
             },
             "type": "waitForTransactionReceipt",
+          },
+        ]
+      `);
+    });
+  });
+
+  describe(DelegationSDK.prototype.approveScUtils, () => {
+    it('approves the SC utils if necessary', async () => {
+      const sdk = new DelegationSDK(walletclient, publicClient, 'backspin');
+
+      vi.mocked(publicClient.readContract).mockImplementationOnce((args) => {
+        calls.push({ type: 'readContract', args });
+        return Promise.resolve(BigInt(2.5e18));
+      });
+
+      expect(await sdk.approveScUtils(BigInt(10e18))).toEqual('tx hash 0');
+      expect(calls).toMatchInlineSnapshot(`
+        [
+          {
+            "args": {
+              "abi": "{{ ERC20 ABI }}",
+              "address": "0x10C6E9530F1C1AF873a391030a1D9E8ed0630D26",
+              "args": [
+                "0xa56A6be23b6Cf39D9448FF6e897C29c41c8fbDFF",
+                "0xc5a5C42992dECbae36851359345FE25997F5C42d",
+              ],
+              "functionName": "allowance",
+            },
+            "type": "readContract",
+          },
+          {
+            "args": {
+              "abi": "{{ ERC20 ABI }}",
+              "account": {
+                "address": "0xa56A6be23b6Cf39D9448FF6e897C29c41c8fbDFF",
+              },
+              "address": "0x10C6E9530F1C1AF873a391030a1D9E8ed0630D26",
+              "args": [
+                "0xc5a5C42992dECbae36851359345FE25997F5C42d",
+                7500000000000000000n,
+              ],
+              "chain": "client chain",
+              "functionName": "approve",
+            },
+            "type": "simulateContract",
+          },
+          {
+            "args": {
+              "abi": "{{ ERC20 ABI }}",
+              "account": {
+                "address": "0xa56A6be23b6Cf39D9448FF6e897C29c41c8fbDFF",
+              },
+              "address": "0x10C6E9530F1C1AF873a391030a1D9E8ed0630D26",
+              "args": [
+                "0xc5a5C42992dECbae36851359345FE25997F5C42d",
+                7500000000000000000n,
+              ],
+              "chain": "client chain",
+              "functionName": "approve",
+            },
+            "type": "writeContract",
+          },
+          {
+            "args": {
+              "hash": "tx hash 0",
+            },
+            "type": "waitForTransactionReceipt",
+          },
+        ]
+      `);
+    });
+
+    it('does nothing if the allowance is high enough', async () => {
+      const sdk = new DelegationSDK(walletclient, publicClient, 'backspin');
+
+      vi.mocked(publicClient.readContract).mockImplementationOnce((args) => {
+        calls.push({ type: 'readContract', args });
+        return Promise.resolve(BigInt(10e18));
+      });
+
+      expect(await sdk.approveScUtils(BigInt(10e18))).toBeNull();
+      expect(calls).toMatchInlineSnapshot(`
+        [
+          {
+            "args": {
+              "abi": "{{ ERC20 ABI }}",
+              "address": "0x10C6E9530F1C1AF873a391030a1D9E8ed0630D26",
+              "args": [
+                "0xa56A6be23b6Cf39D9448FF6e897C29c41c8fbDFF",
+                "0xc5a5C42992dECbae36851359345FE25997F5C42d",
+              ],
+              "functionName": "allowance",
+            },
+            "type": "readContract",
           },
         ]
       `);

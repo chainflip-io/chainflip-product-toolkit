@@ -49,7 +49,7 @@ export class DelegationSDK {
     return account;
   }
 
-  private async approveFlip(requiredAmount: bigint) {
+  async approveScUtils(requiredAmount: bigint) {
     const scUtilsAddress = SC_UTILS_ADDRESSES[this.network];
     const flipAddress = FLIP_ADDRESSES[this.network];
     const account = this.getAccount();
@@ -61,25 +61,25 @@ export class DelegationSDK {
       address: flipAddress,
     });
 
-    if (currentAllowance < requiredAmount) {
-      const { request } = await this.publicClient.simulateContract({
-        abi: erc20Abi,
-        functionName: 'approve',
-        args: [scUtilsAddress, requiredAmount - currentAllowance],
-        account,
-        chain: this.walletClient.chain,
-        address: flipAddress,
-      });
+    if (currentAllowance >= requiredAmount) return null;
 
-      const hash = await this.walletClient.writeContract(request);
+    const { request } = await this.publicClient.simulateContract({
+      abi: erc20Abi,
+      functionName: 'approve',
+      args: [scUtilsAddress, requiredAmount - currentAllowance],
+      account,
+      chain: this.walletClient.chain,
+      address: flipAddress,
+    });
 
-      await this.publicClient.waitForTransactionReceipt({ hash });
-    }
+    const hash = await this.walletClient.writeContract(request);
+
+    await this.publicClient.waitForTransactionReceipt({ hash });
+
+    return hash;
   }
 
   async delegate(amount: bigint, operator: `cF${string}`): Promise<`0x${string}`> {
-    await this.approveFlip(amount);
-
     const { request } = await this.publicClient.simulateContract({
       address: SC_UTILS_ADDRESSES[this.network],
       abi: scUtils,
