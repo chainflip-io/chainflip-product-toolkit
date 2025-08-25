@@ -49,7 +49,7 @@ export class DelegationSDK {
     return account;
   }
 
-  async approveScUtils(requiredAmount: bigint) {
+  async approveScUtils(requiredAmount: bigint): Promise<`0x${string}` | null> {
     const scUtilsAddress = SC_UTILS_ADDRESSES[this.network];
     const flipAddress = FLIP_ADDRESSES[this.network];
     const account = this.getAccount();
