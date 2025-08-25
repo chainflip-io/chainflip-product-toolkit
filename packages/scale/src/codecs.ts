@@ -15,15 +15,38 @@ import {
   u8,
   type Codec,
   bool,
+  u128,
 } from 'scale-ts';
 
-const vaultSwapParametersCodec = <T>(refundAddressCodec: Codec<T>) =>
+const refundParamsWithCcmRefund = <T>(refundAddressCodec: Codec<T>) =>
   Struct({
-    refundParams: Struct({
-      retryDurationBlocks: u32,
-      refundAddress: refundAddressCodec,
-      minPriceX128: u256,
-    }),
+    retryDurationBlocks: u32,
+    refundAddress: refundAddressCodec,
+    minPriceX128: u256,
+    refundCcmMetadata: Option(
+      Struct({
+        channelMetadata: Struct({
+          message: Bytes(),
+          gasBudget: u128,
+          additionalData: Bytes(),
+        }),
+        sourceChain: u32,
+        sourceAddress: Option(Bytes(32)),
+      }),
+    ),
+    maxOraclePriceSlippage: Option(u16),
+  });
+
+const refundParams = <T>(refundAddressCodec: Codec<T>) =>
+  Struct({
+    retryDurationBlocks: u32,
+    refundAddress: refundAddressCodec,
+    minPriceX128: u256,
+  });
+
+const vaultSwapParametersCodec = <T>(refundParamsCodec: Codec<T>) =>
+  Struct({
+    refundParams: refundParamsCodec,
     dcaParams: Option(Struct({ numberOfChunks: u32, chunkIntervalBlocks: u32 })),
     boostFee: u8,
     brokerFees: Struct({ account: Bytes(32), commissionBps: u16 }),
@@ -34,30 +57,43 @@ export const vaultCcmCfParametersCodec = <T>(refundAddressCodec: Codec<T>) =>
   Enum({
     V0: Struct({
       ccmAdditionalData: Bytes(),
-      vaultSwapParameters: vaultSwapParametersCodec(refundAddressCodec),
+      vaultSwapParameters: vaultSwapParametersCodec(refundParams(refundAddressCodec)),
+    }),
+    V1: Struct({
+      ccmAdditionalData: Bytes(),
+      vaultSwapParameters: vaultSwapParametersCodec(refundParamsWithCcmRefund(refundAddressCodec)),
     }),
   });
 
 export const vaultCfParametersCodec = <T>(refundAddressCodec: Codec<T>) =>
   Enum({
     V0: Struct({
-      vaultSwapParameters: vaultSwapParametersCodec(refundAddressCodec),
+      vaultSwapParameters: vaultSwapParametersCodec(refundParams(refundAddressCodec)),
+    }),
+    V1: Struct({
+      vaultSwapParameters: vaultSwapParametersCodec(refundParamsWithCcmRefund(refundAddressCodec)),
     }),
   });
 
-export const solVersionedCcmAdditionalDataCodec = Enum({
-  V0: Struct({
-    cf_receiver: Struct({
+const solCcmAccounts = Struct({
+  cf_receiver: Struct({
+    pubkey: Bytes(32),
+    is_writable: bool,
+  }),
+  additional_accounts: Vector(
+    Struct({
       pubkey: Bytes(32),
       is_writable: bool,
     }),
-    additional_accounts: Vector(
-      Struct({
-        pubkey: Bytes(32),
-        is_writable: bool,
-      }),
-    ),
-    fallback_address: Bytes(32),
+  ),
+  fallback_address: Bytes(32),
+});
+
+export const solVersionedCcmAdditionalDataCodec = Enum({
+  V0: solCcmAccounts,
+  V1: Struct({
+    ccmAccounts: solCcmAccounts,
+    alts: Vector(Bytes(32)),
   }),
 });
 
@@ -73,13 +109,15 @@ export const decodeSolanaAdditionalData = (
   try {
     const { value } = solVersionedCcmAdditionalDataCodec.dec(data);
 
+    const accounts = 'ccmAccounts' in value ? value.ccmAccounts : value;
+
     return {
-      fallbackAddress: base58.encode(value.fallback_address),
+      fallbackAddress: base58.encode(accounts.fallback_address),
       cfReceiver: {
-        pubkey: base58.encode(value.cf_receiver.pubkey),
-        isWritable: value.cf_receiver.is_writable,
+        pubkey: base58.encode(accounts.cf_receiver.pubkey),
+        isWritable: accounts.cf_receiver.is_writable,
       },
-      additionalAccounts: value.additional_accounts.map((account) => ({
+      additionalAccounts: accounts.additional_accounts.map((account) => ({
         pubkey: base58.encode(account.pubkey),
         isWritable: account.is_writable,
       })),
@@ -95,6 +133,7 @@ type DecodedParams<Address, CcmAdditionalData> = {
     retryDurationBlocks: number;
     refundAddress: Address;
     minPriceX128: string;
+    maxOraclePriceSlippage: number | null;
   };
   dcaParams: { numberOfChunks: number; chunkIntervalBlocks: number } | null;
   boostFee: number;
@@ -157,6 +196,10 @@ export function createVaultParamsDecoder<T, U, V>(
           retryDurationBlocks: vaultSwapParameters.refundParams.retryDurationBlocks,
           refundAddress: encodeAddress(vaultSwapParameters.refundParams.refundAddress),
           minPriceX128: vaultSwapParameters.refundParams.minPriceX128.toString(),
+          maxOraclePriceSlippage:
+            'maxOraclePriceSlippage' in vaultSwapParameters.refundParams
+              ? (vaultSwapParameters.refundParams.maxOraclePriceSlippage ?? null)
+              : null,
         },
         dcaParams: vaultSwapParameters.dcaParams
           ? {
