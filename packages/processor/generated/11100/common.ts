@@ -248,6 +248,33 @@ export const cfPrimitivesAccountRole = simpleEnum([
   'Operator',
 ]);
 
+export const palletCfValidatorAuctionResolverSetSizeParameters = z.object({
+  minSize: z.number(),
+  maxSize: z.number(),
+  maxExpansion: z.number(),
+});
+
+export const cfPrimitivesSemVer = z.object({
+  major: z.number(),
+  minor: z.number(),
+  patch: z.number(),
+});
+
+export const palletCfValidatorPalletConfigUpdate = z.discriminatedUnion('__kind', [
+  z.object({ __kind: z.literal('RegistrationBondPercentage'), percentage: z.number() }),
+  z.object({ __kind: z.literal('AuctionBidCutoffPercentage'), percentage: z.number() }),
+  z.object({ __kind: z.literal('RedemptionPeriodAsPercentage'), percentage: z.number() }),
+  z.object({ __kind: z.literal('EpochDuration'), blocks: z.number() }),
+  z.object({ __kind: z.literal('AuthoritySetMinSize'), minSize: z.number() }),
+  z.object({
+    __kind: z.literal('AuctionParameters'),
+    parameters: palletCfValidatorAuctionResolverSetSizeParameters,
+  }),
+  z.object({ __kind: z.literal('MinimumReportedCfeVersion'), version: cfPrimitivesSemVer }),
+  z.object({ __kind: z.literal('MaxAuthoritySetContractionPercentage'), percentage: z.number() }),
+  z.object({ __kind: z.literal('MinimumAuctionBid'), minimumFlipBid: z.number() }),
+]);
+
 export const palletCfValidatorDelegationDelegationAcceptance = simpleEnum(['Allow', 'Deny']);
 
 export const palletCfValidatorDelegationOperatorSettings = z.object({
@@ -423,11 +450,19 @@ export const cfChainsCcmDepositMetadataForeignChainAddress = z.object({
   sourceAddress: cfChainsAddressForeignChainAddress.nullish(),
 });
 
-export const cfChainsRefundParametersChannelRefundParametersAccountOrAddress = z.object({
-  retryDuration: z.number(),
-  refundAddress: cfChainsRefundParametersAccountOrAddress,
+export const cfTraitsSwappingExpiryBehaviour = z.discriminatedUnion('__kind', [
+  z.object({ __kind: z.literal('NoExpiry') }),
+  z.object({
+    __kind: z.literal('RefundIfExpires'),
+    retryDuration: z.number(),
+    refundAddress: cfChainsRefundParametersAccountOrAddress,
+    refundCcmMetadata: cfChainsCcmDepositMetadataForeignChainAddress.nullish(),
+  }),
+]);
+
+export const cfTraitsSwappingPriceLimitsAndExpiry = z.object({
+  expiryBehaviour: cfTraitsSwappingExpiryBehaviour,
   minPrice: numberOrHex,
-  refundCcmMetadata: cfChainsCcmDepositMetadataForeignChainAddress.nullish(),
   maxOraclePriceSlippage: z.number().nullish(),
 });
 
@@ -449,6 +484,15 @@ export const cfChainsRefundParametersChannelRefundParametersEncodedAddress = z.o
   refundCcmMetadata: cfChainsCcmChannelMetadataCcmAdditionalData.nullish(),
   maxOraclePriceSlippage: z.number().nullish(),
 });
+
+export const palletCfSwappingSwapFailureReason = simpleEnum([
+  'PriceImpactLimit',
+  'MinPriceViolation',
+  'OraclePriceSlippageExceeded',
+  'OraclePriceStale',
+  'PredecessorSwapFailure',
+  'SafeModeActive',
+]);
 
 export const palletCfEthereumIngressEgressDepositFailedReason = z.discriminatedUnion('__kind', [
   z.object({ __kind: z.literal('BelowMinimumDeposit') }),
