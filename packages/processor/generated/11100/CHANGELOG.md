@@ -27,6 +27,10 @@ BitcoinIngressEgress:
   - PalletConfigUpdated:
     - update: added
 
+Emissions:
+  - BackupNodeInflationEmissionsUpdated: removed
+  - BackupRewardsDistributed: removed
+
 Environment:
   - RuntimeSafeModeUpdated:
     - safeMode: added
@@ -55,11 +59,14 @@ SolanaIngressEgress:
     - update: added
 
 Swapping:
-  - SwapCanceled: added
+  - SwapAborted: added
   - SwapDepositAddressReady:
     - refundParameters: added
   - SwapRequested:
-    - refundParameters: added
+    - priceLimitsAndExpiry: added
+    - refundParameters: removed
+  - SwapRescheduled:
+    - reason: added
 
 Validator:
   - Delegated: added
@@ -68,6 +75,8 @@ Validator:
   - MaxBidUpdated: added
   - OperatorAcceptedByValidator: added
   - OperatorSettingsUpdated: added
+  - PalletConfigUpdated:
+    - update: removed
   - UnDelegated: added
   - UnDelegationFinalized: added
   - ValidatorClaimed: added
