@@ -11486,6 +11486,13 @@
         "outputAmount": {
           "type": "primitive",
           "value": "u128"
+        },
+        "oracleDelta": {
+          "type": "option",
+          "value": {
+            "type": "primitive",
+            "value": "i16"
+          }
         }
       }
     },

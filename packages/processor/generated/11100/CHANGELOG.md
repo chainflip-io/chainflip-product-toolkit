@@ -62,6 +62,8 @@ Swapping:
   - SwapAborted: added
   - SwapDepositAddressReady:
     - refundParameters: added
+  - SwapExecuted:
+    - oracleDelta: added
   - SwapRequested:
     - priceLimitsAndExpiry: added
     - refundParameters: removed
