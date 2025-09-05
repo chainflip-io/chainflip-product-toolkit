@@ -1,6 +1,6 @@
 {
   "name": "@chainflip/delegation",
-  "version": "1.11.0-alpha.2",
+  "version": "1.11.0-alpha.3",
   "type": "module",
   "scripts": {
     "eslint:check": "pnpm eslint --max-warnings 0 './**/*.ts'",
