@@ -184,7 +184,7 @@ describe(DelegationSDK, () => {
   });
 
   describe(DelegationSDK.prototype.depositAndDelegate, () => {
-    it('deposts 10 FLIP and delegates max', async () => {
+    it('deposits 10 FLIP and delegates max', async () => {
       const sdk = new DelegationSDK(walletclient, publicClient, 'backspin');
 
       expect(
@@ -238,7 +238,7 @@ describe(DelegationSDK, () => {
       `);
     });
 
-    it('deposts 10 FLIP and delegates 20 FLIP', async () => {
+    it('deposits 10 FLIP and delegates 20 FLIP', async () => {
       const sdk = new DelegationSDK(walletclient, publicClient, 'backspin');
 
       expect(
