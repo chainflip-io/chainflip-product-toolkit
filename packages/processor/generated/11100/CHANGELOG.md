@@ -41,6 +41,9 @@ EthereumIngressEgress:
   - PalletConfigUpdated:
     - update: added
 
+Flip:
+  - FlipMinted: added
+
 Funding:
   - SCCallCannotBeDecoded: added
   - SCCallCannotBeExecuted: added
@@ -78,8 +81,8 @@ Validator:
   - OperatorAcceptedByValidator: added
   - OperatorSettingsUpdated: added
   - PalletConfigUpdated:
-    - update: removed
-  - UnDelegated: added
+    - update: changed
   - UnDelegationFinalized: added
+  - Undelegated: added
   - ValidatorClaimed: added
   - ValidatorRemovedFromOperator: added
