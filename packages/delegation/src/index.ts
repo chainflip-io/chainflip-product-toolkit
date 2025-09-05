@@ -79,12 +79,16 @@ export class DelegationSDK {
     return hash;
   }
 
-  async delegate(amount: bigint, operator: `cF${string}`): Promise<`0x${string}`> {
+  async depositAndDelegate(
+    operator: `cF${string}`,
+    depositAmount: bigint,
+    increaseBy?: bigint,
+  ): Promise<`0x${string}`> {
     const { request } = await this.publicClient.simulateContract({
       address: SC_UTILS_ADDRESSES[this.network],
       abi: scUtils,
       functionName: 'depositToScGateway',
-      args: [amount, await this.encodeScBytes({ call: 'delegate', operator })],
+      args: [depositAmount, await this.encodeScBytes({ call: 'delegate', operator, increaseBy })],
       chain: this.walletClient.chain,
       account: this.getAccount(),
     });
@@ -113,12 +117,12 @@ export class DelegationSDK {
     return hash;
   }
 
-  undelegate(): Promise<`0x${string}`> {
-    return this.executeCallSc({ call: 'undelegate' });
+  async delegateFromBalance(operator: `cF${string}`, increaseBy?: bigint): Promise<`0x${string}`> {
+    return this.executeCallSc({ call: 'delegate', operator, increaseBy });
   }
 
-  setMaxBid(maxBid?: bigint): Promise<`0x${string}`> {
-    return this.executeCallSc({ call: 'setMaxBid', maxBid });
+  undelegate(decreaseBy?: bigint): Promise<`0x${string}`> {
+    return this.executeCallSc({ call: 'undelegate', decreaseBy });
   }
 
   redeem(address: `0x${string}`, amount?: bigint): Promise<`0x${string}`> {
