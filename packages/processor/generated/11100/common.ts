@@ -162,6 +162,11 @@ export const numberOrHex = z
   .union([z.number(), hexString, numericString])
   .transform((n) => BigInt(n));
 
+export const palletCfValidatorDelegationDelegationAmount = z.discriminatedUnion('__kind', [
+  z.object({ __kind: z.literal('Max') }),
+  z.object({ __kind: z.literal('Some'), value: numberOrHex }),
+]);
+
 export const palletCfFundingRedemptionAmount = z.discriminatedUnion('__kind', [
   z.object({ __kind: z.literal('Max') }),
   z.object({ __kind: z.literal('Exact'), value: numberOrHex }),
@@ -170,9 +175,15 @@ export const palletCfFundingRedemptionAmount = z.discriminatedUnion('__kind', [
 export const stateChainRuntimeChainflipEthereumScCallsDelegationApi = z.discriminatedUnion(
   '__kind',
   [
-    z.object({ __kind: z.literal('Delegate'), operator: accountId }),
-    z.object({ __kind: z.literal('Undelegate') }),
-    z.object({ __kind: z.literal('SetMaxBid'), maybeMaxBid: numberOrHex.nullish() }),
+    z.object({
+      __kind: z.literal('Delegate'),
+      operator: accountId,
+      increase: palletCfValidatorDelegationDelegationAmount,
+    }),
+    z.object({
+      __kind: z.literal('Undelegate'),
+      decrease: palletCfValidatorDelegationDelegationAmount,
+    }),
     z.object({
       __kind: z.literal('Redeem'),
       amount: palletCfFundingRedemptionAmount,
@@ -184,7 +195,7 @@ export const stateChainRuntimeChainflipEthereumScCallsDelegationApi = z.discrimi
 
 export const stateChainRuntimeChainflipEthereumScCallsEthereumSCApi = z.object({
   __kind: z.literal('Delegation'),
-  value: stateChainRuntimeChainflipEthereumScCallsDelegationApi,
+  call: stateChainRuntimeChainflipEthereumScCallsDelegationApi,
 });
 
 export const spWeightsWeightV2Weight = z.object({ refTime: numberOrHex, proofSize: numberOrHex });
@@ -273,6 +284,7 @@ export const palletCfValidatorPalletConfigUpdate = z.discriminatedUnion('__kind'
   z.object({ __kind: z.literal('MinimumReportedCfeVersion'), version: cfPrimitivesSemVer }),
   z.object({ __kind: z.literal('MaxAuthoritySetContractionPercentage'), percentage: z.number() }),
   z.object({ __kind: z.literal('MinimumAuctionBid'), minimumFlipBid: z.number() }),
+  z.object({ __kind: z.literal('DelegationCapacityFactor'), factor: z.number().nullish() }),
 ]);
 
 export const palletCfValidatorDelegationDelegationAcceptance = simpleEnum(['Allow', 'Deny']);

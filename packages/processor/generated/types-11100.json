@@ -1539,6 +1539,19 @@
           ]
         }
       }
+    },
+    "FlipMinted": {
+      "type": "struct",
+      "fields": {
+        "to": {
+          "type": "primitive",
+          "value": "AccountId32"
+        },
+        "amount": {
+          "type": "primitive",
+          "value": "u128"
+        }
+      }
     }
   },
   "Emissions": {
@@ -2050,83 +2063,114 @@
             {
               "name": "Delegation",
               "value": {
-                "type": "enum",
-                "$name": "stateChainRuntimeChainflipEthereumScCallsDelegationApi",
-                "values": [
-                  {
-                    "name": "Delegate",
-                    "value": {
-                      "type": "struct",
-                      "fields": {
-                        "operator": {
-                          "type": "primitive",
-                          "value": "AccountId32"
-                        }
-                      }
-                    }
-                  },
-                  {
-                    "name": "Undelegate",
-                    "value": {
-                      "type": "primitive",
-                      "value": "null"
-                    }
-                  },
-                  {
-                    "name": "SetMaxBid",
-                    "value": {
-                      "type": "struct",
-                      "fields": {
-                        "maybeMaxBid": {
-                          "type": "option",
-                          "value": {
-                            "type": "primitive",
-                            "value": "u128"
+                "type": "struct",
+                "fields": {
+                  "call": {
+                    "type": "enum",
+                    "$name": "stateChainRuntimeChainflipEthereumScCallsDelegationApi",
+                    "values": [
+                      {
+                        "name": "Delegate",
+                        "value": {
+                          "type": "struct",
+                          "fields": {
+                            "operator": {
+                              "type": "primitive",
+                              "value": "AccountId32"
+                            },
+                            "increase": {
+                              "type": "enum",
+                              "$name": "palletCfValidatorDelegationDelegationAmount",
+                              "values": [
+                                {
+                                  "name": "Max",
+                                  "value": {
+                                    "type": "primitive",
+                                    "value": "null"
+                                  }
+                                },
+                                {
+                                  "name": "Some",
+                                  "value": {
+                                    "type": "primitive",
+                                    "value": "u128"
+                                  }
+                                }
+                              ]
+                            }
                           }
                         }
-                      }
-                    }
-                  },
-                  {
-                    "name": "Redeem",
-                    "value": {
-                      "type": "struct",
-                      "fields": {
-                        "amount": {
-                          "type": "enum",
-                          "$name": "palletCfFundingRedemptionAmount",
-                          "values": [
-                            {
-                              "name": "Max",
-                              "value": {
-                                "type": "primitive",
-                                "value": "null"
-                              }
+                      },
+                      {
+                        "name": "Undelegate",
+                        "value": {
+                          "type": "struct",
+                          "fields": {
+                            "decrease": {
+                              "type": "enum",
+                              "$name": "palletCfValidatorDelegationDelegationAmount",
+                              "values": [
+                                {
+                                  "name": "Max",
+                                  "value": {
+                                    "type": "primitive",
+                                    "value": "null"
+                                  }
+                                },
+                                {
+                                  "name": "Some",
+                                  "value": {
+                                    "type": "primitive",
+                                    "value": "u128"
+                                  }
+                                }
+                              ]
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "name": "Redeem",
+                        "value": {
+                          "type": "struct",
+                          "fields": {
+                            "amount": {
+                              "type": "enum",
+                              "$name": "palletCfFundingRedemptionAmount",
+                              "values": [
+                                {
+                                  "name": "Max",
+                                  "value": {
+                                    "type": "primitive",
+                                    "value": "null"
+                                  }
+                                },
+                                {
+                                  "name": "Exact",
+                                  "value": {
+                                    "type": "primitive",
+                                    "value": "u128"
+                                  }
+                                }
+                              ]
                             },
-                            {
-                              "name": "Exact",
+                            "address": {
+                              "type": "primitive",
+                              "value": "H160"
+                            },
+                            "executor": {
+                              "type": "option",
                               "value": {
                                 "type": "primitive",
-                                "value": "u128"
+                                "value": "H160"
                               }
                             }
-                          ]
-                        },
-                        "address": {
-                          "type": "primitive",
-                          "value": "H160"
-                        },
-                        "executor": {
-                          "type": "option",
-                          "value": {
-                            "type": "primitive",
-                            "value": "H160"
                           }
                         }
                       }
-                    }
+                    ]
                   }
-                ]
+                }
               }
             }
           ]
@@ -2155,83 +2199,114 @@
             {
               "name": "Delegation",
               "value": {
-                "type": "enum",
-                "$name": "stateChainRuntimeChainflipEthereumScCallsDelegationApi",
-                "values": [
-                  {
-                    "name": "Delegate",
-                    "value": {
-                      "type": "struct",
-                      "fields": {
-                        "operator": {
-                          "type": "primitive",
-                          "value": "AccountId32"
-                        }
-                      }
-                    }
-                  },
-                  {
-                    "name": "Undelegate",
-                    "value": {
-                      "type": "primitive",
-                      "value": "null"
-                    }
-                  },
-                  {
-                    "name": "SetMaxBid",
-                    "value": {
-                      "type": "struct",
-                      "fields": {
-                        "maybeMaxBid": {
-                          "type": "option",
-                          "value": {
-                            "type": "primitive",
-                            "value": "u128"
+                "type": "struct",
+                "fields": {
+                  "call": {
+                    "type": "enum",
+                    "$name": "stateChainRuntimeChainflipEthereumScCallsDelegationApi",
+                    "values": [
+                      {
+                        "name": "Delegate",
+                        "value": {
+                          "type": "struct",
+                          "fields": {
+                            "operator": {
+                              "type": "primitive",
+                              "value": "AccountId32"
+                            },
+                            "increase": {
+                              "type": "enum",
+                              "$name": "palletCfValidatorDelegationDelegationAmount",
+                              "values": [
+                                {
+                                  "name": "Max",
+                                  "value": {
+                                    "type": "primitive",
+                                    "value": "null"
+                                  }
+                                },
+                                {
+                                  "name": "Some",
+                                  "value": {
+                                    "type": "primitive",
+                                    "value": "u128"
+                                  }
+                                }
+                              ]
+                            }
                           }
                         }
-                      }
-                    }
-                  },
-                  {
-                    "name": "Redeem",
-                    "value": {
-                      "type": "struct",
-                      "fields": {
-                        "amount": {
-                          "type": "enum",
-                          "$name": "palletCfFundingRedemptionAmount",
-                          "values": [
-                            {
-                              "name": "Max",
-                              "value": {
-                                "type": "primitive",
-                                "value": "null"
-                              }
+                      },
+                      {
+                        "name": "Undelegate",
+                        "value": {
+                          "type": "struct",
+                          "fields": {
+                            "decrease": {
+                              "type": "enum",
+                              "$name": "palletCfValidatorDelegationDelegationAmount",
+                              "values": [
+                                {
+                                  "name": "Max",
+                                  "value": {
+                                    "type": "primitive",
+                                    "value": "null"
+                                  }
+                                },
+                                {
+                                  "name": "Some",
+                                  "value": {
+                                    "type": "primitive",
+                                    "value": "u128"
+                                  }
+                                }
+                              ]
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "name": "Redeem",
+                        "value": {
+                          "type": "struct",
+                          "fields": {
+                            "amount": {
+                              "type": "enum",
+                              "$name": "palletCfFundingRedemptionAmount",
+                              "values": [
+                                {
+                                  "name": "Max",
+                                  "value": {
+                                    "type": "primitive",
+                                    "value": "null"
+                                  }
+                                },
+                                {
+                                  "name": "Exact",
+                                  "value": {
+                                    "type": "primitive",
+                                    "value": "u128"
+                                  }
+                                }
+                              ]
                             },
-                            {
-                              "name": "Exact",
+                            "address": {
+                              "type": "primitive",
+                              "value": "H160"
+                            },
+                            "executor": {
+                              "type": "option",
                               "value": {
                                 "type": "primitive",
-                                "value": "u128"
+                                "value": "H160"
                               }
                             }
-                          ]
-                        },
-                        "address": {
-                          "type": "primitive",
-                          "value": "H160"
-                        },
-                        "executor": {
-                          "type": "option",
-                          "value": {
-                            "type": "primitive",
-                            "value": "H160"
                           }
                         }
                       }
-                    }
+                    ]
                   }
-                ]
+                }
               }
             }
           ]
@@ -3647,6 +3722,21 @@
                   }
                 }
               }
+            },
+            {
+              "name": "DelegationCapacityFactor",
+              "value": {
+                "type": "struct",
+                "fields": {
+                  "factor": {
+                    "type": "option",
+                    "value": {
+                      "type": "primitive",
+                      "value": "u32"
+                    }
+                  }
+                }
+              }
             }
           ]
         }
@@ -3778,7 +3868,7 @@
         }
       }
     },
-    "UnDelegated": {
+    "Undelegated": {
       "type": "struct",
       "fields": {
         "delegator": {
