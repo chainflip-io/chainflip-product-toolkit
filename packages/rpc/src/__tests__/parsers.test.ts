@@ -1203,6 +1203,7 @@ describe('parsers', () => {
           "flip_balance": 1000164110353054811846n,
           "role": "operator",
           "upcoming_delegation": {
+            "delegation_acceptance": "Allow",
             "delegation_fee_bps": 1500,
             "delegators": {
               "cFHsUq1uK5opJudRDczt7w4baiRDHR6Kdezw77u2JnRnCGKcs": 900000000000000000000n,
