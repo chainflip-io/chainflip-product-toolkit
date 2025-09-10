@@ -333,12 +333,14 @@ export const operator = z.object({
   }),
   allowed: z.array(accountId).optional().default([]),
   blocked: z.array(accountId).optional().default([]),
-  active_delegation: z.object({
-    operator: accountId,
-    validators: z.record(accountId, numberOrHex),
-    delegators: z.record(accountId, numberOrHex),
-    delegation_fee_bps: z.number(),
-  }),
+  active_delegation: z
+    .object({
+      operator: accountId,
+      validators: z.record(accountId, numberOrHex),
+      delegators: z.record(accountId, numberOrHex),
+      delegation_fee_bps: z.number(),
+    })
+    .optional(),
 });
 
 const boostBalances = z.array(
