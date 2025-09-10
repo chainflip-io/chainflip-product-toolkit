@@ -418,6 +418,7 @@ export const newCfAccountInfo = z
             validators: managed_validators,
             delegators,
             delegation_fee_bps: settings.fee_bps,
+            delegation_acceptance: settings.delegation_acceptance,
           },
         };
       }
