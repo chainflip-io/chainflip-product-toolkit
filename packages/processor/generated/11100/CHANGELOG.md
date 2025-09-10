@@ -42,6 +42,7 @@ EthereumIngressEgress:
     - update: added
 
 Flip:
+  - BondUpdated: added
   - FlipMinted: added
 
 Funding:
@@ -81,7 +82,9 @@ Validator:
   - OperatorAcceptedByValidator: added
   - OperatorSettingsUpdated: added
   - PalletConfigUpdated:
-    - update: changed
+    - update: removed
+  - RotationPhaseUpdated:
+    - newPhase: removed
   - UnDelegationFinalized: added
   - Undelegated: added
   - ValidatorClaimed: added

@@ -1,7 +1,7 @@
 import { z } from 'zod';
-import { accountId, numberOrHex } from '../common';
+import { accountId, palletCfValidatorDelegationChange } from '../common';
 
 export const validatorMaxBidUpdated = z.object({
   delegator: accountId,
-  maxBid: numberOrHex.nullish(),
+  change: palletCfValidatorDelegationChange,
 });
