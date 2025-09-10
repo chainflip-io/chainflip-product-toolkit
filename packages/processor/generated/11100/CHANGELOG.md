@@ -50,6 +50,19 @@ Funding:
   - SCCallCannotBeExecuted: added
   - SCCallExecuted: added
 
+LendingPools:
+  - CollateralAdded: added
+  - CollateralRemoved: added
+  - LendingFeeCollectionInitiated: added
+  - LendingFundsAdded: added
+  - LendingFundsRemoved: added
+  - LendingPoolCreated: added
+  - LiquidationInitiated: added
+  - LoanCreated: added
+  - LoanRepaid: added
+  - LoanSettled: added
+  - LoanUpdated: added
+
 PolkadotIngressEgress:
   - DepositFailed:
     - details: added
@@ -71,6 +84,7 @@ Swapping:
   - SwapRequested:
     - priceLimitsAndExpiry: added
     - refundParameters: removed
+    - requestType: added
   - SwapRescheduled:
     - reason: added
 

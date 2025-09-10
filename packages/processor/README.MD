@@ -7,7 +7,7 @@ This utility was written to help us spot new events as well as changes in the sc
 
 ---
 
-#### How to run
+#### How to run for a new version
 
 To be able to run the code generation tool, you first need to find out the new spec version of the network and the block hash at which it occured. Once you have these 2 pieces of information, you need to update the [configuration file](../chainspec/metadata/specVersion.json) by adding the new spec verson together with the environment, like so:
 
