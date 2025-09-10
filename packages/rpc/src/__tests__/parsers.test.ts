@@ -16,6 +16,7 @@ import {
 import {
   cfAccountInfoOperator,
   cfOraclePrice,
+  emptyChainAssetMap,
   tradingStrategies,
   tradingStrategiesLimits,
 } from './fixtures';
@@ -113,33 +114,7 @@ describe('parsers', () => {
     it('parses the cfEnvironment response', () => {
       cfEnvironment.parse({
         ingress_egress: {
-          minimum_deposit_amounts: {
-            Ethereum: {
-              ETH: '0x0',
-              FLIP: '0x0',
-              USDC: '0x0',
-              USDT: '0x0',
-            },
-            Polkadot: {
-              DOT: '0x0',
-            },
-            Bitcoin: {
-              BTC: '0x0',
-            },
-            Arbitrum: {
-              ETH: '0x0',
-              USDC: '0x0',
-            },
-            Solana: {
-              SOL: '0x0',
-              USDC: '0x0',
-            },
-            Assethub: {
-              DOT: '0x0',
-              USDC: '0x0',
-              USDT: '0x0',
-            },
-          },
+          minimum_deposit_amounts: emptyChainAssetMap,
           ingress_fees: {
             Ethereum: {
               ETH: '0x55730',
@@ -200,6 +175,7 @@ describe('parsers', () => {
             Solana: 1,
             Bitcoin: 2,
             Polkadot: null,
+            Assethub: null,
           },
           egress_dust_limits: {
             Ethereum: {
@@ -289,6 +265,11 @@ describe('parsers', () => {
             Solana: {
               SOL: '0x12a05f200',
               USDC: '0x3b9aca00',
+            },
+            Assethub: {
+              DOT: '0x1d1a94a2000',
+              USDC: '0x3b9aca00',
+              USDT: '0x3b9aca00',
             },
           },
           network_fees: {
@@ -679,6 +660,11 @@ describe('parsers', () => {
             SOL: null,
             USDC: null,
           },
+          Assethub: {
+            DOT: null,
+            USDC: null,
+            USDT: null,
+          },
         },
         network_fee_hundredth_pips: 1000,
         swap_retry_delay_blocks: 5,
@@ -704,6 +690,11 @@ describe('parsers', () => {
           Solana: {
             SOL: '0x12a05f200',
             USDC: '0x3b9aca00',
+          },
+          Assethub: {
+            DOT: '0x1d1a94a2000',
+            USDC: '0x3b9aca00',
+            USDT: '0x3b9aca00',
           },
         },
         network_fees: {
@@ -1166,19 +1157,59 @@ describe('parsers', () => {
 
       expect(result).toMatchInlineSnapshot(`
         {
+          "active_delegation": {
+            "delegation_fee_bps": 1500,
+            "delegators": {
+              "cFHsUq1uK5opJudRDczt7w4baiRDHR6Kdezw77u2JnRnCGKcs": 1000000000000000000000n,
+            },
+            "operator": "cFMjXCTxTHVkSqbKzeVwJ25TJxLqc1Vn9usPgUGmZhsyvHRQZ",
+            "validators": {
+              "cFNkiayhWvppDY5zSzG8rAYMaqbunLBAAbBQcAgFF4x1jaMSy": 5003891662143612383478n,
+            },
+          },
           "allowed": [],
+          "asset_balances": {
+            "Arbitrum": {
+              "ETH": 0n,
+              "USDC": 0n,
+            },
+            "Assethub": {
+              "DOT": 0n,
+              "USDC": 0n,
+              "USDT": 0n,
+            },
+            "Bitcoin": {
+              "BTC": 0n,
+            },
+            "Ethereum": {
+              "ETH": 0n,
+              "FLIP": 0n,
+              "USDC": 0n,
+              "USDT": 0n,
+            },
+            "Polkadot": {
+              "DOT": 0n,
+            },
+            "Solana": {
+              "SOL": 0n,
+              "USDC": 0n,
+            },
+          },
           "blocked": [
             "cFNfitvPd2acNNFgijVN3Ls4gG112PZPq7sY2FGtPgEk25wV9",
           ],
-          "delegators": {},
-          "flip_balance": 9999998929147000000n,
-          "managed_validators": {
-            "cFNkiayhWvppDY5zSzG8rAYMaqbunLBAAbBQcAgFF4x1jaMSy": 9999996796922000000n,
-          },
+          "bond": 0n,
+          "estimated_redeemable_balance": 1000164110353054811846n,
+          "flip_balance": 1000164110353054811846n,
           "role": "operator",
-          "settings": {
-            "delegation_acceptance": "Allow",
-            "fee_bps": 1000,
+          "upcoming_delegation": {
+            "delegation_fee_bps": 1500,
+            "delegators": {
+              "cFHsUq1uK5opJudRDczt7w4baiRDHR6Kdezw77u2JnRnCGKcs": 900000000000000000000n,
+            },
+            "validators": {
+              "cFNkiayhWvppDY5zSzG8rAYMaqbunLBAAbBQcAgFF4x1jaMSy": 9999996796922000000n,
+            },
           },
         }
       `);
