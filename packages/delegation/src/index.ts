@@ -66,7 +66,7 @@ export class DelegationSDK {
     const { request } = await this.publicClient.simulateContract({
       abi: erc20Abi,
       functionName: 'approve',
-      args: [scUtilsAddress, requiredAmount - currentAllowance],
+      args: [scUtilsAddress, requiredAmount],
       account,
       chain: this.walletClient.chain,
       address: flipAddress,
