@@ -36,9 +36,33 @@ export const palletCfTradingStrategyPalletSafeMode = z.object({
   strategyExecutionEnabled: z.boolean(),
 });
 
+export const simpleEnum = <U extends string, T extends readonly [U, ...U[]]>(values: T) =>
+  z.object({ __kind: z.enum(values) }).transform(({ __kind }) => __kind!);
+
+export const cfPrimitivesChainsAssetsAnyAsset = simpleEnum([
+  'Eth',
+  'Flip',
+  'Usdc',
+  'Dot',
+  'Btc',
+  'ArbEth',
+  'ArbUsdc',
+  'Usdt',
+  'Sol',
+  'SolUsdc',
+  'HubDot',
+  'HubUsdt',
+  'HubUsdc',
+]);
+
 export const palletCfLendingPoolsPalletSafeMode = z.object({
   addBoostFundsEnabled: z.boolean(),
   stopBoostingEnabled: z.boolean(),
+  borrowingEnabled: z.array(cfPrimitivesChainsAssetsAnyAsset),
+  addLenderFundsEnabled: z.array(cfPrimitivesChainsAssetsAnyAsset),
+  withdrawLenderFundsEnabled: z.array(cfPrimitivesChainsAssetsAnyAsset),
+  addCollateralEnabled: z.array(cfPrimitivesChainsAssetsAnyAsset),
+  removeCollateralEnabled: z.array(cfPrimitivesChainsAssetsAnyAsset),
 });
 
 export const palletCfReputationPalletSafeMode = z.object({ reportingEnabled: z.boolean() });
@@ -200,9 +224,6 @@ export const stateChainRuntimeChainflipEthereumScCallsEthereumSCApi = z.object({
 
 export const spWeightsWeightV2Weight = z.object({ refTime: numberOrHex, proofSize: numberOrHex });
 
-export const simpleEnum = <U extends string, T extends readonly [U, ...U[]]>(values: T) =>
-  z.object({ __kind: z.enum(values) }).transform(({ __kind }) => __kind!);
-
 export const frameSupportDispatchPays = simpleEnum(['Yes', 'No']);
 
 export const frameSupportDispatchPostDispatchInfo = z.object({
@@ -316,22 +337,6 @@ export const palletCfValidatorDelegationChange = z.discriminatedUnion('__kind', 
   z.object({ __kind: z.literal('Decrease'), value: numberOrHex }),
 ]);
 
-export const cfPrimitivesChainsAssetsAnyAsset = simpleEnum([
-  'Eth',
-  'Flip',
-  'Usdc',
-  'Dot',
-  'Btc',
-  'ArbEth',
-  'ArbUsdc',
-  'Usdt',
-  'Sol',
-  'SolUsdc',
-  'HubDot',
-  'HubUsdt',
-  'HubUsdc',
-]);
-
 export const cfChainsAddressEncodedAddress = z
   .object({ __kind: z.enum(['Eth', 'Dot', 'Btc', 'Arb', 'Sol', 'Hub']), value: hexString })
   .transform(({ __kind, value }) => {
@@ -432,6 +437,11 @@ export const cfChainsCcmDepositMetadataEncodedAddress = z.object({
   sourceAddress: cfChainsAddressEncodedAddress.nullish(),
 });
 
+export const cfTraitsSwappingLendingSwapType = z.discriminatedUnion('__kind', [
+  z.object({ __kind: z.literal('Liquidation'), borrowerId: accountId, loanId: numberOrHex }),
+  z.object({ __kind: z.literal('FeeSwap'), poolAsset: cfPrimitivesChainsAssetsAnyAsset }),
+]);
+
 export const cfTraitsSwappingSwapOutputActionGenericEncodedAddress = z.discriminatedUnion(
   '__kind',
   [
@@ -441,6 +451,7 @@ export const cfTraitsSwappingSwapOutputActionGenericEncodedAddress = z.discrimin
       outputAddress: cfChainsAddressEncodedAddress,
     }),
     z.object({ __kind: z.literal('CreditOnChain'), accountId }),
+    z.object({ __kind: z.literal('CreditLendingPool'), swapType: cfTraitsSwappingLendingSwapType }),
   ],
 );
 
@@ -526,6 +537,7 @@ export const palletCfSwappingSwapFailureReason = simpleEnum([
   'OraclePriceStale',
   'PredecessorSwapFailure',
   'SafeModeActive',
+  'AbortedFromOrigin',
 ]);
 
 export const palletCfEthereumIngressEgressDepositFailedReason = z.discriminatedUnion('__kind', [
