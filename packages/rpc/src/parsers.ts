@@ -12,38 +12,34 @@ export const u256 = hexString.transform((value) => BigInt(value));
 
 export const numberOrHex = z.union([z.number().transform((n) => BigInt(n)), u256]);
 
-const chainAssetMapFactory = <Z extends z.ZodTypeAny>(parser: Z, defaultValue: z.input<Z>) =>
+const chainAssetMapFactory = <Z extends z.ZodTypeAny>(parser: Z, _defaultValue: z.input<Z>) =>
   z.object({
     Bitcoin: z.object({ BTC: parser }),
     Ethereum: z.object({ ETH: parser, USDC: parser, FLIP: parser, USDT: parser }),
     Polkadot: z.object({ DOT: parser }),
     Arbitrum: z.object({ ETH: parser, USDC: parser }),
     Solana: z.object({ SOL: parser, USDC: parser }),
-    Assethub: z
-      .object({ DOT: parser, USDC: parser, USDT: parser })
-      .default({ DOT: defaultValue, USDC: defaultValue, USDT: defaultValue }),
+    Assethub: z.object({ DOT: parser, USDC: parser, USDT: parser }),
   });
 
-const chainBaseAssetMapFactory = <Z extends z.ZodTypeAny>(parser: Z, defaultValue: z.input<Z>) =>
+const chainBaseAssetMapFactory = <Z extends z.ZodTypeAny>(parser: Z, _defaultValue: z.input<Z>) =>
   z.object({
     Bitcoin: z.object({ BTC: parser }),
     Ethereum: z.object({ ETH: parser, FLIP: parser, USDT: parser }),
     Polkadot: z.object({ DOT: parser }),
     Arbitrum: z.object({ ETH: parser, USDC: parser }),
     Solana: z.object({ SOL: parser, USDC: parser }),
-    Assethub: z
-      .object({ DOT: parser, USDC: parser, USDT: parser })
-      .default({ DOT: defaultValue, USDC: defaultValue, USDT: defaultValue }),
+    Assethub: z.object({ DOT: parser, USDC: parser, USDT: parser }),
   });
 
-const chainMapFactory = <Z extends z.ZodTypeAny>(parser: Z, defaultValue: z.input<Z>) =>
+const chainMapFactory = <Z extends z.ZodTypeAny>(parser: Z, _defaultValue: z.input<Z>) =>
   z.object({
     Bitcoin: parser,
     Ethereum: parser,
     Polkadot: parser,
     Arbitrum: parser,
     Solana: parser,
-    Assethub: parser.default(defaultValue),
+    Assethub: parser,
   });
 
 const rpcAssetSchema = z.union([
@@ -274,13 +270,36 @@ export const requestSwapParameterEncoding = z.discriminatedUnion('chain', [
 
 const accountId = z.string().refine((val): val is `cF${string}` => val.startsWith('cF'));
 
-export const unregistered = z.object({
+const delegationStatus = z.object({
+  operator: accountId,
+  bid: numberOrHex,
+});
+
+export const accountInfoCommon = {
+  flip_balance: numberOrHex,
+  asset_balances: chainAssetMapFactory(numberOrHex, 0),
+  bond: numberOrHex,
+  estimated_redeemable_balance: numberOrHex,
+  bound_redeem_address: hexString.optional(),
+  restricted_balances: z.record(hexString, numberOrHex).optional(),
+  current_delegation_status: delegationStatus.optional(),
+  upcoming_delegation_status: delegationStatus.optional(),
+} as const;
+
+// TODO(1.11): remove after all networks upgraded
+export const oldUnregistered = z.object({
   role: z.literal('unregistered'),
   flip_balance: numberOrHex,
   asset_balances: chainAssetMapFactory(numberOrHex, 0),
 });
 
-export const broker = z.object({
+export const unregistered = z.object({
+  role: z.literal('unregistered'),
+  ...accountInfoCommon,
+});
+
+// TODO(1.11): remove after all networks upgraded
+export const oldBroker = z.object({
   role: z.literal('broker'),
   bond: numberOrHex,
   flip_balance: numberOrHex,
@@ -292,9 +311,20 @@ export const broker = z.object({
     .default([]),
 });
 
+export const broker = z.object({
+  role: z.literal('broker'),
+  ...accountInfoCommon,
+  earned_fees: chainAssetMapFactory(numberOrHex, 0),
+  btc_vault_deposit_address: z.string().nullable().optional(),
+  affiliates: z
+    .array(z.object({ account_id: accountId, short_id: z.number(), withdrawal_address: hexString }))
+    .optional()
+    .default([]),
+});
+
 export const operator = z.object({
-  flip_balance: numberOrHex,
   role: z.literal('operator'),
+  ...accountInfoCommon,
   managed_validators: z.record(accountId, numberOrHex),
   delegators: z.record(accountId, numberOrHex),
   settings: z.object({
@@ -303,6 +333,12 @@ export const operator = z.object({
   }),
   allowed: z.array(accountId).optional().default([]),
   blocked: z.array(accountId).optional().default([]),
+  active_delegation: z.object({
+    operator: accountId,
+    validators: z.record(accountId, numberOrHex),
+    delegators: z.record(accountId, numberOrHex),
+    delegation_fee_bps: z.number(),
+  }),
 });
 
 const boostBalances = z.array(
@@ -315,7 +351,7 @@ const boostBalances = z.array(
   }),
 );
 
-export const liquidityProvider = z.object({
+export const oldLiquidityProvider = z.object({
   role: z.literal('liquidity_provider'),
   balances: chainAssetMapFactory(numberOrHex, '0x0'),
   refund_addresses: chainMapFactory(z.string().nullable(), null),
@@ -324,7 +360,15 @@ export const liquidityProvider = z.object({
   boost_balances: chainAssetMapFactory(boostBalances, []),
 });
 
-export const validator = z.object({
+export const liquidityProvider = z.object({
+  role: z.literal('liquidity_provider'),
+  ...accountInfoCommon,
+  refund_addresses: chainMapFactory(z.string().nullable(), null),
+  earned_fees: chainAssetMapFactory(numberOrHex, 0),
+  boost_balances: chainAssetMapFactory(boostBalances, []),
+});
+
+export const oldValidator = z.object({
   role: z.literal('validator'),
   flip_balance: numberOrHex,
   bond: numberOrHex,
@@ -343,13 +387,57 @@ export const validator = z.object({
   operator: accountId.optional(),
 });
 
-export const cfAccountInfo = z.discriminatedUnion('role', [
-  unregistered,
-  broker,
-  operator,
-  liquidityProvider,
-  validator,
+export const validator = z.object({
+  role: z.literal('validator'),
+  ...accountInfoCommon,
+  last_heartbeat: z.number(),
+  reputation_points: z.number(),
+  keyholder_epochs: z.array(z.number()),
+  is_current_authority: z.boolean(),
+  is_current_backup: z.boolean(),
+  is_qualified: z.boolean(),
+  is_online: z.boolean(),
+  is_bidding: z.boolean(),
+  apy_bp: z.number().nullable(),
+  operator: accountId.optional(),
+});
+
+export const newCfAccountInfo = z
+  .discriminatedUnion('role', [unregistered, broker, operator, liquidityProvider, validator])
+  .transform((account) => {
+    switch (account.role) {
+      case 'broker':
+      case 'validator':
+      case 'unregistered':
+        return account;
+      case 'operator': {
+        const { managed_validators, delegators, settings, ...rest } = account;
+        return {
+          ...rest,
+          upcoming_delegation: {
+            validators: managed_validators,
+            delegators,
+            delegation_fee_bps: settings.fee_bps,
+          },
+        };
+      }
+      // TODO(1.11): remove after all networks upgraded
+      case 'liquidity_provider':
+        return {
+          ...account,
+          balances: account.asset_balances,
+        };
+    }
+  });
+
+export const oldCfAccountInfo = z.discriminatedUnion('role', [
+  oldUnregistered,
+  oldBroker,
+  oldLiquidityProvider,
+  oldValidator,
 ]);
+
+export const cfAccountInfo = z.union([newCfAccountInfo, oldCfAccountInfo]);
 
 export const cfAccounts = z.array(z.tuple([z.string(), z.string()]));
 

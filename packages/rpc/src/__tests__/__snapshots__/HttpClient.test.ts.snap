@@ -9,6 +9,33 @@ exports[`HttpClient > with server > gets broker account info 1`] = `
       "withdrawal_address": "0x9a449133c6a8b4e117840b69e2a1d43634f562d3",
     },
   ],
+  "asset_balances": {
+    "Arbitrum": {
+      "ETH": 0n,
+      "USDC": 0n,
+    },
+    "Assethub": {
+      "DOT": 0n,
+      "USDC": 0n,
+      "USDT": 0n,
+    },
+    "Bitcoin": {
+      "BTC": 0n,
+    },
+    "Ethereum": {
+      "ETH": 0n,
+      "FLIP": 0n,
+      "USDC": 0n,
+      "USDT": 0n,
+    },
+    "Polkadot": {
+      "DOT": 0n,
+    },
+    "Solana": {
+      "SOL": 0n,
+      "USDC": 0n,
+    },
+  },
   "bond": 0n,
   "btc_vault_deposit_address": "tb1pqyqszqgpqyqszqgpqyqszqgpqyqszqgpqyqszqgpqyqszqgpqyqsn60vlk",
   "earned_fees": {
@@ -38,6 +65,7 @@ exports[`HttpClient > with server > gets broker account info 1`] = `
       "USDC": 0n,
     },
   },
+  "estimated_redeemable_balance": 21031117317233135625n,
   "flip_balance": 21031117317233135625n,
   "role": "broker",
 }
@@ -46,6 +74,33 @@ exports[`HttpClient > with server > gets broker account info 1`] = `
 exports[`HttpClient > with server > gets broker account info 2 1`] = `
 {
   "affiliates": [],
+  "asset_balances": {
+    "Arbitrum": {
+      "ETH": 0n,
+      "USDC": 0n,
+    },
+    "Assethub": {
+      "DOT": 0n,
+      "USDC": 0n,
+      "USDT": 0n,
+    },
+    "Bitcoin": {
+      "BTC": 0n,
+    },
+    "Ethereum": {
+      "ETH": 0n,
+      "FLIP": 0n,
+      "USDC": 0n,
+      "USDT": 0n,
+    },
+    "Polkadot": {
+      "DOT": 0n,
+    },
+    "Solana": {
+      "SOL": 0n,
+      "USDC": 0n,
+    },
+  },
   "bond": 0n,
   "earned_fees": {
     "Arbitrum": {
@@ -74,13 +129,125 @@ exports[`HttpClient > with server > gets broker account info 2 1`] = `
       "USDC": 0n,
     },
   },
+  "estimated_redeemable_balance": 21031117317233135625n,
   "flip_balance": 21031117317233135625n,
   "role": "broker",
 }
 `;
 
+exports[`HttpClient > with server > gets delegator account info 1`] = `
+{
+  "asset_balances": {
+    "Arbitrum": {
+      "ETH": 0n,
+      "USDC": 0n,
+    },
+    "Assethub": {
+      "DOT": 0n,
+      "USDC": 0n,
+      "USDT": 0n,
+    },
+    "Bitcoin": {
+      "BTC": 0n,
+    },
+    "Ethereum": {
+      "ETH": 0n,
+      "FLIP": 0n,
+      "USDC": 0n,
+      "USDT": 0n,
+    },
+    "Polkadot": {
+      "DOT": 0n,
+    },
+    "Solana": {
+      "SOL": 0n,
+      "USDC": 0n,
+    },
+  },
+  "bond": 0n,
+  "estimated_redeemable_balance": 1000000000000000000000n,
+  "flip_balance": 1000000000000000000000n,
+  "role": "unregistered",
+  "upcoming_delegation_status": {
+    "bid": 1000000000000000000000n,
+    "operator": "cFMjXCTxTHVkSqbKzeVwJ25TJxLqc1Vn9usPgUGmZhsyvHRQZ",
+  },
+}
+`;
+
+exports[`HttpClient > with server > gets delegator account info 2 1`] = `
+{
+  "asset_balances": {
+    "Arbitrum": {
+      "ETH": 0n,
+      "USDC": 0n,
+    },
+    "Assethub": {
+      "DOT": 0n,
+      "USDC": 0n,
+      "USDT": 0n,
+    },
+    "Bitcoin": {
+      "BTC": 0n,
+    },
+    "Ethereum": {
+      "ETH": 0n,
+      "FLIP": 0n,
+      "USDC": 0n,
+      "USDT": 0n,
+    },
+    "Polkadot": {
+      "DOT": 0n,
+    },
+    "Solana": {
+      "SOL": 0n,
+      "USDC": 0n,
+    },
+  },
+  "bond": 1000000000000000000000n,
+  "current_delegation_status": {
+    "bid": 1000000000000000000000n,
+    "operator": "cFMjXCTxTHVkSqbKzeVwJ25TJxLqc1Vn9usPgUGmZhsyvHRQZ",
+  },
+  "estimated_redeemable_balance": 0n,
+  "flip_balance": 1000111787496577859564n,
+  "role": "unregistered",
+  "upcoming_delegation_status": {
+    "bid": 1000000000000000000000n,
+    "operator": "cFMjXCTxTHVkSqbKzeVwJ25TJxLqc1Vn9usPgUGmZhsyvHRQZ",
+  },
+}
+`;
+
 exports[`HttpClient > with server > gets lp account info 1`] = `
 {
+  "asset_balances": {
+    "Arbitrum": {
+      "ETH": 0n,
+      "USDC": 0n,
+    },
+    "Assethub": {
+      "DOT": 0n,
+      "USDC": 0n,
+      "USDT": 0n,
+    },
+    "Bitcoin": {
+      "BTC": 0n,
+    },
+    "Ethereum": {
+      "ETH": 0n,
+      "FLIP": 0n,
+      "USDC": 0n,
+      "USDT": 0n,
+    },
+    "Polkadot": {
+      "DOT": 0n,
+    },
+    "Solana": {
+      "SOL": 0n,
+      "USDC": 0n,
+    },
+  },
   "balances": {
     "Arbitrum": {
       "ETH": 0n,
@@ -108,6 +275,7 @@ exports[`HttpClient > with server > gets lp account info 1`] = `
       "USDC": 0n,
     },
   },
+  "bond": 0n,
   "boost_balances": {
     "Arbitrum": {
       "ETH": [],
@@ -170,6 +338,7 @@ exports[`HttpClient > with server > gets lp account info 1`] = `
       "USDC": 0n,
     },
   },
+  "estimated_redeemable_balance": 4999847340286000000n,
   "flip_balance": 4999847340286000000n,
   "refund_addresses": {
     "Arbitrum": null,
@@ -287,6 +456,8 @@ exports[`HttpClient > with server > gets unregistered account info 1`] = `
       "USDC": 0n,
     },
   },
+  "bond": 0n,
+  "estimated_redeemable_balance": 0n,
   "flip_balance": 0n,
   "role": "unregistered",
 }
@@ -295,6 +466,33 @@ exports[`HttpClient > with server > gets unregistered account info 1`] = `
 exports[`HttpClient > with server > gets validator account info 1`] = `
 {
   "apy_bp": 970,
+  "asset_balances": {
+    "Arbitrum": {
+      "ETH": 0n,
+      "USDC": 0n,
+    },
+    "Assethub": {
+      "DOT": 0n,
+      "USDC": 0n,
+      "USDT": 0n,
+    },
+    "Bitcoin": {
+      "BTC": 0n,
+    },
+    "Ethereum": {
+      "ETH": 0n,
+      "FLIP": 0n,
+      "USDC": 0n,
+      "USDT": 0n,
+    },
+    "Polkadot": {
+      "DOT": 0n,
+    },
+    "Solana": {
+      "SOL": 0n,
+      "USDC": 0n,
+    },
+  },
   "bond": 225033425976807428934928n,
   "bound_redeem_address": "0x9a449133c6a8b4e117840b69e2a1d43634f562d3",
   "estimated_redeemable_balance": 0n,
@@ -318,6 +516,33 @@ exports[`HttpClient > with server > gets validator account info 1`] = `
 exports[`HttpClient > with server > gets validator account info with an operator 1`] = `
 {
   "apy_bp": 970,
+  "asset_balances": {
+    "Arbitrum": {
+      "ETH": 0n,
+      "USDC": 0n,
+    },
+    "Assethub": {
+      "DOT": 0n,
+      "USDC": 0n,
+      "USDT": 0n,
+    },
+    "Bitcoin": {
+      "BTC": 0n,
+    },
+    "Ethereum": {
+      "ETH": 0n,
+      "FLIP": 0n,
+      "USDC": 0n,
+      "USDT": 0n,
+    },
+    "Polkadot": {
+      "DOT": 0n,
+    },
+    "Solana": {
+      "SOL": 0n,
+      "USDC": 0n,
+    },
+  },
   "bond": 225033425976807428934928n,
   "bound_redeem_address": "0x9a449133c6a8b4e117840b69e2a1d43634f562d3",
   "estimated_redeemable_balance": 0n,
@@ -976,9 +1201,9 @@ exports[`HttpClient > with server > handles cf_environment 1`] = `
         "USDC": 1000000000n,
       },
       "Assethub": {
-        "DOT": null,
-        "USDC": null,
-        "USDT": null,
+        "DOT": 0n,
+        "USDC": 0n,
+        "USDT": 0n,
       },
       "Bitcoin": {
         "BTC": 2000000n,
@@ -1706,9 +1931,9 @@ exports[`HttpClient > with server > handles cf_swapping_environment 1`] = `
       "USDC": 1000000000n,
     },
     "Assethub": {
-      "DOT": null,
-      "USDC": null,
-      "USDT": null,
+      "DOT": 0n,
+      "USDC": 0n,
+      "USDT": 0n,
     },
     "Bitcoin": {
       "BTC": 2000000n,

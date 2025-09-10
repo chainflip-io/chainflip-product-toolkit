@@ -18,6 +18,8 @@ import {
   BROKER_ACCOUNT_ID2,
   brokerAccount,
   cfOraclePrice,
+  DELEGATOR_ACCOUNT_ID,
+  DELEGATOR_ACCOUNT_ID2,
   environment,
   failedCallEvm,
   fundingEnvironment,
@@ -300,6 +302,8 @@ describe(HttpClient, () => {
             case BROKER_ACCOUNT_ID2:
             case VALIDATOR_ACCOUNT_ID:
             case VALIDATOR_ACCOUNT_ID2:
+            case DELEGATOR_ACCOUNT_ID:
+            case DELEGATOR_ACCOUNT_ID2:
               return respond(accounts[body.params[0]]);
             default:
               return respond(unregisteredAccount);
@@ -354,7 +358,7 @@ describe(HttpClient, () => {
           return respond(runtimeVersion);
         case 'lp_total_balances':
           expect(body.params[0]).toEqual(LP_ACCOUNT_ID);
-          return respond(liquidityProviderAccount.balances);
+          return respond(liquidityProviderAccount.asset_balances);
         case 'cf_failed_call_ethereum':
         case 'cf_failed_call_arbitrum':
           if (body.params[0] === 1) return respond(failedCallEvm);
@@ -660,6 +664,14 @@ describe(HttpClient, () => {
 
     it('gets broker account info 2', async () => {
       expect(await client.sendRequest('cf_account_info', BROKER_ACCOUNT_ID2)).toMatchSnapshot();
+    });
+
+    it('gets delegator account info', async () => {
+      expect(await client.sendRequest('cf_account_info', DELEGATOR_ACCOUNT_ID)).toMatchSnapshot();
+    });
+
+    it('gets delegator account info 2', async () => {
+      expect(await client.sendRequest('cf_account_info', DELEGATOR_ACCOUNT_ID2)).toMatchSnapshot();
     });
 
     it('gets broker vault swap data for bitcoin', async () => {

@@ -145,6 +145,11 @@ export const swappingEnvironment: z.input<typeof cfSwappingEnvironment> = {
       SOL: '0x12a05f200',
       USDC: '0x3b9aca00',
     },
+    Assethub: {
+      DOT: '0x0',
+      USDC: '0x0',
+      USDT: '0x0',
+    },
   },
   network_fees: {
     regular_network_fee: {
@@ -538,6 +543,15 @@ export const swapDepositAddress: z.input<typeof brokerRequestSwapDepositAddress>
   source_chain_expiry_block: 1,
 };
 
+export const emptyChainAssetMap = {
+  Ethereum: { ETH: '0x0', FLIP: '0x0', USDC: '0x0', USDT: '0x0' },
+  Polkadot: { DOT: '0x0' },
+  Bitcoin: { BTC: '0x0' },
+  Arbitrum: { ETH: '0x0', USDC: '0x0' },
+  Solana: { SOL: '0x0', USDC: '0x0' },
+  Assethub: { DOT: '0x0', USDT: '0x0', USDC: '0x0' },
+};
+
 export const unregisteredAccount: z.input<typeof unregistered> = {
   role: 'unregistered',
   flip_balance: '0x0',
@@ -547,12 +561,17 @@ export const unregisteredAccount: z.input<typeof unregistered> = {
     Bitcoin: { BTC: '0x0' },
     Arbitrum: { ETH: '0x0', USDC: '0x0' },
     Solana: { SOL: '0x0', USDC: '0x0' },
+    Assethub: { DOT: '0x0', USDC: '0x0', USDT: '0x0' },
   },
+  bond: '0x0',
+  estimated_redeemable_balance: '0x0',
 };
 
 export const liquidityProviderAccount: z.input<typeof liquidityProvider> = {
   role: 'liquidity_provider',
-  balances: {
+  bond: '0x0',
+  estimated_redeemable_balance: '0x456306aa68edbb80',
+  asset_balances: {
     Ethereum: { ETH: '0x0', FLIP: '0x0', USDC: '0x0', USDT: '0x0' },
     Polkadot: { DOT: '0x0' },
     Bitcoin: { BTC: '0x0' },
@@ -566,6 +585,7 @@ export const liquidityProviderAccount: z.input<typeof liquidityProvider> = {
     Bitcoin: 'bc1qqt3juqef9azhd0zeuamu9c30pg5xdllvmks2ja',
     Arbitrum: null,
     Solana: '7zLEfU3nQKqnfrN2A5yNEiFd1Vt9D7maVaoSAV8invMT',
+    Assethub: null,
   },
   flip_balance: '0x456306aa68edbb80',
   earned_fees: {
@@ -577,15 +597,8 @@ export const liquidityProviderAccount: z.input<typeof liquidityProvider> = {
     Assethub: { DOT: 0, USDC: 0, USDT: 0 },
   },
   boost_balances: {
-    Ethereum: {
-      ETH: [],
-      FLIP: [],
-      USDC: [],
-      USDT: [],
-    },
-    Polkadot: {
-      DOT: [],
-    },
+    Ethereum: { ETH: [], FLIP: [], USDC: [], USDT: [] },
+    Polkadot: { DOT: [] },
     Bitcoin: {
       BTC: [
         {
@@ -597,23 +610,42 @@ export const liquidityProviderAccount: z.input<typeof liquidityProvider> = {
         },
       ],
     },
-    Arbitrum: {
-      ETH: [],
-      USDC: [],
-    },
-    Solana: {
-      SOL: [],
-      USDC: [],
-    },
-    Assethub: {
-      DOT: [],
-      USDC: [],
-      USDT: [],
-    },
+    Arbitrum: { ETH: [], USDC: [] },
+    Solana: { SOL: [], USDC: [] },
+    Assethub: { DOT: [], USDC: [], USDT: [] },
   },
 };
 
 export const brokerAccount: z.input<typeof broker> = {
+  role: 'broker',
+  flip_balance: '0x123dd89c5bb3f5009',
+  estimated_redeemable_balance: '0x123dd89c5bb3f5009',
+  bond: '0x0',
+  asset_balances: emptyChainAssetMap,
+  earned_fees: {
+    Ethereum: {
+      ETH: '0x149e76e0f91d2546',
+      FLIP: '0x2233cf5b9f41af4fe',
+      USDC: '0x7293c1a9',
+      USDT: '0x2b7b6186',
+    },
+    Polkadot: { DOT: '0x48b7018d8' },
+    Bitcoin: { BTC: '0xbcbf36' },
+    Arbitrum: { ETH: 0, USDC: 0 },
+    Solana: { SOL: 0, USDC: 0 },
+    Assethub: { DOT: 0, USDC: 0, USDT: 0 },
+  },
+  btc_vault_deposit_address: 'tb1pqyqszqgpqyqszqgpqyqszqgpqyqszqgpqyqszqgpqyqszqgpqyqsn60vlk',
+  affiliates: [
+    {
+      account_id: 'cFJjZKzA5rUTb9qkZMGfec7piCpiAQKr15B4nALzriMGQL8BE',
+      short_id: 1,
+      withdrawal_address: '0x9a449133c6a8b4e117840b69e2a1d43634f562d3',
+    },
+  ],
+};
+
+export const brokerAccountNoAffiliates: z.input<typeof broker> = {
   role: 'broker',
   flip_balance: '0x123dd89c5bb3f5009',
   earned_fees: {
@@ -643,43 +675,9 @@ export const brokerAccount: z.input<typeof broker> = {
       USDT: 0,
     },
   },
-  btc_vault_deposit_address: 'tb1pqyqszqgpqyqszqgpqyqszqgpqyqszqgpqyqszqgpqyqszqgpqyqsn60vlk',
-  affiliates: [
-    {
-      account_id: 'cFJjZKzA5rUTb9qkZMGfec7piCpiAQKr15B4nALzriMGQL8BE',
-      short_id: 1,
-      withdrawal_address: '0x9a449133c6a8b4e117840b69e2a1d43634f562d3',
-    },
-  ],
   bond: '0x0',
-};
-
-export const brokerAccountNoAffiliates: z.input<typeof broker> = {
-  role: 'broker',
-  flip_balance: '0x123dd89c5bb3f5009',
-  earned_fees: {
-    Ethereum: {
-      ETH: '0x149e76e0f91d2546',
-      FLIP: '0x2233cf5b9f41af4fe',
-      USDC: '0x7293c1a9',
-      USDT: '0x2b7b6186',
-    },
-    Polkadot: {
-      DOT: '0x48b7018d8',
-    },
-    Bitcoin: {
-      BTC: '0xbcbf36',
-    },
-    Arbitrum: {
-      ETH: 0,
-      USDC: 0,
-    },
-    Solana: {
-      SOL: 0,
-      USDC: 0,
-    },
-  },
-  bond: '0x0',
+  asset_balances: emptyChainAssetMap,
+  estimated_redeemable_balance: '0x123dd89c5bb3f5009',
 };
 
 export const validatorAccount: z.input<typeof validator> = {
@@ -698,6 +696,7 @@ export const validatorAccount: z.input<typeof validator> = {
   apy_bp: 970,
   restricted_balances: {},
   estimated_redeemable_balance: '0x0',
+  asset_balances: emptyChainAssetMap,
 };
 
 export const validatorAccount2: z.input<typeof validator> = {
@@ -717,6 +716,64 @@ export const validatorAccount2: z.input<typeof validator> = {
   restricted_balances: {},
   estimated_redeemable_balance: '0x0',
   operator: 'cFM7AjUFjqtrRStbEuNRYzEpjAqKEWP3om8FydieAhbqpqRKz',
+  asset_balances: emptyChainAssetMap,
+};
+
+const delegator1: z.input<typeof unregistered> = {
+  flip_balance: '0x3635c9adc5dea00000',
+  asset_balances: emptyChainAssetMap,
+  bond: '0x0',
+  estimated_redeemable_balance: '0x3635c9adc5dea00000',
+  upcoming_delegation_status: {
+    operator: 'cFMjXCTxTHVkSqbKzeVwJ25TJxLqc1Vn9usPgUGmZhsyvHRQZ',
+    bid: '0x3635c9adc5dea00000',
+  },
+  role: 'unregistered',
+};
+
+const delegator2: z.input<typeof unregistered> = {
+  role: 'unregistered',
+  flip_balance: '0x363756d3e8a67a7fec',
+  asset_balances: emptyChainAssetMap,
+  bond: '0x3635c9adc5dea00000',
+  estimated_redeemable_balance: '0x0',
+  current_delegation_status: {
+    operator: 'cFMjXCTxTHVkSqbKzeVwJ25TJxLqc1Vn9usPgUGmZhsyvHRQZ',
+    bid: '0x3635c9adc5dea00000',
+  },
+  upcoming_delegation_status: {
+    operator: 'cFMjXCTxTHVkSqbKzeVwJ25TJxLqc1Vn9usPgUGmZhsyvHRQZ',
+    bid: '0x3635c9adc5dea00000',
+  },
+};
+
+export const cfAccountInfoOperator: z.input<typeof cfAccountInfo> = {
+  flip_balance: '0x363810b745006bc6c6',
+  asset_balances: emptyChainAssetMap,
+  bond: '0x0',
+  estimated_redeemable_balance: '0x363810b745006bc6c6',
+  role: 'operator',
+  managed_validators: {
+    cFNkiayhWvppDY5zSzG8rAYMaqbunLBAAbBQcAgFF4x1jaMSy: '0x8ac7201ac3947280',
+  },
+  settings: {
+    fee_bps: 1500,
+    delegation_acceptance: 'Allow',
+  },
+  delegators: {
+    cFHsUq1uK5opJudRDczt7w4baiRDHR6Kdezw77u2JnRnCGKcs: '0x30ca024f987b900000',
+  },
+  blocked: ['cFNfitvPd2acNNFgijVN3Ls4gG112PZPq7sY2FGtPgEk25wV9'],
+  active_delegation: {
+    operator: 'cFMjXCTxTHVkSqbKzeVwJ25TJxLqc1Vn9usPgUGmZhsyvHRQZ',
+    validators: {
+      cFNkiayhWvppDY5zSzG8rAYMaqbunLBAAbBQcAgFF4x1jaMSy: '0x10f42f25af720f9f0f6',
+    },
+    delegators: {
+      cFHsUq1uK5opJudRDczt7w4baiRDHR6Kdezw77u2JnRnCGKcs: '0x3635c9adc5dea00000',
+    },
+    delegation_fee_bps: 1500,
+  },
 };
 
 export const VALIDATOR_ACCOUNT_ID = 'cFKzr7DwLCRtSkou5H5moKri7g9WwJ4tAbVJv6dZGhLb811Tc';
@@ -724,6 +781,8 @@ export const VALIDATOR_ACCOUNT_ID2 = 'cFJ6qQZ3ybhMDPt7KXDUUj3aLC2DXaPm8rCLCfLEsy
 export const LP_ACCOUNT_ID = 'cFMVtnPTJFYFvnHXK14HZ6XWDSCAByTPZDWrTeFEc2B8A3m7M';
 export const BROKER_ACCOUNT_ID = 'cFJjZKzA5rUTb9qkZMGfec7piCpiAQKr15B4nALzriMGQL8BE';
 export const BROKER_ACCOUNT_ID2 = 'cFMmWJ1U3x1wZFo4qf36XKG8BxejtMvkKE9DZEt2UtASGMBMf';
+export const DELEGATOR_ACCOUNT_ID = 'cFNzMM63izeZ2zqKiUpUVWLEd6YqzbVEAHgPtgHLDtAVG4Hmv';
+export const DELEGATOR_ACCOUNT_ID2 = 'cFKvKKCcScNcWyrJRASocm7vZq5vU8QpQhqdVGU8PnMEwgud5';
 
 export const accounts: Record<`cF${string}`, z.input<typeof cfAccountInfo>> = {
   [VALIDATOR_ACCOUNT_ID]: validatorAccount,
@@ -731,6 +790,8 @@ export const accounts: Record<`cF${string}`, z.input<typeof cfAccountInfo>> = {
   [LP_ACCOUNT_ID]: liquidityProviderAccount,
   [BROKER_ACCOUNT_ID]: brokerAccount,
   [BROKER_ACCOUNT_ID2]: brokerAccountNoAffiliates,
+  [DELEGATOR_ACCOUNT_ID]: delegator1,
+  [DELEGATOR_ACCOUNT_ID2]: delegator2,
 };
 
 export const poolOrders: z.input<typeof cfPoolOrders> = {
@@ -1257,20 +1318,6 @@ export const auctionState: z.input<typeof cfAuctionState> = {
   min_bid: '0x0',
   auction_size_range: [2, 150],
   min_active_bid: '0x74e4528aafe6e30c3e8',
-};
-
-export const cfAccountInfoOperator: z.input<typeof cfAccountInfo> = {
-  role: 'operator',
-  managed_validators: {
-    cFNkiayhWvppDY5zSzG8rAYMaqbunLBAAbBQcAgFF4x1jaMSy: '0x8ac7201ac3947280',
-  },
-  settings: {
-    fee_bps: 1000,
-    delegation_acceptance: 'Allow',
-  },
-  blocked: ['cFNfitvPd2acNNFgijVN3Ls4gG112PZPq7sY2FGtPgEk25wV9'],
-  delegators: {},
-  flip_balance: '0x8ac7220b3617f4c0',
 };
 
 export const cfOraclePrice: z.input<typeof cfOraclePrices> = [
