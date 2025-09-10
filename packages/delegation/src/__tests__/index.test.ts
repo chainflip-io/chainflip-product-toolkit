@@ -518,7 +518,7 @@ describe(DelegationSDK, () => {
               "address": "0x10C6E9530F1C1AF873a391030a1D9E8ed0630D26",
               "args": [
                 "0xc5a5C42992dECbae36851359345FE25997F5C42d",
-                7500000000000000000n,
+                10000000000000000000n,
               ],
               "chain": "client chain",
               "functionName": "approve",
@@ -534,7 +534,7 @@ describe(DelegationSDK, () => {
               "address": "0x10C6E9530F1C1AF873a391030a1D9E8ed0630D26",
               "args": [
                 "0xc5a5C42992dECbae36851359345FE25997F5C42d",
-                7500000000000000000n,
+                10000000000000000000n,
               ],
               "chain": "client chain",
               "functionName": "approve",
