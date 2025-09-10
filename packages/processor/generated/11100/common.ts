@@ -259,6 +259,25 @@ export const cfPrimitivesAccountRole = simpleEnum([
   'Operator',
 ]);
 
+export const palletCfValidatorRotationState = z.object({
+  primaryCandidates: z.array(accountId),
+  banned: z.array(accountId),
+  bond: numberOrHex,
+  newEpochIndex: z.number(),
+});
+
+export const palletCfValidatorRotationPhase = z.discriminatedUnion('__kind', [
+  z.object({ __kind: z.literal('Idle') }),
+  z.object({ __kind: z.literal('KeygensInProgress'), value: palletCfValidatorRotationState }),
+  z.object({ __kind: z.literal('KeyHandoversInProgress'), value: palletCfValidatorRotationState }),
+  z.object({ __kind: z.literal('ActivatingKeys'), value: palletCfValidatorRotationState }),
+  z.object({ __kind: z.literal('NewKeysActivated'), value: palletCfValidatorRotationState }),
+  z.object({
+    __kind: z.literal('SessionRotating'),
+    value: z.tuple([z.array(accountId), numberOrHex]),
+  }),
+]);
+
 export const palletCfValidatorAuctionResolverSetSizeParameters = z.object({
   minSize: z.number(),
   maxSize: z.number(),
@@ -272,8 +291,7 @@ export const cfPrimitivesSemVer = z.object({
 });
 
 export const palletCfValidatorPalletConfigUpdate = z.discriminatedUnion('__kind', [
-  z.object({ __kind: z.literal('RegistrationBondPercentage'), percentage: z.number() }),
-  z.object({ __kind: z.literal('AuctionBidCutoffPercentage'), percentage: z.number() }),
+  z.object({ __kind: z.literal('MinimumValidatorStake'), minStake: z.number() }),
   z.object({ __kind: z.literal('RedemptionPeriodAsPercentage'), percentage: z.number() }),
   z.object({ __kind: z.literal('EpochDuration'), blocks: z.number() }),
   z.object({ __kind: z.literal('AuthoritySetMinSize'), minSize: z.number() }),
@@ -284,7 +302,6 @@ export const palletCfValidatorPalletConfigUpdate = z.discriminatedUnion('__kind'
   z.object({ __kind: z.literal('MinimumReportedCfeVersion'), version: cfPrimitivesSemVer }),
   z.object({ __kind: z.literal('MaxAuthoritySetContractionPercentage'), percentage: z.number() }),
   z.object({ __kind: z.literal('MinimumAuctionBid'), minimumFlipBid: z.number() }),
-  z.object({ __kind: z.literal('DelegationCapacityFactor'), factor: z.number().nullish() }),
 ]);
 
 export const palletCfValidatorDelegationDelegationAcceptance = simpleEnum(['Allow', 'Deny']);
@@ -293,6 +310,11 @@ export const palletCfValidatorDelegationOperatorSettings = z.object({
   feeBps: z.number(),
   delegationAcceptance: palletCfValidatorDelegationDelegationAcceptance,
 });
+
+export const palletCfValidatorDelegationChange = z.discriminatedUnion('__kind', [
+  z.object({ __kind: z.literal('Increase'), value: numberOrHex }),
+  z.object({ __kind: z.literal('Decrease'), value: numberOrHex }),
+]);
 
 export const cfPrimitivesChainsAssetsAnyAsset = simpleEnum([
   'Eth',

@@ -1552,6 +1552,19 @@
           "value": "u128"
         }
       }
+    },
+    "BondUpdated": {
+      "type": "struct",
+      "fields": {
+        "accountId": {
+          "type": "primitive",
+          "value": "AccountId32"
+        },
+        "newBond": {
+          "type": "primitive",
+          "value": "u128"
+        }
+      }
     }
   },
   "Emissions": {
@@ -3357,13 +3370,6 @@
                       "value": "AccountId32"
                     }
                   },
-                  "secondaryCandidates": {
-                    "type": "array",
-                    "value": {
-                      "type": "primitive",
-                      "value": "AccountId32"
-                    }
-                  },
                   "banned": {
                     "type": "array",
                     "value": {
@@ -3389,13 +3395,6 @@
                 "$name": "PalletCfValidatorRotationState",
                 "fields": {
                   "primaryCandidates": {
-                    "type": "array",
-                    "value": {
-                      "type": "primitive",
-                      "value": "AccountId32"
-                    }
-                  },
-                  "secondaryCandidates": {
                     "type": "array",
                     "value": {
                       "type": "primitive",
@@ -3433,13 +3432,6 @@
                       "value": "AccountId32"
                     }
                   },
-                  "secondaryCandidates": {
-                    "type": "array",
-                    "value": {
-                      "type": "primitive",
-                      "value": "AccountId32"
-                    }
-                  },
                   "banned": {
                     "type": "array",
                     "value": {
@@ -3465,13 +3457,6 @@
                 "$name": "PalletCfValidatorRotationState",
                 "fields": {
                   "primaryCandidates": {
-                    "type": "array",
-                    "value": {
-                      "type": "primitive",
-                      "value": "AccountId32"
-                    }
-                  },
-                  "secondaryCandidates": {
                     "type": "array",
                     "value": {
                       "type": "primitive",
@@ -3588,25 +3573,13 @@
           "$name": "palletCfValidatorPalletConfigUpdate",
           "values": [
             {
-              "name": "RegistrationBondPercentage",
+              "name": "MinimumValidatorStake",
               "value": {
                 "type": "struct",
                 "fields": {
-                  "percentage": {
+                  "minStake": {
                     "type": "primitive",
-                    "value": "Percent"
-                  }
-                }
-              }
-            },
-            {
-              "name": "AuctionBidCutoffPercentage",
-              "value": {
-                "type": "struct",
-                "fields": {
-                  "percentage": {
-                    "type": "primitive",
-                    "value": "Percent"
+                    "value": "u32"
                   }
                 }
               }
@@ -3719,21 +3692,6 @@
                   "minimumFlipBid": {
                     "type": "primitive",
                     "value": "u32"
-                  }
-                }
-              }
-            },
-            {
-              "name": "DelegationCapacityFactor",
-              "value": {
-                "type": "struct",
-                "fields": {
-                  "factor": {
-                    "type": "option",
-                    "value": {
-                      "type": "primitive",
-                      "value": "u32"
-                    }
                   }
                 }
               }
@@ -3878,6 +3836,10 @@
         "operator": {
           "type": "primitive",
           "value": "AccountId32"
+        },
+        "maxBid": {
+          "type": "primitive",
+          "value": "u128"
         }
       }
     },
@@ -3891,6 +3853,10 @@
         "operator": {
           "type": "primitive",
           "value": "AccountId32"
+        },
+        "maxBid": {
+          "type": "primitive",
+          "value": "u128"
         }
       }
     },
@@ -3914,12 +3880,25 @@
           "type": "primitive",
           "value": "AccountId32"
         },
-        "maxBid": {
-          "type": "option",
-          "value": {
-            "type": "primitive",
-            "value": "u128"
-          }
+        "change": {
+          "type": "enum",
+          "$name": "palletCfValidatorDelegationChange",
+          "values": [
+            {
+              "name": "Increase",
+              "value": {
+                "type": "primitive",
+                "value": "u128"
+              }
+            },
+            {
+              "name": "Decrease",
+              "value": {
+                "type": "primitive",
+                "value": "u128"
+              }
+            }
+          ]
         }
       }
     }
