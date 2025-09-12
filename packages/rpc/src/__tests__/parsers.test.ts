@@ -12,11 +12,13 @@ import {
   cfSwappingEnvironment,
   cfAccountInfo,
   cfOraclePrices,
+  cfLendingPools,
 } from '../parsers';
 import {
   cfAccountInfoOperator,
   cfOraclePrice,
   emptyChainAssetMap,
+  lendingPools,
   tradingStrategies,
   tradingStrategiesLimits,
 } from './fixtures';
@@ -1221,6 +1223,37 @@ describe('parsers', () => {
     it('parses the cfOraclePrices response', () => {
       const result = cfOraclePrices.parse(cfOraclePrice);
       expect(result.length).toEqual(5);
+    });
+  });
+
+  describe('cfLendingPools', () => {
+    it('parses the cfLendingPools response', () => {
+      const result = cfLendingPools.parse(lendingPools);
+      expect(result.length).toEqual(2);
+      expect(result).toMatchInlineSnapshot(`
+        [
+          {
+            "asset": {
+              "asset": "BTC",
+              "chain": "Bitcoin",
+            },
+            "available_amount": 200000000n,
+            "interest_rate": 200,
+            "total_amount": 200000000n,
+            "utilisation_rate": 0,
+          },
+          {
+            "asset": {
+              "asset": "USDC",
+              "chain": "Solana",
+            },
+            "available_amount": 0n,
+            "interest_rate": 5000,
+            "total_amount": 0n,
+            "utilisation_rate": 10000,
+          },
+        ]
+      `);
     });
   });
 });

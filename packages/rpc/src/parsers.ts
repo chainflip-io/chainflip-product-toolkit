@@ -751,3 +751,13 @@ export const cfSafeModeStatuses = z.union([
     ingress_egress_assethub: ingressEgressPalletSafeModeStatuses,
   }),
 ]);
+
+export const cfLendingPools = z.array(
+  z.object({
+    asset: rpcAssetSchema,
+    total_amount: numberOrHex,
+    available_amount: numberOrHex,
+    utilisation_rate: z.number(),
+    interest_rate: z.number(),
+  }),
+);
