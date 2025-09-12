@@ -393,3 +393,22 @@ export function getInternalAssets(
     destAsset: getInternalAsset({ asset: destAsset, chain: destChain }, assert),
   };
 }
+
+export const chainflipAssetToPriceAssetMap: Record<
+  ChainflipAsset,
+  Exclude<PriceAsset, 'Usd'> | null
+> = {
+  Btc: 'Btc',
+  Sol: 'Sol',
+  Eth: 'Eth',
+  ArbEth: 'Eth',
+  Usdc: 'Usdc',
+  ArbUsdc: 'Usdc',
+  SolUsdc: 'Usdc',
+  HubUsdc: 'Usdc',
+  Usdt: 'Usdt',
+  HubUsdt: 'Usdt',
+  Dot: null,
+  Flip: null,
+  HubDot: null,
+};
