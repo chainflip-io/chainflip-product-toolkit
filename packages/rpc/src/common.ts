@@ -39,6 +39,7 @@ import {
   cfGetTradingStrategyLimits,
   hexString,
   cfOraclePrices,
+  cfLendingPools,
 } from './parsers';
 
 type Nullish<T> = T | null | undefined;
@@ -231,6 +232,7 @@ export type RpcRequest = WithHash<{
   cf_available_pools: [];
   cf_safe_mode_statuses: [];
   cf_oracle_prices: [oraclePricePair?: Nullish<[PriceAsset, PriceAsset]>];
+  cf_lending_pools: [asset: UncheckedAssetAndChain];
 }> & {
   chain_getBlockHash: [blockHeight?: number];
 };
@@ -276,6 +278,7 @@ export const rpcResult = {
   broker_encode_cf_parameters: hexString,
   cf_encode_cf_parameters: hexString,
   cf_oracle_prices: cfOraclePrices,
+  cf_lending_pools: cfLendingPools,
 } as const satisfies { [K in keyof RpcRequest]: z.ZodTypeAny };
 
 export type RpcMethod = keyof RpcRequest;

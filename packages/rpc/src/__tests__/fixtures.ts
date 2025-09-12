@@ -27,6 +27,7 @@ import {
   type cfPoolOrderbook,
 } from '../parsers';
 import { CfAvailablePools } from '../types';
+import { cfLendingPools } from './../parsers';
 
 export const supportedAssets = [
   { chain: 'Ethereum', asset: 'ETH' },
@@ -1355,5 +1356,28 @@ export const cfOraclePrice: z.input<typeof cfOraclePrices> = [
     updated_at_statechain_block: 9,
     base_asset: 'Usdt',
     quote_asset: 'Usd',
+  },
+];
+
+export const lendingPools: z.input<typeof cfLendingPools> = [
+  {
+    asset: {
+      chain: 'Bitcoin',
+      asset: 'BTC',
+    },
+    total_amount: '0xbebc200',
+    available_amount: '0xbebc200',
+    utilisation_rate: 0,
+    interest_rate: 200,
+  },
+  {
+    asset: {
+      chain: 'Solana',
+      asset: 'USDC',
+    },
+    total_amount: '0x0',
+    available_amount: '0x0',
+    utilisation_rate: 10000,
+    interest_rate: 5000,
   },
 ];

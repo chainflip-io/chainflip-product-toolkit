@@ -24,6 +24,7 @@ import {
   failedCallEvm,
   fundingEnvironment,
   ingressEgressEnvironment,
+  lendingPools,
   liquidityProviderAccount,
   LP_ACCOUNT_ID,
   poolOrderbook,
@@ -78,6 +79,7 @@ describe(HttpClient, () => {
         "cf_get_trading_strategies",
         "cf_get_trading_strategy_limits",
         "cf_ingress_egress_environment",
+        "cf_lending_pools",
         "cf_oracle_prices",
         "cf_pool_depth",
         "cf_pool_orderbook",
@@ -384,6 +386,8 @@ describe(HttpClient, () => {
           return respond(safeModeStatuses);
         case 'cf_oracle_prices':
           return respond(cfOraclePrice);
+        case 'cf_lending_pools':
+          return respond(lendingPools);
         case 'cf_eth_state_chain_gateway_address':
         case 'cf_eth_key_manager_address':
         default:
