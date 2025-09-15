@@ -232,7 +232,7 @@ export type RpcRequest = WithHash<{
   cf_available_pools: [];
   cf_safe_mode_statuses: [];
   cf_oracle_prices: [oraclePricePair?: Nullish<[PriceAsset, PriceAsset]>];
-  cf_lending_pools: [asset: UncheckedAssetAndChain];
+  cf_lending_pools: [asset?: UncheckedAssetAndChain];
 }> & {
   chain_getBlockHash: [blockHeight?: number];
 };
