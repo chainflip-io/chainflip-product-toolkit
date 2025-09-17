@@ -276,6 +276,7 @@ const delegationStatus = z.object({
 });
 
 export const accountInfoCommon = {
+  vanity_name: z.string().optional(),
   flip_balance: numberOrHex,
   asset_balances: chainAssetMapFactory(numberOrHex, 0),
   bond: numberOrHex,

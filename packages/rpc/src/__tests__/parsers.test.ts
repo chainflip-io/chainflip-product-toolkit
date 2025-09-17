@@ -1214,6 +1214,7 @@ describe('parsers', () => {
               "cFNkiayhWvppDY5zSzG8rAYMaqbunLBAAbBQcAgFF4x1jaMSy": 9999996796922000000n,
             },
           },
+          "vanity_name": "Buttoness",
         }
       `);
     });
