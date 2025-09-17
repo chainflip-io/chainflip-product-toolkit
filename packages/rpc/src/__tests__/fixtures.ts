@@ -749,6 +749,7 @@ const delegator2: z.input<typeof unregistered> = {
 };
 
 export const cfAccountInfoOperator: z.input<typeof cfAccountInfo> = {
+  vanity_name: 'Buttoness',
   flip_balance: '0x363810b745006bc6c6',
   asset_balances: emptyChainAssetMap,
   bond: '0x0',
