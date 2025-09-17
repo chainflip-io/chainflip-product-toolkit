@@ -758,6 +758,14 @@ export const cfLendingPools = z.array(
     total_amount: numberOrHex,
     available_amount: numberOrHex,
     utilisation_rate: z.number(),
-    interest_rate: z.number(),
+    current_interest_rate: z.number(),
+    origination_fee: z.number(),
+    liquidation_fee: z.number(),
+    interest_rate_curve: z.object({
+      interest_at_zero_utilisation: z.number(),
+      junction_utilisation: z.number(),
+      interest_at_junction_utilisation: z.number(),
+      interest_at_max_utilisation: z.number(),
+    }),
   }),
 );

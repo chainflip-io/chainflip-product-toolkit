@@ -1368,7 +1368,15 @@ export const lendingPools: z.input<typeof cfLendingPools> = [
     total_amount: '0xbebc200',
     available_amount: '0xbebc200',
     utilisation_rate: 0,
-    interest_rate: 200,
+    current_interest_rate: 200,
+    origination_fee: 100,
+    liquidation_fee: 500,
+    interest_rate_curve: {
+      interest_at_zero_utilisation: 20000,
+      junction_utilisation: 900000,
+      interest_at_junction_utilisation: 80000,
+      interest_at_max_utilisation: 500000,
+    },
   },
   {
     asset: {
@@ -1378,6 +1386,14 @@ export const lendingPools: z.input<typeof cfLendingPools> = [
     total_amount: '0x0',
     available_amount: '0x0',
     utilisation_rate: 10000,
-    interest_rate: 5000,
+    current_interest_rate: 5000,
+    origination_fee: 100,
+    liquidation_fee: 500,
+    interest_rate_curve: {
+      interest_at_zero_utilisation: 20000,
+      junction_utilisation: 900000,
+      interest_at_junction_utilisation: 80000,
+      interest_at_max_utilisation: 500000,
+    },
   },
 ];
