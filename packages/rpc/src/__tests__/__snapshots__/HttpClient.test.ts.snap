@@ -232,7 +232,7 @@ exports[`HttpClient > with server > gets lp account info 1`] = `
       "USDT": 0n,
     },
     "Bitcoin": {
-      "BTC": 0n,
+      "BTC": 19842n,
     },
     "Ethereum": {
       "ETH": 0n,
@@ -259,7 +259,7 @@ exports[`HttpClient > with server > gets lp account info 1`] = `
       "USDT": 0n,
     },
     "Bitcoin": {
-      "BTC": 0n,
+      "BTC": 19842n,
     },
     "Ethereum": {
       "ETH": 0n,
@@ -289,11 +289,25 @@ exports[`HttpClient > with server > gets lp account info 1`] = `
     "Bitcoin": {
       "BTC": [
         {
-          "available_balance": 8933778n,
+          "available_balance": 200000000n,
           "fee_tier": 5,
           "in_use_balance": 0n,
           "is_withdrawing": false,
-          "total_balance": 8933778n,
+          "total_balance": 200000000n,
+        },
+        {
+          "available_balance": 200000000n,
+          "fee_tier": 10,
+          "in_use_balance": 0n,
+          "is_withdrawing": false,
+          "total_balance": 200000000n,
+        },
+        {
+          "available_balance": 200000000n,
+          "fee_tier": 30,
+          "in_use_balance": 0n,
+          "is_withdrawing": false,
+          "total_balance": 200000000n,
         },
       ],
     },
@@ -311,6 +325,7 @@ exports[`HttpClient > with server > gets lp account info 1`] = `
       "USDC": [],
     },
   },
+  "collateral_balances": [],
   "earned_fees": {
     "Arbitrum": {
       "ETH": 0n,
@@ -338,17 +353,26 @@ exports[`HttpClient > with server > gets lp account info 1`] = `
       "USDC": 0n,
     },
   },
-  "estimated_redeemable_balance": 4999847340286000000n,
-  "flip_balance": 4999847340286000000n,
+  "estimated_redeemable_balance": 99999975540394000000n,
+  "flip_balance": 99999975540394000000n,
+  "lending_positions": [
+    {
+      "asset": "BTC",
+      "available_amount": 200000000n,
+      "chain": "Bitcoin",
+      "total_amount": 200000000n,
+    },
+  ],
   "refund_addresses": {
     "Arbitrum": null,
     "Assethub": null,
-    "Bitcoin": "bc1qqt3juqef9azhd0zeuamu9c30pg5xdllvmks2ja",
-    "Ethereum": "0xacd7c0481fc71dce9e3e8bd4cca5828ce8302629",
+    "Bitcoin": "mo3MtB6mLxTBBSmzzJvR3TtgrT9qBkoup3",
+    "Ethereum": null,
     "Polkadot": null,
-    "Solana": "7zLEfU3nQKqnfrN2A5yNEiFd1Vt9D7maVaoSAV8invMT",
+    "Solana": null,
   },
   "role": "liquidity_provider",
+  "vanity_name": "Chainflip Testnet LP BOOST",
 }
 `;
 
@@ -364,7 +388,7 @@ exports[`HttpClient > with server > gets lp total balances 1`] = `
     "USDT": 0n,
   },
   "Bitcoin": {
-    "BTC": 0n,
+    "BTC": 19842n,
   },
   "Ethereum": {
     "ETH": 0n,

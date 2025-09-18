@@ -1,0 +1,404 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`parsers > cfAccountInfo > parses the latest cfAccountInfo schema for an lp 1`] = `
+{
+  "asset_balances": {
+    "Arbitrum": {
+      "ETH": 0n,
+      "USDC": 0n,
+    },
+    "Assethub": {
+      "DOT": 0n,
+      "USDC": 0n,
+      "USDT": 0n,
+    },
+    "Bitcoin": {
+      "BTC": 19842n,
+    },
+    "Ethereum": {
+      "ETH": 0n,
+      "FLIP": 0n,
+      "USDC": 0n,
+      "USDT": 0n,
+    },
+    "Polkadot": {
+      "DOT": 0n,
+    },
+    "Solana": {
+      "SOL": 0n,
+      "USDC": 0n,
+    },
+  },
+  "balances": {
+    "Arbitrum": {
+      "ETH": 0n,
+      "USDC": 0n,
+    },
+    "Assethub": {
+      "DOT": 0n,
+      "USDC": 0n,
+      "USDT": 0n,
+    },
+    "Bitcoin": {
+      "BTC": 19842n,
+    },
+    "Ethereum": {
+      "ETH": 0n,
+      "FLIP": 0n,
+      "USDC": 0n,
+      "USDT": 0n,
+    },
+    "Polkadot": {
+      "DOT": 0n,
+    },
+    "Solana": {
+      "SOL": 0n,
+      "USDC": 0n,
+    },
+  },
+  "bond": 0n,
+  "boost_balances": {
+    "Arbitrum": {
+      "ETH": [],
+      "USDC": [],
+    },
+    "Assethub": {
+      "DOT": [],
+      "USDC": [],
+      "USDT": [],
+    },
+    "Bitcoin": {
+      "BTC": [
+        {
+          "available_balance": 200000000n,
+          "fee_tier": 5,
+          "in_use_balance": 0n,
+          "is_withdrawing": false,
+          "total_balance": 200000000n,
+        },
+        {
+          "available_balance": 200000000n,
+          "fee_tier": 10,
+          "in_use_balance": 0n,
+          "is_withdrawing": false,
+          "total_balance": 200000000n,
+        },
+        {
+          "available_balance": 200000000n,
+          "fee_tier": 30,
+          "in_use_balance": 0n,
+          "is_withdrawing": false,
+          "total_balance": 200000000n,
+        },
+      ],
+    },
+    "Ethereum": {
+      "ETH": [],
+      "FLIP": [],
+      "USDC": [],
+      "USDT": [],
+    },
+    "Polkadot": {
+      "DOT": [],
+    },
+    "Solana": {
+      "SOL": [],
+      "USDC": [],
+    },
+  },
+  "collateral_balances": [],
+  "earned_fees": {
+    "Arbitrum": {
+      "ETH": 0n,
+      "USDC": 0n,
+    },
+    "Assethub": {
+      "DOT": 0n,
+      "USDC": 0n,
+      "USDT": 0n,
+    },
+    "Bitcoin": {
+      "BTC": 0n,
+    },
+    "Ethereum": {
+      "ETH": 0n,
+      "FLIP": 0n,
+      "USDC": 0n,
+      "USDT": 0n,
+    },
+    "Polkadot": {
+      "DOT": 0n,
+    },
+    "Solana": {
+      "SOL": 0n,
+      "USDC": 0n,
+    },
+  },
+  "estimated_redeemable_balance": 99999975540394000000n,
+  "flip_balance": 99999975540394000000n,
+  "lending_positions": [
+    {
+      "asset": "BTC",
+      "available_amount": 200000000n,
+      "chain": "Bitcoin",
+      "total_amount": 200000000n,
+    },
+  ],
+  "refund_addresses": {
+    "Arbitrum": null,
+    "Assethub": null,
+    "Bitcoin": "mo3MtB6mLxTBBSmzzJvR3TtgrT9qBkoup3",
+    "Ethereum": null,
+    "Polkadot": null,
+    "Solana": null,
+  },
+  "role": "liquidity_provider",
+  "vanity_name": "Chainflip Testnet LP BOOST",
+}
+`;
+
+exports[`parsers > cfAccountInfo > parses the latest cfAccountInfo schema for an lp on networks that haven't been upgraded yet 1`] = `
+{
+  "asset_balances": {
+    "Arbitrum": {
+      "ETH": 0n,
+      "USDC": 0n,
+    },
+    "Assethub": {
+      "DOT": 0n,
+      "USDC": 0n,
+      "USDT": 0n,
+    },
+    "Bitcoin": {
+      "BTC": 19842n,
+    },
+    "Ethereum": {
+      "ETH": 0n,
+      "FLIP": 0n,
+      "USDC": 0n,
+      "USDT": 0n,
+    },
+    "Polkadot": {
+      "DOT": 0n,
+    },
+    "Solana": {
+      "SOL": 0n,
+      "USDC": 0n,
+    },
+  },
+  "balances": {
+    "Arbitrum": {
+      "ETH": 0n,
+      "USDC": 0n,
+    },
+    "Assethub": {
+      "DOT": 0n,
+      "USDC": 0n,
+      "USDT": 0n,
+    },
+    "Bitcoin": {
+      "BTC": 19842n,
+    },
+    "Ethereum": {
+      "ETH": 0n,
+      "FLIP": 0n,
+      "USDC": 0n,
+      "USDT": 0n,
+    },
+    "Polkadot": {
+      "DOT": 0n,
+    },
+    "Solana": {
+      "SOL": 0n,
+      "USDC": 0n,
+    },
+  },
+  "bond": 0n,
+  "boost_balances": {
+    "Arbitrum": {
+      "ETH": [],
+      "USDC": [],
+    },
+    "Assethub": {
+      "DOT": [],
+      "USDC": [],
+      "USDT": [],
+    },
+    "Bitcoin": {
+      "BTC": [
+        {
+          "available_balance": 200000000n,
+          "fee_tier": 5,
+          "in_use_balance": 0n,
+          "is_withdrawing": false,
+          "total_balance": 200000000n,
+        },
+        {
+          "available_balance": 200000000n,
+          "fee_tier": 10,
+          "in_use_balance": 0n,
+          "is_withdrawing": false,
+          "total_balance": 200000000n,
+        },
+        {
+          "available_balance": 200000000n,
+          "fee_tier": 30,
+          "in_use_balance": 0n,
+          "is_withdrawing": false,
+          "total_balance": 200000000n,
+        },
+      ],
+    },
+    "Ethereum": {
+      "ETH": [],
+      "FLIP": [],
+      "USDC": [],
+      "USDT": [],
+    },
+    "Polkadot": {
+      "DOT": [],
+    },
+    "Solana": {
+      "SOL": [],
+      "USDC": [],
+    },
+  },
+  "collateral_balances": undefined,
+  "earned_fees": {
+    "Arbitrum": {
+      "ETH": 0n,
+      "USDC": 0n,
+    },
+    "Assethub": {
+      "DOT": 0n,
+      "USDC": 0n,
+      "USDT": 0n,
+    },
+    "Bitcoin": {
+      "BTC": 0n,
+    },
+    "Ethereum": {
+      "ETH": 0n,
+      "FLIP": 0n,
+      "USDC": 0n,
+      "USDT": 0n,
+    },
+    "Polkadot": {
+      "DOT": 0n,
+    },
+    "Solana": {
+      "SOL": 0n,
+      "USDC": 0n,
+    },
+  },
+  "estimated_redeemable_balance": 99999975540394000000n,
+  "flip_balance": 99999975540394000000n,
+  "lending_positions": undefined,
+  "refund_addresses": {
+    "Arbitrum": null,
+    "Assethub": null,
+    "Bitcoin": "mo3MtB6mLxTBBSmzzJvR3TtgrT9qBkoup3",
+    "Ethereum": null,
+    "Polkadot": null,
+    "Solana": null,
+  },
+  "role": "liquidity_provider",
+  "vanity_name": "Chainflip Testnet LP BOOST",
+}
+`;
+
+exports[`parsers > cfAccountInfo > parses the old cfAccountInfo schema for an lp 1`] = `
+{
+  "balances": {
+    "Arbitrum": {
+      "ETH": 0n,
+      "USDC": 0n,
+    },
+    "Assethub": {
+      "DOT": 0n,
+      "USDC": 0n,
+      "USDT": 0n,
+    },
+    "Bitcoin": {
+      "BTC": 35910229n,
+    },
+    "Ethereum": {
+      "ETH": 201081687243582975266n,
+      "FLIP": 99996154262861338436158n,
+      "USDC": 227879719689n,
+      "USDT": 1999998411n,
+    },
+    "Polkadot": {
+      "DOT": 0n,
+    },
+    "Solana": {
+      "SOL": 3358768032n,
+      "USDC": 0n,
+    },
+  },
+  "boost_balances": {
+    "Arbitrum": {
+      "ETH": [],
+      "USDC": [],
+    },
+    "Assethub": {
+      "DOT": [],
+      "USDC": [],
+      "USDT": [],
+    },
+    "Bitcoin": {
+      "BTC": [],
+    },
+    "Ethereum": {
+      "ETH": [],
+      "FLIP": [],
+      "USDC": [],
+      "USDT": [],
+    },
+    "Polkadot": {
+      "DOT": [],
+    },
+    "Solana": {
+      "SOL": [],
+      "USDC": [],
+    },
+  },
+  "earned_fees": {
+    "Arbitrum": {
+      "ETH": 0n,
+      "USDC": 0n,
+    },
+    "Assethub": {
+      "DOT": 0n,
+      "USDC": 0n,
+      "USDT": 0n,
+    },
+    "Bitcoin": {
+      "BTC": 54632n,
+    },
+    "Ethereum": {
+      "ETH": 18585729823626322n,
+      "FLIP": 0n,
+      "USDC": 718345809n,
+      "USDT": 0n,
+    },
+    "Polkadot": {
+      "DOT": 0n,
+    },
+    "Solana": {
+      "SOL": 3358768032n,
+      "USDC": 0n,
+    },
+  },
+  "flip_balance": 9999712411635950000n,
+  "refund_addresses": {
+    "Arbitrum": null,
+    "Assethub": null,
+    "Bitcoin": "tb1qlpaajxzlpm6ds0jsg5dgsep56twkzs9ktsc8a9",
+    "Ethereum": "0xe964a5775fd296ce1bd3e05547c59ce86ac077a2",
+    "Polkadot": null,
+    "Solana": "FkoiauqRvxTuimbohr2dK3UtwZ5Vak44dtSbK69nm1EY",
+  },
+  "role": "liquidity_provider",
+}
+`;
