@@ -6,6 +6,7 @@ import {
   cfGetTradingStrategyLimits,
   cfOraclePrices,
   cfSafeModeStatuses,
+  oldLiquidityProvider,
 } from '../parsers';
 import {
   type broker,
@@ -568,18 +569,133 @@ export const unregisteredAccount: z.input<typeof unregistered> = {
   estimated_redeemable_balance: '0x0',
 };
 
-export const liquidityProviderAccount: z.input<typeof liquidityProvider> = {
-  role: 'liquidity_provider',
-  bond: '0x0',
-  estimated_redeemable_balance: '0x456306aa68edbb80',
-  asset_balances: {
-    Ethereum: { ETH: '0x0', FLIP: '0x0', USDC: '0x0', USDT: '0x0' },
-    Polkadot: { DOT: '0x0' },
-    Bitcoin: { BTC: '0x0' },
-    Arbitrum: { ETH: '0x0', USDC: '0x0' },
-    Solana: { SOL: '0x0', USDC: '0x0' },
-    Assethub: { DOT: '0x0', USDC: '0x0', USDT: '0x0' },
+export const oldLiquidityProviderAccount: z.input<typeof oldLiquidityProvider> = {
+  flip_balance: '0x8ac61d7527a021b0',
+  balances: {
+    Ethereum: {
+      ETH: '0xae691a92bedf5ad22',
+      FLIP: '0x152ccd6913bda50ce23e',
+      USDC: '0x350eb09309',
+      USDT: '0x77358dcb',
+    },
+    Polkadot: {
+      DOT: '0x0',
+    },
+    Bitcoin: {
+      BTC: '0x223f255',
+    },
+    Arbitrum: {
+      ETH: '0x0',
+      USDC: '0x0',
+    },
+    Solana: {
+      SOL: '0xc832bba0',
+      USDC: '0x0',
+    },
+    Assethub: {
+      DOT: '0x0',
+      USDT: '0x0',
+      USDC: '0x0',
+    },
   },
+  role: 'liquidity_provider',
+  refund_addresses: {
+    Ethereum: '0xe964a5775fd296ce1bd3e05547c59ce86ac077a2',
+    Polkadot: null,
+    Bitcoin: 'tb1qlpaajxzlpm6ds0jsg5dgsep56twkzs9ktsc8a9',
+    Arbitrum: null,
+    Solana: 'FkoiauqRvxTuimbohr2dK3UtwZ5Vak44dtSbK69nm1EY',
+    Assethub: null,
+  },
+  earned_fees: {
+    Ethereum: {
+      ETH: '0x42079f70075452',
+      FLIP: '0x0',
+      USDC: '0x2ad11651',
+      USDT: '0x0',
+    },
+    Polkadot: {
+      DOT: '0x0',
+    },
+    Bitcoin: {
+      BTC: '0xd568',
+    },
+    Arbitrum: {
+      ETH: '0x0',
+      USDC: '0x0',
+    },
+    Solana: {
+      SOL: '0xc832bba0',
+      USDC: '0x0',
+    },
+    Assethub: {
+      DOT: '0x0',
+      USDT: '0x0',
+      USDC: '0x0',
+    },
+  },
+  boost_balances: {
+    Ethereum: {
+      ETH: [],
+      FLIP: [],
+      USDC: [],
+      USDT: [],
+    },
+    Polkadot: {
+      DOT: [],
+    },
+    Bitcoin: {
+      BTC: [],
+    },
+    Arbitrum: {
+      ETH: [],
+      USDC: [],
+    },
+    Solana: {
+      SOL: [],
+      USDC: [],
+    },
+    Assethub: {
+      DOT: [],
+      USDT: [],
+      USDC: [],
+    },
+  },
+};
+
+export const liquidityProviderAccount: z.input<typeof liquidityProvider> = {
+  vanity_name: 'Chainflip Testnet LP BOOST',
+  flip_balance: '0x56bc747ee70ef7e80',
+  asset_balances: {
+    Ethereum: {
+      ETH: '0x0',
+      FLIP: '0x0',
+      USDC: '0x0',
+      USDT: '0x0',
+    },
+    Polkadot: {
+      DOT: '0x0',
+    },
+    Bitcoin: {
+      BTC: '0x4d82',
+    },
+    Arbitrum: {
+      ETH: '0x0',
+      USDC: '0x0',
+    },
+    Solana: {
+      SOL: '0x0',
+      USDC: '0x0',
+    },
+    Assethub: {
+      DOT: '0x0',
+      USDT: '0x0',
+      USDC: '0x0',
+    },
+  },
+  bond: '0x0',
+  estimated_redeemable_balance: '0x56bc747ee70ef7e80',
+  role: 'liquidity_provider',
   refund_addresses: {
     Ethereum: '0xacd7c0481fc71dce9e3e8bd4cca5828ce8302629',
     Polkadot: null,
@@ -588,33 +704,91 @@ export const liquidityProviderAccount: z.input<typeof liquidityProvider> = {
     Solana: '7zLEfU3nQKqnfrN2A5yNEiFd1Vt9D7maVaoSAV8invMT',
     Assethub: null,
   },
-  flip_balance: '0x456306aa68edbb80',
   earned_fees: {
-    Ethereum: { ETH: 0, FLIP: 0, USDC: 0, USDT: 0 },
-    Polkadot: { DOT: 0 },
-    Bitcoin: { BTC: 0 },
-    Arbitrum: { ETH: 0, USDC: 0 },
-    Solana: { SOL: 0, USDC: 0 },
-    Assethub: { DOT: 0, USDC: 0, USDT: 0 },
+    Ethereum: {
+      ETH: '0x0',
+      FLIP: '0x0',
+      USDC: '0x0',
+      USDT: '0x0',
+    },
+    Polkadot: {
+      DOT: '0x0',
+    },
+    Bitcoin: {
+      BTC: '0x0',
+    },
+    Arbitrum: {
+      ETH: '0x0',
+      USDC: '0x0',
+    },
+    Solana: {
+      SOL: '0x0',
+      USDC: '0x0',
+    },
+    Assethub: {
+      DOT: '0x0',
+      USDT: '0x0',
+      USDC: '0x0',
+    },
   },
   boost_balances: {
-    Ethereum: { ETH: [], FLIP: [], USDC: [], USDT: [] },
-    Polkadot: { DOT: [] },
+    Ethereum: {
+      ETH: [],
+      FLIP: [],
+      USDC: [],
+      USDT: [],
+    },
+    Polkadot: {
+      DOT: [],
+    },
     Bitcoin: {
       BTC: [
         {
           fee_tier: 5,
-          total_balance: '0x885192',
-          available_balance: '0x885192',
+          total_balance: '0xbebc200',
+          available_balance: '0xbebc200',
+          in_use_balance: '0x0',
+          is_withdrawing: false,
+        },
+        {
+          fee_tier: 10,
+          total_balance: '0xbebc200',
+          available_balance: '0xbebc200',
+          in_use_balance: '0x0',
+          is_withdrawing: false,
+        },
+        {
+          fee_tier: 30,
+          total_balance: '0xbebc200',
+          available_balance: '0xbebc200',
           in_use_balance: '0x0',
           is_withdrawing: false,
         },
       ],
     },
-    Arbitrum: { ETH: [], USDC: [] },
-    Solana: { SOL: [], USDC: [] },
-    Assethub: { DOT: [], USDC: [], USDT: [] },
+    Arbitrum: {
+      ETH: [],
+      USDC: [],
+    },
+    Solana: {
+      SOL: [],
+      USDC: [],
+    },
+    Assethub: {
+      DOT: [],
+      USDT: [],
+      USDC: [],
+    },
   },
+  lending_positions: [
+    {
+      chain: 'Bitcoin',
+      asset: 'BTC',
+      total_amount: '0xbebc200',
+      available_amount: '0xbebc200',
+    },
+  ],
+  collateral_balances: [],
 };
 
 export const brokerAccount: z.input<typeof broker> = {

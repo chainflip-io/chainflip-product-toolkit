@@ -19,6 +19,8 @@ import {
   cfOraclePrice,
   emptyChainAssetMap,
   lendingPools,
+  liquidityProviderAccount,
+  oldLiquidityProviderAccount,
   tradingStrategies,
   tradingStrategiesLimits,
 } from './fixtures';
@@ -1217,6 +1219,28 @@ describe('parsers', () => {
           "vanity_name": "Buttoness",
         }
       `);
+    });
+
+    it("parses the latest cfAccountInfo schema for an lp on networks that haven't been upgraded yet", () => {
+      const result = cfAccountInfo.parse({
+        ...liquidityProviderAccount,
+        lending_positions: undefined,
+        collateral_balances: undefined,
+      });
+
+      expect(result).toMatchSnapshot();
+    });
+
+    it('parses the latest cfAccountInfo schema for an lp', () => {
+      const result = cfAccountInfo.parse(liquidityProviderAccount);
+
+      expect(result).toMatchSnapshot();
+    });
+
+    it('parses the old cfAccountInfo schema for an lp', () => {
+      const result = cfAccountInfo.parse(oldLiquidityProviderAccount);
+
+      expect(result).toMatchSnapshot();
     });
   });
 

@@ -354,6 +354,7 @@ const boostBalances = z.array(
   }),
 );
 
+// TODO(1.11): remove after all networks upgraded
 export const oldLiquidityProvider = z.object({
   role: z.literal('liquidity_provider'),
   balances: chainAssetMapFactory(numberOrHex, '0x0'),
@@ -369,6 +370,29 @@ export const liquidityProvider = z.object({
   refund_addresses: chainMapFactory(z.string().nullable(), null),
   earned_fees: chainAssetMapFactory(numberOrHex, 0),
   boost_balances: chainAssetMapFactory(boostBalances, []),
+  lending_positions: z
+    .array(
+      z.intersection(
+        rpcAssetSchema,
+        z.object({
+          total_amount: numberOrHex,
+          available_amount: numberOrHex,
+        }),
+      ),
+    )
+    // TODO(1.11): remove after all networks upgraded
+    .optional(),
+  collateral_balances: z
+    .array(
+      z.intersection(
+        rpcAssetSchema,
+        z.object({
+          amount: numberOrHex,
+        }),
+      ),
+    )
+    // TODO(1.11): remove after all networks upgraded
+    .optional(),
 });
 
 export const oldValidator = z.object({
