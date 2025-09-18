@@ -380,6 +380,7 @@ export const liquidityProvider = z.object({
         }),
       ),
     )
+    // TODO(1.11): remove after all networks upgraded
     .optional(),
   collateral_balances: z
     .array(
@@ -390,6 +391,7 @@ export const liquidityProvider = z.object({
         }),
       ),
     )
+    // TODO(1.11): remove after all networks upgraded
     .optional(),
 });
 
