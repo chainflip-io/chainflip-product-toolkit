@@ -697,11 +697,11 @@ export const liquidityProviderAccount: z.input<typeof liquidityProvider> = {
   estimated_redeemable_balance: '0x56bc747ee70ef7e80',
   role: 'liquidity_provider',
   refund_addresses: {
-    Ethereum: null,
+    Ethereum: '0xacd7c0481fc71dce9e3e8bd4cca5828ce8302629',
     Polkadot: null,
-    Bitcoin: 'mo3MtB6mLxTBBSmzzJvR3TtgrT9qBkoup3',
+    Bitcoin: 'bc1qqt3juqef9azhd0zeuamu9c30pg5xdllvmks2ja',
     Arbitrum: null,
-    Solana: null,
+    Solana: '7zLEfU3nQKqnfrN2A5yNEiFd1Vt9D7maVaoSAV8invMT',
     Assethub: null,
   },
   earned_fees: {

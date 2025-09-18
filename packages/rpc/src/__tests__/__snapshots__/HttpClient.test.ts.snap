@@ -366,10 +366,10 @@ exports[`HttpClient > with server > gets lp account info 1`] = `
   "refund_addresses": {
     "Arbitrum": null,
     "Assethub": null,
-    "Bitcoin": "mo3MtB6mLxTBBSmzzJvR3TtgrT9qBkoup3",
-    "Ethereum": null,
+    "Bitcoin": "bc1qqt3juqef9azhd0zeuamu9c30pg5xdllvmks2ja",
+    "Ethereum": "0xacd7c0481fc71dce9e3e8bd4cca5828ce8302629",
     "Polkadot": null,
-    "Solana": null,
+    "Solana": "7zLEfU3nQKqnfrN2A5yNEiFd1Vt9D7maVaoSAV8invMT",
   },
   "role": "liquidity_provider",
   "vanity_name": "Chainflip Testnet LP BOOST",
