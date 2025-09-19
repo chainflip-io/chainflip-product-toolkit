@@ -596,16 +596,6 @@ exports[`HttpClient > with server > handles cf_available_pools 1`] = `
   },
   {
     "base": {
-      "asset": "DOT",
-      "chain": "Polkadot",
-    },
-    "quote": {
-      "asset": "USDC",
-      "chain": "Ethereum",
-    },
-  },
-  {
-    "base": {
       "asset": "FLIP",
       "chain": "Ethereum",
     },
@@ -1775,10 +1765,6 @@ exports[`HttpClient > with server > handles cf_supported_assets 1`] = `
   {
     "asset": "USDT",
     "chain": "Ethereum",
-  },
-  {
-    "asset": "DOT",
-    "chain": "Polkadot",
   },
   {
     "asset": "BTC",
