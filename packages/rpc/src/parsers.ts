@@ -22,7 +22,7 @@ const chainAssetMapFactory = <Z extends z.ZodTypeAny>(parser: Z, _defaultValue: 
       Solana: z.object({ SOL: parser, USDC: parser }),
       Assethub: z.object({ DOT: parser, USDC: parser, USDT: parser }),
     })
-    .omit({ Polkadot: true }); // TODO(1.12): remove polkadot all together from RPC response
+    .omit({ Polkadot: true }); // TODO(1.12): remove polkadot all together from parser
 
 const chainBaseAssetMapFactory = <Z extends z.ZodTypeAny>(parser: Z, _defaultValue: z.input<Z>) =>
   z
@@ -34,7 +34,7 @@ const chainBaseAssetMapFactory = <Z extends z.ZodTypeAny>(parser: Z, _defaultVal
       Solana: z.object({ SOL: parser, USDC: parser }),
       Assethub: z.object({ DOT: parser, USDC: parser, USDT: parser }),
     })
-    .omit({ Polkadot: true }); // TODO(1.12): remove polkadot all together from RPC response
+    .omit({ Polkadot: true }); // TODO(1.12): remove polkadot all together from parser
 
 const chainMapFactory = <Z extends z.ZodTypeAny>(parser: Z, _defaultValue: z.input<Z>) =>
   z
@@ -46,7 +46,7 @@ const chainMapFactory = <Z extends z.ZodTypeAny>(parser: Z, _defaultValue: z.inp
       Solana: parser,
       Assethub: parser,
     })
-    .omit({ Polkadot: true }); // TODO(1.12): remove polkadot all together from RPC response
+    .omit({ Polkadot: true }); // TODO(1.12): remove polkadot all together from parser
 
 const rpcAssetSchema = z.union([
   z.object({ chain: z.literal('Bitcoin'), asset: z.literal('BTC') }),
