@@ -21,9 +21,6 @@ exports[`parsers > cfAccountInfo > parses the latest cfAccountInfo schema for an
       "USDC": 0n,
       "USDT": 0n,
     },
-    "Polkadot": {
-      "DOT": 0n,
-    },
     "Solana": {
       "SOL": 0n,
       "USDC": 0n,
@@ -47,9 +44,6 @@ exports[`parsers > cfAccountInfo > parses the latest cfAccountInfo schema for an
       "FLIP": 0n,
       "USDC": 0n,
       "USDT": 0n,
-    },
-    "Polkadot": {
-      "DOT": 0n,
     },
     "Solana": {
       "SOL": 0n,
@@ -98,9 +92,6 @@ exports[`parsers > cfAccountInfo > parses the latest cfAccountInfo schema for an
       "USDC": [],
       "USDT": [],
     },
-    "Polkadot": {
-      "DOT": [],
-    },
     "Solana": {
       "SOL": [],
       "USDC": [],
@@ -126,9 +117,6 @@ exports[`parsers > cfAccountInfo > parses the latest cfAccountInfo schema for an
       "USDC": 0n,
       "USDT": 0n,
     },
-    "Polkadot": {
-      "DOT": 0n,
-    },
     "Solana": {
       "SOL": 0n,
       "USDC": 0n,
@@ -149,7 +137,6 @@ exports[`parsers > cfAccountInfo > parses the latest cfAccountInfo schema for an
     "Assethub": null,
     "Bitcoin": "bc1qqt3juqef9azhd0zeuamu9c30pg5xdllvmks2ja",
     "Ethereum": "0xacd7c0481fc71dce9e3e8bd4cca5828ce8302629",
-    "Polkadot": null,
     "Solana": "7zLEfU3nQKqnfrN2A5yNEiFd1Vt9D7maVaoSAV8invMT",
   },
   "role": "liquidity_provider",
@@ -178,9 +165,6 @@ exports[`parsers > cfAccountInfo > parses the latest cfAccountInfo schema for an
       "USDC": 0n,
       "USDT": 0n,
     },
-    "Polkadot": {
-      "DOT": 0n,
-    },
     "Solana": {
       "SOL": 0n,
       "USDC": 0n,
@@ -204,9 +188,6 @@ exports[`parsers > cfAccountInfo > parses the latest cfAccountInfo schema for an
       "FLIP": 0n,
       "USDC": 0n,
       "USDT": 0n,
-    },
-    "Polkadot": {
-      "DOT": 0n,
     },
     "Solana": {
       "SOL": 0n,
@@ -255,9 +236,6 @@ exports[`parsers > cfAccountInfo > parses the latest cfAccountInfo schema for an
       "USDC": [],
       "USDT": [],
     },
-    "Polkadot": {
-      "DOT": [],
-    },
     "Solana": {
       "SOL": [],
       "USDC": [],
@@ -283,9 +261,6 @@ exports[`parsers > cfAccountInfo > parses the latest cfAccountInfo schema for an
       "USDC": 0n,
       "USDT": 0n,
     },
-    "Polkadot": {
-      "DOT": 0n,
-    },
     "Solana": {
       "SOL": 0n,
       "USDC": 0n,
@@ -299,7 +274,6 @@ exports[`parsers > cfAccountInfo > parses the latest cfAccountInfo schema for an
     "Assethub": null,
     "Bitcoin": "bc1qqt3juqef9azhd0zeuamu9c30pg5xdllvmks2ja",
     "Ethereum": "0xacd7c0481fc71dce9e3e8bd4cca5828ce8302629",
-    "Polkadot": null,
     "Solana": "7zLEfU3nQKqnfrN2A5yNEiFd1Vt9D7maVaoSAV8invMT",
   },
   "role": "liquidity_provider",
@@ -328,9 +302,6 @@ exports[`parsers > cfAccountInfo > parses the old cfAccountInfo schema for an lp
       "USDC": 227879719689n,
       "USDT": 1999998411n,
     },
-    "Polkadot": {
-      "DOT": 0n,
-    },
     "Solana": {
       "SOL": 3358768032n,
       "USDC": 0n,
@@ -354,9 +325,6 @@ exports[`parsers > cfAccountInfo > parses the old cfAccountInfo schema for an lp
       "FLIP": [],
       "USDC": [],
       "USDT": [],
-    },
-    "Polkadot": {
-      "DOT": [],
     },
     "Solana": {
       "SOL": [],
@@ -382,9 +350,6 @@ exports[`parsers > cfAccountInfo > parses the old cfAccountInfo schema for an lp
       "USDC": 718345809n,
       "USDT": 0n,
     },
-    "Polkadot": {
-      "DOT": 0n,
-    },
     "Solana": {
       "SOL": 3358768032n,
       "USDC": 0n,
@@ -396,7 +361,6 @@ exports[`parsers > cfAccountInfo > parses the old cfAccountInfo schema for an lp
     "Assethub": null,
     "Bitcoin": "tb1qlpaajxzlpm6ds0jsg5dgsep56twkzs9ktsc8a9",
     "Ethereum": "0xe964a5775fd296ce1bd3e05547c59ce86ac077a2",
-    "Polkadot": null,
     "Solana": "FkoiauqRvxTuimbohr2dK3UtwZ5Vak44dtSbK69nm1EY",
   },
   "role": "liquidity_provider",

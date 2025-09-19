@@ -28,9 +28,6 @@ exports[`HttpClient > with server > gets broker account info 1`] = `
       "USDC": 0n,
       "USDT": 0n,
     },
-    "Polkadot": {
-      "DOT": 0n,
-    },
     "Solana": {
       "SOL": 0n,
       "USDC": 0n,
@@ -56,9 +53,6 @@ exports[`HttpClient > with server > gets broker account info 1`] = `
       "FLIP": 39432662616362382590n,
       "USDC": 1922285993n,
       "USDT": 729506182n,
-    },
-    "Polkadot": {
-      "DOT": 19519248600n,
     },
     "Solana": {
       "SOL": 0n,
@@ -93,9 +87,6 @@ exports[`HttpClient > with server > gets broker account info 2 1`] = `
       "USDC": 0n,
       "USDT": 0n,
     },
-    "Polkadot": {
-      "DOT": 0n,
-    },
     "Solana": {
       "SOL": 0n,
       "USDC": 0n,
@@ -120,9 +111,6 @@ exports[`HttpClient > with server > gets broker account info 2 1`] = `
       "FLIP": 39432662616362382590n,
       "USDC": 1922285993n,
       "USDT": 729506182n,
-    },
-    "Polkadot": {
-      "DOT": 19519248600n,
     },
     "Solana": {
       "SOL": 0n,
@@ -155,9 +143,6 @@ exports[`HttpClient > with server > gets delegator account info 1`] = `
       "FLIP": 0n,
       "USDC": 0n,
       "USDT": 0n,
-    },
-    "Polkadot": {
-      "DOT": 0n,
     },
     "Solana": {
       "SOL": 0n,
@@ -195,9 +180,6 @@ exports[`HttpClient > with server > gets delegator account info 2 1`] = `
       "FLIP": 0n,
       "USDC": 0n,
       "USDT": 0n,
-    },
-    "Polkadot": {
-      "DOT": 0n,
     },
     "Solana": {
       "SOL": 0n,
@@ -240,9 +222,6 @@ exports[`HttpClient > with server > gets lp account info 1`] = `
       "USDC": 0n,
       "USDT": 0n,
     },
-    "Polkadot": {
-      "DOT": 0n,
-    },
     "Solana": {
       "SOL": 0n,
       "USDC": 0n,
@@ -266,9 +245,6 @@ exports[`HttpClient > with server > gets lp account info 1`] = `
       "FLIP": 0n,
       "USDC": 0n,
       "USDT": 0n,
-    },
-    "Polkadot": {
-      "DOT": 0n,
     },
     "Solana": {
       "SOL": 0n,
@@ -317,9 +293,6 @@ exports[`HttpClient > with server > gets lp account info 1`] = `
       "USDC": [],
       "USDT": [],
     },
-    "Polkadot": {
-      "DOT": [],
-    },
     "Solana": {
       "SOL": [],
       "USDC": [],
@@ -345,9 +318,6 @@ exports[`HttpClient > with server > gets lp account info 1`] = `
       "USDC": 0n,
       "USDT": 0n,
     },
-    "Polkadot": {
-      "DOT": 0n,
-    },
     "Solana": {
       "SOL": 0n,
       "USDC": 0n,
@@ -368,7 +338,6 @@ exports[`HttpClient > with server > gets lp account info 1`] = `
     "Assethub": null,
     "Bitcoin": "bc1qqt3juqef9azhd0zeuamu9c30pg5xdllvmks2ja",
     "Ethereum": "0xacd7c0481fc71dce9e3e8bd4cca5828ce8302629",
-    "Polkadot": null,
     "Solana": "7zLEfU3nQKqnfrN2A5yNEiFd1Vt9D7maVaoSAV8invMT",
   },
   "role": "liquidity_provider",
@@ -395,9 +364,6 @@ exports[`HttpClient > with server > gets lp total balances 1`] = `
     "FLIP": 0n,
     "USDC": 0n,
     "USDT": 0n,
-  },
-  "Polkadot": {
-    "DOT": 0n,
   },
   "Solana": {
     "SOL": 0n,
@@ -472,9 +438,6 @@ exports[`HttpClient > with server > gets unregistered account info 1`] = `
       "USDC": 0n,
       "USDT": 0n,
     },
-    "Polkadot": {
-      "DOT": 0n,
-    },
     "Solana": {
       "SOL": 0n,
       "USDC": 0n,
@@ -508,9 +471,6 @@ exports[`HttpClient > with server > gets validator account info 1`] = `
       "FLIP": 0n,
       "USDC": 0n,
       "USDT": 0n,
-    },
-    "Polkadot": {
-      "DOT": 0n,
     },
     "Solana": {
       "SOL": 0n,
@@ -558,9 +518,6 @@ exports[`HttpClient > with server > gets validator account info with an operator
       "FLIP": 0n,
       "USDC": 0n,
       "USDT": 0n,
-    },
-    "Polkadot": {
-      "DOT": 0n,
     },
     "Solana": {
       "SOL": 0n,
@@ -765,7 +722,6 @@ exports[`HttpClient > with server > handles cf_environment 1`] = `
       "Assethub": 0n,
       "Bitcoin": 0n,
       "Ethereum": 0n,
-      "Polkadot": 0n,
       "Solana": 0n,
     },
     "egress_fees": {
@@ -786,9 +742,6 @@ exports[`HttpClient > with server > handles cf_environment 1`] = `
         "FLIP": 0n,
         "USDC": 0n,
         "USDT": 0n,
-      },
-      "Polkadot": {
-        "DOT": 197450000n,
       },
       "Solana": {
         "SOL": 176n,
@@ -814,9 +767,6 @@ exports[`HttpClient > with server > handles cf_environment 1`] = `
         "USDC": 0n,
         "USDT": 0n,
       },
-      "Polkadot": {
-        "DOT": 197300000n,
-      },
       "Solana": {
         "SOL": 176n,
         "USDC": 0n,
@@ -840,9 +790,6 @@ exports[`HttpClient > with server > handles cf_environment 1`] = `
         "FLIP": 0n,
         "USDC": 0n,
         "USDT": 0n,
-      },
-      "Polkadot": {
-        "DOT": 0n,
       },
       "Solana": {
         "SOL": 0n,
@@ -868,9 +815,6 @@ exports[`HttpClient > with server > handles cf_environment 1`] = `
         "USDC": 1n,
         "USDT": 1n,
       },
-      "Polkadot": {
-        "DOT": 1n,
-      },
       "Solana": {
         "SOL": 1n,
         "USDC": 1n,
@@ -881,7 +825,6 @@ exports[`HttpClient > with server > handles cf_environment 1`] = `
       "Assethub": null,
       "Bitcoin": 2,
       "Ethereum": 2,
-      "Polkadot": null,
       "Solana": 1,
     },
   },
@@ -1111,32 +1054,6 @@ exports[`HttpClient > with server > handles cf_environment 1`] = `
           },
         },
       },
-      "Polkadot": {
-        "DOT": {
-          "limit_order_fee_hundredth_pips": 20,
-          "limit_order_total_fees_earned": {
-            "base": 0n,
-            "quote": 0n,
-          },
-          "limit_total_swap_inputs": {
-            "base": 0n,
-            "quote": 0n,
-          },
-          "quote_asset": {
-            "asset": "USDC",
-            "chain": "Ethereum",
-          },
-          "range_order_fee_hundredth_pips": 20,
-          "range_order_total_fees_earned": {
-            "base": 0n,
-            "quote": 0n,
-          },
-          "range_total_swap_inputs": {
-            "base": 0n,
-            "quote": 0n,
-          },
-        },
-      },
       "Solana": {
         "SOL": {
           "limit_order_fee_hundredth_pips": 20,
@@ -1211,9 +1128,6 @@ exports[`HttpClient > with server > handles cf_environment 1`] = `
         "USDC": null,
         "USDT": null,
       },
-      "Polkadot": {
-        "DOT": null,
-      },
       "Solana": {
         "SOL": null,
         "USDC": null,
@@ -1237,9 +1151,6 @@ exports[`HttpClient > with server > handles cf_environment 1`] = `
         "FLIP": 1000000000000000000000n,
         "USDC": 1000000000n,
         "USDT": 1000000000n,
-      },
-      "Polkadot": {
-        "DOT": 2000000000000n,
       },
       "Solana": {
         "SOL": 5000000000n,
@@ -1267,9 +1178,6 @@ exports[`HttpClient > with server > handles cf_environment 1`] = `
             "FLIP": 0n,
             "USDC": 0n,
             "USDT": 0n,
-          },
-          "Polkadot": {
-            "DOT": 0n,
           },
           "Solana": {
             "SOL": 0n,
@@ -1300,9 +1208,6 @@ exports[`HttpClient > with server > handles cf_environment 1`] = `
             "FLIP": 0n,
             "USDC": 0n,
             "USDT": 0n,
-          },
-          "Polkadot": {
-            "DOT": 0n,
           },
           "Solana": {
             "SOL": 0n,
@@ -1482,9 +1387,6 @@ exports[`HttpClient > with server > handles cf_get_trading_strategy_limits 1`] =
       "USDC": 10000000,
       "USDT": 10000000,
     },
-    "Polkadot": {
-      "DOT": null,
-    },
     "Solana": {
       "SOL": null,
       "USDC": 10000000,
@@ -1509,9 +1411,6 @@ exports[`HttpClient > with server > handles cf_get_trading_strategy_limits 1`] =
       "USDC": 20000000000,
       "USDT": 20000000000,
     },
-    "Polkadot": {
-      "DOT": null,
-    },
     "Solana": {
       "SOL": null,
       "USDC": 20000000000,
@@ -1527,7 +1426,6 @@ exports[`HttpClient > with server > handles cf_ingress_egress_environment 1`] = 
     "Assethub": 0n,
     "Bitcoin": 0n,
     "Ethereum": 0n,
-    "Polkadot": 0n,
     "Solana": 0n,
   },
   "egress_fees": {
@@ -1548,9 +1446,6 @@ exports[`HttpClient > with server > handles cf_ingress_egress_environment 1`] = 
       "FLIP": 0n,
       "USDC": 0n,
       "USDT": 0n,
-    },
-    "Polkadot": {
-      "DOT": 197450000n,
     },
     "Solana": {
       "SOL": 176n,
@@ -1576,9 +1471,6 @@ exports[`HttpClient > with server > handles cf_ingress_egress_environment 1`] = 
       "USDC": 0n,
       "USDT": 0n,
     },
-    "Polkadot": {
-      "DOT": 197300000n,
-    },
     "Solana": {
       "SOL": 176n,
       "USDC": 0n,
@@ -1602,9 +1494,6 @@ exports[`HttpClient > with server > handles cf_ingress_egress_environment 1`] = 
       "FLIP": 0n,
       "USDC": 0n,
       "USDT": 0n,
-    },
-    "Polkadot": {
-      "DOT": 0n,
     },
     "Solana": {
       "SOL": 0n,
@@ -1630,9 +1519,6 @@ exports[`HttpClient > with server > handles cf_ingress_egress_environment 1`] = 
       "USDC": 1n,
       "USDT": 1n,
     },
-    "Polkadot": {
-      "DOT": 1n,
-    },
     "Solana": {
       "SOL": 1n,
       "USDC": 1n,
@@ -1643,7 +1529,6 @@ exports[`HttpClient > with server > handles cf_ingress_egress_environment 1`] = 
     "Assethub": null,
     "Bitcoin": 2,
     "Ethereum": 2,
-    "Polkadot": null,
     "Solana": 1,
   },
 }
@@ -1941,9 +1826,6 @@ exports[`HttpClient > with server > handles cf_swapping_environment 1`] = `
       "USDC": null,
       "USDT": null,
     },
-    "Polkadot": {
-      "DOT": null,
-    },
     "Solana": {
       "SOL": null,
       "USDC": null,
@@ -1967,9 +1849,6 @@ exports[`HttpClient > with server > handles cf_swapping_environment 1`] = `
       "FLIP": 1000000000000000000000n,
       "USDC": 1000000000n,
       "USDT": 1000000000n,
-    },
-    "Polkadot": {
-      "DOT": 2000000000000n,
     },
     "Solana": {
       "SOL": 5000000000n,
@@ -1997,9 +1876,6 @@ exports[`HttpClient > with server > handles cf_swapping_environment 1`] = `
           "FLIP": 0n,
           "USDC": 0n,
           "USDT": 0n,
-        },
-        "Polkadot": {
-          "DOT": 0n,
         },
         "Solana": {
           "SOL": 0n,
@@ -2030,9 +1906,6 @@ exports[`HttpClient > with server > handles cf_swapping_environment 1`] = `
           "FLIP": 0n,
           "USDC": 0n,
           "USDT": 0n,
-        },
-        "Polkadot": {
-          "DOT": 0n,
         },
         "Solana": {
           "SOL": 0n,
