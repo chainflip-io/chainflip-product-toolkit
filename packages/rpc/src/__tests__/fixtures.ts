@@ -35,7 +35,6 @@ export const supportedAssets = [
   { chain: 'Ethereum', asset: 'FLIP' },
   { chain: 'Ethereum', asset: 'USDC' },
   { chain: 'Ethereum', asset: 'USDT' },
-  { chain: 'Polkadot', asset: 'DOT' },
   { chain: 'Bitcoin', asset: 'BTC' },
   { chain: 'Arbitrum', asset: 'ETH' },
   { chain: 'Arbitrum', asset: 'USDC' },
@@ -46,7 +45,6 @@ export const supportedAssets = [
 export const ingressEgressEnvironment: z.input<typeof cfIngressEgressEnvironment> = {
   minimum_deposit_amounts: {
     Ethereum: { ETH: '0x0', FLIP: '0x0', USDC: '0x0', USDT: '0x0' },
-    Polkadot: { DOT: '0x0' },
     Bitcoin: { BTC: '0x0' },
     Arbitrum: { ETH: '0x0', USDC: '0x0' },
     Solana: { SOL: '0x0', USDC: '0x0' },
@@ -54,7 +52,6 @@ export const ingressEgressEnvironment: z.input<typeof cfIngressEgressEnvironment
   },
   ingress_fees: {
     Ethereum: { ETH: '0x55730', FLIP: '0x0', USDC: '0x0', USDT: '0x0' },
-    Polkadot: { DOT: '0xbc28f20' },
     Bitcoin: { BTC: '0x4e' },
     Arbitrum: { ETH: '0x574b457d400', USDC: '0x231b' },
     Solana: { SOL: '0xb0', USDC: '0x0' },
@@ -62,7 +59,6 @@ export const ingressEgressEnvironment: z.input<typeof cfIngressEgressEnvironment
   },
   egress_fees: {
     Ethereum: { ETH: '0x77a10', FLIP: '0x0', USDC: '0x0', USDT: '0x0' },
-    Polkadot: { DOT: '0xbc4d910' },
     Bitcoin: { BTC: '0xb0' },
     Arbitrum: { ETH: '0x74645ca7000', USDC: '0x2701' },
     Solana: { SOL: '0xb0', USDC: '0x0' },
@@ -70,7 +66,6 @@ export const ingressEgressEnvironment: z.input<typeof cfIngressEgressEnvironment
   },
   witness_safety_margins: {
     Bitcoin: 2,
-    Polkadot: null,
     Ethereum: 2,
     Arbitrum: 1,
     Solana: 1,
@@ -78,7 +73,6 @@ export const ingressEgressEnvironment: z.input<typeof cfIngressEgressEnvironment
   },
   egress_dust_limits: {
     Ethereum: { ETH: '0x1', FLIP: '0x1', USDC: '0x1', USDT: '0x1' },
-    Polkadot: { DOT: '0x1' },
     Bitcoin: { BTC: '0x258' },
     Arbitrum: { ETH: '0x1', USDC: '0x1' },
     Solana: { SOL: '0x1', USDC: '0x1' },
@@ -87,7 +81,6 @@ export const ingressEgressEnvironment: z.input<typeof cfIngressEgressEnvironment
   channel_opening_fees: {
     Arbitrum: '0x0',
     Ethereum: '0x0',
-    Polkadot: '0x0',
     Bitcoin: '0x0',
     Solana: '0x0',
     Assethub: '0x0',
@@ -101,9 +94,6 @@ export const swappingEnvironment: z.input<typeof cfSwappingEnvironment> = {
       FLIP: null,
       USDC: null,
       USDT: null,
-    },
-    Polkadot: {
-      DOT: null,
     },
     Bitcoin: {
       BTC: null,
@@ -132,9 +122,6 @@ export const swappingEnvironment: z.input<typeof cfSwappingEnvironment> = {
       FLIP: '0x3635c9adc5dea00000',
       USDC: '0x3b9aca00',
       USDT: '0x3b9aca00',
-    },
-    Polkadot: {
-      DOT: '0x1d1a94a2000',
     },
     Bitcoin: {
       BTC: '0x1e8480',
@@ -166,9 +153,6 @@ export const swappingEnvironment: z.input<typeof cfSwappingEnvironment> = {
           USDC: 0,
           USDT: 0,
         },
-        Polkadot: {
-          DOT: 0,
-        },
         Bitcoin: {
           BTC: 0,
         },
@@ -199,9 +183,7 @@ export const swappingEnvironment: z.input<typeof cfSwappingEnvironment> = {
           USDC: 0,
           USDT: 0,
         },
-        Polkadot: {
-          DOT: 0,
-        },
+
         Bitcoin: {
           BTC: 0,
         },
@@ -282,32 +264,6 @@ export const poolsEnvironment: z.input<typeof cfPoolsEnvironment> = {
       // @ts-expect-error we want to make sure we ignore this field
       USDC: null,
       USDT: {
-        limit_order_fee_hundredth_pips: 20,
-        range_order_fee_hundredth_pips: 20,
-        range_order_total_fees_earned: {
-          base: '0x0',
-          quote: '0x0',
-        },
-        limit_order_total_fees_earned: {
-          base: '0x0',
-          quote: '0x0',
-        },
-        range_total_swap_inputs: {
-          base: '0x0',
-          quote: '0x0',
-        },
-        limit_total_swap_inputs: {
-          base: '0x0',
-          quote: '0x0',
-        },
-        quote_asset: {
-          chain: 'Ethereum',
-          asset: 'USDC',
-        },
-      },
-    },
-    Polkadot: {
-      DOT: {
         limit_order_fee_hundredth_pips: 20,
         range_order_fee_hundredth_pips: 20,
         range_order_total_fees_earned: {
@@ -547,7 +503,6 @@ export const swapDepositAddress: z.input<typeof brokerRequestSwapDepositAddress>
 
 export const emptyChainAssetMap = {
   Ethereum: { ETH: '0x0', FLIP: '0x0', USDC: '0x0', USDT: '0x0' },
-  Polkadot: { DOT: '0x0' },
   Bitcoin: { BTC: '0x0' },
   Arbitrum: { ETH: '0x0', USDC: '0x0' },
   Solana: { SOL: '0x0', USDC: '0x0' },
@@ -559,7 +514,6 @@ export const unregisteredAccount: z.input<typeof unregistered> = {
   flip_balance: '0x0',
   asset_balances: {
     Ethereum: { ETH: '0x0', FLIP: '0x0', USDC: '0x0', USDT: '0x0' },
-    Polkadot: { DOT: '0x0' },
     Bitcoin: { BTC: '0x0' },
     Arbitrum: { ETH: '0x0', USDC: '0x0' },
     Solana: { SOL: '0x0', USDC: '0x0' },
@@ -577,9 +531,6 @@ export const oldLiquidityProviderAccount: z.input<typeof oldLiquidityProvider> =
       FLIP: '0x152ccd6913bda50ce23e',
       USDC: '0x350eb09309',
       USDT: '0x77358dcb',
-    },
-    Polkadot: {
-      DOT: '0x0',
     },
     Bitcoin: {
       BTC: '0x223f255',
@@ -601,7 +552,6 @@ export const oldLiquidityProviderAccount: z.input<typeof oldLiquidityProvider> =
   role: 'liquidity_provider',
   refund_addresses: {
     Ethereum: '0xe964a5775fd296ce1bd3e05547c59ce86ac077a2',
-    Polkadot: null,
     Bitcoin: 'tb1qlpaajxzlpm6ds0jsg5dgsep56twkzs9ktsc8a9',
     Arbitrum: null,
     Solana: 'FkoiauqRvxTuimbohr2dK3UtwZ5Vak44dtSbK69nm1EY',
@@ -613,9 +563,6 @@ export const oldLiquidityProviderAccount: z.input<typeof oldLiquidityProvider> =
       FLIP: '0x0',
       USDC: '0x2ad11651',
       USDT: '0x0',
-    },
-    Polkadot: {
-      DOT: '0x0',
     },
     Bitcoin: {
       BTC: '0xd568',
@@ -640,9 +587,6 @@ export const oldLiquidityProviderAccount: z.input<typeof oldLiquidityProvider> =
       FLIP: [],
       USDC: [],
       USDT: [],
-    },
-    Polkadot: {
-      DOT: [],
     },
     Bitcoin: {
       BTC: [],
@@ -673,9 +617,6 @@ export const liquidityProviderAccount: z.input<typeof liquidityProvider> = {
       USDC: '0x0',
       USDT: '0x0',
     },
-    Polkadot: {
-      DOT: '0x0',
-    },
     Bitcoin: {
       BTC: '0x4d82',
     },
@@ -698,7 +639,6 @@ export const liquidityProviderAccount: z.input<typeof liquidityProvider> = {
   role: 'liquidity_provider',
   refund_addresses: {
     Ethereum: '0xacd7c0481fc71dce9e3e8bd4cca5828ce8302629',
-    Polkadot: null,
     Bitcoin: 'bc1qqt3juqef9azhd0zeuamu9c30pg5xdllvmks2ja',
     Arbitrum: null,
     Solana: '7zLEfU3nQKqnfrN2A5yNEiFd1Vt9D7maVaoSAV8invMT',
@@ -710,9 +650,6 @@ export const liquidityProviderAccount: z.input<typeof liquidityProvider> = {
       FLIP: '0x0',
       USDC: '0x0',
       USDT: '0x0',
-    },
-    Polkadot: {
-      DOT: '0x0',
     },
     Bitcoin: {
       BTC: '0x0',
@@ -737,9 +674,6 @@ export const liquidityProviderAccount: z.input<typeof liquidityProvider> = {
       FLIP: [],
       USDC: [],
       USDT: [],
-    },
-    Polkadot: {
-      DOT: [],
     },
     Bitcoin: {
       BTC: [
@@ -804,7 +738,6 @@ export const brokerAccount: z.input<typeof broker> = {
       USDC: '0x7293c1a9',
       USDT: '0x2b7b6186',
     },
-    Polkadot: { DOT: '0x48b7018d8' },
     Bitcoin: { BTC: '0xbcbf36' },
     Arbitrum: { ETH: 0, USDC: 0 },
     Solana: { SOL: 0, USDC: 0 },
@@ -829,9 +762,6 @@ export const brokerAccountNoAffiliates: z.input<typeof broker> = {
       FLIP: '0x2233cf5b9f41af4fe',
       USDC: '0x7293c1a9',
       USDT: '0x2b7b6186',
-    },
-    Polkadot: {
-      DOT: '0x48b7018d8',
     },
     Bitcoin: {
       BTC: '0xbcbf36',
@@ -1202,9 +1132,6 @@ export const tradingStrategiesLimits: z.input<typeof cfGetTradingStrategyLimits>
       USDC: 20000000000,
       USDT: 20000000000,
     },
-    Polkadot: {
-      DOT: null,
-    },
     Bitcoin: {
       BTC: null,
     },
@@ -1229,9 +1156,6 @@ export const tradingStrategiesLimits: z.input<typeof cfGetTradingStrategyLimits>
       USDC: 10000000,
       USDT: 10000000,
     },
-    Polkadot: {
-      DOT: null,
-    },
     Bitcoin: {
       BTC: null,
     },
@@ -1255,7 +1179,6 @@ export const availablePools: CfAvailablePools = [
   { base: { chain: 'Ethereum', asset: 'ETH' }, quote: { chain: 'Ethereum', asset: 'USDC' } },
   { base: { chain: 'Arbitrum', asset: 'USDC' }, quote: { chain: 'Ethereum', asset: 'USDC' } },
   { base: { chain: 'Solana', asset: 'USDC' }, quote: { chain: 'Ethereum', asset: 'USDC' } },
-  { base: { chain: 'Polkadot', asset: 'DOT' }, quote: { chain: 'Ethereum', asset: 'USDC' } },
   { base: { chain: 'Ethereum', asset: 'FLIP' }, quote: { chain: 'Ethereum', asset: 'USDC' } },
   { base: { chain: 'Arbitrum', asset: 'ETH' }, quote: { chain: 'Ethereum', asset: 'USDC' } },
   { base: { chain: 'Bitcoin', asset: 'BTC' }, quote: { chain: 'Ethereum', asset: 'USDC' } },
