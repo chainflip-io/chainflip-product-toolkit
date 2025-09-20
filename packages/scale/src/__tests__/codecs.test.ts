@@ -29,6 +29,7 @@ describe(createVaultParamsDecoder, () => {
             "numberOfChunks": 16,
           },
           "refundParams": {
+            "maxOraclePriceSlippage": null,
             "minPriceX128": "6616846606368726564647178815965546002365481543",
             "refundAddress": "3yKDHJgzS2GbZB9qruoadRYtq8597HZifnRju7fHpdRC",
             "retryDurationBlocks": 100,
@@ -59,6 +60,7 @@ describe(createVaultParamsDecoder, () => {
           "ccmAdditionalData": "0x007417da8b99d7748127a76b03d61fee69c80dfef73ad2d5503737beedc5a9ed48000074db60885e7039415f358e9391e67bf7d61e728ae13c225763156419d64d11d8",
           "dcaParams": null,
           "refundParams": {
+            "maxOraclePriceSlippage": null,
             "minPriceX128": "6616846606368726564647178815965546002365481543",
             "refundAddress": "3yKDHJgzS2GbZB9qruoadRYtq8597HZifnRju7fHpdRC",
             "retryDurationBlocks": 100,
@@ -113,6 +115,7 @@ describe(createVaultParamsDecoder, () => {
           },
           "dcaParams": null,
           "refundParams": {
+            "maxOraclePriceSlippage": null,
             "minPriceX128": "6616846606368726564647178815965546002365481543",
             "refundAddress": "3yKDHJgzS2GbZB9qruoadRYtq8597HZifnRju7fHpdRC",
             "retryDurationBlocks": 100,
