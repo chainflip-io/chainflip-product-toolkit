@@ -4,6 +4,14 @@ export type HexString = `0x${string}`;
 
 export type Bytelike = Uint8Array | number[] | HexString;
 
+type CcmMetadata<Data = never> = {
+  channelMetadata: {
+    message: HexString;
+    gasBudget: HexString;
+  };
+  ccmAdditionalData: Data;
+};
+
 // https://github.com/chainflip-io/chainflip-backend/blob/f9b281c1fa4862da0e8a9007214afa96de5eb6f1/api/bin/chainflip-ingress-egress-tracker/src/witnessing/state_chain.rs#L139
 export type VaultSwapData<Broker, CcmData = never> = {
   amount: bigint;
@@ -23,17 +31,7 @@ export type VaultSwapData<Broker, CcmData = never> = {
     minPrice: bigint;
     retryDuration: number;
     maxOraclePriceSlippage: number | null;
-    refundCcmMetadata: {
-      message: HexString;
-      gasBudget: bigint;
-      additionalData: HexString;
-    } | null;
+    refundCcmMetadata: CcmMetadata<CcmData> | null;
   };
-  ccmDepositMetadata: {
-    channelMetadata: {
-      message: HexString;
-      gasBudget: HexString;
-    };
-    ccmAdditionalData: CcmData;
-  } | null;
+  ccmDepositMetadata: CcmMetadata<CcmData> | null;
 };
