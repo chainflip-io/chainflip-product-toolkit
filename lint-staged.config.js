@@ -31,12 +31,17 @@ export default function lint(files) {
   );
 
   if (tsFiles.length) {
-    commands.push(`pnpm prettier --check ${tsFiles.join(' ')}`);
     if (micromatch(files, '**/eslint.config.js').length) {
       commands.push('pnpm eslint --max-warnings 0 --no-warn-ignored .');
     } else {
       commands.push(`pnpm eslint --max-warnings 0 --no-warn-ignored ${tsFiles.join(' ')}`);
     }
+  }
+
+  const prettierFiles = tsFiles.concat(micromatch(files, '**/*.js(on)?'));
+
+  if (prettierFiles.length) {
+    commands.push(`pnpm prettier --check ${prettierFiles.join(' ')}`);
   }
 
   return commands;
