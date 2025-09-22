@@ -23,6 +23,11 @@ export type VaultSwapData<Broker, CcmData = never> = {
     minPrice: bigint;
     retryDuration: number;
     maxOraclePriceSlippage: number | null;
+    refundCcmMetadata: {
+      message: HexString;
+      gasBudget: bigint;
+      additionalData: HexString;
+    } | null;
   };
   ccmDepositMetadata: {
     channelMetadata: {
