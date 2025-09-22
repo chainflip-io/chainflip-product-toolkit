@@ -124,9 +124,14 @@ const swapParams = z
         refundAddress: data.refundParams.refundAddress,
         minPrice: BigInt(data.refundParams.minPriceX128),
         retryDuration: data.refundParams.retryDurationBlocks,
-        // TODO: update schema for new network version
-        maxOraclePriceSlippage: null,
-        refundCcmMetadata: null,
+        maxOraclePriceSlippage: data.refundParams.maxOraclePriceSlippage,
+        refundCcmMetadata: data.refundParams.refundCcmMetadata && {
+          channelMetadata: {
+            message: data.refundParams.refundCcmMetadata.message,
+            gasBudget: hexEncodeNumber(data.refundParams.refundCcmMetadata.gasBudget),
+          },
+          ccmAdditionalData: data.refundParams.refundCcmMetadata.additionalData,
+        },
       },
     };
   });

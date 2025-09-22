@@ -210,8 +210,8 @@ importers:
   packages/solana:
     dependencies:
       '@chainflip/scale':
-        specifier: ^1.8.0
-        version: 1.8.0
+        specifier: ^1.11.0
+        version: 1.11.0
       '@chainflip/utils':
         specifier: ^0.8.22
         version: 0.8.22
@@ -304,11 +304,8 @@ packages:
   '@chainflip/rpc@1.9.3':
     resolution: {integrity: sha512-vmOcq0ZaF+GcN1Ikb3ExnJWlZ2pHKFS++r8a1FfYa4nCzV/Xt8Hg9rP8g30VJNv13pZ21kXcchd1/v3EFJfgqw==}
 
-  '@chainflip/scale@1.8.0':
-    resolution: {integrity: sha512-66bT2DQi0kNFZRva0phBuMWCWKamOyfROlKovxcBd6wzZVGFxVqgi73iG1nExaUPlOLJnYc8gQ/blwHidgjvrg==}
-
-  '@chainflip/utils@0.6.0':
-    resolution: {integrity: sha512-ZwyNKv3FVVJw5aOcRf/4rTxCclP+prerxPnTGBrFcBYEYSrPlyx4eI1dc7J35xmKD2yq+vQgwNjCx1h6oJuoPA==}
+  '@chainflip/scale@1.11.0':
+    resolution: {integrity: sha512-gLs2pARutz6JJSKth92TYQEHVWvwpavWNUARB9626t+QxlparHyL10t9XibD2X1sr+GLXWKj2q5qXOSGU8CICA==}
 
   '@chainflip/utils@0.8.18':
     resolution: {integrity: sha512-qaKtasZSfCcEICR3Bo6IUabOkBsmldsKmDbGTRr0WBQlUyOA2SNwZRN9EP73ZQofWyI3luRN2tFGS54O3bYazQ==}
@@ -3572,16 +3569,10 @@ snapshots:
       '@chainflip/utils': 0.8.2
       zod: 3.25.75
 
-  '@chainflip/scale@1.8.0':
+  '@chainflip/scale@1.11.0':
     dependencies:
-      '@chainflip/utils': 0.6.0
+      '@chainflip/utils': 0.8.22
       scale-ts: 1.6.1
-
-  '@chainflip/utils@0.6.0':
-    dependencies:
-      '@date-fns/utc': 2.1.1
-      bignumber.js: 9.3.1
-      date-fns: 4.1.0
 
   '@chainflip/utils@0.8.18':
     dependencies:
