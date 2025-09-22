@@ -108,8 +108,8 @@ importers:
   packages/delegation:
     dependencies:
       '@chainflip/utils':
-        specifier: ^0.8.18
-        version: 0.8.18
+        specifier: ^0.8.22
+        version: 0.8.22
       scale-ts:
         specifier: ^1.6.1
         version: 1.6.1
@@ -197,8 +197,8 @@ importers:
   packages/scale:
     dependencies:
       '@chainflip/utils':
-        specifier: ^0.8.18
-        version: 0.8.18
+        specifier: ^0.8.22
+        version: 0.8.22
       scale-ts:
         specifier: ^1.6.1
         version: 1.6.1
@@ -210,11 +210,11 @@ importers:
   packages/solana:
     dependencies:
       '@chainflip/scale':
-        specifier: ^1.8.0
-        version: 1.8.0
+        specifier: link:../scale
+        version: link:../scale
       '@chainflip/utils':
-        specifier: 0.8.18
-        version: 0.8.18
+        specifier: ^0.8.22
+        version: 0.8.22
       '@coral-xyz/anchor':
         specifier: ^0.31.1
         version: 0.31.1(bufferutil@4.0.9)(typescript@5.9.2)(utf-8-validate@5.0.10)
@@ -238,8 +238,8 @@ importers:
   packages/testing:
     dependencies:
       '@chainflip/utils':
-        specifier: ^0.8.18
-        version: 0.8.18
+        specifier: ^0.8.22
+        version: 0.8.22
       vitest:
         specifier: 3.1.1
         version: 3.1.1(@types/node@24.5.2)(@vitest/ui@3.1.1)(tsx@4.20.5)(yaml@2.8.1)
@@ -304,17 +304,14 @@ packages:
   '@chainflip/rpc@1.9.3':
     resolution: {integrity: sha512-vmOcq0ZaF+GcN1Ikb3ExnJWlZ2pHKFS++r8a1FfYa4nCzV/Xt8Hg9rP8g30VJNv13pZ21kXcchd1/v3EFJfgqw==}
 
-  '@chainflip/scale@1.8.0':
-    resolution: {integrity: sha512-66bT2DQi0kNFZRva0phBuMWCWKamOyfROlKovxcBd6wzZVGFxVqgi73iG1nExaUPlOLJnYc8gQ/blwHidgjvrg==}
-
-  '@chainflip/utils@0.6.0':
-    resolution: {integrity: sha512-ZwyNKv3FVVJw5aOcRf/4rTxCclP+prerxPnTGBrFcBYEYSrPlyx4eI1dc7J35xmKD2yq+vQgwNjCx1h6oJuoPA==}
-
   '@chainflip/utils@0.8.18':
     resolution: {integrity: sha512-qaKtasZSfCcEICR3Bo6IUabOkBsmldsKmDbGTRr0WBQlUyOA2SNwZRN9EP73ZQofWyI3luRN2tFGS54O3bYazQ==}
 
   '@chainflip/utils@0.8.2':
     resolution: {integrity: sha512-wVWSdd1i8+RY4IPqCLdsr/b2Y5cGTzSv6kE/nKhFhcUPELUO0YTRoVote/mUQ/Kd9MiQFaDiS1AEtcPZ0H2W6w==}
+
+  '@chainflip/utils@0.8.22':
+    resolution: {integrity: sha512-VVerCmYtxW6rk3HCKnJzYAC60kf8Xv66Sp7ittMzpuJ9kzu+IeycY6lHv/I7GJnagy3zeuL6PNGWqdAMpuF+TQ==}
 
   '@coral-xyz/anchor-errors@0.31.1':
     resolution: {integrity: sha512-NhNEku4F3zzUSBtrYz84FzYWm48+9OvmT1Hhnwr6GnPQry2dsEqH/ti/7ASjjpoFTWRnPXrjAIT1qM6Isop+LQ==}
@@ -3569,17 +3566,6 @@ snapshots:
       '@chainflip/utils': 0.8.2
       zod: 3.25.75
 
-  '@chainflip/scale@1.8.0':
-    dependencies:
-      '@chainflip/utils': 0.6.0
-      scale-ts: 1.6.1
-
-  '@chainflip/utils@0.6.0':
-    dependencies:
-      '@date-fns/utc': 2.1.1
-      bignumber.js: 9.3.1
-      date-fns: 4.1.0
-
   '@chainflip/utils@0.8.18':
     dependencies:
       '@date-fns/utc': 2.1.1
@@ -3587,6 +3573,12 @@ snapshots:
       date-fns: 4.1.0
 
   '@chainflip/utils@0.8.2':
+    dependencies:
+      '@date-fns/utc': 2.1.1
+      bignumber.js: 9.3.1
+      date-fns: 4.1.0
+
+  '@chainflip/utils@0.8.22':
     dependencies:
       '@date-fns/utc': 2.1.1
       bignumber.js: 9.3.1

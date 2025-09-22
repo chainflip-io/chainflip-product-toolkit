@@ -30,8 +30,6 @@ const refundParamsWithCcmRefund = <T>(refundAddressCodec: Codec<T>) =>
           gasBudget: u128,
           additionalData: Bytes(),
         }),
-        sourceChain: u32,
-        sourceAddress: Option(Bytes(32)),
       }),
     ),
     maxOraclePriceSlippage: Option(u16),
@@ -134,6 +132,11 @@ type DecodedParams<Address, CcmAdditionalData> = {
     refundAddress: Address;
     minPriceX128: string;
     maxOraclePriceSlippage: number | null;
+    refundCcmMetadata: {
+      message: `0x${string}`;
+      gasBudget: bigint;
+      additionalData: CcmAdditionalData;
+    } | null;
   };
   dcaParams: { numberOfChunks: number; chunkIntervalBlocks: number } | null;
   boostFee: number;
@@ -199,6 +202,21 @@ export function createVaultParamsDecoder<T, U, V>(
           maxOraclePriceSlippage:
             'maxOraclePriceSlippage' in vaultSwapParameters.refundParams
               ? (vaultSwapParameters.refundParams.maxOraclePriceSlippage ?? null)
+              : null,
+          refundCcmMetadata:
+            'refundCcmMetadata' in vaultSwapParameters.refundParams &&
+            vaultSwapParameters.refundParams.refundCcmMetadata
+              ? {
+                  message: bytesToHex(
+                    vaultSwapParameters.refundParams.refundCcmMetadata.channelMetadata.message,
+                  ),
+                  gasBudget:
+                    vaultSwapParameters.refundParams.refundCcmMetadata.channelMetadata.gasBudget,
+                  additionalData: (decodeAdditionalData ?? bytesToHex)(
+                    vaultSwapParameters.refundParams.refundCcmMetadata.channelMetadata
+                      .additionalData,
+                  ),
+                }
               : null,
         },
         dcaParams: vaultSwapParameters.dcaParams
