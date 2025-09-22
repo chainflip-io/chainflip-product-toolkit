@@ -95,6 +95,7 @@ describe('swapSchema', () => {
           "maxOraclePriceSlippage": null,
           "minPrice": 6616846606368726564647178815965546002365481543n,
           "refundAddress": "3yKDHJgzS2GbZB9qruoadRYtq8597HZifnRju7fHpdRC",
+          "refundCcmMetadata": null,
           "retryDuration": 100,
         },
       }

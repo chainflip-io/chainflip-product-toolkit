@@ -126,6 +126,7 @@ const swapParams = z
         retryDuration: data.refundParams.retryDurationBlocks,
         // TODO: update schema for new network version
         maxOraclePriceSlippage: null,
+        refundCcmMetadata: null,
       },
     };
   });
