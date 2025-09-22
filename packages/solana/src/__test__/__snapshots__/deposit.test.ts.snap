@@ -335,3 +335,66 @@ exports[`findVaultSwapData > handles swap native for Sol on mainnet 1`] = `
   },
 }
 `;
+
+exports[`findVaultSwapData > returns a vault swap with refund ccm metadata 1`] = `
+{
+  "affiliateFees": [],
+  "amount": 1500000000n,
+  "brokerFee": {
+    "account": "cFMTNSQQVfBo2HqtekvhLPfZY764kuJDVFG1EvnnDGYxc3LRW",
+    "commissionBps": 0,
+  },
+  "ccmDepositMetadata": null,
+  "dcaParams": null,
+  "depositChainBlockHeight": 409578228,
+  "destinationAddress": "0xa56a6be23b6cf39d9448ff6e897c29c41c8fbdff",
+  "inputAsset": "Sol",
+  "maxBoostFee": 0,
+  "outputAsset": "Eth",
+  "refundParams": {
+    "maxOraclePriceSlippage": 100,
+    "minPrice": 2125250318299970061068650399067280319814532893n,
+    "refundAddress": "3yKDHJgzS2GbZB9qruoadRYtq8597HZifnRju7fHpdRC",
+    "refundCcmMetadata": {
+      "ccmAdditionalData": {
+        "additionalAccounts": [
+          {
+            "isWritable": true,
+            "pubkey": "CG23G5EKxz3fvWxUmt79ZtqtdY3sPUqhQbTYidXUsUKq",
+          },
+          {
+            "isWritable": false,
+            "pubkey": "6gyJoKUvEmwDG6qQn7CHTUaa1HX8mJExd1xNo9zq5ADi",
+          },
+          {
+            "isWritable": true,
+            "pubkey": "6afdKAejVqUMa8aJZytP6HLYBecfqzoP5DBbb1kjkxPs",
+          },
+          {
+            "isWritable": true,
+            "pubkey": "4DFeg4fgB1Mq9iaAJZMvEigE7xcpxKr5gyrtPCRfg7i9",
+          },
+          {
+            "isWritable": true,
+            "pubkey": "HMBNi6UjkxCmisyPPU9zv54C2YhvbbfyZgnTFAtBHSYA",
+          },
+          {
+            "isWritable": false,
+            "pubkey": "HgqSroGPb94ZxuB61tPv9nCB47NocUCK2DTPNjwGG8bR",
+          },
+        ],
+        "cfReceiver": {
+          "isWritable": false,
+          "pubkey": "8pBPaVfTAcjLeNfC187Fkvi9b1XEFhRNJ95BQXXVksmH",
+        },
+        "fallbackAddress": "4i3kY7VN9MBCjp2scd5455MBbWSYx2rZ1KKcaY69H4ja",
+      },
+      "channelMetadata": {
+        "gasBudget": "0xc350",
+        "message": "0xdeadbeef",
+      },
+    },
+    "retryDuration": 100,
+  },
+}
+`;

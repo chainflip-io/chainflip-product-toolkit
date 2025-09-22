@@ -29,6 +29,7 @@ import solusdc2 from './fixtures/solusdc2.json';
 import { swapNative } from './fixtures/swapNative';
 import swapTokenDevnet from './fixtures/swapTokenDevnet.json';
 import unsorted from './fixtures/unsorted.json';
+import vaultSwapCcmRefund from './fixtures/vaultSwapCcmRefund.json';
 
 const mockFetchWithResponses = (responses: { jsonrpc: string; result: unknown; id: string }[]) =>
   responses.reduce(
@@ -582,4 +583,15 @@ describe(findVaultSwapData, () => {
       expect(data).toMatchSnapshot();
     },
   );
+
+  it('returns a vault swap with refund ccm metadata', async () => {
+    mockFetchWithResponses([vaultSwapCcmRefund]);
+
+    const data = await findVaultSwapData(
+      'https://black-summer-breeze.solana-devnet.quiknode.pro/ae64b7887c3c22fc2b3080740dc3434322819f20',
+      '3BUTxaA3YE8dMcUPgackgSpqPKcgtCaSXjFQbMuFY6jK3xsQq6nJLo9Rnbag6rHKcg47tSRkNabfeT6roP6jAwu2',
+    );
+
+    expect(data).toMatchSnapshot();
+  });
 });
