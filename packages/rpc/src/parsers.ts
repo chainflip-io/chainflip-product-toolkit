@@ -10,7 +10,9 @@ export const hexString = z.string().refine(isHex, { message: 'Invalid hex string
 
 export const u256 = hexString.transform((value) => BigInt(value));
 
-export const numberOrHex = z.union([z.number().transform((n) => BigInt(n)), u256]);
+export const numericString = z.string().regex(/^[0-9]+$/);
+
+export const numberOrHex = z.union([z.number(), u256, numericString]).transform((n) => BigInt(n));
 
 const chainAssetMapFactory = <Z extends z.ZodTypeAny>(parser: Z, _defaultValue: z.input<Z>) =>
   z
@@ -800,3 +802,27 @@ export const cfLendingPools = z.array(
     }),
   }),
 );
+
+export const cfLendingConfig = z.object({
+  ltv_thresholds: z.object({
+    minimum: numberOrHex,
+    target: numberOrHex,
+    topup: numberOrHex,
+    soft_liquidation: numberOrHex,
+    soft_liquidation_abort: numberOrHex,
+    hard_liquidation: numberOrHex,
+    hard_liquidation_abort: numberOrHex,
+  }),
+  network_fee_contributions: z.object({
+    from_interest: z.number(),
+    from_origination_fee: z.number(),
+    from_liquidation_fee: z.number(),
+  }),
+  fee_swap_interval_blocks: z.number(),
+  interest_payment_interval_blocks: z.number(),
+  fee_swap_threshold_usd: numberOrHex,
+  liquidation_swap_chunk_size_usd: numberOrHex,
+  soft_liquidation_max_oracle_slippage: z.number(),
+  hard_liquidation_max_oracle_slippage: z.number(),
+  fee_swap_max_oracle_slippage: z.number(),
+});

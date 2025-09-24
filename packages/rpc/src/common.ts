@@ -40,6 +40,7 @@ import {
   hexString,
   cfOraclePrices,
   cfLendingPools,
+  cfLendingConfig,
 } from './parsers';
 
 type Nullish<T> = T | null | undefined;
@@ -233,6 +234,7 @@ export type RpcRequest = WithHash<{
   cf_safe_mode_statuses: [];
   cf_oracle_prices: [oraclePricePair?: Nullish<[PriceAsset, PriceAsset]>];
   cf_lending_pools: [asset?: UncheckedAssetAndChain];
+  cf_lending_config: [];
 }> & {
   chain_getBlockHash: [blockHeight?: number];
 };
@@ -279,6 +281,7 @@ export const rpcResult = {
   cf_encode_cf_parameters: hexString,
   cf_oracle_prices: cfOraclePrices,
   cf_lending_pools: cfLendingPools,
+  cf_lending_config: cfLendingConfig,
 } as const satisfies { [K in keyof RpcRequest]: z.ZodTypeAny };
 
 export type RpcMethod = keyof RpcRequest;

@@ -13,11 +13,13 @@ import {
   cfAccountInfo,
   cfOraclePrices,
   cfLendingPools,
+  cfLendingConfig,
 } from '../parsers';
 import {
   cfAccountInfoOperator,
   cfOraclePrice,
   emptyChainAssetMap,
+  lendingConfig,
   lendingPools,
   liquidityProviderAccount,
   oldLiquidityProviderAccount,
@@ -1291,6 +1293,36 @@ describe('parsers', () => {
             "utilisation_rate": 10000,
           },
         ]
+      `);
+    });
+  });
+  describe('cfLendingConfig', () => {
+    it('parses the cfLendingConfig response', () => {
+      const result = cfLendingConfig.parse(lendingConfig);
+      expect(result).toMatchInlineSnapshot(`
+        {
+          "fee_swap_interval_blocks": 10,
+          "fee_swap_max_oracle_slippage": 50,
+          "fee_swap_threshold_usd": 20000000n,
+          "hard_liquidation_max_oracle_slippage": 500,
+          "interest_payment_interval_blocks": 10,
+          "liquidation_swap_chunk_size_usd": 10000000000n,
+          "ltv_thresholds": {
+            "hard_liquidation": 950000000n,
+            "hard_liquidation_abort": 930000000n,
+            "minimum": 100000000n,
+            "soft_liquidation": 900000000n,
+            "soft_liquidation_abort": 880000000n,
+            "target": 800000000n,
+            "topup": 850000000n,
+          },
+          "network_fee_contributions": {
+            "from_interest": 20,
+            "from_liquidation_fee": 20,
+            "from_origination_fee": 20,
+          },
+          "soft_liquidation_max_oracle_slippage": 50,
+        }
       `);
     });
   });
