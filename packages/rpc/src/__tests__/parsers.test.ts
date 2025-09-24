@@ -1191,9 +1191,6 @@ describe('parsers', () => {
               "USDC": 0n,
               "USDT": 0n,
             },
-            "Polkadot": {
-              "DOT": 0n,
-            },
             "Solana": {
               "SOL": 0n,
               "USDC": 0n,

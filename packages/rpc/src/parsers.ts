@@ -13,34 +13,40 @@ export const u256 = hexString.transform((value) => BigInt(value));
 export const numberOrHex = z.union([z.number().transform((n) => BigInt(n)), u256]);
 
 const chainAssetMapFactory = <Z extends z.ZodTypeAny>(parser: Z, _defaultValue: z.input<Z>) =>
-  z.object({
-    Bitcoin: z.object({ BTC: parser }),
-    Ethereum: z.object({ ETH: parser, USDC: parser, FLIP: parser, USDT: parser }),
-    Polkadot: z.object({ DOT: parser }),
-    Arbitrum: z.object({ ETH: parser, USDC: parser }),
-    Solana: z.object({ SOL: parser, USDC: parser }),
-    Assethub: z.object({ DOT: parser, USDC: parser, USDT: parser }),
-  });
+  z
+    .object({
+      Bitcoin: z.object({ BTC: parser }),
+      Ethereum: z.object({ ETH: parser, USDC: parser, FLIP: parser, USDT: parser }),
+      Polkadot: z.object({ DOT: parser }),
+      Arbitrum: z.object({ ETH: parser, USDC: parser }),
+      Solana: z.object({ SOL: parser, USDC: parser }),
+      Assethub: z.object({ DOT: parser, USDC: parser, USDT: parser }),
+    })
+    .omit({ Polkadot: true }); // TODO(1.12): remove polkadot all together from parser
 
 const chainBaseAssetMapFactory = <Z extends z.ZodTypeAny>(parser: Z, _defaultValue: z.input<Z>) =>
-  z.object({
-    Bitcoin: z.object({ BTC: parser }),
-    Ethereum: z.object({ ETH: parser, FLIP: parser, USDT: parser }),
-    Polkadot: z.object({ DOT: parser }),
-    Arbitrum: z.object({ ETH: parser, USDC: parser }),
-    Solana: z.object({ SOL: parser, USDC: parser }),
-    Assethub: z.object({ DOT: parser, USDC: parser, USDT: parser }),
-  });
+  z
+    .object({
+      Bitcoin: z.object({ BTC: parser }),
+      Ethereum: z.object({ ETH: parser, FLIP: parser, USDT: parser }),
+      Polkadot: z.object({ DOT: parser }),
+      Arbitrum: z.object({ ETH: parser, USDC: parser }),
+      Solana: z.object({ SOL: parser, USDC: parser }),
+      Assethub: z.object({ DOT: parser, USDC: parser, USDT: parser }),
+    })
+    .omit({ Polkadot: true }); // TODO(1.12): remove polkadot all together from parser
 
 const chainMapFactory = <Z extends z.ZodTypeAny>(parser: Z, _defaultValue: z.input<Z>) =>
-  z.object({
-    Bitcoin: parser,
-    Ethereum: parser,
-    Polkadot: parser,
-    Arbitrum: parser,
-    Solana: parser,
-    Assethub: parser,
-  });
+  z
+    .object({
+      Bitcoin: parser,
+      Ethereum: parser,
+      Polkadot: parser,
+      Arbitrum: parser,
+      Solana: parser,
+      Assethub: parser,
+    })
+    .omit({ Polkadot: true }); // TODO(1.12): remove polkadot all together from parser
 
 const rpcAssetSchema = z.union([
   z.object({ chain: z.literal('Bitcoin'), asset: z.literal('BTC') }),
