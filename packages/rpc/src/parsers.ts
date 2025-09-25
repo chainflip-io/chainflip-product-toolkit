@@ -644,8 +644,12 @@ export const cfGetTradingStrategyLimits = z.object({
 export const cfAvailablePools = z.array(
   z.object({
     base: rpcAssetSchema.refine(
-      (a): a is Exclude<AssetAndChain, { chain: 'Ethereum'; asset: 'USDC' }> =>
-        a.chain !== 'Ethereum' || a.asset !== 'USDC',
+      (
+        a,
+      ): a is Exclude<
+        AssetAndChain,
+        { chain: 'Ethereum'; asset: 'USDC' } | { chain: 'Polkadot'; asset: 'DOT' }
+      > => a.chain !== 'Ethereum' || a.asset !== 'USDC',
     ),
     quote: z.object({ chain: z.literal('Ethereum'), asset: z.literal('USDC') }),
   }),
