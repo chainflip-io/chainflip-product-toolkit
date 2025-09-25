@@ -68,7 +68,10 @@ export type ChainAssetMap<T> = {
 
 export type BaseChainAssetMap<T> = {
   [C in Exclude<ChainflipChain, 'Polkadot'>]: {
-    [A in BaseChainflipAsset as Extract<(typeof assetConstants)[A], { chain: C }>['symbol']]: T;
+    [A in Exclude<BaseChainflipAsset, 'Dot'> as Extract<
+      (typeof assetConstants)[A],
+      { chain: C }
+    >['symbol']]: T;
   };
 };
 
