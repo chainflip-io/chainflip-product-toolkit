@@ -57,34 +57,35 @@ export type ChainflipNetwork = (typeof chainflipNetworks)[number];
 export const addressTypes = ['Eth', 'Btc', 'Dot', 'Arb', 'Sol', 'Hub'] as const;
 export type AddressType = (typeof addressTypes)[number];
 
-export type AssetOfChain<C extends ChainflipChain> = (typeof chainConstants)[C]['assets'][number];
+export type AssetOfChain<C extends Exclude<ChainflipChain, 'Polkadot'>> =
+  (typeof chainConstants)[C]['assets'][number];
 
 export type ChainAssetMap<T> = {
-  [C in ChainflipChain]: {
+  [C in Exclude<ChainflipChain, 'Polkadot'>]: {
     [A in AssetOfChain<C>]: T;
   };
 };
 
 export type BaseChainAssetMap<T> = {
-  [C in ChainflipChain]: {
+  [C in Exclude<ChainflipChain, 'Polkadot'>]: {
     [A in BaseChainflipAsset as Extract<(typeof assetConstants)[A], { chain: C }>['symbol']]: T;
   };
 };
 
 export type AssetAndChain = {
-  [C in ChainflipChain]: {
+  [C in Exclude<ChainflipChain, 'Polkadot'>]: {
     [A in keyof ChainAssetMap<unknown>[C]]: { chain: C; asset: A };
   }[keyof ChainAssetMap<unknown>[C]];
-}[ChainflipChain];
+}[Exclude<ChainflipChain, 'Polkadot'>];
 
 export type BaseAssetAndChain = Exclude<AssetAndChain, { chain: 'Ethereum'; asset: 'USDC' }>;
 
 export type ChainMap<T> = {
-  [C in ChainflipChain]: T;
+  [C in Exclude<ChainflipChain, 'Polkadot'>]: T;
 };
 
 export type InternalAssetMap<T> = {
-  [A in ChainflipAsset]: T;
+  [A in Exclude<ChainflipAsset, 'Dot'>]: T;
 };
 
 export type UncheckedAssetAndChain = {
@@ -107,7 +108,7 @@ export function readAssetValue<T>(
   map: ChainAssetMap<T> | BaseChainAssetMap<T>,
   asset: ChainflipAsset | BaseChainflipAsset,
 ): T {
-  const chainValues = map[assetConstants[asset].chain];
+  const chainValues = map[assetConstants[asset].chain as Exclude<ChainflipChain, 'Polkadot'>];
   return chainValues[assetConstants[asset].symbol as keyof typeof chainValues];
 }
 
@@ -196,7 +197,14 @@ export const assetConstants = {
   /** @deprecated use `symbol` instead */
   rpcAsset: AssetSymbol;
   decimals: number;
-}>;
+}> & {
+  Dot: {
+    chain: 'Polkadot';
+    symbol: 'DOT';
+    rpcAsset: 'DOT';
+    decimals: 10;
+  };
+};
 
 export const chainConstants = {
   Ethereum: {
@@ -255,14 +263,22 @@ export const chainConstants = {
   gasAsset: ChainflipAsset;
   addressType: AddressType;
   blockTimeSeconds: number;
-}>;
+}> & {
+  Polkadot: {
+    chainflipAssets: ['Dot'];
+    assets: ['DOT'];
+    rpcAssets: ['DOT'];
+    gasAsset: 'Dot';
+    addressType: 'Dot';
+    blockTimeSeconds: 6;
+  };
+};
 
 export const internalAssetToRpcAsset: InternalAssetMap<AssetAndChain> = {
   Eth: { chain: 'Ethereum', asset: 'ETH' },
   Flip: { chain: 'Ethereum', asset: 'FLIP' },
   Usdc: { chain: 'Ethereum', asset: 'USDC' },
   Usdt: { chain: 'Ethereum', asset: 'USDT' },
-  Dot: { chain: 'Polkadot', asset: 'DOT' },
   Btc: { chain: 'Bitcoin', asset: 'BTC' },
   ArbUsdc: { chain: 'Arbitrum', asset: 'USDC' },
   ArbEth: { chain: 'Arbitrum', asset: 'ETH' },
@@ -275,7 +291,6 @@ export const internalAssetToRpcAsset: InternalAssetMap<AssetAndChain> = {
 
 export const chainContractId: ChainMap<number> = {
   Ethereum: 1,
-  Polkadot: 2,
   Bitcoin: 3,
   Arbitrum: 4,
   Solana: 5,
@@ -287,7 +302,6 @@ export const assetContractId: InternalAssetMap<number> = {
   Flip: 2,
   Usdc: 3,
   Usdt: 8,
-  Dot: 4,
   Btc: 5,
   ArbEth: 6,
   ArbUsdc: 7,
@@ -317,9 +331,6 @@ export function getInternalAsset(asset: UncheckedAssetAndChain, assert = true) {
     Bitcoin: {
       BTC: 'Btc',
     },
-    Polkadot: {
-      DOT: 'Dot',
-    },
     Arbitrum: {
       USDC: 'ArbUsdc',
       ETH: 'ArbEth',
@@ -335,7 +346,7 @@ export function getInternalAsset(asset: UncheckedAssetAndChain, assert = true) {
     },
   };
 
-  const chain = map[asset.chain] as ChainAssetMap<ChainflipAsset>[ChainflipChain] | undefined;
+  const chain = map[asset.chain as Exclude<ChainflipChain, 'Polkadot'>];
   const internalAsset = chain?.[asset.asset as keyof typeof chain] as ChainflipAsset | undefined;
 
   if (internalAsset) return internalAsset;
