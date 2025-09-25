@@ -277,11 +277,14 @@ export const chainConstants = {
   };
 };
 
-export const internalAssetToRpcAsset: InternalAssetMap<AssetAndChain> = {
+export const internalAssetToRpcAsset: InternalAssetMap<AssetAndChain> & {
+  Dot: { chain: 'Polkadot'; asset: 'DOT' };
+} = {
   Eth: { chain: 'Ethereum', asset: 'ETH' },
   Flip: { chain: 'Ethereum', asset: 'FLIP' },
   Usdc: { chain: 'Ethereum', asset: 'USDC' },
   Usdt: { chain: 'Ethereum', asset: 'USDT' },
+  Dot: { chain: 'Polkadot', asset: 'DOT' },
   Btc: { chain: 'Bitcoin', asset: 'BTC' },
   ArbUsdc: { chain: 'Arbitrum', asset: 'USDC' },
   ArbEth: { chain: 'Arbitrum', asset: 'ETH' },
