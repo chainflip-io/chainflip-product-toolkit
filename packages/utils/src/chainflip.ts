@@ -289,18 +289,20 @@ export const internalAssetToRpcAsset: InternalAssetMap<AssetAndChain> = {
   HubUsdc: { chain: 'Assethub', asset: 'USDC' },
 };
 
-export const chainContractId: ChainMap<number> = {
+export const chainContractId: ChainMap<number> & { Polkadot: 2 } = {
   Ethereum: 1,
+  Polkadot: 2,
   Bitcoin: 3,
   Arbitrum: 4,
   Solana: 5,
   Assethub: 6,
 };
 
-export const assetContractId: InternalAssetMap<number> = {
+export const assetContractId: InternalAssetMap<number> & { Dot: 4 } = {
   Eth: 1,
   Flip: 2,
   Usdc: 3,
+  Dot: 4,
   Usdt: 8,
   Btc: 5,
   ArbEth: 6,
