@@ -4,6 +4,7 @@ import {
   cfAuctionState,
   cfGetTradingStrategies,
   cfGetTradingStrategyLimits,
+  cfLendingConfig,
   cfOraclePrices,
   cfSafeModeStatuses,
   oldLiquidityProvider,
@@ -1495,3 +1496,27 @@ export const lendingPools: z.input<typeof cfLendingPools> = [
     },
   },
 ];
+
+export const lendingConfig: z.input<typeof cfLendingConfig> = {
+  ltv_thresholds: {
+    minimum: '100000000',
+    target: '800000000',
+    topup: '850000000',
+    soft_liquidation: '900000000',
+    soft_liquidation_abort: '880000000',
+    hard_liquidation: '950000000',
+    hard_liquidation_abort: '930000000',
+  },
+  network_fee_contributions: {
+    from_interest: 20,
+    from_origination_fee: 20,
+    from_liquidation_fee: 20,
+  },
+  fee_swap_interval_blocks: 10,
+  interest_payment_interval_blocks: 10,
+  fee_swap_threshold_usd: '0x1312d00',
+  liquidation_swap_chunk_size_usd: '0x2540be400',
+  soft_liquidation_max_oracle_slippage: 50,
+  hard_liquidation_max_oracle_slippage: 500,
+  fee_swap_max_oracle_slippage: 50,
+};
