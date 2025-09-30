@@ -33,6 +33,7 @@ export type CfSwapRateV3 = RpcResult<'cf_swap_rate_v3'>;
 export type CfOraclePrices = RpcResult<'cf_oracle_prices'>;
 export type CfLendingPools = RpcResult<'cf_lending_pools'>;
 export type CfLendingConfig = RpcResult<'cf_lending_config'>;
+export type CfLoanAccounts = RpcResult<'cf_loan_accounts'>;
 
 export type CfAccountInfoResponse = RpcResponse<'cf_account_info'>;
 export type CfAccountsResponse = RpcResponse<'cf_accounts'>;
@@ -66,6 +67,7 @@ export type CfSwapRateV3Response = RpcResponse<'cf_swap_rate_v3'>;
 export type CfOraclePricesResponse = RpcResponse<'cf_oracle_prices'>;
 export type CfLendingPoolsResponse = RpcResponse<'cf_lending_pools'>;
 export type CfLendingConfigResponse = RpcResponse<'cf_lending_config'>;
+export type CfLoanAccountsResponse = RpcResponse<'cf_loan_accounts'>;
 
 export type CfUnregisteredAccount = z.output<typeof unregistered>;
 export type CfBrokerAccount = z.output<typeof broker>;

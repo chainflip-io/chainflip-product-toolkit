@@ -27,6 +27,7 @@ import {
   lendingConfig,
   lendingPools,
   liquidityProviderAccount,
+  loanAccounts,
   LP_ACCOUNT_ID,
   poolOrderbook,
   poolOrders,
@@ -82,6 +83,7 @@ describe(HttpClient, () => {
         "cf_ingress_egress_environment",
         "cf_lending_config",
         "cf_lending_pools",
+        "cf_loan_accounts",
         "cf_oracle_prices",
         "cf_pool_depth",
         "cf_pool_orderbook",
@@ -392,6 +394,8 @@ describe(HttpClient, () => {
           return respond(lendingPools);
         case 'cf_lending_config':
           return respond(lendingConfig);
+        case 'cf_loan_accounts':
+          return respond(loanAccounts);
         case 'cf_eth_state_chain_gateway_address':
         case 'cf_eth_key_manager_address':
         default:

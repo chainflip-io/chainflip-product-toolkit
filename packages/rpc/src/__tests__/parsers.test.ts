@@ -14,6 +14,7 @@ import {
   cfOraclePrices,
   cfLendingPools,
   cfLendingConfig,
+  cfLoanAccounts,
 } from '../parsers';
 import {
   cfAccountInfoOperator,
@@ -22,6 +23,7 @@ import {
   lendingConfig,
   lendingPools,
   liquidityProviderAccount,
+  loanAccounts,
   oldLiquidityProviderAccount,
   tradingStrategies,
   tradingStrategiesLimits,
@@ -1323,6 +1325,51 @@ describe('parsers', () => {
           },
           "soft_liquidation_max_oracle_slippage": 50,
         }
+      `);
+    });
+  });
+
+  describe('cfLoanAccounts', () => {
+    it('parses the cfLoanAccounts response', () => {
+      const result = cfLoanAccounts.parse(loanAccounts);
+      expect(result).toMatchInlineSnapshot(`
+        [
+          {
+            "account": "cFL8fmgKZcchhtLagBH2GKfsuWxBqUaD5CYE1m7DFb8DBSLJ1",
+            "collateral": [
+              {
+                "amount": 3n,
+                "asset": "BTC",
+                "chain": "Bitcoin",
+              },
+            ],
+            "liquidation_status": {
+              "is_hard": true,
+              "liquidation_swaps": [
+                {
+                  "loan_id": 1,
+                  "swap_request_id": 1,
+                },
+              ],
+            },
+            "loans": [
+              {
+                "asset": {
+                  "asset": "USDC",
+                  "chain": "Ethereum",
+                },
+                "created_at": 400,
+                "loan_id": 1,
+                "principal_amount": 1000n,
+              },
+            ],
+            "ltv_ratio": 1333333333n,
+            "primary_collateral_asset": {
+              "asset": "BTC",
+              "chain": "Bitcoin",
+            },
+          },
+        ]
       `);
     });
   });
