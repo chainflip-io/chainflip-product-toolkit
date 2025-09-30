@@ -38,7 +38,9 @@ export type CallData =
     };
 
 const buildDelegationAmount = (amount: bigint | undefined) =>
-  amount ? ({ tag: 'Some', value: amount } as const) : ({ tag: 'Max', value: undefined } as const);
+  typeof amount === 'bigint'
+    ? ({ tag: 'Some', value: amount } as const)
+    : ({ tag: 'Max', value: undefined } as const);
 
 const buildDelegationApiData = (data: CallData): CodecType<typeof DelegationApi> => {
   switch (data.call) {

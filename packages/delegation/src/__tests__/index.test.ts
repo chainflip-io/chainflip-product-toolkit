@@ -181,6 +181,55 @@ describe(DelegationSDK, () => {
         ]
       `);
     });
+
+    it('delegates 0 additional FLIP', async () => {
+      const sdk = new DelegationSDK(walletclient, publicClient, 'backspin');
+
+      expect(
+        await sdk.delegateFromBalance('cFMjXCTxTHVkSqbKzeVwJ25TJxLqc1Vn9usPgUGmZhsyvHRQZ', 0n),
+      ).toEqual('tx hash 0');
+
+      expect(calls).toMatchInlineSnapshot(`
+        [
+          {
+            "action": "simulateContract",
+            "args": {
+              "abi": "{{ SC UTILS ABI }}",
+              "account": {
+                "address": "0xa56A6be23b6Cf39D9448FF6e897C29c41c8fbDFF",
+              },
+              "address": "0xc5a5C42992dECbae36851359345FE25997F5C42d",
+              "args": [
+                "0x0000aadef2b57f70666b05f95dd3d223bc85df6c03b28d36f8cc2026383d8428af230100000000000000000000000000000000",
+              ],
+              "chain": "client chain",
+              "functionName": "callSc",
+            },
+          },
+          {
+            "action": "writeContract",
+            "args": {
+              "abi": "{{ SC UTILS ABI }}",
+              "account": {
+                "address": "0xa56A6be23b6Cf39D9448FF6e897C29c41c8fbDFF",
+              },
+              "address": "0xc5a5C42992dECbae36851359345FE25997F5C42d",
+              "args": [
+                "0x0000aadef2b57f70666b05f95dd3d223bc85df6c03b28d36f8cc2026383d8428af230100000000000000000000000000000000",
+              ],
+              "chain": "client chain",
+              "functionName": "callSc",
+            },
+          },
+          {
+            "action": "waitForTransactionReceipt",
+            "args": {
+              "hash": "tx hash 0",
+            },
+          },
+        ]
+      `);
+    });
   });
 
   describe(DelegationSDK.prototype.depositAndDelegate, () => {
