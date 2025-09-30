@@ -5,6 +5,7 @@ import {
   cfGetTradingStrategies,
   cfGetTradingStrategyLimits,
   cfLendingConfig,
+  cfLoanAccounts,
   cfOraclePrices,
   cfSafeModeStatuses,
   oldLiquidityProvider,
@@ -1520,3 +1521,41 @@ export const lendingConfig: z.input<typeof cfLendingConfig> = {
   hard_liquidation_max_oracle_slippage: 500,
   fee_swap_max_oracle_slippage: 50,
 };
+
+export const loanAccounts: z.input<typeof cfLoanAccounts> = [
+  {
+    account: 'cFL8fmgKZcchhtLagBH2GKfsuWxBqUaD5CYE1m7DFb8DBSLJ1',
+    primary_collateral_asset: {
+      chain: 'Bitcoin',
+      asset: 'BTC',
+    },
+    ltv_ratio: '1333333333',
+    collateral: [
+      {
+        chain: 'Bitcoin',
+        asset: 'BTC',
+        amount: '0x3',
+      },
+    ],
+    loans: [
+      {
+        loan_id: 1,
+        asset: {
+          chain: 'Ethereum',
+          asset: 'USDC',
+        },
+        created_at: 400,
+        principal_amount: '0x3e8',
+      },
+    ],
+    liquidation_status: {
+      liquidation_swaps: [
+        {
+          swap_request_id: 1,
+          loan_id: 1,
+        },
+      ],
+      is_hard: true,
+    },
+  },
+];

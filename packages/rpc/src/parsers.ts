@@ -830,3 +830,36 @@ export const cfLendingConfig = z.object({
   hard_liquidation_max_oracle_slippage: z.number(),
   fee_swap_max_oracle_slippage: z.number(),
 });
+
+export const cfLoanAccount = z.object({
+  account: accountId,
+  primary_collateral_asset: rpcAssetSchema,
+  ltv_ratio: numberOrHex,
+  collateral: z.array(
+    z.intersection(
+      rpcAssetSchema,
+      z.object({
+        amount: numberOrHex,
+      }),
+    ),
+  ),
+  loans: z.array(
+    z.object({
+      loan_id: z.number(),
+      asset: rpcAssetSchema,
+      created_at: z.number(),
+      principal_amount: numberOrHex,
+    }),
+  ),
+  liquidation_status: z.object({
+    liquidation_swaps: z.array(
+      z.object({
+        swap_request_id: z.number(),
+        loan_id: z.number(),
+      }),
+    ),
+    is_hard: z.boolean(),
+  }),
+});
+
+export const cfLoanAccounts = z.array(cfLoanAccount);
