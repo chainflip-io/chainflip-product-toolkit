@@ -851,15 +851,17 @@ export const cfLoanAccount = z.object({
       principal_amount: numberOrHex,
     }),
   ),
-  liquidation_status: z.object({
-    liquidation_swaps: z.array(
-      z.object({
-        swap_request_id: z.number(),
-        loan_id: z.number(),
-      }),
-    ),
-    is_hard: z.boolean(),
-  }),
+  liquidation_status: z
+    .object({
+      liquidation_swaps: z.array(
+        z.object({
+          swap_request_id: z.number(),
+          loan_id: z.number(),
+        }),
+      ),
+      is_hard: z.boolean(),
+    })
+    .nullable(),
 });
 
 export const cfLoanAccounts = z.array(cfLoanAccount);
