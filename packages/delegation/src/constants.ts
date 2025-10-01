@@ -2,7 +2,7 @@ import { ChainflipNetwork } from '@chainflip/utils/chainflip';
 import { HexString } from '@chainflip/utils/types';
 
 export const SC_UTILS_ADDRESSES: Record<ChainflipNetwork, HexString> = {
-  mainnet: '0x',
+  mainnet: '0x13Ad793E7B75eaaCee34b69792552f086b301380',
   perseverance: '0xC191c202fdc308F54fF815fb3309eCd052E75D73',
   sisyphos: '0x',
   backspin: '0xc5a5C42992dECbae36851359345FE25997F5C42d',
