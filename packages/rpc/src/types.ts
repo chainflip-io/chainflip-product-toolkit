@@ -5,6 +5,7 @@ import type { broker, liquidityProvider, operator, unregistered, validator } fro
 export type CfAccountInfo = RpcResult<'cf_account_info'>;
 export type CfAccounts = RpcResult<'cf_accounts'>;
 export type CfAuctionState = RpcResult<'cf_auction_state'>;
+export type CfMonitoringSimulateAuction = RpcResult<'cf_monitoring_simulate_auction'>;
 export type CfAvailablePools = RpcResult<'cf_available_pools'>;
 export type CfBoostPoolDetails = RpcResult<'cf_boost_pool_details'>;
 export type CfBoostPoolPendingFees = RpcResult<'cf_boost_pool_pending_fees'>;
@@ -38,6 +39,7 @@ export type CfLoanAccounts = RpcResult<'cf_loan_accounts'>;
 export type CfAccountInfoResponse = RpcResponse<'cf_account_info'>;
 export type CfAccountsResponse = RpcResponse<'cf_accounts'>;
 export type CfAuctionStateResponse = RpcResponse<'cf_auction_state'>;
+export type CfMonitoringSimulateAuctionResponse = RpcResponse<'cf_monitoring_simulate_auction'>;
 export type CfAvailablePoolsResponse = RpcResponse<'cf_available_pools'>;
 export type CfBoostPoolDetailsResponse = RpcResponse<'cf_boost_pool_details'>;
 export type CfBoostPoolPendingFeesResponse = RpcResponse<'cf_boost_pool_pending_fees'>;

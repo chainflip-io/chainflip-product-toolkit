@@ -42,6 +42,7 @@ import {
   cfLendingPools,
   cfLendingConfig,
   cfLoanAccounts,
+  cfMonitoringSimulateAuction,
 } from './parsers';
 
 type Nullish<T> = T | null | undefined;
@@ -221,6 +222,7 @@ export type RpcRequest = WithHash<{
   cf_authority_emission_per_block: [];
   cf_epoch_duration: [];
   cf_auction_state: [];
+  cf_monitoring_simulate_auction: [];
   cf_flip_supply: [];
   cf_eth_state_chain_gateway_address: [];
   cf_eth_key_manager_address: [];
@@ -271,6 +273,7 @@ export const rpcResult = {
   cf_authority_emission_per_block: numberOrHex,
   cf_epoch_duration: z.number(),
   cf_auction_state: cfAuctionState,
+  cf_monitoring_simulate_auction: cfMonitoringSimulateAuction,
   cf_flip_supply: cfFlipSuppy,
   cf_eth_state_chain_gateway_address: ethereumAddress.nullable(),
   cf_eth_key_manager_address: ethereumAddress.nullable(),

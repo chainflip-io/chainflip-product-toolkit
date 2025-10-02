@@ -15,6 +15,7 @@ import {
   cfLendingPools,
   cfLendingConfig,
   cfLoanAccounts,
+  cfMonitoringSimulateAuction,
 } from '../parsers';
 import {
   cfAccountInfoOperator,
@@ -24,6 +25,7 @@ import {
   lendingPools,
   liquidityProviderAccount,
   loanAccounts,
+  monitoringSimulateAuction,
   oldLiquidityProviderAccount,
   tradingStrategies,
   tradingStrategiesLimits,
@@ -1371,6 +1373,13 @@ describe('parsers', () => {
           },
         ]
       `);
+    });
+  });
+
+  describe('cfMonitoringSimulateAuction', () => {
+    it('parses the cfMonitoringSimulateAuction response', () => {
+      const result = cfMonitoringSimulateAuction.parse(monitoringSimulateAuction);
+      expect(result).toMatchSnapshot();
     });
   });
 });
