@@ -592,6 +592,24 @@ export const cfAuctionState = z
   })
   .transform(rename({ epoch_duration: 'epoch_duration_blocks' }));
 
+export const cfMonitoringSimulateAuction = z.object({
+  auction_outcome: z.object({
+    winners: z.array(accountId),
+    bond: numberOrHex,
+  }),
+  operators_info: z.record(
+    accountId,
+    z.object({
+      operator: accountId,
+      validators: z.record(accountId, numberOrHex),
+      delegators: z.record(accountId, numberOrHex),
+      delegation_fee_bps: z.number(),
+    }),
+  ),
+  new_validators: z.array(accountId),
+  current_mab: numberOrHex,
+});
+
 export const cfFlipSuppy = range(numberOrHex).transform(([totalIssuance, offchainFunds]) => ({
   totalIssuance,
   offchainFunds,

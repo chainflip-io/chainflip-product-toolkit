@@ -84,6 +84,7 @@ describe(HttpClient, () => {
         "cf_lending_config",
         "cf_lending_pools",
         "cf_loan_accounts",
+        "cf_monitoring_simulate_auction",
         "cf_oracle_prices",
         "cf_pool_depth",
         "cf_pool_orderbook",
