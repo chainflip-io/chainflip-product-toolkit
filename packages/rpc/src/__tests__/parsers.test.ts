@@ -26,7 +26,6 @@ import {
   liquidityProviderAccount,
   loanAccounts,
   monitoringSimulateAuction,
-  oldLiquidityProviderAccount,
   tradingStrategies,
   tradingStrategiesLimits,
 } from './fixtures';
@@ -1236,12 +1235,6 @@ describe('parsers', () => {
 
     it('parses the latest cfAccountInfo schema for an lp', () => {
       const result = cfAccountInfo.parse(liquidityProviderAccount);
-
-      expect(result).toMatchSnapshot();
-    });
-
-    it('parses the old cfAccountInfo schema for an lp', () => {
-      const result = cfAccountInfo.parse(oldLiquidityProviderAccount);
 
       expect(result).toMatchSnapshot();
     });

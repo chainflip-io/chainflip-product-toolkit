@@ -6,6 +6,7 @@ import { type Mock, afterEach, beforeEach, describe, expect, it, vi } from 'vite
 import { type AddressInfo, WebSocketServer } from 'ws';
 import { spyOn } from '@/testing';
 import { type JsonRpcRequest, type RpcMethod } from '../common';
+import { CfAccountInfoResponse } from '../types';
 import WsClient from '../WsClient';
 
 const createChainAssetMap = <T>(value: T): ChainAssetMap<T> => ({
@@ -90,7 +91,9 @@ describe(WsClient, () => {
                       role: 'unregistered',
                       flip_balance: '0x0',
                       asset_balances: createChainAssetMap('0x0'),
-                    },
+                      bond: '0x0',
+                      estimated_redeemable_balance: '0x0',
+                    } satisfies Extract<CfAccountInfoResponse, { role: 'unregistered' }>,
                   };
                 }
                 if (req.params[0] === 'account 2') {
@@ -101,7 +104,9 @@ describe(WsClient, () => {
                       role: 'unregistered',
                       flip_balance: '0x10',
                       asset_balances: createChainAssetMap('0x0'),
-                    },
+                      bond: '0x0',
+                      estimated_redeemable_balance: '0x10',
+                    } satisfies Extract<CfAccountInfoResponse, { role: 'unregistered' }>,
                   };
                 }
               }
@@ -260,6 +265,8 @@ describe(WsClient, () => {
                 "USDC": 0n,
               },
             },
+            "bond": 0n,
+            "estimated_redeemable_balance": 0n,
             "flip_balance": 0n,
             "role": "unregistered",
           },
@@ -288,6 +295,8 @@ describe(WsClient, () => {
                 "USDC": 0n,
               },
             },
+            "bond": 0n,
+            "estimated_redeemable_balance": 16n,
             "flip_balance": 16n,
             "role": "unregistered",
           },

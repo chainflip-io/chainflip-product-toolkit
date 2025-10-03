@@ -227,30 +227,6 @@ exports[`HttpClient > with server > gets lp account info 1`] = `
       "USDC": 0n,
     },
   },
-  "balances": {
-    "Arbitrum": {
-      "ETH": 0n,
-      "USDC": 0n,
-    },
-    "Assethub": {
-      "DOT": 0n,
-      "USDC": 0n,
-      "USDT": 0n,
-    },
-    "Bitcoin": {
-      "BTC": 19842n,
-    },
-    "Ethereum": {
-      "ETH": 0n,
-      "FLIP": 0n,
-      "USDC": 0n,
-      "USDT": 0n,
-    },
-    "Solana": {
-      "SOL": 0n,
-      "USDC": 0n,
-    },
-  },
   "bond": 0n,
   "boost_balances": {
     "Arbitrum": {
