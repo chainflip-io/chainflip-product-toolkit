@@ -295,29 +295,9 @@ export const accountInfoCommon = {
   upcoming_delegation_status: delegationStatus.optional(),
 } as const;
 
-// TODO(1.11): remove after all networks upgraded
-export const oldUnregistered = z.object({
-  role: z.literal('unregistered'),
-  flip_balance: numberOrHex,
-  asset_balances: chainAssetMapFactory(numberOrHex, 0),
-});
-
 export const unregistered = z.object({
   role: z.literal('unregistered'),
   ...accountInfoCommon,
-});
-
-// TODO(1.11): remove after all networks upgraded
-export const oldBroker = z.object({
-  role: z.literal('broker'),
-  bond: numberOrHex,
-  flip_balance: numberOrHex,
-  earned_fees: chainAssetMapFactory(numberOrHex, 0),
-  btc_vault_deposit_address: z.string().nullable().optional(),
-  affiliates: z
-    .array(z.object({ account_id: accountId, short_id: z.number(), withdrawal_address: hexString }))
-    .optional()
-    .default([]),
 });
 
 export const broker = z.object({
@@ -362,16 +342,6 @@ const boostBalances = z.array(
   }),
 );
 
-// TODO(1.11): remove after all networks upgraded
-export const oldLiquidityProvider = z.object({
-  role: z.literal('liquidity_provider'),
-  balances: chainAssetMapFactory(numberOrHex, '0x0'),
-  refund_addresses: chainMapFactory(z.string().nullable(), null),
-  flip_balance: numberOrHex,
-  earned_fees: chainAssetMapFactory(numberOrHex, 0),
-  boost_balances: chainAssetMapFactory(boostBalances, []),
-});
-
 export const liquidityProvider = z.object({
   role: z.literal('liquidity_provider'),
   ...accountInfoCommon,
@@ -403,25 +373,6 @@ export const liquidityProvider = z.object({
     .optional(),
 });
 
-export const oldValidator = z.object({
-  role: z.literal('validator'),
-  flip_balance: numberOrHex,
-  bond: numberOrHex,
-  last_heartbeat: z.number(),
-  reputation_points: z.number(),
-  keyholder_epochs: z.array(z.number()),
-  is_current_authority: z.boolean(),
-  is_current_backup: z.boolean(),
-  is_qualified: z.boolean(),
-  is_online: z.boolean(),
-  is_bidding: z.boolean(),
-  bound_redeem_address: hexString.nullable(),
-  apy_bp: z.number().nullable(),
-  restricted_balances: z.record(hexString, numberOrHex),
-  estimated_redeemable_balance: numberOrHex,
-  operator: accountId.optional(),
-});
-
 export const validator = z.object({
   role: z.literal('validator'),
   ...accountInfoCommon,
@@ -437,13 +388,14 @@ export const validator = z.object({
   operator: accountId.optional(),
 });
 
-export const newCfAccountInfo = z
+export const cfAccountInfo = z
   .discriminatedUnion('role', [unregistered, broker, operator, liquidityProvider, validator])
   .transform((account) => {
     switch (account.role) {
       case 'broker':
       case 'validator':
       case 'unregistered':
+      case 'liquidity_provider':
         return account;
       case 'operator': {
         const { managed_validators, delegators, settings, ...rest } = account;
@@ -457,23 +409,8 @@ export const newCfAccountInfo = z
           },
         };
       }
-      // TODO(1.11): remove after all networks upgraded
-      case 'liquidity_provider':
-        return {
-          ...account,
-          balances: account.asset_balances,
-        };
     }
   });
-
-export const oldCfAccountInfo = z.discriminatedUnion('role', [
-  oldUnregistered,
-  oldBroker,
-  oldLiquidityProvider,
-  oldValidator,
-]);
-
-export const cfAccountInfo = z.union([newCfAccountInfo, oldCfAccountInfo]);
 
 export const cfAccounts = z.array(z.tuple([z.string(), z.string()]));
 

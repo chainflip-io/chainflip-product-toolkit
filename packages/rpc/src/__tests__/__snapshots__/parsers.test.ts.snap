@@ -26,30 +26,6 @@ exports[`parsers > cfAccountInfo > parses the latest cfAccountInfo schema for an
       "USDC": 0n,
     },
   },
-  "balances": {
-    "Arbitrum": {
-      "ETH": 0n,
-      "USDC": 0n,
-    },
-    "Assethub": {
-      "DOT": 0n,
-      "USDC": 0n,
-      "USDT": 0n,
-    },
-    "Bitcoin": {
-      "BTC": 19842n,
-    },
-    "Ethereum": {
-      "ETH": 0n,
-      "FLIP": 0n,
-      "USDC": 0n,
-      "USDT": 0n,
-    },
-    "Solana": {
-      "SOL": 0n,
-      "USDC": 0n,
-    },
-  },
   "bond": 0n,
   "boost_balances": {
     "Arbitrum": {
@@ -170,30 +146,6 @@ exports[`parsers > cfAccountInfo > parses the latest cfAccountInfo schema for an
       "USDC": 0n,
     },
   },
-  "balances": {
-    "Arbitrum": {
-      "ETH": 0n,
-      "USDC": 0n,
-    },
-    "Assethub": {
-      "DOT": 0n,
-      "USDC": 0n,
-      "USDT": 0n,
-    },
-    "Bitcoin": {
-      "BTC": 19842n,
-    },
-    "Ethereum": {
-      "ETH": 0n,
-      "FLIP": 0n,
-      "USDC": 0n,
-      "USDT": 0n,
-    },
-    "Solana": {
-      "SOL": 0n,
-      "USDC": 0n,
-    },
-  },
   "bond": 0n,
   "boost_balances": {
     "Arbitrum": {
@@ -278,92 +230,6 @@ exports[`parsers > cfAccountInfo > parses the latest cfAccountInfo schema for an
   },
   "role": "liquidity_provider",
   "vanity_name": "Chainflip Testnet LP BOOST",
-}
-`;
-
-exports[`parsers > cfAccountInfo > parses the old cfAccountInfo schema for an lp 1`] = `
-{
-  "balances": {
-    "Arbitrum": {
-      "ETH": 0n,
-      "USDC": 0n,
-    },
-    "Assethub": {
-      "DOT": 0n,
-      "USDC": 0n,
-      "USDT": 0n,
-    },
-    "Bitcoin": {
-      "BTC": 35910229n,
-    },
-    "Ethereum": {
-      "ETH": 201081687243582975266n,
-      "FLIP": 99996154262861338436158n,
-      "USDC": 227879719689n,
-      "USDT": 1999998411n,
-    },
-    "Solana": {
-      "SOL": 3358768032n,
-      "USDC": 0n,
-    },
-  },
-  "boost_balances": {
-    "Arbitrum": {
-      "ETH": [],
-      "USDC": [],
-    },
-    "Assethub": {
-      "DOT": [],
-      "USDC": [],
-      "USDT": [],
-    },
-    "Bitcoin": {
-      "BTC": [],
-    },
-    "Ethereum": {
-      "ETH": [],
-      "FLIP": [],
-      "USDC": [],
-      "USDT": [],
-    },
-    "Solana": {
-      "SOL": [],
-      "USDC": [],
-    },
-  },
-  "earned_fees": {
-    "Arbitrum": {
-      "ETH": 0n,
-      "USDC": 0n,
-    },
-    "Assethub": {
-      "DOT": 0n,
-      "USDC": 0n,
-      "USDT": 0n,
-    },
-    "Bitcoin": {
-      "BTC": 54632n,
-    },
-    "Ethereum": {
-      "ETH": 18585729823626322n,
-      "FLIP": 0n,
-      "USDC": 718345809n,
-      "USDT": 0n,
-    },
-    "Solana": {
-      "SOL": 3358768032n,
-      "USDC": 0n,
-    },
-  },
-  "flip_balance": 9999712411635950000n,
-  "refund_addresses": {
-    "Arbitrum": null,
-    "Assethub": null,
-    "Bitcoin": "tb1qlpaajxzlpm6ds0jsg5dgsep56twkzs9ktsc8a9",
-    "Ethereum": "0xe964a5775fd296ce1bd3e05547c59ce86ac077a2",
-    "Solana": "FkoiauqRvxTuimbohr2dK3UtwZ5Vak44dtSbK69nm1EY",
-  },
-  "role": "liquidity_provider",
 }
 `;
 
