@@ -764,13 +764,13 @@ export const cfLendingPools = z.array(
 
 export const cfLendingConfig = z.object({
   ltv_thresholds: z.object({
-    target: numberOrHex,
-    topup: numberOrHex,
-    soft_liquidation: numberOrHex,
-    soft_liquidation_abort: numberOrHex,
-    hard_liquidation: numberOrHex,
-    hard_liquidation_abort: numberOrHex,
-    low_ltv: numberOrHex,
+    target: z.number(),
+    topup: z.number(),
+    soft_liquidation: z.number(),
+    soft_liquidation_abort: z.number(),
+    hard_liquidation: z.number(),
+    hard_liquidation_abort: z.number(),
+    low_ltv: z.number(),
   }),
   network_fee_contributions: z.object({
     extra_interest: z.number(),
