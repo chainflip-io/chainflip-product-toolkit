@@ -1500,119 +1500,121 @@ exports[`HttpClient > with server > handles cf_ingress_egress_environment 1`] = 
 }
 `;
 
+exports[`HttpClient > with server > handles cf_lending_config 1`] = `
+{
+  "fee_swap_interval_blocks": 10,
+  "fee_swap_max_oracle_slippage": 50,
+  "fee_swap_threshold_usd": 20000000n,
+  "hard_liquidation_max_oracle_slippage": 500,
+  "interest_collection_threshold_usd": 100000n,
+  "interest_payment_interval_blocks": 10,
+  "liquidation_swap_chunk_size_usd": 10000000000n,
+  "ltv_thresholds": {
+    "hard_liquidation": 950000,
+    "hard_liquidation_abort": 930000,
+    "low_ltv": 500000,
+    "soft_liquidation": 900000,
+    "soft_liquidation_abort": 880000,
+    "target": 800000,
+    "topup": 850000,
+  },
+  "network_fee_contributions": {
+    "extra_interest": 10000,
+    "from_liquidation_fee": 200000,
+    "from_origination_fee": 200000,
+    "interest_on_collateral_max": 10000,
+  },
+  "soft_liquidation_max_oracle_slippage": 50,
+}
+`;
+
+exports[`HttpClient > with server > handles cf_lending_pools 1`] = `
+[
+  {
+    "asset": {
+      "asset": "BTC",
+      "chain": "Bitcoin",
+    },
+    "available_amount": 200000000n,
+    "current_interest_rate": 200,
+    "interest_rate_curve": {
+      "interest_at_junction_utilisation": 80000,
+      "interest_at_max_utilisation": 500000,
+      "interest_at_zero_utilisation": 20000,
+      "junction_utilisation": 900000,
+    },
+    "liquidation_fee": 500,
+    "origination_fee": 100,
+    "total_amount": 200000000n,
+    "utilisation_rate": 0,
+  },
+  {
+    "asset": {
+      "asset": "USDC",
+      "chain": "Solana",
+    },
+    "available_amount": 0n,
+    "current_interest_rate": 5000,
+    "interest_rate_curve": {
+      "interest_at_junction_utilisation": 80000,
+      "interest_at_max_utilisation": 500000,
+      "interest_at_zero_utilisation": 20000,
+      "junction_utilisation": 900000,
+    },
+    "liquidation_fee": 500,
+    "origination_fee": 100,
+    "total_amount": 0n,
+    "utilisation_rate": 10000,
+  },
+]
+`;
+
+exports[`HttpClient > with server > handles cf_loan_accounts 1`] = `
+[
+  {
+    "account": "cFL8fmgKZcchhtLagBH2GKfsuWxBqUaD5CYE1m7DFb8DBSLJ1",
+    "collateral": [
+      {
+        "amount": 3n,
+        "asset": "BTC",
+        "chain": "Bitcoin",
+      },
+    ],
+    "liquidation_status": {
+      "is_hard": true,
+      "liquidation_swaps": [
+        {
+          "loan_id": 1,
+          "swap_request_id": 1,
+        },
+      ],
+    },
+    "loans": [
+      {
+        "asset": {
+          "asset": "USDC",
+          "chain": "Ethereum",
+        },
+        "created_at": 400,
+        "loan_id": 1,
+        "principal_amount": 1000n,
+      },
+    ],
+    "ltv_ratio": 1333333333n,
+    "primary_collateral_asset": {
+      "asset": "BTC",
+      "chain": "Bitcoin",
+    },
+  },
+]
+`;
+
 exports[`HttpClient > with server > handles cf_safe_mode_statuses 1`] = `
 {
   "asset_balances": {
     "reconciliation_enabled": true,
   },
   "broadcast_arbitrum": {
-    "retry_enabled": true,
-  },
-  "broadcast_assethub": {
-    "retry_enabled": true,
-  },
-  "broadcast_bitcoin": {
-    "retry_enabled": true,
-  },
-  "broadcast_ethereum": {
-    "retry_enabled": true,
-  },
-  "broadcast_polkadot": {
-    "retry_enabled": true,
-  },
-  "broadcast_solana": {
-    "retry_enabled": true,
-  },
-  "emissions": {
-    "emissions_sync_enabled": true,
-  },
-  "funding": {
-    "redeem_enabled": true,
-  },
-  "ingress_egress_arbitrum": {
-    "add_boost_funds_enabled": true,
-    "boost_deposits_enabled": true,
-    "deposits_enabled": true,
-    "stop_boosting_enabled": true,
-  },
-  "ingress_egress_assethub": {
-    "add_boost_funds_enabled": true,
-    "boost_deposits_enabled": true,
-    "deposits_enabled": true,
-    "stop_boosting_enabled": true,
-  },
-  "ingress_egress_bitcoin": {
-    "add_boost_funds_enabled": true,
-    "boost_deposits_enabled": true,
-    "deposits_enabled": true,
-    "stop_boosting_enabled": true,
-  },
-  "ingress_egress_ethereum": {
-    "add_boost_funds_enabled": true,
-    "boost_deposits_enabled": true,
-    "deposits_enabled": true,
-    "stop_boosting_enabled": true,
-  },
-  "ingress_egress_polkadot": {
-    "add_boost_funds_enabled": true,
-    "boost_deposits_enabled": true,
-    "deposits_enabled": true,
-    "stop_boosting_enabled": true,
-  },
-  "ingress_egress_solana": {
-    "add_boost_funds_enabled": true,
-    "boost_deposits_enabled": true,
-    "deposits_enabled": true,
-    "stop_boosting_enabled": true,
-  },
-  "liquidity_provider": {
-    "deposit_enabled": true,
-    "internal_swaps_enabled": true,
-    "withdrawal_enabled": true,
-  },
-  "pools": {
-    "limit_order_update_enabled": true,
-    "range_order_update_enabled": true,
-  },
-  "reputation": {
-    "reporting_enabled": true,
-  },
-  "swapping": {
-    "broker_registration_enabled": true,
-    "swaps_enabled": true,
-    "withdrawals_enabled": true,
-  },
-  "threshold_signature_bitcoin": {
-    "slashing_enabled": true,
-  },
-  "threshold_signature_evm": {
-    "slashing_enabled": true,
-  },
-  "threshold_signature_polkadot": {
-    "slashing_enabled": true,
-  },
-  "threshold_signature_solana": {
-    "slashing_enabled": true,
-  },
-  "trading_strategies": {
-    "strategy_closure_enabled": true,
-    "strategy_execution_enabled": true,
-    "strategy_updates_enabled": true,
-  },
-  "validator": {
-    "authority_rotation_enabled": true,
-    "start_bidding_enabled": true,
-    "stop_bidding_enabled": true,
-  },
-}
-`;
-
-exports[`HttpClient > with server > handles cf_safe_mode_statuses 2`] = `
-{
-  "asset_balances": {
-    "reconciliation_enabled": true,
-  },
-  "broadcast_arbitrum": {
     "egress_witnessing_enabled": true,
     "retry_enabled": true,
   },
@@ -1635,6 +1637,9 @@ exports[`HttpClient > with server > handles cf_safe_mode_statuses 2`] = `
   "broadcast_solana": {
     "egress_witnessing_enabled": true,
     "retry_enabled": true,
+  },
+  "elections_generic": {
+    "oracle_price_elections": true,
   },
   "emissions": {
     "emissions_sync_enabled": true,
@@ -1721,6 +1726,7 @@ exports[`HttpClient > with server > handles cf_safe_mode_statuses 2`] = `
     "start_bidding_enabled": true,
     "stop_bidding_enabled": true,
   },
+  "witnesser": "CodeGreen",
 }
 `;
 

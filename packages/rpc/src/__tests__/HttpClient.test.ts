@@ -35,7 +35,6 @@ import {
   poolsEnvironment,
   runtimeVersion,
   safeModeStatuses,
-  safeModeStatuses190,
   supportedAssets,
   swapDepositAddress,
   swapParameterEncodingBitcoin,
@@ -387,7 +386,6 @@ describe(HttpClient, () => {
         case 'cf_available_pools':
           return respond(availablePools);
         case 'cf_safe_mode_statuses':
-          if (body.id === '1.9') return respond(safeModeStatuses190);
           return respond(safeModeStatuses);
         case 'cf_oracle_prices':
           return respond(cfOraclePrice);
@@ -499,8 +497,10 @@ describe(HttpClient, () => {
       ['cf_get_trading_strategies'],
       ['cf_get_trading_strategy_limits'],
       ['cf_available_pools'],
-      ['cf_safe_mode_statuses', '1.9'],
       ['cf_safe_mode_statuses'],
+      ['cf_lending_config'],
+      ['cf_lending_pools'],
+      ['cf_loan_accounts'],
     ] as [SimpleRpcMethod, string?][])('handles %s', async (method, id) => {
       if (id) vi.spyOn(crypto, 'randomUUID').mockImplementationOnce(() => id as any);
       expect(await client.sendRequest(method)).toMatchSnapshot();

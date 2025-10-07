@@ -622,8 +622,7 @@ export const cfOraclePrices = z.array(
 
 const broadcastPalletSafeModeStatuses = z.object({
   retry_enabled: z.boolean(),
-  // TODO(1.10): make not optional
-  egress_witnessing_enabled: z.boolean().optional(),
+  egress_witnessing_enabled: z.boolean(),
 });
 
 const ingressEgressPalletSafeModeStatuses = z.object({
@@ -633,7 +632,7 @@ const ingressEgressPalletSafeModeStatuses = z.object({
   vault_deposit_witnessing_enabled: z.boolean(),
 });
 
-const cfSafeModeStatusesBase = z.object({
+export const cfSafeModeStatuses = z.object({
   emissions: z.object({
     emissions_sync_enabled: z.boolean(),
   }),
@@ -648,7 +647,7 @@ const cfSafeModeStatusesBase = z.object({
   liquidity_provider: z.object({
     deposit_enabled: z.boolean(),
     withdrawal_enabled: z.boolean(),
-    internal_swaps_enabled: z.boolean().optional().default(false),
+    internal_swaps_enabled: z.boolean(),
   }),
   validator: z.object({
     authority_rotation_enabled: z.boolean(),
@@ -682,67 +681,33 @@ const cfSafeModeStatusesBase = z.object({
   threshold_signature_solana: z.object({
     slashing_enabled: z.boolean(),
   }),
+  lending_pools: z.object({
+    add_boost_funds_enabled: z.boolean(),
+    stop_boosting_enabled: z.boolean(),
+    // TODO(1.12): remove `optional` after all networks upgraded
+    borrowing_enabled: z.array(rpcAssetSchema).optional(),
+    add_lender_funds_enabled: z.array(rpcAssetSchema).optional(),
+    withdraw_lender_funds_enabled: z.array(rpcAssetSchema).optional(),
+    add_collateral_enabled: z.array(rpcAssetSchema).optional(),
+    remove_collateral_enabled: z.array(rpcAssetSchema).optional(),
+  }),
   broadcast_ethereum: broadcastPalletSafeModeStatuses,
   broadcast_bitcoin: broadcastPalletSafeModeStatuses,
   broadcast_polkadot: broadcastPalletSafeModeStatuses,
   broadcast_arbitrum: broadcastPalletSafeModeStatuses,
   broadcast_solana: broadcastPalletSafeModeStatuses,
   broadcast_assethub: broadcastPalletSafeModeStatuses,
+  ingress_egress_ethereum: ingressEgressPalletSafeModeStatuses,
+  ingress_egress_bitcoin: ingressEgressPalletSafeModeStatuses,
+  ingress_egress_polkadot: ingressEgressPalletSafeModeStatuses,
+  ingress_egress_arbitrum: ingressEgressPalletSafeModeStatuses,
+  ingress_egress_solana: ingressEgressPalletSafeModeStatuses,
+  ingress_egress_assethub: ingressEgressPalletSafeModeStatuses,
+  witnesser: z.enum(['CodeRed', 'CodeGreen', 'CodeAmber']),
+  elections_generic: z.object({
+    oracle_price_elections: z.boolean(),
+  }),
 });
-
-export const cfSafeModeStatuses = z.union([
-  // TODO(1.10): remove
-  cfSafeModeStatusesBase.extend({
-    ingress_egress_ethereum: z.object({
-      boost_deposits_enabled: z.boolean(),
-      add_boost_funds_enabled: z.boolean(),
-      stop_boosting_enabled: z.boolean(),
-      deposits_enabled: z.boolean(),
-    }),
-    ingress_egress_bitcoin: z.object({
-      boost_deposits_enabled: z.boolean(),
-      add_boost_funds_enabled: z.boolean(),
-      stop_boosting_enabled: z.boolean(),
-      deposits_enabled: z.boolean(),
-    }),
-    ingress_egress_polkadot: z.object({
-      boost_deposits_enabled: z.boolean(),
-      add_boost_funds_enabled: z.boolean(),
-      stop_boosting_enabled: z.boolean(),
-      deposits_enabled: z.boolean(),
-    }),
-    ingress_egress_arbitrum: z.object({
-      boost_deposits_enabled: z.boolean(),
-      add_boost_funds_enabled: z.boolean(),
-      stop_boosting_enabled: z.boolean(),
-      deposits_enabled: z.boolean(),
-    }),
-    ingress_egress_solana: z.object({
-      boost_deposits_enabled: z.boolean(),
-      add_boost_funds_enabled: z.boolean(),
-      stop_boosting_enabled: z.boolean(),
-      deposits_enabled: z.boolean(),
-    }),
-    ingress_egress_assethub: z.object({
-      boost_deposits_enabled: z.boolean(),
-      add_boost_funds_enabled: z.boolean(),
-      stop_boosting_enabled: z.boolean(),
-      deposits_enabled: z.boolean(),
-    }),
-  }),
-  cfSafeModeStatusesBase.extend({
-    lending_pools: z.object({
-      add_boost_funds_enabled: z.boolean(),
-      stop_boosting_enabled: z.boolean(),
-    }),
-    ingress_egress_ethereum: ingressEgressPalletSafeModeStatuses,
-    ingress_egress_bitcoin: ingressEgressPalletSafeModeStatuses,
-    ingress_egress_polkadot: ingressEgressPalletSafeModeStatuses,
-    ingress_egress_arbitrum: ingressEgressPalletSafeModeStatuses,
-    ingress_egress_solana: ingressEgressPalletSafeModeStatuses,
-    ingress_egress_assethub: ingressEgressPalletSafeModeStatuses,
-  }),
-]);
 
 export const cfLendingPools = z.array(
   z.object({
