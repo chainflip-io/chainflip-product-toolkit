@@ -1,3 +1,4 @@
+import { chainflipAssets, internalAssetToRpcAsset } from '@chainflip/utils/chainflip';
 import { describe, expect, it } from 'vitest';
 import {
   cfBoostPoolDetails,
@@ -16,6 +17,7 @@ import {
   cfLendingConfig,
   cfLoanAccounts,
   cfMonitoringSimulateAuction,
+  cfSafeModeStatuses,
 } from '../parsers';
 import {
   cfAccountInfoOperator,
@@ -26,6 +28,7 @@ import {
   liquidityProviderAccount,
   loanAccounts,
   monitoringSimulateAuction,
+  safeModeStatuses,
   tradingStrategies,
   tradingStrategiesLimits,
 } from './fixtures';
@@ -1375,6 +1378,520 @@ describe('parsers', () => {
     it('parses the cfMonitoringSimulateAuction response', () => {
       const result = cfMonitoringSimulateAuction.parse(monitoringSimulateAuction);
       expect(result).toMatchSnapshot();
+    });
+  });
+
+  describe('cfSafeModeStatuses', () => {
+    it('parses the 1.11 cfSafeModeStatuses response', () => {
+      const result = cfSafeModeStatuses.parse(safeModeStatuses);
+      expect(result).toMatchInlineSnapshot(`
+        {
+          "asset_balances": {
+            "reconciliation_enabled": true,
+          },
+          "broadcast_arbitrum": {
+            "egress_witnessing_enabled": true,
+            "retry_enabled": true,
+          },
+          "broadcast_assethub": {
+            "egress_witnessing_enabled": true,
+            "retry_enabled": true,
+          },
+          "broadcast_bitcoin": {
+            "egress_witnessing_enabled": true,
+            "retry_enabled": true,
+          },
+          "broadcast_ethereum": {
+            "egress_witnessing_enabled": true,
+            "retry_enabled": true,
+          },
+          "broadcast_polkadot": {
+            "egress_witnessing_enabled": true,
+            "retry_enabled": true,
+          },
+          "broadcast_solana": {
+            "egress_witnessing_enabled": true,
+            "retry_enabled": true,
+          },
+          "elections_generic": {
+            "oracle_price_elections": true,
+          },
+          "emissions": {
+            "emissions_sync_enabled": true,
+          },
+          "funding": {
+            "redeem_enabled": true,
+          },
+          "ingress_egress_arbitrum": {
+            "boost_deposits_enabled": true,
+            "deposit_channel_creation_enabled": true,
+            "deposit_channel_witnessing_enabled": true,
+            "vault_deposit_witnessing_enabled": true,
+          },
+          "ingress_egress_assethub": {
+            "boost_deposits_enabled": true,
+            "deposit_channel_creation_enabled": true,
+            "deposit_channel_witnessing_enabled": true,
+            "vault_deposit_witnessing_enabled": true,
+          },
+          "ingress_egress_bitcoin": {
+            "boost_deposits_enabled": true,
+            "deposit_channel_creation_enabled": true,
+            "deposit_channel_witnessing_enabled": true,
+            "vault_deposit_witnessing_enabled": true,
+          },
+          "ingress_egress_ethereum": {
+            "boost_deposits_enabled": true,
+            "deposit_channel_creation_enabled": true,
+            "deposit_channel_witnessing_enabled": true,
+            "vault_deposit_witnessing_enabled": true,
+          },
+          "ingress_egress_polkadot": {
+            "boost_deposits_enabled": true,
+            "deposit_channel_creation_enabled": true,
+            "deposit_channel_witnessing_enabled": true,
+            "vault_deposit_witnessing_enabled": true,
+          },
+          "ingress_egress_solana": {
+            "boost_deposits_enabled": true,
+            "deposit_channel_creation_enabled": true,
+            "deposit_channel_witnessing_enabled": true,
+            "vault_deposit_witnessing_enabled": true,
+          },
+          "lending_pools": {
+            "add_boost_funds_enabled": true,
+            "stop_boosting_enabled": true,
+          },
+          "liquidity_provider": {
+            "deposit_enabled": true,
+            "internal_swaps_enabled": true,
+            "withdrawal_enabled": true,
+          },
+          "pools": {
+            "limit_order_update_enabled": true,
+            "range_order_update_enabled": true,
+          },
+          "reputation": {
+            "reporting_enabled": true,
+          },
+          "swapping": {
+            "broker_registration_enabled": true,
+            "swaps_enabled": true,
+            "withdrawals_enabled": true,
+          },
+          "threshold_signature_bitcoin": {
+            "slashing_enabled": true,
+          },
+          "threshold_signature_evm": {
+            "slashing_enabled": true,
+          },
+          "threshold_signature_polkadot": {
+            "slashing_enabled": true,
+          },
+          "threshold_signature_solana": {
+            "slashing_enabled": true,
+          },
+          "trading_strategies": {
+            "strategy_closure_enabled": true,
+            "strategy_execution_enabled": true,
+            "strategy_updates_enabled": true,
+          },
+          "validator": {
+            "authority_rotation_enabled": true,
+            "start_bidding_enabled": true,
+            "stop_bidding_enabled": true,
+          },
+          "witnesser": "CodeGreen",
+        }
+      `);
+    });
+
+    it('parses the 1.12 cfSafeModeStatuses response', () => {
+      const lendingPoolEnabledRpcAssets = chainflipAssets
+        .filter((asset) => asset !== 'Dot')
+        .map((asset) => internalAssetToRpcAsset[asset]);
+
+      const result = cfSafeModeStatuses.parse({
+        ...safeModeStatuses,
+        lending_pools: {
+          ...safeModeStatuses.lending_pools,
+          borrowing_enabled: lendingPoolEnabledRpcAssets,
+          add_lender_funds_enabled: lendingPoolEnabledRpcAssets,
+          withdraw_lender_funds_enabled: lendingPoolEnabledRpcAssets,
+          add_collateral_enabled: lendingPoolEnabledRpcAssets,
+          remove_collateral_enabled: lendingPoolEnabledRpcAssets,
+        },
+      });
+      expect(result).toMatchInlineSnapshot(`
+        {
+          "asset_balances": {
+            "reconciliation_enabled": true,
+          },
+          "broadcast_arbitrum": {
+            "egress_witnessing_enabled": true,
+            "retry_enabled": true,
+          },
+          "broadcast_assethub": {
+            "egress_witnessing_enabled": true,
+            "retry_enabled": true,
+          },
+          "broadcast_bitcoin": {
+            "egress_witnessing_enabled": true,
+            "retry_enabled": true,
+          },
+          "broadcast_ethereum": {
+            "egress_witnessing_enabled": true,
+            "retry_enabled": true,
+          },
+          "broadcast_polkadot": {
+            "egress_witnessing_enabled": true,
+            "retry_enabled": true,
+          },
+          "broadcast_solana": {
+            "egress_witnessing_enabled": true,
+            "retry_enabled": true,
+          },
+          "elections_generic": {
+            "oracle_price_elections": true,
+          },
+          "emissions": {
+            "emissions_sync_enabled": true,
+          },
+          "funding": {
+            "redeem_enabled": true,
+          },
+          "ingress_egress_arbitrum": {
+            "boost_deposits_enabled": true,
+            "deposit_channel_creation_enabled": true,
+            "deposit_channel_witnessing_enabled": true,
+            "vault_deposit_witnessing_enabled": true,
+          },
+          "ingress_egress_assethub": {
+            "boost_deposits_enabled": true,
+            "deposit_channel_creation_enabled": true,
+            "deposit_channel_witnessing_enabled": true,
+            "vault_deposit_witnessing_enabled": true,
+          },
+          "ingress_egress_bitcoin": {
+            "boost_deposits_enabled": true,
+            "deposit_channel_creation_enabled": true,
+            "deposit_channel_witnessing_enabled": true,
+            "vault_deposit_witnessing_enabled": true,
+          },
+          "ingress_egress_ethereum": {
+            "boost_deposits_enabled": true,
+            "deposit_channel_creation_enabled": true,
+            "deposit_channel_witnessing_enabled": true,
+            "vault_deposit_witnessing_enabled": true,
+          },
+          "ingress_egress_polkadot": {
+            "boost_deposits_enabled": true,
+            "deposit_channel_creation_enabled": true,
+            "deposit_channel_witnessing_enabled": true,
+            "vault_deposit_witnessing_enabled": true,
+          },
+          "ingress_egress_solana": {
+            "boost_deposits_enabled": true,
+            "deposit_channel_creation_enabled": true,
+            "deposit_channel_witnessing_enabled": true,
+            "vault_deposit_witnessing_enabled": true,
+          },
+          "lending_pools": {
+            "add_boost_funds_enabled": true,
+            "add_collateral_enabled": [
+              {
+                "asset": "USDC",
+                "chain": "Ethereum",
+              },
+              {
+                "asset": "USDT",
+                "chain": "Ethereum",
+              },
+              {
+                "asset": "FLIP",
+                "chain": "Ethereum",
+              },
+              {
+                "asset": "ETH",
+                "chain": "Ethereum",
+              },
+              {
+                "asset": "BTC",
+                "chain": "Bitcoin",
+              },
+              {
+                "asset": "USDC",
+                "chain": "Arbitrum",
+              },
+              {
+                "asset": "ETH",
+                "chain": "Arbitrum",
+              },
+              {
+                "asset": "SOL",
+                "chain": "Solana",
+              },
+              {
+                "asset": "USDC",
+                "chain": "Solana",
+              },
+              {
+                "asset": "DOT",
+                "chain": "Assethub",
+              },
+              {
+                "asset": "USDT",
+                "chain": "Assethub",
+              },
+              {
+                "asset": "USDC",
+                "chain": "Assethub",
+              },
+            ],
+            "add_lender_funds_enabled": [
+              {
+                "asset": "USDC",
+                "chain": "Ethereum",
+              },
+              {
+                "asset": "USDT",
+                "chain": "Ethereum",
+              },
+              {
+                "asset": "FLIP",
+                "chain": "Ethereum",
+              },
+              {
+                "asset": "ETH",
+                "chain": "Ethereum",
+              },
+              {
+                "asset": "BTC",
+                "chain": "Bitcoin",
+              },
+              {
+                "asset": "USDC",
+                "chain": "Arbitrum",
+              },
+              {
+                "asset": "ETH",
+                "chain": "Arbitrum",
+              },
+              {
+                "asset": "SOL",
+                "chain": "Solana",
+              },
+              {
+                "asset": "USDC",
+                "chain": "Solana",
+              },
+              {
+                "asset": "DOT",
+                "chain": "Assethub",
+              },
+              {
+                "asset": "USDT",
+                "chain": "Assethub",
+              },
+              {
+                "asset": "USDC",
+                "chain": "Assethub",
+              },
+            ],
+            "borrowing_enabled": [
+              {
+                "asset": "USDC",
+                "chain": "Ethereum",
+              },
+              {
+                "asset": "USDT",
+                "chain": "Ethereum",
+              },
+              {
+                "asset": "FLIP",
+                "chain": "Ethereum",
+              },
+              {
+                "asset": "ETH",
+                "chain": "Ethereum",
+              },
+              {
+                "asset": "BTC",
+                "chain": "Bitcoin",
+              },
+              {
+                "asset": "USDC",
+                "chain": "Arbitrum",
+              },
+              {
+                "asset": "ETH",
+                "chain": "Arbitrum",
+              },
+              {
+                "asset": "SOL",
+                "chain": "Solana",
+              },
+              {
+                "asset": "USDC",
+                "chain": "Solana",
+              },
+              {
+                "asset": "DOT",
+                "chain": "Assethub",
+              },
+              {
+                "asset": "USDT",
+                "chain": "Assethub",
+              },
+              {
+                "asset": "USDC",
+                "chain": "Assethub",
+              },
+            ],
+            "remove_collateral_enabled": [
+              {
+                "asset": "USDC",
+                "chain": "Ethereum",
+              },
+              {
+                "asset": "USDT",
+                "chain": "Ethereum",
+              },
+              {
+                "asset": "FLIP",
+                "chain": "Ethereum",
+              },
+              {
+                "asset": "ETH",
+                "chain": "Ethereum",
+              },
+              {
+                "asset": "BTC",
+                "chain": "Bitcoin",
+              },
+              {
+                "asset": "USDC",
+                "chain": "Arbitrum",
+              },
+              {
+                "asset": "ETH",
+                "chain": "Arbitrum",
+              },
+              {
+                "asset": "SOL",
+                "chain": "Solana",
+              },
+              {
+                "asset": "USDC",
+                "chain": "Solana",
+              },
+              {
+                "asset": "DOT",
+                "chain": "Assethub",
+              },
+              {
+                "asset": "USDT",
+                "chain": "Assethub",
+              },
+              {
+                "asset": "USDC",
+                "chain": "Assethub",
+              },
+            ],
+            "stop_boosting_enabled": true,
+            "withdraw_lender_funds_enabled": [
+              {
+                "asset": "USDC",
+                "chain": "Ethereum",
+              },
+              {
+                "asset": "USDT",
+                "chain": "Ethereum",
+              },
+              {
+                "asset": "FLIP",
+                "chain": "Ethereum",
+              },
+              {
+                "asset": "ETH",
+                "chain": "Ethereum",
+              },
+              {
+                "asset": "BTC",
+                "chain": "Bitcoin",
+              },
+              {
+                "asset": "USDC",
+                "chain": "Arbitrum",
+              },
+              {
+                "asset": "ETH",
+                "chain": "Arbitrum",
+              },
+              {
+                "asset": "SOL",
+                "chain": "Solana",
+              },
+              {
+                "asset": "USDC",
+                "chain": "Solana",
+              },
+              {
+                "asset": "DOT",
+                "chain": "Assethub",
+              },
+              {
+                "asset": "USDT",
+                "chain": "Assethub",
+              },
+              {
+                "asset": "USDC",
+                "chain": "Assethub",
+              },
+            ],
+          },
+          "liquidity_provider": {
+            "deposit_enabled": true,
+            "internal_swaps_enabled": true,
+            "withdrawal_enabled": true,
+          },
+          "pools": {
+            "limit_order_update_enabled": true,
+            "range_order_update_enabled": true,
+          },
+          "reputation": {
+            "reporting_enabled": true,
+          },
+          "swapping": {
+            "broker_registration_enabled": true,
+            "swaps_enabled": true,
+            "withdrawals_enabled": true,
+          },
+          "threshold_signature_bitcoin": {
+            "slashing_enabled": true,
+          },
+          "threshold_signature_evm": {
+            "slashing_enabled": true,
+          },
+          "threshold_signature_polkadot": {
+            "slashing_enabled": true,
+          },
+          "threshold_signature_solana": {
+            "slashing_enabled": true,
+          },
+          "trading_strategies": {
+            "strategy_closure_enabled": true,
+            "strategy_execution_enabled": true,
+            "strategy_updates_enabled": true,
+          },
+          "validator": {
+            "authority_rotation_enabled": true,
+            "start_bidding_enabled": true,
+            "stop_bidding_enabled": true,
+          },
+          "witnesser": "CodeGreen",
+        }
+      `);
     });
   });
 });
