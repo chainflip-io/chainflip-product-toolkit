@@ -24,7 +24,15 @@ export type ChainflipAsset = (typeof chainflipAssets)[number];
 
 export const assetSymbols = ['USDC', 'USDT', 'FLIP', 'DOT', 'ETH', 'BTC', 'SOL'] as const;
 
-export const priceAssets = ['Btc', 'Eth', 'Sol', 'Usdc', 'Usdt', 'Usd'] as const;
+export const priceAssets = [
+  'Btc',
+  'Eth',
+  'Sol',
+  'Usdc',
+  'Usdt',
+  'Usd',
+  'Fine', // not used
+] as const;
 export type PriceAsset = (typeof priceAssets)[number];
 
 /** @deprecated use `assetSymbols` instead */
