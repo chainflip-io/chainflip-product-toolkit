@@ -17,7 +17,7 @@
   "dependencies": {
     "@chainflip/scale": "^1.11.0",
     "@chainflip/utils": "^0.8.22",
-    "@coral-xyz/anchor": "^0.31.1",
+    "@coral-xyz/anchor": "^0.32.1",
     "@solana/web3.js": "^1.98.4",
     "bn.js": "^5.2.2",
     "scale-ts": "^1.6.1",
