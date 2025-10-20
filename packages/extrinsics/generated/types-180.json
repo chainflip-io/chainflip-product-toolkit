@@ -404,7 +404,7 @@
                 "type": "primitive",
                 "value": "u128"
               },
-              "cfParameters": {
+              "ccmAdditionalData": {
                 "type": "primitive",
                 "value": "Bytes"
               }
@@ -414,6 +414,77 @@
         "boostFee": {
           "type": "primitive",
           "value": "u16"
+        },
+        "refundParameters": {
+          "type": "struct",
+          "$name": "CfChainsChannelRefundParametersEncodedAddress",
+          "fields": {
+            "retryDuration": {
+              "type": "primitive",
+              "value": "u32"
+            },
+            "refundAddress": {
+              "type": "enum",
+              "$name": "cfChainsAddressEncodedAddress",
+              "values": [
+                {
+                  "name": "Eth",
+                  "value": {
+                    "type": "array",
+                    "value": {
+                      "type": "primitive",
+                      "value": "u8"
+                    },
+                    "length": 20
+                  }
+                },
+                {
+                  "name": "Dot",
+                  "value": {
+                    "type": "array",
+                    "value": {
+                      "type": "primitive",
+                      "value": "u8"
+                    },
+                    "length": 32
+                  }
+                },
+                {
+                  "name": "Btc",
+                  "value": {
+                    "type": "primitive",
+                    "value": "Bytes"
+                  }
+                },
+                {
+                  "name": "Arb",
+                  "value": {
+                    "type": "array",
+                    "value": {
+                      "type": "primitive",
+                      "value": "u8"
+                    },
+                    "length": 20
+                  }
+                },
+                {
+                  "name": "Sol",
+                  "value": {
+                    "type": "array",
+                    "value": {
+                      "type": "primitive",
+                      "value": "u8"
+                    },
+                    "length": 32
+                  }
+                }
+              ]
+            },
+            "minPrice": {
+              "type": "primitive",
+              "value": "U256"
+            }
+          }
         }
       }
     }

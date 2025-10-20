@@ -820,3 +820,5 @@ export const cfLoanAccount = z.object({
 });
 
 export const cfLoanAccounts = z.array(cfLoanAccount);
+
+export const cfEncodeNonNativeCall = z;

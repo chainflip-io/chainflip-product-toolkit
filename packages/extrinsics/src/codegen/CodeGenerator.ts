@@ -76,6 +76,7 @@ export default class CodeGenerator extends BaseCodeGenerator {
       case 'u8':
       case 'u16':
       case 'u32':
+      case 'u64':
         return new Code('number').asType();
       case 'u128':
       case 'U256':
@@ -94,22 +95,15 @@ export default class CodeGenerator extends BaseCodeGenerator {
     const identifier = this.getKnownIdentifier(def.$name);
     if (this.registry.types.has(identifier)) return new Identifier(identifier).asType();
 
-    const isSimpleEnum = def.values.every(
-      (value) => value.value.type === 'primitive' && value.value.value === 'null',
-    );
-
-    let members: CodegenResult[];
-
-    if (isSimpleEnum) {
-      members = def.values
-        .filter((value) => !value.name.startsWith('__Unused'))
-        .map((value) => new Code(`'${value.name}'`).asType());
-    } else {
-      members = def.values.map((value) => {
+    const members = def.values
+      .filter((value) => !value.name.startsWith('__Unused'))
+      .map((value) => {
+        if (value.value.type === 'primitive' && value.value.value === 'null') {
+          return new Code(`'${value.name}'`).asType();
+        }
         const result = this.generateResolvedType(value.value);
         return new Code(`Record<'${value.name}', ${result.toString()}>`, [result]).asType();
       });
-    }
 
     const code = new Code(members.join(' | '), members).asType();
     this.registry.types.set(identifier, code);

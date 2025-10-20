@@ -288,6 +288,7 @@ export const rpcResult = {
   cf_lending_pools: cfLendingPools,
   cf_lending_config: cfLendingConfig,
   cf_loan_accounts: cfLoanAccounts,
+  // cf_encode_non_native_call:
 } as const satisfies { [K in keyof RpcRequest]: z.ZodTypeAny };
 
 export type RpcMethod = keyof RpcRequest;

@@ -157,6 +157,42 @@
           "value": "H160"
         }
       }
+    },
+    "rebalance": {
+      "type": "struct",
+      "fields": {
+        "recipientAccountId": {
+          "type": "primitive",
+          "value": "AccountId32"
+        },
+        "redemptionAddress": {
+          "type": "option",
+          "value": {
+            "type": "primitive",
+            "value": "H160"
+          }
+        },
+        "amount": {
+          "type": "enum",
+          "$name": "palletCfFundingRedemptionAmount",
+          "values": [
+            {
+              "name": "Max",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "Exact",
+              "value": {
+                "type": "primitive",
+                "value": "u128"
+              }
+            }
+          ]
+        }
+      }
     }
   },
   "Swapping": {
@@ -239,6 +275,27 @@
             },
             {
               "name": "SolUsdc",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "HubDot",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "HubUsdt",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "HubUsdc",
               "value": {
                 "type": "primitive",
                 "value": "null"
@@ -326,6 +383,27 @@
                 "type": "primitive",
                 "value": "null"
               }
+            },
+            {
+              "name": "HubDot",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "HubUsdt",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "HubUsdc",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
             }
           ]
         },
@@ -383,6 +461,17 @@
                 },
                 "length": 32
               }
+            },
+            {
+              "name": "Hub",
+              "value": {
+                "type": "array",
+                "value": {
+                  "type": "primitive",
+                  "value": "u8"
+                },
+                "length": 32
+              }
             }
           ]
         },
@@ -394,7 +483,7 @@
           "type": "option",
           "value": {
             "type": "struct",
-            "$name": "CfChainsCcmChannelMetadata",
+            "$name": "CfChainsCcmChannelMetadataCcmAdditionalData",
             "fields": {
               "message": {
                 "type": "primitive",
@@ -404,7 +493,7 @@
                 "type": "primitive",
                 "value": "u128"
               },
-              "cfParameters": {
+              "ccmAdditionalData": {
                 "type": "primitive",
                 "value": "Bytes"
               }
@@ -414,6 +503,88 @@
         "boostFee": {
           "type": "primitive",
           "value": "u16"
+        },
+        "refundParameters": {
+          "type": "struct",
+          "$name": "CfChainsChannelRefundParametersEncodedAddress",
+          "fields": {
+            "retryDuration": {
+              "type": "primitive",
+              "value": "u32"
+            },
+            "refundAddress": {
+              "type": "enum",
+              "$name": "cfChainsAddressEncodedAddress",
+              "values": [
+                {
+                  "name": "Eth",
+                  "value": {
+                    "type": "array",
+                    "value": {
+                      "type": "primitive",
+                      "value": "u8"
+                    },
+                    "length": 20
+                  }
+                },
+                {
+                  "name": "Dot",
+                  "value": {
+                    "type": "array",
+                    "value": {
+                      "type": "primitive",
+                      "value": "u8"
+                    },
+                    "length": 32
+                  }
+                },
+                {
+                  "name": "Btc",
+                  "value": {
+                    "type": "primitive",
+                    "value": "Bytes"
+                  }
+                },
+                {
+                  "name": "Arb",
+                  "value": {
+                    "type": "array",
+                    "value": {
+                      "type": "primitive",
+                      "value": "u8"
+                    },
+                    "length": 20
+                  }
+                },
+                {
+                  "name": "Sol",
+                  "value": {
+                    "type": "array",
+                    "value": {
+                      "type": "primitive",
+                      "value": "u8"
+                    },
+                    "length": 32
+                  }
+                },
+                {
+                  "name": "Hub",
+                  "value": {
+                    "type": "array",
+                    "value": {
+                      "type": "primitive",
+                      "value": "u8"
+                    },
+                    "length": 32
+                  }
+                }
+              ]
+            },
+            "minPrice": {
+              "type": "primitive",
+              "value": "U256"
+            }
+          }
         }
       }
     }
