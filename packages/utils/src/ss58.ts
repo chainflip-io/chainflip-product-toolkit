@@ -1,4 +1,4 @@
-import { blake2b } from '@noble/hashes/blake2';
+import { blake2b } from '@noble/hashes/blake2.js';
 import { assert } from './assertion';
 import * as base58 from './base58';
 import { hexToBytes, bytesToHex } from './bytes';
