@@ -53,7 +53,7 @@ class ChangelogGenerator {
 
   changedEvents: Record<
     `${string}.${string}`,
-    { field: string; type: 'added' | 'changed' | 'removed' }[]
+    { field: string; type: 'added' | 'changed' | 'removed'; path: string[] }[]
   > = {};
   addedOrRemovedEvents: Record<`${string}.${string}`, 'added' | 'removed'> = {};
 
@@ -72,7 +72,7 @@ class ChangelogGenerator {
       const id = `${pallet}.${event}.${field}`;
       if (this.trackedFieldChanges.has(id)) return;
       this.trackedFieldChanges.add(id);
-      (this.changedEvents[`${pallet}.${event}`] ??= []).push({ field, type });
+      (this.changedEvents[`${pallet}.${event}`] ??= []).push({ field, type, path });
     }
   }
 
@@ -106,7 +106,8 @@ class ChangelogGenerator {
       } else {
         lines.push(`  - ${name}:`);
         const fields = this.changedEvents[event].map(
-          ({ field, type }) => `    - ${field}: ${type}`,
+          ({ field, type, path }) =>
+            `    - ${field}: ${type} (${path.filter((v) => v !== 'value' && v !== 'values' && v !== 'fields').join('.')})`,
         );
         lines.push(...fields);
       }

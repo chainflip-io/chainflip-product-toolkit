@@ -8,185 +8,185 @@ New or removed pallets:
 
 ArbitrumIngressEgress:
   - BatchBroadcastRequested:
-    - egressIds: added
+    - egressIds: added (ArbitrumIngressEgress.BatchBroadcastRequested.egressIds.0.5)
   - CcmBroadcastRequested:
-    - egressId: added
+    - egressId: added (ArbitrumIngressEgress.CcmBroadcastRequested.egressId.0.5)
   - CcmEgressInvalid:
-    - egressId: added
+    - egressId: added (ArbitrumIngressEgress.CcmEgressInvalid.egressId.0.5)
   - DepositBoosted:
-    - blockHeight: added
-    - depositDetails: added
+    - blockHeight: added (ArbitrumIngressEgress.DepositBoosted.blockHeight)
+    - depositDetails: added (ArbitrumIngressEgress.DepositBoosted.depositDetails)
   - DepositFinalised:
-    - blockHeight: added
-    - depositDetails: added
+    - blockHeight: added (ArbitrumIngressEgress.DepositFinalised.blockHeight)
+    - depositDetails: added (ArbitrumIngressEgress.DepositFinalised.depositDetails)
   - DepositIgnored:
-    - depositDetails: added
+    - depositDetails: added (ArbitrumIngressEgress.DepositIgnored.depositDetails)
   - DepositWitnessRejected:
-    - depositWitness: added
+    - depositWitness: added (ArbitrumIngressEgress.DepositWitnessRejected.depositWitness.depositDetails)
   - MaxSwapRetryDurationSet: added
 
 BitcoinIngressEgress:
   - BatchBroadcastRequested:
-    - egressIds: added
+    - egressIds: added (BitcoinIngressEgress.BatchBroadcastRequested.egressIds.0.5)
   - CcmBroadcastRequested:
-    - egressId: added
+    - egressId: added (BitcoinIngressEgress.CcmBroadcastRequested.egressId.0.5)
   - CcmEgressInvalid:
-    - egressId: added
+    - egressId: added (BitcoinIngressEgress.CcmEgressInvalid.egressId.0.5)
   - DepositBoosted:
-    - blockHeight: added
+    - blockHeight: added (BitcoinIngressEgress.DepositBoosted.blockHeight)
   - DepositFinalised:
-    - blockHeight: added
+    - blockHeight: added (BitcoinIngressEgress.DepositFinalised.blockHeight)
   - MaxSwapRetryDurationSet: added
 
 Emissions:
   - NetworkFeeBurned:
-    - egressId: added
+    - egressId: added (Emissions.NetworkFeeBurned.egressId.0.5)
 
 Environment:
   - RuntimeSafeModeUpdated:
-    - safeMode: added
+    - safeMode: added (Environment.RuntimeSafeModeUpdated.safeMode.2.assetBalances)
 
 EthereumIngressEgress:
   - BatchBroadcastRequested:
-    - egressIds: added
+    - egressIds: added (EthereumIngressEgress.BatchBroadcastRequested.egressIds.0.5)
   - CcmBroadcastRequested:
-    - egressId: added
+    - egressId: added (EthereumIngressEgress.CcmBroadcastRequested.egressId.0.5)
   - CcmEgressInvalid:
-    - egressId: added
+    - egressId: added (EthereumIngressEgress.CcmEgressInvalid.egressId.0.5)
   - DepositBoosted:
-    - blockHeight: added
-    - depositDetails: added
+    - blockHeight: added (EthereumIngressEgress.DepositBoosted.blockHeight)
+    - depositDetails: added (EthereumIngressEgress.DepositBoosted.depositDetails)
   - DepositFinalised:
-    - blockHeight: added
-    - depositDetails: added
+    - blockHeight: added (EthereumIngressEgress.DepositFinalised.blockHeight)
+    - depositDetails: added (EthereumIngressEgress.DepositFinalised.depositDetails)
   - DepositIgnored:
-    - depositDetails: added
+    - depositDetails: added (EthereumIngressEgress.DepositIgnored.depositDetails)
   - DepositWitnessRejected:
-    - depositWitness: added
+    - depositWitness: added (EthereumIngressEgress.DepositWitnessRejected.depositWitness.depositDetails)
   - MaxSwapRetryDurationSet: added
 
 LiquidityPools:
   - AssetSwapped:
-    - from: added
-    - to: added
+    - from: added (LiquidityPools.AssetSwapped.from.9)
+    - to: added (LiquidityPools.AssetSwapped.to.9)
   - LimitOrderUpdated:
-    - baseAsset: added
-    - quoteAsset: added
+    - baseAsset: added (LiquidityPools.LimitOrderUpdated.baseAsset.9)
+    - quoteAsset: added (LiquidityPools.LimitOrderUpdated.quoteAsset.9)
   - NetworkFeeTaken: removed
   - NewPoolCreated:
-    - baseAsset: added
-    - quoteAsset: added
+    - baseAsset: added (LiquidityPools.NewPoolCreated.baseAsset.9)
+    - quoteAsset: added (LiquidityPools.NewPoolCreated.quoteAsset.9)
   - PoolFeeSet:
-    - baseAsset: added
-    - quoteAsset: added
+    - baseAsset: added (LiquidityPools.PoolFeeSet.baseAsset.9)
+    - quoteAsset: added (LiquidityPools.PoolFeeSet.quoteAsset.9)
   - PriceImpactLimitSet:
-    - assetPair: added
+    - assetPair: added (LiquidityPools.PriceImpactLimitSet.assetPair.assets.base.9)
   - RangeOrderUpdated:
-    - baseAsset: added
-    - quoteAsset: added
+    - baseAsset: added (LiquidityPools.RangeOrderUpdated.baseAsset.9)
+    - quoteAsset: added (LiquidityPools.RangeOrderUpdated.quoteAsset.9)
   - UpdatedBuyInterval: removed
 
 LiquidityProvider:
   - AccountCredited:
-    - asset: added
+    - asset: added (LiquidityProvider.AccountCredited.asset.9)
   - AccountDebited:
-    - asset: added
+    - asset: added (LiquidityProvider.AccountDebited.asset.9)
   - AssetTransferred:
-    - asset: added
+    - asset: added (LiquidityProvider.AssetTransferred.asset.9)
   - LiquidityDepositAddressReady:
-    - asset: added
-    - depositAddress: added
+    - asset: added (LiquidityProvider.LiquidityDepositAddressReady.asset.9)
+    - depositAddress: added (LiquidityProvider.LiquidityDepositAddressReady.depositAddress.4)
   - LiquidityDepositCredited:
-    - asset: added
+    - asset: added (LiquidityProvider.LiquidityDepositCredited.asset.9)
   - LiquidityRefundAddressRegistered:
-    - chain: added
-    - address: added
+    - chain: added (LiquidityProvider.LiquidityRefundAddressRegistered.chain.5)
+    - address: added (LiquidityProvider.LiquidityRefundAddressRegistered.address.4)
   - WithdrawalEgressScheduled:
-    - egressId: added
-    - asset: added
-    - destinationAddress: added
+    - egressId: added (LiquidityProvider.WithdrawalEgressScheduled.egressId.0.5)
+    - asset: added (LiquidityProvider.WithdrawalEgressScheduled.asset.9)
+    - destinationAddress: added (LiquidityProvider.WithdrawalEgressScheduled.destinationAddress.4)
 
 PolkadotIngressEgress:
   - BatchBroadcastRequested:
-    - egressIds: added
+    - egressIds: added (PolkadotIngressEgress.BatchBroadcastRequested.egressIds.0.5)
   - CcmBroadcastRequested:
-    - egressId: added
+    - egressId: added (PolkadotIngressEgress.CcmBroadcastRequested.egressId.0.5)
   - CcmEgressInvalid:
-    - egressId: added
+    - egressId: added (PolkadotIngressEgress.CcmEgressInvalid.egressId.0.5)
   - DepositBoosted:
-    - blockHeight: added
-    - depositDetails: changed
+    - blockHeight: added (PolkadotIngressEgress.DepositBoosted.blockHeight)
+    - depositDetails: changed (PolkadotIngressEgress.DepositBoosted.depositDetails)
   - DepositFinalised:
-    - blockHeight: added
-    - depositDetails: changed
+    - blockHeight: added (PolkadotIngressEgress.DepositFinalised.blockHeight)
+    - depositDetails: changed (PolkadotIngressEgress.DepositFinalised.depositDetails)
   - DepositIgnored:
-    - depositDetails: changed
+    - depositDetails: changed (PolkadotIngressEgress.DepositIgnored.depositDetails)
   - DepositWitnessRejected:
-    - depositWitness: changed
+    - depositWitness: changed (PolkadotIngressEgress.DepositWitnessRejected.depositWitness.depositDetails)
   - MaxSwapRetryDurationSet: added
 
 Swapping:
   - BatchSwapFailed:
-    - asset: added
+    - asset: added (Swapping.BatchSwapFailed.asset.9)
   - BuyIntervalSet: added
   - CcmDepositReceived:
-    - destinationAddress: added
-    - depositMetadata: added
+    - destinationAddress: added (Swapping.CcmDepositReceived.destinationAddress.4)
+    - depositMetadata: added (Swapping.CcmDepositReceived.depositMetadata.sourceChain.5)
   - CcmEgressScheduled:
-    - egressId: added
+    - egressId: added (Swapping.CcmEgressScheduled.egressId.0.5)
   - CcmFailed:
-    - destinationAddress: added
-    - depositMetadata: added
-    - origin: added
+    - destinationAddress: added (Swapping.CcmFailed.destinationAddress.4)
+    - depositMetadata: added (Swapping.CcmFailed.depositMetadata.sourceChain.5)
+    - origin: added (Swapping.CcmFailed.origin.0.depositAddress.4)
   - MaximumSwapAmountSet:
-    - asset: added
+    - asset: added (Swapping.MaximumSwapAmountSet.asset.9)
   - NetworkFeeTaken: added
   - RefundEgressIgnored: added
   - RefundEgressScheduled: added
   - SwapAmountConfiscated:
-    - sourceAsset: added
-    - destinationAsset: added
+    - sourceAsset: added (Swapping.SwapAmountConfiscated.sourceAsset.9)
+    - destinationAsset: added (Swapping.SwapAmountConfiscated.destinationAsset.9)
   - SwapDepositAddressReady:
-    - refundParameters: added
-    - depositAddress: added
-    - destinationAddress: added
-    - sourceAsset: added
-    - destinationAsset: added
+    - refundParameters: added (Swapping.SwapDepositAddressReady.refundParameters)
+    - depositAddress: added (Swapping.SwapDepositAddressReady.depositAddress.4)
+    - destinationAddress: added (Swapping.SwapDepositAddressReady.destinationAddress.4)
+    - sourceAsset: added (Swapping.SwapDepositAddressReady.sourceAsset.9)
+    - destinationAsset: added (Swapping.SwapDepositAddressReady.destinationAsset.9)
   - SwapEgressIgnored:
-    - asset: added
+    - asset: added (Swapping.SwapEgressIgnored.asset.9)
   - SwapEgressScheduled:
-    - egressId: added
-    - asset: added
+    - egressId: added (Swapping.SwapEgressScheduled.egressId.0.5)
+    - asset: added (Swapping.SwapEgressScheduled.asset.9)
   - SwapExecuted:
-    - sourceAsset: added
-    - destinationAsset: added
-    - swapType: added
+    - sourceAsset: added (Swapping.SwapExecuted.sourceAsset.9)
+    - destinationAsset: added (Swapping.SwapExecuted.destinationAsset.9)
+    - swapType: added (Swapping.SwapExecuted.swapType.0.4)
   - SwapRescheduled: added
   - SwapRetryDelaySet: added
   - SwapScheduled:
-    - sourceAsset: added
-    - destinationAsset: added
-    - destinationAddress: added
-    - origin: added
-    - swapType: added
+    - sourceAsset: added (Swapping.SwapScheduled.sourceAsset.9)
+    - destinationAsset: added (Swapping.SwapScheduled.destinationAsset.9)
+    - destinationAddress: added (Swapping.SwapScheduled.destinationAddress.4)
+    - origin: added (Swapping.SwapScheduled.origin.0.depositAddress.4)
+    - swapType: added (Swapping.SwapScheduled.swapType.0.4)
   - WithdrawalRequested:
-    - egressId: added
-    - egressAsset: added
-    - destinationAddress: added
+    - egressId: added (Swapping.WithdrawalRequested.egressId.0.5)
+    - egressAsset: added (Swapping.WithdrawalRequested.egressAsset.9)
+    - destinationAddress: added (Swapping.WithdrawalRequested.destinationAddress.4)
 
 TokenholderGovernance:
   - GovKeyUpdatedHasFailed:
-    - chain: added
+    - chain: added (TokenholderGovernance.GovKeyUpdatedHasFailed.chain.5)
   - GovKeyUpdatedWasSuccessful:
-    - chain: added
+    - chain: added (TokenholderGovernance.GovKeyUpdatedWasSuccessful.chain.5)
   - ProposalEnacted:
-    - proposal: added
+    - proposal: added (TokenholderGovernance.ProposalEnacted.proposal.0.0.5)
   - ProposalPassed:
-    - proposal: added
+    - proposal: added (TokenholderGovernance.ProposalPassed.proposal.0.0.5)
   - ProposalRejected:
-    - proposal: added
+    - proposal: added (TokenholderGovernance.ProposalRejected.proposal.0.0.5)
   - ProposalSubmitted:
-    - proposal: added
+    - proposal: added (TokenholderGovernance.ProposalSubmitted.proposal.0.0.5)
 
 Validator:
   - PeerIdRegistered: removed

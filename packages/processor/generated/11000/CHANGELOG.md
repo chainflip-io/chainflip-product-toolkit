@@ -6,13 +6,13 @@ ArbitrumIngressEgress:
   - BoostFundsAdded: removed
   - BoostPoolCreated: removed
   - CcmEgressInvalid:
-    - error: added
+    - error: added (ArbitrumIngressEgress.CcmEgressInvalid.error.4)
   - ChannelOpeningFeeSet: removed
   - DepositChannelLifetimeSet: removed
   - DepositFailed:
-    - details: changed
+    - details: changed (ArbitrumIngressEgress.DepositFailed.details.0.name)
   - FailedToBuildAllBatchCall:
-    - error: added
+    - error: added (ArbitrumIngressEgress.FailedToBuildAllBatchCall.error.5.9)
   - InvalidCcmRefunded: added
   - MinimumDepositSet: removed
   - NetworkFeeDeductionFromBoostSet: removed
@@ -24,13 +24,13 @@ AssethubIngressEgress:
   - BoostFundsAdded: removed
   - BoostPoolCreated: removed
   - CcmEgressInvalid:
-    - error: added
+    - error: added (AssethubIngressEgress.CcmEgressInvalid.error.4)
   - ChannelOpeningFeeSet: removed
   - DepositChannelLifetimeSet: removed
   - DepositFailed:
-    - details: changed
+    - details: changed (AssethubIngressEgress.DepositFailed.details.0.name)
   - FailedToBuildAllBatchCall:
-    - error: added
+    - error: added (AssethubIngressEgress.FailedToBuildAllBatchCall.error.5.9)
   - InvalidCcmRefunded: added
   - MinimumDepositSet: removed
   - NetworkFeeDeductionFromBoostSet: removed
@@ -42,13 +42,13 @@ BitcoinIngressEgress:
   - BoostFundsAdded: removed
   - BoostPoolCreated: removed
   - CcmEgressInvalid:
-    - error: added
+    - error: added (BitcoinIngressEgress.CcmEgressInvalid.error.4)
   - ChannelOpeningFeeSet: removed
   - DepositChannelLifetimeSet: removed
   - DepositFailed:
-    - details: changed
+    - details: changed (BitcoinIngressEgress.DepositFailed.details.0.name)
   - FailedToBuildAllBatchCall:
-    - error: added
+    - error: added (BitcoinIngressEgress.FailedToBuildAllBatchCall.error.5.9)
   - InvalidCcmRefunded: added
   - MinimumDepositSet: removed
   - NetworkFeeDeductionFromBoostSet: removed
@@ -58,21 +58,21 @@ BitcoinIngressEgress:
 
 Environment:
   - RuntimeSafeModeUpdated:
-    - safeMode: added
+    - safeMode: added (Environment.RuntimeSafeModeUpdated.safeMode.2.lendingPools)
   - SolanaGovCallDispatched:
-    - govCall: added
+    - govCall: added (Environment.SolanaGovCallDispatched.govCall.2)
 
 EthereumIngressEgress:
   - BoostFundsAdded: removed
   - BoostPoolCreated: removed
   - CcmEgressInvalid:
-    - error: added
+    - error: added (EthereumIngressEgress.CcmEgressInvalid.error.4)
   - ChannelOpeningFeeSet: removed
   - DepositChannelLifetimeSet: removed
   - DepositFailed:
-    - details: changed
+    - details: changed (EthereumIngressEgress.DepositFailed.details.0.name)
   - FailedToBuildAllBatchCall:
-    - error: added
+    - error: added (EthereumIngressEgress.FailedToBuildAllBatchCall.error.5.9)
   - InvalidCcmRefunded: added
   - MinimumDepositSet: removed
   - NetworkFeeDeductionFromBoostSet: removed
@@ -87,13 +87,13 @@ PolkadotIngressEgress:
   - BoostFundsAdded: removed
   - BoostPoolCreated: removed
   - CcmEgressInvalid:
-    - error: added
+    - error: added (PolkadotIngressEgress.CcmEgressInvalid.error.4)
   - ChannelOpeningFeeSet: removed
   - DepositChannelLifetimeSet: removed
   - DepositFailed:
-    - details: changed
+    - details: changed (PolkadotIngressEgress.DepositFailed.details.0.name)
   - FailedToBuildAllBatchCall:
-    - error: added
+    - error: added (PolkadotIngressEgress.FailedToBuildAllBatchCall.error.5.9)
   - InvalidCcmRefunded: added
   - MinimumDepositSet: removed
   - NetworkFeeDeductionFromBoostSet: removed
@@ -104,19 +104,19 @@ PolkadotIngressEgress:
 SolanaElections:
   - ElectoralEvent: added
   - UnknownElection:
-    - 1: added
+    - 1: added (SolanaElections.UnknownElection.1.6)
 
 SolanaIngressEgress:
   - BoostFundsAdded: removed
   - BoostPoolCreated: removed
   - CcmEgressInvalid:
-    - error: added
+    - error: added (SolanaIngressEgress.CcmEgressInvalid.error.4)
   - ChannelOpeningFeeSet: removed
   - DepositChannelLifetimeSet: removed
   - DepositFailed:
-    - details: changed
+    - details: changed (SolanaIngressEgress.DepositFailed.details.0.name)
   - FailedToBuildAllBatchCall:
-    - error: added
+    - error: added (SolanaIngressEgress.FailedToBuildAllBatchCall.error.5.9)
   - InvalidCcmRefunded: added
   - MinimumDepositSet: removed
   - NetworkFeeDeductionFromBoostSet: removed
@@ -126,20 +126,20 @@ SolanaIngressEgress:
 
 Swapping:
   - PalletConfigUpdated:
-    - update: added
+    - update: added (Swapping.PalletConfigUpdated.update.10)
   - RefundEgressScheduled:
-    - refundFee: added
+    - refundFee: added (Swapping.RefundEgressScheduled.refundFee)
   - RefundedOnChain:
-    - refundFee: added
+    - refundFee: added (Swapping.RefundedOnChain.refundFee)
   - SwapDepositAddressReady:
-    - channelMetadata: added
+    - channelMetadata: added (Swapping.SwapDepositAddressReady.channelMetadata.ccmAdditionalData)
   - SwapRequested:
-    - requestType: added
+    - requestType: added (Swapping.SwapRequested.requestType.2.outputAction.0.ccmDepositMetadata.channelMetadata.ccmAdditionalData)
 
 TradingStrategy:
   - StrategyDeployed:
-    - strategy: added
+    - strategy: added (TradingStrategy.StrategyDeployed.strategy.1)
 
 Validator:
   - PalletConfigUpdated:
-    - update: added
+    - update: added (Validator.PalletConfigUpdated.update.9)
