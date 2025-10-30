@@ -3,29 +3,29 @@ New or removed pallets:
 
 AccountRoles:
   - AccountRoleDeregistered:
-    - role: added
+    - role: added (AccountRoles.AccountRoleDeregistered.role.4)
   - AccountRoleRegistered:
-    - role: added
+    - role: added (AccountRoles.AccountRoleRegistered.role.4)
   - SubAccountCallExecuted: added
   - SubAccountCreated: added
 
 ArbitrumIngressEgress:
   - DepositFailed:
-    - details: added
+    - details: added (ArbitrumIngressEgress.DepositFailed.details.1.vaultWitness.refundParams.refundCcmMetadata)
   - PalletConfigUpdated:
-    - update: added
+    - update: added (ArbitrumIngressEgress.PalletConfigUpdated.update.5.accountRole.4)
 
 AssethubIngressEgress:
   - DepositFailed:
-    - details: added
+    - details: added (AssethubIngressEgress.DepositFailed.details.1.vaultWitness.refundParams.refundCcmMetadata)
   - PalletConfigUpdated:
-    - update: added
+    - update: added (AssethubIngressEgress.PalletConfigUpdated.update.5.accountRole.4)
 
 BitcoinIngressEgress:
   - DepositFailed:
-    - details: added
+    - details: added (BitcoinIngressEgress.DepositFailed.details.1.vaultWitness.refundParams.refundCcmMetadata)
   - PalletConfigUpdated:
-    - update: added
+    - update: added (BitcoinIngressEgress.PalletConfigUpdated.update.5.accountRole.4)
 
 Emissions:
   - BackupNodeInflationEmissionsUpdated: removed
@@ -33,13 +33,13 @@ Emissions:
 
 Environment:
   - RuntimeSafeModeUpdated:
-    - safeMode: added
+    - safeMode: added (Environment.RuntimeSafeModeUpdated.safeMode.2.electionsGeneric)
 
 EthereumIngressEgress:
   - DepositFailed:
-    - details: added
+    - details: added (EthereumIngressEgress.DepositFailed.details.1.vaultWitness.refundParams.refundCcmMetadata)
   - PalletConfigUpdated:
-    - update: added
+    - update: added (EthereumIngressEgress.PalletConfigUpdated.update.5.accountRole.4)
 
 Flip:
   - BondUpdated: added
@@ -65,28 +65,28 @@ LendingPools:
 
 PolkadotIngressEgress:
   - DepositFailed:
-    - details: added
+    - details: added (PolkadotIngressEgress.DepositFailed.details.1.vaultWitness.refundParams.refundCcmMetadata)
   - PalletConfigUpdated:
-    - update: added
+    - update: added (PolkadotIngressEgress.PalletConfigUpdated.update.5.accountRole.4)
 
 SolanaIngressEgress:
   - DepositFailed:
-    - details: added
+    - details: added (SolanaIngressEgress.DepositFailed.details.1.vaultWitness.refundParams.refundCcmMetadata)
   - PalletConfigUpdated:
-    - update: added
+    - update: added (SolanaIngressEgress.PalletConfigUpdated.update.5.accountRole.4)
 
 Swapping:
   - SwapAborted: added
   - SwapDepositAddressReady:
-    - refundParameters: added
+    - refundParameters: added (Swapping.SwapDepositAddressReady.refundParameters.refundCcmMetadata)
   - SwapExecuted:
-    - oracleDelta: added
+    - oracleDelta: added (Swapping.SwapExecuted.oracleDelta)
   - SwapRequested:
-    - priceLimitsAndExpiry: added
-    - refundParameters: removed
-    - requestType: added
+    - priceLimitsAndExpiry: added (Swapping.SwapRequested.priceLimitsAndExpiry)
+    - refundParameters: removed (Swapping.SwapRequested.refundParameters)
+    - requestType: added (Swapping.SwapRequested.requestType.2.outputAction.2)
   - SwapRescheduled:
-    - reason: added
+    - reason: added (Swapping.SwapRescheduled.reason)
 
 Validator:
   - Delegated: added
@@ -96,9 +96,9 @@ Validator:
   - OperatorAcceptedByValidator: added
   - OperatorSettingsUpdated: added
   - PalletConfigUpdated:
-    - update: removed
+    - update: removed (Validator.PalletConfigUpdated.update.8)
   - RotationPhaseUpdated:
-    - newPhase: removed
+    - newPhase: removed (Validator.RotationPhaseUpdated.newPhase.1.secondaryCandidates)
   - UnDelegationFinalized: added
   - Undelegated: added
   - ValidatorClaimed: added

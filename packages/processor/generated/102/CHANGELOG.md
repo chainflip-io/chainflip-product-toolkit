@@ -1,6 +1,6 @@
 AccountRoles:
   - AccountRoleRegistered:
-    - role: changed
+    - role: changed (AccountRoles.AccountRoleRegistered.role.0.name)
 
 Swapping:
   - MaximumSwapAmountSet: added
@@ -8,4 +8,4 @@ Swapping:
 
 Validator:
   - PalletConfigUpdated:
-    - update: added
+    - update: added (Validator.PalletConfigUpdated.update.8)

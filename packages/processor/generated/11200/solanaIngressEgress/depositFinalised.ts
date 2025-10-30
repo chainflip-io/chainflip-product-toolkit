@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import {
   cfChainsDepositOriginType,
+  cfChainsSolVaultSwapOrDepositChannelId,
   cfPrimitivesChainsAssetsSolAsset,
   hexString,
   numberOrHex,
@@ -12,6 +13,7 @@ export const solanaIngressEgressDepositFinalised = z.object({
   asset: cfPrimitivesChainsAssetsSolAsset,
   amount: numberOrHex,
   blockHeight: numberOrHex,
+  depositDetails: cfChainsSolVaultSwapOrDepositChannelId,
   ingressFee: numberOrHex,
   maxBoostFeeBps: z.number(),
   action: palletCfSolanaIngressEgressDepositAction,

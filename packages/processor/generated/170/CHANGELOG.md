@@ -7,9 +7,9 @@ ArbitrumIngressEgress:
   - CcmFallbackScheduled: added
   - DepositChannelLifetimeSet: added
   - DepositIgnored:
-    - reason: added
+    - reason: added (ArbitrumIngressEgress.DepositIgnored.reason.2)
   - FailedToBuildAllBatchCall:
-    - error: added
+    - error: added (ArbitrumIngressEgress.FailedToBuildAllBatchCall.error.6)
   - TransactionRejectedByBroker: added
   - TransactionRejectionFailed: added
   - TransactionRejectionRequestExpired: added
@@ -26,17 +26,17 @@ BitcoinIngressEgress:
   - CcmFailed: added
   - CcmFallbackScheduled: added
   - DepositBoosted:
-    - depositDetails: added
+    - depositDetails: added (BitcoinIngressEgress.DepositBoosted.depositDetails.id)
   - DepositChannelLifetimeSet: added
   - DepositFinalised:
-    - depositDetails: added
+    - depositDetails: added (BitcoinIngressEgress.DepositFinalised.depositDetails.id)
   - DepositIgnored:
-    - depositDetails: added
-    - reason: added
+    - depositDetails: added (BitcoinIngressEgress.DepositIgnored.depositDetails.id)
+    - reason: added (BitcoinIngressEgress.DepositIgnored.reason.2)
   - DepositWitnessRejected:
-    - depositWitness: added
+    - depositWitness: added (BitcoinIngressEgress.DepositWitnessRejected.depositWitness.depositDetails.id)
   - FailedToBuildAllBatchCall:
-    - error: added
+    - error: added (BitcoinIngressEgress.FailedToBuildAllBatchCall.error.6)
   - TransactionRejectedByBroker: added
   - TransactionRejectionFailed: added
   - TransactionRejectionRequestExpired: added
@@ -59,9 +59,9 @@ EthereumIngressEgress:
   - CcmFallbackScheduled: added
   - DepositChannelLifetimeSet: added
   - DepositIgnored:
-    - reason: added
+    - reason: added (EthereumIngressEgress.DepositIgnored.reason.2)
   - FailedToBuildAllBatchCall:
-    - error: added
+    - error: added (EthereumIngressEgress.FailedToBuildAllBatchCall.error.6)
   - TransactionRejectedByBroker: added
   - TransactionRejectionFailed: added
   - TransactionRejectionRequestExpired: added
@@ -84,9 +84,9 @@ PolkadotIngressEgress:
   - CcmFallbackScheduled: added
   - DepositChannelLifetimeSet: added
   - DepositIgnored:
-    - reason: added
+    - reason: added (PolkadotIngressEgress.DepositIgnored.reason.2)
   - FailedToBuildAllBatchCall:
-    - error: added
+    - error: added (PolkadotIngressEgress.FailedToBuildAllBatchCall.error.6)
   - TransactionRejectedByBroker: added
   - TransactionRejectionFailed: added
   - TransactionRejectionRequestExpired: added
@@ -102,14 +102,14 @@ PolkadotVault:
 
 Reputation:
   - OffencePenalty:
-    - offence: added
+    - offence: added (Reputation.OffencePenalty.offence.8)
   - PenaltyUpdated:
-    - offence: added
+    - offence: added (Reputation.PenaltyUpdated.offence.8)
 
 SolanaBroadcaster:
   - PalletConfigUpdated: added
   - TransactionBroadcastRequest:
-    - transactionPayload: added
+    - transactionPayload: added (SolanaBroadcaster.TransactionBroadcastRequest.transactionPayload.serializedTransaction)
 
 SolanaIngressEgress:
   - BoostedDepositLost: added
@@ -117,9 +117,9 @@ SolanaIngressEgress:
   - CcmFallbackScheduled: added
   - DepositChannelLifetimeSet: added
   - DepositIgnored:
-    - reason: added
+    - reason: added (SolanaIngressEgress.DepositIgnored.reason.2)
   - FailedToBuildAllBatchCall:
-    - error: added
+    - error: added (SolanaIngressEgress.FailedToBuildAllBatchCall.error.6)
   - TransactionRejectedByBroker: added
   - TransactionRejectionFailed: added
   - TransactionRejectionRequestExpired: added
@@ -137,7 +137,7 @@ Swapping:
   - CcmFailed: removed
   - MinimumChunkSizeSet: added
   - SwapRequested:
-    - requestType: added
+    - requestType: added (Swapping.SwapRequested.requestType.3.ccmSwapMetadata)
 
 Validator:
   - PreviousRotationStillPending: added

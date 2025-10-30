@@ -1,67 +1,67 @@
 ArbitrumChainTracking:
   - ChainStateUpdated:
-    - newChainState: added
+    - newChainState: added (ArbitrumChainTracking.ChainStateUpdated.newChainState.trackedData.l1BaseFeeEstimate)
 
 ArbitrumIngressEgress:
   - CcmEgressInvalid:
-    - error: added
+    - error: added (ArbitrumIngressEgress.CcmEgressInvalid.error.1.6.3)
   - CcmFailed: removed
   - CcmFallbackScheduled: removed
   - DepositBoosted:
-    - maxBoostFeeBps: added
-    - originType: added
-    - depositAddress: changed
-    - channelId: changed
-    - action: removed
+    - maxBoostFeeBps: added (ArbitrumIngressEgress.DepositBoosted.maxBoostFeeBps)
+    - originType: added (ArbitrumIngressEgress.DepositBoosted.originType)
+    - depositAddress: changed (ArbitrumIngressEgress.DepositBoosted.depositAddress.type)
+    - channelId: changed (ArbitrumIngressEgress.DepositBoosted.channelId.type)
+    - action: removed (ArbitrumIngressEgress.DepositBoosted.action.4)
   - DepositFailed: added
   - DepositFinalised:
-    - maxBoostFeeBps: added
-    - originType: added
-    - depositAddress: changed
-    - action: removed
-    - channelId: changed
+    - maxBoostFeeBps: added (ArbitrumIngressEgress.DepositFinalised.maxBoostFeeBps)
+    - originType: added (ArbitrumIngressEgress.DepositFinalised.originType)
+    - depositAddress: changed (ArbitrumIngressEgress.DepositFinalised.depositAddress.type)
+    - action: removed (ArbitrumIngressEgress.DepositFinalised.action.4)
+    - channelId: changed (ArbitrumIngressEgress.DepositFinalised.channelId.type)
   - DepositIgnored: removed
   - DepositWitnessRejected: removed
   - FailedToBuildAllBatchCall:
-    - error: added
+    - error: added (ArbitrumIngressEgress.FailedToBuildAllBatchCall.error.5.6.3)
   - InsufficientBoostLiquidity:
-    - originType: added
-    - channelId: changed
+    - originType: added (ArbitrumIngressEgress.InsufficientBoostLiquidity.originType)
+    - channelId: changed (ArbitrumIngressEgress.InsufficientBoostLiquidity.channelId.type)
   - NetworkFeeDeductionFromBoostSet: added
   - TransferFallbackRequested:
-    - egressDetails: added
+    - egressDetails: added (ArbitrumIngressEgress.TransferFallbackRequested.egressDetails)
   - UnknownAffiliate: added
   - UnknownBroker: added
   - WitnessSafetyMarginSet: added
 
 BitcoinIngressEgress:
   - CcmEgressInvalid:
-    - error: added
+    - error: added (BitcoinIngressEgress.CcmEgressInvalid.error.1.6.3)
   - CcmFailed: removed
   - CcmFallbackScheduled: removed
   - DepositBoosted:
-    - maxBoostFeeBps: added
-    - originType: added
-    - depositAddress: added
-    - channelId: changed
-    - action: removed
+    - maxBoostFeeBps: added (BitcoinIngressEgress.DepositBoosted.maxBoostFeeBps)
+    - originType: added (BitcoinIngressEgress.DepositBoosted.originType)
+    - depositAddress: added (BitcoinIngressEgress.DepositBoosted.depositAddress)
+    - channelId: changed (BitcoinIngressEgress.DepositBoosted.channelId.type)
+    - action: removed (BitcoinIngressEgress.DepositBoosted.action.4)
   - DepositFailed: added
   - DepositFinalised:
-    - maxBoostFeeBps: added
-    - originType: added
-    - depositAddress: added
-    - action: removed
-    - channelId: changed
+    - maxBoostFeeBps: added (BitcoinIngressEgress.DepositFinalised.maxBoostFeeBps)
+    - originType: added (BitcoinIngressEgress.DepositFinalised.originType)
+    - depositAddress: added (BitcoinIngressEgress.DepositFinalised.depositAddress)
+    - action: removed (BitcoinIngressEgress.DepositFinalised.action.4)
+    - channelId: changed (BitcoinIngressEgress.DepositFinalised.channelId.type)
   - DepositIgnored: removed
   - DepositWitnessRejected: removed
   - FailedToBuildAllBatchCall:
-    - error: added
+    - error: added (BitcoinIngressEgress.FailedToBuildAllBatchCall.error.5.6.3)
   - InsufficientBoostLiquidity:
-    - originType: added
-    - channelId: changed
+    - originType: added (BitcoinIngressEgress.InsufficientBoostLiquidity.originType)
+    - channelId: changed (BitcoinIngressEgress.InsufficientBoostLiquidity.channelId.type)
   - NetworkFeeDeductionFromBoostSet: added
   - TransferFallbackRequested:
-    - egressDetails: added
+    - egressDetails: added (BitcoinIngressEgress.TransferFallbackRequested.egressDetails)
   - UnknownAffiliate: added
   - UnknownBroker: added
   - WitnessSafetyMarginSet: added
@@ -71,107 +71,107 @@ Environment:
 
 EthereumIngressEgress:
   - CcmEgressInvalid:
-    - error: added
+    - error: added (EthereumIngressEgress.CcmEgressInvalid.error.1.6.3)
   - CcmFailed: removed
   - CcmFallbackScheduled: removed
   - DepositBoosted:
-    - maxBoostFeeBps: added
-    - originType: added
-    - depositAddress: changed
-    - channelId: changed
-    - action: removed
+    - maxBoostFeeBps: added (EthereumIngressEgress.DepositBoosted.maxBoostFeeBps)
+    - originType: added (EthereumIngressEgress.DepositBoosted.originType)
+    - depositAddress: changed (EthereumIngressEgress.DepositBoosted.depositAddress.type)
+    - channelId: changed (EthereumIngressEgress.DepositBoosted.channelId.type)
+    - action: removed (EthereumIngressEgress.DepositBoosted.action.4)
   - DepositFailed: added
   - DepositFinalised:
-    - maxBoostFeeBps: added
-    - originType: added
-    - depositAddress: changed
-    - action: removed
-    - channelId: changed
+    - maxBoostFeeBps: added (EthereumIngressEgress.DepositFinalised.maxBoostFeeBps)
+    - originType: added (EthereumIngressEgress.DepositFinalised.originType)
+    - depositAddress: changed (EthereumIngressEgress.DepositFinalised.depositAddress.type)
+    - action: removed (EthereumIngressEgress.DepositFinalised.action.4)
+    - channelId: changed (EthereumIngressEgress.DepositFinalised.channelId.type)
   - DepositIgnored: removed
   - DepositWitnessRejected: removed
   - FailedToBuildAllBatchCall:
-    - error: added
+    - error: added (EthereumIngressEgress.FailedToBuildAllBatchCall.error.5.6.3)
   - InsufficientBoostLiquidity:
-    - originType: added
-    - channelId: changed
+    - originType: added (EthereumIngressEgress.InsufficientBoostLiquidity.originType)
+    - channelId: changed (EthereumIngressEgress.InsufficientBoostLiquidity.channelId.type)
   - NetworkFeeDeductionFromBoostSet: added
   - TransferFallbackRequested:
-    - egressDetails: added
+    - egressDetails: added (EthereumIngressEgress.TransferFallbackRequested.egressDetails)
   - UnknownAffiliate: added
   - UnknownBroker: added
   - WitnessSafetyMarginSet: added
 
 PolkadotIngressEgress:
   - CcmEgressInvalid:
-    - error: added
+    - error: added (PolkadotIngressEgress.CcmEgressInvalid.error.1.6.3)
   - CcmFailed: removed
   - CcmFallbackScheduled: removed
   - DepositBoosted:
-    - maxBoostFeeBps: added
-    - originType: added
-    - depositAddress: removed
-    - channelId: changed
-    - action: removed
+    - maxBoostFeeBps: added (PolkadotIngressEgress.DepositBoosted.maxBoostFeeBps)
+    - originType: added (PolkadotIngressEgress.DepositBoosted.originType)
+    - depositAddress: removed (PolkadotIngressEgress.DepositBoosted.depositAddress.length)
+    - channelId: changed (PolkadotIngressEgress.DepositBoosted.channelId.type)
+    - action: removed (PolkadotIngressEgress.DepositBoosted.action.4)
   - DepositFailed: added
   - DepositFinalised:
-    - maxBoostFeeBps: added
-    - originType: added
-    - depositAddress: removed
-    - action: removed
-    - channelId: changed
+    - maxBoostFeeBps: added (PolkadotIngressEgress.DepositFinalised.maxBoostFeeBps)
+    - originType: added (PolkadotIngressEgress.DepositFinalised.originType)
+    - depositAddress: removed (PolkadotIngressEgress.DepositFinalised.depositAddress.length)
+    - action: removed (PolkadotIngressEgress.DepositFinalised.action.4)
+    - channelId: changed (PolkadotIngressEgress.DepositFinalised.channelId.type)
   - DepositIgnored: removed
   - DepositWitnessRejected: removed
   - FailedToBuildAllBatchCall:
-    - error: added
+    - error: added (PolkadotIngressEgress.FailedToBuildAllBatchCall.error.5.6.3)
   - InsufficientBoostLiquidity:
-    - originType: added
-    - channelId: changed
+    - originType: added (PolkadotIngressEgress.InsufficientBoostLiquidity.originType)
+    - channelId: changed (PolkadotIngressEgress.InsufficientBoostLiquidity.channelId.type)
   - NetworkFeeDeductionFromBoostSet: added
   - TransferFallbackRequested:
-    - egressDetails: added
+    - egressDetails: added (PolkadotIngressEgress.TransferFallbackRequested.egressDetails)
   - UnknownAffiliate: added
   - UnknownBroker: added
   - WitnessSafetyMarginSet: added
 
 SolanaBroadcaster:
   - TransactionBroadcastRequest:
-    - transactionPayload: added
+    - transactionPayload: added (SolanaBroadcaster.TransactionBroadcastRequest.transactionPayload.skipPreflight)
 
 SolanaElections:
   - UnknownElection: added
 
 SolanaIngressEgress:
   - CcmEgressInvalid:
-    - error: added
+    - error: added (SolanaIngressEgress.CcmEgressInvalid.error.1.6.3)
   - CcmFailed: removed
   - CcmFallbackScheduled: removed
   - DepositBoosted:
-    - maxBoostFeeBps: added
-    - originType: added
-    - depositAddress: removed
-    - channelId: changed
-    - action: removed
+    - maxBoostFeeBps: added (SolanaIngressEgress.DepositBoosted.maxBoostFeeBps)
+    - originType: added (SolanaIngressEgress.DepositBoosted.originType)
+    - depositAddress: removed (SolanaIngressEgress.DepositBoosted.depositAddress.length)
+    - channelId: changed (SolanaIngressEgress.DepositBoosted.channelId.type)
+    - action: removed (SolanaIngressEgress.DepositBoosted.action.4)
   - DepositFailed: added
   - DepositFinalised:
-    - maxBoostFeeBps: added
-    - originType: added
-    - depositAddress: removed
-    - action: removed
-    - channelId: changed
+    - maxBoostFeeBps: added (SolanaIngressEgress.DepositFinalised.maxBoostFeeBps)
+    - originType: added (SolanaIngressEgress.DepositFinalised.originType)
+    - depositAddress: removed (SolanaIngressEgress.DepositFinalised.depositAddress.length)
+    - action: removed (SolanaIngressEgress.DepositFinalised.action.4)
+    - channelId: changed (SolanaIngressEgress.DepositFinalised.channelId.type)
   - DepositIgnored: removed
   - DepositWitnessRejected: removed
   - FailedToBuildAllBatchCall:
-    - error: added
+    - error: added (SolanaIngressEgress.FailedToBuildAllBatchCall.error.5.6.3)
   - InsufficientBoostLiquidity:
-    - originType: added
-    - channelId: changed
+    - originType: added (SolanaIngressEgress.InsufficientBoostLiquidity.originType)
+    - channelId: changed (SolanaIngressEgress.InsufficientBoostLiquidity.channelId.type)
   - NetworkFeeDeductionFromBoostSet: added
   - TransactionRejectionRequestExpired:
-    - txId: added
+    - txId: added (SolanaIngressEgress.TransactionRejectionRequestExpired.txId)
   - TransactionRejectionRequestReceived:
-    - txId: added
+    - txId: added (SolanaIngressEgress.TransactionRejectionRequestReceived.txId)
   - TransferFallbackRequested:
-    - egressDetails: added
+    - egressDetails: added (SolanaIngressEgress.TransferFallbackRequested.egressDetails)
   - UnknownAffiliate: added
   - UnknownBroker: added
   - WitnessSafetyMarginSet: added
@@ -183,18 +183,18 @@ Swapping:
   - PrivateBrokerChannelClosed: added
   - PrivateBrokerChannelOpened: added
   - RefundEgressScheduled:
-    - egressFee: added
+    - egressFee: added (Swapping.RefundEgressScheduled.egressFee)
   - SwapDepositAddressReady:
-    - brokerId: added
-    - channelMetadata: added
-    - refundParameters: added
+    - brokerId: added (Swapping.SwapDepositAddressReady.brokerId)
+    - channelMetadata: added (Swapping.SwapDepositAddressReady.channelMetadata.ccmAdditionalData)
+    - refundParameters: added (Swapping.SwapDepositAddressReady.refundParameters)
   - SwapEgressScheduled:
-    - egressFee: added
+    - egressFee: added (Swapping.SwapEgressScheduled.egressFee)
   - SwapRequested:
-    - brokerFees: added
-    - origin: added
-    - requestType: removed
+    - brokerFees: added (Swapping.SwapRequested.brokerFees)
+    - origin: added (Swapping.SwapRequested.origin.0.brokerId)
+    - requestType: removed (Swapping.SwapRequested.requestType.3)
   - SwapScheduled:
-    - swapType: removed
+    - swapType: removed (Swapping.SwapScheduled.swapType.3)
   - WithdrawalRequested:
-    - accountId: added
+    - accountId: added (Swapping.WithdrawalRequested.accountId)
