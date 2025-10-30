@@ -76,14 +76,14 @@ describe(WsClient, () => {
                   id: req.id,
                   jsonrpc: '2.0',
                   result: [
-                    ['account 1', ''],
-                    ['account 2', ''],
+                    ['cFaccount 1', ''],
+                    ['cFaccount 2', ''],
                   ],
                 };
               }
 
               if (req.method === 'cf_account_info') {
-                if (req.params[0] === 'account 1') {
+                if (req.params[0] === 'cFaccount 1') {
                   return {
                     id: req.id,
                     jsonrpc: '2.0',
@@ -96,7 +96,7 @@ describe(WsClient, () => {
                     } satisfies Extract<CfAccountInfoResponse, { role: 'unregistered' }>,
                   };
                 }
-                if (req.params[0] === 'account 2') {
+                if (req.params[0] === 'cFaccount 2') {
                   return {
                     id: req.id,
                     jsonrpc: '2.0',
@@ -233,8 +233,8 @@ describe(WsClient, () => {
     const accounts = await client.sendRequest('cf_accounts');
 
     expect(accounts).toEqual([
-      ['account 1', ''],
-      ['account 2', ''],
+      ['cFaccount 1', ''],
+      ['cFaccount 2', ''],
     ]);
 
     expect(await Promise.all(accounts.map(([acct]) => client.sendRequest('cf_account_info', acct))))
@@ -320,13 +320,13 @@ describe(WsClient, () => {
             jsonrpc: '2.0',
             id: expect.any(String),
             method: 'cf_account_info',
-            params: ['account 1'],
+            params: ['cFaccount 1'],
           },
           {
             jsonrpc: '2.0',
             id: expect.any(String),
             method: 'cf_account_info',
-            params: ['account 2'],
+            params: ['cFaccount 2'],
           },
         ],
       ],

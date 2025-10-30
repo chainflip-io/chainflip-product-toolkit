@@ -48,6 +48,7 @@ import {
   unregisteredAccount,
   VALIDATOR_ACCOUNT_ID,
   VALIDATOR_ACCOUNT_ID2,
+  vaultAddresses,
 } from './fixtures';
 
 const isHexString = (value: unknown): value is HexString =>
@@ -79,6 +80,7 @@ describe(HttpClient, () => {
         "cf_funding_environment",
         "cf_get_trading_strategies",
         "cf_get_trading_strategy_limits",
+        "cf_get_vault_addresses",
         "cf_ingress_egress_environment",
         "cf_lending_config",
         "cf_lending_pools",
@@ -145,7 +147,7 @@ describe(HttpClient, () => {
             Promise.resolve([
               {
                 jsonrpc: '2.0',
-                result: [['hello', 'world']],
+                result: [['cFhello', 'world']],
                 id: '1-1-1-1-1',
               },
             ]),
@@ -156,7 +158,7 @@ describe(HttpClient, () => {
       const listener = vi.fn();
       client.eventTarget.addEventListener('archiveNodeFallback', listener);
 
-      expect(await client.sendRequest('cf_accounts', '0x1234')).toEqual([['hello', 'world']]);
+      expect(await client.sendRequest('cf_accounts', '0x1234')).toEqual([['cFhello', 'world']]);
       expect(vi.mocked(fetch).mock.calls).toMatchInlineSnapshot(`
         [
           [
@@ -395,6 +397,8 @@ describe(HttpClient, () => {
           return respond(lendingConfig);
         case 'cf_loan_accounts':
           return respond(loanAccounts);
+        case 'cf_get_vault_addresses':
+          return respond(vaultAddresses);
         case 'cf_eth_state_chain_gateway_address':
         case 'cf_eth_key_manager_address':
         default:
@@ -1069,6 +1073,10 @@ describe(HttpClient, () => {
       `);
     });
 
+    it('handles cf_get_vault_addresses', async () => {
+      expect(await client.sendRequest('cf_get_vault_addresses')).toMatchSnapshot();
+    });
+
     it('handles multiple requests with 1 call', async () => {
       const [r1, r2] = await Promise.all([
         client.sendRequest(
@@ -1165,7 +1173,7 @@ describe(HttpClient, () => {
       spyOn(globalThis, 'fetch').mockResolvedValueOnce({
         ok: true,
         // eslint-disable-next-line @typescript-eslint/require-await
-        json: async () => [{ id: '1', jsonrpc: '2.0', result: [['account 1', null]] }],
+        json: async () => [{ id: '1', jsonrpc: '2.0', result: [['cFaccount 1', null]] }],
       } as Response);
       await expect(client.sendRequest('cf_accounts')).rejects.toThrowErrorMatchingInlineSnapshot(
         `
