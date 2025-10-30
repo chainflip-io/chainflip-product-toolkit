@@ -12,6 +12,13 @@ const IGNORED_METHODS = [
   'cf_eth_key_manager_address',
 ];
 
+const transformMethodName = (method: string) =>
+  capitalize(method)
+    .replace(/_(.)/g, (_, char: string) => char.toUpperCase())
+    // make `Get` optional in type names, e.g. `cf_get_vault_addresses` can be
+    // `CfVaultAddresses` or `CfGetVaultAddresses`
+    .replace('CfGet', 'Cf(Get)?');
+
 describe('types', () => {
   it.each(
     Object.keys(rpcResult).filter(
@@ -19,7 +26,7 @@ describe('types', () => {
     ),
   )('has a result export', async (key) => {
     const file = await fs.readFile(path.join(import.meta.dirname, '..', 'types.ts'), 'utf8');
-    const exportName = capitalize(key).replace(/_(.)/g, (_, char: string) => char.toUpperCase());
+    const exportName = transformMethodName(key);
 
     expect(file).toMatch(new RegExp(`export type ${exportName} =\\s+RpcResult<'${key}'>;`));
   });
@@ -30,7 +37,7 @@ describe('types', () => {
     ),
   )('has a response export', async (key) => {
     const file = await fs.readFile(path.join(import.meta.dirname, '..', 'types.ts'), 'utf8');
-    const exportName = capitalize(key).replace(/_(.)/g, (_, char: string) => char.toUpperCase());
+    const exportName = transformMethodName(key);
 
     expect(file).toMatch(
       new RegExp(`export type ${exportName}Response =\\s+RpcResponse<'${key}'>;`),

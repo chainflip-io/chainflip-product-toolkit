@@ -43,6 +43,7 @@ import {
   cfLendingConfig,
   cfLoanAccounts,
   cfMonitoringSimulateAuction,
+  cfVaultAddresses,
 } from './parsers';
 
 type Nullish<T> = T | null | undefined;
@@ -239,6 +240,7 @@ export type RpcRequest = WithHash<{
   cf_lending_pools: [asset?: UncheckedAssetAndChain];
   cf_lending_config: [];
   cf_loan_accounts: [accountId?: string];
+  cf_get_vault_addresses: [];
 }> & {
   chain_getBlockHash: [blockHeight?: number];
 };
@@ -288,6 +290,7 @@ export const rpcResult = {
   cf_lending_pools: cfLendingPools,
   cf_lending_config: cfLendingConfig,
   cf_loan_accounts: cfLoanAccounts,
+  cf_get_vault_addresses: cfVaultAddresses,
 } as const satisfies { [K in keyof RpcRequest]: z.ZodTypeAny };
 
 export type RpcMethod = keyof RpcRequest;

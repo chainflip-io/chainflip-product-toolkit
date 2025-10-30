@@ -1,3 +1,4 @@
+import { bytesToHex } from '@chainflip/utils/bytes';
 import { priceAssets } from '@chainflip/utils/chainflip';
 import { isUndefined } from '@chainflip/utils/guard';
 import { isHex } from '@chainflip/utils/string';
@@ -412,7 +413,7 @@ export const cfAccountInfo = z
     }
   });
 
-export const cfAccounts = z.array(z.tuple([z.string(), z.string()]));
+export const cfAccounts = z.array(z.tuple([accountId, z.string()]));
 
 export const cfPoolPriceV2 = z.object({
   sell: numberOrHex.nullable(),
@@ -787,3 +788,51 @@ export const cfLoanAccount = z.object({
 });
 
 export const cfLoanAccounts = z.array(cfLoanAccount);
+
+export const cfVaultAddresses = z
+  .object({
+    ethereum: z.object({ Eth: z.array(z.number()).length(20).transform(bytesToHex) }),
+    arbitrum: z.object({ Arb: z.array(z.number()).length(20).transform(bytesToHex) }),
+    bitcoin: z.array(
+      z.tuple([
+        accountId,
+        z.object({
+          Btc: z
+            .array(z.number())
+            .transform((bytes) => new TextDecoder().decode(new Uint8Array(bytes))),
+        }),
+      ]),
+    ),
+  })
+  .transform(({ ethereum, arbitrum, bitcoin }) => {
+    const bitcoinAddresses = bitcoin.reduce((acc, [brokerId, { Btc }]) => {
+      let obj = acc.get(brokerId);
+      if (!obj) {
+        obj = { current: '', previous: '' };
+        acc.set(brokerId, obj);
+      }
+      if (!obj.previous) {
+        obj.previous = Btc;
+      } else {
+        obj.current = Btc;
+      }
+
+      return acc;
+    }, new Map<`cF${string}`, { current: string; previous: string }>());
+
+    return {
+      Ethereum: ethereum.Eth,
+      Arbitrum: arbitrum.Arb,
+      Bitcoin: bitcoinAddresses,
+    };
+  })
+  .superRefine(({ Bitcoin }, ctx) => {
+    Bitcoin.forEach((value, key) => {
+      if (!value.current) {
+        ctx.addIssue({
+          message: `No current BTC address for broker ${key}`,
+          code: z.ZodIssueCode.custom,
+        });
+      }
+    });
+  });
