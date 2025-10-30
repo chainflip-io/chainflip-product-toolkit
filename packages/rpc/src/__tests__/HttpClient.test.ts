@@ -398,6 +398,9 @@ describe(HttpClient, () => {
         case 'cf_loan_accounts':
           return respond(loanAccounts);
         case 'cf_get_vault_addresses':
+          if (body.params[0] === '0xcafebabe') {
+            return respond({ ...vaultAddresses, bitcoin: vaultAddresses.bitcoin.slice(1) });
+          }
           return respond(vaultAddresses);
         case 'cf_eth_state_chain_gateway_address':
         case 'cf_eth_key_manager_address':
@@ -1075,6 +1078,19 @@ describe(HttpClient, () => {
 
     it('handles cf_get_vault_addresses', async () => {
       expect(await client.sendRequest('cf_get_vault_addresses')).toMatchSnapshot();
+    });
+
+    it('ensures every broker has a current and previous address', async () => {
+      await expect(client.sendRequest('cf_get_vault_addresses', '0xcafebabe')).rejects
+        .toThrowErrorMatchingInlineSnapshot(`
+        [ZodError: [
+          {
+            "message": "No current BTC address for broker cFJZVRaybb2PBwxTiAiRLiQfHY4KPB3RpJK22Q7Fhqk979aCH",
+            "code": "custom",
+            "path": []
+          }
+        ]]
+      `);
     });
 
     it('handles multiple requests with 1 call', async () => {

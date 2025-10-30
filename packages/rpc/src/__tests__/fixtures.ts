@@ -1694,4 +1694,4 @@ export const vaultAddresses = {
       },
     ],
   ],
-};
+} as const;
