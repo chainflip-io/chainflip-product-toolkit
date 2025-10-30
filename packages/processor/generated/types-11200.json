@@ -19547,8 +19547,33 @@
                   }
                 }
               }
+            },
+            {
+              "name": "SetIngressDelayEthereum",
+              "value": {
+                "type": "struct",
+                "fields": {
+                  "delayBlocks": {
+                    "type": "primitive",
+                    "value": "u32"
+                  }
+                }
+              }
             }
           ]
+        }
+      }
+    },
+    "ChannelRejectionRequestReceived": {
+      "type": "struct",
+      "fields": {
+        "accountId": {
+          "type": "primitive",
+          "value": "AccountId32"
+        },
+        "depositAddress": {
+          "type": "primitive",
+          "value": "H160"
         }
       }
     }
@@ -23074,8 +23099,37 @@
                   }
                 }
               }
+            },
+            {
+              "name": "SetIngressDelayPolkadot",
+              "value": {
+                "type": "struct",
+                "fields": {
+                  "delayBlocks": {
+                    "type": "primitive",
+                    "value": "u32"
+                  }
+                }
+              }
             }
           ]
+        }
+      }
+    },
+    "ChannelRejectionRequestReceived": {
+      "type": "struct",
+      "fields": {
+        "accountId": {
+          "type": "primitive",
+          "value": "AccountId32"
+        },
+        "depositAddress": {
+          "type": "array",
+          "value": {
+            "type": "primitive",
+            "value": "u8"
+          },
+          "length": 32
         }
       }
     }
@@ -27489,6 +27543,104 @@
                   "numChannels": {
                     "type": "primitive",
                     "value": "u8"
+                  }
+                }
+              }
+            },
+            {
+              "name": "SetIngressDelayBitcoin",
+              "value": {
+                "type": "struct",
+                "fields": {
+                  "delayBlocks": {
+                    "type": "primitive",
+                    "value": "u32"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "ChannelRejectionRequestReceived": {
+      "type": "struct",
+      "fields": {
+        "accountId": {
+          "type": "primitive",
+          "value": "AccountId32"
+        },
+        "depositAddress": {
+          "type": "enum",
+          "$name": "cfChainsBtcScriptPubkey",
+          "values": [
+            {
+              "name": "P2PKH",
+              "value": {
+                "type": "array",
+                "value": {
+                  "type": "primitive",
+                  "value": "u8"
+                },
+                "length": 20
+              }
+            },
+            {
+              "name": "P2SH",
+              "value": {
+                "type": "array",
+                "value": {
+                  "type": "primitive",
+                  "value": "u8"
+                },
+                "length": 20
+              }
+            },
+            {
+              "name": "P2WPKH",
+              "value": {
+                "type": "array",
+                "value": {
+                  "type": "primitive",
+                  "value": "u8"
+                },
+                "length": 20
+              }
+            },
+            {
+              "name": "P2WSH",
+              "value": {
+                "type": "array",
+                "value": {
+                  "type": "primitive",
+                  "value": "u8"
+                },
+                "length": 32
+              }
+            },
+            {
+              "name": "Taproot",
+              "value": {
+                "type": "array",
+                "value": {
+                  "type": "primitive",
+                  "value": "u8"
+                },
+                "length": 32
+              }
+            },
+            {
+              "name": "OtherSegwit",
+              "value": {
+                "type": "struct",
+                "fields": {
+                  "version": {
+                    "type": "primitive",
+                    "value": "u8"
+                  },
+                  "program": {
+                    "type": "primitive",
+                    "value": "Bytes"
                   }
                 }
               }
@@ -34080,8 +34232,33 @@
                   }
                 }
               }
+            },
+            {
+              "name": "SetIngressDelayArbitrum",
+              "value": {
+                "type": "struct",
+                "fields": {
+                  "delayBlocks": {
+                    "type": "primitive",
+                    "value": "u32"
+                  }
+                }
+              }
             }
           ]
+        }
+      }
+    },
+    "ChannelRejectionRequestReceived": {
+      "type": "struct",
+      "fields": {
+        "accountId": {
+          "type": "primitive",
+          "value": "AccountId32"
+        },
+        "depositAddress": {
+          "type": "primitive",
+          "value": "H160"
         }
       }
     }
@@ -35346,8 +35523,41 @@
           "value": "u64"
         },
         "depositDetails": {
-          "type": "primitive",
-          "value": "null"
+          "type": "enum",
+          "$name": "cfChainsSolVaultSwapOrDepositChannelId",
+          "values": [
+            {
+              "name": "Channel",
+              "value": {
+                "type": "array",
+                "value": {
+                  "type": "primitive",
+                  "value": "u8"
+                },
+                "length": 32
+              }
+            },
+            {
+              "name": "VaultSwapAccount",
+              "value": {
+                "type": "tuple",
+                "values": [
+                  {
+                    "type": "array",
+                    "value": {
+                      "type": "primitive",
+                      "value": "u8"
+                    },
+                    "length": 32
+                  },
+                  {
+                    "type": "primitive",
+                    "value": "u64"
+                  }
+                ]
+              }
+            }
+          ]
         },
         "ingressFee": {
           "type": "primitive",
@@ -36831,8 +37041,41 @@
                         "value": "u64"
                       },
                       "depositDetails": {
-                        "type": "primitive",
-                        "value": "null"
+                        "type": "enum",
+                        "$name": "cfChainsSolVaultSwapOrDepositChannelId",
+                        "values": [
+                          {
+                            "name": "Channel",
+                            "value": {
+                              "type": "array",
+                              "value": {
+                                "type": "primitive",
+                                "value": "u8"
+                              },
+                              "length": 32
+                            }
+                          },
+                          {
+                            "name": "VaultSwapAccount",
+                            "value": {
+                              "type": "tuple",
+                              "values": [
+                                {
+                                  "type": "array",
+                                  "value": {
+                                    "type": "primitive",
+                                    "value": "u8"
+                                  },
+                                  "length": 32
+                                },
+                                {
+                                  "type": "primitive",
+                                  "value": "u64"
+                                }
+                              ]
+                            }
+                          }
+                        ]
                       }
                     }
                   }
@@ -36891,8 +37134,41 @@
                         "value": "u64"
                       },
                       "depositDetails": {
-                        "type": "primitive",
-                        "value": "null"
+                        "type": "enum",
+                        "$name": "cfChainsSolVaultSwapOrDepositChannelId",
+                        "values": [
+                          {
+                            "name": "Channel",
+                            "value": {
+                              "type": "array",
+                              "value": {
+                                "type": "primitive",
+                                "value": "u8"
+                              },
+                              "length": 32
+                            }
+                          },
+                          {
+                            "name": "VaultSwapAccount",
+                            "value": {
+                              "type": "tuple",
+                              "values": [
+                                {
+                                  "type": "array",
+                                  "value": {
+                                    "type": "primitive",
+                                    "value": "u8"
+                                  },
+                                  "length": 32
+                                },
+                                {
+                                  "type": "primitive",
+                                  "value": "u64"
+                                }
+                              ]
+                            }
+                          }
+                        ]
                       },
                       "outputAsset": {
                         "type": "enum",
@@ -38302,8 +38578,41 @@
           }
         },
         "depositDetails": {
-          "type": "primitive",
-          "value": "null"
+          "type": "enum",
+          "$name": "cfChainsSolVaultSwapOrDepositChannelId",
+          "values": [
+            {
+              "name": "Channel",
+              "value": {
+                "type": "array",
+                "value": {
+                  "type": "primitive",
+                  "value": "u8"
+                },
+                "length": 32
+              }
+            },
+            {
+              "name": "VaultSwapAccount",
+              "value": {
+                "type": "tuple",
+                "values": [
+                  {
+                    "type": "array",
+                    "value": {
+                      "type": "primitive",
+                      "value": "u8"
+                    },
+                    "length": 32
+                  },
+                  {
+                    "type": "primitive",
+                    "value": "u64"
+                  }
+                ]
+              }
+            }
+          ]
         },
         "prewitnessedDepositId": {
           "type": "primitive",
@@ -38690,8 +38999,41 @@
           "value": "u32"
         },
         "txId": {
-          "type": "primitive",
-          "value": "null"
+          "type": "enum",
+          "$name": "cfChainsSolVaultSwapOrDepositChannelId",
+          "values": [
+            {
+              "name": "Channel",
+              "value": {
+                "type": "array",
+                "value": {
+                  "type": "primitive",
+                  "value": "u8"
+                },
+                "length": 32
+              }
+            },
+            {
+              "name": "VaultSwapAccount",
+              "value": {
+                "type": "tuple",
+                "values": [
+                  {
+                    "type": "array",
+                    "value": {
+                      "type": "primitive",
+                      "value": "u8"
+                    },
+                    "length": 32
+                  },
+                  {
+                    "type": "primitive",
+                    "value": "u64"
+                  }
+                ]
+              }
+            }
+          ]
         }
       }
     },
@@ -38699,8 +39041,41 @@
       "type": "struct",
       "fields": {
         "txId": {
-          "type": "primitive",
-          "value": "null"
+          "type": "enum",
+          "$name": "cfChainsSolVaultSwapOrDepositChannelId",
+          "values": [
+            {
+              "name": "Channel",
+              "value": {
+                "type": "array",
+                "value": {
+                  "type": "primitive",
+                  "value": "u8"
+                },
+                "length": 32
+              }
+            },
+            {
+              "name": "VaultSwapAccount",
+              "value": {
+                "type": "tuple",
+                "values": [
+                  {
+                    "type": "array",
+                    "value": {
+                      "type": "primitive",
+                      "value": "u8"
+                    },
+                    "length": 32
+                  },
+                  {
+                    "type": "primitive",
+                    "value": "u64"
+                  }
+                ]
+              }
+            }
+          ]
         }
       }
     },
@@ -38902,8 +39277,37 @@
                   }
                 }
               }
+            },
+            {
+              "name": "SetIngressDelaySolana",
+              "value": {
+                "type": "struct",
+                "fields": {
+                  "delayBlocks": {
+                    "type": "primitive",
+                    "value": "u32"
+                  }
+                }
+              }
             }
           ]
+        }
+      }
+    },
+    "ChannelRejectionRequestReceived": {
+      "type": "struct",
+      "fields": {
+        "accountId": {
+          "type": "primitive",
+          "value": "AccountId32"
+        },
+        "depositAddress": {
+          "type": "array",
+          "value": {
+            "type": "primitive",
+            "value": "u8"
+          },
+          "length": 32
         }
       }
     }
@@ -44145,8 +44549,37 @@
                   }
                 }
               }
+            },
+            {
+              "name": "SetIngressDelayAssethub",
+              "value": {
+                "type": "struct",
+                "fields": {
+                  "delayBlocks": {
+                    "type": "primitive",
+                    "value": "u32"
+                  }
+                }
+              }
             }
           ]
+        }
+      }
+    },
+    "ChannelRejectionRequestReceived": {
+      "type": "struct",
+      "fields": {
+        "accountId": {
+          "type": "primitive",
+          "value": "AccountId32"
+        },
+        "depositAddress": {
+          "type": "array",
+          "value": {
+            "type": "primitive",
+            "value": "u8"
+          },
+          "length": 32
         }
       }
     }

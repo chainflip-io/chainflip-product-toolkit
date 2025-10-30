@@ -558,6 +558,35 @@ export const palletCfEthereumIngressEgressDepositFailedDetailsEthereum = z.discr
   ],
 );
 
+export const cfPrimitivesAccountRole = simpleEnum([
+  'Unregistered',
+  'Validator',
+  'LiquidityProvider',
+  'Broker',
+  'Operator',
+]);
+
+export const palletCfEthereumIngressEgressPalletConfigUpdateEthereum = z.discriminatedUnion(
+  '__kind',
+  [
+    z.object({ __kind: z.literal('ChannelOpeningFeeEthereum'), fee: numberOrHex }),
+    z.object({
+      __kind: z.literal('SetMinimumDepositEthereum'),
+      asset: cfPrimitivesChainsAssetsEthAsset,
+      minimumDeposit: numberOrHex,
+    }),
+    z.object({ __kind: z.literal('SetDepositChannelLifetimeEthereum'), lifetime: numberOrHex }),
+    z.object({ __kind: z.literal('SetWitnessSafetyMarginEthereum'), margin: numberOrHex }),
+    z.object({ __kind: z.literal('SetBoostDelayEthereum'), delayBlocks: z.number() }),
+    z.object({
+      __kind: z.literal('SetMaximumPreallocatedChannelsEthereum'),
+      accountRole: cfPrimitivesAccountRole,
+      numChannels: z.number(),
+    }),
+    z.object({ __kind: z.literal('SetIngressDelayEthereum'), delayBlocks: z.number() }),
+  ],
+);
+
 export const cfPrimitivesChainsAssetsDotAsset = simpleEnum(['Dot']);
 
 export const palletCfPolkadotIngressEgressRefundReason = simpleEnum([
@@ -631,6 +660,27 @@ export const palletCfPolkadotIngressEgressDepositFailedDetailsPolkadot = z.discr
       __kind: z.literal('DepositFailedVaultVariantPolkadot'),
       vaultWitness: palletCfPolkadotIngressEgressVaultDepositWitnessPolkadot,
     }),
+  ],
+);
+
+export const palletCfPolkadotIngressEgressPalletConfigUpdatePolkadot = z.discriminatedUnion(
+  '__kind',
+  [
+    z.object({ __kind: z.literal('ChannelOpeningFeePolkadot'), fee: numberOrHex }),
+    z.object({
+      __kind: z.literal('SetMinimumDepositPolkadot'),
+      asset: cfPrimitivesChainsAssetsDotAsset,
+      minimumDeposit: numberOrHex,
+    }),
+    z.object({ __kind: z.literal('SetDepositChannelLifetimePolkadot'), lifetime: z.number() }),
+    z.object({ __kind: z.literal('SetWitnessSafetyMarginPolkadot'), margin: z.number() }),
+    z.object({ __kind: z.literal('SetBoostDelayPolkadot'), delayBlocks: z.number() }),
+    z.object({
+      __kind: z.literal('SetMaximumPreallocatedChannelsPolkadot'),
+      accountRole: cfPrimitivesAccountRole,
+      numChannels: z.number(),
+    }),
+    z.object({ __kind: z.literal('SetIngressDelayPolkadot'), delayBlocks: z.number() }),
   ],
 );
 
@@ -732,6 +782,27 @@ export const palletCfBitcoinIngressEgressDepositFailedDetailsBitcoin = z.discrim
   ],
 );
 
+export const palletCfBitcoinIngressEgressPalletConfigUpdateBitcoin = z.discriminatedUnion(
+  '__kind',
+  [
+    z.object({ __kind: z.literal('ChannelOpeningFeeBitcoin'), fee: numberOrHex }),
+    z.object({
+      __kind: z.literal('SetMinimumDepositBitcoin'),
+      asset: cfPrimitivesChainsAssetsBtcAsset,
+      minimumDeposit: numberOrHex,
+    }),
+    z.object({ __kind: z.literal('SetDepositChannelLifetimeBitcoin'), lifetime: numberOrHex }),
+    z.object({ __kind: z.literal('SetWitnessSafetyMarginBitcoin'), margin: numberOrHex }),
+    z.object({ __kind: z.literal('SetBoostDelayBitcoin'), delayBlocks: z.number() }),
+    z.object({
+      __kind: z.literal('SetMaximumPreallocatedChannelsBitcoin'),
+      accountRole: cfPrimitivesAccountRole,
+      numChannels: z.number(),
+    }),
+    z.object({ __kind: z.literal('SetIngressDelayBitcoin'), delayBlocks: z.number() }),
+  ],
+);
+
 export const cfPrimitivesChainsAssetsArbAsset = simpleEnum(['ArbEth', 'ArbUsdc']);
 
 export const palletCfArbitrumIngressEgressRefundReason = simpleEnum([
@@ -808,7 +879,33 @@ export const palletCfArbitrumIngressEgressDepositFailedDetailsArbitrum = z.discr
   ],
 );
 
+export const palletCfArbitrumIngressEgressPalletConfigUpdateArbitrum = z.discriminatedUnion(
+  '__kind',
+  [
+    z.object({ __kind: z.literal('ChannelOpeningFeeArbitrum'), fee: numberOrHex }),
+    z.object({
+      __kind: z.literal('SetMinimumDepositArbitrum'),
+      asset: cfPrimitivesChainsAssetsArbAsset,
+      minimumDeposit: numberOrHex,
+    }),
+    z.object({ __kind: z.literal('SetDepositChannelLifetimeArbitrum'), lifetime: numberOrHex }),
+    z.object({ __kind: z.literal('SetWitnessSafetyMarginArbitrum'), margin: numberOrHex }),
+    z.object({ __kind: z.literal('SetBoostDelayArbitrum'), delayBlocks: z.number() }),
+    z.object({
+      __kind: z.literal('SetMaximumPreallocatedChannelsArbitrum'),
+      accountRole: cfPrimitivesAccountRole,
+      numChannels: z.number(),
+    }),
+    z.object({ __kind: z.literal('SetIngressDelayArbitrum'), delayBlocks: z.number() }),
+  ],
+);
+
 export const cfPrimitivesChainsAssetsSolAsset = simpleEnum(['Sol', 'SolUsdc']);
+
+export const cfChainsSolVaultSwapOrDepositChannelId = z.discriminatedUnion('__kind', [
+  z.object({ __kind: z.literal('Channel'), value: hexString }),
+  z.object({ __kind: z.literal('VaultSwapAccount'), value: z.tuple([hexString, numberOrHex]) }),
+]);
 
 export const palletCfSolanaIngressEgressRefundReason = simpleEnum([
   'InvalidBrokerFees',
@@ -850,6 +947,7 @@ export const palletCfSolanaIngressEgressDepositWitnessSolana = z.object({
   depositAddress: hexString,
   asset: cfPrimitivesChainsAssetsSolAsset,
   amount: numberOrHex,
+  depositDetails: cfChainsSolVaultSwapOrDepositChannelId,
 });
 
 export const palletCfSolanaIngressEgressVaultDepositWitnessSolana = z.object({
@@ -857,6 +955,7 @@ export const palletCfSolanaIngressEgressVaultDepositWitnessSolana = z.object({
   depositAddress: hexString.nullish(),
   channelId: numberOrHex.nullish(),
   depositAmount: numberOrHex,
+  depositDetails: cfChainsSolVaultSwapOrDepositChannelId,
   outputAsset: cfPrimitivesChainsAssetsAnyAsset,
   destinationAddress: cfChainsAddressEncodedAddress,
   depositMetadata: cfChainsCcmDepositMetadata.nullish(),
@@ -881,6 +980,24 @@ export const palletCfSolanaIngressEgressDepositFailedDetailsSolana = z.discrimin
     }),
   ],
 );
+
+export const palletCfSolanaIngressEgressPalletConfigUpdateSolana = z.discriminatedUnion('__kind', [
+  z.object({ __kind: z.literal('ChannelOpeningFeeSolana'), fee: numberOrHex }),
+  z.object({
+    __kind: z.literal('SetMinimumDepositSolana'),
+    asset: cfPrimitivesChainsAssetsSolAsset,
+    minimumDeposit: numberOrHex,
+  }),
+  z.object({ __kind: z.literal('SetDepositChannelLifetimeSolana'), lifetime: numberOrHex }),
+  z.object({ __kind: z.literal('SetWitnessSafetyMarginSolana'), margin: numberOrHex }),
+  z.object({ __kind: z.literal('SetBoostDelaySolana'), delayBlocks: z.number() }),
+  z.object({
+    __kind: z.literal('SetMaximumPreallocatedChannelsSolana'),
+    accountRole: cfPrimitivesAccountRole,
+    numChannels: z.number(),
+  }),
+  z.object({ __kind: z.literal('SetIngressDelaySolana'), delayBlocks: z.number() }),
+]);
 
 export const cfPrimitivesChainsAssetsHubAsset = simpleEnum(['HubDot', 'HubUsdt', 'HubUsdc']);
 
@@ -955,6 +1072,27 @@ export const palletCfAssethubIngressEgressDepositFailedDetailsAssethub = z.discr
       __kind: z.literal('DepositFailedVaultVariantAssethub'),
       vaultWitness: palletCfAssethubIngressEgressVaultDepositWitnessAssethub,
     }),
+  ],
+);
+
+export const palletCfAssethubIngressEgressPalletConfigUpdateAssethub = z.discriminatedUnion(
+  '__kind',
+  [
+    z.object({ __kind: z.literal('ChannelOpeningFeeAssethub'), fee: numberOrHex }),
+    z.object({
+      __kind: z.literal('SetMinimumDepositAssethub'),
+      asset: cfPrimitivesChainsAssetsHubAsset,
+      minimumDeposit: numberOrHex,
+    }),
+    z.object({ __kind: z.literal('SetDepositChannelLifetimeAssethub'), lifetime: z.number() }),
+    z.object({ __kind: z.literal('SetWitnessSafetyMarginAssethub'), margin: z.number() }),
+    z.object({ __kind: z.literal('SetBoostDelayAssethub'), delayBlocks: z.number() }),
+    z.object({
+      __kind: z.literal('SetMaximumPreallocatedChannelsAssethub'),
+      accountRole: cfPrimitivesAccountRole,
+      numChannels: z.number(),
+    }),
+    z.object({ __kind: z.literal('SetIngressDelayAssethub'), delayBlocks: z.number() }),
   ],
 );
 
