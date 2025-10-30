@@ -23,6 +23,8 @@ BitcoinIngressEgress:
     - action: added
 
 Environment:
+  - BatchCompleted: added
+  - NonNativeSignedCall: added
   - RuntimeSafeModeUpdated:
     - safeMode: added
 
@@ -42,7 +44,6 @@ LendingPools:
   - InterestTaken: added
   - LendingFeeCollectionInitiated: removed
   - LendingNetworkFeeSwapInitiated: added
-  - LendingPoolFeeSwapInitiated: added
   - LiquidationFeeTaken: added
   - LoanCreated:
     - originationFee: removed
@@ -78,6 +79,8 @@ SolanaIngressEgress:
 Swapping:
   - SwapAborted:
     - reason: added
+  - SwapRequested:
+    - requestType: removed
   - SwapRescheduled:
     - reason: added
 

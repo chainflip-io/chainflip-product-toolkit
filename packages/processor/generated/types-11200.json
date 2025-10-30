@@ -2048,6 +2048,14 @@
           "length": 32
         }
       }
+    },
+    "NonNativeSignedCall": {
+      "type": "primitive",
+      "value": "null"
+    },
+    "BatchCompleted": {
+      "type": "primitive",
+      "value": "null"
     }
   },
   "Flip": {
@@ -10594,118 +10602,6 @@
                                       "loanId": {
                                         "type": "primitive",
                                         "value": "u64"
-                                      }
-                                    }
-                                  }
-                                },
-                                {
-                                  "name": "FeeSwap",
-                                  "value": {
-                                    "type": "struct",
-                                    "fields": {
-                                      "poolAsset": {
-                                        "type": "enum",
-                                        "$name": "cfPrimitivesChainsAssetsAnyAsset",
-                                        "values": [
-                                          {
-                                            "name": "__Unused0",
-                                            "value": {
-                                              "type": "primitive",
-                                              "value": "null"
-                                            }
-                                          },
-                                          {
-                                            "name": "Eth",
-                                            "value": {
-                                              "type": "primitive",
-                                              "value": "null"
-                                            }
-                                          },
-                                          {
-                                            "name": "Flip",
-                                            "value": {
-                                              "type": "primitive",
-                                              "value": "null"
-                                            }
-                                          },
-                                          {
-                                            "name": "Usdc",
-                                            "value": {
-                                              "type": "primitive",
-                                              "value": "null"
-                                            }
-                                          },
-                                          {
-                                            "name": "Dot",
-                                            "value": {
-                                              "type": "primitive",
-                                              "value": "null"
-                                            }
-                                          },
-                                          {
-                                            "name": "Btc",
-                                            "value": {
-                                              "type": "primitive",
-                                              "value": "null"
-                                            }
-                                          },
-                                          {
-                                            "name": "ArbEth",
-                                            "value": {
-                                              "type": "primitive",
-                                              "value": "null"
-                                            }
-                                          },
-                                          {
-                                            "name": "ArbUsdc",
-                                            "value": {
-                                              "type": "primitive",
-                                              "value": "null"
-                                            }
-                                          },
-                                          {
-                                            "name": "Usdt",
-                                            "value": {
-                                              "type": "primitive",
-                                              "value": "null"
-                                            }
-                                          },
-                                          {
-                                            "name": "Sol",
-                                            "value": {
-                                              "type": "primitive",
-                                              "value": "null"
-                                            }
-                                          },
-                                          {
-                                            "name": "SolUsdc",
-                                            "value": {
-                                              "type": "primitive",
-                                              "value": "null"
-                                            }
-                                          },
-                                          {
-                                            "name": "HubDot",
-                                            "value": {
-                                              "type": "primitive",
-                                              "value": "null"
-                                            }
-                                          },
-                                          {
-                                            "name": "HubUsdt",
-                                            "value": {
-                                              "type": "primitive",
-                                              "value": "null"
-                                            }
-                                          },
-                                          {
-                                            "name": "HubUsdc",
-                                            "value": {
-                                              "type": "primitive",
-                                              "value": "null"
-                                            }
-                                          }
-                                        ]
                                       }
                                     }
                                   }
@@ -45434,6 +45330,26 @@
                 "type": "primitive",
                 "value": "u128"
               }
+            },
+            {
+              "name": "SetMinimumAmounts",
+              "value": {
+                "type": "struct",
+                "fields": {
+                  "minimumLoanAmountUsd": {
+                    "type": "primitive",
+                    "value": "u128"
+                  },
+                  "minimumUpdateLoanAmountUsd": {
+                    "type": "primitive",
+                    "value": "u128"
+                  },
+                  "minimumUpdateCollateralAmountUsd": {
+                    "type": "primitive",
+                    "value": "u128"
+                  }
+                }
+              }
             }
           ]
         }
@@ -45444,7 +45360,7 @@
       "fields": {
         "boostPool": {
           "type": "struct",
-          "$name": "PalletCfLendingPoolsBoostPoolId",
+          "$name": "PalletCfLendingPoolsBoostBoostPoolId",
           "fields": {
             "asset": {
               "type": "enum",
@@ -45567,7 +45483,7 @@
         },
         "boostPool": {
           "type": "struct",
-          "$name": "PalletCfLendingPoolsBoostPoolId",
+          "$name": "PalletCfLendingPoolsBoostBoostPoolId",
           "fields": {
             "asset": {
               "type": "enum",
@@ -45694,7 +45610,7 @@
         },
         "boostPool": {
           "type": "struct",
-          "$name": "PalletCfLendingPoolsBoostPoolId",
+          "$name": "PalletCfLendingPoolsBoostBoostPoolId",
           "fields": {
             "asset": {
               "type": "enum",
@@ -46678,448 +46594,20 @@
           "value": "u64"
         },
         "poolInterest": {
-          "type": "map",
-          "key": {
-            "type": "enum",
-            "$name": "cfPrimitivesChainsAssetsAnyAsset",
-            "values": [
-              {
-                "name": "__Unused0",
-                "value": {
-                  "type": "primitive",
-                  "value": "null"
-                }
-              },
-              {
-                "name": "Eth",
-                "value": {
-                  "type": "primitive",
-                  "value": "null"
-                }
-              },
-              {
-                "name": "Flip",
-                "value": {
-                  "type": "primitive",
-                  "value": "null"
-                }
-              },
-              {
-                "name": "Usdc",
-                "value": {
-                  "type": "primitive",
-                  "value": "null"
-                }
-              },
-              {
-                "name": "Dot",
-                "value": {
-                  "type": "primitive",
-                  "value": "null"
-                }
-              },
-              {
-                "name": "Btc",
-                "value": {
-                  "type": "primitive",
-                  "value": "null"
-                }
-              },
-              {
-                "name": "ArbEth",
-                "value": {
-                  "type": "primitive",
-                  "value": "null"
-                }
-              },
-              {
-                "name": "ArbUsdc",
-                "value": {
-                  "type": "primitive",
-                  "value": "null"
-                }
-              },
-              {
-                "name": "Usdt",
-                "value": {
-                  "type": "primitive",
-                  "value": "null"
-                }
-              },
-              {
-                "name": "Sol",
-                "value": {
-                  "type": "primitive",
-                  "value": "null"
-                }
-              },
-              {
-                "name": "SolUsdc",
-                "value": {
-                  "type": "primitive",
-                  "value": "null"
-                }
-              },
-              {
-                "name": "HubDot",
-                "value": {
-                  "type": "primitive",
-                  "value": "null"
-                }
-              },
-              {
-                "name": "HubUsdt",
-                "value": {
-                  "type": "primitive",
-                  "value": "null"
-                }
-              },
-              {
-                "name": "HubUsdc",
-                "value": {
-                  "type": "primitive",
-                  "value": "null"
-                }
-              }
-            ]
-          },
-          "value": {
-            "type": "primitive",
-            "value": "u128"
-          }
+          "type": "primitive",
+          "value": "u128"
         },
         "networkInterest": {
-          "type": "map",
-          "key": {
-            "type": "enum",
-            "$name": "cfPrimitivesChainsAssetsAnyAsset",
-            "values": [
-              {
-                "name": "__Unused0",
-                "value": {
-                  "type": "primitive",
-                  "value": "null"
-                }
-              },
-              {
-                "name": "Eth",
-                "value": {
-                  "type": "primitive",
-                  "value": "null"
-                }
-              },
-              {
-                "name": "Flip",
-                "value": {
-                  "type": "primitive",
-                  "value": "null"
-                }
-              },
-              {
-                "name": "Usdc",
-                "value": {
-                  "type": "primitive",
-                  "value": "null"
-                }
-              },
-              {
-                "name": "Dot",
-                "value": {
-                  "type": "primitive",
-                  "value": "null"
-                }
-              },
-              {
-                "name": "Btc",
-                "value": {
-                  "type": "primitive",
-                  "value": "null"
-                }
-              },
-              {
-                "name": "ArbEth",
-                "value": {
-                  "type": "primitive",
-                  "value": "null"
-                }
-              },
-              {
-                "name": "ArbUsdc",
-                "value": {
-                  "type": "primitive",
-                  "value": "null"
-                }
-              },
-              {
-                "name": "Usdt",
-                "value": {
-                  "type": "primitive",
-                  "value": "null"
-                }
-              },
-              {
-                "name": "Sol",
-                "value": {
-                  "type": "primitive",
-                  "value": "null"
-                }
-              },
-              {
-                "name": "SolUsdc",
-                "value": {
-                  "type": "primitive",
-                  "value": "null"
-                }
-              },
-              {
-                "name": "HubDot",
-                "value": {
-                  "type": "primitive",
-                  "value": "null"
-                }
-              },
-              {
-                "name": "HubUsdt",
-                "value": {
-                  "type": "primitive",
-                  "value": "null"
-                }
-              },
-              {
-                "name": "HubUsdc",
-                "value": {
-                  "type": "primitive",
-                  "value": "null"
-                }
-              }
-            ]
-          },
-          "value": {
-            "type": "primitive",
-            "value": "u128"
-          }
+          "type": "primitive",
+          "value": "u128"
         },
         "brokerInterest": {
-          "type": "map",
-          "key": {
-            "type": "enum",
-            "$name": "cfPrimitivesChainsAssetsAnyAsset",
-            "values": [
-              {
-                "name": "__Unused0",
-                "value": {
-                  "type": "primitive",
-                  "value": "null"
-                }
-              },
-              {
-                "name": "Eth",
-                "value": {
-                  "type": "primitive",
-                  "value": "null"
-                }
-              },
-              {
-                "name": "Flip",
-                "value": {
-                  "type": "primitive",
-                  "value": "null"
-                }
-              },
-              {
-                "name": "Usdc",
-                "value": {
-                  "type": "primitive",
-                  "value": "null"
-                }
-              },
-              {
-                "name": "Dot",
-                "value": {
-                  "type": "primitive",
-                  "value": "null"
-                }
-              },
-              {
-                "name": "Btc",
-                "value": {
-                  "type": "primitive",
-                  "value": "null"
-                }
-              },
-              {
-                "name": "ArbEth",
-                "value": {
-                  "type": "primitive",
-                  "value": "null"
-                }
-              },
-              {
-                "name": "ArbUsdc",
-                "value": {
-                  "type": "primitive",
-                  "value": "null"
-                }
-              },
-              {
-                "name": "Usdt",
-                "value": {
-                  "type": "primitive",
-                  "value": "null"
-                }
-              },
-              {
-                "name": "Sol",
-                "value": {
-                  "type": "primitive",
-                  "value": "null"
-                }
-              },
-              {
-                "name": "SolUsdc",
-                "value": {
-                  "type": "primitive",
-                  "value": "null"
-                }
-              },
-              {
-                "name": "HubDot",
-                "value": {
-                  "type": "primitive",
-                  "value": "null"
-                }
-              },
-              {
-                "name": "HubUsdt",
-                "value": {
-                  "type": "primitive",
-                  "value": "null"
-                }
-              },
-              {
-                "name": "HubUsdc",
-                "value": {
-                  "type": "primitive",
-                  "value": "null"
-                }
-              }
-            ]
-          },
-          "value": {
-            "type": "primitive",
-            "value": "u128"
-          }
+          "type": "primitive",
+          "value": "u128"
         },
         "lowLtvPenalty": {
-          "type": "map",
-          "key": {
-            "type": "enum",
-            "$name": "cfPrimitivesChainsAssetsAnyAsset",
-            "values": [
-              {
-                "name": "__Unused0",
-                "value": {
-                  "type": "primitive",
-                  "value": "null"
-                }
-              },
-              {
-                "name": "Eth",
-                "value": {
-                  "type": "primitive",
-                  "value": "null"
-                }
-              },
-              {
-                "name": "Flip",
-                "value": {
-                  "type": "primitive",
-                  "value": "null"
-                }
-              },
-              {
-                "name": "Usdc",
-                "value": {
-                  "type": "primitive",
-                  "value": "null"
-                }
-              },
-              {
-                "name": "Dot",
-                "value": {
-                  "type": "primitive",
-                  "value": "null"
-                }
-              },
-              {
-                "name": "Btc",
-                "value": {
-                  "type": "primitive",
-                  "value": "null"
-                }
-              },
-              {
-                "name": "ArbEth",
-                "value": {
-                  "type": "primitive",
-                  "value": "null"
-                }
-              },
-              {
-                "name": "ArbUsdc",
-                "value": {
-                  "type": "primitive",
-                  "value": "null"
-                }
-              },
-              {
-                "name": "Usdt",
-                "value": {
-                  "type": "primitive",
-                  "value": "null"
-                }
-              },
-              {
-                "name": "Sol",
-                "value": {
-                  "type": "primitive",
-                  "value": "null"
-                }
-              },
-              {
-                "name": "SolUsdc",
-                "value": {
-                  "type": "primitive",
-                  "value": "null"
-                }
-              },
-              {
-                "name": "HubDot",
-                "value": {
-                  "type": "primitive",
-                  "value": "null"
-                }
-              },
-              {
-                "name": "HubUsdt",
-                "value": {
-                  "type": "primitive",
-                  "value": "null"
-                }
-              },
-              {
-                "name": "HubUsdc",
-                "value": {
-                  "type": "primitive",
-                  "value": "null"
-                }
-              }
-            ]
-          },
-          "value": {
-            "type": "primitive",
-            "value": "u128"
-          }
+          "type": "primitive",
+          "value": "u128"
         }
       }
     },
@@ -47198,119 +46686,6 @@
         "viaLiquidation": {
           "type": "primitive",
           "value": "bool"
-        }
-      }
-    },
-    "LendingPoolFeeSwapInitiated": {
-      "type": "struct",
-      "fields": {
-        "asset": {
-          "type": "enum",
-          "$name": "cfPrimitivesChainsAssetsAnyAsset",
-          "values": [
-            {
-              "name": "__Unused0",
-              "value": {
-                "type": "primitive",
-                "value": "null"
-              }
-            },
-            {
-              "name": "Eth",
-              "value": {
-                "type": "primitive",
-                "value": "null"
-              }
-            },
-            {
-              "name": "Flip",
-              "value": {
-                "type": "primitive",
-                "value": "null"
-              }
-            },
-            {
-              "name": "Usdc",
-              "value": {
-                "type": "primitive",
-                "value": "null"
-              }
-            },
-            {
-              "name": "Dot",
-              "value": {
-                "type": "primitive",
-                "value": "null"
-              }
-            },
-            {
-              "name": "Btc",
-              "value": {
-                "type": "primitive",
-                "value": "null"
-              }
-            },
-            {
-              "name": "ArbEth",
-              "value": {
-                "type": "primitive",
-                "value": "null"
-              }
-            },
-            {
-              "name": "ArbUsdc",
-              "value": {
-                "type": "primitive",
-                "value": "null"
-              }
-            },
-            {
-              "name": "Usdt",
-              "value": {
-                "type": "primitive",
-                "value": "null"
-              }
-            },
-            {
-              "name": "Sol",
-              "value": {
-                "type": "primitive",
-                "value": "null"
-              }
-            },
-            {
-              "name": "SolUsdc",
-              "value": {
-                "type": "primitive",
-                "value": "null"
-              }
-            },
-            {
-              "name": "HubDot",
-              "value": {
-                "type": "primitive",
-                "value": "null"
-              }
-            },
-            {
-              "name": "HubUsdt",
-              "value": {
-                "type": "primitive",
-                "value": "null"
-              }
-            },
-            {
-              "name": "HubUsdc",
-              "value": {
-                "type": "primitive",
-                "value": "null"
-              }
-            }
-          ]
-        },
-        "swapRequestId": {
-          "type": "primitive",
-          "value": "u64"
         }
       }
     },
