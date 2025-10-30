@@ -3,12 +3,12 @@
 exports[`extrinsic codegen > generates the code in the desired format > /160/CHANGELOG.md 1`] = `
 "Swapping:
   - request_swap_deposit_address:
-    - sourceAsset: added
-    - destinationAsset: added
+    - sourceAsset: added (Swapping.request_swap_deposit_address.sourceAsset.10)
+    - destinationAsset: added (Swapping.request_swap_deposit_address.destinationAsset.10)
   - request_swap_deposit_address_with_affiliates:
-    - dcaParameters: added
-    - sourceAsset: added
-    - destinationAsset: added
+    - dcaParameters: added (Swapping.request_swap_deposit_address_with_affiliates.dcaParameters)
+    - sourceAsset: added (Swapping.request_swap_deposit_address_with_affiliates.sourceAsset.10)
+    - destinationAsset: added (Swapping.request_swap_deposit_address_with_affiliates.destinationAsset.10)
 "
 `;
 
