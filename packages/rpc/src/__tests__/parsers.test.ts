@@ -124,7 +124,7 @@ describe('parsers', () => {
 
   describe('cfEnvironment', () => {
     it('parses the cfEnvironment response', () => {
-      cfEnvironment.parse({
+      const result = cfEnvironment.parse({
         ingress_egress: {
           minimum_deposit_amounts: emptyChainAssetMap,
           ingress_fees: {
@@ -223,6 +223,22 @@ describe('parsers', () => {
             Polkadot: '0x0',
             Solana: '0x0',
             Assethub: '0x0',
+          },
+          ingress_delays: {
+            Ethereum: 0,
+            Bitcoin: 0,
+            Arbitrum: 0,
+            Polkadot: 0,
+            Solana: 10,
+            Assethub: 0,
+          },
+          boost_delays: {
+            Ethereum: 0,
+            Bitcoin: 0,
+            Arbitrum: 0,
+            Polkadot: 0,
+            Solana: 0,
+            Assethub: 0,
           },
         },
         swapping: {
@@ -645,6 +661,534 @@ describe('parsers', () => {
           },
         },
       });
+      expect(result).toMatchInlineSnapshot(`
+        {
+          "funding": {
+            "minimum_funding_amount": 10000000000000000000n,
+            "redemption_tax": 5000000000000000000n,
+          },
+          "ingress_egress": {
+            "boost_delays": {
+              "Arbitrum": 0,
+              "Assethub": 0,
+              "Bitcoin": 0,
+              "Ethereum": 0,
+              "Solana": 0,
+            },
+            "channel_opening_fees": {
+              "Arbitrum": 0n,
+              "Assethub": 0n,
+              "Bitcoin": 0n,
+              "Ethereum": 0n,
+              "Solana": 0n,
+            },
+            "egress_fees": {
+              "Arbitrum": {
+                "ETH": 7998400000000n,
+                "USDC": 5989n,
+              },
+              "Assethub": {
+                "DOT": 0n,
+                "USDC": 0n,
+                "USDT": 0n,
+              },
+              "Bitcoin": {
+                "BTC": 179n,
+              },
+              "Ethereum": {
+                "ETH": 490000n,
+                "FLIP": 53930633n,
+                "USDC": 0n,
+                "USDT": 0n,
+              },
+              "Solana": {
+                "SOL": 75005000n,
+                "USDC": 0n,
+              },
+            },
+            "ingress_delays": {
+              "Arbitrum": 0,
+              "Assethub": 0,
+              "Bitcoin": 0,
+              "Ethereum": 0,
+              "Solana": 10,
+            },
+            "ingress_fees": {
+              "Arbitrum": {
+                "ETH": 5998800000000n,
+                "USDC": 5390n,
+              },
+              "Assethub": {
+                "DOT": 0n,
+                "USDC": 0n,
+                "USDT": 0n,
+              },
+              "Bitcoin": {
+                "BTC": 79n,
+              },
+              "Ethereum": {
+                "ETH": 350000n,
+                "FLIP": 47938341n,
+                "USDC": 0n,
+                "USDT": 0n,
+              },
+              "Solana": {
+                "SOL": 795005000n,
+                "USDC": 0n,
+              },
+            },
+            "minimum_deposit_amounts": {
+              "Arbitrum": {
+                "ETH": 0n,
+                "USDC": 0n,
+              },
+              "Assethub": {
+                "DOT": 0n,
+                "USDC": 0n,
+                "USDT": 0n,
+              },
+              "Bitcoin": {
+                "BTC": 0n,
+              },
+              "Ethereum": {
+                "ETH": 0n,
+                "FLIP": 0n,
+                "USDC": 0n,
+                "USDT": 0n,
+              },
+              "Solana": {
+                "SOL": 0n,
+                "USDC": 0n,
+              },
+            },
+            "minimum_egress_amounts": {
+              "Arbitrum": {
+                "ETH": 1n,
+                "USDC": 1n,
+              },
+              "Assethub": {
+                "DOT": 1n,
+                "USDC": 1n,
+                "USDT": 1n,
+              },
+              "Bitcoin": {
+                "BTC": 600n,
+              },
+              "Ethereum": {
+                "ETH": 1n,
+                "FLIP": 1n,
+                "USDC": 1n,
+                "USDT": 1n,
+              },
+              "Solana": {
+                "SOL": 1n,
+                "USDC": 1n,
+              },
+            },
+            "witness_safety_margins": {
+              "Arbitrum": 1,
+              "Assethub": null,
+              "Bitcoin": 2,
+              "Ethereum": 2,
+              "Solana": 1,
+            },
+          },
+          "pools": {
+            "fees": {
+              "Arbitrum": {
+                "ETH": {
+                  "limit_order_fee_hundredth_pips": 20,
+                  "limit_order_total_fees_earned": {
+                    "base": 0n,
+                    "quote": 0n,
+                  },
+                  "limit_total_swap_inputs": {
+                    "base": 0n,
+                    "quote": 0n,
+                  },
+                  "quote_asset": {
+                    "asset": "USDC",
+                    "chain": "Ethereum",
+                  },
+                  "range_order_fee_hundredth_pips": 20,
+                  "range_order_total_fees_earned": {
+                    "base": 7483996779844160n,
+                    "quote": 2163248n,
+                  },
+                  "range_total_swap_inputs": {
+                    "base": 374192354995428155840n,
+                    "quote": 108159402146n,
+                  },
+                },
+                "USDC": {
+                  "limit_order_fee_hundredth_pips": 20,
+                  "limit_order_total_fees_earned": {
+                    "base": 0n,
+                    "quote": 0n,
+                  },
+                  "limit_total_swap_inputs": {
+                    "base": 0n,
+                    "quote": 0n,
+                  },
+                  "quote_asset": {
+                    "asset": "USDC",
+                    "chain": "Ethereum",
+                  },
+                  "range_order_fee_hundredth_pips": 20,
+                  "range_order_total_fees_earned": {
+                    "base": 698817n,
+                    "quote": 1776971n,
+                  },
+                  "range_total_swap_inputs": {
+                    "base": 34939477564n,
+                    "quote": 88846251160n,
+                  },
+                },
+              },
+              "Assethub": {
+                "DOT": {
+                  "limit_order_fee_hundredth_pips": 20,
+                  "limit_order_total_fees_earned": {
+                    "base": 66801754n,
+                    "quote": 60243n,
+                  },
+                  "limit_total_swap_inputs": {
+                    "base": 3340020541469n,
+                    "quote": 3011760634n,
+                  },
+                  "quote_asset": {
+                    "asset": "USDC",
+                    "chain": "Ethereum",
+                  },
+                  "range_order_fee_hundredth_pips": 20,
+                  "range_order_total_fees_earned": {
+                    "base": 28659n,
+                    "quote": 0n,
+                  },
+                  "range_total_swap_inputs": {
+                    "base": 1432885660n,
+                    "quote": 0n,
+                  },
+                },
+                "USDC": {
+                  "limit_order_fee_hundredth_pips": 0,
+                  "limit_order_total_fees_earned": {
+                    "base": "0x0",
+                    "quote": "0x0",
+                  },
+                  "limit_total_swap_inputs": {
+                    "base": "0x0",
+                    "quote": "0x0",
+                  },
+                  "quote_asset": {
+                    "asset": "USDC",
+                    "chain": "Ethereum",
+                  },
+                  "range_order_fee_hundredth_pips": 0,
+                  "range_order_total_fees_earned": {
+                    "base": "0x0",
+                    "quote": "0x0",
+                  },
+                  "range_total_swap_inputs": {
+                    "base": "0x0",
+                    "quote": "0x0",
+                  },
+                },
+                "USDT": {
+                  "limit_order_fee_hundredth_pips": 5,
+                  "limit_order_total_fees_earned": {
+                    "base": 413n,
+                    "quote": 251n,
+                  },
+                  "limit_total_swap_inputs": {
+                    "base": 82051234n,
+                    "quote": 49995003n,
+                  },
+                  "quote_asset": {
+                    "asset": "USDC",
+                    "chain": "Ethereum",
+                  },
+                  "range_order_fee_hundredth_pips": 5,
+                  "range_order_total_fees_earned": {
+                    "base": 6316n,
+                    "quote": 273431n,
+                  },
+                  "range_total_swap_inputs": {
+                    "base": 1259952272n,
+                    "quote": 54684215835n,
+                  },
+                },
+              },
+              "Bitcoin": {
+                "BTC": {
+                  "limit_order_fee_hundredth_pips": 20,
+                  "limit_order_total_fees_earned": {
+                    "base": 0n,
+                    "quote": 44044n,
+                  },
+                  "limit_total_swap_inputs": {
+                    "base": 0n,
+                    "quote": 2202133377n,
+                  },
+                  "quote_asset": {
+                    "asset": "USDC",
+                    "chain": "Ethereum",
+                  },
+                  "range_order_fee_hundredth_pips": 20,
+                  "range_order_total_fees_earned": {
+                    "base": 35169n,
+                    "quote": 14290722n,
+                  },
+                  "range_total_swap_inputs": {
+                    "base": 1758387178n,
+                    "quote": 714521511174n,
+                  },
+                },
+              },
+              "Ethereum": {
+                "ETH": {
+                  "limit_order_fee_hundredth_pips": 20,
+                  "limit_order_total_fees_earned": {
+                    "base": 580754730628100n,
+                    "quote": 0n,
+                  },
+                  "limit_total_swap_inputs": {
+                    "base": 29037155776674311822n,
+                    "quote": 0n,
+                  },
+                  "quote_asset": {
+                    "asset": "USDC",
+                    "chain": "Ethereum",
+                  },
+                  "range_order_fee_hundredth_pips": 20,
+                  "range_order_total_fees_earned": {
+                    "base": 27267193453871629n,
+                    "quote": 8696083n,
+                  },
+                  "range_total_swap_inputs": {
+                    "base": 1363332405500127242349n,
+                    "quote": 434794536050n,
+                  },
+                },
+                "FLIP": {
+                  "limit_order_fee_hundredth_pips": 20,
+                  "limit_order_total_fees_earned": {
+                    "base": 0n,
+                    "quote": 0n,
+                  },
+                  "limit_total_swap_inputs": {
+                    "base": 0n,
+                    "quote": 0n,
+                  },
+                  "quote_asset": {
+                    "asset": "USDC",
+                    "chain": "Ethereum",
+                  },
+                  "range_order_fee_hundredth_pips": 20,
+                  "range_order_total_fees_earned": {
+                    "base": 648004123740934547n,
+                    "quote": 1758321n,
+                  },
+                  "range_total_swap_inputs": {
+                    "base": 32399558182922985999205n,
+                    "quote": 87913755136n,
+                  },
+                },
+                "USDT": {
+                  "limit_order_fee_hundredth_pips": 20,
+                  "limit_order_total_fees_earned": {
+                    "base": 0n,
+                    "quote": 0n,
+                  },
+                  "limit_total_swap_inputs": {
+                    "base": 0n,
+                    "quote": 0n,
+                  },
+                  "quote_asset": {
+                    "asset": "USDC",
+                    "chain": "Ethereum",
+                  },
+                  "range_order_fee_hundredth_pips": 20,
+                  "range_order_total_fees_earned": {
+                    "base": 568838n,
+                    "quote": 1833078n,
+                  },
+                  "range_total_swap_inputs": {
+                    "base": 28440979122n,
+                    "quote": 91651575243n,
+                  },
+                },
+              },
+              "Solana": {
+                "SOL": {
+                  "limit_order_fee_hundredth_pips": 20,
+                  "limit_order_total_fees_earned": {
+                    "base": 0n,
+                    "quote": 0n,
+                  },
+                  "limit_total_swap_inputs": {
+                    "base": 0n,
+                    "quote": 0n,
+                  },
+                  "quote_asset": {
+                    "asset": "USDC",
+                    "chain": "Ethereum",
+                  },
+                  "range_order_fee_hundredth_pips": 20,
+                  "range_order_total_fees_earned": {
+                    "base": 7483996779844160n,
+                    "quote": 2163248n,
+                  },
+                  "range_total_swap_inputs": {
+                    "base": 374192354995428155840n,
+                    "quote": 108159402146n,
+                  },
+                },
+                "USDC": {
+                  "limit_order_fee_hundredth_pips": 20,
+                  "limit_order_total_fees_earned": {
+                    "base": 0n,
+                    "quote": 0n,
+                  },
+                  "limit_total_swap_inputs": {
+                    "base": 0n,
+                    "quote": 0n,
+                  },
+                  "quote_asset": {
+                    "asset": "USDC",
+                    "chain": "Ethereum",
+                  },
+                  "range_order_fee_hundredth_pips": 20,
+                  "range_order_total_fees_earned": {
+                    "base": 698817n,
+                    "quote": 1776971n,
+                  },
+                  "range_total_swap_inputs": {
+                    "base": 34939477564n,
+                    "quote": 88846251160n,
+                  },
+                },
+              },
+            },
+          },
+          "swapping": {
+            "max_swap_request_duration_blocks": 14400,
+            "max_swap_retry_duration_blocks": 600,
+            "maximum_swap_amounts": {
+              "Arbitrum": {
+                "ETH": null,
+                "USDC": null,
+              },
+              "Assethub": {
+                "DOT": null,
+                "USDC": null,
+                "USDT": null,
+              },
+              "Bitcoin": {
+                "BTC": null,
+              },
+              "Ethereum": {
+                "ETH": null,
+                "FLIP": null,
+                "USDC": null,
+                "USDT": null,
+              },
+              "Solana": {
+                "SOL": null,
+                "USDC": null,
+              },
+            },
+            "minimum_chunk_size": {
+              "Arbitrum": {
+                "ETH": 200000000000000000n,
+                "USDC": 1000000000n,
+              },
+              "Assethub": {
+                "DOT": 2000000000000n,
+                "USDC": 1000000000n,
+                "USDT": 1000000000n,
+              },
+              "Bitcoin": {
+                "BTC": 2000000n,
+              },
+              "Ethereum": {
+                "ETH": 200000000000000000n,
+                "FLIP": 1000000000000000000000n,
+                "USDC": 1000000000n,
+                "USDT": 1000000000n,
+              },
+              "Solana": {
+                "SOL": 5000000000n,
+                "USDC": 1000000000n,
+              },
+            },
+            "network_fee_hundredth_pips": 1000,
+            "network_fees": {
+              "internal_swap_network_fee": {
+                "rates": {
+                  "Arbitrum": {
+                    "ETH": 0n,
+                    "USDC": 0n,
+                  },
+                  "Assethub": {
+                    "DOT": 0n,
+                    "USDC": 0n,
+                    "USDT": 0n,
+                  },
+                  "Bitcoin": {
+                    "BTC": 0n,
+                  },
+                  "Ethereum": {
+                    "ETH": 0n,
+                    "FLIP": 0n,
+                    "USDC": 0n,
+                    "USDT": 0n,
+                  },
+                  "Solana": {
+                    "SOL": 0n,
+                    "USDC": 0n,
+                  },
+                },
+                "standard_rate_and_minimum": {
+                  "minimum": 0n,
+                  "rate": 0n,
+                },
+              },
+              "regular_network_fee": {
+                "rates": {
+                  "Arbitrum": {
+                    "ETH": 0n,
+                    "USDC": 0n,
+                  },
+                  "Assethub": {
+                    "DOT": 0n,
+                    "USDC": 0n,
+                    "USDT": 0n,
+                  },
+                  "Bitcoin": {
+                    "BTC": 0n,
+                  },
+                  "Ethereum": {
+                    "ETH": 0n,
+                    "FLIP": 0n,
+                    "USDC": 0n,
+                    "USDT": 0n,
+                  },
+                  "Solana": {
+                    "SOL": 0n,
+                    "USDC": 0n,
+                  },
+                },
+                "standard_rate_and_minimum": {
+                  "minimum": 0n,
+                  "rate": 0n,
+                },
+              },
+            },
+            "swap_retry_delay_blocks": 5,
+          },
+        }
+      `);
     });
   });
 
