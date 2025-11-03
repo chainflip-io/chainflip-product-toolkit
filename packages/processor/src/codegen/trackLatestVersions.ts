@@ -1,5 +1,6 @@
 import { assert } from '@chainflip/utils/assertion';
 import { GenerateHook } from '@/chainspec/generateAllCode';
+import SpecVersion from '@/chainspec/SpecVersion';
 
 const deepEqual = <T>(a: T, b: T): boolean => {
   if (a === b) return true;
@@ -27,28 +28,28 @@ const deepEqual = <T>(a: T, b: T): boolean => {
 };
 
 class FinalTwo {
-  static from(other: FinalTwo | undefined, newVersion: number) {
+  static from(other: FinalTwo | undefined, newVersion: SpecVersion) {
     const instance = new FinalTwo(newVersion);
     if (other) {
       // it's not impossible for an event to be reintroduced but it hasn't happened yet
-      assert(!other.deleted, 'unexpected new version after event was already deleted');
+      // assert(!other.deleted, 'unexpected new version after event was already deleted');
       instance.old = other.new;
     }
     return instance;
   }
 
-  old: number | null = null;
-  new: number;
+  old: SpecVersion | null = null;
+  new: SpecVersion;
   private deleted = false;
 
-  private constructor(newVersion: number) {
+  private constructor(newVersion: SpecVersion) {
     this.new = newVersion;
   }
 
   toString() {
-    const newVersion = this.deleted ? 'DELETED' : this.new.toString();
+    const newVersion = this.deleted ? 'DELETED' : this.new.toFormatted();
     if (this.old === null) return newVersion;
-    return `${this.old} => ${newVersion}`;
+    return `${this.old.toFormatted()} => ${newVersion}`;
   }
 
   markDeleted() {

@@ -36,39 +36,9 @@ export const palletCfTradingStrategyPalletSafeMode = z.object({
   strategyExecutionEnabled: z.boolean(),
 });
 
-export const simpleEnum = <U extends string, T extends readonly [U, ...U[]]>(values: T) =>
-  z.object({ __kind: z.enum(values) }).transform(({ __kind }) => __kind!);
-
-export const cfPrimitivesChainsAssetsAnyAsset = simpleEnum([
-  'Eth',
-  'Flip',
-  'Usdc',
-  'Dot',
-  'Btc',
-  'ArbEth',
-  'ArbUsdc',
-  'Usdt',
-  'Sol',
-  'SolUsdc',
-  'HubDot',
-  'HubUsdt',
-  'HubUsdc',
-]);
-
-export const cfTraitsSafeModeSafeModeSet = z.discriminatedUnion('__kind', [
-  z.object({ __kind: z.literal('Green') }),
-  z.object({ __kind: z.literal('Red') }),
-  z.object({ __kind: z.literal('Amber'), value: z.array(cfPrimitivesChainsAssetsAnyAsset) }),
-]);
-
 export const palletCfLendingPoolsPalletSafeMode = z.object({
   addBoostFundsEnabled: z.boolean(),
   stopBoostingEnabled: z.boolean(),
-  borrowing: cfTraitsSafeModeSafeModeSet,
-  addLenderFunds: cfTraitsSafeModeSafeModeSet,
-  withdrawLenderFunds: cfTraitsSafeModeSafeModeSet,
-  addCollateral: cfTraitsSafeModeSafeModeSet,
-  removeCollateral: cfTraitsSafeModeSafeModeSet,
 });
 
 export const palletCfReputationPalletSafeMode = z.object({ reportingEnabled: z.boolean() });
@@ -211,6 +181,9 @@ export const accountId = z
   ])
   .transform((value) => ss58.encode({ data: value, ss58Format: 2112 }));
 
+export const simpleEnum = <U extends string, T extends readonly [U, ...U[]]>(values: T) =>
+  z.object({ __kind: z.enum(values) }).transform(({ __kind }) => __kind!);
+
 export const palletCfValidatorDelegationDelegationAcceptance = simpleEnum(['Allow', 'Deny']);
 
 export const palletCfValidatorDelegationOperatorSettings = z.object({
@@ -225,6 +198,22 @@ export const numericString = z
 export const numberOrHex = z
   .union([z.number(), hexString, numericString])
   .transform((n) => BigInt(n));
+
+export const cfPrimitivesChainsAssetsAnyAsset = simpleEnum([
+  'Eth',
+  'Flip',
+  'Usdc',
+  'Dot',
+  'Btc',
+  'ArbEth',
+  'ArbUsdc',
+  'Usdt',
+  'Sol',
+  'SolUsdc',
+  'HubDot',
+  'HubUsdt',
+  'HubUsdc',
+]);
 
 export const cfChainsAddressEncodedAddress = z
   .object({ __kind: z.enum(['Eth', 'Dot', 'Btc', 'Arb', 'Sol', 'Hub']), value: hexString })
@@ -326,12 +315,6 @@ export const cfChainsCcmDepositMetadataEncodedAddress = z.object({
   sourceAddress: cfChainsAddressEncodedAddress.nullish(),
 });
 
-export const cfTraitsSwappingLendingSwapType = z.object({
-  __kind: z.literal('Liquidation'),
-  borrowerId: accountId,
-  loanId: numberOrHex,
-});
-
 export const cfTraitsSwappingSwapOutputActionGenericEncodedAddress = z.discriminatedUnion(
   '__kind',
   [
@@ -341,7 +324,6 @@ export const cfTraitsSwappingSwapOutputActionGenericEncodedAddress = z.discrimin
       outputAddress: cfChainsAddressEncodedAddress,
     }),
     z.object({ __kind: z.literal('CreditOnChain'), accountId }),
-    z.object({ __kind: z.literal('CreditLendingPool'), swapType: cfTraitsSwappingLendingSwapType }),
   ],
 );
 
@@ -413,7 +395,6 @@ export const palletCfSwappingSwapFailureReason = simpleEnum([
   'OraclePriceStale',
   'PredecessorSwapFailure',
   'SafeModeActive',
-  'AbortedFromOrigin',
   'LogicError',
 ]);
 
@@ -1095,67 +1076,3 @@ export const palletCfAssethubIngressEgressPalletConfigUpdateAssethub = z.discrim
     z.object({ __kind: z.literal('SetIngressDelayAssethub'), delayBlocks: z.number() }),
   ],
 );
-
-export const palletCfLendingPoolsGeneralLendingInterestRateConfiguration = z.object({
-  interestAtZeroUtilisation: z.number(),
-  junctionUtilisation: z.number(),
-  interestAtJunctionUtilisation: z.number(),
-  interestAtMaxUtilisation: z.number(),
-});
-
-export const palletCfLendingPoolsGeneralLendingLendingPoolConfiguration = z.object({
-  originationFee: z.number(),
-  liquidationFee: z.number(),
-  interestRateCurve: palletCfLendingPoolsGeneralLendingInterestRateConfiguration,
-});
-
-export const palletCfLendingPoolsGeneralLendingLtvThresholds = z.object({
-  target: z.number(),
-  topup: z.number(),
-  softLiquidation: z.number(),
-  softLiquidationAbort: z.number(),
-  hardLiquidation: z.number(),
-  hardLiquidationAbort: z.number(),
-  lowLtv: z.number(),
-});
-
-export const palletCfLendingPoolsGeneralLendingNetworkFeeContributions = z.object({
-  extraInterest: z.number(),
-  fromOriginationFee: z.number(),
-  fromLiquidationFee: z.number(),
-  interestOnCollateralMax: z.number(),
-});
-
-export const palletCfLendingPoolsPalletConfigUpdate = z.discriminatedUnion('__kind', [
-  z.object({ __kind: z.literal('SetNetworkFeeDeductionFromBoost'), deductionPercent: z.number() }),
-  z.object({
-    __kind: z.literal('SetLendingPoolConfiguration'),
-    asset: cfPrimitivesChainsAssetsAnyAsset.nullish(),
-    config: palletCfLendingPoolsGeneralLendingLendingPoolConfiguration.nullish(),
-  }),
-  z.object({
-    __kind: z.literal('SetLtvThresholds'),
-    ltvThresholds: palletCfLendingPoolsGeneralLendingLtvThresholds,
-  }),
-  z.object({
-    __kind: z.literal('SetNetworkFeeContributions'),
-    contributions: palletCfLendingPoolsGeneralLendingNetworkFeeContributions,
-  }),
-  z.object({ __kind: z.literal('SetFeeSwapIntervalBlocks'), value: z.number() }),
-  z.object({ __kind: z.literal('SetInterestPaymentIntervalBlocks'), value: z.number() }),
-  z.object({ __kind: z.literal('SetFeeSwapThresholdUsd'), value: numberOrHex }),
-  z.object({ __kind: z.literal('SetInterestCollectionThresholdUsd'), value: numberOrHex }),
-  z.object({
-    __kind: z.literal('SetOracleSlippageForSwaps'),
-    softLiquidation: z.number(),
-    hardLiquidation: z.number(),
-    feeSwap: z.number(),
-  }),
-  z.object({ __kind: z.literal('SetLiquidationSwapChunkSizeUsd'), value: numberOrHex }),
-  z.object({
-    __kind: z.literal('SetMinimumAmounts'),
-    minimumLoanAmountUsd: numberOrHex,
-    minimumUpdateLoanAmountUsd: numberOrHex,
-    minimumUpdateCollateralAmountUsd: numberOrHex,
-  }),
-]);
