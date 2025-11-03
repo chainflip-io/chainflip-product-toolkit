@@ -32,10 +32,8 @@ BitcoinIngressEgress:
     - update: added (BitcoinIngressEgress.PalletConfigUpdated.update.6)
 
 Environment:
-  - BatchCompleted: added
-  - NonNativeSignedCall: added
   - RuntimeSafeModeUpdated:
-    - safeMode: added (Environment.RuntimeSafeModeUpdated.safeMode.2.lendingPools.borrowing)
+    - safeMode: removed (Environment.RuntimeSafeModeUpdated.safeMode.2.lendingPools.borrowingEnabled)
 
 EthereumIngressEgress:
   - ChannelRejectionRequestReceived: added
@@ -49,28 +47,17 @@ EthereumIngressEgress:
     - update: added (EthereumIngressEgress.PalletConfigUpdated.update.6)
 
 LendingPools:
-  - CollateralAdded:
-    - primaryCollateralAsset: removed (LendingPools.CollateralAdded.primaryCollateralAsset)
-  - CollateralRemoved:
-    - primaryCollateralAsset: removed (LendingPools.CollateralRemoved.primaryCollateralAsset)
-  - InterestTaken: added
+  - CollateralAdded: removed
+  - CollateralRemoved: removed
   - LendingFeeCollectionInitiated: removed
-  - LendingNetworkFeeSwapInitiated: added
-  - LiquidationFeeTaken: added
-  - LoanCreated:
-    - originationFee: removed (LendingPools.LoanCreated.originationFee)
-  - LoanRepaid:
-    - liquidationFees: removed (LendingPools.LoanRepaid.liquidationFees)
-  - LoanSettled:
-    - outstandingPrincipal: added (LendingPools.LoanSettled.outstandingPrincipal)
-    - viaLiquidation: added (LendingPools.LoanSettled.viaLiquidation)
-    - totalFees: removed (LendingPools.LoanSettled.totalFees)
-  - LoanUpdated:
-    - originationFee: removed (LendingPools.LoanUpdated.originationFee)
-  - OriginationFeeTaken: added
-  - PalletConfigUpdated:
-    - update: added (LendingPools.PalletConfigUpdated.update.1)
-  - PrimaryCollateralAssetUpdated: added
+  - LendingFundsAdded: removed
+  - LendingFundsRemoved: removed
+  - LendingPoolCreated: removed
+  - LiquidationInitiated: removed
+  - LoanCreated: removed
+  - LoanRepaid: removed
+  - LoanSettled: removed
+  - LoanUpdated: removed
 
 PolkadotIngressEgress:
   - ChannelRejectionRequestReceived: added
@@ -103,11 +90,11 @@ SolanaIngressEgress:
 
 Swapping:
   - SwapAborted:
-    - reason: added (Swapping.SwapAborted.reason.7)
+    - reason: changed (Swapping.SwapAborted.reason.6.name)
   - SwapRequested:
-    - requestType: removed (Swapping.SwapRequested.requestType.2.outputAction.2.swapType.1)
+    - requestType: removed (Swapping.SwapRequested.requestType.2.outputAction.2)
   - SwapRescheduled:
-    - reason: added (Swapping.SwapRescheduled.reason.7)
+    - reason: changed (Swapping.SwapRescheduled.reason.6.name)
 
 Validator:
   - OperatorSettingsUpdated:

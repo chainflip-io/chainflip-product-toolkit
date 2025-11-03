@@ -8,6 +8,7 @@ import assert from 'assert';
 import * as fs from 'fs/promises';
 import * as path from 'path';
 import { type Network, specVersionCache } from './cache';
+import SpecVersion from './SpecVersion';
 
 export type MetadataOpts = {
   network?: Network;
@@ -308,11 +309,11 @@ export default abstract class BaseParser {
 
   async fetchAndParseSpec(): Promise<{
     metadata: ParsedMetadata;
-    specVersion: number;
+    specVersion: SpecVersion;
   }> {
-    const specVersion = await this.getSpecVersion();
+    const specVersion = new SpecVersion(await this.getSpecVersion());
 
-    const outfile = path.join(this.generatedDir, `types-${specVersion}.json`);
+    const outfile = path.join(this.generatedDir, `types-${specVersion.toString()}.json`);
 
     let parsedMetadata = await fs
       .readFile(outfile, 'utf8')

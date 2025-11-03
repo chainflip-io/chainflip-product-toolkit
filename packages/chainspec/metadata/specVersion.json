@@ -72,7 +72,11 @@
     "network": "backspin"
   },
   "11200": {
-    "hash": "0x85cea2f78099b224ca8e2b88803fcbb75a33949221d9de590c241a1b1f4fde41",
+    "hash": "0x11ea2d1c087be1630ae56deb4d70e891df8b22fb53647ec51047ee5f44848a0a",
+    "network": "perseverance"
+  },
+  "200": {
+    "hash": "0x96b9b1732b5f32b5a1ca5a0b501439990d280f0e0e541ce99b2f567f58a843d8",
     "network": "backspin"
   }
 }

@@ -4,6 +4,7 @@ import { specVersionCache } from '@/chainspec/cache';
 import type BaseCodeGenerator from './BaseCodeGenerator';
 import { ParsedMetadata, type MetadataOpts } from './BaseParser';
 import type BaseParser from './BaseParser';
+import type SpecVersion from './SpecVersion';
 import { diffSpecs } from './utils';
 
 export type GenerateHook<T> = (
@@ -11,11 +12,11 @@ export type GenerateHook<T> = (
   data: {
     new: {
       metadata: ParsedMetadata;
-      specVersion: number;
+      specVersion: SpecVersion;
     };
     old: {
       metadata: ParsedMetadata;
-      specVersion: number;
+      specVersion: SpecVersion | undefined;
     };
   },
 ) => T | Promise<T>;
@@ -43,14 +44,14 @@ async function generateAllCode<T>(
 
   const metadataForHashes = (
     await Promise.all(opts.map((o) => new Parser(o).fetchAndParseSpec()))
-  ).sort((a, b) => a.specVersion - b.specVersion);
+  ).sort((a, b) => a.specVersion.compare(b.specVersion));
 
   let previousMetadata = {};
   let acc: T | undefined;
-  let previousSpecVersion = 0;
+  let previousSpecVersion;
 
   for (const { metadata, specVersion } of metadataForHashes) {
-    const specDir = path.join(generatedDir, `${specVersion}`);
+    const specDir = path.join(generatedDir, specVersion.toString());
     await fs.rm(specDir, { recursive: true, force: true });
     const { changedOrAddedEvents, changelog } = diffSpecs(previousMetadata, metadata);
     const generator = new CodeGenerator({ trackedItems: changedOrAddedEvents });
@@ -60,7 +61,10 @@ async function generateAllCode<T>(
 
     acc = await cb?.(acc, {
       new: { metadata, specVersion },
-      old: { metadata: previousMetadata, specVersion: previousSpecVersion },
+      old: {
+        metadata: previousMetadata,
+        specVersion: previousSpecVersion,
+      },
     });
 
     previousMetadata = metadata;
