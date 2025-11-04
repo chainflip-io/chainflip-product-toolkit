@@ -222,6 +222,14 @@ export default abstract class BaseParser {
         `pallet_cf_${chain.toLowerCase()}_ingress_egress`,
       );
     }
+
+    if (namespace.startsWith('cf_chains')) {
+      const chain = /^(.+)IngressEgress$/.exec(this.getPalletName())?.[1];
+      if (chain) {
+        return namespace.replace('cf_chains', `cf_${chain.toLowerCase()}_chain`);
+      }
+    }
+
     return namespace;
   }
 

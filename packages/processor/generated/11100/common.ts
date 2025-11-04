@@ -558,7 +558,7 @@ export const palletCfEthereumIngressEgressDepositWitnessEthereum = z.object({
   depositDetails: cfChainsEvmDepositDetails,
 });
 
-export const cfChainsCcmDepositMetadata = z.object({
+export const cfEthereumChainCcmDepositMetadata = z.object({
   channelMetadata: cfChainsCcmChannelMetadataCcmAdditionalData,
   sourceChain: cfPrimitivesChainsForeignChain,
   sourceAddress: cfChainsAddressForeignChainAddress.nullish(),
@@ -585,7 +585,7 @@ export const palletCfEthereumIngressEgressVaultDepositWitnessEthereum = z.object
   depositDetails: cfChainsEvmDepositDetails,
   outputAsset: cfPrimitivesChainsAssetsAnyAsset,
   destinationAddress: cfChainsAddressEncodedAddress,
-  depositMetadata: cfChainsCcmDepositMetadata.nullish(),
+  depositMetadata: cfEthereumChainCcmDepositMetadata.nullish(),
   txId: hexString,
   brokerFee: cfPrimitivesBeneficiaryAccountId32.nullish(),
   affiliateFees: z.array(cfPrimitivesBeneficiaryAffiliateShortId),
@@ -644,6 +644,12 @@ export const palletCfPolkadotIngressEgressDepositWitnessPolkadot = z.object({
   depositDetails: z.number(),
 });
 
+export const cfPolkadotChainCcmDepositMetadata = z.object({
+  channelMetadata: cfChainsCcmChannelMetadataCcmAdditionalData,
+  sourceChain: cfPrimitivesChainsForeignChain,
+  sourceAddress: cfChainsAddressForeignChainAddress.nullish(),
+});
+
 export const cfChainsRefundParametersChannelRefundParametersPolkadotAccountId = z.object({
   retryDuration: z.number(),
   refundAddress: hexString,
@@ -660,7 +666,7 @@ export const palletCfPolkadotIngressEgressVaultDepositWitnessPolkadot = z.object
   depositDetails: z.number(),
   outputAsset: cfPrimitivesChainsAssetsAnyAsset,
   destinationAddress: cfChainsAddressEncodedAddress,
-  depositMetadata: cfChainsCcmDepositMetadata.nullish(),
+  depositMetadata: cfPolkadotChainCcmDepositMetadata.nullish(),
   txId: cfPrimitivesTxId,
   brokerFee: cfPrimitivesBeneficiaryAccountId32.nullish(),
   affiliateFees: z.array(cfPrimitivesBeneficiaryAffiliateShortId),
@@ -741,6 +747,12 @@ export const palletCfBitcoinIngressEgressDepositWitnessBitcoin = z.object({
   depositDetails: cfChainsBtcUtxo,
 });
 
+export const cfBitcoinChainCcmDepositMetadata = z.object({
+  channelMetadata: cfChainsCcmChannelMetadataCcmAdditionalData,
+  sourceChain: cfPrimitivesChainsForeignChain,
+  sourceAddress: cfChainsAddressForeignChainAddress.nullish(),
+});
+
 export const cfChainsRefundParametersChannelRefundParametersScriptPubkey = z.object({
   retryDuration: z.number(),
   refundAddress: cfChainsBtcScriptPubkey,
@@ -757,7 +769,7 @@ export const palletCfBitcoinIngressEgressVaultDepositWitnessBitcoin = z.object({
   depositDetails: cfChainsBtcUtxo,
   outputAsset: cfPrimitivesChainsAssetsAnyAsset,
   destinationAddress: cfChainsAddressEncodedAddress,
-  depositMetadata: cfChainsCcmDepositMetadata.nullish(),
+  depositMetadata: cfBitcoinChainCcmDepositMetadata.nullish(),
   txId: hexString,
   brokerFee: cfPrimitivesBeneficiaryAccountId32.nullish(),
   affiliateFees: z.array(cfPrimitivesBeneficiaryAffiliateShortId),
@@ -816,6 +828,12 @@ export const palletCfArbitrumIngressEgressDepositWitnessArbitrum = z.object({
   depositDetails: cfChainsEvmDepositDetails,
 });
 
+export const cfArbitrumChainCcmDepositMetadata = z.object({
+  channelMetadata: cfChainsCcmChannelMetadataCcmAdditionalData,
+  sourceChain: cfPrimitivesChainsForeignChain,
+  sourceAddress: cfChainsAddressForeignChainAddress.nullish(),
+});
+
 export const palletCfArbitrumIngressEgressVaultDepositWitnessArbitrum = z.object({
   inputAsset: cfPrimitivesChainsAssetsArbAsset,
   depositAddress: hexString.nullish(),
@@ -824,7 +842,7 @@ export const palletCfArbitrumIngressEgressVaultDepositWitnessArbitrum = z.object
   depositDetails: cfChainsEvmDepositDetails,
   outputAsset: cfPrimitivesChainsAssetsAnyAsset,
   destinationAddress: cfChainsAddressEncodedAddress,
-  depositMetadata: cfChainsCcmDepositMetadata.nullish(),
+  depositMetadata: cfArbitrumChainCcmDepositMetadata.nullish(),
   txId: hexString,
   brokerFee: cfPrimitivesBeneficiaryAccountId32.nullish(),
   affiliateFees: z.array(cfPrimitivesBeneficiaryAffiliateShortId),
@@ -882,6 +900,12 @@ export const palletCfSolanaIngressEgressDepositWitnessSolana = z.object({
   amount: numberOrHex,
 });
 
+export const cfSolanaChainCcmDepositMetadata = z.object({
+  channelMetadata: cfChainsCcmChannelMetadataCcmAdditionalData,
+  sourceChain: cfPrimitivesChainsForeignChain,
+  sourceAddress: cfChainsAddressForeignChainAddress.nullish(),
+});
+
 export const cfChainsRefundParametersChannelRefundParametersAddress = z.object({
   retryDuration: z.number(),
   refundAddress: hexString,
@@ -897,7 +921,7 @@ export const palletCfSolanaIngressEgressVaultDepositWitnessSolana = z.object({
   depositAmount: numberOrHex,
   outputAsset: cfPrimitivesChainsAssetsAnyAsset,
   destinationAddress: cfChainsAddressEncodedAddress,
-  depositMetadata: cfChainsCcmDepositMetadata.nullish(),
+  depositMetadata: cfSolanaChainCcmDepositMetadata.nullish(),
   txId: z.tuple([hexString, numberOrHex]),
   brokerFee: cfPrimitivesBeneficiaryAccountId32.nullish(),
   affiliateFees: z.array(cfPrimitivesBeneficiaryAffiliateShortId),
@@ -953,6 +977,12 @@ export const palletCfAssethubIngressEgressDepositWitnessAssethub = z.object({
   depositDetails: z.number(),
 });
 
+export const cfAssethubChainCcmDepositMetadata = z.object({
+  channelMetadata: cfChainsCcmChannelMetadataCcmAdditionalData,
+  sourceChain: cfPrimitivesChainsForeignChain,
+  sourceAddress: cfChainsAddressForeignChainAddress.nullish(),
+});
+
 export const palletCfAssethubIngressEgressVaultDepositWitnessAssethub = z.object({
   inputAsset: cfPrimitivesChainsAssetsHubAsset,
   depositAddress: hexString.nullish(),
@@ -961,7 +991,7 @@ export const palletCfAssethubIngressEgressVaultDepositWitnessAssethub = z.object
   depositDetails: z.number(),
   outputAsset: cfPrimitivesChainsAssetsAnyAsset,
   destinationAddress: cfChainsAddressEncodedAddress,
-  depositMetadata: cfChainsCcmDepositMetadata.nullish(),
+  depositMetadata: cfAssethubChainCcmDepositMetadata.nullish(),
   txId: cfPrimitivesTxId,
   brokerFee: cfPrimitivesBeneficiaryAccountId32.nullish(),
   affiliateFees: z.array(cfPrimitivesBeneficiaryAffiliateShortId),
