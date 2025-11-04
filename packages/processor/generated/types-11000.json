@@ -15559,7 +15559,7 @@
                         "type": "option",
                         "value": {
                           "type": "struct",
-                          "$name": "cf_chains::CcmDepositMetadata",
+                          "$name": "cf_ethereum_chain::CcmDepositMetadata",
                           "fields": {
                             "channelMetadata": {
                               "type": "struct",
@@ -19125,7 +19125,7 @@
                         "type": "option",
                         "value": {
                           "type": "struct",
-                          "$name": "cf_chains::CcmDepositMetadata",
+                          "$name": "cf_polkadot_chain::CcmDepositMetadata",
                           "fields": {
                             "channelMetadata": {
                               "type": "struct",
@@ -23022,7 +23022,7 @@
                         "type": "option",
                         "value": {
                           "type": "struct",
-                          "$name": "cf_chains::CcmDepositMetadata",
+                          "$name": "cf_bitcoin_chain::CcmDepositMetadata",
                           "fields": {
                             "channelMetadata": {
                               "type": "struct",
@@ -29994,7 +29994,7 @@
                         "type": "option",
                         "value": {
                           "type": "struct",
-                          "$name": "cf_chains::CcmDepositMetadata",
+                          "$name": "cf_arbitrum_chain::CcmDepositMetadata",
                           "fields": {
                             "channelMetadata": {
                               "type": "struct",
@@ -34741,7 +34741,7 @@
                         "type": "option",
                         "value": {
                           "type": "struct",
-                          "$name": "cf_chains::CcmDepositMetadata",
+                          "$name": "cf_solana_chain::CcmDepositMetadata",
                           "fields": {
                             "channelMetadata": {
                               "type": "struct",
@@ -39902,7 +39902,7 @@
                         "type": "option",
                         "value": {
                           "type": "struct",
-                          "$name": "cf_chains::CcmDepositMetadata",
+                          "$name": "cf_assethub_chain::CcmDepositMetadata",
                           "fields": {
                             "channelMetadata": {
                               "type": "struct",

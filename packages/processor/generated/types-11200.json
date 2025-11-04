@@ -16962,7 +16962,7 @@
                         "type": "option",
                         "value": {
                           "type": "struct",
-                          "$name": "cf_chains::CcmDepositMetadata",
+                          "$name": "cf_ethereum_chain::CcmDepositMetadata",
                           "fields": {
                             "channelMetadata": {
                               "type": "struct",
@@ -17216,7 +17216,7 @@
                       },
                       "refundParams": {
                         "type": "struct",
-                        "$name": "cf_chains::refund_parameters::ChannelRefundParameters",
+                        "$name": "cf_ethereum_chain::refund_parameters::ChannelRefundParameters",
                         "fields": {
                           "retryDuration": {
                             "type": "primitive",
@@ -20609,7 +20609,7 @@
                         "type": "option",
                         "value": {
                           "type": "struct",
-                          "$name": "cf_chains::CcmDepositMetadata",
+                          "$name": "cf_polkadot_chain::CcmDepositMetadata",
                           "fields": {
                             "channelMetadata": {
                               "type": "struct",
@@ -20873,7 +20873,7 @@
                       },
                       "refundParams": {
                         "type": "struct",
-                        "$name": "cf_chains::refund_parameters::ChannelRefundParameters",
+                        "$name": "cf_polkadot_chain::refund_parameters::ChannelRefundParameters",
                         "fields": {
                           "retryDuration": {
                             "type": "primitive",
@@ -24591,7 +24591,7 @@
                         "type": "option",
                         "value": {
                           "type": "struct",
-                          "$name": "cf_chains::CcmDepositMetadata",
+                          "$name": "cf_bitcoin_chain::CcmDepositMetadata",
                           "fields": {
                             "channelMetadata": {
                               "type": "struct",
@@ -24845,7 +24845,7 @@
                       },
                       "refundParams": {
                         "type": "struct",
-                        "$name": "cf_chains::refund_parameters::ChannelRefundParameters",
+                        "$name": "cf_bitcoin_chain::refund_parameters::ChannelRefundParameters",
                         "fields": {
                           "retryDuration": {
                             "type": "primitive",
@@ -31717,7 +31717,7 @@
                         "type": "option",
                         "value": {
                           "type": "struct",
-                          "$name": "cf_chains::CcmDepositMetadata",
+                          "$name": "cf_arbitrum_chain::CcmDepositMetadata",
                           "fields": {
                             "channelMetadata": {
                               "type": "struct",
@@ -31971,7 +31971,7 @@
                       },
                       "refundParams": {
                         "type": "struct",
-                        "$name": "cf_chains::refund_parameters::ChannelRefundParameters",
+                        "$name": "cf_arbitrum_chain::refund_parameters::ChannelRefundParameters",
                         "fields": {
                           "retryDuration": {
                             "type": "primitive",
@@ -36644,7 +36644,7 @@
                         "type": "option",
                         "value": {
                           "type": "struct",
-                          "$name": "cf_chains::CcmDepositMetadata",
+                          "$name": "cf_solana_chain::CcmDepositMetadata",
                           "fields": {
                             "channelMetadata": {
                               "type": "struct",
@@ -36911,7 +36911,7 @@
                       },
                       "refundParams": {
                         "type": "struct",
-                        "$name": "cf_chains::refund_parameters::ChannelRefundParameters",
+                        "$name": "cf_solana_chain::refund_parameters::ChannelRefundParameters",
                         "fields": {
                           "retryDuration": {
                             "type": "primitive",
@@ -41989,7 +41989,7 @@
                         "type": "option",
                         "value": {
                           "type": "struct",
-                          "$name": "cf_chains::CcmDepositMetadata",
+                          "$name": "cf_assethub_chain::CcmDepositMetadata",
                           "fields": {
                             "channelMetadata": {
                               "type": "struct",
@@ -42253,7 +42253,7 @@
                       },
                       "refundParams": {
                         "type": "struct",
-                        "$name": "cf_chains::refund_parameters::ChannelRefundParameters",
+                        "$name": "cf_assethub_chain::refund_parameters::ChannelRefundParameters",
                         "fields": {
                           "retryDuration": {
                             "type": "primitive",

@@ -489,7 +489,7 @@ export const cfChainsCcmChannelMetadataCcmAdditionalData = z.object({
   ccmAdditionalData: hexString,
 });
 
-export const cfChainsCcmDepositMetadata = z.object({
+export const cfEthereumChainCcmDepositMetadata = z.object({
   channelMetadata: cfChainsCcmChannelMetadataCcmAdditionalData,
   sourceChain: cfPrimitivesChainsForeignChain,
   sourceAddress: cfChainsAddressForeignChainAddress.nullish(),
@@ -500,7 +500,7 @@ export const cfPrimitivesBeneficiaryAffiliateShortId = z.object({
   bps: z.number(),
 });
 
-export const cfChainsRefundParametersChannelRefundParameters = z.object({
+export const cfEthereumChainRefundParametersChannelRefundParameters = z.object({
   retryDuration: z.number(),
   refundAddress: hexString,
   minPrice: numberOrHex,
@@ -516,11 +516,11 @@ export const palletCfEthereumIngressEgressVaultDepositWitnessEthereum = z.object
   depositDetails: cfChainsEvmDepositDetails,
   outputAsset: cfPrimitivesChainsAssetsAnyAsset,
   destinationAddress: cfChainsAddressEncodedAddress,
-  depositMetadata: cfChainsCcmDepositMetadata.nullish(),
+  depositMetadata: cfEthereumChainCcmDepositMetadata.nullish(),
   txId: hexString,
   brokerFee: cfPrimitivesBeneficiaryAccountId32.nullish(),
   affiliateFees: z.array(cfPrimitivesBeneficiaryAffiliateShortId),
-  refundParams: cfChainsRefundParametersChannelRefundParameters,
+  refundParams: cfEthereumChainRefundParametersChannelRefundParameters,
   dcaParams: cfPrimitivesDcaParameters.nullish(),
   boostFee: z.number(),
 });
@@ -613,6 +613,20 @@ export const palletCfPolkadotIngressEgressDepositWitnessPolkadot = z.object({
   depositDetails: z.number(),
 });
 
+export const cfPolkadotChainCcmDepositMetadata = z.object({
+  channelMetadata: cfChainsCcmChannelMetadataCcmAdditionalData,
+  sourceChain: cfPrimitivesChainsForeignChain,
+  sourceAddress: cfChainsAddressForeignChainAddress.nullish(),
+});
+
+export const cfPolkadotChainRefundParametersChannelRefundParameters = z.object({
+  retryDuration: z.number(),
+  refundAddress: hexString,
+  minPrice: numberOrHex,
+  refundCcmMetadata: cfChainsCcmChannelMetadataCcmAdditionalData.nullish(),
+  maxOraclePriceSlippage: z.number().nullish(),
+});
+
 export const palletCfPolkadotIngressEgressVaultDepositWitnessPolkadot = z.object({
   inputAsset: cfPrimitivesChainsAssetsDotAsset,
   depositAddress: hexString.nullish(),
@@ -621,11 +635,11 @@ export const palletCfPolkadotIngressEgressVaultDepositWitnessPolkadot = z.object
   depositDetails: z.number(),
   outputAsset: cfPrimitivesChainsAssetsAnyAsset,
   destinationAddress: cfChainsAddressEncodedAddress,
-  depositMetadata: cfChainsCcmDepositMetadata.nullish(),
+  depositMetadata: cfPolkadotChainCcmDepositMetadata.nullish(),
   txId: cfPrimitivesTxId,
   brokerFee: cfPrimitivesBeneficiaryAccountId32.nullish(),
   affiliateFees: z.array(cfPrimitivesBeneficiaryAffiliateShortId),
-  refundParams: cfChainsRefundParametersChannelRefundParameters,
+  refundParams: cfPolkadotChainRefundParametersChannelRefundParameters,
   dcaParams: cfPrimitivesDcaParameters.nullish(),
   boostFee: z.number(),
 });
@@ -732,6 +746,20 @@ export const palletCfBitcoinIngressEgressDepositWitnessBitcoin = z.object({
   depositDetails: cfChainsBtcUtxo,
 });
 
+export const cfBitcoinChainCcmDepositMetadata = z.object({
+  channelMetadata: cfChainsCcmChannelMetadataCcmAdditionalData,
+  sourceChain: cfPrimitivesChainsForeignChain,
+  sourceAddress: cfChainsAddressForeignChainAddress.nullish(),
+});
+
+export const cfBitcoinChainRefundParametersChannelRefundParameters = z.object({
+  retryDuration: z.number(),
+  refundAddress: cfChainsBtcScriptPubkey,
+  minPrice: numberOrHex,
+  refundCcmMetadata: cfChainsCcmChannelMetadataCcmAdditionalData.nullish(),
+  maxOraclePriceSlippage: z.number().nullish(),
+});
+
 export const palletCfBitcoinIngressEgressVaultDepositWitnessBitcoin = z.object({
   inputAsset: cfPrimitivesChainsAssetsBtcAsset,
   depositAddress: cfChainsBtcScriptPubkey.nullish(),
@@ -740,11 +768,11 @@ export const palletCfBitcoinIngressEgressVaultDepositWitnessBitcoin = z.object({
   depositDetails: cfChainsBtcUtxo,
   outputAsset: cfPrimitivesChainsAssetsAnyAsset,
   destinationAddress: cfChainsAddressEncodedAddress,
-  depositMetadata: cfChainsCcmDepositMetadata.nullish(),
+  depositMetadata: cfBitcoinChainCcmDepositMetadata.nullish(),
   txId: hexString,
   brokerFee: cfPrimitivesBeneficiaryAccountId32.nullish(),
   affiliateFees: z.array(cfPrimitivesBeneficiaryAffiliateShortId),
-  refundParams: cfChainsRefundParametersChannelRefundParameters,
+  refundParams: cfBitcoinChainRefundParametersChannelRefundParameters,
   dcaParams: cfPrimitivesDcaParameters.nullish(),
   boostFee: z.number(),
 });
@@ -829,6 +857,20 @@ export const palletCfArbitrumIngressEgressDepositWitnessArbitrum = z.object({
   depositDetails: cfChainsEvmDepositDetails,
 });
 
+export const cfArbitrumChainCcmDepositMetadata = z.object({
+  channelMetadata: cfChainsCcmChannelMetadataCcmAdditionalData,
+  sourceChain: cfPrimitivesChainsForeignChain,
+  sourceAddress: cfChainsAddressForeignChainAddress.nullish(),
+});
+
+export const cfArbitrumChainRefundParametersChannelRefundParameters = z.object({
+  retryDuration: z.number(),
+  refundAddress: hexString,
+  minPrice: numberOrHex,
+  refundCcmMetadata: cfChainsCcmChannelMetadataCcmAdditionalData.nullish(),
+  maxOraclePriceSlippage: z.number().nullish(),
+});
+
 export const palletCfArbitrumIngressEgressVaultDepositWitnessArbitrum = z.object({
   inputAsset: cfPrimitivesChainsAssetsArbAsset,
   depositAddress: hexString.nullish(),
@@ -837,11 +879,11 @@ export const palletCfArbitrumIngressEgressVaultDepositWitnessArbitrum = z.object
   depositDetails: cfChainsEvmDepositDetails,
   outputAsset: cfPrimitivesChainsAssetsAnyAsset,
   destinationAddress: cfChainsAddressEncodedAddress,
-  depositMetadata: cfChainsCcmDepositMetadata.nullish(),
+  depositMetadata: cfArbitrumChainCcmDepositMetadata.nullish(),
   txId: hexString,
   brokerFee: cfPrimitivesBeneficiaryAccountId32.nullish(),
   affiliateFees: z.array(cfPrimitivesBeneficiaryAffiliateShortId),
-  refundParams: cfChainsRefundParametersChannelRefundParameters,
+  refundParams: cfArbitrumChainRefundParametersChannelRefundParameters,
   dcaParams: cfPrimitivesDcaParameters.nullish(),
   boostFee: z.number(),
 });
@@ -931,6 +973,20 @@ export const palletCfSolanaIngressEgressDepositWitnessSolana = z.object({
   depositDetails: cfChainsSolVaultSwapOrDepositChannelId,
 });
 
+export const cfSolanaChainCcmDepositMetadata = z.object({
+  channelMetadata: cfChainsCcmChannelMetadataCcmAdditionalData,
+  sourceChain: cfPrimitivesChainsForeignChain,
+  sourceAddress: cfChainsAddressForeignChainAddress.nullish(),
+});
+
+export const cfSolanaChainRefundParametersChannelRefundParameters = z.object({
+  retryDuration: z.number(),
+  refundAddress: hexString,
+  minPrice: numberOrHex,
+  refundCcmMetadata: cfChainsCcmChannelMetadataCcmAdditionalData.nullish(),
+  maxOraclePriceSlippage: z.number().nullish(),
+});
+
 export const palletCfSolanaIngressEgressVaultDepositWitnessSolana = z.object({
   inputAsset: cfPrimitivesChainsAssetsSolAsset,
   depositAddress: hexString.nullish(),
@@ -939,11 +995,11 @@ export const palletCfSolanaIngressEgressVaultDepositWitnessSolana = z.object({
   depositDetails: cfChainsSolVaultSwapOrDepositChannelId,
   outputAsset: cfPrimitivesChainsAssetsAnyAsset,
   destinationAddress: cfChainsAddressEncodedAddress,
-  depositMetadata: cfChainsCcmDepositMetadata.nullish(),
+  depositMetadata: cfSolanaChainCcmDepositMetadata.nullish(),
   txId: z.tuple([hexString, numberOrHex]),
   brokerFee: cfPrimitivesBeneficiaryAccountId32.nullish(),
   affiliateFees: z.array(cfPrimitivesBeneficiaryAffiliateShortId),
-  refundParams: cfChainsRefundParametersChannelRefundParameters,
+  refundParams: cfSolanaChainRefundParametersChannelRefundParameters,
   dcaParams: cfPrimitivesDcaParameters.nullish(),
   boostFee: z.number(),
 });
@@ -1025,6 +1081,20 @@ export const palletCfAssethubIngressEgressDepositWitnessAssethub = z.object({
   depositDetails: z.number(),
 });
 
+export const cfAssethubChainCcmDepositMetadata = z.object({
+  channelMetadata: cfChainsCcmChannelMetadataCcmAdditionalData,
+  sourceChain: cfPrimitivesChainsForeignChain,
+  sourceAddress: cfChainsAddressForeignChainAddress.nullish(),
+});
+
+export const cfAssethubChainRefundParametersChannelRefundParameters = z.object({
+  retryDuration: z.number(),
+  refundAddress: hexString,
+  minPrice: numberOrHex,
+  refundCcmMetadata: cfChainsCcmChannelMetadataCcmAdditionalData.nullish(),
+  maxOraclePriceSlippage: z.number().nullish(),
+});
+
 export const palletCfAssethubIngressEgressVaultDepositWitnessAssethub = z.object({
   inputAsset: cfPrimitivesChainsAssetsHubAsset,
   depositAddress: hexString.nullish(),
@@ -1033,11 +1103,11 @@ export const palletCfAssethubIngressEgressVaultDepositWitnessAssethub = z.object
   depositDetails: z.number(),
   outputAsset: cfPrimitivesChainsAssetsAnyAsset,
   destinationAddress: cfChainsAddressEncodedAddress,
-  depositMetadata: cfChainsCcmDepositMetadata.nullish(),
+  depositMetadata: cfAssethubChainCcmDepositMetadata.nullish(),
   txId: cfPrimitivesTxId,
   brokerFee: cfPrimitivesBeneficiaryAccountId32.nullish(),
   affiliateFees: z.array(cfPrimitivesBeneficiaryAffiliateShortId),
-  refundParams: cfChainsRefundParametersChannelRefundParameters,
+  refundParams: cfAssethubChainRefundParametersChannelRefundParameters,
   dcaParams: cfPrimitivesDcaParameters.nullish(),
   boostFee: z.number(),
 });
