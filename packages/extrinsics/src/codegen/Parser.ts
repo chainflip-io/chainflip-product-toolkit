@@ -8,11 +8,11 @@ export default class Parser extends BaseParser {
   }
 
   protected override shouldParsePallet(palletName: string): boolean {
-    return palletName === 'Swapping';
+    return palletName === 'LendingPools';
   }
 
   protected override shouldParseItem(palletName: string, itemName: string): boolean {
-    return itemName.includes('request_swap_deposit_address');
+    return !['update_pallet_config'].includes(itemName);
   }
 
   private depth = 0;

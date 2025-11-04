@@ -77,8 +77,10 @@ export default class CodeGenerator extends BaseCodeGenerator {
       case 'u16':
       case 'u32':
         return new Code('number').asType();
+      case 'u64':
       case 'u128':
       case 'U256':
+        return new Code('`${number}` | `0x${string}`').asType();
       case 'AccountId32':
         return new Code('`0x${string}`').asType();
       case 'Bytes':
@@ -147,8 +149,11 @@ export default class CodeGenerator extends BaseCodeGenerator {
     return new Code(`${type.toString()} | null`, [type]);
   }
 
-  protected override generateMap(_def: MapType): CodegenResult {
-    throw new Error('Method not implemented.');
+  protected override generateMap(def: MapType): CodegenResult {
+    assert(def.key.type === 'enum', 'only know how to generate map with enum key');
+    const key = this.generateEnum(def.key);
+    const value = this.generateResolvedType(def.value);
+    return new Code(`Map<{ [key in ${key.toString()}]: {}; }, ${value.toString()}>`, [key, value]);
   }
 
   protected override generateItem(itemName: string, def: ResolvedType): CodegenResult {
