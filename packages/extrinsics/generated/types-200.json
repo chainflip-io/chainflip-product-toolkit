@@ -1601,8 +1601,24 @@
           "value": "u64"
         },
         "amount": {
-          "type": "primitive",
-          "value": "u128"
+          "type": "enum",
+          "$name": "cfTraitsLendingRepaymentAmount",
+          "values": [
+            {
+              "name": "Full",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "Exact",
+              "value": {
+                "type": "primitive",
+                "value": "u128"
+              }
+            }
+          ]
         }
       }
     }

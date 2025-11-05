@@ -29,6 +29,8 @@ exports[`extrinsic codegen > generates the code in the desired format > /200/com
   | 'HubDot'
   | 'HubUsdt'
   | 'HubUsdc';
+
+export type CfTraitsLendingRepaymentAmount = 'Full' | { Exact: \`\${number}\` | \`0x\${string}\` };
 "
 `;
 
@@ -71,9 +73,11 @@ export type LendingPoolsExpandLoan = [
 `;
 
 exports[`extrinsic codegen > generates the code in the desired format > /200/lendingPools/makeRepayment.ts 1`] = `
-"export type LendingPoolsMakeRepayment = [
+"import { type CfTraitsLendingRepaymentAmount } from '../common';
+
+export type LendingPoolsMakeRepayment = [
   loanId: \`\${number}\` | \`0x\${string}\`,
-  amount: \`\${number}\` | \`0x\${string}\`,
+  amount: CfTraitsLendingRepaymentAmount,
 ];
 "
 `;

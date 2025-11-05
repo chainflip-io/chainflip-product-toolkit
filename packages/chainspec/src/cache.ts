@@ -74,7 +74,8 @@ export class SpecVersionCache {
       await this.write(specVersion, hash, network);
     }
 
-    const filePath = path.join(this.getDir(), `${specVersion}.scale`);
+    // check if we already have the metadata cached for this hash and chainspec
+    const filePath = path.join(this.getDir(), `${specVersion}-${hash.slice(2, 8)}.scale`);
 
     let bytes = await fs.readFile(filePath).catch(() => null);
 
@@ -85,6 +86,13 @@ export class SpecVersionCache {
 
       await fs.mkdir(path.dirname(filePath), { recursive: true });
       await fs.writeFile(filePath, bytes);
+
+      // remove other cached files for the same chainspec
+      for (const file of await fs.readdir(this.getDir())) {
+        if (file.startsWith(`${specVersion}-`) && file !== path.basename(filePath)) {
+          await fs.rm(path.join(this.getDir(), file)).catch(() => null);
+        }
+      }
     }
 
     const registry = new TypeRegistry();

@@ -96,22 +96,16 @@ export default class CodeGenerator extends BaseCodeGenerator {
     const identifier = this.getKnownIdentifier(def.$name);
     if (this.registry.types.has(identifier)) return new Identifier(identifier).asType();
 
-    const isSimpleEnum = def.values.every(
-      (value) => value.value.type === 'primitive' && value.value.value === 'null',
-    );
+    const members = def.values
+      .filter((value) => !value.name.startsWith('__Unused'))
+      .map((value) => {
+        if (value.value.type === 'primitive' && value.value.value === 'null') {
+          return new Code(`'${value.name}'`).asType();
+        }
 
-    let members: CodegenResult[];
-
-    if (isSimpleEnum) {
-      members = def.values
-        .filter((value) => !value.name.startsWith('__Unused'))
-        .map((value) => new Code(`'${value.name}'`).asType());
-    } else {
-      members = def.values.map((value) => {
         const result = this.generateResolvedType(value.value);
-        return new Code(`Record<'${value.name}', ${result.toString()}>`, [result]).asType();
+        return new Code(`{ ${value.name}: ${result.toString()} }`, [result]).asType();
       });
-    }
 
     const code = new Code(members.join(' | '), members).asType();
     this.registry.types.set(identifier, code);

@@ -12,3 +12,5 @@ export type ChainflipAsset =
   | 'HubDot'
   | 'HubUsdt'
   | 'HubUsdc';
+
+export type CfTraitsLendingRepaymentAmount = 'Full' | { Exact: `${number}` | `0x${string}` };
