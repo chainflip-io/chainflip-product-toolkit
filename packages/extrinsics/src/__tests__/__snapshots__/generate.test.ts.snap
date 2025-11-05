@@ -1,18 +1,20 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`extrinsic codegen > generates the code in the desired format > /160/CHANGELOG.md 1`] = `
-"Swapping:
-  - request_swap_deposit_address:
-    - sourceAsset: added (Swapping.request_swap_deposit_address.sourceAsset.10)
-    - destinationAsset: added (Swapping.request_swap_deposit_address.destinationAsset.10)
-  - request_swap_deposit_address_with_affiliates:
-    - dcaParameters: added (Swapping.request_swap_deposit_address_with_affiliates.dcaParameters)
-    - sourceAsset: added (Swapping.request_swap_deposit_address_with_affiliates.sourceAsset.10)
-    - destinationAsset: added (Swapping.request_swap_deposit_address_with_affiliates.destinationAsset.10)
+exports[`extrinsic codegen > generates the code in the desired format > /200/CHANGELOG.md 1`] = `
+"LendingPools:
+  - add_collateral: added
+  - add_lender_funds: added
+  - create_lending_pool: added
+  - expand_loan: added
+  - make_repayment: added
+  - remove_collateral: added
+  - remove_lender_funds: added
+  - request_loan: added
+  - update_primary_collateral_asset: added
 "
 `;
 
-exports[`extrinsic codegen > generates the code in the desired format > /160/common.ts 1`] = `
+exports[`extrinsic codegen > generates the code in the desired format > /200/common.ts 1`] = `
 "export type ChainflipAsset =
   | 'Eth'
   | 'Flip'
@@ -23,83 +25,97 @@ exports[`extrinsic codegen > generates the code in the desired format > /160/com
   | 'ArbUsdc'
   | 'Usdt'
   | 'Sol'
-  | 'SolUsdc';
+  | 'SolUsdc'
+  | 'HubDot'
+  | 'HubUsdt'
+  | 'HubUsdc';
 
-export type EncodedAddress =
-  | Record<'Eth', Uint8Array>
-  | Record<'Dot', Uint8Array>
-  | Record<'Btc', Uint8Array | \`0x\${string}\`>
-  | Record<'Arb', Uint8Array>
-  | Record<'Sol', Uint8Array>;
-
-export type BitcoinScriptPubKey =
-  | Record<'P2PKH', Uint8Array>
-  | Record<'P2SH', Uint8Array>
-  | Record<'P2WPKH', Uint8Array>
-  | Record<'P2WSH', Uint8Array>
-  | Record<'Taproot', Uint8Array>
-  | Record<
-      'OtherSegwit',
-      {
-        version: number;
-        program: Uint8Array | \`0x\${string}\`;
-      }
-    >;
-
-export type ForeignChainAddress =
-  | Record<'Eth', Uint8Array>
-  | Record<'Dot', Uint8Array>
-  | Record<'Btc', BitcoinScriptPubKey>
-  | Record<'Arb', Uint8Array>
-  | Record<'Sol', Uint8Array>;
+export type CfTraitsLendingRepaymentAmount = 'Full' | { Exact: \`\${number}\` | \`0x\${string}\` };
 "
 `;
 
-exports[`extrinsic codegen > generates the code in the desired format > /160/swapping/requestSwapDepositAddress.ts 1`] = `
-"import { type ChainflipAsset, type EncodedAddress } from '../common';
+exports[`extrinsic codegen > generates the code in the desired format > /200/lendingPools/addCollateral.ts 1`] = `
+"import { type ChainflipAsset } from '../common';
 
-export type SwappingRequestSwapDepositAddress = [
-  sourceAsset: ChainflipAsset,
-  destinationAsset: ChainflipAsset,
-  destinationAddress: EncodedAddress,
-  brokerCommission: number,
-  channelMetadata: {
-    message: Uint8Array | \`0x\${string}\`;
-    gas_budget: \`0x\${string}\`;
-    cf_parameters: Uint8Array | \`0x\${string}\`;
-  } | null,
-  boostFee: number,
+export type LendingPoolsAddCollateral = [
+  primaryCollateralAsset: ChainflipAsset | null,
+  collateral: Map<{ [key in ChainflipAsset]: {} }, \`\${number}\` | \`0x\${string}\`>,
 ];
 "
 `;
 
-exports[`extrinsic codegen > generates the code in the desired format > /160/swapping/requestSwapDepositAddressWithAffiliates.ts 1`] = `
-"import { type ChainflipAsset, type EncodedAddress, type ForeignChainAddress } from '../common';
+exports[`extrinsic codegen > generates the code in the desired format > /200/lendingPools/addLenderFunds.ts 1`] = `
+"import { type ChainflipAsset } from '../common';
 
-export type SwappingRequestSwapDepositAddressWithAffiliates = [
-  sourceAsset: ChainflipAsset,
-  destinationAsset: ChainflipAsset,
-  destinationAddress: EncodedAddress,
-  brokerCommission: number,
-  channelMetadata: {
-    message: Uint8Array | \`0x\${string}\`;
-    gas_budget: \`0x\${string}\`;
-    cf_parameters: Uint8Array | \`0x\${string}\`;
-  } | null,
-  boostFee: number,
-  affiliateFees: {
-    account: \`0x\${string}\`;
-    bps: number;
-  }[],
-  refundParameters: {
-    retry_duration: number;
-    refund_address: ForeignChainAddress;
-    min_price: \`0x\${string}\`;
-  } | null,
-  dcaParameters: {
-    number_of_chunks: number;
-    chunk_interval: number;
-  } | null,
+export type LendingPoolsAddLenderFunds = [
+  asset: ChainflipAsset,
+  amount: \`\${number}\` | \`0x\${string}\`,
 ];
+"
+`;
+
+exports[`extrinsic codegen > generates the code in the desired format > /200/lendingPools/createLendingPool.ts 1`] = `
+"import { type ChainflipAsset } from '../common';
+
+export type LendingPoolsCreateLendingPool = [asset: ChainflipAsset];
+"
+`;
+
+exports[`extrinsic codegen > generates the code in the desired format > /200/lendingPools/expandLoan.ts 1`] = `
+"import { type ChainflipAsset } from '../common';
+
+export type LendingPoolsExpandLoan = [
+  loanId: \`\${number}\` | \`0x\${string}\`,
+  extraAmountToBorrow: \`\${number}\` | \`0x\${string}\`,
+  extraCollateral: Map<{ [key in ChainflipAsset]: {} }, \`\${number}\` | \`0x\${string}\`>,
+];
+"
+`;
+
+exports[`extrinsic codegen > generates the code in the desired format > /200/lendingPools/makeRepayment.ts 1`] = `
+"import { type CfTraitsLendingRepaymentAmount } from '../common';
+
+export type LendingPoolsMakeRepayment = [
+  loanId: \`\${number}\` | \`0x\${string}\`,
+  amount: CfTraitsLendingRepaymentAmount,
+];
+"
+`;
+
+exports[`extrinsic codegen > generates the code in the desired format > /200/lendingPools/removeCollateral.ts 1`] = `
+"import { type ChainflipAsset } from '../common';
+
+export type LendingPoolsRemoveCollateral = [
+  collateral: Map<{ [key in ChainflipAsset]: {} }, \`\${number}\` | \`0x\${string}\`>,
+];
+"
+`;
+
+exports[`extrinsic codegen > generates the code in the desired format > /200/lendingPools/removeLenderFunds.ts 1`] = `
+"import { type ChainflipAsset } from '../common';
+
+export type LendingPoolsRemoveLenderFunds = [
+  asset: ChainflipAsset,
+  amount: \`\${number}\` | \`0x\${string}\` | null,
+];
+"
+`;
+
+exports[`extrinsic codegen > generates the code in the desired format > /200/lendingPools/requestLoan.ts 1`] = `
+"import { type ChainflipAsset } from '../common';
+
+export type LendingPoolsRequestLoan = [
+  loanAsset: ChainflipAsset,
+  loanAmount: \`\${number}\` | \`0x\${string}\`,
+  primaryCollateralAsset: ChainflipAsset | null,
+  extraCollateral: Map<{ [key in ChainflipAsset]: {} }, \`\${number}\` | \`0x\${string}\`>,
+];
+"
+`;
+
+exports[`extrinsic codegen > generates the code in the desired format > /200/lendingPools/updatePrimaryCollateralAsset.ts 1`] = `
+"import { type ChainflipAsset } from '../common';
+
+export type LendingPoolsUpdatePrimaryCollateralAsset = [primaryCollateralAsset: ChainflipAsset];
 "
 `;

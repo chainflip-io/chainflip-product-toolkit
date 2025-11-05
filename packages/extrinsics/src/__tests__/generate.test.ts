@@ -26,7 +26,8 @@ describe('extrinsic codegen', () => {
     await generateAllCode(Parser, CodeGenerator, dir);
 
     for await (const file of readdir(dir)) {
-      if (!file.includes('/160/')) continue;
+      if (!file.includes('/200/')) continue;
+      console.log(file);
       const content = await fs.readFile(file, 'utf-8');
       expect(content).toMatchSnapshot(file.replace(dir, ''));
     }

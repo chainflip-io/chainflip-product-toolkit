@@ -1,0 +1,9 @@
+LendingPools:
+  - add_collateral: added
+  - add_lender_funds: added
+  - create_lending_pool: added
+  - expand_loan: added
+  - make_repayment: added
+  - remove_collateral: added
+  - remove_lender_funds: added
+  - request_loan: added

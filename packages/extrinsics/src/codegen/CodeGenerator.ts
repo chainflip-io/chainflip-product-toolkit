@@ -77,8 +77,10 @@ export default class CodeGenerator extends BaseCodeGenerator {
       case 'u16':
       case 'u32':
         return new Code('number').asType();
+      case 'u64':
       case 'u128':
       case 'U256':
+        return new Code('`${number}` | `0x${string}`').asType();
       case 'AccountId32':
         return new Code('`0x${string}`').asType();
       case 'Bytes':
@@ -94,22 +96,16 @@ export default class CodeGenerator extends BaseCodeGenerator {
     const identifier = this.getKnownIdentifier(def.$name);
     if (this.registry.types.has(identifier)) return new Identifier(identifier).asType();
 
-    const isSimpleEnum = def.values.every(
-      (value) => value.value.type === 'primitive' && value.value.value === 'null',
-    );
+    const members = def.values
+      .filter((value) => !value.name.startsWith('__Unused'))
+      .map((value) => {
+        if (value.value.type === 'primitive' && value.value.value === 'null') {
+          return new Code(`'${value.name}'`).asType();
+        }
 
-    let members: CodegenResult[];
-
-    if (isSimpleEnum) {
-      members = def.values
-        .filter((value) => !value.name.startsWith('__Unused'))
-        .map((value) => new Code(`'${value.name}'`).asType());
-    } else {
-      members = def.values.map((value) => {
         const result = this.generateResolvedType(value.value);
-        return new Code(`Record<'${value.name}', ${result.toString()}>`, [result]).asType();
+        return new Code(`{ ${value.name}: ${result.toString()} }`, [result]).asType();
       });
-    }
 
     const code = new Code(members.join(' | '), members).asType();
     this.registry.types.set(identifier, code);
@@ -147,8 +143,11 @@ export default class CodeGenerator extends BaseCodeGenerator {
     return new Code(`${type.toString()} | null`, [type]);
   }
 
-  protected override generateMap(_def: MapType): CodegenResult {
-    throw new Error('Method not implemented.');
+  protected override generateMap(def: MapType): CodegenResult {
+    assert(def.key.type === 'enum', 'only know how to generate map with enum key');
+    const key = this.generateEnum(def.key);
+    const value = this.generateResolvedType(def.value);
+    return new Code(`Map<{ [key in ${key.toString()}]: {}; }, ${value.toString()}>`, [key, value]);
   }
 
   protected override generateItem(itemName: string, def: ResolvedType): CodegenResult {
