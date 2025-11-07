@@ -3,28 +3,18 @@ import pluginJs from '@eslint/js';
 import tseslint from 'typescript-eslint';
 import importPlugin from 'eslint-plugin-import';
 
-export default [
+/**
+ * @param {{tsconfigRootDir: string, project: string}} parserOptions
+ */
+export default (parserOptions) => [
   { ignores: ['**/coverage', '**/dist', '**/generated', '**/wasm/built'] },
   { files: ['**/*.ts'], rules: { 'no-console': 'error' } },
+  { files: ['packages/processor/**/*.ts'], rules: { 'no-console': 'off' } },
   {
-    files: ['packages/processor/**/*.ts'],
-    rules: { 'no-console': 'off' },
+    languageOptions: { globals: { ...globals.browser, ...globals.node }, parserOptions },
+    linterOptions: { reportUnusedDisableDirectives: 'error' },
   },
-  {
-    languageOptions: {
-      globals: { ...globals.browser, ...globals.node },
-      parserOptions: {
-        project: './tsconfig.eslint.json',
-        tsconfigRootDir: import.meta.dirname,
-      },
-    },
-    linterOptions: {
-      reportUnusedDisableDirectives: 'error',
-    },
-  },
-  {
-    ...pluginJs.configs.recommended,
-  },
+  { ...pluginJs.configs.recommended },
   ...tseslint.configs.recommendedTypeChecked,
   {
     files: ['**/*.ts', '**/*.tsx'],
