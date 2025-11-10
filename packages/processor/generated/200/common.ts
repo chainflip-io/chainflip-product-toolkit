@@ -372,6 +372,12 @@ export const cfPrimitivesDcaParameters = z.object({
   chunkInterval: z.number(),
 });
 
+export const palletCfSwappingSwapRequestCompletionReason = simpleEnum([
+  'Aborted',
+  'Expired',
+  'Executed',
+]);
+
 export const palletCfSwappingSwapFailureReason = simpleEnum([
   'PriceImpactLimit',
   'MinPriceViolation',
@@ -445,4 +451,22 @@ export const palletCfLendingPoolsPalletConfigUpdate = z.discriminatedUnion('__ki
     minimumUpdateLoanAmountUsd: numberOrHex,
     minimumUpdateCollateralAmountUsd: numberOrHex,
   }),
+]);
+
+export const palletCfLendingPoolsCollateralAddedActionType = simpleEnum([
+  'Manual',
+  'SystemTopup',
+  'SystemLiquidationExcessAmount',
+]);
+
+export const palletCfLendingPoolsGeneralLendingLiquidationType = simpleEnum([
+  'SoftVoluntary',
+  'Soft',
+  'Hard',
+]);
+
+export const palletCfLendingPoolsGeneralLendingLiquidationCompletionReason = simpleEnum([
+  'FullySwapped',
+  'LtvChange',
+  'ManualAbort',
 ]);
