@@ -1621,6 +1621,14 @@
           ]
         }
       }
+    },
+    "initiate_voluntary_liquidation": {
+      "type": "primitive",
+      "value": "null"
+    },
+    "stop_voluntary_liquidation": {
+      "type": "primitive",
+      "value": "null"
     }
   }
 }

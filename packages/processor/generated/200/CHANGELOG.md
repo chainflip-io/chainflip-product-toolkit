@@ -12,6 +12,7 @@ LendingPools:
   - LendingFundsRemoved: added
   - LendingNetworkFeeSwapInitiated: added
   - LendingPoolCreated: added
+  - LiquidationCompleted: added
   - LiquidationFeeTaken: added
   - LiquidationInitiated: added
   - LoanCreated: added
@@ -26,6 +27,8 @@ LendingPools:
 Swapping:
   - SwapAborted:
     - reason: added (Swapping.SwapAborted.reason.7)
+  - SwapRequestCompleted:
+    - reason: added (Swapping.SwapRequestCompleted.reason)
   - SwapRequested:
     - requestType: added (Swapping.SwapRequested.requestType.2.outputAction.2)
   - SwapRescheduled:

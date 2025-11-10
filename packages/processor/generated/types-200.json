@@ -11218,6 +11218,33 @@
         "swapRequestId": {
           "type": "primitive",
           "value": "u64"
+        },
+        "reason": {
+          "type": "enum",
+          "$name": "palletCfSwappingSwapRequestCompletionReason",
+          "values": [
+            {
+              "name": "Aborted",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "Expired",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "Executed",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            }
+          ]
         }
       }
     },
@@ -46628,6 +46655,33 @@
             "type": "primitive",
             "value": "u128"
           }
+        },
+        "actionType": {
+          "type": "enum",
+          "$name": "palletCfLendingPoolsCollateralAddedActionType",
+          "values": [
+            {
+              "name": "Manual",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "SystemTopup",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "SystemLiquidationExcessAmount",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            }
+          ]
         }
       }
     },
@@ -47065,9 +47119,68 @@
             }
           }
         },
-        "isHard": {
+        "liquidationType": {
+          "type": "enum",
+          "$name": "palletCfLendingPoolsGeneralLendingLiquidationType",
+          "values": [
+            {
+              "name": "SoftVoluntary",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "Soft",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "Hard",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            }
+          ]
+        }
+      }
+    },
+    "LiquidationCompleted": {
+      "type": "struct",
+      "fields": {
+        "borrowerId": {
           "type": "primitive",
-          "value": "bool"
+          "value": "AccountId32"
+        },
+        "reason": {
+          "type": "enum",
+          "$name": "palletCfLendingPoolsGeneralLendingLiquidationCompletionReason",
+          "values": [
+            {
+              "name": "FullySwapped",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "LtvChange",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "ManualAbort",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            }
+          ]
         }
       }
     },
