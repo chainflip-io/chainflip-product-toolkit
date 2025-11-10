@@ -17,6 +17,16 @@ import {
   type TupleType,
 } from '@/chainspec/BaseParser';
 
+class NoArgs extends Code {
+  constructor() {
+    super('NO_ARGS');
+  }
+
+  override toString() {
+    return '[]';
+  }
+}
+
 class Struct extends Code {
   as: 'tuple' | 'record' = 'record';
   declarationType: 'type' | 'const' = 'type';
@@ -87,6 +97,8 @@ export default class CodeGenerator extends BaseCodeGenerator {
         return new Code('Uint8Array | `0x${string}`').asType();
       case 'H160':
         return new Code('Uint8Array').asType();
+      case 'null':
+        return new Code('null').asType();
       default:
         throw new Error(`Method not implemented for primitive type: ${def.value}`);
     }
@@ -151,6 +163,9 @@ export default class CodeGenerator extends BaseCodeGenerator {
   }
 
   protected override generateItem(itemName: string, def: ResolvedType): CodegenResult {
+    // if the input type to the extrinsic is `null`, we don't need to pass any
+    // args to the call
+    if (def.type === 'primitive' && def.value === 'null') return new NoArgs();
     const type = this.generateResolvedType(def);
     assert(def.type === 'struct', `Expected struct, got ${def.type}`);
     assert(type instanceof Struct, `Expected code, got ${type[Symbol.toStringTag]()}`);

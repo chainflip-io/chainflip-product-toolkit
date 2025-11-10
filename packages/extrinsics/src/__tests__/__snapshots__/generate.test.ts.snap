@@ -6,10 +6,12 @@ exports[`extrinsic codegen > generates the code in the desired format > /200/CHA
   - add_lender_funds: added
   - create_lending_pool: added
   - expand_loan: added
+  - initiate_voluntary_liquidation: added
   - make_repayment: added
   - remove_collateral: added
   - remove_lender_funds: added
   - request_loan: added
+  - stop_voluntary_liquidation: added
   - update_primary_collateral_asset: added
 "
 `;
@@ -72,6 +74,11 @@ export type LendingPoolsExpandLoan = [
 "
 `;
 
+exports[`extrinsic codegen > generates the code in the desired format > /200/lendingPools/initiateVoluntaryLiquidation.ts 1`] = `
+"export const LendingPoolsInitiateVoluntaryLiquidation = [];
+"
+`;
+
 exports[`extrinsic codegen > generates the code in the desired format > /200/lendingPools/makeRepayment.ts 1`] = `
 "import { type CfTraitsLendingRepaymentAmount } from '../common';
 
@@ -110,6 +117,11 @@ export type LendingPoolsRequestLoan = [
   primaryCollateralAsset: ChainflipAsset | null,
   extraCollateral: Map<{ [key in ChainflipAsset]: {} }, \`\${number}\` | \`0x\${string}\`>,
 ];
+"
+`;
+
+exports[`extrinsic codegen > generates the code in the desired format > /200/lendingPools/stopVoluntaryLiquidation.ts 1`] = `
+"export const LendingPoolsStopVoluntaryLiquidation = [];
 "
 `;
 

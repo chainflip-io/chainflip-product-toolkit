@@ -3,8 +3,10 @@ LendingPools:
   - add_lender_funds: added
   - create_lending_pool: added
   - expand_loan: added
+  - initiate_voluntary_liquidation: added
   - make_repayment: added
   - remove_collateral: added
   - remove_lender_funds: added
   - request_loan: added
+  - stop_voluntary_liquidation: added
   - update_primary_collateral_asset: added
