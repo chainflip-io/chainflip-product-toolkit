@@ -1557,6 +1557,9 @@ export const lendingConfig: z.input<typeof cfLendingConfig> = {
   soft_liquidation_max_oracle_slippage: 50,
   hard_liquidation_max_oracle_slippage: 500,
   fee_swap_max_oracle_slippage: 50,
+  minimum_loan_amount_usd: '0x5f5e100',
+  minimum_update_loan_amount_usd: '0x989680',
+  minimum_update_collateral_amount_usd: '0x989680',
 };
 
 export const loanAccounts: z.input<typeof cfLoanAccounts> = [

@@ -754,6 +754,9 @@ export const cfLendingConfig = z.object({
   soft_liquidation_max_oracle_slippage: z.number(),
   hard_liquidation_max_oracle_slippage: z.number(),
   fee_swap_max_oracle_slippage: z.number(),
+  minimum_loan_amount_usd: numberOrHex,
+  minimum_update_loan_amount_usd: numberOrHex,
+  minimum_update_collateral_amount_usd: numberOrHex,
 });
 
 export const cfLoanAccount = z.object({
