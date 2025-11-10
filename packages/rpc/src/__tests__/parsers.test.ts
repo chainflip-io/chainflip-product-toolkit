@@ -1861,6 +1861,9 @@ describe('parsers', () => {
             "target": 800000,
             "topup": 850000,
           },
+          "minimum_loan_amount_usd": 100000000n,
+          "minimum_update_collateral_amount_usd": 10000000n,
+          "minimum_update_loan_amount_usd": 10000000n,
           "network_fee_contributions": {
             "extra_interest": 10000,
             "from_liquidation_fee": 200000,
