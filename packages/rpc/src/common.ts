@@ -241,7 +241,7 @@ export type RpcRequest = WithHash<{
   cf_lending_pools: [asset?: UncheckedAssetAndChain];
   cf_lending_config: [];
   cf_loan_accounts: [accountId?: string];
-  cf_lending_pool_supply_balances: [asset: UncheckedAssetAndChain];
+  cf_lending_pool_supply_balances: [asset?: UncheckedAssetAndChain];
   cf_get_vault_addresses: [];
 }> & {
   chain_getBlockHash: [blockHeight?: number];
