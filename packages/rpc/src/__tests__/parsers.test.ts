@@ -18,6 +18,7 @@ import {
   cfLoanAccounts,
   cfMonitoringSimulateAuction,
   cfSafeModeStatuses,
+  cfLendingPoolSupplyBalances,
 } from '../parsers';
 import {
   cfAccountInfoOperator,
@@ -25,6 +26,7 @@ import {
   emptyChainAssetMap,
   lendingConfig,
   lendingPools,
+  lendingPoolSupplyBalances,
   liquidityProviderAccount,
   loanAccounts,
   monitoringSimulateAuction,
@@ -1914,6 +1916,70 @@ describe('parsers', () => {
               "asset": "BTC",
               "chain": "Bitcoin",
             },
+          },
+        ]
+      `);
+    });
+  });
+
+  describe('cfLendingPoolSupplyBalances', () => {
+    it('parses the cfLendingPoolSupplyBalances response', () => {
+      const result = cfLendingPoolSupplyBalances.parse(lendingPoolSupplyBalances);
+      expect(result).toMatchInlineSnapshot(`
+        [
+          {
+            "asset": "BTC",
+            "chain": "Bitcoin",
+            "positions": [
+              {
+                "lp_id": "cFKKYDgKLHgKRfHEwTPsGj2SJmmha5mGqajHEPXo1Chaqa96Q",
+                "total_amount": 1999040000n,
+              },
+              {
+                "lp_id": "cFL8fmgKZcchhtLagBH2GKfsuWxBqUaD5CYE1m7DFb8DBSLJ1",
+                "total_amount": 200000000n,
+              },
+            ],
+          },
+          {
+            "asset": "ETH",
+            "chain": "Ethereum",
+            "positions": [
+              {
+                "lp_id": "cFKKYDgKLHgKRfHEwTPsGj2SJmmha5mGqajHEPXo1Chaqa96Q",
+                "total_amount": 100000000000000000000n,
+              },
+            ],
+          },
+          {
+            "asset": "SOL",
+            "chain": "Solana",
+            "positions": [
+              {
+                "lp_id": "cFKKYDgKLHgKRfHEwTPsGj2SJmmha5mGqajHEPXo1Chaqa96Q",
+                "total_amount": 100000000000n,
+              },
+            ],
+          },
+          {
+            "asset": "USDT",
+            "chain": "Ethereum",
+            "positions": [
+              {
+                "lp_id": "cFKKYDgKLHgKRfHEwTPsGj2SJmmha5mGqajHEPXo1Chaqa96Q",
+                "total_amount": 10000000000n,
+              },
+            ],
+          },
+          {
+            "asset": "USDC",
+            "chain": "Ethereum",
+            "positions": [
+              {
+                "lp_id": "cFKKYDgKLHgKRfHEwTPsGj2SJmmha5mGqajHEPXo1Chaqa96Q",
+                "total_amount": 10000096000n,
+              },
+            ],
           },
         ]
       `);

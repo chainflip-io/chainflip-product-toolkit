@@ -26,6 +26,7 @@ import {
   ingressEgressEnvironment,
   lendingConfig,
   lendingPools,
+  lendingPoolSupplyBalances,
   liquidityProviderAccount,
   loanAccounts,
   LP_ACCOUNT_ID,
@@ -83,6 +84,7 @@ describe(HttpClient, () => {
         "cf_get_vault_addresses",
         "cf_ingress_egress_environment",
         "cf_lending_config",
+        "cf_lending_pool_supply_balances",
         "cf_lending_pools",
         "cf_loan_accounts",
         "cf_monitoring_simulate_auction",
@@ -397,6 +399,8 @@ describe(HttpClient, () => {
           return respond(lendingConfig);
         case 'cf_loan_accounts':
           return respond(loanAccounts);
+        case 'cf_lending_pool_supply_balances':
+          return respond(lendingPoolSupplyBalances);
         case 'cf_get_vault_addresses':
           if (body.params[0] === '0xcafebabe') {
             return respond({ ...vaultAddresses, bitcoin: vaultAddresses.bitcoin.slice(1) });
@@ -508,6 +512,7 @@ describe(HttpClient, () => {
       ['cf_lending_config'],
       ['cf_lending_pools'],
       ['cf_loan_accounts'],
+      ['cf_lending_pool_supply_balances'],
     ] as [SimpleRpcMethod, string?][])('handles %s', async (method, id) => {
       if (id) vi.spyOn(crypto, 'randomUUID').mockImplementationOnce(() => id as any);
       expect(await client.sendRequest(method)).toMatchSnapshot();

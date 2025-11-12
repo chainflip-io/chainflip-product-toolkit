@@ -793,6 +793,20 @@ export const cfLoanAccount = z.object({
 
 export const cfLoanAccounts = z.array(cfLoanAccount);
 
+export const cfLendingPoolSupplyBalances = z.array(
+  z.intersection(
+    rpcAssetSchema,
+    z.object({
+      positions: z.array(
+        z.object({
+          lp_id: accountId,
+          total_amount: numberOrHex,
+        }),
+      ),
+    }),
+  ),
+);
+
 export const cfVaultAddresses = z
   .object({
     ethereum: z.object({ Eth: z.array(z.number()).length(20).transform(bytesToHex) }),

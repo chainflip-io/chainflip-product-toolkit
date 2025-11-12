@@ -5,6 +5,7 @@ import {
   cfGetTradingStrategies,
   cfGetTradingStrategyLimits,
   cfLendingConfig,
+  cfLendingPoolSupplyBalances,
   cfLoanAccounts,
   cfMonitoringSimulateAuction,
   cfOraclePrices,
@@ -1599,6 +1600,62 @@ export const loanAccounts: z.input<typeof cfLoanAccounts> = [
   },
 ];
 
+export const lendingPoolSupplyBalances: z.input<typeof cfLendingPoolSupplyBalances> = [
+  {
+    chain: 'Bitcoin',
+    asset: 'BTC',
+    positions: [
+      {
+        lp_id: 'cFKKYDgKLHgKRfHEwTPsGj2SJmmha5mGqajHEPXo1Chaqa96Q',
+        total_amount: '0x7726ee00',
+      },
+      {
+        lp_id: 'cFL8fmgKZcchhtLagBH2GKfsuWxBqUaD5CYE1m7DFb8DBSLJ1',
+        total_amount: '0xbebc200',
+      },
+    ],
+  },
+  {
+    chain: 'Ethereum',
+    asset: 'ETH',
+    positions: [
+      {
+        lp_id: 'cFKKYDgKLHgKRfHEwTPsGj2SJmmha5mGqajHEPXo1Chaqa96Q',
+        total_amount: '0x56bc75e2d63100000',
+      },
+    ],
+  },
+  {
+    chain: 'Solana',
+    asset: 'SOL',
+    positions: [
+      {
+        lp_id: 'cFKKYDgKLHgKRfHEwTPsGj2SJmmha5mGqajHEPXo1Chaqa96Q',
+        total_amount: '0x174876e800',
+      },
+    ],
+  },
+  {
+    chain: 'Ethereum',
+    asset: 'USDT',
+    positions: [
+      {
+        lp_id: 'cFKKYDgKLHgKRfHEwTPsGj2SJmmha5mGqajHEPXo1Chaqa96Q',
+        total_amount: '0x2540be400',
+      },
+    ],
+  },
+  {
+    chain: 'Ethereum',
+    asset: 'USDC',
+    positions: [
+      {
+        lp_id: 'cFKKYDgKLHgKRfHEwTPsGj2SJmmha5mGqajHEPXo1Chaqa96Q',
+        total_amount: '0x2540d5b00',
+      },
+    ],
+  },
+];
 export const vaultAddresses = {
   ethereum: {
     Eth: [245, 225, 3, 128, 33, 56, 128, 17, 21, 34, 221, 14, 253, 61, 187, 69, 185, 246, 43, 204],
