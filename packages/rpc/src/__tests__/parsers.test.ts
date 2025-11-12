@@ -1868,7 +1868,7 @@ describe('parsers', () => {
             "extra_interest": 10000,
             "from_liquidation_fee": 200000,
             "from_origination_fee": 200000,
-            "interest_on_collateral_max": 10000,
+            "low_ltv_penalty_max": 10000,
           },
           "soft_liquidation_max_oracle_slippage": 50,
         }

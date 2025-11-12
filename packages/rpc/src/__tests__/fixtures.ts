@@ -1547,7 +1547,7 @@ export const lendingConfig: z.input<typeof cfLendingConfig> = {
     extra_interest: 10000,
     from_origination_fee: 200000,
     from_liquidation_fee: 200000,
-    interest_on_collateral_max: 10000,
+    low_ltv_penalty_max: 10000,
   },
   fee_swap_interval_blocks: 10,
   interest_payment_interval_blocks: 10,
