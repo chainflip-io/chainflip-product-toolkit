@@ -1905,7 +1905,6 @@ describe('parsers', () => {
                   "asset": "USDC",
                   "chain": "Ethereum",
                 },
-                "created_at": 400,
                 "loan_id": 1,
                 "principal_amount": 1000n,
               },

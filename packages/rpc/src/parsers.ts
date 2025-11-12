@@ -775,7 +775,6 @@ export const cfLoanAccount = z.object({
     z.object({
       loan_id: z.number(),
       asset: rpcAssetSchema,
-      created_at: z.number(),
       principal_amount: numberOrHex,
     }),
   ),
