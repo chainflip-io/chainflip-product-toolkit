@@ -742,7 +742,7 @@ export const cfLendingConfig = z.object({
   }),
   network_fee_contributions: z.object({
     extra_interest: z.number(),
-    interest_on_collateral_max: z.number(),
+    low_ltv_penalty_max: z.number(),
     from_origination_fee: z.number(),
     from_liquidation_fee: z.number(),
   }),
