@@ -1623,7 +1623,6 @@ exports[`HttpClient > with server > handles cf_loan_accounts 1`] = `
           "asset": "USDC",
           "chain": "Ethereum",
         },
-        "created_at": 400,
         "loan_id": 1,
         "principal_amount": 1000n,
       },

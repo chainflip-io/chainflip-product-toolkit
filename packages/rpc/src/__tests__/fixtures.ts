@@ -1584,7 +1584,6 @@ export const loanAccounts: z.input<typeof cfLoanAccounts> = [
           chain: 'Ethereum',
           asset: 'USDC',
         },
-        created_at: 400,
         principal_amount: '0x3e8',
       },
     ],
