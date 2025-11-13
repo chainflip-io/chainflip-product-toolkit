@@ -786,7 +786,7 @@ export const cfLoanAccount = z.object({
           loan_id: z.number(),
         }),
       ),
-      is_hard: z.boolean(),
+      liquidation_type: z.enum(['SoftVoluntary', 'Soft', 'Hard']),
     })
     .nullable(),
 });
