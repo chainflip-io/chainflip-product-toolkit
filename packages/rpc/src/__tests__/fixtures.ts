@@ -1595,7 +1595,7 @@ export const loanAccounts: z.input<typeof cfLoanAccounts> = [
           loan_id: 1,
         },
       ],
-      is_hard: true,
+      liquidation_type: 'Hard',
     },
   },
 ];

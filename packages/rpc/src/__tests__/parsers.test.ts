@@ -1893,13 +1893,13 @@ describe('parsers', () => {
               },
             ],
             "liquidation_status": {
-              "is_hard": true,
               "liquidation_swaps": [
                 {
                   "loan_id": 1,
                   "swap_request_id": 1,
                 },
               ],
+              "liquidation_type": "Hard",
             },
             "loans": [
               {
