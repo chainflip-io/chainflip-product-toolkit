@@ -13,6 +13,7 @@ exports[`extrinsic codegen > generates the code in the desired format > /200/CHA
   - request_loan: added
   - stop_voluntary_liquidation: added
   - update_primary_collateral_asset: added
+  - update_whitelist: added
 "
 `;
 
@@ -33,6 +34,12 @@ exports[`extrinsic codegen > generates the code in the desired format > /200/com
   | 'HubUsdc';
 
 export type CfTraitsLendingRepaymentAmount = 'Full' | { Exact: \`\${number}\` | \`0x\${string}\` };
+
+export type PalletCfLendingPoolsGeneralLendingWhitelistWhitelistUpdate =
+  | 'SetAllowAll'
+  | { SetAllowedAccounts: \`0x\${string}\`[] }
+  | { AddAllowedAccounts: \`0x\${string}\`[] }
+  | { RemoveAllowedAccounts: \`0x\${string}\`[] };
 "
 `;
 
@@ -129,5 +136,14 @@ exports[`extrinsic codegen > generates the code in the desired format > /200/len
 "import { type ChainflipAsset } from '../common';
 
 export type LendingPoolsUpdatePrimaryCollateralAsset = [primaryCollateralAsset: ChainflipAsset];
+"
+`;
+
+exports[`extrinsic codegen > generates the code in the desired format > /200/lendingPools/updateWhitelist.ts 1`] = `
+"import { type PalletCfLendingPoolsGeneralLendingWhitelistWhitelistUpdate } from '../common';
+
+export type LendingPoolsUpdateWhitelist = [
+  update: PalletCfLendingPoolsGeneralLendingWhitelistWhitelistUpdate,
+];
 "
 `;

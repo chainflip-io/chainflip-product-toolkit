@@ -1629,6 +1629,54 @@
     "stop_voluntary_liquidation": {
       "type": "primitive",
       "value": "null"
+    },
+    "update_whitelist": {
+      "type": "struct",
+      "fields": {
+        "update": {
+          "type": "enum",
+          "$name": "palletCfLendingPoolsGeneralLendingWhitelistWhitelistUpdate",
+          "values": [
+            {
+              "name": "SetAllowAll",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "SetAllowedAccounts",
+              "value": {
+                "type": "array",
+                "value": {
+                  "type": "primitive",
+                  "value": "AccountId32"
+                }
+              }
+            },
+            {
+              "name": "AddAllowedAccounts",
+              "value": {
+                "type": "array",
+                "value": {
+                  "type": "primitive",
+                  "value": "AccountId32"
+                }
+              }
+            },
+            {
+              "name": "RemoveAllowedAccounts",
+              "value": {
+                "type": "array",
+                "value": {
+                  "type": "primitive",
+                  "value": "AccountId32"
+                }
+              }
+            }
+          ]
+        }
+      }
     }
   }
 }
