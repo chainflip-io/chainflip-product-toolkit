@@ -33,7 +33,7 @@ const numberOrHex = new Code(
   'z.union([z.number(), hexString, numericString]).transform((n) => BigInt(n))',
 );
 const accountId = new Code(
-  'z.union([hexString, z.string().regex(/^[0-9a-f]+$/).transform<`0x${string}`>((v) => `0x${v}`)]).transform((value) => ss58.encode({ data: value, ss58Format: 2112 }))',
+  'z.union([hexString, z.string().regex(/^[0-9a-f]+$/).transform<`0x${string}`>((v) => `0x${v}`)]).transform((value) => ss58.encode({ data: value, ss58Format: 2112 }) as `cF${string}`)',
   [new Identifier('* as ss58', '@chainflip/utils/ss58')],
 );
 const simpleEnum = new Code(

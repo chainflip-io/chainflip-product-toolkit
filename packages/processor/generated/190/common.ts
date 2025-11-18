@@ -183,7 +183,7 @@ export const accountId = z
       .regex(/^[0-9a-f]+$/)
       .transform<`0x${string}`>((v) => `0x${v}`),
   ])
-  .transform((value) => ss58.encode({ data: value, ss58Format: 2112 }));
+  .transform((value) => ss58.encode({ data: value, ss58Format: 2112 }) as `cF${string}`);
 
 export const stateChainRuntimeChainflipOffencesOffence = z.discriminatedUnion('__kind', [
   z.object({ __kind: z.literal('ParticipateSigningFailed') }),
