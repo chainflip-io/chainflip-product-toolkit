@@ -651,6 +651,10 @@
                       "brokerRegistrationEnabled": {
                         "type": "primitive",
                         "value": "bool"
+                      },
+                      "depositEnabled": {
+                        "type": "primitive",
+                        "value": "bool"
                       }
                     }
                   },
@@ -2554,13 +2558,162 @@
           "type": "primitive",
           "value": "AccountId32"
         },
-        "txHash": {
-          "type": "array",
-          "value": {
-            "type": "primitive",
-            "value": "u8"
-          },
-          "length": 32
+        "source": {
+          "type": "enum",
+          "$name": "cfTraitsFundingSource",
+          "values": [
+            {
+              "name": "EthTransaction",
+              "value": {
+                "type": "struct",
+                "fields": {
+                  "txHash": {
+                    "type": "array",
+                    "value": {
+                      "type": "primitive",
+                      "value": "u8"
+                    },
+                    "length": 32
+                  },
+                  "funder": {
+                    "type": "primitive",
+                    "value": "H160"
+                  }
+                }
+              }
+            },
+            {
+              "name": "Swap",
+              "value": {
+                "type": "struct",
+                "fields": {
+                  "swapRequestId": {
+                    "type": "primitive",
+                    "value": "u64"
+                  }
+                }
+              }
+            },
+            {
+              "name": "InitialFunding",
+              "value": {
+                "type": "struct",
+                "fields": {
+                  "channelId": {
+                    "type": "option",
+                    "value": {
+                      "type": "primitive",
+                      "value": "u64"
+                    }
+                  },
+                  "asset": {
+                    "type": "enum",
+                    "$name": "cfPrimitivesChainsAssetsAnyAsset",
+                    "values": [
+                      {
+                        "name": "__Unused0",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      },
+                      {
+                        "name": "Eth",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      },
+                      {
+                        "name": "Flip",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      },
+                      {
+                        "name": "Usdc",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      },
+                      {
+                        "name": "Dot",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      },
+                      {
+                        "name": "Btc",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      },
+                      {
+                        "name": "ArbEth",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      },
+                      {
+                        "name": "ArbUsdc",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      },
+                      {
+                        "name": "Usdt",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      },
+                      {
+                        "name": "Sol",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      },
+                      {
+                        "name": "SolUsdc",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      },
+                      {
+                        "name": "HubDot",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      },
+                      {
+                        "name": "HubUsdt",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      },
+                      {
+                        "name": "HubUsdc",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          ]
         },
         "fundsAdded": {
           "type": "primitive",
@@ -10610,6 +10763,469 @@
                             }
                           }
                         }
+                      },
+                      {
+                        "name": "CreditFlipAndTransferToGateway",
+                        "value": {
+                          "type": "struct",
+                          "fields": {
+                            "accountId": {
+                              "type": "primitive",
+                              "value": "AccountId32"
+                            },
+                            "flipToSubtractFromSwapOutput": {
+                              "type": "primitive",
+                              "value": "u128"
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "name": "RegularNoNetworkFee",
+              "value": {
+                "type": "struct",
+                "fields": {
+                  "outputAction": {
+                    "type": "enum",
+                    "$name": "cfTraitsSwappingSwapOutputActionGenericEncodedAddress",
+                    "values": [
+                      {
+                        "name": "Egress",
+                        "value": {
+                          "type": "struct",
+                          "fields": {
+                            "ccmDepositMetadata": {
+                              "type": "option",
+                              "value": {
+                                "type": "struct",
+                                "$name": "CfChainsCcmDepositMetadataEncodedAddress",
+                                "fields": {
+                                  "channelMetadata": {
+                                    "type": "struct",
+                                    "$name": "CfChainsCcmChannelMetadataDecodedCcmAdditionalData",
+                                    "fields": {
+                                      "message": {
+                                        "type": "primitive",
+                                        "value": "Bytes"
+                                      },
+                                      "gasBudget": {
+                                        "type": "primitive",
+                                        "value": "u128"
+                                      },
+                                      "ccmAdditionalData": {
+                                        "type": "enum",
+                                        "$name": "cfChainsCcmCheckerDecodedCcmAdditionalData",
+                                        "values": [
+                                          {
+                                            "name": "NotRequired",
+                                            "value": {
+                                              "type": "primitive",
+                                              "value": "null"
+                                            }
+                                          },
+                                          {
+                                            "name": "Solana",
+                                            "value": {
+                                              "type": "enum",
+                                              "$name": "cfChainsCcmCheckerVersionedSolanaCcmAdditionalData",
+                                              "values": [
+                                                {
+                                                  "name": "V0",
+                                                  "value": {
+                                                    "type": "struct",
+                                                    "$name": "CfChainsSolSolTxCoreCcmAccounts",
+                                                    "fields": {
+                                                      "cfReceiver": {
+                                                        "type": "struct",
+                                                        "$name": "CfChainsSolSolTxCoreCcmAddress",
+                                                        "fields": {
+                                                          "pubkey": {
+                                                            "type": "array",
+                                                            "value": {
+                                                              "type": "primitive",
+                                                              "value": "u8"
+                                                            },
+                                                            "length": 32
+                                                          },
+                                                          "isWritable": {
+                                                            "type": "primitive",
+                                                            "value": "bool"
+                                                          }
+                                                        }
+                                                      },
+                                                      "additionalAccounts": {
+                                                        "type": "array",
+                                                        "value": {
+                                                          "type": "struct",
+                                                          "$name": "CfChainsSolSolTxCoreCcmAddress",
+                                                          "fields": {
+                                                            "pubkey": {
+                                                              "type": "array",
+                                                              "value": {
+                                                                "type": "primitive",
+                                                                "value": "u8"
+                                                              },
+                                                              "length": 32
+                                                            },
+                                                            "isWritable": {
+                                                              "type": "primitive",
+                                                              "value": "bool"
+                                                            }
+                                                          }
+                                                        }
+                                                      },
+                                                      "fallbackAddress": {
+                                                        "type": "array",
+                                                        "value": {
+                                                          "type": "primitive",
+                                                          "value": "u8"
+                                                        },
+                                                        "length": 32
+                                                      }
+                                                    }
+                                                  }
+                                                },
+                                                {
+                                                  "name": "V1",
+                                                  "value": {
+                                                    "type": "struct",
+                                                    "fields": {
+                                                      "ccmAccounts": {
+                                                        "type": "struct",
+                                                        "$name": "CfChainsSolSolTxCoreCcmAccounts",
+                                                        "fields": {
+                                                          "cfReceiver": {
+                                                            "type": "struct",
+                                                            "$name": "CfChainsSolSolTxCoreCcmAddress",
+                                                            "fields": {
+                                                              "pubkey": {
+                                                                "type": "array",
+                                                                "value": {
+                                                                  "type": "primitive",
+                                                                  "value": "u8"
+                                                                },
+                                                                "length": 32
+                                                              },
+                                                              "isWritable": {
+                                                                "type": "primitive",
+                                                                "value": "bool"
+                                                              }
+                                                            }
+                                                          },
+                                                          "additionalAccounts": {
+                                                            "type": "array",
+                                                            "value": {
+                                                              "type": "struct",
+                                                              "$name": "CfChainsSolSolTxCoreCcmAddress",
+                                                              "fields": {
+                                                                "pubkey": {
+                                                                  "type": "array",
+                                                                  "value": {
+                                                                    "type": "primitive",
+                                                                    "value": "u8"
+                                                                  },
+                                                                  "length": 32
+                                                                },
+                                                                "isWritable": {
+                                                                  "type": "primitive",
+                                                                  "value": "bool"
+                                                                }
+                                                              }
+                                                            }
+                                                          },
+                                                          "fallbackAddress": {
+                                                            "type": "array",
+                                                            "value": {
+                                                              "type": "primitive",
+                                                              "value": "u8"
+                                                            },
+                                                            "length": 32
+                                                          }
+                                                        }
+                                                      },
+                                                      "alts": {
+                                                        "type": "array",
+                                                        "value": {
+                                                          "type": "array",
+                                                          "value": {
+                                                            "type": "primitive",
+                                                            "value": "u8"
+                                                          },
+                                                          "length": 32
+                                                        }
+                                                      }
+                                                    }
+                                                  }
+                                                }
+                                              ]
+                                            }
+                                          }
+                                        ]
+                                      }
+                                    }
+                                  },
+                                  "sourceChain": {
+                                    "type": "enum",
+                                    "$name": "cfPrimitivesChainsForeignChain",
+                                    "values": [
+                                      {
+                                        "name": "__Unused0",
+                                        "value": {
+                                          "type": "primitive",
+                                          "value": "null"
+                                        }
+                                      },
+                                      {
+                                        "name": "Ethereum",
+                                        "value": {
+                                          "type": "primitive",
+                                          "value": "null"
+                                        }
+                                      },
+                                      {
+                                        "name": "Polkadot",
+                                        "value": {
+                                          "type": "primitive",
+                                          "value": "null"
+                                        }
+                                      },
+                                      {
+                                        "name": "Bitcoin",
+                                        "value": {
+                                          "type": "primitive",
+                                          "value": "null"
+                                        }
+                                      },
+                                      {
+                                        "name": "Arbitrum",
+                                        "value": {
+                                          "type": "primitive",
+                                          "value": "null"
+                                        }
+                                      },
+                                      {
+                                        "name": "Solana",
+                                        "value": {
+                                          "type": "primitive",
+                                          "value": "null"
+                                        }
+                                      },
+                                      {
+                                        "name": "Assethub",
+                                        "value": {
+                                          "type": "primitive",
+                                          "value": "null"
+                                        }
+                                      }
+                                    ]
+                                  },
+                                  "sourceAddress": {
+                                    "type": "option",
+                                    "value": {
+                                      "type": "enum",
+                                      "$name": "cfChainsAddressEncodedAddress",
+                                      "values": [
+                                        {
+                                          "name": "Eth",
+                                          "value": {
+                                            "type": "array",
+                                            "value": {
+                                              "type": "primitive",
+                                              "value": "u8"
+                                            },
+                                            "length": 20
+                                          }
+                                        },
+                                        {
+                                          "name": "Dot",
+                                          "value": {
+                                            "type": "array",
+                                            "value": {
+                                              "type": "primitive",
+                                              "value": "u8"
+                                            },
+                                            "length": 32
+                                          }
+                                        },
+                                        {
+                                          "name": "Btc",
+                                          "value": {
+                                            "type": "primitive",
+                                            "value": "Bytes"
+                                          }
+                                        },
+                                        {
+                                          "name": "Arb",
+                                          "value": {
+                                            "type": "array",
+                                            "value": {
+                                              "type": "primitive",
+                                              "value": "u8"
+                                            },
+                                            "length": 20
+                                          }
+                                        },
+                                        {
+                                          "name": "Sol",
+                                          "value": {
+                                            "type": "array",
+                                            "value": {
+                                              "type": "primitive",
+                                              "value": "u8"
+                                            },
+                                            "length": 32
+                                          }
+                                        },
+                                        {
+                                          "name": "Hub",
+                                          "value": {
+                                            "type": "array",
+                                            "value": {
+                                              "type": "primitive",
+                                              "value": "u8"
+                                            },
+                                            "length": 32
+                                          }
+                                        }
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "outputAddress": {
+                              "type": "enum",
+                              "$name": "cfChainsAddressEncodedAddress",
+                              "values": [
+                                {
+                                  "name": "Eth",
+                                  "value": {
+                                    "type": "array",
+                                    "value": {
+                                      "type": "primitive",
+                                      "value": "u8"
+                                    },
+                                    "length": 20
+                                  }
+                                },
+                                {
+                                  "name": "Dot",
+                                  "value": {
+                                    "type": "array",
+                                    "value": {
+                                      "type": "primitive",
+                                      "value": "u8"
+                                    },
+                                    "length": 32
+                                  }
+                                },
+                                {
+                                  "name": "Btc",
+                                  "value": {
+                                    "type": "primitive",
+                                    "value": "Bytes"
+                                  }
+                                },
+                                {
+                                  "name": "Arb",
+                                  "value": {
+                                    "type": "array",
+                                    "value": {
+                                      "type": "primitive",
+                                      "value": "u8"
+                                    },
+                                    "length": 20
+                                  }
+                                },
+                                {
+                                  "name": "Sol",
+                                  "value": {
+                                    "type": "array",
+                                    "value": {
+                                      "type": "primitive",
+                                      "value": "u8"
+                                    },
+                                    "length": 32
+                                  }
+                                },
+                                {
+                                  "name": "Hub",
+                                  "value": {
+                                    "type": "array",
+                                    "value": {
+                                      "type": "primitive",
+                                      "value": "u8"
+                                    },
+                                    "length": 32
+                                  }
+                                }
+                              ]
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "name": "CreditOnChain",
+                        "value": {
+                          "type": "struct",
+                          "fields": {
+                            "accountId": {
+                              "type": "primitive",
+                              "value": "AccountId32"
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "name": "CreditLendingPool",
+                        "value": {
+                          "type": "struct",
+                          "fields": {
+                            "swapType": {
+                              "type": "enum",
+                              "$name": "cfTraitsSwappingLendingSwapType",
+                              "values": [
+                                {
+                                  "name": "Liquidation",
+                                  "value": {
+                                    "type": "struct",
+                                    "fields": {
+                                      "borrowerId": {
+                                        "type": "primitive",
+                                        "value": "AccountId32"
+                                      },
+                                      "loanId": {
+                                        "type": "primitive",
+                                        "value": "u64"
+                                      }
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "name": "CreditFlipAndTransferToGateway",
+                        "value": {
+                          "type": "struct",
+                          "fields": {
+                            "accountId": {
+                              "type": "primitive",
+                              "value": "AccountId32"
+                            },
+                            "flipToSubtractFromSwapOutput": {
+                              "type": "primitive",
+                              "value": "u128"
+                            }
+                          }
+                        }
                       }
                     ]
                   }
@@ -15056,6 +15672,340 @@
               "value": {
                 "type": "primitive",
                 "value": "null"
+              }
+            }
+          ]
+        }
+      }
+    },
+    "AccountCreationDepositAddressReady": {
+      "type": "struct",
+      "fields": {
+        "channelId": {
+          "type": "primitive",
+          "value": "u64"
+        },
+        "asset": {
+          "type": "enum",
+          "$name": "cfPrimitivesChainsAssetsAnyAsset",
+          "values": [
+            {
+              "name": "__Unused0",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "Eth",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "Flip",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "Usdc",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "Dot",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "Btc",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "ArbEth",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "ArbUsdc",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "Usdt",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "Sol",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "SolUsdc",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "HubDot",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "HubUsdt",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "HubUsdc",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            }
+          ]
+        },
+        "depositAddress": {
+          "type": "enum",
+          "$name": "cfChainsAddressEncodedAddress",
+          "values": [
+            {
+              "name": "Eth",
+              "value": {
+                "type": "array",
+                "value": {
+                  "type": "primitive",
+                  "value": "u8"
+                },
+                "length": 20
+              }
+            },
+            {
+              "name": "Dot",
+              "value": {
+                "type": "array",
+                "value": {
+                  "type": "primitive",
+                  "value": "u8"
+                },
+                "length": 32
+              }
+            },
+            {
+              "name": "Btc",
+              "value": {
+                "type": "primitive",
+                "value": "Bytes"
+              }
+            },
+            {
+              "name": "Arb",
+              "value": {
+                "type": "array",
+                "value": {
+                  "type": "primitive",
+                  "value": "u8"
+                },
+                "length": 20
+              }
+            },
+            {
+              "name": "Sol",
+              "value": {
+                "type": "array",
+                "value": {
+                  "type": "primitive",
+                  "value": "u8"
+                },
+                "length": 32
+              }
+            },
+            {
+              "name": "Hub",
+              "value": {
+                "type": "array",
+                "value": {
+                  "type": "primitive",
+                  "value": "u8"
+                },
+                "length": 32
+              }
+            }
+          ]
+        },
+        "requestedBy": {
+          "type": "primitive",
+          "value": "AccountId32"
+        },
+        "requestedFor": {
+          "type": "primitive",
+          "value": "AccountId32"
+        },
+        "depositChainExpiryBlock": {
+          "type": "primitive",
+          "value": "u64"
+        },
+        "boostFee": {
+          "type": "primitive",
+          "value": "u16"
+        },
+        "channelOpeningFee": {
+          "type": "primitive",
+          "value": "u128"
+        },
+        "refundAddress": {
+          "type": "enum",
+          "$name": "cfChainsAddressForeignChainAddress",
+          "values": [
+            {
+              "name": "Eth",
+              "value": {
+                "type": "primitive",
+                "value": "H160"
+              }
+            },
+            {
+              "name": "Dot",
+              "value": {
+                "type": "array",
+                "value": {
+                  "type": "primitive",
+                  "value": "u8"
+                },
+                "length": 32
+              }
+            },
+            {
+              "name": "Btc",
+              "value": {
+                "type": "enum",
+                "$name": "cfChainsBtcScriptPubkey",
+                "values": [
+                  {
+                    "name": "P2PKH",
+                    "value": {
+                      "type": "array",
+                      "value": {
+                        "type": "primitive",
+                        "value": "u8"
+                      },
+                      "length": 20
+                    }
+                  },
+                  {
+                    "name": "P2SH",
+                    "value": {
+                      "type": "array",
+                      "value": {
+                        "type": "primitive",
+                        "value": "u8"
+                      },
+                      "length": 20
+                    }
+                  },
+                  {
+                    "name": "P2WPKH",
+                    "value": {
+                      "type": "array",
+                      "value": {
+                        "type": "primitive",
+                        "value": "u8"
+                      },
+                      "length": 20
+                    }
+                  },
+                  {
+                    "name": "P2WSH",
+                    "value": {
+                      "type": "array",
+                      "value": {
+                        "type": "primitive",
+                        "value": "u8"
+                      },
+                      "length": 32
+                    }
+                  },
+                  {
+                    "name": "Taproot",
+                    "value": {
+                      "type": "array",
+                      "value": {
+                        "type": "primitive",
+                        "value": "u8"
+                      },
+                      "length": 32
+                    }
+                  },
+                  {
+                    "name": "OtherSegwit",
+                    "value": {
+                      "type": "struct",
+                      "fields": {
+                        "version": {
+                          "type": "primitive",
+                          "value": "u8"
+                        },
+                        "program": {
+                          "type": "primitive",
+                          "value": "Bytes"
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Arb",
+              "value": {
+                "type": "primitive",
+                "value": "H160"
+              }
+            },
+            {
+              "name": "Sol",
+              "value": {
+                "type": "array",
+                "value": {
+                  "type": "primitive",
+                  "value": "u8"
+                },
+                "length": 32
+              }
+            },
+            {
+              "name": "Hub",
+              "value": {
+                "type": "array",
+                "value": {
+                  "type": "primitive",
+                  "value": "u8"
+                },
+                "length": 32
               }
             }
           ]
@@ -45727,7 +46677,7 @@
                         "type": "primitive",
                         "value": "Permill"
                       },
-                      "interestOnCollateralMax": {
+                      "lowLtvPenaltyMax": {
                         "type": "primitive",
                         "value": "Permill"
                       }
@@ -45787,8 +46737,17 @@
             {
               "name": "SetLiquidationSwapChunkSizeUsd",
               "value": {
-                "type": "primitive",
-                "value": "u128"
+                "type": "struct",
+                "fields": {
+                  "soft": {
+                    "type": "primitive",
+                    "value": "u128"
+                  },
+                  "hard": {
+                    "type": "primitive",
+                    "value": "u128"
+                  }
+                }
               }
             },
             {
@@ -47241,6 +48200,54 @@
         "swapRequestId": {
           "type": "primitive",
           "value": "u64"
+        }
+      }
+    },
+    "WhitelistUpdated": {
+      "type": "struct",
+      "fields": {
+        "update": {
+          "type": "enum",
+          "$name": "palletCfLendingPoolsGeneralLendingWhitelistWhitelistUpdate",
+          "values": [
+            {
+              "name": "SetAllowAll",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "SetAllowedAccounts",
+              "value": {
+                "type": "array",
+                "value": {
+                  "type": "primitive",
+                  "value": "AccountId32"
+                }
+              }
+            },
+            {
+              "name": "AddAllowedAccounts",
+              "value": {
+                "type": "array",
+                "value": {
+                  "type": "primitive",
+                  "value": "AccountId32"
+                }
+              }
+            },
+            {
+              "name": "RemoveAllowedAccounts",
+              "value": {
+                "type": "array",
+                "value": {
+                  "type": "primitive",
+                  "value": "AccountId32"
+                }
+              }
+            }
+          ]
         }
       }
     }

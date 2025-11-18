@@ -1851,9 +1851,9 @@ describe('parsers', () => {
           "fee_swap_max_oracle_slippage": 50,
           "fee_swap_threshold_usd": 20000000n,
           "hard_liquidation_max_oracle_slippage": 500,
+          "hard_liquidation_swap_chunk_size_usd": 50000000000n,
           "interest_collection_threshold_usd": 100000n,
           "interest_payment_interval_blocks": 10,
-          "liquidation_swap_chunk_size_usd": 10000000000n,
           "ltv_thresholds": {
             "hard_liquidation": 950000,
             "hard_liquidation_abort": 930000,
@@ -1873,6 +1873,7 @@ describe('parsers', () => {
             "low_ltv_penalty_max": 10000,
           },
           "soft_liquidation_max_oracle_slippage": 50,
+          "soft_liquidation_swap_chunk_size_usd": 10000000000n,
         }
       `);
     });

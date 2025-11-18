@@ -10,3 +10,4 @@ LendingPools:
   - request_loan: added
   - stop_voluntary_liquidation: added
   - update_primary_collateral_asset: added
+  - update_whitelist: added

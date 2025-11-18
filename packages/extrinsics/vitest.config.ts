@@ -7,9 +7,9 @@ export default {
     coverage: {
       ...config.test?.coverage,
       thresholds: {
-        lines: 90.36,
-        statements: 90.36,
-        branches: 80.64,
+        lines: 90.96,
+        statements: 90.96,
+        branches: 84.12,
         functions: 92.3,
         autoUpdate: true,
       },

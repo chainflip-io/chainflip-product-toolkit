@@ -11,6 +11,7 @@ export const palletCfSwappingPalletSafeMode = z.object({
   swapsEnabled: z.boolean(),
   withdrawalsEnabled: z.boolean(),
   brokerRegistrationEnabled: z.boolean(),
+  depositEnabled: z.boolean(),
 });
 
 export const palletCfLpPalletSafeMode = z.object({
@@ -170,17 +171,37 @@ export const palletCfEnvironmentSafeModeUpdate = z.discriminatedUnion('__kind', 
   }),
 ]);
 
-export const numericString = z
-  .string()
-  .refine((v) => /^\d+$/.test(v), { message: 'Invalid numeric string' });
-
 export const hexString = z
   .string()
   .refine((v): v is `0x${string}` => /^0x[\da-f]*$/i.test(v), { message: 'Invalid hex string' });
 
+export const accountId = z
+  .union([
+    hexString,
+    z
+      .string()
+      .regex(/^[0-9a-f]+$/)
+      .transform<`0x${string}`>((v) => `0x${v}`),
+  ])
+  .transform((value) => ss58.encode({ data: value, ss58Format: 2112 }));
+
+export const numericString = z
+  .string()
+  .refine((v) => /^\d+$/.test(v), { message: 'Invalid numeric string' });
+
 export const numberOrHex = z
   .union([z.number(), hexString, numericString])
   .transform((n) => BigInt(n));
+
+export const cfTraitsFundingSource = z.discriminatedUnion('__kind', [
+  z.object({ __kind: z.literal('EthTransaction'), txHash: hexString, funder: hexString }),
+  z.object({ __kind: z.literal('Swap'), swapRequestId: numberOrHex }),
+  z.object({
+    __kind: z.literal('InitialFunding'),
+    channelId: numberOrHex.nullish(),
+    asset: cfPrimitivesChainsAssetsAnyAsset,
+  }),
+]);
 
 export const cfChainsAddressEncodedAddress = z
   .object({ __kind: z.enum(['Eth', 'Dot', 'Btc', 'Arb', 'Sol', 'Hub']), value: hexString })
@@ -205,16 +226,6 @@ export const cfChainsAddressEncodedAddress = z
         throw new Error('Unknown chain');
     }
   });
-
-export const accountId = z
-  .union([
-    hexString,
-    z
-      .string()
-      .regex(/^[0-9a-f]+$/)
-      .transform<`0x${string}`>((v) => `0x${v}`),
-  ])
-  .transform((value) => ss58.encode({ data: value, ss58Format: 2112 }));
 
 export const cfPrimitivesTxId = z.object({ blockNumber: z.number(), extrinsicIndex: z.number() });
 
@@ -308,6 +319,11 @@ export const cfTraitsSwappingSwapOutputActionGenericEncodedAddress = z.discrimin
     }),
     z.object({ __kind: z.literal('CreditOnChain'), accountId }),
     z.object({ __kind: z.literal('CreditLendingPool'), swapType: cfTraitsSwappingLendingSwapType }),
+    z.object({
+      __kind: z.literal('CreditFlipAndTransferToGateway'),
+      accountId,
+      flipToSubtractFromSwapOutput: numberOrHex,
+    }),
   ],
 );
 
@@ -316,6 +332,10 @@ export const cfTraitsSwappingSwapRequestTypeGeneric = z.discriminatedUnion('__ki
   z.object({ __kind: z.literal('IngressEgressFee') }),
   z.object({
     __kind: z.literal('Regular'),
+    outputAction: cfTraitsSwappingSwapOutputActionGenericEncodedAddress,
+  }),
+  z.object({
+    __kind: z.literal('RegularNoNetworkFee'),
     outputAction: cfTraitsSwappingSwapOutputActionGenericEncodedAddress,
   }),
 ]);
@@ -416,7 +436,7 @@ export const palletCfLendingPoolsGeneralLendingNetworkFeeContributions = z.objec
   extraInterest: z.number(),
   fromOriginationFee: z.number(),
   fromLiquidationFee: z.number(),
-  interestOnCollateralMax: z.number(),
+  lowLtvPenaltyMax: z.number(),
 });
 
 export const palletCfLendingPoolsPalletConfigUpdate = z.discriminatedUnion('__kind', [
@@ -444,7 +464,11 @@ export const palletCfLendingPoolsPalletConfigUpdate = z.discriminatedUnion('__ki
     hardLiquidation: z.number(),
     feeSwap: z.number(),
   }),
-  z.object({ __kind: z.literal('SetLiquidationSwapChunkSizeUsd'), value: numberOrHex }),
+  z.object({
+    __kind: z.literal('SetLiquidationSwapChunkSizeUsd'),
+    soft: numberOrHex,
+    hard: numberOrHex,
+  }),
   z.object({
     __kind: z.literal('SetMinimumAmounts'),
     minimumLoanAmountUsd: numberOrHex,
@@ -470,3 +494,13 @@ export const palletCfLendingPoolsGeneralLendingLiquidationCompletionReason = sim
   'LtvChange',
   'ManualAbort',
 ]);
+
+export const palletCfLendingPoolsGeneralLendingWhitelistWhitelistUpdate = z.discriminatedUnion(
+  '__kind',
+  [
+    z.object({ __kind: z.literal('SetAllowAll') }),
+    z.object({ __kind: z.literal('SetAllowedAccounts'), value: z.array(accountId) }),
+    z.object({ __kind: z.literal('AddAllowedAccounts'), value: z.array(accountId) }),
+    z.object({ __kind: z.literal('RemoveAllowedAccounts'), value: z.array(accountId) }),
+  ],
+);
