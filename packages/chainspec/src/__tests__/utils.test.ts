@@ -32,7 +32,7 @@ describe(diffSpecs, () => {
     expect(changelog).toMatchInlineSnapshot(`
       "pallet1:
         - event1:
-          - undefined: added
+          - undefined: added (pallet1.event1)
       "
     `);
   });
@@ -77,7 +77,7 @@ describe(diffSpecs, () => {
     expect(changelog).toMatchInlineSnapshot(`
       "pallet1:
         - event1:
-          - undefined: added
+          - undefined: added (pallet1.event1)
         - event2: added
       "
     `);
