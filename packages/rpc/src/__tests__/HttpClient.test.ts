@@ -60,6 +60,7 @@ describe(HttpClient, () => {
     expect(new HttpClient('http://localhost:8080').methods()).toMatchInlineSnapshot(`
       [
         "broker_encode_cf_parameters",
+        "broker_request_account_creation_deposit_address",
         "broker_request_swap_deposit_address",
         "broker_request_swap_parameter_encoding",
         "cf_account_info",
