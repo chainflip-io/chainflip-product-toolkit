@@ -141,6 +141,22 @@ export type RpcRequest = WithHash<{
     fillOrKillParams: FillOrKillParams,
     dcaParams?: Nullish<DcaParams>,
   ];
+  broker_request_account_creation_deposit_address: [
+    asset: UncheckedAssetAndChain,
+    refundAddress: string,
+    boostFee: Nullish<number>,
+    signatureData: {
+      Ethereum: {
+        signature: HexString;
+        signer: HexString;
+        sigType: 'Eip712';
+      };
+    },
+    transactionMetadata: {
+      nonce: number;
+      expiryBlock: number;
+    },
+  ];
   broker_request_swap_parameter_encoding: RequestSwapParameterEncodingParams;
   cf_request_swap_parameter_encoding: [
     brokerAccountId: string,
@@ -249,6 +265,7 @@ export type RpcRequest = WithHash<{
 
 export const rpcResult = {
   broker_request_swap_deposit_address: brokerRequestSwapDepositAddress,
+  broker_request_account_creation_deposit_address: brokerRequestSwapDepositAddress,
   broker_request_swap_parameter_encoding: requestSwapParameterEncoding,
   cf_request_swap_parameter_encoding: requestSwapParameterEncoding,
   cf_accounts: cfAccounts,
