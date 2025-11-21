@@ -45,6 +45,7 @@ import {
   cfMonitoringSimulateAuction,
   cfVaultAddresses,
   cfLendingPoolSupplyBalances,
+  brokerRequestAccountCreationDepositAddress,
 } from './parsers';
 
 type Nullish<T> = T | null | undefined;
@@ -142,20 +143,20 @@ export type RpcRequest = WithHash<{
     dcaParams?: Nullish<DcaParams>,
   ];
   broker_request_account_creation_deposit_address: [
-    asset: UncheckedAssetAndChain,
-    refundAddress: string,
-    boostFee: Nullish<number>,
     signatureData: {
       Ethereum: {
         signature: HexString;
         signer: HexString;
-        sigType: 'Eip712';
+        sig_type: 'Eip712';
       };
     },
     transactionMetadata: {
       nonce: number;
-      expiryBlock: number;
+      expiry_block: number;
     },
+    asset: UncheckedAssetAndChain,
+    boostFee: Nullish<number>,
+    refundAddress: string,
   ];
   broker_request_swap_parameter_encoding: RequestSwapParameterEncodingParams;
   cf_request_swap_parameter_encoding: [
@@ -265,7 +266,7 @@ export type RpcRequest = WithHash<{
 
 export const rpcResult = {
   broker_request_swap_deposit_address: brokerRequestSwapDepositAddress,
-  broker_request_account_creation_deposit_address: brokerRequestSwapDepositAddress,
+  broker_request_account_creation_deposit_address: brokerRequestAccountCreationDepositAddress,
   broker_request_swap_parameter_encoding: requestSwapParameterEncoding,
   cf_request_swap_parameter_encoding: requestSwapParameterEncoding,
   cf_accounts: cfAccounts,

@@ -1,34 +1,33 @@
 import { z } from 'zod';
 import {
-  cfAccountInfo,
-  cfAuctionState,
-  cfGetTradingStrategies,
-  cfGetTradingStrategyLimits,
-  cfLendingConfig,
-  cfLendingPoolSupplyBalances,
-  cfLoanAccounts,
-  cfMonitoringSimulateAuction,
-  cfOraclePrices,
-  cfSafeModeStatuses,
-} from '../parsers';
-import {
   type broker,
+  type brokerRequestAccountCreationDepositAddress,
   type brokerRequestSwapDepositAddress,
+  type cfAccountInfo,
+  type cfAuctionState,
   type cfEnvironment,
+  type cfFailedCallEvm,
+  type cfFundingEnvironment,
+  type cfGetTradingStrategies,
+  type cfGetTradingStrategyLimits,
   type cfIngressEgressEnvironment,
+  type cfLendingConfig,
+  type cfLendingPoolSupplyBalances,
+  type cfLoanAccounts,
+  type cfMonitoringSimulateAuction,
+  type cfOraclePrices,
+  type cfPoolOrderbook,
   type cfPoolOrders,
   type cfPoolPriceV2,
   type cfPoolsEnvironment,
+  type cfSafeModeStatuses,
   type cfSwapRateV2,
+  type cfSwapRateV3,
   type cfSwappingEnvironment,
   type liquidityProvider,
+  type requestSwapParameterEncoding,
   type unregistered,
   type validator,
-  type cfFundingEnvironment,
-  type cfSwapRateV3,
-  type requestSwapParameterEncoding,
-  type cfFailedCallEvm,
-  type cfPoolOrderbook,
 } from '../parsers';
 import { CfAvailablePools } from '../types';
 import { cfLendingPools } from './../parsers';
@@ -502,6 +501,18 @@ export const swapDepositAddress: z.input<typeof brokerRequestSwapDepositAddress>
   issued_block: 1,
   channel_opening_fee: '0x0',
   source_chain_expiry_block: 1,
+};
+
+export const accountCreationDepositAddress: z.input<
+  typeof brokerRequestAccountCreationDepositAddress
+> = {
+  issued_block: 53948,
+  channel_id: 3,
+  address: '0xc2774b2f1972f50ac6113e81721cc7214388434d',
+  requested_for: 'cFHsUq1uK5opJudRDczt7w4baiRDHR6Kdezw77u2JnRnCGKcs',
+  deposit_chain_expiry_block: 27208,
+  channel_opening_fee: '0x0',
+  refund_address: '0x26a863209e9021e835c9ab0a657ddc8a659c5adb',
 };
 
 export const emptyChainAssetMap = {
