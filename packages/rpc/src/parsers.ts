@@ -7,6 +7,8 @@ import { z } from 'zod';
 
 // base types
 
+const accountId = z.string().refine((val): val is `cF${string}` => val.startsWith('cF'));
+
 export const hexString = z.string().refine(isHex, { message: 'Invalid hex string' });
 
 export const u256 = hexString.transform((value) => BigInt(value));
@@ -246,6 +248,16 @@ export const brokerRequestSwapDepositAddress = z.object({
   channel_opening_fee: u256,
 });
 
+export const brokerRequestAccountCreationDepositAddress = z.object({
+  issued_block: z.number(),
+  channel_id: z.number(),
+  address: z.string(),
+  requested_for: accountId,
+  deposit_chain_expiry_block: numberOrHex,
+  channel_opening_fee: u256,
+  refund_address: z.string(),
+});
+
 const evmBrokerRequestSwapParameterEncoding = z.object({
   to: hexString,
   calldata: hexString,
@@ -278,8 +290,6 @@ export const requestSwapParameterEncoding = z.discriminatedUnion('chain', [
     ),
   }),
 ]);
-
-const accountId = z.string().refine((val): val is `cF${string}` => val.startsWith('cF'));
 
 const delegationStatus = z.object({
   operator: accountId,

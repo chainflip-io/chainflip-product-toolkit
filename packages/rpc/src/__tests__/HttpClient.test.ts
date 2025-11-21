@@ -10,6 +10,7 @@ import { RpcRequest, type JsonRpcRequest, type RpcMethod } from '../common';
 import { HttpClient } from '../index';
 import { type AssetAndChain, type cfSwapRate } from '../parsers';
 import {
+  accountCreationDepositAddress,
   accounts,
   auctionState,
   availablePools,
@@ -339,6 +340,8 @@ describe(HttpClient, () => {
           }
         case 'broker_request_swap_deposit_address':
           return respond(swapDepositAddress);
+        case 'broker_request_account_creation_deposit_address':
+          return respond(accountCreationDepositAddress);
         case 'cf_boost_pools_depth':
           return respond(boostPoolsDepth);
         case 'cf_environment':
@@ -869,6 +872,40 @@ describe(HttpClient, () => {
           "channel_opening_fee": 0n,
           "issued_block": 1,
           "source_chain_expiry_block": 1n,
+        }
+      `);
+      expect(callCounter).toEqual(1);
+    });
+
+    it('account creation deposit addresses', async () => {
+      expect(
+        await client.sendRequest(
+          'broker_request_account_creation_deposit_address',
+          {
+            Ethereum: {
+              signature:
+                '0xffd3630f175a13ada79d94f5d526124cbb5792113af6203f7118c3b501708eeb4018fda05ae94a9e2182357debad03c78eab50cd02451da56428316c7165c5fd1b',
+              signer: '0x26A863209E9021E835C9Ab0A657dDC8A659C5aDB',
+              sig_type: 'Eip712',
+            },
+          },
+          {
+            nonce: 0,
+            expiry_block: 54026,
+          },
+          { asset: 'ETH', chain: 'Ethereum' },
+          30,
+          '0x26a863209e9021e835c9ab0a657ddc8a659c5adb',
+        ),
+      ).toMatchInlineSnapshot(`
+        {
+          "address": "0xc2774b2f1972f50ac6113e81721cc7214388434d",
+          "channel_id": 3,
+          "channel_opening_fee": 0n,
+          "deposit_chain_expiry_block": 27208n,
+          "issued_block": 53948,
+          "refund_address": "0x26a863209e9021e835c9ab0a657ddc8a659c5adb",
+          "requested_for": "cFHsUq1uK5opJudRDczt7w4baiRDHR6Kdezw77u2JnRnCGKcs",
         }
       `);
       expect(callCounter).toEqual(1);
