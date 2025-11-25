@@ -175,6 +175,18 @@ export const brokerAliasMap: AccountAliasMap = {
     name: 'Li.Fi',
     twitter: '@lifiprotocol',
   },
+  cFNXP6GCSVcHAWfoEBsWTQAXQs3nCxnw8EsSxz6KAernHRpAf: {
+    name: 'Binance Web3 Wallet',
+    twitter: '@BinanceWallet',
+  },
+  cFPWhtZhoxt3FLgxAJasebmSNtVvCza1KeDEkR9pm1quCp46T: {
+    name: 'MetaMask',
+    twitter: '@MetaMask',
+  },
+  cFMaDHQWsJQqDktnXuEM8fjx4EVzvfHpwJS1KgcEW6Xchv6L7: {
+    name: 'MetaMask',
+    twitter: '@MetaMask',
+  },
 } as const;
 
 export const lpAliasMap: AccountAliasMap = {
