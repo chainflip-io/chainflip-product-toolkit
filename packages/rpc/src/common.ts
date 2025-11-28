@@ -131,34 +131,6 @@ type EncodeCfParametersParams = [
 ];
 
 export type RpcRequest = WithHash<{
-  broker_request_swap_deposit_address: [
-    sourceAsset: UncheckedAssetAndChain,
-    destinationAsset: UncheckedAssetAndChain,
-    destinationAddress: string,
-    brokerCommission: number,
-    ccmMetadata: Nullish<CcmParams>,
-    boostFee: Nullish<number>,
-    affiliateFees: Nullish<{ account: string; bps: number }[]>,
-    fillOrKillParams: FillOrKillParams,
-    dcaParams?: Nullish<DcaParams>,
-  ];
-  broker_request_account_creation_deposit_address: [
-    signatureData: {
-      Ethereum: {
-        signature: HexString;
-        signer: HexString;
-        sig_type: 'Eip712';
-      };
-    },
-    transactionMetadata: {
-      nonce: number;
-      expiry_block: number;
-    },
-    asset: UncheckedAssetAndChain,
-    boostFee: Nullish<number>,
-    refundAddress: string,
-  ];
-  broker_request_swap_parameter_encoding: RequestSwapParameterEncodingParams;
   cf_request_swap_parameter_encoding: [
     brokerAccountId: string,
     ...RequestSwapParameterEncodingParams,
@@ -262,6 +234,34 @@ export type RpcRequest = WithHash<{
   cf_get_vault_addresses: [];
 }> & {
   chain_getBlockHash: [blockHeight?: number];
+  broker_request_swap_deposit_address: [
+    sourceAsset: UncheckedAssetAndChain,
+    destinationAsset: UncheckedAssetAndChain,
+    destinationAddress: string,
+    brokerCommission: number,
+    ccmMetadata: Nullish<CcmParams>,
+    boostFee: Nullish<number>,
+    affiliateFees: Nullish<{ account: string; bps: number }[]>,
+    fillOrKillParams: FillOrKillParams,
+    dcaParams?: Nullish<DcaParams>,
+  ];
+  broker_request_account_creation_deposit_address: [
+    signatureData: {
+      Ethereum: {
+        signature: HexString;
+        signer: HexString;
+        sig_type: 'Eip712';
+      };
+    },
+    transactionMetadata: {
+      nonce: number;
+      expiry_block: number;
+    },
+    asset: UncheckedAssetAndChain,
+    boostFee: Nullish<number>,
+    refundAddress: string,
+  ];
+  broker_request_swap_parameter_encoding: RequestSwapParameterEncodingParams;
 };
 
 export const rpcResult = {

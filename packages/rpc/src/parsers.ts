@@ -834,34 +834,13 @@ export const cfVaultAddresses = z
     ),
   })
   .transform(({ ethereum, arbitrum, bitcoin }) => {
-    const bitcoinAddresses = bitcoin.reduce((acc, [brokerId, { Btc }]) => {
-      let obj = acc.get(brokerId);
-      if (!obj) {
-        obj = { current: '', previous: '' };
-        acc.set(brokerId, obj);
-      }
-      if (!obj.previous) {
-        obj.previous = Btc;
-      } else {
-        obj.current = Btc;
-      }
-
-      return acc;
-    }, new Map<`cF${string}`, { current: string; previous: string }>());
+    const bitcoinAddresses = new Map(
+      bitcoin.map(([brokerId, { Btc }]) => [brokerId, Btc] as const),
+    );
 
     return {
       Ethereum: ethereum.Eth,
       Arbitrum: arbitrum.Arb,
       Bitcoin: bitcoinAddresses,
     };
-  })
-  .superRefine(({ Bitcoin }, ctx) => {
-    Bitcoin.forEach((value, key) => {
-      if (!value.current) {
-        ctx.addIssue({
-          message: `No current BTC address for broker ${key}`,
-          code: z.ZodIssueCode.custom,
-        });
-      }
-    });
   });
