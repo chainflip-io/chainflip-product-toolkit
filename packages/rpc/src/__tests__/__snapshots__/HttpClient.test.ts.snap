@@ -1389,22 +1389,10 @@ exports[`HttpClient > with server > handles cf_get_vault_addresses 1`] = `
 {
   "Arbitrum": "0x79001a5e762f3befc8e5871b42f6734e00498920",
   "Bitcoin": Map {
-    "cFJZVRaybb2PBwxTiAiRLiQfHY4KPB3RpJK22Q7Fhqk979aCH" => {
-      "current": "bc1pmlecg5qmnzamrkrkhzatr72mszkja2askkt2u8dwe2390v7rzuyqu4wrnx",
-      "previous": "bc1pecgxz0ls3qs7wcvzf55sjzh4qljj5km35gl3gqlcse4lkxstvnhqsfle7s",
-    },
-    "cFKpid38PmmZ8V81AHaZAhHzzpRbsf7Xw5PYt5ajTXAUvHoTQ" => {
-      "current": "bc1p395ptc97xyue0pe5x2zqk8lev2eduhevg06p6upzz2580358phnsyr40ak",
-      "previous": "bc1p2ve7y0tsx4je6kqdpxgjxvqsgejuqpg0u9v3w87pz35lhvr00mjssx23p8",
-    },
-    "cFLRQDfEdmnv6d2XfHJNRBQHi4fruPMReLSfvB8WWD2ENbqj7" => {
-      "current": "bc1p3jw7qhspcdgqv3mlfjtr476jg6lcwunc6eu2st5n8z0rxmr0st6qtljmuq",
-      "previous": "bc1puhgd4r2ghhzn0hnre8lsmuljjd5xz9p2zj5evjdx2d36y92z32cqcrwe2q",
-    },
-    "cFNx21kQWmr9wsqq29zWM7RpDBKv4bctudEUE6J22Hd4NUUHR" => {
-      "current": "bc1pssufxanrjd0cct8t2nj9wkh9epyw20zx8rjf6cckz90u3hjn5meqegud3x",
-      "previous": "bc1pay0kxg22j5fjhtgrflx3txtyp98k6dp69n7cr7zgl5ewrcpmawjq6jvrnw",
-    },
+    "cFJZVRaybb2PBwxTiAiRLiQfHY4KPB3RpJK22Q7Fhqk979aCH" => "bc1pg0s96d9ax30xlc25uwsh98ql8zyzc5x9r8c9jtjph550qlu3tgks3hdgpt",
+    "cFKpid38PmmZ8V81AHaZAhHzzpRbsf7Xw5PYt5ajTXAUvHoTQ" => "bc1peydy6thuk7u8wquk87ahr9ec56774pjesjdcrgj6n45m2u9fnr0qkmnuhn",
+    "cFLRQDfEdmnv6d2XfHJNRBQHi4fruPMReLSfvB8WWD2ENbqj7" => "bc1p2akjf8mce8sllgd8c8fg8pqdhqwl7rt5lxgrqxcftcgsjzrhk8hsc8cmzy",
+    "cFNx21kQWmr9wsqq29zWM7RpDBKv4bctudEUE6J22Hd4NUUHR" => "bc1p7eddhv7w6z5hrz0cjk9tg0vtswacee0juy0yzc2d03z8t58t6h8qry0sf4",
   },
   "Ethereum": "0xf5e10380213880111522dd0efd3dbb45b9f62bcc",
 }

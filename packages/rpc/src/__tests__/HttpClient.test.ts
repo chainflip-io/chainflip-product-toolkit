@@ -1123,19 +1123,6 @@ describe(HttpClient, () => {
       expect(await client.sendRequest('cf_get_vault_addresses')).toMatchSnapshot();
     });
 
-    it('ensures every broker has a current and previous address', async () => {
-      await expect(client.sendRequest('cf_get_vault_addresses', '0xcafebabe')).rejects
-        .toThrowErrorMatchingInlineSnapshot(`
-        [ZodError: [
-          {
-            "message": "No current BTC address for broker cFJZVRaybb2PBwxTiAiRLiQfHY4KPB3RpJK22Q7Fhqk979aCH",
-            "code": "custom",
-            "path": []
-          }
-        ]]
-      `);
-    });
-
     it('handles multiple requests with 1 call', async () => {
       const [r1, r2] = await Promise.all([
         client.sendRequest(
