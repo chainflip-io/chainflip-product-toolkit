@@ -70,6 +70,7 @@ export const palletCfLendingPoolsPalletSafeMode = z.object({
   withdrawLenderFunds: cfTraitsSafeModeSafeModeSet,
   addCollateral: cfTraitsSafeModeSafeModeSet,
   removeCollateral: cfTraitsSafeModeSafeModeSet,
+  liquidationsEnabled: z.boolean(),
 });
 
 export const palletCfReputationPalletSafeMode = z.object({ reportingEnabled: z.boolean() });
@@ -409,22 +410,22 @@ export const palletCfSwappingSwapFailureReason = simpleEnum([
   'LogicError',
 ]);
 
-export const palletCfLendingPoolsGeneralLendingInterestRateConfiguration = z.object({
+export const palletCfLendingPoolsGeneralLendingConfigInterestRateConfiguration = z.object({
   interestAtZeroUtilisation: z.number(),
   junctionUtilisation: z.number(),
   interestAtJunctionUtilisation: z.number(),
   interestAtMaxUtilisation: z.number(),
 });
 
-export const palletCfLendingPoolsGeneralLendingLendingPoolConfiguration = z.object({
+export const palletCfLendingPoolsGeneralLendingConfigLendingPoolConfiguration = z.object({
   originationFee: z.number(),
   liquidationFee: z.number(),
-  interestRateCurve: palletCfLendingPoolsGeneralLendingInterestRateConfiguration,
+  interestRateCurve: palletCfLendingPoolsGeneralLendingConfigInterestRateConfiguration,
 });
 
-export const palletCfLendingPoolsGeneralLendingLtvThresholds = z.object({
+export const palletCfLendingPoolsGeneralLendingConfigLtvThresholds = z.object({
   target: z.number(),
-  topup: z.number(),
+  topup: z.number().nullish(),
   softLiquidation: z.number(),
   softLiquidationAbort: z.number(),
   hardLiquidation: z.number(),
@@ -432,7 +433,7 @@ export const palletCfLendingPoolsGeneralLendingLtvThresholds = z.object({
   lowLtv: z.number(),
 });
 
-export const palletCfLendingPoolsGeneralLendingNetworkFeeContributions = z.object({
+export const palletCfLendingPoolsGeneralLendingConfigNetworkFeeContributions = z.object({
   extraInterest: z.number(),
   fromOriginationFee: z.number(),
   fromLiquidationFee: z.number(),
@@ -444,15 +445,15 @@ export const palletCfLendingPoolsPalletConfigUpdate = z.discriminatedUnion('__ki
   z.object({
     __kind: z.literal('SetLendingPoolConfiguration'),
     asset: cfPrimitivesChainsAssetsAnyAsset.nullish(),
-    config: palletCfLendingPoolsGeneralLendingLendingPoolConfiguration.nullish(),
+    config: palletCfLendingPoolsGeneralLendingConfigLendingPoolConfiguration.nullish(),
   }),
   z.object({
     __kind: z.literal('SetLtvThresholds'),
-    ltvThresholds: palletCfLendingPoolsGeneralLendingLtvThresholds,
+    ltvThresholds: palletCfLendingPoolsGeneralLendingConfigLtvThresholds,
   }),
   z.object({
     __kind: z.literal('SetNetworkFeeContributions'),
-    contributions: palletCfLendingPoolsGeneralLendingNetworkFeeContributions,
+    contributions: palletCfLendingPoolsGeneralLendingConfigNetworkFeeContributions,
   }),
   z.object({ __kind: z.literal('SetFeeSwapIntervalBlocks'), value: z.number() }),
   z.object({ __kind: z.literal('SetInterestPaymentIntervalBlocks'), value: z.number() }),
@@ -474,6 +475,7 @@ export const palletCfLendingPoolsPalletConfigUpdate = z.discriminatedUnion('__ki
     minimumLoanAmountUsd: numberOrHex,
     minimumUpdateLoanAmountUsd: numberOrHex,
     minimumUpdateCollateralAmountUsd: numberOrHex,
+    minimumSupplyAmountUsd: numberOrHex,
   }),
 ]);
 

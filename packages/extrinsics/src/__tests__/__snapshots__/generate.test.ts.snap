@@ -12,7 +12,7 @@ exports[`extrinsic codegen > generates the code in the desired format > /200/CHA
   - remove_lender_funds: added
   - request_loan: added
   - stop_voluntary_liquidation: added
-  - update_primary_collateral_asset: added
+  - update_collateral_topup_asset: added
   - update_whitelist: added
 "
 `;
@@ -47,7 +47,7 @@ exports[`extrinsic codegen > generates the code in the desired format > /200/len
 "import { type ChainflipAsset } from '../common';
 
 export type LendingPoolsAddCollateral = [
-  primaryCollateralAsset: ChainflipAsset | null,
+  collateralTopupAsset: ChainflipAsset | null,
   collateral: Map<{ [key in ChainflipAsset]: {} }, \`\${number}\` | \`0x\${string}\`>,
 ];
 "
@@ -121,7 +121,7 @@ exports[`extrinsic codegen > generates the code in the desired format > /200/len
 export type LendingPoolsRequestLoan = [
   loanAsset: ChainflipAsset,
   loanAmount: \`\${number}\` | \`0x\${string}\`,
-  primaryCollateralAsset: ChainflipAsset | null,
+  collateralTopupAsset: ChainflipAsset | null,
   extraCollateral: Map<{ [key in ChainflipAsset]: {} }, \`\${number}\` | \`0x\${string}\`>,
 ];
 "
@@ -132,10 +132,10 @@ exports[`extrinsic codegen > generates the code in the desired format > /200/len
 "
 `;
 
-exports[`extrinsic codegen > generates the code in the desired format > /200/lendingPools/updatePrimaryCollateralAsset.ts 1`] = `
+exports[`extrinsic codegen > generates the code in the desired format > /200/lendingPools/updateCollateralTopupAsset.ts 1`] = `
 "import { type ChainflipAsset } from '../common';
 
-export type LendingPoolsUpdatePrimaryCollateralAsset = [primaryCollateralAsset: ChainflipAsset];
+export type LendingPoolsUpdateCollateralTopupAsset = [collateralTopupAsset: ChainflipAsset | null];
 "
 `;
 
