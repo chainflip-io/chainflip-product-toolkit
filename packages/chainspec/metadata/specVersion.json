@@ -76,7 +76,7 @@
     "network": "perseverance"
   },
   "200": {
-    "hash": "0x1446ff1777f4faf5776966921b3b69592cbb5e34e5678987b4ae8a1d89f391eb",
-    "network": "backspin"
+    "hash": "0x2021077190dd9abb1844a61d899294c5335ff1cbda5624fb410269ee3b209c62",
+    "network": "localnet"
   }
 }

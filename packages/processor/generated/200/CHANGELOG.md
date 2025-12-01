@@ -1,8 +1,26 @@
+ArbitrumBroadcaster:
+  - HistoricalBroadcastRequested: added
+
+AssethubBroadcaster:
+  - HistoricalBroadcastRequested: added
+
+BitcoinBroadcaster:
+  - HistoricalBroadcastRequested: added
+
+BitcoinThresholdSigner:
+  - MaxRetriesReachedForRequest: added
+
 Environment:
   - BatchCompleted: added
   - NonNativeSignedCall: added
   - RuntimeSafeModeUpdated:
     - safeMode: added (Environment.RuntimeSafeModeUpdated.safeMode.2.swapping.depositEnabled)
+
+EthereumBroadcaster:
+  - HistoricalBroadcastRequested: added
+
+EvmThresholdSigner:
+  - MaxRetriesReachedForRequest: added
 
 Funding:
   - Funded:
@@ -12,6 +30,7 @@ Funding:
 LendingPools:
   - CollateralAdded: added
   - CollateralRemoved: added
+  - CollateralTopupAssetUpdated: added
   - InterestTaken: added
   - LendingFundsAdded: added
   - LendingFundsRemoved: added
@@ -27,8 +46,19 @@ LendingPools:
   - OriginationFeeTaken: added
   - PalletConfigUpdated:
     - update: added (LendingPools.PalletConfigUpdated.update.1)
-  - PrimaryCollateralAssetUpdated: added
   - WhitelistUpdated: added
+
+PolkadotBroadcaster:
+  - HistoricalBroadcastRequested: added
+
+PolkadotThresholdSigner:
+  - MaxRetriesReachedForRequest: added
+
+SolanaBroadcaster:
+  - HistoricalBroadcastRequested: added
+
+SolanaThresholdSigner:
+  - MaxRetriesReachedForRequest: added
 
 Swapping:
   - AccountCreationDepositAddressReady: added

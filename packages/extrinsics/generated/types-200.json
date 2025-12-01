@@ -693,7 +693,7 @@
     "add_collateral": {
       "type": "struct",
       "fields": {
-        "primaryCollateralAsset": {
+        "collateralTopupAsset": {
           "type": "option",
           "value": {
             "type": "enum",
@@ -1140,7 +1140,7 @@
           "type": "primitive",
           "value": "u128"
         },
-        "primaryCollateralAsset": {
+        "collateralTopupAsset": {
           "type": "option",
           "value": {
             "type": "enum",
@@ -1360,112 +1360,115 @@
         }
       }
     },
-    "update_primary_collateral_asset": {
+    "update_collateral_topup_asset": {
       "type": "struct",
       "fields": {
-        "primaryCollateralAsset": {
-          "type": "enum",
-          "$name": "cfPrimitivesChainsAssetsAnyAsset",
-          "values": [
-            {
-              "name": "__Unused0",
-              "value": {
-                "type": "primitive",
-                "value": "null"
+        "collateralTopupAsset": {
+          "type": "option",
+          "value": {
+            "type": "enum",
+            "$name": "cfPrimitivesChainsAssetsAnyAsset",
+            "values": [
+              {
+                "name": "__Unused0",
+                "value": {
+                  "type": "primitive",
+                  "value": "null"
+                }
+              },
+              {
+                "name": "Eth",
+                "value": {
+                  "type": "primitive",
+                  "value": "null"
+                }
+              },
+              {
+                "name": "Flip",
+                "value": {
+                  "type": "primitive",
+                  "value": "null"
+                }
+              },
+              {
+                "name": "Usdc",
+                "value": {
+                  "type": "primitive",
+                  "value": "null"
+                }
+              },
+              {
+                "name": "Dot",
+                "value": {
+                  "type": "primitive",
+                  "value": "null"
+                }
+              },
+              {
+                "name": "Btc",
+                "value": {
+                  "type": "primitive",
+                  "value": "null"
+                }
+              },
+              {
+                "name": "ArbEth",
+                "value": {
+                  "type": "primitive",
+                  "value": "null"
+                }
+              },
+              {
+                "name": "ArbUsdc",
+                "value": {
+                  "type": "primitive",
+                  "value": "null"
+                }
+              },
+              {
+                "name": "Usdt",
+                "value": {
+                  "type": "primitive",
+                  "value": "null"
+                }
+              },
+              {
+                "name": "Sol",
+                "value": {
+                  "type": "primitive",
+                  "value": "null"
+                }
+              },
+              {
+                "name": "SolUsdc",
+                "value": {
+                  "type": "primitive",
+                  "value": "null"
+                }
+              },
+              {
+                "name": "HubDot",
+                "value": {
+                  "type": "primitive",
+                  "value": "null"
+                }
+              },
+              {
+                "name": "HubUsdt",
+                "value": {
+                  "type": "primitive",
+                  "value": "null"
+                }
+              },
+              {
+                "name": "HubUsdc",
+                "value": {
+                  "type": "primitive",
+                  "value": "null"
+                }
               }
-            },
-            {
-              "name": "Eth",
-              "value": {
-                "type": "primitive",
-                "value": "null"
-              }
-            },
-            {
-              "name": "Flip",
-              "value": {
-                "type": "primitive",
-                "value": "null"
-              }
-            },
-            {
-              "name": "Usdc",
-              "value": {
-                "type": "primitive",
-                "value": "null"
-              }
-            },
-            {
-              "name": "Dot",
-              "value": {
-                "type": "primitive",
-                "value": "null"
-              }
-            },
-            {
-              "name": "Btc",
-              "value": {
-                "type": "primitive",
-                "value": "null"
-              }
-            },
-            {
-              "name": "ArbEth",
-              "value": {
-                "type": "primitive",
-                "value": "null"
-              }
-            },
-            {
-              "name": "ArbUsdc",
-              "value": {
-                "type": "primitive",
-                "value": "null"
-              }
-            },
-            {
-              "name": "Usdt",
-              "value": {
-                "type": "primitive",
-                "value": "null"
-              }
-            },
-            {
-              "name": "Sol",
-              "value": {
-                "type": "primitive",
-                "value": "null"
-              }
-            },
-            {
-              "name": "SolUsdc",
-              "value": {
-                "type": "primitive",
-                "value": "null"
-              }
-            },
-            {
-              "name": "HubDot",
-              "value": {
-                "type": "primitive",
-                "value": "null"
-              }
-            },
-            {
-              "name": "HubUsdt",
-              "value": {
-                "type": "primitive",
-                "value": "null"
-              }
-            },
-            {
-              "name": "HubUsdc",
-              "value": {
-                "type": "primitive",
-                "value": "null"
-              }
-            }
-          ]
+            ]
+          }
         }
       }
     },

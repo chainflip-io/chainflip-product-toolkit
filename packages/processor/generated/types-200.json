@@ -1387,6 +1387,10 @@
                             }
                           }
                         ]
+                      },
+                      "liquidationsEnabled": {
+                        "type": "primitive",
+                        "value": "bool"
                       }
                     }
                   },
@@ -6831,6 +6835,15 @@
         }
       }
     },
+    "MaxRetriesReachedForRequest": {
+      "type": "struct",
+      "fields": {
+        "requestId": {
+          "type": "primitive",
+          "value": "u32"
+        }
+      }
+    },
     "FailureReportProcessed": {
       "type": "struct",
       "fields": {
@@ -7528,6 +7541,15 @@
         }
       }
     },
+    "MaxRetriesReachedForRequest": {
+      "type": "struct",
+      "fields": {
+        "requestId": {
+          "type": "primitive",
+          "value": "u32"
+        }
+      }
+    },
     "FailureReportProcessed": {
       "type": "struct",
       "fields": {
@@ -8167,6 +8189,15 @@
         "ceremonyId": {
           "type": "primitive",
           "value": "u64"
+        }
+      }
+    },
+    "MaxRetriesReachedForRequest": {
+      "type": "struct",
+      "fields": {
+        "requestId": {
+          "type": "primitive",
+          "value": "u32"
         }
       }
     },
@@ -8951,6 +8982,23 @@
           ]
         }
       }
+    },
+    "HistoricalBroadcastRequested": {
+      "type": "struct",
+      "fields": {
+        "broadcastId": {
+          "type": "primitive",
+          "value": "u32"
+        },
+        "thresholdSignatureRequestId": {
+          "type": "primitive",
+          "value": "u32"
+        },
+        "epochIndex": {
+          "type": "primitive",
+          "value": "u32"
+        }
+      }
     }
   },
   "PolkadotBroadcaster": {
@@ -9369,6 +9417,23 @@
               }
             }
           ]
+        }
+      }
+    },
+    "HistoricalBroadcastRequested": {
+      "type": "struct",
+      "fields": {
+        "broadcastId": {
+          "type": "primitive",
+          "value": "u32"
+        },
+        "thresholdSignatureRequestId": {
+          "type": "primitive",
+          "value": "u32"
+        },
+        "epochIndex": {
+          "type": "primitive",
+          "value": "u32"
         }
       }
     }
@@ -9909,6 +9974,23 @@
               }
             }
           ]
+        }
+      }
+    },
+    "HistoricalBroadcastRequested": {
+      "type": "struct",
+      "fields": {
+        "broadcastId": {
+          "type": "primitive",
+          "value": "u32"
+        },
+        "thresholdSignatureRequestId": {
+          "type": "primitive",
+          "value": "u32"
+        },
+        "epochIndex": {
+          "type": "primitive",
+          "value": "u32"
         }
       }
     }
@@ -15879,13 +15961,17 @@
         },
         "refundAddress": {
           "type": "enum",
-          "$name": "cfChainsAddressForeignChainAddress",
+          "$name": "cfChainsAddressEncodedAddress",
           "values": [
             {
               "name": "Eth",
               "value": {
-                "type": "primitive",
-                "value": "H160"
+                "type": "array",
+                "value": {
+                  "type": "primitive",
+                  "value": "u8"
+                },
+                "length": 20
               }
             },
             {
@@ -15902,88 +15988,19 @@
             {
               "name": "Btc",
               "value": {
-                "type": "enum",
-                "$name": "cfChainsBtcScriptPubkey",
-                "values": [
-                  {
-                    "name": "P2PKH",
-                    "value": {
-                      "type": "array",
-                      "value": {
-                        "type": "primitive",
-                        "value": "u8"
-                      },
-                      "length": 20
-                    }
-                  },
-                  {
-                    "name": "P2SH",
-                    "value": {
-                      "type": "array",
-                      "value": {
-                        "type": "primitive",
-                        "value": "u8"
-                      },
-                      "length": 20
-                    }
-                  },
-                  {
-                    "name": "P2WPKH",
-                    "value": {
-                      "type": "array",
-                      "value": {
-                        "type": "primitive",
-                        "value": "u8"
-                      },
-                      "length": 20
-                    }
-                  },
-                  {
-                    "name": "P2WSH",
-                    "value": {
-                      "type": "array",
-                      "value": {
-                        "type": "primitive",
-                        "value": "u8"
-                      },
-                      "length": 32
-                    }
-                  },
-                  {
-                    "name": "Taproot",
-                    "value": {
-                      "type": "array",
-                      "value": {
-                        "type": "primitive",
-                        "value": "u8"
-                      },
-                      "length": 32
-                    }
-                  },
-                  {
-                    "name": "OtherSegwit",
-                    "value": {
-                      "type": "struct",
-                      "fields": {
-                        "version": {
-                          "type": "primitive",
-                          "value": "u8"
-                        },
-                        "program": {
-                          "type": "primitive",
-                          "value": "Bytes"
-                        }
-                      }
-                    }
-                  }
-                ]
+                "type": "primitive",
+                "value": "Bytes"
               }
             },
             {
               "name": "Arb",
               "value": {
-                "type": "primitive",
-                "value": "H160"
+                "type": "array",
+                "value": {
+                  "type": "primitive",
+                  "value": "u8"
+                },
+                "length": 20
               }
             },
             {
@@ -31602,6 +31619,23 @@
           ]
         }
       }
+    },
+    "HistoricalBroadcastRequested": {
+      "type": "struct",
+      "fields": {
+        "broadcastId": {
+          "type": "primitive",
+          "value": "u32"
+        },
+        "thresholdSignatureRequestId": {
+          "type": "primitive",
+          "value": "u32"
+        },
+        "epochIndex": {
+          "type": "primitive",
+          "value": "u32"
+        }
+      }
     }
   },
   "ArbitrumIngressEgress": {
@@ -35786,6 +35820,15 @@
         }
       }
     },
+    "MaxRetriesReachedForRequest": {
+      "type": "struct",
+      "fields": {
+        "requestId": {
+          "type": "primitive",
+          "value": "u32"
+        }
+      }
+    },
     "FailureReportProcessed": {
       "type": "struct",
       "fields": {
@@ -36452,6 +36495,23 @@
               }
             }
           ]
+        }
+      }
+    },
+    "HistoricalBroadcastRequested": {
+      "type": "struct",
+      "fields": {
+        "broadcastId": {
+          "type": "primitive",
+          "value": "u32"
+        },
+        "thresholdSignatureRequestId": {
+          "type": "primitive",
+          "value": "u32"
+        },
+        "epochIndex": {
+          "type": "primitive",
+          "value": "u32"
         }
       }
     }
@@ -41863,6 +41923,23 @@
           ]
         }
       }
+    },
+    "HistoricalBroadcastRequested": {
+      "type": "struct",
+      "fields": {
+        "broadcastId": {
+          "type": "primitive",
+          "value": "u32"
+        },
+        "thresholdSignatureRequestId": {
+          "type": "primitive",
+          "value": "u32"
+        },
+        "epochIndex": {
+          "type": "primitive",
+          "value": "u32"
+        }
+      }
     }
   },
   "AssethubIngressEgress": {
@@ -46576,7 +46653,7 @@
                     "type": "option",
                     "value": {
                       "type": "struct",
-                      "$name": "PalletCfLendingPoolsGeneralLendingLendingPoolConfiguration",
+                      "$name": "PalletCfLendingPoolsGeneralLendingConfigLendingPoolConfiguration",
                       "fields": {
                         "originationFee": {
                           "type": "primitive",
@@ -46588,7 +46665,7 @@
                         },
                         "interestRateCurve": {
                           "type": "struct",
-                          "$name": "PalletCfLendingPoolsGeneralLendingInterestRateConfiguration",
+                          "$name": "PalletCfLendingPoolsGeneralLendingConfigInterestRateConfiguration",
                           "fields": {
                             "interestAtZeroUtilisation": {
                               "type": "primitive",
@@ -46621,15 +46698,18 @@
                 "fields": {
                   "ltvThresholds": {
                     "type": "struct",
-                    "$name": "PalletCfLendingPoolsGeneralLendingLtvThresholds",
+                    "$name": "PalletCfLendingPoolsGeneralLendingConfigLtvThresholds",
                     "fields": {
                       "target": {
                         "type": "primitive",
                         "value": "Permill"
                       },
                       "topup": {
-                        "type": "primitive",
-                        "value": "Permill"
+                        "type": "option",
+                        "value": {
+                          "type": "primitive",
+                          "value": "Permill"
+                        }
                       },
                       "softLiquidation": {
                         "type": "primitive",
@@ -46663,7 +46743,7 @@
                 "fields": {
                   "contributions": {
                     "type": "struct",
-                    "$name": "PalletCfLendingPoolsGeneralLendingNetworkFeeContributions",
+                    "$name": "PalletCfLendingPoolsGeneralLendingConfigNetworkFeeContributions",
                     "fields": {
                       "extraInterest": {
                         "type": "primitive",
@@ -46764,6 +46844,10 @@
                     "value": "u128"
                   },
                   "minimumUpdateCollateralAmountUsd": {
+                    "type": "primitive",
+                    "value": "u128"
+                  },
+                  "minimumSupplyAmountUsd": {
                     "type": "primitive",
                     "value": "u128"
                   }
@@ -47898,116 +47982,119 @@
         }
       }
     },
-    "PrimaryCollateralAssetUpdated": {
+    "CollateralTopupAssetUpdated": {
       "type": "struct",
       "fields": {
         "borrowerId": {
           "type": "primitive",
           "value": "AccountId32"
         },
-        "primaryCollateralAsset": {
-          "type": "enum",
-          "$name": "cfPrimitivesChainsAssetsAnyAsset",
-          "values": [
-            {
-              "name": "__Unused0",
-              "value": {
-                "type": "primitive",
-                "value": "null"
+        "collateralTopupAsset": {
+          "type": "option",
+          "value": {
+            "type": "enum",
+            "$name": "cfPrimitivesChainsAssetsAnyAsset",
+            "values": [
+              {
+                "name": "__Unused0",
+                "value": {
+                  "type": "primitive",
+                  "value": "null"
+                }
+              },
+              {
+                "name": "Eth",
+                "value": {
+                  "type": "primitive",
+                  "value": "null"
+                }
+              },
+              {
+                "name": "Flip",
+                "value": {
+                  "type": "primitive",
+                  "value": "null"
+                }
+              },
+              {
+                "name": "Usdc",
+                "value": {
+                  "type": "primitive",
+                  "value": "null"
+                }
+              },
+              {
+                "name": "Dot",
+                "value": {
+                  "type": "primitive",
+                  "value": "null"
+                }
+              },
+              {
+                "name": "Btc",
+                "value": {
+                  "type": "primitive",
+                  "value": "null"
+                }
+              },
+              {
+                "name": "ArbEth",
+                "value": {
+                  "type": "primitive",
+                  "value": "null"
+                }
+              },
+              {
+                "name": "ArbUsdc",
+                "value": {
+                  "type": "primitive",
+                  "value": "null"
+                }
+              },
+              {
+                "name": "Usdt",
+                "value": {
+                  "type": "primitive",
+                  "value": "null"
+                }
+              },
+              {
+                "name": "Sol",
+                "value": {
+                  "type": "primitive",
+                  "value": "null"
+                }
+              },
+              {
+                "name": "SolUsdc",
+                "value": {
+                  "type": "primitive",
+                  "value": "null"
+                }
+              },
+              {
+                "name": "HubDot",
+                "value": {
+                  "type": "primitive",
+                  "value": "null"
+                }
+              },
+              {
+                "name": "HubUsdt",
+                "value": {
+                  "type": "primitive",
+                  "value": "null"
+                }
+              },
+              {
+                "name": "HubUsdc",
+                "value": {
+                  "type": "primitive",
+                  "value": "null"
+                }
               }
-            },
-            {
-              "name": "Eth",
-              "value": {
-                "type": "primitive",
-                "value": "null"
-              }
-            },
-            {
-              "name": "Flip",
-              "value": {
-                "type": "primitive",
-                "value": "null"
-              }
-            },
-            {
-              "name": "Usdc",
-              "value": {
-                "type": "primitive",
-                "value": "null"
-              }
-            },
-            {
-              "name": "Dot",
-              "value": {
-                "type": "primitive",
-                "value": "null"
-              }
-            },
-            {
-              "name": "Btc",
-              "value": {
-                "type": "primitive",
-                "value": "null"
-              }
-            },
-            {
-              "name": "ArbEth",
-              "value": {
-                "type": "primitive",
-                "value": "null"
-              }
-            },
-            {
-              "name": "ArbUsdc",
-              "value": {
-                "type": "primitive",
-                "value": "null"
-              }
-            },
-            {
-              "name": "Usdt",
-              "value": {
-                "type": "primitive",
-                "value": "null"
-              }
-            },
-            {
-              "name": "Sol",
-              "value": {
-                "type": "primitive",
-                "value": "null"
-              }
-            },
-            {
-              "name": "SolUsdc",
-              "value": {
-                "type": "primitive",
-                "value": "null"
-              }
-            },
-            {
-              "name": "HubDot",
-              "value": {
-                "type": "primitive",
-                "value": "null"
-              }
-            },
-            {
-              "name": "HubUsdt",
-              "value": {
-                "type": "primitive",
-                "value": "null"
-              }
-            },
-            {
-              "name": "HubUsdc",
-              "value": {
-                "type": "primitive",
-                "value": "null"
-              }
-            }
-          ]
+            ]
+          }
         }
       }
     },
