@@ -2,7 +2,7 @@ import * as fs from 'fs/promises';
 import * as os from 'os';
 import * as path from 'path';
 import { describe, it, expect } from 'vitest';
-import generateAllCode from '@/chainspec/generateAllCode';
+import Compiler from '@/chainspec/Compiler';
 import CodeGenerator from '../codegen/CodeGenerator';
 import Parser from '../codegen/Parser';
 
@@ -23,7 +23,7 @@ describe('extrinsic codegen', () => {
   it('generates the code in the desired format', async () => {
     const dir = await fs.mkdtemp(path.join(os.tmpdir(), 'extrinsics-codegen-'));
 
-    await generateAllCode(Parser, CodeGenerator, dir);
+    await new Compiler(Parser, CodeGenerator, dir).compile();
 
     for await (const file of readdir(dir)) {
       if (!file.includes('/200/')) continue;

@@ -1,5 +1,5 @@
 import { assert } from '@chainflip/utils/assertion';
-import { GenerateHook } from '@/chainspec/generateAllCode';
+import { GenerateHook } from '@/chainspec/Compiler';
 import SpecVersion from '@/chainspec/SpecVersion';
 
 const deepEqual = <T>(a: T, b: T): boolean => {
