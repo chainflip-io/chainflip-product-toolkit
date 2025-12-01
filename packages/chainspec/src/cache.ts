@@ -23,18 +23,15 @@ export const networkToRpcUrl: Record<Network, string> = {
 };
 
 export class SpecVersionCache {
-  private contents?: z.output<typeof cacheSchema>;
+  private contents?: Record<string, { hash?: string; network: Network }>;
 
   private readonly queue = new Queue();
 
   constructor(private readonly filePath: string) {}
 
-  async read(): Promise<z.output<typeof cacheSchema>> {
+  async read(): Promise<Record<string, { hash?: string; network: Network }>> {
     const contents = JSON.parse(
-      await fs.readFile(this.filePath, 'utf8').catch(async () => {
-        await fs.mkdir(path.dirname(this.filePath), { recursive: true });
-        return '{}';
-      }),
+      await fs.readFile(this.filePath, 'utf8').catch(() => '{}'),
     ) as unknown;
 
     this.contents ??= cacheSchema.parse(contents);
@@ -42,12 +39,37 @@ export class SpecVersionCache {
     return this.contents;
   }
 
-  private async write(id: number, hash: string, network: Network): Promise<void> {
+  protected async write(id: number, hash: string, network: Network): Promise<void> {
     return this.queue.enqueue(async () => {
       const data = await this.read();
       data[id] = { hash, network };
+      await fs.mkdir(path.dirname(this.filePath), { recursive: true });
       await fs.writeFile(this.filePath, JSON.stringify(data, null, 2));
     });
+  }
+
+  protected async persistMetadata(
+    specVersion: number,
+    filePath: string,
+    bytes: Uint8Array,
+  ): Promise<void> {
+    await fs.mkdir(path.dirname(filePath), { recursive: true });
+    await fs.writeFile(filePath, bytes);
+
+    // remove other cached files for the same chainspec
+    for (const file of await fs.readdir(this.getDir())) {
+      if (file.startsWith(`${specVersion}-`) && file !== path.basename(filePath)) {
+        await fs.rm(path.join(this.getDir(), file)).catch(() => null);
+      }
+    }
+  }
+
+  protected async fetchSpecVersion(hash: string, network: Network) {
+    const client = new HttpClient(networkToRpcUrl[network]);
+
+    const { specVersion } = await client.sendRequest('state_getRuntimeVersion', hash);
+
+    return specVersion;
   }
 
   private async getVersion(hash: string, network: Network) {
@@ -70,7 +92,7 @@ export class SpecVersionCache {
     }
 
     if (!specVersion) {
-      ({ specVersion } = await client.sendRequest('state_getRuntimeVersion', hash));
+      specVersion = await this.fetchSpecVersion(hash, network);
       await this.write(specVersion, hash, network);
     }
 
@@ -84,15 +106,7 @@ export class SpecVersionCache {
 
       bytes = Buffer.from(metadata.slice(2), 'hex');
 
-      await fs.mkdir(path.dirname(filePath), { recursive: true });
-      await fs.writeFile(filePath, bytes);
-
-      // remove other cached files for the same chainspec
-      for (const file of await fs.readdir(this.getDir())) {
-        if (file.startsWith(`${specVersion}-`) && file !== path.basename(filePath)) {
-          await fs.rm(path.join(this.getDir(), file)).catch(() => null);
-        }
-      }
+      await this.persistMetadata(specVersion, filePath, bytes);
     }
 
     const registry = new TypeRegistry();
@@ -108,5 +122,10 @@ export class SpecVersionCache {
 }
 
 export const specVersionCache = new SpecVersionCache(
-  path.join(import.meta.dirname, '..', 'metadata', 'specVersion.json'),
+  path.join(
+    typeof __dirname !== 'undefined' ? __dirname : import.meta.dirname,
+    '..',
+    'metadata',
+    'specVersion.json',
+  ),
 );

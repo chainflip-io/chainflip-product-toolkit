@@ -1,17 +1,14 @@
 #!/usr/bin/env -S pnpm tsx
 import { chainflipChains } from '@chainflip/utils/chainflip';
 import * as path from 'path';
-import generateAllCode from '@/chainspec/generateAllCode';
+import Compiler from '@/chainspec/Compiler';
 import CodeGenerator from '../src/codegen/CodeGenerator';
 import Parser from '../src/codegen/Parser';
 import trackLatestVersions from '../src/codegen/trackLatestVersions';
 
 const generatedDir = path.join(import.meta.dirname, '..', 'generated');
 
-const latestVersions = await generateAllCode(
-  Parser,
-  CodeGenerator,
-  generatedDir,
+const latestVersions = await new Compiler(Parser, CodeGenerator, generatedDir).compile(
   trackLatestVersions,
 );
 

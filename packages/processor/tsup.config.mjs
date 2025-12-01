@@ -31,6 +31,14 @@ const processor = defineConfig({
   entry: ['./src/processor/*.ts'],
 });
 
+const generate = defineConfig({
+  ...baseConfig,
+  entry: ['./src/codegen/generate.ts'],
+  external: [...Object.keys(pkg.dependencies), ...Object.keys(pkg.devDependencies), 'prettier'],
+  splitting: false,
+  esbuildPlugins: [],
+});
+
 /**
  * @param {string} version
  */
@@ -48,7 +56,7 @@ const configs = (
     if (dirent.isDirectory()) acc.push(generated(dirent.name));
     return acc;
   },
-  [processor],
+  [processor, generate],
 );
 
 export default configs;

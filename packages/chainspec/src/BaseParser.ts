@@ -7,7 +7,7 @@ import { type TypeDef, TypeDefInfo } from '@polkadot/types/types';
 import assert from 'assert';
 import * as fs from 'fs/promises';
 import * as path from 'path';
-import { type Network, specVersionCache } from './cache';
+import { SpecVersionCache, type Network } from './cache';
 import SpecVersion from './SpecVersion';
 
 export type MetadataOpts = {
@@ -83,7 +83,10 @@ export default abstract class BaseParser {
   private specVersion?: number;
   private currentPallet?: string;
 
-  constructor(opts: MetadataOpts) {
+  constructor(
+    opts: MetadataOpts,
+    private readonly specVersionCache: SpecVersionCache,
+  ) {
     this.hash = opts.hash;
     this.network = opts.network ?? 'backspin';
     this.generatedDir = opts.generatedDir;
@@ -283,7 +286,7 @@ export default abstract class BaseParser {
       return { metadata: this.metadata, specVersion: this.specVersion };
     }
 
-    const { specVersion, metadata } = await specVersionCache.getMetadataAndVersion(
+    const { specVersion, metadata } = await this.specVersionCache.getMetadataAndVersion(
       this.network,
       this.hash,
     );
@@ -292,14 +295,6 @@ export default abstract class BaseParser {
     this.metadata = metadata;
 
     return { specVersion, metadata };
-  }
-
-  protected async getMetadata(): Promise<Metadata> {
-    let { metadata } = this;
-
-    if (!metadata) metadata = (await this.fetchMetadataAndSpecVersion()).metadata;
-
-    return metadata;
   }
 
   protected getMetadataSync(): Metadata {
