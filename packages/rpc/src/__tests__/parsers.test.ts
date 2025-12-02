@@ -1861,9 +1861,10 @@ describe('parsers', () => {
             "soft_liquidation": 900000,
             "soft_liquidation_abort": 880000,
             "target": 800000,
-            "topup": 850000,
+            "topup": null,
           },
           "minimum_loan_amount_usd": 100000000n,
+          "minimum_supply_amount_usd": 100000000n,
           "minimum_update_collateral_amount_usd": 10000000n,
           "minimum_update_loan_amount_usd": 10000000n,
           "network_fee_contributions": {

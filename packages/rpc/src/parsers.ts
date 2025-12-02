@@ -732,19 +732,19 @@ export const cfLendingPools = z.array(
 
 export const cfLendingConfig = z.object({
   ltv_thresholds: z.object({
-    target: z.number(),
-    topup: z.number(),
-    soft_liquidation: z.number(),
-    soft_liquidation_abort: z.number(),
-    hard_liquidation: z.number(),
-    hard_liquidation_abort: z.number(),
-    low_ltv: z.number(),
+    target: z.number().nullable(),
+    topup: z.number().nullable(),
+    soft_liquidation: z.number().nullable(),
+    soft_liquidation_abort: z.number().nullable(),
+    hard_liquidation: z.number().nullable(),
+    hard_liquidation_abort: z.number().nullable(),
+    low_ltv: z.number().nullable(),
   }),
   network_fee_contributions: z.object({
-    extra_interest: z.number(),
-    low_ltv_penalty_max: z.number(),
-    from_origination_fee: z.number(),
-    from_liquidation_fee: z.number(),
+    extra_interest: z.number().nullable(),
+    low_ltv_penalty_max: z.number().nullable(),
+    from_origination_fee: z.number().nullable(),
+    from_liquidation_fee: z.number().nullable(),
   }),
   fee_swap_interval_blocks: z.number(),
   interest_payment_interval_blocks: z.number(),
@@ -756,6 +756,7 @@ export const cfLendingConfig = z.object({
   hard_liquidation_max_oracle_slippage: z.number(),
   fee_swap_max_oracle_slippage: z.number(),
   minimum_loan_amount_usd: numberOrHex,
+  minimum_supply_amount_usd: numberOrHex,
   minimum_update_loan_amount_usd: numberOrHex,
   minimum_update_collateral_amount_usd: numberOrHex,
 });
