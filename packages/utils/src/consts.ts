@@ -187,6 +187,10 @@ export const brokerAliasMap: AccountAliasMap = {
     name: 'MetaMask',
     twitter: '@MetaMask',
   },
+  cFJt567jd8vooomo6z86sS9qenBodSYyPb6CKgqGESYJS4cFG: {
+    name: 'Ellipal Wallet',
+    twitter: '@ellipalwallet',
+  },
 } as const;
 
 export const lpAliasMap: AccountAliasMap = {
