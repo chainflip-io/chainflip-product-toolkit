@@ -1894,6 +1894,10 @@ describe('parsers', () => {
                 "chain": "Bitcoin",
               },
             ],
+            "collateral_topup_asset": {
+              "asset": "BTC",
+              "chain": "Bitcoin",
+            },
             "liquidation_status": {
               "liquidation_swaps": [
                 {
@@ -1914,10 +1918,6 @@ describe('parsers', () => {
               },
             ],
             "ltv_ratio": 1333333333n,
-            "primary_collateral_asset": {
-              "asset": "BTC",
-              "chain": "Bitcoin",
-            },
           },
         ]
       `);

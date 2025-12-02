@@ -1657,6 +1657,10 @@ exports[`HttpClient > with server > handles cf_loan_accounts 1`] = `
         "chain": "Bitcoin",
       },
     ],
+    "collateral_topup_asset": {
+      "asset": "BTC",
+      "chain": "Bitcoin",
+    },
     "liquidation_status": {
       "liquidation_swaps": [
         {
@@ -1677,10 +1681,6 @@ exports[`HttpClient > with server > handles cf_loan_accounts 1`] = `
       },
     ],
     "ltv_ratio": 1333333333n,
-    "primary_collateral_asset": {
-      "asset": "BTC",
-      "chain": "Bitcoin",
-    },
   },
 ]
 `;

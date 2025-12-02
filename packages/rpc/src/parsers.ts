@@ -773,7 +773,7 @@ export const cfLendingConfig = z.object({
 
 export const cfLoanAccount = z.object({
   account: accountId,
-  primary_collateral_asset: rpcAssetSchema,
+  collateral_topup_asset: rpcAssetSchema,
   ltv_ratio: numberOrHex.nullable(),
   collateral: z.array(
     z.intersection(

@@ -1580,7 +1580,7 @@ export const lendingConfig: z.input<typeof cfLendingConfig> = {
 export const loanAccounts: z.input<typeof cfLoanAccounts> = [
   {
     account: 'cFL8fmgKZcchhtLagBH2GKfsuWxBqUaD5CYE1m7DFb8DBSLJ1',
-    primary_collateral_asset: {
+    collateral_topup_asset: {
       chain: 'Bitcoin',
       asset: 'BTC',
     },
