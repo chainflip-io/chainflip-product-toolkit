@@ -60,6 +60,7 @@ const rpcAssetSchema = z.union([
   z.object({ chain: z.literal('Ethereum'), asset: z.literal('ETH') }),
   z.object({ chain: z.literal('Ethereum'), asset: z.literal('USDC') }),
   z.object({ chain: z.literal('Ethereum'), asset: z.literal('USDT') }),
+  z.object({ chain: z.literal('Ethereum'), asset: z.literal('WBTC') }),
   z.object({ chain: z.literal('Arbitrum'), asset: z.literal('ETH') }),
   z.object({ chain: z.literal('Arbitrum'), asset: z.literal('USDC') }),
   z.object({ chain: z.literal('Solana'), asset: z.literal('SOL') }),
