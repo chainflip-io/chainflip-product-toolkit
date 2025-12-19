@@ -2222,6 +2222,10 @@ describe('parsers', () => {
                 "chain": "Ethereum",
               },
               {
+                "asset": "WBTC",
+                "chain": "Ethereum",
+              },
+              {
                 "asset": "FLIP",
                 "chain": "Ethereum",
               },
@@ -2269,6 +2273,10 @@ describe('parsers', () => {
               },
               {
                 "asset": "USDT",
+                "chain": "Ethereum",
+              },
+              {
+                "asset": "WBTC",
                 "chain": "Ethereum",
               },
               {
@@ -2322,6 +2330,10 @@ describe('parsers', () => {
                 "chain": "Ethereum",
               },
               {
+                "asset": "WBTC",
+                "chain": "Ethereum",
+              },
+              {
                 "asset": "FLIP",
                 "chain": "Ethereum",
               },
@@ -2369,6 +2381,10 @@ describe('parsers', () => {
               },
               {
                 "asset": "USDT",
+                "chain": "Ethereum",
+              },
+              {
+                "asset": "WBTC",
                 "chain": "Ethereum",
               },
               {
@@ -2420,6 +2436,10 @@ describe('parsers', () => {
               },
               {
                 "asset": "USDT",
+                "chain": "Ethereum",
+              },
+              {
+                "asset": "WBTC",
                 "chain": "Ethereum",
               },
               {
