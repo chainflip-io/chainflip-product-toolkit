@@ -27,6 +27,7 @@ exports[`HttpClient > with server > gets broker account info 1`] = `
       "FLIP": 0n,
       "USDC": 0n,
       "USDT": 0n,
+      "WBTC": 0n,
     },
     "Solana": {
       "SOL": 0n,
@@ -53,6 +54,7 @@ exports[`HttpClient > with server > gets broker account info 1`] = `
       "FLIP": 39432662616362382590n,
       "USDC": 1922285993n,
       "USDT": 729506182n,
+      "WBTC": 12369718n,
     },
     "Solana": {
       "SOL": 0n,
@@ -86,6 +88,7 @@ exports[`HttpClient > with server > gets broker account info 2 1`] = `
       "FLIP": 0n,
       "USDC": 0n,
       "USDT": 0n,
+      "WBTC": 0n,
     },
     "Solana": {
       "SOL": 0n,
@@ -111,6 +114,7 @@ exports[`HttpClient > with server > gets broker account info 2 1`] = `
       "FLIP": 39432662616362382590n,
       "USDC": 1922285993n,
       "USDT": 729506182n,
+      "WBTC": 12369718n,
     },
     "Solana": {
       "SOL": 0n,
@@ -143,6 +147,7 @@ exports[`HttpClient > with server > gets delegator account info 1`] = `
       "FLIP": 0n,
       "USDC": 0n,
       "USDT": 0n,
+      "WBTC": 0n,
     },
     "Solana": {
       "SOL": 0n,
@@ -180,6 +185,7 @@ exports[`HttpClient > with server > gets delegator account info 2 1`] = `
       "FLIP": 0n,
       "USDC": 0n,
       "USDT": 0n,
+      "WBTC": 0n,
     },
     "Solana": {
       "SOL": 0n,
@@ -221,6 +227,7 @@ exports[`HttpClient > with server > gets lp account info 1`] = `
       "FLIP": 0n,
       "USDC": 0n,
       "USDT": 0n,
+      "WBTC": 0n,
     },
     "Solana": {
       "SOL": 0n,
@@ -268,6 +275,7 @@ exports[`HttpClient > with server > gets lp account info 1`] = `
       "FLIP": [],
       "USDC": [],
       "USDT": [],
+      "WBTC": [],
     },
     "Solana": {
       "SOL": [],
@@ -293,6 +301,7 @@ exports[`HttpClient > with server > gets lp account info 1`] = `
       "FLIP": 0n,
       "USDC": 0n,
       "USDT": 0n,
+      "WBTC": 0n,
     },
     "Solana": {
       "SOL": 0n,
@@ -340,6 +349,7 @@ exports[`HttpClient > with server > gets lp total balances 1`] = `
     "FLIP": 0n,
     "USDC": 0n,
     "USDT": 0n,
+    "WBTC": 0n,
   },
   "Solana": {
     "SOL": 0n,
@@ -413,6 +423,7 @@ exports[`HttpClient > with server > gets unregistered account info 1`] = `
       "FLIP": 0n,
       "USDC": 0n,
       "USDT": 0n,
+      "WBTC": 0n,
     },
     "Solana": {
       "SOL": 0n,
@@ -447,6 +458,7 @@ exports[`HttpClient > with server > gets validator account info 1`] = `
       "FLIP": 0n,
       "USDC": 0n,
       "USDT": 0n,
+      "WBTC": 0n,
     },
     "Solana": {
       "SOL": 0n,
@@ -494,6 +506,7 @@ exports[`HttpClient > with server > gets validator account info with an operator
       "FLIP": 0n,
       "USDC": 0n,
       "USDT": 0n,
+      "WBTC": 0n,
     },
     "Solana": {
       "SOL": 0n,
@@ -708,6 +721,7 @@ exports[`HttpClient > with server > handles cf_environment 1`] = `
         "FLIP": 0n,
         "USDC": 0n,
         "USDT": 0n,
+        "WBTC": 0n,
       },
       "Solana": {
         "SOL": 176n,
@@ -732,6 +746,7 @@ exports[`HttpClient > with server > handles cf_environment 1`] = `
         "FLIP": 0n,
         "USDC": 0n,
         "USDT": 0n,
+        "WBTC": 0n,
       },
       "Solana": {
         "SOL": 176n,
@@ -756,6 +771,7 @@ exports[`HttpClient > with server > handles cf_environment 1`] = `
         "FLIP": 0n,
         "USDC": 0n,
         "USDT": 0n,
+        "WBTC": 0n,
       },
       "Solana": {
         "SOL": 0n,
@@ -780,6 +796,7 @@ exports[`HttpClient > with server > handles cf_environment 1`] = `
         "FLIP": 1n,
         "USDC": 1n,
         "USDT": 1n,
+        "WBTC": 1n,
       },
       "Solana": {
         "SOL": 1n,
@@ -1019,6 +1036,30 @@ exports[`HttpClient > with server > handles cf_environment 1`] = `
             "quote": 0n,
           },
         },
+        "WBTC": {
+          "limit_order_fee_hundredth_pips": 20,
+          "limit_order_total_fees_earned": {
+            "base": 0n,
+            "quote": 0n,
+          },
+          "limit_total_swap_inputs": {
+            "base": 0n,
+            "quote": 0n,
+          },
+          "quote_asset": {
+            "asset": "USDC",
+            "chain": "Ethereum",
+          },
+          "range_order_fee_hundredth_pips": 20,
+          "range_order_total_fees_earned": {
+            "base": 180n,
+            "quote": 19996n,
+          },
+          "range_total_swap_inputs": {
+            "base": 8996618n,
+            "quote": 999734320n,
+          },
+        },
       },
       "Solana": {
         "SOL": {
@@ -1093,6 +1134,7 @@ exports[`HttpClient > with server > handles cf_environment 1`] = `
         "FLIP": null,
         "USDC": null,
         "USDT": null,
+        "WBTC": null,
       },
       "Solana": {
         "SOL": null,
@@ -1117,6 +1159,7 @@ exports[`HttpClient > with server > handles cf_environment 1`] = `
         "FLIP": 1000000000000000000000n,
         "USDC": 1000000000n,
         "USDT": 1000000000n,
+        "WBTC": 2000000n,
       },
       "Solana": {
         "SOL": 5000000000n,
@@ -1144,6 +1187,7 @@ exports[`HttpClient > with server > handles cf_environment 1`] = `
             "FLIP": 0n,
             "USDC": 0n,
             "USDT": 0n,
+            "WBTC": 0n,
           },
           "Solana": {
             "SOL": 0n,
@@ -1174,6 +1218,7 @@ exports[`HttpClient > with server > handles cf_environment 1`] = `
             "FLIP": 0n,
             "USDC": 0n,
             "USDT": 0n,
+            "WBTC": 0n,
           },
           "Solana": {
             "SOL": 0n,
@@ -1352,6 +1397,7 @@ exports[`HttpClient > with server > handles cf_get_trading_strategy_limits 1`] =
       "FLIP": null,
       "USDC": 10000000,
       "USDT": 10000000,
+      "WBTC": null,
     },
     "Solana": {
       "SOL": null,
@@ -1376,6 +1422,7 @@ exports[`HttpClient > with server > handles cf_get_trading_strategy_limits 1`] =
       "FLIP": null,
       "USDC": 20000000000,
       "USDT": 20000000000,
+      "WBTC": null,
     },
     "Solana": {
       "SOL": null,
@@ -1425,6 +1472,7 @@ exports[`HttpClient > with server > handles cf_ingress_egress_environment 1`] = 
       "FLIP": 0n,
       "USDC": 0n,
       "USDT": 0n,
+      "WBTC": 0n,
     },
     "Solana": {
       "SOL": 176n,
@@ -1449,6 +1497,7 @@ exports[`HttpClient > with server > handles cf_ingress_egress_environment 1`] = 
       "FLIP": 0n,
       "USDC": 0n,
       "USDT": 0n,
+      "WBTC": 0n,
     },
     "Solana": {
       "SOL": 176n,
@@ -1473,6 +1522,7 @@ exports[`HttpClient > with server > handles cf_ingress_egress_environment 1`] = 
       "FLIP": 0n,
       "USDC": 0n,
       "USDT": 0n,
+      "WBTC": 0n,
     },
     "Solana": {
       "SOL": 0n,
@@ -1497,6 +1547,7 @@ exports[`HttpClient > with server > handles cf_ingress_egress_environment 1`] = 
       "FLIP": 1n,
       "USDC": 1n,
       "USDT": 1n,
+      "WBTC": 1n,
     },
     "Solana": {
       "SOL": 1n,
@@ -1869,6 +1920,7 @@ exports[`HttpClient > with server > handles cf_swapping_environment 1`] = `
       "FLIP": null,
       "USDC": null,
       "USDT": null,
+      "WBTC": null,
     },
     "Solana": {
       "SOL": null,
@@ -1893,6 +1945,7 @@ exports[`HttpClient > with server > handles cf_swapping_environment 1`] = `
       "FLIP": 1000000000000000000000n,
       "USDC": 1000000000n,
       "USDT": 1000000000n,
+      "WBTC": 2000000n,
     },
     "Solana": {
       "SOL": 5000000000n,
@@ -1920,6 +1973,7 @@ exports[`HttpClient > with server > handles cf_swapping_environment 1`] = `
           "FLIP": 0n,
           "USDC": 0n,
           "USDT": 0n,
+          "WBTC": 0n,
         },
         "Solana": {
           "SOL": 0n,
@@ -1950,6 +2004,7 @@ exports[`HttpClient > with server > handles cf_swapping_environment 1`] = `
           "FLIP": 0n,
           "USDC": 0n,
           "USDT": 0n,
+          "WBTC": 0n,
         },
         "Solana": {
           "SOL": 0n,

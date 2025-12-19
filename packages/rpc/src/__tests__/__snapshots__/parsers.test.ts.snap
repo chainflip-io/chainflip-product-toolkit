@@ -20,6 +20,7 @@ exports[`parsers > cfAccountInfo > parses the latest cfAccountInfo schema for an
       "FLIP": 0n,
       "USDC": 0n,
       "USDT": 0n,
+      "WBTC": 0n,
     },
     "Solana": {
       "SOL": 0n,
@@ -67,6 +68,7 @@ exports[`parsers > cfAccountInfo > parses the latest cfAccountInfo schema for an
       "FLIP": [],
       "USDC": [],
       "USDT": [],
+      "WBTC": [],
     },
     "Solana": {
       "SOL": [],
@@ -92,6 +94,7 @@ exports[`parsers > cfAccountInfo > parses the latest cfAccountInfo schema for an
       "FLIP": 0n,
       "USDC": 0n,
       "USDT": 0n,
+      "WBTC": 0n,
     },
     "Solana": {
       "SOL": 0n,
@@ -140,6 +143,7 @@ exports[`parsers > cfAccountInfo > parses the latest cfAccountInfo schema for an
       "FLIP": 0n,
       "USDC": 0n,
       "USDT": 0n,
+      "WBTC": 0n,
     },
     "Solana": {
       "SOL": 0n,
@@ -187,6 +191,7 @@ exports[`parsers > cfAccountInfo > parses the latest cfAccountInfo schema for an
       "FLIP": [],
       "USDC": [],
       "USDT": [],
+      "WBTC": [],
     },
     "Solana": {
       "SOL": [],
@@ -212,6 +217,7 @@ exports[`parsers > cfAccountInfo > parses the latest cfAccountInfo schema for an
       "FLIP": 0n,
       "USDC": 0n,
       "USDT": 0n,
+      "WBTC": 0n,
     },
     "Solana": {
       "SOL": 0n,

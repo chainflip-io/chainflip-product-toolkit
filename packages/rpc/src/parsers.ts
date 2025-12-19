@@ -21,7 +21,7 @@ const chainAssetMapFactory = <Z extends z.ZodTypeAny>(parser: Z, _defaultValue: 
   z
     .object({
       Bitcoin: z.object({ BTC: parser }),
-      Ethereum: z.object({ ETH: parser, USDC: parser, FLIP: parser, USDT: parser }),
+      Ethereum: z.object({ ETH: parser, USDC: parser, FLIP: parser, USDT: parser, WBTC: parser }),
       Polkadot: z.object({ DOT: parser }),
       Arbitrum: z.object({ ETH: parser, USDC: parser }),
       Solana: z.object({ SOL: parser, USDC: parser }),
@@ -33,7 +33,7 @@ const chainBaseAssetMapFactory = <Z extends z.ZodTypeAny>(parser: Z, _defaultVal
   z
     .object({
       Bitcoin: z.object({ BTC: parser }),
-      Ethereum: z.object({ ETH: parser, FLIP: parser, USDT: parser }),
+      Ethereum: z.object({ ETH: parser, FLIP: parser, USDT: parser, WBTC: parser }),
       Polkadot: z.object({ DOT: parser }),
       Arbitrum: z.object({ ETH: parser, USDC: parser }),
       Solana: z.object({ SOL: parser, USDC: parser }),
