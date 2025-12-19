@@ -135,6 +135,7 @@ describe('parsers', () => {
               FLIP: '0x2db7b25',
               USDC: '0x0',
               USDT: '0x0',
+              WBTC: '0x0',
             },
             Polkadot: {
               DOT: '0xbc28f20',
@@ -162,6 +163,7 @@ describe('parsers', () => {
               FLIP: '0x336ea89',
               USDC: '0x0',
               USDT: '0x0',
+              WBTC: '0x0',
             },
             Polkadot: {
               DOT: '0xbc4d910',
@@ -197,6 +199,7 @@ describe('parsers', () => {
               FLIP: '0x1',
               USDC: '0x1',
               USDT: '0x1',
+              WBTC: '0x1',
             },
             Polkadot: {
               DOT: '0x1',
@@ -250,6 +253,7 @@ describe('parsers', () => {
               FLIP: null,
               USDC: null,
               USDT: null,
+              WBTC: null,
             },
             Polkadot: {
               DOT: null,
@@ -281,6 +285,7 @@ describe('parsers', () => {
               FLIP: '0x3635c9adc5dea00000',
               USDC: '0x3b9aca00',
               USDT: '0x3b9aca00',
+              WBTC: '0x1e8480',
             },
             Polkadot: {
               DOT: '0x1d1a94a2000',
@@ -314,6 +319,7 @@ describe('parsers', () => {
                   FLIP: 0,
                   USDC: 0,
                   USDT: 0,
+                  WBTC: 0,
                 },
                 Polkadot: {
                   DOT: 0,
@@ -347,6 +353,7 @@ describe('parsers', () => {
                   FLIP: 0,
                   USDC: 0,
                   USDT: 0,
+                  WBTC: 0,
                 },
                 Polkadot: {
                   DOT: 0,
@@ -445,6 +452,30 @@ describe('parsers', () => {
                 limit_total_swap_inputs: {
                   base: '0x0',
                   quote: '0x0',
+                },
+                quote_asset: {
+                  chain: 'Ethereum',
+                  asset: 'USDC',
+                },
+              },
+              WBTC: {
+                limit_order_fee_hundredth_pips: 20,
+                range_order_fee_hundredth_pips: 20,
+                range_order_total_fees_earned: {
+                  base: '0x8961',
+                  quote: '0xda0f22',
+                },
+                limit_order_total_fees_earned: {
+                  base: '0x0',
+                  quote: '0xac0c',
+                },
+                range_total_swap_inputs: {
+                  base: '0x68cedbea',
+                  quote: '0xa65ccd0506',
+                },
+                limit_total_swap_inputs: {
+                  base: '0x0',
+                  quote: '0x8341e381',
                 },
                 quote_asset: {
                   chain: 'Ethereum',
@@ -702,6 +733,7 @@ describe('parsers', () => {
                 "FLIP": 53930633n,
                 "USDC": 0n,
                 "USDT": 0n,
+                "WBTC": 0n,
               },
               "Solana": {
                 "SOL": 75005000n,
@@ -733,6 +765,7 @@ describe('parsers', () => {
                 "FLIP": 47938341n,
                 "USDC": 0n,
                 "USDT": 0n,
+                "WBTC": 0n,
               },
               "Solana": {
                 "SOL": 795005000n,
@@ -757,6 +790,7 @@ describe('parsers', () => {
                 "FLIP": 0n,
                 "USDC": 0n,
                 "USDT": 0n,
+                "WBTC": 0n,
               },
               "Solana": {
                 "SOL": 0n,
@@ -781,6 +815,7 @@ describe('parsers', () => {
                 "FLIP": 1n,
                 "USDC": 1n,
                 "USDT": 1n,
+                "WBTC": 1n,
               },
               "Solana": {
                 "SOL": 1n,
@@ -1020,6 +1055,30 @@ describe('parsers', () => {
                     "quote": 91651575243n,
                   },
                 },
+                "WBTC": {
+                  "limit_order_fee_hundredth_pips": 20,
+                  "limit_order_total_fees_earned": {
+                    "base": 0n,
+                    "quote": 44044n,
+                  },
+                  "limit_total_swap_inputs": {
+                    "base": 0n,
+                    "quote": 2202133377n,
+                  },
+                  "quote_asset": {
+                    "asset": "USDC",
+                    "chain": "Ethereum",
+                  },
+                  "range_order_fee_hundredth_pips": 20,
+                  "range_order_total_fees_earned": {
+                    "base": 35169n,
+                    "quote": 14290722n,
+                  },
+                  "range_total_swap_inputs": {
+                    "base": 1758387178n,
+                    "quote": 714521511174n,
+                  },
+                },
               },
               "Solana": {
                 "SOL": {
@@ -1094,6 +1153,7 @@ describe('parsers', () => {
                 "FLIP": null,
                 "USDC": null,
                 "USDT": null,
+                "WBTC": null,
               },
               "Solana": {
                 "SOL": null,
@@ -1118,6 +1178,7 @@ describe('parsers', () => {
                 "FLIP": 1000000000000000000000n,
                 "USDC": 1000000000n,
                 "USDT": 1000000000n,
+                "WBTC": 2000000n,
               },
               "Solana": {
                 "SOL": 5000000000n,
@@ -1145,6 +1206,7 @@ describe('parsers', () => {
                     "FLIP": 0n,
                     "USDC": 0n,
                     "USDT": 0n,
+                    "WBTC": 0n,
                   },
                   "Solana": {
                     "SOL": 0n,
@@ -1175,6 +1237,7 @@ describe('parsers', () => {
                     "FLIP": 0n,
                     "USDC": 0n,
                     "USDT": 0n,
+                    "WBTC": 0n,
                   },
                   "Solana": {
                     "SOL": 0n,
@@ -1203,6 +1266,7 @@ describe('parsers', () => {
             FLIP: null,
             USDC: null,
             USDT: null,
+            WBTC: null,
           },
           Polkadot: {
             DOT: null,
@@ -1234,6 +1298,7 @@ describe('parsers', () => {
             FLIP: '0x3635c9adc5dea00000',
             USDC: '0x3b9aca00',
             USDT: '0x3b9aca00',
+            WBTC: '0x1e8480',
           },
           Polkadot: {
             DOT: '0x1d1a94a2000',
@@ -1267,6 +1332,7 @@ describe('parsers', () => {
                 FLIP: 0,
                 USDC: 0,
                 USDT: 0,
+                WBTC: 0,
               },
               Polkadot: {
                 DOT: 0,
@@ -1300,6 +1366,7 @@ describe('parsers', () => {
                 FLIP: 0,
                 USDC: 0,
                 USDT: 0,
+                WBTC: 0,
               },
               Polkadot: {
                 DOT: 0,
@@ -1398,6 +1465,30 @@ describe('parsers', () => {
               limit_total_swap_inputs: {
                 base: '0x4e400a2',
                 quote: '0x2fadcfb',
+              },
+              quote_asset: {
+                chain: 'Ethereum',
+                asset: 'USDC',
+              },
+            },
+            WBTC: {
+              limit_order_fee_hundredth_pips: 20,
+              range_order_fee_hundredth_pips: 20,
+              range_order_total_fees_earned: {
+                base: '0x70',
+                quote: '0x91aa0',
+              },
+              limit_order_total_fees_earned: {
+                base: '0xab',
+                quote: '0x49a9a',
+              },
+              range_total_swap_inputs: {
+                base: '0x5356ca',
+                quote: '0x6f212e4ff',
+              },
+              limit_total_swap_inputs: {
+                base: '0x7fb017',
+                quote: '0x3832ba417',
               },
               quote_asset: {
                 chain: 'Ethereum',
@@ -1744,6 +1835,7 @@ describe('parsers', () => {
               "FLIP": 0n,
               "USDC": 0n,
               "USDT": 0n,
+              "WBTC": 0n,
             },
             "Solana": {
               "SOL": 0n,
