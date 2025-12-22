@@ -39,7 +39,7 @@ describe(RedisClient, () => {
       ['Bitcoin' as const, { hash: '0x1234' }, { hash: '0xdeadc0de' }],
       ['Bitcoin' as const, { hash: '0x1234' }, { hash: 'deadc0de' }],
       [
-        'Polkadot' as const,
+        'Assethub' as const,
         { signature: '0x1234' },
         { transaction_id: { block_number: 100, extrinsic_index: 20 } },
       ],
@@ -120,11 +120,11 @@ describe(RedisClient, () => {
       expect(mock).toHaveBeenCalledWith('deposit:Ethereum:0x1234', 0, -1);
     });
 
-    it('returns the deposits if found - Polkadot', async () => {
+    it('returns the deposits if found - Assethub', async () => {
       const mock = vi.mocked(Redis.prototype.lrange).mockResolvedValueOnce([
         JSON.stringify({
           amount: '0x8000',
-          asset: { asset: 'DOT', chain: 'Polkadot' },
+          asset: { asset: 'DOT', chain: 'Assethub' },
           deposit_chain_block_height: 100,
           deposit_details: {
             extrinsic_index: 20,
@@ -134,14 +134,14 @@ describe(RedisClient, () => {
 
       const client = new RedisClient(url);
       const deposits = await client.getDeposits(
-        'Dot',
+        'HubDot',
         '121LWHo3TJYdvSuDVhdCY6P9Bk6Cd5wMkkvMnU5joWJfuWBJ',
       );
       expect(deposits).toMatchInlineSnapshot(`
         [
           {
             "amount": 32768n,
-            "asset": "Dot",
+            "asset": "HubDot",
             "deposit_chain_block_height": 100,
             "tx_refs": [
               "100-20",
@@ -149,8 +149,9 @@ describe(RedisClient, () => {
           },
         ]
       `);
+
       expect(mock).toHaveBeenCalledWith(
-        'deposit:Polkadot:0x2c7de4a2d760264b29f2033b67aa882f300e1785bc7d130fbf67f5b127202169',
+        'deposit:Assethub:0x2c7de4a2d760264b29f2033b67aa882f300e1785bc7d130fbf67f5b127202169',
         0,
         -1,
       );
@@ -266,7 +267,7 @@ describe(RedisClient, () => {
       const mock = vi.mocked(Redis.prototype.get);
       const client = new RedisClient(url);
 
-      const polkadotSwap = await client.getPendingVaultSwap('Polkadot', '134422-43');
+      const polkadotSwap = await client.getPendingVaultSwap('Assethub', '134422-43');
       expect(polkadotSwap).toBeNull();
       expect(mock).not.toHaveBeenCalled();
 
