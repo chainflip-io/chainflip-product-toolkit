@@ -25,7 +25,7 @@ const uncheckedAssetAndChain = z.object({
 const assetAndChain = uncheckedAssetAndChain
   .refine(
     (value): value is AssetAndChain => isValidAssetAndChain(value as UncheckedAssetAndChain),
-    { message: 'Invalid asset and chain' },
+    (value) => ({ message: `Invalid asset and chain : ${value.asset} on ${value.chain}` }),
   )
   .transform((value) => getInternalAsset(value));
 
@@ -51,16 +51,16 @@ const evmDeposit = z
   .object({ tx_hashes: z.array(hexString) })
   .transform((obj) => ({ ...obj, type: 'EVM' as const }));
 
-const polkadotDeposit = z
+const assethubDeposit = z
   .object({ extrinsic_index: z.number() })
-  .transform((obj) => ({ ...obj, type: 'Polkadot' as const }));
+  .transform((obj) => ({ ...obj, type: 'Assethub' as const }));
 
 const depositSchema = jsonString.pipe(
   z.object({
     amount: u128,
     asset: assetAndChain,
     deposit_chain_block_height: z.number(),
-    deposit_details: z.union([evmDeposit, bitcoinDeposit, polkadotDeposit]).nullable(),
+    deposit_details: z.union([evmDeposit, bitcoinDeposit, assethubDeposit]).nullable(),
   }),
 );
 
@@ -81,19 +81,6 @@ const broadcastParsers = {
         hash: hexString,
       })
       .transform(({ hash }) => hash),
-  }),
-  Polkadot: z.object({
-    tx_out_id: z.object({ signature: z.string() }),
-    tx_ref: z
-      .object({
-        transaction_id: z.object({
-          block_number: z.number(),
-          extrinsic_index: z.number(),
-        }),
-      })
-      .transform(
-        ({ transaction_id }) => `${transaction_id.block_number}-${transaction_id.extrinsic_index}`,
-      ),
   }),
   Assethub: z.object({
     tx_out_id: z.object({ signature: z.string() }),
@@ -129,7 +116,7 @@ const broadcastParsers = {
       })
       .transform(({ hash }) => hash),
   }),
-} as const satisfies Record<Exclude<ChainflipChain, 'Solana'>, z.ZodTypeAny>;
+} as const satisfies Record<Exclude<ChainflipChain, 'Solana' | 'Polkadot'>, z.ZodTypeAny>;
 
 const accountFee = z
   .object({
@@ -180,14 +167,14 @@ const vaultDepositSchema = jsonString.pipe(
     .transform(transformKeysToCamelCase),
 );
 
-type ChainBroadcast<C extends Exclude<ChainflipChain, 'Solana'>> = z.infer<
+type ChainBroadcast<C extends Exclude<ChainflipChain, 'Solana' | 'Polkadot'>> = z.infer<
   (typeof broadcastParsers)[C]
 >;
 
 type EthereumBroadcast = ChainBroadcast<'Ethereum'>;
-type PolkadotBroadcast = ChainBroadcast<'Polkadot'>;
+type AssethubBroadcast = ChainBroadcast<'Assethub'>;
 type BitcoinBroadcast = ChainBroadcast<'Bitcoin'>;
-type Broadcast = ChainBroadcast<Exclude<ChainflipChain, 'Solana'>>;
+type Broadcast = ChainBroadcast<Exclude<ChainflipChain, 'Solana' | 'Polkadot'>>;
 
 const mempoolTransaction = jsonString.pipe(
   z.object({
@@ -210,9 +197,9 @@ export default class RedisClient {
     broadcastId: number | bigint,
   ): Promise<EthereumBroadcast | null>;
   async getBroadcast(
-    chain: 'Polkadot',
+    chain: 'Assethub',
     broadcastId: number | bigint,
-  ): Promise<PolkadotBroadcast | null>;
+  ): Promise<AssethubBroadcast | null>;
   async getBroadcast(
     chain: 'Bitcoin',
     broadcastId: number | bigint,
@@ -229,7 +216,7 @@ export default class RedisClient {
     chain: ChainflipChain,
     broadcastId: number | bigint,
   ): Promise<Broadcast | null> {
-    if (chain === 'Solana') return null;
+    if (chain === 'Solana' || chain === 'Polkadot') return null;
     const key = `broadcast:${chain}:${broadcastId}`;
     const value = await this.client.get(key);
     return value ? broadcastParsers[chain].parse(JSON.parse(value)) : null;
@@ -237,7 +224,7 @@ export default class RedisClient {
 
   async getDeposits(asset: ChainflipAsset, address: string): Promise<PendingDeposit[]> {
     const { chain } = assetConstants[asset];
-    const parsedAddress = chain === 'Polkadot' ? ss58.toPublicKey(address) : address;
+    const parsedAddress = chain === 'Assethub' ? ss58.toPublicKey(address) : address;
     const key = `deposit:${chain}:${parsedAddress}`;
     const deposits = await this.client.lrange(key, 0, -1);
     return deposits
@@ -249,7 +236,7 @@ export default class RedisClient {
             return { ...deposit, tx_refs: deposit_details.tx_hashes };
           case 'Bitcoin':
             return { ...deposit, tx_refs: [deposit_details.tx_id] };
-          case 'Polkadot':
+          case 'Assethub':
             return {
               ...deposit,
               tx_refs: [`${deposit.deposit_chain_block_height}-${deposit_details.extrinsic_index}`],
@@ -270,7 +257,7 @@ export default class RedisClient {
   }
 
   async getPendingVaultSwap(chain: ChainflipChain, txId: string) {
-    const unavailableChains: ChainflipChain[] = ['Solana', 'Polkadot', 'Assethub'];
+    const unavailableChains: ChainflipChain[] = ['Solana', 'Assethub'];
     if (unavailableChains.includes(chain)) return null;
 
     const redisTxId = chain === 'Bitcoin' && isHex(`0x${txId}`) ? reverseBytes(`0x${txId}`) : txId;
