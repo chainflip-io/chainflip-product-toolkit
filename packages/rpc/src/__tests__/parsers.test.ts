@@ -148,6 +148,7 @@ describe('parsers', () => {
             Arbitrum: {
               ETH: '0x574b457d400',
               USDC: '0x150e',
+              USDT: '0x150e',
             },
             Solana: {
               SOL: '0x2f62d048',
@@ -176,6 +177,7 @@ describe('parsers', () => {
             Arbitrum: {
               ETH: '0x74645ca7000',
               USDC: '0x1765',
+              USDT: '0x1765',
             },
             Solana: {
               SOL: '0x4787c48',
@@ -212,6 +214,7 @@ describe('parsers', () => {
             Arbitrum: {
               ETH: '0x1',
               USDC: '0x1',
+              USDT: '0x1',
             },
             Solana: {
               SOL: '0x1',
@@ -266,6 +269,7 @@ describe('parsers', () => {
             Arbitrum: {
               ETH: null,
               USDC: null,
+              USDT: null,
             },
             Solana: {
               SOL: null,
@@ -298,6 +302,7 @@ describe('parsers', () => {
             Arbitrum: {
               ETH: '0x2c68af0bb140000',
               USDC: '0x3b9aca00',
+              USDT: '0x3b9aca00',
             },
             Solana: {
               SOL: '0x12a05f200',
@@ -332,6 +337,7 @@ describe('parsers', () => {
                 Arbitrum: {
                   ETH: 0,
                   USDC: 0,
+                  USDT: 0,
                 },
                 Solana: {
                   SOL: 0,
@@ -366,6 +372,7 @@ describe('parsers', () => {
                 Arbitrum: {
                   ETH: 0,
                   USDC: 0,
+                  USDT: 0,
                 },
                 Solana: {
                   SOL: 0,
@@ -586,6 +593,30 @@ describe('parsers', () => {
                   asset: 'USDC',
                 },
               },
+              USDT: {
+                limit_order_fee_hundredth_pips: 20,
+                range_order_fee_hundredth_pips: 20,
+                range_order_total_fees_earned: {
+                  base: '0xaa9c1',
+                  quote: '0x1b1d4b',
+                },
+                limit_order_total_fees_earned: {
+                  base: '0x0',
+                  quote: '0x0',
+                },
+                range_total_swap_inputs: {
+                  base: '0x8228e1e3c',
+                  quote: '0x14afa63498',
+                },
+                limit_total_swap_inputs: {
+                  base: '0x0',
+                  quote: '0x0',
+                },
+                quote_asset: {
+                  chain: 'Ethereum',
+                  asset: 'USDC',
+                },
+              },
             },
             Solana: {
               SOL: {
@@ -721,6 +752,7 @@ describe('parsers', () => {
               "Arbitrum": {
                 "ETH": 7998400000000n,
                 "USDC": 5989n,
+                "USDT": 5989n,
               },
               "Assethub": {
                 "DOT": 0n,
@@ -753,6 +785,7 @@ describe('parsers', () => {
               "Arbitrum": {
                 "ETH": 5998800000000n,
                 "USDC": 5390n,
+                "USDT": 5390n,
               },
               "Assethub": {
                 "DOT": 0n,
@@ -778,6 +811,7 @@ describe('parsers', () => {
               "Arbitrum": {
                 "ETH": 0n,
                 "USDC": 0n,
+                "USDT": 0n,
               },
               "Assethub": {
                 "DOT": 0n,
@@ -803,6 +837,7 @@ describe('parsers', () => {
               "Arbitrum": {
                 "ETH": 1n,
                 "USDC": 1n,
+                "USDT": 1n,
               },
               "Assethub": {
                 "DOT": 1n,
@@ -860,6 +895,30 @@ describe('parsers', () => {
                   },
                 },
                 "USDC": {
+                  "limit_order_fee_hundredth_pips": 20,
+                  "limit_order_total_fees_earned": {
+                    "base": 0n,
+                    "quote": 0n,
+                  },
+                  "limit_total_swap_inputs": {
+                    "base": 0n,
+                    "quote": 0n,
+                  },
+                  "quote_asset": {
+                    "asset": "USDC",
+                    "chain": "Ethereum",
+                  },
+                  "range_order_fee_hundredth_pips": 20,
+                  "range_order_total_fees_earned": {
+                    "base": 698817n,
+                    "quote": 1776971n,
+                  },
+                  "range_total_swap_inputs": {
+                    "base": 34939477564n,
+                    "quote": 88846251160n,
+                  },
+                },
+                "USDT": {
                   "limit_order_fee_hundredth_pips": 20,
                   "limit_order_total_fees_earned": {
                     "base": 0n,
@@ -1141,6 +1200,7 @@ describe('parsers', () => {
               "Arbitrum": {
                 "ETH": null,
                 "USDC": null,
+                "USDT": null,
               },
               "Assethub": {
                 "DOT": null,
@@ -1166,6 +1226,7 @@ describe('parsers', () => {
               "Arbitrum": {
                 "ETH": 200000000000000000n,
                 "USDC": 1000000000n,
+                "USDT": 1000000000n,
               },
               "Assethub": {
                 "DOT": 2000000000000n,
@@ -1194,6 +1255,7 @@ describe('parsers', () => {
                   "Arbitrum": {
                     "ETH": 0n,
                     "USDC": 0n,
+                    "USDT": 0n,
                   },
                   "Assethub": {
                     "DOT": 0n,
@@ -1225,6 +1287,7 @@ describe('parsers', () => {
                   "Arbitrum": {
                     "ETH": 0n,
                     "USDC": 0n,
+                    "USDT": 0n,
                   },
                   "Assethub": {
                     "DOT": 0n,
@@ -1279,6 +1342,7 @@ describe('parsers', () => {
           Arbitrum: {
             ETH: null,
             USDC: null,
+            USDT: null,
           },
           Solana: {
             SOL: null,
@@ -1311,6 +1375,7 @@ describe('parsers', () => {
           Arbitrum: {
             ETH: '0x2c68af0bb140000',
             USDC: '0x3b9aca00',
+            USDT: '0x3b9aca00',
           },
           Solana: {
             SOL: '0x12a05f200',
@@ -1345,6 +1410,7 @@ describe('parsers', () => {
               Arbitrum: {
                 ETH: 0,
                 USDC: 0,
+                USDT: 0,
               },
               Solana: {
                 SOL: 0,
@@ -1379,6 +1445,7 @@ describe('parsers', () => {
               Arbitrum: {
                 ETH: 0,
                 USDC: 0,
+                USDT: 0,
               },
               Solana: {
                 SOL: 0,
@@ -1576,6 +1643,30 @@ describe('parsers', () => {
               },
             },
             USDC: {
+              limit_order_fee_hundredth_pips: 20,
+              range_order_fee_hundredth_pips: 20,
+              range_order_total_fees_earned: {
+                base: '0x18da0',
+                quote: '0xe9203',
+              },
+              limit_order_total_fees_earned: {
+                base: '0x0',
+                quote: '0x0',
+              },
+              range_total_swap_inputs: {
+                base: '0x12f561efa',
+                quote: '0xb1db4cae8',
+              },
+              limit_total_swap_inputs: {
+                base: '0x0',
+                quote: '0x0',
+              },
+              quote_asset: {
+                chain: 'Ethereum',
+                asset: 'USDC',
+              },
+            },
+            USDT: {
               limit_order_fee_hundredth_pips: 20,
               range_order_fee_hundredth_pips: 20,
               range_order_total_fees_earned: {
@@ -1870,6 +1961,7 @@ describe('parsers', () => {
             "Arbitrum": {
               "ETH": 0n,
               "USDC": 0n,
+              "USDT": 0n,
             },
             "Assethub": {
               "DOT": 0n,
@@ -2383,6 +2475,10 @@ describe('parsers', () => {
                 "chain": "Arbitrum",
               },
               {
+                "asset": "USDT",
+                "chain": "Arbitrum",
+              },
+              {
                 "asset": "ETH",
                 "chain": "Arbitrum",
               },
@@ -2434,6 +2530,10 @@ describe('parsers', () => {
               },
               {
                 "asset": "USDC",
+                "chain": "Arbitrum",
+              },
+              {
+                "asset": "USDT",
                 "chain": "Arbitrum",
               },
               {
@@ -2491,6 +2591,10 @@ describe('parsers', () => {
                 "chain": "Arbitrum",
               },
               {
+                "asset": "USDT",
+                "chain": "Arbitrum",
+              },
+              {
                 "asset": "ETH",
                 "chain": "Arbitrum",
               },
@@ -2542,6 +2646,10 @@ describe('parsers', () => {
               },
               {
                 "asset": "USDC",
+                "chain": "Arbitrum",
+              },
+              {
+                "asset": "USDT",
                 "chain": "Arbitrum",
               },
               {
@@ -2597,6 +2705,10 @@ describe('parsers', () => {
               },
               {
                 "asset": "USDC",
+                "chain": "Arbitrum",
+              },
+              {
+                "asset": "USDT",
                 "chain": "Arbitrum",
               },
               {

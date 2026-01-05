@@ -6,6 +6,7 @@ exports[`parsers > cfAccountInfo > parses the latest cfAccountInfo schema for an
     "Arbitrum": {
       "ETH": 0n,
       "USDC": 0n,
+      "USDT": 0n,
     },
     "Assethub": {
       "DOT": 0n,
@@ -32,6 +33,7 @@ exports[`parsers > cfAccountInfo > parses the latest cfAccountInfo schema for an
     "Arbitrum": {
       "ETH": [],
       "USDC": [],
+      "USDT": [],
     },
     "Assethub": {
       "DOT": [],
@@ -80,6 +82,7 @@ exports[`parsers > cfAccountInfo > parses the latest cfAccountInfo schema for an
     "Arbitrum": {
       "ETH": 0n,
       "USDC": 0n,
+      "USDT": 0n,
     },
     "Assethub": {
       "DOT": 0n,
@@ -129,6 +132,7 @@ exports[`parsers > cfAccountInfo > parses the latest cfAccountInfo schema for an
     "Arbitrum": {
       "ETH": 0n,
       "USDC": 0n,
+      "USDT": 0n,
     },
     "Assethub": {
       "DOT": 0n,
@@ -155,6 +159,7 @@ exports[`parsers > cfAccountInfo > parses the latest cfAccountInfo schema for an
     "Arbitrum": {
       "ETH": [],
       "USDC": [],
+      "USDT": [],
     },
     "Assethub": {
       "DOT": [],
@@ -203,6 +208,7 @@ exports[`parsers > cfAccountInfo > parses the latest cfAccountInfo schema for an
     "Arbitrum": {
       "ETH": 0n,
       "USDC": 0n,
+      "USDT": 0n,
     },
     "Assethub": {
       "DOT": 0n,

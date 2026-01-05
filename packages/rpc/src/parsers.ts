@@ -23,7 +23,7 @@ const chainAssetMapFactory = <Z extends z.ZodTypeAny>(parser: Z, _defaultValue: 
       Bitcoin: z.object({ BTC: parser }),
       Ethereum: z.object({ ETH: parser, USDC: parser, FLIP: parser, USDT: parser, WBTC: parser }),
       Polkadot: z.object({ DOT: parser }),
-      Arbitrum: z.object({ ETH: parser, USDC: parser }),
+      Arbitrum: z.object({ ETH: parser, USDC: parser, USDT: parser }),
       Solana: z.object({ SOL: parser, USDC: parser }),
       Assethub: z.object({ DOT: parser, USDC: parser, USDT: parser }),
     })
@@ -35,7 +35,7 @@ const chainBaseAssetMapFactory = <Z extends z.ZodTypeAny>(parser: Z, _defaultVal
       Bitcoin: z.object({ BTC: parser }),
       Ethereum: z.object({ ETH: parser, FLIP: parser, USDT: parser, WBTC: parser }),
       Polkadot: z.object({ DOT: parser }),
-      Arbitrum: z.object({ ETH: parser, USDC: parser }),
+      Arbitrum: z.object({ ETH: parser, USDC: parser, USDT: parser }),
       Solana: z.object({ SOL: parser, USDC: parser }),
       Assethub: z.object({ DOT: parser, USDC: parser, USDT: parser }),
     })
@@ -63,6 +63,7 @@ const rpcAssetSchema = z.union([
   z.object({ chain: z.literal('Ethereum'), asset: z.literal('WBTC') }),
   z.object({ chain: z.literal('Arbitrum'), asset: z.literal('ETH') }),
   z.object({ chain: z.literal('Arbitrum'), asset: z.literal('USDC') }),
+  z.object({ chain: z.literal('Arbitrum'), asset: z.literal('USDT') }),
   z.object({ chain: z.literal('Solana'), asset: z.literal('SOL') }),
   z.object({ chain: z.literal('Solana'), asset: z.literal('USDC') }),
   z.object({ chain: z.literal('Assethub'), asset: z.literal('DOT') }),
