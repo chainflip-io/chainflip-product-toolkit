@@ -16,6 +16,7 @@ export const chainflipAssets = [
   // Solana
   'Sol',
   'SolUsdc',
+  'SolUsdt',
   // Assethub
   'HubDot',
   'HubUsdt',
@@ -198,6 +199,12 @@ export const assetConstants = {
     rpcAsset: 'USDC',
     decimals: 6,
   },
+  SolUsdt: {
+    chain: 'Solana',
+    symbol: 'USDT',
+    rpcAsset: 'USDT',
+    decimals: 6,
+  },
   HubDot: {
     chain: 'Assethub',
     symbol: 'DOT',
@@ -265,9 +272,9 @@ export const chainConstants = {
     blockTimeSeconds: 0.26,
   },
   Solana: {
-    chainflipAssets: ['Sol', 'SolUsdc'],
-    assets: ['SOL', 'USDC'],
-    rpcAssets: ['SOL', 'USDC'],
+    chainflipAssets: ['Sol', 'SolUsdc', 'SolUsdt'],
+    assets: ['SOL', 'USDC', 'USDT'],
+    rpcAssets: ['SOL', 'USDC', 'USDT'],
     gasAsset: 'Sol',
     addressType: 'Sol',
     blockTimeSeconds: 0.8,
@@ -314,6 +321,7 @@ export const internalAssetToRpcAsset: InternalAssetMap<AssetAndChain> & {
   ArbEth: { chain: 'Arbitrum', asset: 'ETH' },
   Sol: { chain: 'Solana', asset: 'SOL' },
   SolUsdc: { chain: 'Solana', asset: 'USDC' },
+  SolUsdt: { chain: 'Solana', asset: 'USDT' },
   HubDot: { chain: 'Assethub', asset: 'DOT' },
   HubUsdt: { chain: 'Assethub', asset: 'USDT' },
   HubUsdc: { chain: 'Assethub', asset: 'USDC' },
@@ -344,6 +352,7 @@ export const assetContractId: InternalAssetMap<number> & { Dot: 4 } = {
   HubUsdc: 13,
   Wbtc: 14,
   ArbUsdt: 15,
+  SolUsdt: 15,
 };
 
 export function getInternalAsset(asset: BaseAssetAndChain): BaseChainflipAsset;
@@ -374,6 +383,7 @@ export function getInternalAsset(asset: UncheckedAssetAndChain, assert = true) {
     Solana: {
       SOL: 'Sol',
       USDC: 'SolUsdc',
+      USDT: 'SolUsdt',
     },
     Assethub: {
       USDC: 'HubUsdc',
@@ -453,11 +463,12 @@ export const chainflipAssetToPriceAssetMap: Record<
   ArbUsdc: 'Usdc',
   ArbUsdt: 'Usdt',
   SolUsdc: 'Usdc',
+  SolUsdt: 'Usdt',
   HubUsdc: 'Usdc',
   Usdt: 'Usdt',
   HubUsdt: 'Usdt',
   Dot: null,
   Flip: null,
   HubDot: null,
-  Wbtc: null,
+  Wbtc: 'Btc',
 };

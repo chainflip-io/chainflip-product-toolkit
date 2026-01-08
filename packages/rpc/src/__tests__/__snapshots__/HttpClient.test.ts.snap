@@ -33,6 +33,7 @@ exports[`HttpClient > with server > gets broker account info 1`] = `
     "Solana": {
       "SOL": 0n,
       "USDC": 0n,
+      "USDT": 0n,
     },
   },
   "bond": 0n,
@@ -61,6 +62,7 @@ exports[`HttpClient > with server > gets broker account info 1`] = `
     "Solana": {
       "SOL": 0n,
       "USDC": 0n,
+      "USDT": 0n,
     },
   },
   "estimated_redeemable_balance": 21031117317233135625n,
@@ -96,6 +98,7 @@ exports[`HttpClient > with server > gets broker account info 2 1`] = `
     "Solana": {
       "SOL": 0n,
       "USDC": 0n,
+      "USDT": 0n,
     },
   },
   "bond": 0n,
@@ -123,6 +126,7 @@ exports[`HttpClient > with server > gets broker account info 2 1`] = `
     "Solana": {
       "SOL": 0n,
       "USDC": 0n,
+      "USDT": 0n,
     },
   },
   "estimated_redeemable_balance": 21031117317233135625n,
@@ -157,6 +161,7 @@ exports[`HttpClient > with server > gets delegator account info 1`] = `
     "Solana": {
       "SOL": 0n,
       "USDC": 0n,
+      "USDT": 0n,
     },
   },
   "bond": 0n,
@@ -196,6 +201,7 @@ exports[`HttpClient > with server > gets delegator account info 2 1`] = `
     "Solana": {
       "SOL": 0n,
       "USDC": 0n,
+      "USDT": 0n,
     },
   },
   "bond": 1000000000000000000000n,
@@ -239,6 +245,7 @@ exports[`HttpClient > with server > gets lp account info 1`] = `
     "Solana": {
       "SOL": 0n,
       "USDC": 0n,
+      "USDT": 0n,
     },
   },
   "bond": 0n,
@@ -288,6 +295,7 @@ exports[`HttpClient > with server > gets lp account info 1`] = `
     "Solana": {
       "SOL": [],
       "USDC": [],
+      "USDT": [],
     },
   },
   "collateral_balances": [],
@@ -315,6 +323,7 @@ exports[`HttpClient > with server > gets lp account info 1`] = `
     "Solana": {
       "SOL": 0n,
       "USDC": 0n,
+      "USDT": 0n,
     },
   },
   "estimated_redeemable_balance": 99999975540394000000n,
@@ -364,6 +373,7 @@ exports[`HttpClient > with server > gets lp total balances 1`] = `
   "Solana": {
     "SOL": 0n,
     "USDC": 0n,
+    "USDT": 0n,
   },
 }
 `;
@@ -439,6 +449,7 @@ exports[`HttpClient > with server > gets unregistered account info 1`] = `
     "Solana": {
       "SOL": 0n,
       "USDC": 0n,
+      "USDT": 0n,
     },
   },
   "bond": 0n,
@@ -475,6 +486,7 @@ exports[`HttpClient > with server > gets validator account info 1`] = `
     "Solana": {
       "SOL": 0n,
       "USDC": 0n,
+      "USDT": 0n,
     },
   },
   "bond": 225033425976807428934928n,
@@ -524,6 +536,7 @@ exports[`HttpClient > with server > gets validator account info with an operator
     "Solana": {
       "SOL": 0n,
       "USDC": 0n,
+      "USDT": 0n,
     },
   },
   "bond": 225033425976807428934928n,
@@ -740,6 +753,7 @@ exports[`HttpClient > with server > handles cf_environment 1`] = `
       "Solana": {
         "SOL": 176n,
         "USDC": 0n,
+        "USDT": 0n,
       },
     },
     "ingress_fees": {
@@ -766,6 +780,7 @@ exports[`HttpClient > with server > handles cf_environment 1`] = `
       "Solana": {
         "SOL": 176n,
         "USDC": 0n,
+        "USDT": 0n,
       },
     },
     "minimum_deposit_amounts": {
@@ -792,6 +807,7 @@ exports[`HttpClient > with server > handles cf_environment 1`] = `
       "Solana": {
         "SOL": 0n,
         "USDC": 0n,
+        "USDT": 0n,
       },
     },
     "minimum_egress_amounts": {
@@ -818,6 +834,7 @@ exports[`HttpClient > with server > handles cf_environment 1`] = `
       "Solana": {
         "SOL": 1n,
         "USDC": 1n,
+        "USDT": 1n,
       },
     },
     "witness_safety_margins": {
@@ -1151,6 +1168,30 @@ exports[`HttpClient > with server > handles cf_environment 1`] = `
             "quote": "0x0",
           },
         },
+        "USDT": {
+          "limit_order_fee_hundredth_pips": 0,
+          "limit_order_total_fees_earned": {
+            "base": "0x0",
+            "quote": "0x0",
+          },
+          "limit_total_swap_inputs": {
+            "base": "0x0",
+            "quote": "0x0",
+          },
+          "quote_asset": {
+            "asset": "USDC",
+            "chain": "Ethereum",
+          },
+          "range_order_fee_hundredth_pips": 0,
+          "range_order_total_fees_earned": {
+            "base": "0x0",
+            "quote": "0x0",
+          },
+          "range_total_swap_inputs": {
+            "base": "0x0",
+            "quote": "0x0",
+          },
+        },
       },
     },
   },
@@ -1181,6 +1222,7 @@ exports[`HttpClient > with server > handles cf_environment 1`] = `
       "Solana": {
         "SOL": null,
         "USDC": null,
+        "USDT": null,
       },
     },
     "minimum_chunk_size": {
@@ -1207,6 +1249,7 @@ exports[`HttpClient > with server > handles cf_environment 1`] = `
       "Solana": {
         "SOL": 5000000000n,
         "USDC": 1000000000n,
+        "USDT": 1000000000n,
       },
     },
     "network_fee_hundredth_pips": 1000,
@@ -1236,6 +1279,7 @@ exports[`HttpClient > with server > handles cf_environment 1`] = `
           "Solana": {
             "SOL": 0n,
             "USDC": 0n,
+            "USDT": 0n,
           },
         },
         "standard_rate_and_minimum": {
@@ -1268,6 +1312,7 @@ exports[`HttpClient > with server > handles cf_environment 1`] = `
           "Solana": {
             "SOL": 0n,
             "USDC": 0n,
+            "USDT": 0n,
           },
         },
         "standard_rate_and_minimum": {
@@ -1448,6 +1493,7 @@ exports[`HttpClient > with server > handles cf_get_trading_strategy_limits 1`] =
     "Solana": {
       "SOL": null,
       "USDC": 10000000,
+      "USDT": 10000000,
     },
   },
   "minimum_deployment_amount": {
@@ -1474,6 +1520,7 @@ exports[`HttpClient > with server > handles cf_get_trading_strategy_limits 1`] =
     "Solana": {
       "SOL": null,
       "USDC": 20000000000,
+      "USDT": 20000000000,
     },
   },
 }
@@ -1525,6 +1572,7 @@ exports[`HttpClient > with server > handles cf_ingress_egress_environment 1`] = 
     "Solana": {
       "SOL": 176n,
       "USDC": 0n,
+      "USDT": 0n,
     },
   },
   "ingress_fees": {
@@ -1551,6 +1599,7 @@ exports[`HttpClient > with server > handles cf_ingress_egress_environment 1`] = 
     "Solana": {
       "SOL": 176n,
       "USDC": 0n,
+      "USDT": 0n,
     },
   },
   "minimum_deposit_amounts": {
@@ -1577,6 +1626,7 @@ exports[`HttpClient > with server > handles cf_ingress_egress_environment 1`] = 
     "Solana": {
       "SOL": 0n,
       "USDC": 0n,
+      "USDT": 0n,
     },
   },
   "minimum_egress_amounts": {
@@ -1603,6 +1653,7 @@ exports[`HttpClient > with server > handles cf_ingress_egress_environment 1`] = 
     "Solana": {
       "SOL": 1n,
       "USDC": 1n,
+      "USDT": 1n,
     },
   },
   "witness_safety_margins": {
@@ -1939,11 +1990,19 @@ exports[`HttpClient > with server > handles cf_supported_assets 1`] = `
     "chain": "Arbitrum",
   },
   {
+    "asset": "USDT",
+    "chain": "Arbitrum",
+  },
+  {
     "asset": "SOL",
     "chain": "Solana",
   },
   {
     "asset": "USDC",
+    "chain": "Solana",
+  },
+  {
+    "asset": "USDT",
     "chain": "Solana",
   },
 ]
@@ -1977,6 +2036,7 @@ exports[`HttpClient > with server > handles cf_swapping_environment 1`] = `
     "Solana": {
       "SOL": null,
       "USDC": null,
+      "USDT": null,
     },
   },
   "minimum_chunk_size": {
@@ -2003,6 +2063,7 @@ exports[`HttpClient > with server > handles cf_swapping_environment 1`] = `
     "Solana": {
       "SOL": 5000000000n,
       "USDC": 1000000000n,
+      "USDT": 1000000000n,
     },
   },
   "network_fee_hundredth_pips": 1000,
@@ -2032,6 +2093,7 @@ exports[`HttpClient > with server > handles cf_swapping_environment 1`] = `
         "Solana": {
           "SOL": 0n,
           "USDC": 0n,
+          "USDT": 0n,
         },
       },
       "standard_rate_and_minimum": {
@@ -2064,6 +2126,7 @@ exports[`HttpClient > with server > handles cf_swapping_environment 1`] = `
         "Solana": {
           "SOL": 0n,
           "USDC": 0n,
+          "USDT": 0n,
         },
       },
       "standard_rate_and_minimum": {

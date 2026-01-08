@@ -13,7 +13,7 @@ const createChainAssetMap = <T>(value: T): ChainAssetMap<T> => ({
   Bitcoin: { BTC: value },
   Ethereum: { ETH: value, FLIP: value, USDC: value, USDT: value, WBTC: value },
   Arbitrum: { ETH: value, USDC: value, USDT: value },
-  Solana: { SOL: value, USDC: value },
+  Solana: { SOL: value, USDC: value, USDT: value },
   Assethub: { DOT: value, USDC: value, USDT: value },
 });
 
@@ -270,6 +270,7 @@ describe(WsClient, () => {
               "Solana": {
                 "SOL": 0n,
                 "USDC": 0n,
+                "USDT": 0n,
               },
             },
             "bond": 0n,
@@ -302,6 +303,7 @@ describe(WsClient, () => {
               "Solana": {
                 "SOL": 0n,
                 "USDC": 0n,
+                "USDT": 0n,
               },
             },
             "bond": 0n,

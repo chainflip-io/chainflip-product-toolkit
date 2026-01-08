@@ -24,7 +24,7 @@ const chainAssetMapFactory = <Z extends z.ZodTypeAny>(parser: Z, _defaultValue: 
       Ethereum: z.object({ ETH: parser, USDC: parser, FLIP: parser, USDT: parser, WBTC: parser }),
       Polkadot: z.object({ DOT: parser }),
       Arbitrum: z.object({ ETH: parser, USDC: parser, USDT: parser }),
-      Solana: z.object({ SOL: parser, USDC: parser }),
+      Solana: z.object({ SOL: parser, USDC: parser, USDT: parser }),
       Assethub: z.object({ DOT: parser, USDC: parser, USDT: parser }),
     })
     .omit({ Polkadot: true }); // TODO(1.12): remove polkadot all together from parser
@@ -36,7 +36,7 @@ const chainBaseAssetMapFactory = <Z extends z.ZodTypeAny>(parser: Z, _defaultVal
       Ethereum: z.object({ ETH: parser, FLIP: parser, USDT: parser, WBTC: parser }),
       Polkadot: z.object({ DOT: parser }),
       Arbitrum: z.object({ ETH: parser, USDC: parser, USDT: parser }),
-      Solana: z.object({ SOL: parser, USDC: parser }),
+      Solana: z.object({ SOL: parser, USDC: parser, USDT: parser }),
       Assethub: z.object({ DOT: parser, USDC: parser, USDT: parser }),
     })
     .omit({ Polkadot: true }); // TODO(1.12): remove polkadot all together from parser
@@ -66,6 +66,7 @@ const rpcAssetSchema = z.union([
   z.object({ chain: z.literal('Arbitrum'), asset: z.literal('USDT') }),
   z.object({ chain: z.literal('Solana'), asset: z.literal('SOL') }),
   z.object({ chain: z.literal('Solana'), asset: z.literal('USDC') }),
+  z.object({ chain: z.literal('Solana'), asset: z.literal('USDT') }),
   z.object({ chain: z.literal('Assethub'), asset: z.literal('DOT') }),
   z.object({ chain: z.literal('Assethub'), asset: z.literal('USDC') }),
   z.object({ chain: z.literal('Assethub'), asset: z.literal('USDT') }),
