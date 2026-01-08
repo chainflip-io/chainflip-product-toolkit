@@ -1,6 +1,6 @@
 {
   "name": "@chainflip/rpc",
-  "version": "2.0.6-wbtc-dev.2",
+  "version": "2.0.6-wbtc-dev.3",
   "type": "module",
   "scripts": {
     "eslint:check": "pnpm eslint --max-warnings 0 './**/*.ts'",
@@ -15,7 +15,7 @@
     "coverage": "vitest run --coverage"
   },
   "dependencies": {
-    "@chainflip/utils": "../utils",
+    "@chainflip/utils": "0.11.2-wbtc-dev.1",
     "zod": "^3.25.75"
   },
   "devDependencies": {
