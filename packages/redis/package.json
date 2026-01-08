@@ -1,6 +1,6 @@
 {
   "name": "@chainflip/redis",
-  "version": "1.0.2-wbtc-dev.0",
+  "version": "1.0.2-wbtc-dev.1",
   "type": "module",
   "scripts": {
     "eslint:check": "pnpm eslint --max-warnings 0 './**/*.ts'",
@@ -36,7 +36,7 @@
     }
   },
   "dependencies": {
-    "@chainflip/utils": "0.11.2-wbtc-dev.0",
+    "@chainflip/utils": "0.11.2-wbtc-dev.1",
     "bignumber.js": "^9.3.1",
     "ioredis": "^5.9.3",
     "zod": "^3.25.75"
