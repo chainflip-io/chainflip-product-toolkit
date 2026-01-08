@@ -153,6 +153,7 @@ describe('parsers', () => {
             Solana: {
               SOL: '0x2f62d048',
               USDC: '0x0',
+              USDT: '0x0',
             },
             Assethub: {
               DOT: '0x0',
@@ -182,6 +183,7 @@ describe('parsers', () => {
             Solana: {
               SOL: '0x4787c48',
               USDC: '0x0',
+              USDT: '0x0',
             },
             Assethub: {
               DOT: '0x0',
@@ -219,6 +221,7 @@ describe('parsers', () => {
             Solana: {
               SOL: '0x1',
               USDC: '0x1',
+              USDT: '0x1',
             },
             Assethub: {
               DOT: '0x1',
@@ -274,6 +277,7 @@ describe('parsers', () => {
             Solana: {
               SOL: null,
               USDC: null,
+              USDT: null,
             },
             Assethub: {
               DOT: null,
@@ -307,6 +311,7 @@ describe('parsers', () => {
             Solana: {
               SOL: '0x12a05f200',
               USDC: '0x3b9aca00',
+              USDT: '0x3b9aca00',
             },
             Assethub: {
               DOT: '0x1d1a94a2000',
@@ -342,6 +347,7 @@ describe('parsers', () => {
                 Solana: {
                   SOL: 0,
                   USDC: 0,
+                  USDT: 0,
                 },
                 Assethub: {
                   DOT: 0,
@@ -377,6 +383,7 @@ describe('parsers', () => {
                 Solana: {
                   SOL: 0,
                   USDC: 0,
+                  USDT: 0,
                 },
                 Assethub: {
                   DOT: 0,
@@ -667,10 +674,29 @@ describe('parsers', () => {
                   asset: 'USDC',
                 },
               },
-              Assethub: {
-                DOT: null,
-                USDC: null,
-                USDT: null,
+              USDT: {
+                limit_order_fee_hundredth_pips: 20,
+                range_order_fee_hundredth_pips: 20,
+                range_order_total_fees_earned: {
+                  base: '0xaa9c1',
+                  quote: '0x1b1d4b',
+                },
+                limit_order_total_fees_earned: {
+                  base: '0x0',
+                  quote: '0x0',
+                },
+                range_total_swap_inputs: {
+                  base: '0x8228e1e3c',
+                  quote: '0x14afa63498',
+                },
+                limit_total_swap_inputs: {
+                  base: '0x0',
+                  quote: '0x0',
+                },
+                quote_asset: {
+                  chain: 'Ethereum',
+                  asset: 'USDC',
+                },
               },
             },
             Assethub: {
@@ -772,6 +798,7 @@ describe('parsers', () => {
               "Solana": {
                 "SOL": 75005000n,
                 "USDC": 0n,
+                "USDT": 0n,
               },
             },
             "ingress_delays": {
@@ -805,6 +832,7 @@ describe('parsers', () => {
               "Solana": {
                 "SOL": 795005000n,
                 "USDC": 0n,
+                "USDT": 0n,
               },
             },
             "minimum_deposit_amounts": {
@@ -831,6 +859,7 @@ describe('parsers', () => {
               "Solana": {
                 "SOL": 0n,
                 "USDC": 0n,
+                "USDT": 0n,
               },
             },
             "minimum_egress_amounts": {
@@ -857,6 +886,7 @@ describe('parsers', () => {
               "Solana": {
                 "SOL": 1n,
                 "USDC": 1n,
+                "USDT": 1n,
               },
             },
             "witness_safety_margins": {
@@ -1190,6 +1220,30 @@ describe('parsers', () => {
                     "quote": 88846251160n,
                   },
                 },
+                "USDT": {
+                  "limit_order_fee_hundredth_pips": 20,
+                  "limit_order_total_fees_earned": {
+                    "base": 0n,
+                    "quote": 0n,
+                  },
+                  "limit_total_swap_inputs": {
+                    "base": 0n,
+                    "quote": 0n,
+                  },
+                  "quote_asset": {
+                    "asset": "USDC",
+                    "chain": "Ethereum",
+                  },
+                  "range_order_fee_hundredth_pips": 20,
+                  "range_order_total_fees_earned": {
+                    "base": 698817n,
+                    "quote": 1776971n,
+                  },
+                  "range_total_swap_inputs": {
+                    "base": 34939477564n,
+                    "quote": 88846251160n,
+                  },
+                },
               },
             },
           },
@@ -1220,6 +1274,7 @@ describe('parsers', () => {
               "Solana": {
                 "SOL": null,
                 "USDC": null,
+                "USDT": null,
               },
             },
             "minimum_chunk_size": {
@@ -1246,6 +1301,7 @@ describe('parsers', () => {
               "Solana": {
                 "SOL": 5000000000n,
                 "USDC": 1000000000n,
+                "USDT": 1000000000n,
               },
             },
             "network_fee_hundredth_pips": 1000,
@@ -1275,6 +1331,7 @@ describe('parsers', () => {
                   "Solana": {
                     "SOL": 0n,
                     "USDC": 0n,
+                    "USDT": 0n,
                   },
                 },
                 "standard_rate_and_minimum": {
@@ -1307,6 +1364,7 @@ describe('parsers', () => {
                   "Solana": {
                     "SOL": 0n,
                     "USDC": 0n,
+                    "USDT": 0n,
                   },
                 },
                 "standard_rate_and_minimum": {
@@ -1347,6 +1405,7 @@ describe('parsers', () => {
           Solana: {
             SOL: null,
             USDC: null,
+            USDT: null,
           },
           Assethub: {
             DOT: null,
@@ -1380,6 +1439,7 @@ describe('parsers', () => {
           Solana: {
             SOL: '0x12a05f200',
             USDC: '0x3b9aca00',
+            USDT: '0x3b9aca00',
           },
           Assethub: {
             DOT: '0x1d1a94a2000',
@@ -1415,6 +1475,7 @@ describe('parsers', () => {
               Solana: {
                 SOL: 0,
                 USDC: 0,
+                USDT: 0,
               },
               Assethub: {
                 DOT: 0,
@@ -1450,6 +1511,7 @@ describe('parsers', () => {
               Solana: {
                 SOL: 0,
                 USDC: 0,
+                USDT: 0,
               },
               Assethub: {
                 DOT: 0,
@@ -1740,6 +1802,30 @@ describe('parsers', () => {
                 asset: 'USDC',
               },
             },
+            USDT: {
+              limit_order_fee_hundredth_pips: 20,
+              range_order_fee_hundredth_pips: 20,
+              range_order_total_fees_earned: {
+                base: '0x18da0',
+                quote: '0xe9203',
+              },
+              limit_order_total_fees_earned: {
+                base: '0x0',
+                quote: '0x0',
+              },
+              range_total_swap_inputs: {
+                base: '0x12f561efa',
+                quote: '0xb1db4cae8',
+              },
+              limit_total_swap_inputs: {
+                base: '0x0',
+                quote: '0x0',
+              },
+              quote_asset: {
+                chain: 'Ethereum',
+                asset: 'USDC',
+              },
+            },
           },
           Assethub: {
             DOT: {
@@ -1981,6 +2067,7 @@ describe('parsers', () => {
             "Solana": {
               "SOL": 0n,
               "USDC": 0n,
+              "USDT": 0n,
             },
           },
           "blocked": [
@@ -2491,6 +2578,10 @@ describe('parsers', () => {
                 "chain": "Solana",
               },
               {
+                "asset": "USDT",
+                "chain": "Solana",
+              },
+              {
                 "asset": "DOT",
                 "chain": "Assethub",
               },
@@ -2546,6 +2637,10 @@ describe('parsers', () => {
               },
               {
                 "asset": "USDC",
+                "chain": "Solana",
+              },
+              {
+                "asset": "USDT",
                 "chain": "Solana",
               },
               {
@@ -2607,6 +2702,10 @@ describe('parsers', () => {
                 "chain": "Solana",
               },
               {
+                "asset": "USDT",
+                "chain": "Solana",
+              },
+              {
                 "asset": "DOT",
                 "chain": "Assethub",
               },
@@ -2662,6 +2761,10 @@ describe('parsers', () => {
               },
               {
                 "asset": "USDC",
+                "chain": "Solana",
+              },
+              {
+                "asset": "USDT",
                 "chain": "Solana",
               },
               {
@@ -2721,6 +2824,10 @@ describe('parsers', () => {
               },
               {
                 "asset": "USDC",
+                "chain": "Solana",
+              },
+              {
+                "asset": "USDT",
                 "chain": "Solana",
               },
               {
