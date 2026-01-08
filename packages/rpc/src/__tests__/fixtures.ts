@@ -41,8 +41,10 @@ export const supportedAssets = [
   { chain: 'Bitcoin', asset: 'BTC' },
   { chain: 'Arbitrum', asset: 'ETH' },
   { chain: 'Arbitrum', asset: 'USDC' },
+  { chain: 'Arbitrum', asset: 'USDT' },
   { chain: 'Solana', asset: 'SOL' },
   { chain: 'Solana', asset: 'USDC' },
+  { chain: 'Solana', asset: 'USDT' },
 ];
 
 export const ingressEgressEnvironment: z.input<typeof cfIngressEgressEnvironment> = {
@@ -50,21 +52,21 @@ export const ingressEgressEnvironment: z.input<typeof cfIngressEgressEnvironment
     Ethereum: { ETH: '0x0', FLIP: '0x0', USDC: '0x0', USDT: '0x0', WBTC: '0x0' },
     Bitcoin: { BTC: '0x0' },
     Arbitrum: { ETH: '0x0', USDC: '0x0', USDT: '0x0' },
-    Solana: { SOL: '0x0', USDC: '0x0' },
+    Solana: { SOL: '0x0', USDC: '0x0', USDT: '0x0' },
     Assethub: { DOT: '0x0', USDC: '0x0', USDT: '0x0' },
   },
   ingress_fees: {
     Ethereum: { ETH: '0x55730', FLIP: '0x0', USDC: '0x0', USDT: '0x0', WBTC: '0x0' },
     Bitcoin: { BTC: '0x4e' },
     Arbitrum: { ETH: '0x574b457d400', USDC: '0x231b', USDT: '0x231b' },
-    Solana: { SOL: '0xb0', USDC: '0x0' },
+    Solana: { SOL: '0xb0', USDC: '0x0', USDT: '0x0' },
     Assethub: { DOT: '0x0', USDC: '0x0', USDT: '0x0' },
   },
   egress_fees: {
     Ethereum: { ETH: '0x77a10', FLIP: '0x0', USDC: '0x0', USDT: '0x0', WBTC: '0x0' },
     Bitcoin: { BTC: '0xb0' },
     Arbitrum: { ETH: '0x74645ca7000', USDC: '0x2701', USDT: '0x2701' },
-    Solana: { SOL: '0xb0', USDC: '0x0' },
+    Solana: { SOL: '0xb0', USDC: '0x0', USDT: '0x0' },
     Assethub: { DOT: '0x0', USDC: '0x0', USDT: '0x0' },
   },
   witness_safety_margins: {
@@ -78,7 +80,7 @@ export const ingressEgressEnvironment: z.input<typeof cfIngressEgressEnvironment
     Ethereum: { ETH: '0x1', FLIP: '0x1', USDC: '0x1', USDT: '0x1', WBTC: '0x1' },
     Bitcoin: { BTC: '0x258' },
     Arbitrum: { ETH: '0x1', USDC: '0x1', USDT: '0x1' },
-    Solana: { SOL: '0x1', USDC: '0x1' },
+    Solana: { SOL: '0x1', USDC: '0x1', USDT: '0x1' },
     Assethub: { DOT: '0x0', USDC: '0x0', USDT: '0x0' },
   },
   channel_opening_fees: {
@@ -110,6 +112,7 @@ export const swappingEnvironment: z.input<typeof cfSwappingEnvironment> = {
     Solana: {
       SOL: null,
       USDC: null,
+      USDT: null,
     },
     Assethub: {
       DOT: null,
@@ -140,6 +143,7 @@ export const swappingEnvironment: z.input<typeof cfSwappingEnvironment> = {
     Solana: {
       SOL: '0x12a05f200',
       USDC: '0x3b9aca00',
+      USDT: '0x3b9aca00',
     },
     Assethub: {
       DOT: '0x0',
@@ -172,6 +176,7 @@ export const swappingEnvironment: z.input<typeof cfSwappingEnvironment> = {
         Solana: {
           SOL: 0,
           USDC: 0,
+          USDT: 0,
         },
         Assethub: {
           DOT: 0,
@@ -205,6 +210,7 @@ export const swappingEnvironment: z.input<typeof cfSwappingEnvironment> = {
         Solana: {
           SOL: 0,
           USDC: 0,
+          USDT: 0,
         },
         Assethub: {
           DOT: 0,
@@ -449,6 +455,7 @@ export const poolsEnvironment: z.input<typeof cfPoolsEnvironment> = {
         },
       },
       USDC: null,
+      USDT: null,
     },
     Assethub: {
       DOT: null,
@@ -576,7 +583,7 @@ export const emptyChainAssetMap = {
   Ethereum: { ETH: '0x0', FLIP: '0x0', USDC: '0x0', USDT: '0x0', WBTC: '0x0' },
   Bitcoin: { BTC: '0x0' },
   Arbitrum: { ETH: '0x0', USDC: '0x0', USDT: '0x0' },
-  Solana: { SOL: '0x0', USDC: '0x0' },
+  Solana: { SOL: '0x0', USDC: '0x0', USDT: '0x0' },
   Assethub: { DOT: '0x0', USDT: '0x0', USDC: '0x0' },
 };
 
@@ -587,7 +594,7 @@ export const unregisteredAccount: z.input<typeof unregistered> = {
     Ethereum: { ETH: '0x0', FLIP: '0x0', USDC: '0x0', USDT: '0x0', WBTC: '0x0' },
     Bitcoin: { BTC: '0x0' },
     Arbitrum: { ETH: '0x0', USDC: '0x0', USDT: '0x0' },
-    Solana: { SOL: '0x0', USDC: '0x0' },
+    Solana: { SOL: '0x0', USDC: '0x0', USDT: '0x0' },
     Assethub: { DOT: '0x0', USDC: '0x0', USDT: '0x0' },
   },
   bond: '0x0',
@@ -616,6 +623,7 @@ export const liquidityProviderAccount: z.input<typeof liquidityProvider> = {
     Solana: {
       SOL: '0x0',
       USDC: '0x0',
+      USDT: '0x0',
     },
     Assethub: {
       DOT: '0x0',
@@ -652,6 +660,7 @@ export const liquidityProviderAccount: z.input<typeof liquidityProvider> = {
     Solana: {
       SOL: '0x0',
       USDC: '0x0',
+      USDT: '0x0',
     },
     Assethub: {
       DOT: '0x0',
@@ -700,6 +709,7 @@ export const liquidityProviderAccount: z.input<typeof liquidityProvider> = {
     Solana: {
       SOL: [],
       USDC: [],
+      USDT: [],
     },
     Assethub: {
       DOT: [],
@@ -734,7 +744,7 @@ export const brokerAccount: z.input<typeof broker> = {
     },
     Bitcoin: { BTC: '0xbcbf36' },
     Arbitrum: { ETH: 0, USDC: 0, USDT: 0 },
-    Solana: { SOL: 0, USDC: 0 },
+    Solana: { SOL: 0, USDC: 0, USDT: 0 },
     Assethub: { DOT: 0, USDC: 0, USDT: 0 },
   },
   btc_vault_deposit_address: 'tb1pqyqszqgpqyqszqgpqyqszqgpqyqszqgpqyqszqgpqyqszqgpqyqsn60vlk',
@@ -769,6 +779,7 @@ export const brokerAccountNoAffiliates: z.input<typeof broker> = {
     Solana: {
       SOL: 0,
       USDC: 0,
+      USDT: 0,
     },
     Assethub: {
       DOT: 0,
@@ -1140,6 +1151,7 @@ export const tradingStrategiesLimits: z.input<typeof cfGetTradingStrategyLimits>
     Solana: {
       SOL: null,
       USDC: 20000000000,
+      USDT: 20000000000,
     },
     Assethub: {
       DOT: null,
@@ -1166,6 +1178,7 @@ export const tradingStrategiesLimits: z.input<typeof cfGetTradingStrategyLimits>
     Solana: {
       SOL: null,
       USDC: 10000000,
+      USDT: 10000000,
     },
     Assethub: {
       DOT: null,
