@@ -352,7 +352,7 @@ export const assetContractId: InternalAssetMap<number> & { Dot: 4 } = {
   HubUsdc: 13,
   Wbtc: 14,
   ArbUsdt: 15,
-  SolUsdt: 15,
+  SolUsdt: 16,
 };
 
 export function getInternalAsset(asset: BaseAssetAndChain): BaseChainflipAsset;
