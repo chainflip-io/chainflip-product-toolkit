@@ -22,7 +22,7 @@ on:
         description: 'NPM tag for the release'
         required: false
         type: string
-        default: 'alpha'
+        default: 'dev'
 
 permissions:
   packages: write
