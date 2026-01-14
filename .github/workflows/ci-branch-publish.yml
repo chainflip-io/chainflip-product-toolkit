@@ -1,0 +1,59 @@
+name: Branch Publish 🚀
+
+on:
+  workflow_dispatch:
+    inputs:
+      package:
+        description: 'Package to publish'
+        required: true
+        type: choice
+        options:
+          - bitcoin
+          - delegation
+          - extrinsics
+          - processor
+          - redis
+          - rpc
+          - scale
+          - solana
+          - testing
+          - utils
+      npm_tag:
+        description: 'NPM tag for the release'
+        required: false
+        type: string
+        default: 'dev'
+
+permissions:
+  packages: write
+  contents: read
+
+jobs:
+  get-node-version:
+    uses: ./.github/workflows/_node_context.yml
+
+  pre-checks:
+    uses: ./.github/workflows/_01_pre_checks.yml
+    with:
+      package: ${{ inputs.package }}
+    secrets: inherit
+
+  checks:
+    needs: [pre-checks]
+    uses: ./.github/workflows/_02_checks.yml
+    with:
+      package: ${{ inputs.package }}
+    secrets: inherit
+
+  publish:
+    needs: [get-node-version, checks]
+    uses: ./.github/workflows/_npm_publish.yml
+    with:
+      node_version: ${{ needs.get-node-version.outputs.node_version }}
+      package_registry: 'https://registry.npmjs.org'
+      package_scope: '@chainflip-io'
+      build_cmd: pnpm --filter @chainflip/${{ inputs.package }} build
+      publish_cmd: pnpm --filter @chainflip/${{ inputs.package }} publish --tag ${{ inputs.npm_tag }} --no-git-checks
+      runs_on: namespace-profile-product-npm-publish
+    secrets:
+      node_auth_token: ${{ secrets.CF_NPM_JS_PACKAGES_READ_WRITE }}
