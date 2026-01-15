@@ -2,23 +2,14 @@ import * as fs from 'fs/promises';
 import * as path from 'path';
 import { SpecVersionCache, specVersionCache as defaultSpecVersionCache } from '@/chainspec/cache';
 import type BaseCodeGenerator from './BaseCodeGenerator';
-import { ParsedMetadata, type MetadataOpts } from './BaseParser';
+import { type MetadataOpts } from './BaseParser';
 import type BaseParser from './BaseParser';
 import type SpecVersion from './SpecVersion';
 import { diffSpecs } from './utils';
 
 export type GenerateHook<T> = (
   acc: T | undefined,
-  data: {
-    new: {
-      metadata: ParsedMetadata;
-      specVersion: SpecVersion;
-    };
-    old: {
-      metadata: ParsedMetadata;
-      specVersion: SpecVersion | undefined;
-    };
-  },
+  data: { specVersion: SpecVersion; changedOrAddedEvents: Set<string> },
 ) => T | Promise<T>;
 
 export default class Compiler {
@@ -54,7 +45,6 @@ export default class Compiler {
   async compile<T>(cb?: GenerateHook<T>) {
     let previousMetadata = {};
     let acc: T | undefined;
-    let previousSpecVersion;
 
     for (const { metadata, specVersion } of await this.retrieveMetadata()) {
       const specDir = path.join(this.generatedDir, specVersion.toString());
@@ -65,16 +55,9 @@ export default class Compiler {
         await module.writeFile(specDir, module.isCommon() ? changelog : undefined);
       }
 
-      acc = await cb?.(acc, {
-        new: { metadata, specVersion },
-        old: {
-          metadata: previousMetadata,
-          specVersion: previousSpecVersion,
-        },
-      });
+      acc = await cb?.(acc, { specVersion, changedOrAddedEvents });
 
       previousMetadata = metadata;
-      previousSpecVersion = specVersion;
     }
 
     return acc;
