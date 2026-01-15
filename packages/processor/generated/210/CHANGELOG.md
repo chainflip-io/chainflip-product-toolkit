@@ -91,6 +91,8 @@ LendingPools:
     - asset: added (LendingPools.LendingPoolCreated.asset.14)
   - LoanCreated:
     - asset: added (LendingPools.LoanCreated.asset.14)
+  - LoanRepaid:
+    - actionType: added (LendingPools.LoanRepaid.actionType)
   - PalletConfigUpdated:
     - update: added (LendingPools.PalletConfigUpdated.update.1.asset.14)
   - StoppedBoosting:
