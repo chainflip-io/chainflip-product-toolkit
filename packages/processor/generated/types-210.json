@@ -48909,6 +48909,10 @@
                   "loanId": {
                     "type": "primitive",
                     "value": "u64"
+                  },
+                  "swapRequestId": {
+                    "type": "primitive",
+                    "value": "u64"
                   }
                 }
               }
@@ -49492,6 +49496,31 @@
         "amount": {
           "type": "primitive",
           "value": "u128"
+        },
+        "actionType": {
+          "type": "enum",
+          "$name": "palletCfLendingPoolsLoanRepaidActionType",
+          "values": [
+            {
+              "name": "Manual",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "Liquidation",
+              "value": {
+                "type": "struct",
+                "fields": {
+                  "swapRequestId": {
+                    "type": "primitive",
+                    "value": "u64"
+                  }
+                }
+              }
+            }
+          ]
         }
       }
     },

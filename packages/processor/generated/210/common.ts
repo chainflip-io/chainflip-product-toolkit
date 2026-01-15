@@ -59,7 +59,6 @@ export const cfPrimitivesChainsAssetsAnyAsset = simpleEnum([
   'Usdt',
   'Sol',
   'SolUsdc',
-  'SolUsdt', // manually added this
   'HubDot',
   'HubUsdt',
   'HubUsdc',
@@ -939,8 +938,8 @@ export const palletCfSolanaIngressEgressDepositFailedReason = z.discriminatedUni
   z.object({ __kind: z.literal('Unrefundable') }),
 ]);
 
-export const cfPrimitivesChainsAssetsSolAsset = simpleEnum(['Sol', 'SolUsdc', 'SolUsdt']);
-//                                                         manually added this ^^^^^^^
+export const cfPrimitivesChainsAssetsSolAsset = simpleEnum(['Sol', 'SolUsdc']);
+
 export const cfChainsSolVaultSwapOrDepositChannelId = z.discriminatedUnion('__kind', [
   z.object({ __kind: z.literal('Channel'), value: hexString }),
   z.object({ __kind: z.literal('VaultSwapAccount'), value: z.tuple([hexString, numberOrHex]) }),
@@ -1177,5 +1176,14 @@ export const palletCfLendingPoolsBoostBoostPoolId = z.object({
 export const palletCfLendingPoolsCollateralAddedActionType = z.discriminatedUnion('__kind', [
   z.object({ __kind: z.literal('Manual') }),
   z.object({ __kind: z.literal('SystemTopup') }),
-  z.object({ __kind: z.literal('SystemLiquidationExcessAmount'), loanId: numberOrHex }),
+  z.object({
+    __kind: z.literal('SystemLiquidationExcessAmount'),
+    loanId: numberOrHex,
+    swapRequestId: numberOrHex,
+  }),
+]);
+
+export const palletCfLendingPoolsLoanRepaidActionType = z.discriminatedUnion('__kind', [
+  z.object({ __kind: z.literal('Manual') }),
+  z.object({ __kind: z.literal('Liquidation'), swapRequestId: numberOrHex }),
 ]);
