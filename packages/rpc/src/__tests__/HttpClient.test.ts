@@ -1083,6 +1083,7 @@ describe(HttpClient, () => {
           {
             "base_asset": "Btc",
             "price": 44236707699722000250238698966129867489280000000000n,
+            "price_status": "UpToDate",
             "quote_asset": "Usd",
             "updated_at_oracle_timestamp": 1754318883,
             "updated_at_statechain_block": 43871,
@@ -1090,6 +1091,7 @@ describe(HttpClient, () => {
           {
             "base_asset": "Eth",
             "price": 340282366920938463463374607431n,
+            "price_status": "UpToDate",
             "quote_asset": "Usd",
             "updated_at_oracle_timestamp": 1754056071,
             "updated_at_statechain_block": 69,
@@ -1097,6 +1099,7 @@ describe(HttpClient, () => {
           {
             "base_asset": "Sol",
             "price": 34028236692093846346337460743176821145n,
+            "price_status": "UpToDate",
             "quote_asset": "Usd",
             "updated_at_oracle_timestamp": 1754056071,
             "updated_at_statechain_block": 69,
@@ -1104,6 +1107,7 @@ describe(HttpClient, () => {
           {
             "base_asset": "Usdc",
             "price": 340282366920938463463374607431768211456n,
+            "price_status": "Stale",
             "quote_asset": "Usd",
             "updated_at_oracle_timestamp": 1752662428,
             "updated_at_statechain_block": 9,
@@ -1111,6 +1115,7 @@ describe(HttpClient, () => {
           {
             "base_asset": "Usdt",
             "price": 340282366920938463463374607431768211456n,
+            "price_status": "MaybeStale",
             "quote_asset": "Usd",
             "updated_at_oracle_timestamp": 1752662431,
             "updated_at_statechain_block": 9,

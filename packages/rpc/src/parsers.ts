@@ -630,6 +630,7 @@ export const cfOraclePrices = z.array(
     updated_at_statechain_block: z.number(),
     base_asset: z.enum(priceAssets),
     quote_asset: z.enum(priceAssets),
+    price_status: z.enum(['UpToDate', 'Stale', 'MaybeStale']).optional(), // TODO remove `optional` after backspin updates
   }),
 );
 
