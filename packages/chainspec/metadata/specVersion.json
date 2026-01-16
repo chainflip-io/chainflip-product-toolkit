@@ -76,7 +76,11 @@
     "network": "perseverance"
   },
   "200": {
-    "hash": "0x2021077190dd9abb1844a61d899294c5335ff1cbda5624fb410269ee3b209c62",
+    "hash": "0x2889c355fb5423bb33aa477f3dcc9cba9738bef5fe4bd343444012e05c8f6ca7",
+    "network": "mainnet"
+  },
+  "210": {
+    "hash": "0x36f2c413c58f87d7f4bc27afff622ce14c52805682ecd6e2c7a53983f3c2f575",
     "network": "localnet"
   }
 }
