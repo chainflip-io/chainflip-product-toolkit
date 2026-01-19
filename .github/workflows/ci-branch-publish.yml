@@ -32,7 +32,34 @@ jobs:
   get-node-version:
     uses: ./.github/workflows/_node_context.yml
 
+  validate-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate npm tag
+        run: |
+          if [ "${{ inputs.npm_tag }}" = "latest" ]; then
+            echo "Error: npm_tag cannot be 'latest' for branch publishes"
+            exit 1
+          fi
+
+      - name: Checkout 🛎️
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
+
+      - name: Validate pre-release version
+        run: |
+          version=$(jq -r .version packages/${{ inputs.package }}/package.json)
+          echo "Package version: $version"
+
+          # Check if version has a pre-release suffix (e.g., -alpha.0, -beta.1, -rc.2)
+          if [[ ! $version =~ ^[0-9]+\.[0-9]+\.[0-9]+-.+ ]]; then
+            echo "Error: Version '$version' must have a pre-release suffix (e.g., -alpha.0, -beta.0, -rc.0)"
+            exit 1
+          fi
+
+          echo "Valid pre-release version: $version"
+
   pre-checks:
+    needs: [validate-release]
     uses: ./.github/workflows/_01_pre_checks.yml
     with:
       package: ${{ inputs.package }}
