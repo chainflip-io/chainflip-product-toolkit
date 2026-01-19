@@ -32,7 +32,7 @@ jobs:
   get-node-version:
     uses: ./.github/workflows/_node_context.yml
 
-  validate-version:
+  validate-release:
     runs-on: ubuntu-latest
     steps:
       - name: Validate npm tag
@@ -59,7 +59,7 @@ jobs:
           echo "Valid pre-release version: $version"
 
   pre-checks:
-    needs: [validate-version]
+    needs: [validate-release]
     uses: ./.github/workflows/_01_pre_checks.yml
     with:
       package: ${{ inputs.package }}
