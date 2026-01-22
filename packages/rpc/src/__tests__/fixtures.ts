@@ -1558,6 +1558,7 @@ export const cfOraclePrice: z.input<typeof cfOraclePrices> = [
     updated_at_statechain_block: 43871,
     base_asset: 'Btc',
     quote_asset: 'Usd',
+    price_status: 'UpToDate',
   },
   {
     price: '0x44b82fa09b5a52cb98b405447',
@@ -1565,6 +1566,7 @@ export const cfOraclePrice: z.input<typeof cfOraclePrices> = [
     updated_at_statechain_block: 69,
     base_asset: 'Eth',
     quote_asset: 'Usd',
+    price_status: 'UpToDate',
   },
   {
     price: '0x19999999999999999999999999999999',
@@ -1572,6 +1574,7 @@ export const cfOraclePrice: z.input<typeof cfOraclePrices> = [
     updated_at_statechain_block: 69,
     base_asset: 'Sol',
     quote_asset: 'Usd',
+    price_status: 'UpToDate',
   },
   {
     price: '0x100000000000000000000000000000000',
@@ -1579,6 +1582,7 @@ export const cfOraclePrice: z.input<typeof cfOraclePrices> = [
     updated_at_statechain_block: 9,
     base_asset: 'Usdc',
     quote_asset: 'Usd',
+    price_status: 'Stale',
   },
   {
     price: '0x100000000000000000000000000000000',
@@ -1586,6 +1590,7 @@ export const cfOraclePrice: z.input<typeof cfOraclePrices> = [
     updated_at_statechain_block: 9,
     base_asset: 'Usdt',
     quote_asset: 'Usd',
+    price_status: 'MaybeStale',
   },
 ];
 

@@ -1,6 +1,6 @@
 {
   "name": "@chainflip/rpc",
-  "version": "2.0.6-wbtc-dev.4",
+  "version": "2.0.7-wbtc-dev.1",
   "type": "module",
   "scripts": {
     "eslint:check": "pnpm eslint --max-warnings 0 './**/*.ts'",
@@ -19,9 +19,9 @@
     "zod": "^3.25.75"
   },
   "devDependencies": {
-    "@types/node": "^25.0.2",
+    "@types/node": "^25.0.9",
     "@types/ws": "^8.18.1",
-    "ws": "^8.18.3"
+    "ws": "^8.19.0"
   },
   "files": [
     "dist",
