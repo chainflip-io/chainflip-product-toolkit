@@ -1,3 +1,4 @@
+import { coverageConfigDefaults } from 'vitest/config';
 import config from '../../vitest.config';
 
 export default {
@@ -6,6 +7,7 @@ export default {
     ...config.test,
     coverage: {
       ...config.test?.coverage,
+      exclude: ['**/index.ts', ...coverageConfigDefaults.exclude],
       thresholds: {
         lines: 100,
         statements: 100,

@@ -1,5 +1,5 @@
 /* eslint-disable dot-notation */
-import { sleep } from '@chainflip/utils/async';
+import { once as onceEventTarget, sleep } from '@chainflip/utils/async';
 import { ChainAssetMap } from '@chainflip/utils/chainflip';
 import { once } from 'events';
 import { type Mock, afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
@@ -128,6 +128,8 @@ describe(WsClient, () => {
     await client.close();
     server.close();
     if (!serverClosed) await once(server, 'close');
+    // Reset mocks to their original implementation (important for sleep mock)
+    vi.mocked(sleep).mockRestore();
     vi.useRealTimers();
   });
 
@@ -144,7 +146,7 @@ describe(WsClient, () => {
     closeServer();
     const connectSpy = spyOn(client, 'connect' as any);
     expect(connectSpy).not.toHaveBeenCalled();
-    await once(client['emitter'], 'DISCONNECT');
+    await onceEventTarget(client['emitter'], 'DISCONNECT');
 
     let resolve!: () => void;
     const sleepMock = vi.mocked(sleep).mockImplementation(() => {
@@ -156,7 +158,7 @@ describe(WsClient, () => {
     for (let i = 0; i < 7; i += 1) {
       await once(client['emitter'], 'CONNECTING');
       expect(connectSpy).toHaveBeenCalledTimes(i + 1);
-      await once(client['emitter'], 'DISCONNECT');
+      await onceEventTarget(client['emitter'], 'DISCONNECT');
       expect(sleepMock.mock.lastCall?.[0]).toBe(250 * 2 ** i);
       resolve();
     }
@@ -176,8 +178,11 @@ describe(WsClient, () => {
       ),
     ).resolves.not.toThrow();
     expect(client['ws']).toBeDefined();
-    client['ws']?.dispatchEvent(new Event('error'));
-    await once(client['emitter'], 'DISCONNECT');
+    // Set up listener BEFORE killing connection to avoid missing the event
+    const disconnectPromise = onceEventTarget(client['emitter'], 'DISCONNECT');
+    // Kill connection from server side (like the working "doesn't spam the reconnect" test)
+    killConnections();
+    await disconnectPromise;
     await expect(
       client.sendRequest(
         'cf_swap_rate',
@@ -341,5 +346,24 @@ describe(WsClient, () => {
       expect(deferred.promise).rejects.toThrowError('disconnected'),
       client.close(),
     ]);
+  });
+
+  it('rejects in-flight sendRequest when disconnected', async () => {
+    serverFn = vi.fn();
+    const requestPromise = client.sendRequest('cf_supported_assets');
+    // Wait for server to receive the request
+    await vi.waitFor(() => expect(serverFn).toHaveBeenCalledTimes(1));
+    // Kill connections while request is in flight
+    killConnections();
+    await expect(requestPromise).rejects.toThrowError('disconnected');
+  });
+
+  it('closes socket when error occurs after connection', async () => {
+    await client['connectionReady']();
+    const ws = client['ws']!;
+    const closeSpy = vi.spyOn(ws, 'close');
+    // Dispatch error event to trigger the error handler
+    ws.dispatchEvent(new Event('error'));
+    expect(closeSpy).toHaveBeenCalled();
   });
 });

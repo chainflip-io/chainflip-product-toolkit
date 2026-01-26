@@ -190,12 +190,10 @@ const tryToAlignDepositsAndTransfers = (
     let success = false;
 
     for (let txEndIndex = txStartIndex; txEndIndex < transfers.length; txEndIndex += 1) {
-      if (currentDeposit.maxSlot) {
-        const blockDiff = transfers[txEndIndex].slot - currentDeposit.maxSlot;
+      const blockDiff = transfers[txEndIndex].slot - currentDeposit.maxSlot;
 
-        if (blockDiff > reportingErrorTolerance) {
-          throw new Error('transfers are too new');
-        }
+      if (blockDiff > reportingErrorTolerance) {
+        throw new Error('transfers are too new');
       }
 
       total += transfers[txEndIndex].amount;
