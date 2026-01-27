@@ -7,6 +7,7 @@ import {
   numberOrHex,
   cfPoolsEnvironment,
   cfPoolDepth,
+  cfPoolOrders,
   cfAccounts,
   cfGetTradingStrategies,
   cfGetTradingStrategyLimits,
@@ -30,6 +31,7 @@ import {
   liquidityProviderAccount,
   loanAccounts,
   monitoringSimulateAuction,
+  poolOrders,
   safeModeStatuses,
   tradingStrategies,
   tradingStrategiesLimits,
@@ -1637,6 +1639,31 @@ describe('parsers', () => {
       expect(result.fees.Solana.SOL).not.toBeNull();
       expect(result.fees.Solana.USDC).not.toBeNull();
     });
+
+    it('uses default fee info when fee is null', () => {
+      const result = cfPoolsEnvironment.parse({
+        fees: {
+          Ethereum: { ETH: null, FLIP: null, USDC: null, USDT: null },
+          Polkadot: { DOT: null },
+          Bitcoin: { BTC: null },
+          Arbitrum: { ETH: null, USDC: null },
+          Solana: { SOL: null, USDC: null },
+          Assethub: { DOT: null, USDC: null, USDT: null },
+        },
+      });
+
+      // Default values should be applied for null fees
+      // Note: string values like '0x0' are NOT transformed by u256 when coming from defaults
+      expect(result.fees.Ethereum.ETH).toEqual({
+        limit_order_fee_hundredth_pips: 0,
+        range_order_fee_hundredth_pips: 0,
+        range_order_total_fees_earned: { base: '0x0', quote: '0x0' },
+        limit_order_total_fees_earned: { base: '0x0', quote: '0x0' },
+        range_total_swap_inputs: { base: '0x0', quote: '0x0' },
+        limit_total_swap_inputs: { base: '0x0', quote: '0x0' },
+        quote_asset: { chain: 'Ethereum', asset: 'USDC' },
+      });
+    });
   });
 
   describe('cfPoolDepth', () => {
@@ -1668,6 +1695,28 @@ describe('parsers', () => {
       expect(result?.asks.range_orders.depth).not.toBeNull();
       expect(result?.bids.limit_orders.depth).not.toBeNull();
       expect(result?.bids.range_orders.depth).not.toBeNull();
+    });
+  });
+
+  describe('cfPoolOrders', () => {
+    it('parses the cfPoolOrders response', () => {
+      const result = cfPoolOrders.parse(poolOrders);
+
+      expect(result.limit_orders.asks).toHaveLength(1);
+      expect(result.limit_orders.asks[0]).toMatchObject({
+        type: 'ask',
+        lp: 'cFLGvPhhrribWCx9id5kLVqwiFK4QiVNjQ6ViyaRFF2Nrgq7j',
+      });
+      expect(result.limit_orders.bids).toHaveLength(1);
+      expect(result.limit_orders.bids[0]).toMatchObject({
+        type: 'bid',
+        lp: 'cFLvCBxThPho4LP8iSP54B1iHdEtJhTHniUW5yyNcwDBGSe1X',
+      });
+      expect(result.range_orders).toHaveLength(1);
+      expect(result.range_orders[0]).toMatchObject({
+        type: 'range',
+        lp: 'cFM63NFq2MiujSSXUz1AfZgb4aZrkv5aWggdLkyufyTcpkrf2',
+      });
     });
   });
 

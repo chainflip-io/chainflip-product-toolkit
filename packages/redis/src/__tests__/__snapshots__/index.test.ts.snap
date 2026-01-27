@@ -1,5 +1,26 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
+exports[`RedisClient > getBroadcast > parses a Arbitrum broadcast > Arbitrum broadcast 1`] = `
+{
+  "tx_out_id": {
+    "signature": {
+      "k_times_g_address": [],
+      "s": [],
+    },
+  },
+  "tx_ref": "0xdeadc0de",
+}
+`;
+
+exports[`RedisClient > getBroadcast > parses a Assethub broadcast > Assethub broadcast 1`] = `
+{
+  "tx_out_id": {
+    "signature": "0x1234",
+  },
+  "tx_ref": "200-30",
+}
+`;
+
 exports[`RedisClient > getBroadcast > parses a Bitcoin broadcast > Bitcoin broadcast 1`] = `
 {
   "tx_out_id": {

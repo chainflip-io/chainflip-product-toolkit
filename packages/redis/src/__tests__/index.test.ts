@@ -48,6 +48,16 @@ describe(RedisClient, () => {
         { signature: { s: [], k_times_g_address: [] } },
         { hash: '0xdeadc0de' },
       ],
+      [
+        'Arbitrum' as const,
+        { signature: { s: [], k_times_g_address: [] } },
+        { hash: '0xdeadc0de' },
+      ],
+      [
+        'Assethub' as const,
+        { signature: '0x1234' },
+        { transaction_id: { block_number: 200, extrinsic_index: 30 } },
+      ],
     ])('parses a %s broadcast', async (chain, txOutId, txRef) => {
       const mock = vi
         .mocked(Redis.prototype.get)
@@ -215,6 +225,27 @@ describe(RedisClient, () => {
       `);
       expect(mock).toHaveBeenCalledWith('deposit:Ethereum:0x1234', 0, -1);
     });
+
+    it('sorts multiple deposits by block height', async () => {
+      vi.mocked(Redis.prototype.lrange).mockResolvedValueOnce([
+        JSON.stringify({
+          amount: '0x1000',
+          asset: { asset: 'BTC', chain: 'Bitcoin' },
+          deposit_chain_block_height: 2000,
+          deposit_details: { tx_id: '0x2222', vout: 0 },
+        }),
+        JSON.stringify({
+          amount: '0x2000',
+          asset: { asset: 'BTC', chain: 'Bitcoin' },
+          deposit_chain_block_height: 1000,
+          deposit_details: { tx_id: '0x1111', vout: 0 },
+        }),
+      ]);
+      const client = new RedisClient(url);
+      const deposits = await client.getDeposits('Btc', '0x1234');
+      expect(deposits[0].deposit_chain_block_height).toBe(1000);
+      expect(deposits[1].deposit_chain_block_height).toBe(2000);
+    });
   });
 
   describe(RedisClient.prototype.getPendingVaultSwap, () => {
@@ -312,6 +343,35 @@ describe(RedisClient, () => {
 
       expect(mock).toHaveBeenCalledWith(
         'vault_deposit:Arbitrum:0x08aca142611325c4eb96f52dc9b9843d4773d3a80c066cfa8de2102f34763654',
+      );
+    });
+
+    it('throws for invalid chainflip address in broker_fee', async () => {
+      vi.mocked(Redis.prototype.get).mockResolvedValue(
+        JSON.stringify({
+          deposit_chain_block_height: 1,
+          input_asset: { chain: 'Ethereum', asset: 'ETH' },
+          output_asset: { chain: 'Ethereum', asset: 'FLIP' },
+          amount: '0x64',
+          destination_address: '0xcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcf',
+          ccm_deposit_metadata: null,
+          deposit_details: null,
+          // Invalid chainflip address (wrong ss58 prefix)
+          broker_fee: { account: '5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY', bps: 0 },
+          affiliate_fees: [],
+          refund_params: {
+            retry_duration: 0,
+            refund_address: '0xcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcf',
+            min_price: '0x0',
+          },
+          dca_params: null,
+          max_boost_fee: 0,
+        }),
+      );
+
+      const client = new RedisClient(url);
+      await expect(client.getPendingVaultSwap('Ethereum', '0x1234')).rejects.toThrow(
+        '5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY is not a valid Chainflip address',
       );
     });
 
