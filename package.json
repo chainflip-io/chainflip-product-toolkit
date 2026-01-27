@@ -31,6 +31,7 @@
     "micromatch": "^4.0.8",
     "prettier": "^3.8.1",
     "syncpack": "^13.0.4",
+    "tinyglobby": "^0.2.15",
     "tsdown": "^0.20.1",
     "tsup": "^8.5.1",
     "tsx": "^4.21.0",

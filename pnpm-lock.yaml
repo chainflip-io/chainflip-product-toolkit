@@ -53,6 +53,9 @@ importers:
       syncpack:
         specifier: ^13.0.4
         version: 13.0.4(typescript@5.9.3)
+      tinyglobby:
+        specifier: ^0.2.15
+        version: 0.2.15
       tsdown:
         specifier: ^0.20.1
         version: 0.20.1(typescript@5.9.3)
