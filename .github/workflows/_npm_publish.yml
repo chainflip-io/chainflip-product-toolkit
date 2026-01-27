@@ -33,14 +33,10 @@ on:
         required: false
         type: string
         default: pnpm publish
-    secrets:
-      node_auth_token:
-        description: Node auth token
-        required: true
 
 permissions:
-  packages: write
-  contents: read
+  contents: write
+  id-token: write
 
 jobs:
   publish:
@@ -76,5 +72,4 @@ jobs:
       - name: Publish npm package 📦
         env:
           NODE_OPTIONS: '--max-old-space-size=16384'
-          NODE_AUTH_TOKEN: ${{ secrets.node_auth_token }}
         run: ${{ inputs.publish_cmd }}
