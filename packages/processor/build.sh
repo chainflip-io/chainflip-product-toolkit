@@ -10,7 +10,7 @@ for target in processor generate; do
   BUILD_TARGET="$target" pnpm tsdown
 done
 
-for version in generated/*/; do
+for version in ../generated/*/; do
   version=$(basename "$version")
   echo "Building $version..."
   BUILD_TARGET="$version" pnpm tsdown
