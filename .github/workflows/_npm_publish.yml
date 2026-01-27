@@ -7,7 +7,7 @@ on:
         description: Runs on
         required: false
         type: string
-        default: namespace-profile-product-npm-publish
+        default: ubuntu-latest
       node_version:
         description: Node version
         required: false
