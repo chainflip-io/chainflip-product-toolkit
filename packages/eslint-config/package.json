@@ -22,5 +22,10 @@
       "import": "./dist/eslint.config.js",
       "require": "./dist/eslint.config.js"
     }
+  },
+  "repository": "https://github.com/chainflip-io/chainflip-product-toolkit.git",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
   }
 }
