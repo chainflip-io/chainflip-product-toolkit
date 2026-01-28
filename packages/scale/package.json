@@ -1,6 +1,6 @@
 {
   "name": "@chainflip/scale",
-  "version": "1.11.0",
+  "version": "2.1.0-beta.0",
   "type": "module",
   "scripts": {
     "eslint:check": "pnpm eslint --max-warnings 0 './**/*.ts'",
