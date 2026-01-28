@@ -23,7 +23,7 @@
     "test": "vitest",
     "clean": "rm -rf dist",
     "prepublish": "pnpm test run && pnpm build",
-    "build": "pnpm clean && pnpm tsup"
+    "build": "./build.sh"
   },
   "repository": "https://github.com/chainflip-io/chainflip-product-toolkit.git",
   "publishConfig": {
@@ -36,7 +36,7 @@
   "exports": {
     "./*": {
       "require": {
-        "types": "./dist/*.d.cts",
+        "types": "./dist/*.d.ts",
         "default": "./dist/*.cjs"
       },
       "import": {
@@ -46,7 +46,7 @@
     },
     ".": {
       "require": {
-        "types": "./dist/index.d.cts",
+        "types": "./dist/index.d.ts",
         "default": "./dist/index.cjs"
       },
       "import": {
