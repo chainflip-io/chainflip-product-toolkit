@@ -8,7 +8,7 @@ export default defineConfig({
   entry: ['./generated/**/*.ts'],
   target: 'es2022',
   outExtensions: ({ format }) => ({
-    js: format === 'es' ? '.js' : '.cjs',
-    dts: '.d.ts',
+    js: format === 'es' ? '.mjs' : '.cjs',
+    dts: format === 'es' ? '.d.mts' : '.d.cts',
   }),
 });
