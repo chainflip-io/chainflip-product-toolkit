@@ -9,7 +9,7 @@ export default defineConfig({
   entry: ['./src/*.ts'],
   target: 'es2022',
   outExtensions: ({ format }) => ({
-    dts: '.d.ts',
-    js: format === 'es' ? '.js' : '.cjs',
+    js: format === 'es' ? '.mjs' : '.cjs',
+    dts: format === 'es' ? '.d.mts' : '.d.cts',
   }),
 });

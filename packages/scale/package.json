@@ -22,12 +22,12 @@
   "exports": {
     "./*": {
       "require": {
-        "types": "./dist/*.d.ts",
+        "types": "./dist/*.d.cts",
         "default": "./dist/*.cjs"
       },
       "import": {
-        "types": "./dist/*.d.ts",
-        "default": "./dist/*.js"
+        "types": "./dist/*.d.mts",
+        "default": "./dist/*.mjs"
       }
     }
   },
