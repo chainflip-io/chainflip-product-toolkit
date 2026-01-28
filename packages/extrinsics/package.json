@@ -8,7 +8,7 @@
     "prettier:check": "pnpm prettier:base --check",
     "prettier:write": "pnpm prettier:base --write",
     "clean": "rm -rf dist",
-    "build": "pnpm clean && pnpm tsup",
+    "build": "pnpm clean && pnpm tsdown",
     "prepublish": "pnpm test run && pnpm build",
     "test:ci": "CI=1 pnpm t run",
     "test": "vitest"
@@ -23,21 +23,21 @@
   "exports": {
     "./*": {
       "require": {
-        "types": "./dist/*.d.cts",
+        "types": "./dist/*.d.ts",
         "default": "./dist/*.cjs"
       },
       "import": {
-        "types": "./dist/*.d.mts",
+        "types": "./dist/*.d.ts",
         "default": "./dist/*.js"
       }
     },
     ".": {
       "require": {
-        "types": "./dist/index.d.cts",
+        "types": "./dist/index.d.ts",
         "default": "./dist/index.cjs"
       },
       "import": {
-        "types": "./dist/index.d.mts",
+        "types": "./dist/index.d.ts",
         "default": "./dist/index.js"
       }
     }
