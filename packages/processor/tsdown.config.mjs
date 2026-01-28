@@ -8,7 +8,7 @@ const baseConfig = defineConfig({
   unbundle: true,
   format: ['esm', 'cjs'],
   target: 'es2022',
-  inlineOnly: false,
+  skipNodeModulesBundle: true,
   outExtensions: ({ format }) => {
     const type = format === 'es' ? 'm' : 'c';
 
