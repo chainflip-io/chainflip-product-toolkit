@@ -9,7 +9,7 @@
     "prettier:write": "pnpm prettier:base --write",
     "clean": "rm -rf dist",
     "prepublish": "pnpm test run && pnpm build",
-    "build": "pnpm clean && pnpm tsup",
+    "build": "pnpm clean && pnpm tsdown",
     "test:ci": "CI=1 pnpm t run",
     "test": "vitest",
     "coverage": "vitest run --coverage"
@@ -30,7 +30,7 @@
   "exports": {
     "./*": {
       "require": {
-        "types": "./dist/*.d.cts",
+        "types": "./dist/*.d.ts",
         "default": "./dist/*.cjs"
       },
       "import": {
@@ -40,7 +40,7 @@
     },
     ".": {
       "require": {
-        "types": "./dist/index.d.cts",
+        "types": "./dist/index.d.ts",
         "default": "./dist/index.cjs"
       },
       "import": {
