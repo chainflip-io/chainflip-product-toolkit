@@ -13,7 +13,7 @@
     "@chainflip/rpc": "1.9.3",
     "@chainflip/utils": "0.8.18",
     "@polkadot/types": "^16.5.4",
-    "prettier": "^3.7.4",
+    "prettier": "^3.8.1",
     "zod": "^3.25.75"
   }
 }

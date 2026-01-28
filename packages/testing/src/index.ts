@@ -20,16 +20,12 @@ export const check = <T>(value: T): T => value;
  * vitest now discards previous mocks if you call `vi.spyOn` on the same method
  * more than once.
  */
-export const spyOn: typeof vi.spyOn = (
-  // @ts-expect-error -- overloaded function
-  obj,
-  // @ts-expect-error -- overloaded function
-  method,
-) => {
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-  if (vi.isMockFunction(obj[method])) return obj[method];
-  return vi.spyOn(obj, method);
-};
+export const spyOn = ((obj: object, method: string) => {
+  if (vi.isMockFunction((obj as Record<string, unknown>)[method])) {
+    return (obj as Record<string, unknown>)[method];
+  }
+  return vi.spyOn(obj, method as never);
+}) as typeof vi.spyOn;
 
 export const buildChainAssetMap = <T>(
   defaultValue: T,

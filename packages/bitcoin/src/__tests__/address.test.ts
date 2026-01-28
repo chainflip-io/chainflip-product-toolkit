@@ -1,6 +1,19 @@
 import { bytesToHex } from '@chainflip/utils/bytes';
-import { describe, it, expect } from 'vitest';
-import { encodeAddress, decodeAddress, isValidAddressForNetwork } from '../index';
+import * as bitcoin from 'bitcoinjs-lib';
+import { describe, it, expect, vi } from 'vitest';
+import { encodeAddress, decodeAddress, isValidAddressForNetwork } from '../address';
+
+vi.mock('bitcoinjs-lib', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('bitcoinjs-lib')>();
+  return {
+    ...actual,
+    address: {
+      ...actual.address,
+      fromBech32: vi.fn(actual.address.fromBech32),
+      fromBase58Check: vi.fn(actual.address.fromBase58Check),
+    },
+  };
+});
 
 const networks = ['mainnet', 'perseverance', 'sisyphos', 'backspin', 'regtest', 'testnet'] as const;
 
@@ -128,5 +141,26 @@ describe(isValidAddressForNetwork, () => {
         'mainnet',
       ),
     ).toBe(false);
+  });
+});
+
+describe('decodeAddress with invalid versions', () => {
+  it('throws for invalid bech32 version', () => {
+    vi.mocked(bitcoin.address.fromBech32).mockReturnValueOnce({
+      version: 99,
+      prefix: 'bc',
+      data: Buffer.from('0000000000000000000000000000000000000000', 'hex'),
+    });
+
+    expect(() => decodeAddress('bc1qtest', 'mainnet')).toThrow('Invalid version: 99');
+  });
+
+  it('throws for invalid base58 version', () => {
+    vi.mocked(bitcoin.address.fromBase58Check).mockReturnValueOnce({
+      version: 99,
+      hash: Buffer.from('0000000000000000000000000000000000000000', 'hex'),
+    });
+
+    expect(() => decodeAddress('1test', 'mainnet')).toThrow('Invalid version: 99');
   });
 });

@@ -411,7 +411,9 @@ describe(HttpClient, () => {
           }
           return respond(vaultAddresses);
         case 'cf_eth_state_chain_gateway_address':
+          return respond('deadbeefcafebabedeadbeefcafebabedeadbeef');
         case 'cf_eth_key_manager_address':
+          return respond('cafebabedeadbeefcafebabedeadbeefcafebabe');
         default:
           console.error('Method not found:', body.method);
           return [
@@ -1128,6 +1130,16 @@ describe(HttpClient, () => {
       expect(await client.sendRequest('cf_get_vault_addresses')).toMatchSnapshot();
     });
 
+    it('handles cf_eth_state_chain_gateway_address', async () => {
+      const result = await client.sendRequest('cf_eth_state_chain_gateway_address');
+      expect(result).toBe('0xdeadbeefcafebabedeadbeefcafebabedeadbeef');
+    });
+
+    it('handles cf_eth_key_manager_address', async () => {
+      const result = await client.sendRequest('cf_eth_key_manager_address');
+      expect(result).toBe('0xcafebabedeadbeefcafebabedeadbeefcafebabe');
+    });
+
     it('handles multiple requests with 1 call', async () => {
       const [r1, r2] = await Promise.all([
         client.sendRequest(
@@ -1354,6 +1366,40 @@ describe(HttpClient, () => {
         status: 'fulfilled',
         value: { role: 'broker' },
       });
+    });
+
+    it('rethrows non-Error rejections without modification', async () => {
+      // Access internals to test the catch block for non-Error values
+      client = new HttpClient('http://localhost:8080');
+
+      // Mock handleResponse to reject with a non-Error value
+      // eslint-disable-next-line dot-notation
+      client['handleResponse'] = (response, clonedMap) => {
+        const item = clonedMap.get(response.id);
+        if (item) {
+          clonedMap.delete(response.id);
+          // Reject with a string (non-Error value) to test the else branch
+          // @ts-expect-error testing non-Error rejection
+          item.deferred.reject('string error');
+        }
+      };
+
+      spyOn(globalThis, 'fetch').mockImplementation((url, init) => {
+        const body = JSON.parse(init!.body as string) as JsonRpcRequest<RpcMethod>[];
+        return Promise.resolve({
+          ok: true,
+          json: () =>
+            Promise.resolve(
+              body.map((req) => ({
+                id: req.id,
+                jsonrpc: '2.0',
+                result: accounts,
+              })),
+            ),
+        } as Response);
+      });
+
+      await expect(client.sendRequest('cf_accounts')).rejects.toBe('string error');
     });
   });
 });

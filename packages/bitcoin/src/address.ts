@@ -116,7 +116,6 @@ export const decodeAddress = (
       type = 'P2WSH';
     } else if (version === 1) {
       type = 'Taproot';
-      /* v8 ignore next 3 */
     } else {
       throw new TypeError(`Invalid version: ${version}`);
     }

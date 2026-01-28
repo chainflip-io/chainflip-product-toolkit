@@ -5,7 +5,7 @@ import * as fs from 'fs/promises';
 import * as path from 'path';
 import { createInterface } from 'readline/promises';
 import * as util from 'util';
-import yargs from 'yargs/yargs';
+import yargs from 'yargs';
 
 const execAsync = util.promisify(exec);
 

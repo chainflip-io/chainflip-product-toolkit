@@ -33,23 +33,29 @@ describe(SpecVersionCache, () => {
     });
   });
 
-  describe(SpecVersionCache.prototype.write, () => {
+  // eslint-disable-next-line dot-notation
+  describe(SpecVersionCache.prototype['write'], () => {
     it('updates the cache', async () => {
-      await specVersionCache.write(1, 'hash', 'mainnet');
+      // eslint-disable-next-line dot-notation
+      await specVersionCache['write'](1, 'hash', 'mainnet');
       expect(await fs.readFile(cachePath, 'utf8')).toEqual(
         JSON.stringify({ '1': { hash: 'hash', network: 'mainnet' } }, null, 2),
       );
     });
   });
 
-  describe(SpecVersionCache.prototype.getVersion, () => {
+  // eslint-disable-next-line dot-notation
+  describe(SpecVersionCache.prototype['getVersion'], () => {
     it('finds the version for a hash and network', async () => {
-      await specVersionCache.write(1, 'hash', 'mainnet');
-      expect(await specVersionCache.getVersion('hash', 'mainnet')).toEqual(1);
+      // eslint-disable-next-line dot-notation
+      await specVersionCache['write'](1, 'hash', 'mainnet');
+      // eslint-disable-next-line dot-notation
+      expect(await specVersionCache['getVersion']('hash', 'mainnet')).toEqual(1);
     });
 
     it('returns undefined for unknown versions', async () => {
-      expect(await specVersionCache.getVersion('hash', 'mainnet')).toBeUndefined();
+      // eslint-disable-next-line dot-notation
+      expect(await specVersionCache['getVersion']('hash', 'mainnet')).toBeUndefined();
     });
   });
 

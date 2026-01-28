@@ -4,3 +4,4 @@ packages/bitcoin/wasm/built
 **/coverage
 pnpm-lock.yaml
 **/tsconfig.json
+*.sh

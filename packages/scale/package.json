@@ -32,7 +32,7 @@
     }
   },
   "devDependencies": {
-    "@vitest/ui": "3.1.1"
+    "@vitest/ui": "4.0.18"
   },
   "dependencies": {
     "@chainflip/utils": "^0.8.22",

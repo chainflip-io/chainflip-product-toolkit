@@ -7,6 +7,7 @@ import {
   numberOrHex,
   cfPoolsEnvironment,
   cfPoolDepth,
+  cfPoolOrders,
   cfAccounts,
   cfGetTradingStrategies,
   cfGetTradingStrategyLimits,
@@ -30,6 +31,7 @@ import {
   liquidityProviderAccount,
   loanAccounts,
   monitoringSimulateAuction,
+  poolOrders,
   safeModeStatuses,
   tradingStrategies,
   tradingStrategiesLimits,
@@ -1905,6 +1907,31 @@ describe('parsers', () => {
       expect(result.fees.Solana.SOL).not.toBeNull();
       expect(result.fees.Solana.USDC).not.toBeNull();
     });
+
+    it('uses default fee info when fee is null', () => {
+      const result = cfPoolsEnvironment.parse({
+        fees: {
+          Ethereum: { ETH: null, FLIP: null, USDC: null, USDT: null },
+          Polkadot: { DOT: null },
+          Bitcoin: { BTC: null },
+          Arbitrum: { ETH: null, USDC: null },
+          Solana: { SOL: null, USDC: null },
+          Assethub: { DOT: null, USDC: null, USDT: null },
+        },
+      });
+
+      // Default values should be applied for null fees
+      // Note: string values like '0x0' are NOT transformed by u256 when coming from defaults
+      expect(result.fees.Ethereum.ETH).toEqual({
+        limit_order_fee_hundredth_pips: 0,
+        range_order_fee_hundredth_pips: 0,
+        range_order_total_fees_earned: { base: '0x0', quote: '0x0' },
+        limit_order_total_fees_earned: { base: '0x0', quote: '0x0' },
+        range_total_swap_inputs: { base: '0x0', quote: '0x0' },
+        limit_total_swap_inputs: { base: '0x0', quote: '0x0' },
+        quote_asset: { chain: 'Ethereum', asset: 'USDC' },
+      });
+    });
   });
 
   describe('cfPoolDepth', () => {
@@ -1936,6 +1963,28 @@ describe('parsers', () => {
       expect(result?.asks.range_orders.depth).not.toBeNull();
       expect(result?.bids.limit_orders.depth).not.toBeNull();
       expect(result?.bids.range_orders.depth).not.toBeNull();
+    });
+  });
+
+  describe('cfPoolOrders', () => {
+    it('parses the cfPoolOrders response', () => {
+      const result = cfPoolOrders.parse(poolOrders);
+
+      expect(result.limit_orders.asks).toHaveLength(1);
+      expect(result.limit_orders.asks[0]).toMatchObject({
+        type: 'ask',
+        lp: 'cFLGvPhhrribWCx9id5kLVqwiFK4QiVNjQ6ViyaRFF2Nrgq7j',
+      });
+      expect(result.limit_orders.bids).toHaveLength(1);
+      expect(result.limit_orders.bids[0]).toMatchObject({
+        type: 'bid',
+        lp: 'cFLvCBxThPho4LP8iSP54B1iHdEtJhTHniUW5yyNcwDBGSe1X',
+      });
+      expect(result.range_orders).toHaveLength(1);
+      expect(result.range_orders[0]).toMatchObject({
+        type: 'range',
+        lp: 'cFM63NFq2MiujSSXUz1AfZgb4aZrkv5aWggdLkyufyTcpkrf2',
+      });
     });
   });
 
@@ -2267,130 +2316,6 @@ describe('parsers', () => {
   });
 
   describe('cfSafeModeStatuses', () => {
-    it('parses the 1.11 cfSafeModeStatuses response', () => {
-      const result = cfSafeModeStatuses.parse(safeModeStatuses);
-      expect(result).toMatchInlineSnapshot(`
-        {
-          "asset_balances": {
-            "reconciliation_enabled": true,
-          },
-          "broadcast_arbitrum": {
-            "egress_witnessing_enabled": true,
-            "retry_enabled": true,
-          },
-          "broadcast_assethub": {
-            "egress_witnessing_enabled": true,
-            "retry_enabled": true,
-          },
-          "broadcast_bitcoin": {
-            "egress_witnessing_enabled": true,
-            "retry_enabled": true,
-          },
-          "broadcast_ethereum": {
-            "egress_witnessing_enabled": true,
-            "retry_enabled": true,
-          },
-          "broadcast_polkadot": {
-            "egress_witnessing_enabled": true,
-            "retry_enabled": true,
-          },
-          "broadcast_solana": {
-            "egress_witnessing_enabled": true,
-            "retry_enabled": true,
-          },
-          "elections_generic": {
-            "oracle_price_elections": true,
-          },
-          "emissions": {
-            "emissions_sync_enabled": true,
-          },
-          "funding": {
-            "redeem_enabled": true,
-          },
-          "ingress_egress_arbitrum": {
-            "boost_deposits_enabled": true,
-            "deposit_channel_creation_enabled": true,
-            "deposit_channel_witnessing_enabled": true,
-            "vault_deposit_witnessing_enabled": true,
-          },
-          "ingress_egress_assethub": {
-            "boost_deposits_enabled": true,
-            "deposit_channel_creation_enabled": true,
-            "deposit_channel_witnessing_enabled": true,
-            "vault_deposit_witnessing_enabled": true,
-          },
-          "ingress_egress_bitcoin": {
-            "boost_deposits_enabled": true,
-            "deposit_channel_creation_enabled": true,
-            "deposit_channel_witnessing_enabled": true,
-            "vault_deposit_witnessing_enabled": true,
-          },
-          "ingress_egress_ethereum": {
-            "boost_deposits_enabled": true,
-            "deposit_channel_creation_enabled": true,
-            "deposit_channel_witnessing_enabled": true,
-            "vault_deposit_witnessing_enabled": true,
-          },
-          "ingress_egress_polkadot": {
-            "boost_deposits_enabled": true,
-            "deposit_channel_creation_enabled": true,
-            "deposit_channel_witnessing_enabled": true,
-            "vault_deposit_witnessing_enabled": true,
-          },
-          "ingress_egress_solana": {
-            "boost_deposits_enabled": true,
-            "deposit_channel_creation_enabled": true,
-            "deposit_channel_witnessing_enabled": true,
-            "vault_deposit_witnessing_enabled": true,
-          },
-          "lending_pools": {
-            "add_boost_funds_enabled": true,
-            "stop_boosting_enabled": true,
-          },
-          "liquidity_provider": {
-            "deposit_enabled": true,
-            "internal_swaps_enabled": true,
-            "withdrawal_enabled": true,
-          },
-          "pools": {
-            "limit_order_update_enabled": true,
-            "range_order_update_enabled": true,
-          },
-          "reputation": {
-            "reporting_enabled": true,
-          },
-          "swapping": {
-            "broker_registration_enabled": true,
-            "swaps_enabled": true,
-            "withdrawals_enabled": true,
-          },
-          "threshold_signature_bitcoin": {
-            "slashing_enabled": true,
-          },
-          "threshold_signature_evm": {
-            "slashing_enabled": true,
-          },
-          "threshold_signature_polkadot": {
-            "slashing_enabled": true,
-          },
-          "threshold_signature_solana": {
-            "slashing_enabled": true,
-          },
-          "trading_strategies": {
-            "strategy_closure_enabled": true,
-            "strategy_execution_enabled": true,
-            "strategy_updates_enabled": true,
-          },
-          "validator": {
-            "authority_rotation_enabled": true,
-            "start_bidding_enabled": true,
-            "stop_bidding_enabled": true,
-          },
-          "witnesser": "CodeGreen",
-        }
-      `);
-    });
-
     it('parses the 1.12 cfSafeModeStatuses response', () => {
       const lendingPoolEnabledRpcAssets = chainflipAssets
         .filter((asset) => asset !== 'Dot')
