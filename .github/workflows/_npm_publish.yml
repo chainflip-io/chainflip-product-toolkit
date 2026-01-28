@@ -65,11 +65,7 @@ jobs:
           done
 
       - name: Build 🏗️
-        env:
-          NODE_OPTIONS: '--max-old-space-size=16384'
         run: ${{ inputs.build_cmd }}
 
       - name: Publish npm package 📦
-        env:
-          NODE_OPTIONS: '--max-old-space-size=16384'
         run: ${{ inputs.publish_cmd }}
