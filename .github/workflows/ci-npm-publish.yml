@@ -108,7 +108,7 @@ jobs:
       package_registry: 'https://registry.npmjs.org'
       package_scope: '@chainflip-io'
       build_cmd: pnpm --filter @chainflip/${{ needs.get-release-context.outputs.publish }} build
-      publish_cmd: pnpm --filter @chainflip/${{ needs.get-release-context.outputs.publish }} publish --tag ${{ needs.get-release-context.outputs.publish-tag }}
+      publish_cmd: pnpm --filter @chainflip/${{ needs.get-release-context.outputs.publish }} publish --tag ${{ needs.get-release-context.outputs.publish-tag }} --provenance --access public
       runs_on: ubuntu-latest
 
   # ============================================
@@ -172,5 +172,5 @@ jobs:
       package_registry: 'https://registry.npmjs.org'
       package_scope: '@chainflip-io'
       build_cmd: pnpm --filter @chainflip/${{ inputs.package }} build
-      publish_cmd: pnpm --filter @chainflip/${{ inputs.package }} publish --tag ${{ inputs.npm_tag }} --no-git-checks
+      publish_cmd: pnpm --filter @chainflip/${{ inputs.package }} publish --tag ${{ inputs.npm_tag }} --no-git-checks --provenance --access public
       runs_on: ubuntu-latest

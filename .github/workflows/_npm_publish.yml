@@ -12,7 +12,7 @@ on:
         description: Node version
         required: false
         type: string
-        default: 22.x
+        default: 24.x
       package_registry:
         description: Package registry
         required: false
@@ -32,7 +32,7 @@ on:
         description: Publish command
         required: false
         type: string
-        default: pnpm publish
+        default: pnpm publish --provenance --access public
 
 permissions:
   contents: write
