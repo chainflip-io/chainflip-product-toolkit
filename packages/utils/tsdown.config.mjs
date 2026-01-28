@@ -5,8 +5,7 @@ export default defineConfig({
   dts: true,
   unbundle: true,
   format: ['cjs', 'esm'],
-  external: ['*'],
-  noExternal: ['@noble/hashes/*'],
+  skipNodeModulesBundle: true,
   entry: ['./src/*.ts'],
   target: 'es2022',
   outExtensions: ({ format }) => ({
