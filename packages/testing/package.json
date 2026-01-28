@@ -9,8 +9,7 @@
     "prettier:write": "pnpm prettier:base --write",
     "prepublish": "pnpm build && pnpm test run",
     "clean": "rm -rf dist",
-    "tsup:build": "tsup ./src/index.ts --format esm --dts --treeshake",
-    "build": "pnpm clean && pnpm tsup:build",
+    "build": "tsdown",
     "test:ci": "CI=1 pnpm t run",
     "test": "vitest"
   },
