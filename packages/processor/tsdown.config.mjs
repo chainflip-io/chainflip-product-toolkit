@@ -10,7 +10,7 @@ const baseConfig = defineConfig({
   target: 'es2022',
   inlineOnly: false,
   outExtensions: ({ format }) => {
-    const type = format === 'es' ? '' : 'c';
+    const type = format === 'es' ? 'm' : 'c';
 
     return { js: `.${type}js`, dts: `.d.ts` };
   },

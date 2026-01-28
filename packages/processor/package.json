@@ -41,7 +41,7 @@
       },
       "import": {
         "types": "./dist/*.d.ts",
-        "default": "./dist/*.js"
+        "default": "./dist/*.mjs"
       }
     },
     ".": {
@@ -51,7 +51,7 @@
       },
       "import": {
         "types": "./dist/index.d.ts",
-        "default": "./dist/index.js"
+        "default": "./dist/index.mjs"
       }
     }
   }
