@@ -12,7 +12,7 @@ const baseConfig = defineConfig({
   outExtensions: ({ format }) => {
     const type = format === 'es' ? 'm' : 'c';
 
-    return { js: `.${type}js`, dts: `.d.${type}ts` };
+    return { js: `.${type}js`, dts: `.d.ts` };
   },
 });
 
