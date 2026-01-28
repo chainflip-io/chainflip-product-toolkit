@@ -9,8 +9,7 @@
     "prettier:write": "pnpm prettier:base --write",
     "prepublish": "pnpm build && pnpm test run",
     "clean": "rm -rf dist",
-    "tsup:build": "tsup ./src/index.ts --format esm,cjs --dts --treeshake",
-    "build": "pnpm clean && pnpm tsup:build",
+    "build": "pnpm clean && pnpm tsdown",
     "test:ci": "CI=1 pnpm t run",
     "test": "vitest"
   },
@@ -26,7 +25,7 @@
   "exports": {
     ".": {
       "require": {
-        "types": "./dist/index.d.cts",
+        "types": "./dist/index.d.ts",
         "default": "./dist/index.cjs"
       },
       "import": {

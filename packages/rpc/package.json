@@ -1,6 +1,6 @@
 {
   "name": "@chainflip/rpc",
-  "version": "2.0.7",
+  "version": "2.0.7-wbtc-dev.2",
   "type": "module",
   "scripts": {
     "eslint:check": "pnpm eslint --max-warnings 0 './**/*.ts'",
@@ -9,13 +9,13 @@
     "prettier:write": "pnpm prettier:base --write",
     "clean": "rm -rf dist",
     "prepublish": "pnpm test run && pnpm build",
-    "build": "pnpm clean && pnpm tsup",
+    "build": "pnpm clean && pnpm tsdown",
     "test:ci": "CI=1 pnpm t run",
     "test": "vitest",
     "coverage": "vitest run --coverage"
   },
   "dependencies": {
-    "@chainflip/utils": "0.11.0",
+    "@chainflip/utils": "0.11.2-wbtc-dev.2",
     "zod": "^3.25.75"
   },
   "devDependencies": {
@@ -30,7 +30,7 @@
   "exports": {
     "./*": {
       "require": {
-        "types": "./dist/*.d.cts",
+        "types": "./dist/*.d.ts",
         "default": "./dist/*.cjs"
       },
       "import": {
@@ -40,7 +40,7 @@
     },
     ".": {
       "require": {
-        "types": "./dist/index.d.cts",
+        "types": "./dist/index.d.ts",
         "default": "./dist/index.cjs"
       },
       "import": {
