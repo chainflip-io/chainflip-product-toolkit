@@ -64,6 +64,7 @@ export const cfPrimitivesChainsAssetsAnyAsset = simpleEnum([
   'HubUsdc',
   'Wbtc',
   'ArbUsdt',
+  'SolUsdt',
 ]);
 
 export const cfTraitsSafeModeSafeModeSet = z.discriminatedUnion('__kind', [
@@ -142,6 +143,16 @@ export const stateChainRuntimeChainflipGenericElectionsGenericElectionsSafeMode 
   oraclePriceElections: z.boolean(),
 });
 
+export const stateChainRuntimeChainflipEthereumElectionsEthereumElectionsSafeMode = z.object({
+  stateChainGatewayWitnessing: z.boolean(),
+  keyManagerWitnessing: z.boolean(),
+  scUtilsWitnessing: z.boolean(),
+});
+
+export const stateChainRuntimeChainflipArbitrumElectionsArbitrumElectionsSafeMode = z.object({
+  keyManagerWitnessing: z.boolean(),
+});
+
 export const stateChainRuntimeSafeModeInnerRuntimeSafeMode = z.object({
   emissions: palletCfEmissionsPalletSafeMode,
   funding: palletCfFundingPalletSafeMode,
@@ -171,6 +182,8 @@ export const stateChainRuntimeSafeModeInnerRuntimeSafeMode = z.object({
   ingressEgressSolana: palletCfIngressEgressPalletSafeMode,
   ingressEgressAssethub: palletCfIngressEgressPalletSafeMode,
   electionsGeneric: stateChainRuntimeChainflipGenericElectionsGenericElectionsSafeMode,
+  ethereumElections: stateChainRuntimeChainflipEthereumElectionsEthereumElectionsSafeMode,
+  arbitrumElections: stateChainRuntimeChainflipArbitrumElectionsArbitrumElectionsSafeMode,
 });
 
 export const palletCfEnvironmentSafeModeUpdate = z.discriminatedUnion('__kind', [
@@ -930,19 +943,47 @@ export const palletCfArbitrumIngressEgressPalletConfigUpdateArbitrum = z.discrim
   ],
 );
 
+export const cfPrimitivesChainsAssetsSolAsset = simpleEnum(['Sol', 'SolUsdc', 'SolUsdt']);
+
+export const cfChainsSolVaultSwapOrDepositChannelId = z.discriminatedUnion('__kind', [
+  z.object({ __kind: z.literal('Channel'), value: hexString }),
+  z.object({ __kind: z.literal('VaultSwapAccount'), value: z.tuple([hexString, numberOrHex]) }),
+]);
+
+export const palletCfSolanaIngressEgressRefundReason = simpleEnum([
+  'InvalidBrokerFees',
+  'InvalidRefundParameters',
+  'InvalidDcaParameters',
+  'CcmUnsupportedForTargetChain',
+  'CcmInvalidMetadata',
+  'InvalidDestinationAddress',
+]);
+
+export const palletCfSolanaIngressEgressDepositAction = z.discriminatedUnion('__kind', [
+  z.object({ __kind: z.literal('Swap'), swapRequestId: numberOrHex }),
+  z.object({ __kind: z.literal('LiquidityProvision'), lpAccount: accountId }),
+  z.object({ __kind: z.literal('CcmTransfer'), swapRequestId: numberOrHex }),
+  z.object({
+    __kind: z.literal('BoostersCredited'),
+    prewitnessedDepositId: numberOrHex,
+    networkFeeFromBoost: numberOrHex,
+    networkFeeSwapRequestId: numberOrHex.nullish(),
+  }),
+  z.object({
+    __kind: z.literal('Refund'),
+    egressId: z.tuple([cfPrimitivesChainsForeignChain, numberOrHex]).nullish(),
+    reason: palletCfSolanaIngressEgressRefundReason,
+    amount: numberOrHex,
+  }),
+  z.object({ __kind: z.literal('Unrefundable') }),
+]);
+
 export const palletCfSolanaIngressEgressDepositFailedReason = z.discriminatedUnion('__kind', [
   z.object({ __kind: z.literal('BelowMinimumDeposit') }),
   z.object({ __kind: z.literal('NotEnoughToPayFees') }),
   z.object({ __kind: z.literal('TransactionRejectedByBroker') }),
   z.object({ __kind: z.literal('DepositWitnessRejected'), value: spRuntimeDispatchError }),
   z.object({ __kind: z.literal('Unrefundable') }),
-]);
-
-export const cfPrimitivesChainsAssetsSolAsset = simpleEnum(['Sol', 'SolUsdc']);
-
-export const cfChainsSolVaultSwapOrDepositChannelId = z.discriminatedUnion('__kind', [
-  z.object({ __kind: z.literal('Channel'), value: hexString }),
-  z.object({ __kind: z.literal('VaultSwapAccount'), value: z.tuple([hexString, numberOrHex]) }),
 ]);
 
 export const palletCfSolanaIngressEgressDepositWitnessSolana = z.object({
@@ -996,6 +1037,30 @@ export const palletCfSolanaIngressEgressDepositFailedDetailsSolana = z.discrimin
     }),
   ],
 );
+
+export const cfTraitsScheduledEgressDetailsSolana = z.object({
+  egressId: z.tuple([cfPrimitivesChainsForeignChain, numberOrHex]),
+  egressAmount: numberOrHex,
+  feeWithheld: numberOrHex,
+});
+
+export const palletCfSolanaIngressEgressPalletConfigUpdateSolana = z.discriminatedUnion('__kind', [
+  z.object({ __kind: z.literal('ChannelOpeningFeeSolana'), fee: numberOrHex }),
+  z.object({
+    __kind: z.literal('SetMinimumDepositSolana'),
+    asset: cfPrimitivesChainsAssetsSolAsset,
+    minimumDeposit: numberOrHex,
+  }),
+  z.object({ __kind: z.literal('SetDepositChannelLifetimeSolana'), lifetime: numberOrHex }),
+  z.object({ __kind: z.literal('SetWitnessSafetyMarginSolana'), margin: numberOrHex }),
+  z.object({ __kind: z.literal('SetBoostDelaySolana'), delayBlocks: z.number() }),
+  z.object({
+    __kind: z.literal('SetMaximumPreallocatedChannelsSolana'),
+    accountRole: cfPrimitivesAccountRole,
+    numChannels: z.number(),
+  }),
+  z.object({ __kind: z.literal('SetIngressDelaySolana'), delayBlocks: z.number() }),
+]);
 
 export const palletCfAssethubIngressEgressDepositFailedReason = z.discriminatedUnion('__kind', [
   z.object({ __kind: z.literal('BelowMinimumDeposit') }),
@@ -1099,6 +1164,11 @@ export const palletCfTradingStrategyPalletConfigUpdate = z.discriminatedUnion('_
   }),
 ]);
 
+export const palletCfLendingPoolsBoostConfiguration = z.object({
+  networkFeeDeductionFromBoostPercent: z.number(),
+  minimumAddFundsAmount: z.array(z.tuple([cfPrimitivesChainsAssetsAnyAsset, numberOrHex])),
+});
+
 export const palletCfLendingPoolsGeneralLendingConfigInterestRateConfiguration = z.object({
   interestAtZeroUtilisation: z.number(),
   junctionUtilisation: z.number(),
@@ -1130,7 +1200,7 @@ export const palletCfLendingPoolsGeneralLendingConfigNetworkFeeContributions = z
 });
 
 export const palletCfLendingPoolsPalletConfigUpdate = z.discriminatedUnion('__kind', [
-  z.object({ __kind: z.literal('SetNetworkFeeDeductionFromBoost'), deductionPercent: z.number() }),
+  z.object({ __kind: z.literal('SetBoostConfig'), config: palletCfLendingPoolsBoostConfiguration }),
   z.object({
     __kind: z.literal('SetLendingPoolConfiguration'),
     asset: cfPrimitivesChainsAssetsAnyAsset.nullish(),
@@ -1187,3 +1257,24 @@ export const palletCfLendingPoolsLoanRepaidActionType = z.discriminatedUnion('__
   z.object({ __kind: z.literal('Manual') }),
   z.object({ __kind: z.literal('Liquidation'), swapRequestId: numberOrHex }),
 ]);
+
+export const palletCfElectionsElectoralSystemsCompositeTuple8ImplsCompositeElectionIdentifierExtra =
+  simpleEnum(['A', 'B', 'C', 'D', 'EE', 'FF', 'G', 'HH']);
+
+export const stateChainRuntimeChainflipEthereumElectionsEthereumElectoralEvents = z.object({
+  __kind: z.literal('ReorgDetected'),
+  reorgedBlocks: z.object({ start: numberOrHex, end: numberOrHex }),
+});
+
+export const palletCfElectionsElectoralSystemsCompositeTuple6ImplsCompositeElectionIdentifierExtra =
+  simpleEnum(['A', 'B', 'C', 'D', 'EE', 'FF']);
+
+export const cfChainsWitnessPeriodBlockWitnessRange = z.object({ root: numberOrHex });
+
+export const stateChainRuntimeChainflipArbitrumElectionsArbitrumElectoralEvents = z.object({
+  __kind: z.literal('ReorgDetected'),
+  reorgedBlocks: z.object({
+    start: cfChainsWitnessPeriodBlockWitnessRange,
+    end: cfChainsWitnessPeriodBlockWitnessRange,
+  }),
+});

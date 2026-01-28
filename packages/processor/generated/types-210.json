@@ -903,6 +903,13 @@
                                       "type": "primitive",
                                       "value": "null"
                                     }
+                                  },
+                                  {
+                                    "name": "SolUsdt",
+                                    "value": {
+                                      "type": "primitive",
+                                      "value": "null"
+                                    }
                                   }
                                 ]
                               }
@@ -1043,6 +1050,13 @@
                                   },
                                   {
                                     "name": "ArbUsdt",
+                                    "value": {
+                                      "type": "primitive",
+                                      "value": "null"
+                                    }
+                                  },
+                                  {
+                                    "name": "SolUsdt",
                                     "value": {
                                       "type": "primitive",
                                       "value": "null"
@@ -1191,6 +1205,13 @@
                                       "type": "primitive",
                                       "value": "null"
                                     }
+                                  },
+                                  {
+                                    "name": "SolUsdt",
+                                    "value": {
+                                      "type": "primitive",
+                                      "value": "null"
+                                    }
                                   }
                                 ]
                               }
@@ -1335,6 +1356,13 @@
                                       "type": "primitive",
                                       "value": "null"
                                     }
+                                  },
+                                  {
+                                    "name": "SolUsdt",
+                                    "value": {
+                                      "type": "primitive",
+                                      "value": "null"
+                                    }
                                   }
                                 ]
                               }
@@ -1475,6 +1503,13 @@
                                   },
                                   {
                                     "name": "ArbUsdt",
+                                    "value": {
+                                      "type": "primitive",
+                                      "value": "null"
+                                    }
+                                  },
+                                  {
+                                    "name": "SolUsdt",
                                     "value": {
                                       "type": "primitive",
                                       "value": "null"
@@ -1902,6 +1937,34 @@
                     "$name": "StateChainRuntimeChainflipGenericElectionsGenericElectionsSafeMode",
                     "fields": {
                       "oraclePriceElections": {
+                        "type": "primitive",
+                        "value": "bool"
+                      }
+                    }
+                  },
+                  "ethereumElections": {
+                    "type": "struct",
+                    "$name": "StateChainRuntimeChainflipEthereumElectionsEthereumElectionsSafeMode",
+                    "fields": {
+                      "stateChainGatewayWitnessing": {
+                        "type": "primitive",
+                        "value": "bool"
+                      },
+                      "keyManagerWitnessing": {
+                        "type": "primitive",
+                        "value": "bool"
+                      },
+                      "scUtilsWitnessing": {
+                        "type": "primitive",
+                        "value": "bool"
+                      }
+                    }
+                  },
+                  "arbitrumElections": {
+                    "type": "struct",
+                    "$name": "StateChainRuntimeChainflipArbitrumElectionsArbitrumElectionsSafeMode",
+                    "fields": {
+                      "keyManagerWitnessing": {
                         "type": "primitive",
                         "value": "bool"
                       }
@@ -2819,6 +2882,13 @@
                       },
                       {
                         "name": "ArbUsdt",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      },
+                      {
+                        "name": "SolUsdt",
                         "value": {
                           "type": "primitive",
                           "value": "null"
@@ -10252,6 +10322,13 @@
                 "type": "primitive",
                 "value": "null"
               }
+            },
+            {
+              "name": "SolUsdt",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
             }
           ]
         },
@@ -10370,6 +10447,13 @@
             },
             {
               "name": "ArbUsdt",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "SolUsdt",
               "value": {
                 "type": "primitive",
                 "value": "null"
@@ -12362,6 +12446,13 @@
                 "type": "primitive",
                 "value": "null"
               }
+            },
+            {
+              "name": "SolUsdt",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
             }
           ]
         },
@@ -12476,6 +12567,13 @@
             },
             {
               "name": "ArbUsdt",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "SolUsdt",
               "value": {
                 "type": "primitive",
                 "value": "null"
@@ -13069,6 +13167,13 @@
                 "type": "primitive",
                 "value": "null"
               }
+            },
+            {
+              "name": "SolUsdt",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
             }
           ]
         },
@@ -13183,6 +13288,13 @@
             },
             {
               "name": "ArbUsdt",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "SolUsdt",
               "value": {
                 "type": "primitive",
                 "value": "null"
@@ -13408,6 +13520,13 @@
                 "type": "primitive",
                 "value": "null"
               }
+            },
+            {
+              "name": "SolUsdt",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
             }
           ]
         },
@@ -13533,6 +13652,13 @@
                 },
                 {
                   "name": "ArbUsdt",
+                  "value": {
+                    "type": "primitive",
+                    "value": "null"
+                  }
+                },
+                {
+                  "name": "SolUsdt",
                   "value": {
                     "type": "primitive",
                     "value": "null"
@@ -13730,6 +13856,13 @@
                 "type": "primitive",
                 "value": "null"
               }
+            },
+            {
+              "name": "SolUsdt",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
             }
           ]
         },
@@ -13855,6 +13988,13 @@
                 },
                 {
                   "name": "ArbUsdt",
+                  "value": {
+                    "type": "primitive",
+                    "value": "null"
+                  }
+                },
+                {
+                  "name": "SolUsdt",
                   "value": {
                     "type": "primitive",
                     "value": "null"
@@ -14052,6 +14192,13 @@
             },
             {
               "name": "ArbUsdt",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "SolUsdt",
               "value": {
                 "type": "primitive",
                 "value": "null"
@@ -14255,6 +14402,13 @@
                 "type": "primitive",
                 "value": "null"
               }
+            },
+            {
+              "name": "SolUsdt",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
             }
           ]
         },
@@ -14406,6 +14560,13 @@
                 "type": "primitive",
                 "value": "null"
               }
+            },
+            {
+              "name": "SolUsdt",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
             }
           ]
         },
@@ -14537,6 +14698,13 @@
             },
             {
               "name": "ArbUsdt",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "SolUsdt",
               "value": {
                 "type": "primitive",
                 "value": "null"
@@ -14897,6 +15065,13 @@
             },
             {
               "name": "ArbUsdt",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "SolUsdt",
               "value": {
                 "type": "primitive",
                 "value": "null"
@@ -15312,6 +15487,13 @@
                 "type": "primitive",
                 "value": "null"
               }
+            },
+            {
+              "name": "SolUsdt",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
             }
           ]
         },
@@ -15443,6 +15625,13 @@
             },
             {
               "name": "ArbUsdt",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "SolUsdt",
               "value": {
                 "type": "primitive",
                 "value": "null"
@@ -15583,6 +15772,13 @@
                       },
                       {
                         "name": "ArbUsdt",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      },
+                      {
+                        "name": "SolUsdt",
                         "value": {
                           "type": "primitive",
                           "value": "null"
@@ -15764,6 +15960,13 @@
                       },
                       {
                         "name": "ArbUsdt",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      },
+                      {
+                        "name": "SolUsdt",
                         "value": {
                           "type": "primitive",
                           "value": "null"
@@ -15954,6 +16157,13 @@
                           "type": "primitive",
                           "value": "null"
                         }
+                      },
+                      {
+                        "name": "SolUsdt",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
                       }
                     ]
                   },
@@ -16083,6 +16293,13 @@
                       },
                       {
                         "name": "ArbUsdt",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      },
+                      {
+                        "name": "SolUsdt",
                         "value": {
                           "type": "primitive",
                           "value": "null"
@@ -16310,6 +16527,13 @@
                 "type": "primitive",
                 "value": "null"
               }
+            },
+            {
+              "name": "SolUsdt",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
             }
           ]
         },
@@ -16470,6 +16694,19 @@
           ]
         }
       }
+    },
+    "BoundBrokerWithdrawalAddress": {
+      "type": "struct",
+      "fields": {
+        "broker": {
+          "type": "primitive",
+          "value": "AccountId32"
+        },
+        "address": {
+          "type": "primitive",
+          "value": "H160"
+        }
+      }
     }
   },
   "LiquidityProvider": {
@@ -16591,6 +16828,13 @@
             },
             {
               "name": "ArbUsdt",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "SolUsdt",
               "value": {
                 "type": "primitive",
                 "value": "null"
@@ -16862,6 +17106,13 @@
             },
             {
               "name": "ArbUsdt",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "SolUsdt",
               "value": {
                 "type": "primitive",
                 "value": "null"
@@ -17266,6 +17517,13 @@
             },
             {
               "name": "ArbUsdt",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "SolUsdt",
               "value": {
                 "type": "primitive",
                 "value": "null"
@@ -19112,6 +19370,13 @@
                           },
                           {
                             "name": "ArbUsdt",
+                            "value": {
+                              "type": "primitive",
+                              "value": "null"
+                            }
+                          },
+                          {
+                            "name": "SolUsdt",
                             "value": {
                               "type": "primitive",
                               "value": "null"
@@ -22808,6 +23073,13 @@
                           },
                           {
                             "name": "ArbUsdt",
+                            "value": {
+                              "type": "primitive",
+                              "value": "null"
+                            }
+                          },
+                          {
+                            "name": "SolUsdt",
                             "value": {
                               "type": "primitive",
                               "value": "null"
@@ -26808,6 +27080,13 @@
                               "type": "primitive",
                               "value": "null"
                             }
+                          },
+                          {
+                            "name": "SolUsdt",
+                            "value": {
+                              "type": "primitive",
+                              "value": "null"
+                            }
                           }
                         ]
                       },
@@ -29359,6 +29638,13 @@
                 "type": "primitive",
                 "value": "null"
               }
+            },
+            {
+              "name": "SolUsdt",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
             }
           ]
         },
@@ -29473,6 +29759,13 @@
             },
             {
               "name": "ArbUsdt",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "SolUsdt",
               "value": {
                 "type": "primitive",
                 "value": "null"
@@ -29612,6 +29905,13 @@
                 "type": "primitive",
                 "value": "null"
               }
+            },
+            {
+              "name": "SolUsdt",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
             }
           ]
         },
@@ -29726,6 +30026,13 @@
             },
             {
               "name": "ArbUsdt",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "SolUsdt",
               "value": {
                 "type": "primitive",
                 "value": "null"
@@ -29949,6 +30256,13 @@
                 "type": "primitive",
                 "value": "null"
               }
+            },
+            {
+              "name": "SolUsdt",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
             }
           ]
         },
@@ -30063,6 +30377,13 @@
             },
             {
               "name": "ArbUsdt",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "SolUsdt",
               "value": {
                 "type": "primitive",
                 "value": "null"
@@ -30253,6 +30574,13 @@
                 "type": "primitive",
                 "value": "null"
               }
+            },
+            {
+              "name": "SolUsdt",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
             }
           ]
         },
@@ -30367,6 +30695,13 @@
             },
             {
               "name": "ArbUsdt",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "SolUsdt",
               "value": {
                 "type": "primitive",
                 "value": "null"
@@ -30502,6 +30837,13 @@
                 "type": "primitive",
                 "value": "null"
               }
+            },
+            {
+              "name": "SolUsdt",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
             }
           ]
         },
@@ -30616,6 +30958,13 @@
             },
             {
               "name": "ArbUsdt",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "SolUsdt",
               "value": {
                 "type": "primitive",
                 "value": "null"
@@ -31027,6 +31376,13 @@
                         "type": "primitive",
                         "value": "null"
                       }
+                    },
+                    {
+                      "name": "SolUsdt",
+                      "value": {
+                        "type": "primitive",
+                        "value": "null"
+                      }
                     }
                   ]
                 },
@@ -31141,6 +31497,13 @@
                     },
                     {
                       "name": "ArbUsdt",
+                      "value": {
+                        "type": "primitive",
+                        "value": "null"
+                      }
+                    },
+                    {
+                      "name": "SolUsdt",
                       "value": {
                         "type": "primitive",
                         "value": "null"
@@ -31288,6 +31651,13 @@
                           "type": "primitive",
                           "value": "null"
                         }
+                      },
+                      {
+                        "name": "SolUsdt",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
                       }
                     ]
                   },
@@ -31402,6 +31772,13 @@
                       },
                       {
                         "name": "ArbUsdt",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      },
+                      {
+                        "name": "SolUsdt",
                         "value": {
                           "type": "primitive",
                           "value": "null"
@@ -31556,6 +31933,13 @@
                           "type": "primitive",
                           "value": "null"
                         }
+                      },
+                      {
+                        "name": "SolUsdt",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
                       }
                     ]
                   },
@@ -31670,6 +32054,13 @@
                       },
                       {
                         "name": "ArbUsdt",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      },
+                      {
+                        "name": "SolUsdt",
                         "value": {
                           "type": "primitive",
                           "value": "null"
@@ -31811,6 +32202,13 @@
                       },
                       {
                         "name": "ArbUsdt",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      },
+                      {
+                        "name": "SolUsdt",
                         "value": {
                           "type": "primitive",
                           "value": "null"
@@ -34234,6 +34632,13 @@
                           },
                           {
                             "name": "ArbUsdt",
+                            "value": {
+                              "type": "primitive",
+                              "value": "null"
+                            }
+                          },
+                          {
+                            "name": "SolUsdt",
                             "value": {
                               "type": "primitive",
                               "value": "null"
@@ -37466,6 +37871,13 @@
                 "type": "primitive",
                 "value": "null"
               }
+            },
+            {
+              "name": "SolUsdt",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
             }
           ]
         },
@@ -37766,6 +38178,13 @@
             },
             {
               "name": "SolUsdc",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "SolUsdt",
               "value": {
                 "type": "primitive",
                 "value": "null"
@@ -38596,6 +39015,13 @@
                 "type": "primitive",
                 "value": "null"
               }
+            },
+            {
+              "name": "SolUsdt",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
             }
           ]
         }
@@ -38988,6 +39414,13 @@
                               "type": "primitive",
                               "value": "null"
                             }
+                          },
+                          {
+                            "name": "SolUsdt",
+                            "value": {
+                              "type": "primitive",
+                              "value": "null"
+                            }
                           }
                         ]
                       },
@@ -39059,6 +39492,13 @@
                           },
                           {
                             "name": "SolUsdc",
+                            "value": {
+                              "type": "primitive",
+                              "value": "null"
+                            }
+                          },
+                          {
+                            "name": "SolUsdt",
                             "value": {
                               "type": "primitive",
                               "value": "null"
@@ -39236,6 +39676,13 @@
                           },
                           {
                             "name": "ArbUsdt",
+                            "value": {
+                              "type": "primitive",
+                              "value": "null"
+                            }
+                          },
+                          {
+                            "name": "SolUsdt",
                             "value": {
                               "type": "primitive",
                               "value": "null"
@@ -39676,6 +40123,13 @@
             },
             {
               "name": "SolUsdc",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "SolUsdt",
               "value": {
                 "type": "primitive",
                 "value": "null"
@@ -40532,6 +40986,13 @@
                 "type": "primitive",
                 "value": "null"
               }
+            },
+            {
+              "name": "SolUsdt",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
             }
           ]
         },
@@ -40855,6 +41316,13 @@
                 "type": "primitive",
                 "value": "null"
               }
+            },
+            {
+              "name": "SolUsdt",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
             }
           ]
         },
@@ -41090,6 +41558,13 @@
                 "type": "primitive",
                 "value": "null"
               }
+            },
+            {
+              "name": "SolUsdt",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
             }
           ]
         },
@@ -41144,6 +41619,13 @@
                       },
                       {
                         "name": "SolUsdc",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      },
+                      {
+                        "name": "SolUsdt",
                         "value": {
                           "type": "primitive",
                           "value": "null"
@@ -42222,6 +42704,13 @@
                 "type": "primitive",
                 "value": "null"
               }
+            },
+            {
+              "name": "SolUsdt",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
             }
           ]
         },
@@ -42353,6 +42842,13 @@
             },
             {
               "name": "ArbUsdt",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "SolUsdt",
               "value": {
                 "type": "primitive",
                 "value": "null"
@@ -44644,6 +45140,13 @@
                               "type": "primitive",
                               "value": "null"
                             }
+                          },
+                          {
+                            "name": "SolUsdt",
+                            "value": {
+                              "type": "primitive",
+                              "value": "null"
+                            }
                           }
                         ]
                       },
@@ -46752,6 +47255,13 @@
                           "type": "primitive",
                           "value": "null"
                         }
+                      },
+                      {
+                        "name": "SolUsdt",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
                       }
                     ]
                   }
@@ -46882,6 +47392,13 @@
                       },
                       {
                         "name": "ArbUsdt",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      },
+                      {
+                        "name": "SolUsdt",
                         "value": {
                           "type": "primitive",
                           "value": "null"
@@ -47028,6 +47545,13 @@
                           "type": "primitive",
                           "value": "null"
                         }
+                      },
+                      {
+                        "name": "SolUsdt",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
                       }
                     ]
                   }
@@ -47158,6 +47682,13 @@
               },
               {
                 "name": "ArbUsdt",
+                "value": {
+                  "type": "primitive",
+                  "value": "null"
+                }
+              },
+              {
+                "name": "SolUsdt",
                 "value": {
                   "type": "primitive",
                   "value": "null"
@@ -47308,6 +47839,13 @@
                           "type": "primitive",
                           "value": "null"
                         }
+                      },
+                      {
+                        "name": "SolUsdt",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
                       }
                     ]
                   },
@@ -47437,6 +47975,13 @@
                       },
                       {
                         "name": "ArbUsdt",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      },
+                      {
+                        "name": "SolUsdt",
                         "value": {
                           "type": "primitive",
                           "value": "null"
@@ -47574,6 +48119,13 @@
                           "type": "primitive",
                           "value": "null"
                         }
+                      },
+                      {
+                        "name": "SolUsdt",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
                       }
                     ]
                   },
@@ -47598,13 +48150,151 @@
           "$name": "palletCfLendingPoolsPalletConfigUpdate",
           "values": [
             {
-              "name": "SetNetworkFeeDeductionFromBoost",
+              "name": "SetBoostConfig",
               "value": {
                 "type": "struct",
                 "fields": {
-                  "deductionPercent": {
-                    "type": "primitive",
-                    "value": "Percent"
+                  "config": {
+                    "type": "struct",
+                    "$name": "PalletCfLendingPoolsBoostConfiguration",
+                    "fields": {
+                      "networkFeeDeductionFromBoostPercent": {
+                        "type": "primitive",
+                        "value": "Percent"
+                      },
+                      "minimumAddFundsAmount": {
+                        "type": "map",
+                        "key": {
+                          "type": "enum",
+                          "$name": "cfPrimitivesChainsAssetsAnyAsset",
+                          "values": [
+                            {
+                              "name": "__Unused0",
+                              "value": {
+                                "type": "primitive",
+                                "value": "null"
+                              }
+                            },
+                            {
+                              "name": "Eth",
+                              "value": {
+                                "type": "primitive",
+                                "value": "null"
+                              }
+                            },
+                            {
+                              "name": "Flip",
+                              "value": {
+                                "type": "primitive",
+                                "value": "null"
+                              }
+                            },
+                            {
+                              "name": "Usdc",
+                              "value": {
+                                "type": "primitive",
+                                "value": "null"
+                              }
+                            },
+                            {
+                              "name": "Dot",
+                              "value": {
+                                "type": "primitive",
+                                "value": "null"
+                              }
+                            },
+                            {
+                              "name": "Btc",
+                              "value": {
+                                "type": "primitive",
+                                "value": "null"
+                              }
+                            },
+                            {
+                              "name": "ArbEth",
+                              "value": {
+                                "type": "primitive",
+                                "value": "null"
+                              }
+                            },
+                            {
+                              "name": "ArbUsdc",
+                              "value": {
+                                "type": "primitive",
+                                "value": "null"
+                              }
+                            },
+                            {
+                              "name": "Usdt",
+                              "value": {
+                                "type": "primitive",
+                                "value": "null"
+                              }
+                            },
+                            {
+                              "name": "Sol",
+                              "value": {
+                                "type": "primitive",
+                                "value": "null"
+                              }
+                            },
+                            {
+                              "name": "SolUsdc",
+                              "value": {
+                                "type": "primitive",
+                                "value": "null"
+                              }
+                            },
+                            {
+                              "name": "HubDot",
+                              "value": {
+                                "type": "primitive",
+                                "value": "null"
+                              }
+                            },
+                            {
+                              "name": "HubUsdt",
+                              "value": {
+                                "type": "primitive",
+                                "value": "null"
+                              }
+                            },
+                            {
+                              "name": "HubUsdc",
+                              "value": {
+                                "type": "primitive",
+                                "value": "null"
+                              }
+                            },
+                            {
+                              "name": "Wbtc",
+                              "value": {
+                                "type": "primitive",
+                                "value": "null"
+                              }
+                            },
+                            {
+                              "name": "ArbUsdt",
+                              "value": {
+                                "type": "primitive",
+                                "value": "null"
+                              }
+                            },
+                            {
+                              "name": "SolUsdt",
+                              "value": {
+                                "type": "primitive",
+                                "value": "null"
+                              }
+                            }
+                          ]
+                        },
+                        "value": {
+                          "type": "primitive",
+                          "value": "u128"
+                        }
+                      }
+                    }
                   }
                 }
               }
@@ -47727,6 +48417,13 @@
                         },
                         {
                           "name": "ArbUsdt",
+                          "value": {
+                            "type": "primitive",
+                            "value": "null"
+                          }
+                        },
+                        {
+                          "name": "SolUsdt",
                           "value": {
                             "type": "primitive",
                             "value": "null"
@@ -48066,6 +48763,13 @@
                     "type": "primitive",
                     "value": "null"
                   }
+                },
+                {
+                  "name": "SolUsdt",
+                  "value": {
+                    "type": "primitive",
+                    "value": "null"
+                  }
                 }
               ]
             },
@@ -48199,6 +48903,13 @@
                 },
                 {
                   "name": "ArbUsdt",
+                  "value": {
+                    "type": "primitive",
+                    "value": "null"
+                  }
+                },
+                {
+                  "name": "SolUsdt",
                   "value": {
                     "type": "primitive",
                     "value": "null"
@@ -48344,6 +49055,13 @@
                     "type": "primitive",
                     "value": "null"
                   }
+                },
+                {
+                  "name": "SolUsdt",
+                  "value": {
+                    "type": "primitive",
+                    "value": "null"
+                  }
                 }
               ]
             },
@@ -48484,6 +49202,13 @@
                 "type": "primitive",
                 "value": "null"
               }
+            },
+            {
+              "name": "SolUsdt",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
             }
           ]
         }
@@ -48607,6 +49332,13 @@
             },
             {
               "name": "ArbUsdt",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "SolUsdt",
               "value": {
                 "type": "primitive",
                 "value": "null"
@@ -48742,6 +49474,13 @@
                 "type": "primitive",
                 "value": "null"
               }
+            },
+            {
+              "name": "SolUsdt",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
             }
           ]
         },
@@ -48871,6 +49610,13 @@
               },
               {
                 "name": "ArbUsdt",
+                "value": {
+                  "type": "primitive",
+                  "value": "null"
+                }
+              },
+              {
+                "name": "SolUsdt",
                 "value": {
                   "type": "primitive",
                   "value": "null"
@@ -49045,6 +49791,13 @@
                   "type": "primitive",
                   "value": "null"
                 }
+              },
+              {
+                "name": "SolUsdt",
+                "value": {
+                  "type": "primitive",
+                  "value": "null"
+                }
               }
             ]
           },
@@ -49173,6 +49926,13 @@
             },
             {
               "name": "ArbUsdt",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "SolUsdt",
               "value": {
                 "type": "primitive",
                 "value": "null"
@@ -49323,6 +50083,13 @@
               },
               {
                 "name": "ArbUsdt",
+                "value": {
+                  "type": "primitive",
+                  "value": "null"
+                }
+              },
+              {
+                "name": "SolUsdt",
                 "value": {
                   "type": "primitive",
                   "value": "null"
@@ -49864,6 +50631,218 @@
                       ]
                     },
                     "updatedAtOracleTimestamp": {
+                      "type": "primitive",
+                      "value": "u64"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  },
+  "EthereumElections": {
+    "CorruptStorage": {
+      "type": "primitive",
+      "value": "null"
+    },
+    "Uninitialized": {
+      "type": "primitive",
+      "value": "null"
+    },
+    "AllVotesCleared": {
+      "type": "primitive",
+      "value": "null"
+    },
+    "AllVotesNotCleared": {
+      "type": "primitive",
+      "value": "null"
+    },
+    "UnknownElection": {
+      "type": "tuple",
+      "values": [
+        {
+          "type": "primitive",
+          "value": "u64"
+        },
+        {
+          "type": "enum",
+          "$name": "palletCfElectionsElectoralSystemsCompositeTuple8ImplsCompositeElectionIdentifierExtra",
+          "values": [
+            {
+              "name": "A",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "B",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "C",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "D",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "EE",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "FF",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "G",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "HH",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "ElectoralEvent": {
+      "type": "enum",
+      "$name": "stateChainRuntimeChainflipEthereumElectionsEthereumElectoralEvents",
+      "values": [
+        {
+          "name": "ReorgDetected",
+          "value": {
+            "type": "struct",
+            "fields": {
+              "reorgedBlocks": {
+                "type": "range",
+                "value": {
+                  "type": "primitive",
+                  "value": "u64"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  },
+  "ArbitrumElections": {
+    "CorruptStorage": {
+      "type": "primitive",
+      "value": "null"
+    },
+    "Uninitialized": {
+      "type": "primitive",
+      "value": "null"
+    },
+    "AllVotesCleared": {
+      "type": "primitive",
+      "value": "null"
+    },
+    "AllVotesNotCleared": {
+      "type": "primitive",
+      "value": "null"
+    },
+    "UnknownElection": {
+      "type": "tuple",
+      "values": [
+        {
+          "type": "primitive",
+          "value": "u64"
+        },
+        {
+          "type": "enum",
+          "$name": "palletCfElectionsElectoralSystemsCompositeTuple6ImplsCompositeElectionIdentifierExtra",
+          "values": [
+            {
+              "name": "A",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "B",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "C",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "D",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "EE",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "FF",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "ElectoralEvent": {
+      "type": "enum",
+      "$name": "stateChainRuntimeChainflipArbitrumElectionsArbitrumElectoralEvents",
+      "values": [
+        {
+          "name": "ReorgDetected",
+          "value": {
+            "type": "struct",
+            "fields": {
+              "reorgedBlocks": {
+                "type": "range",
+                "value": {
+                  "type": "struct",
+                  "$name": "CfChainsWitnessPeriodBlockWitnessRange",
+                  "fields": {
+                    "root": {
                       "type": "primitive",
                       "value": "u64"
                     }

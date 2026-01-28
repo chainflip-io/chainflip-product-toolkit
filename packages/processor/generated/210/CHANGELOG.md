@@ -1,3 +1,7 @@
+New or removed pallets:
+  ArbitrumElections: added
+  EthereumElections: added
+
 ArbitrumIngressEgress:
   - AssetEgressStatusChanged:
     - asset: added (ArbitrumIngressEgress.AssetEgressStatusChanged.asset.2)
@@ -38,7 +42,7 @@ Environment:
   - AddedNewEthAsset:
     - 0: added (Environment.AddedNewEthAsset.0.4)
   - RuntimeSafeModeUpdated:
-    - safeMode: added (Environment.RuntimeSafeModeUpdated.safeMode.2.lendingPools.borrowing.2.14)
+    - safeMode: added (Environment.RuntimeSafeModeUpdated.safeMode.2.ethereumElections)
   - UpdatedArbAsset:
     - 0: added (Environment.UpdatedArbAsset.0.2)
   - UpdatedEthAsset:
@@ -94,7 +98,7 @@ LendingPools:
   - LoanRepaid:
     - actionType: added (LendingPools.LoanRepaid.actionType)
   - PalletConfigUpdated:
-    - update: added (LendingPools.PalletConfigUpdated.update.1.asset.14)
+    - update: changed (LendingPools.PalletConfigUpdated.update.0.name)
   - StoppedBoosting:
     - boostPool: added (LendingPools.StoppedBoosting.boostPool.asset.14)
 
@@ -134,14 +138,31 @@ PolkadotIngressEgress:
     - details: added (PolkadotIngressEgress.DepositFailed.details.1.vaultWitness.outputAsset.14)
 
 SolanaIngressEgress:
+  - AssetEgressStatusChanged:
+    - asset: added (SolanaIngressEgress.AssetEgressStatusChanged.asset.2)
+  - DepositBoosted:
+    - asset: added (SolanaIngressEgress.DepositBoosted.asset.2)
   - DepositFailed:
-    - details: added (SolanaIngressEgress.DepositFailed.details.1.vaultWitness.outputAsset.14)
+    - details: added (SolanaIngressEgress.DepositFailed.details.0.depositWitness.asset.2)
+  - DepositFetchesScheduled:
+    - asset: added (SolanaIngressEgress.DepositFetchesScheduled.asset.2)
+  - DepositFinalised:
+    - asset: added (SolanaIngressEgress.DepositFinalised.asset.2)
+  - InsufficientBoostLiquidity:
+    - asset: added (SolanaIngressEgress.InsufficientBoostLiquidity.asset.2)
+  - InvalidCcmRefunded:
+    - asset: added (SolanaIngressEgress.InvalidCcmRefunded.asset.2)
+  - PalletConfigUpdated:
+    - update: added (SolanaIngressEgress.PalletConfigUpdated.update.1.asset.2)
+  - TransferFallbackRequested:
+    - asset: added (SolanaIngressEgress.TransferFallbackRequested.asset.2)
 
 Swapping:
   - AccountCreationDepositAddressReady:
     - asset: added (Swapping.AccountCreationDepositAddressReady.asset.14)
   - BatchSwapFailed:
     - asset: added (Swapping.BatchSwapFailed.asset.14)
+  - BoundBrokerWithdrawalAddress: added
   - CreditedOnChain:
     - asset: added (Swapping.CreditedOnChain.asset.14)
   - PalletConfigUpdated:
