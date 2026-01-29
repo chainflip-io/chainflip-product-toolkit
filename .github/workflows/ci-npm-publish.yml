@@ -1,8 +1,8 @@
 name: NPM Publish CI 🛰️
 
 concurrency:
-  group: npm-publish-ci
-  cancel-in-progress: false
+  group: ${{ github.workflow }}-${{ github.ref }}-${{ inputs.npm_tag }}-${{ inputs.package }}
+  cancel-in-progress: true
 
 on:
   push:
