@@ -45,6 +45,9 @@ export const supportedAssets = [
   { chain: 'Solana', asset: 'SOL' },
   { chain: 'Solana', asset: 'USDC' },
   { chain: 'Solana', asset: 'USDT' },
+  { chain: 'Assethub', asset: 'DOT' },
+  { chain: 'Assethub', asset: 'USDC' },
+  { chain: 'Assethub', asset: 'USDT' },
 ];
 
 export const ingressEgressEnvironment: z.input<typeof cfIngressEgressEnvironment> = {
