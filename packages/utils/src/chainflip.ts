@@ -2,6 +2,7 @@ export const chainflipAssets = [
   // Ethereum
   'Usdc',
   'Usdt',
+  'Wbtc',
   'Flip',
   'Eth',
   // Polkadot
@@ -10,10 +11,12 @@ export const chainflipAssets = [
   'Btc',
   // Arbitrum
   'ArbUsdc',
+  'ArbUsdt',
   'ArbEth',
   // Solana
   'Sol',
   'SolUsdc',
+  'SolUsdt',
   // Assethub
   'HubDot',
   'HubUsdt',
@@ -22,7 +25,7 @@ export const chainflipAssets = [
 
 export type ChainflipAsset = (typeof chainflipAssets)[number];
 
-export const assetSymbols = ['USDC', 'USDT', 'FLIP', 'DOT', 'ETH', 'BTC', 'SOL'] as const;
+export const assetSymbols = ['USDC', 'USDT', 'WBTC', 'FLIP', 'DOT', 'ETH', 'BTC', 'SOL'] as const;
 
 export const priceAssets = [
   'Btc',
@@ -148,6 +151,12 @@ export const assetConstants = {
     rpcAsset: 'USDT',
     decimals: 6,
   },
+  Wbtc: {
+    chain: 'Ethereum',
+    symbol: 'WBTC',
+    rpcAsset: 'WBTC',
+    decimals: 8,
+  },
   Dot: {
     chain: 'Polkadot',
     symbol: 'DOT',
@@ -166,6 +175,12 @@ export const assetConstants = {
     rpcAsset: 'USDC',
     decimals: 6,
   },
+  ArbUsdt: {
+    chain: 'Arbitrum',
+    symbol: 'USDT',
+    rpcAsset: 'USDT',
+    decimals: 6,
+  },
   ArbEth: {
     chain: 'Arbitrum',
     symbol: 'ETH',
@@ -182,6 +197,12 @@ export const assetConstants = {
     chain: 'Solana',
     symbol: 'USDC',
     rpcAsset: 'USDC',
+    decimals: 6,
+  },
+  SolUsdt: {
+    chain: 'Solana',
+    symbol: 'USDT',
+    rpcAsset: 'USDT',
     decimals: 6,
   },
   HubDot: {
@@ -219,9 +240,9 @@ export const assetConstants = {
 
 export const chainConstants = {
   Ethereum: {
-    chainflipAssets: ['Eth', 'Flip', 'Usdc', 'Usdt'],
-    assets: ['ETH', 'FLIP', 'USDC', 'USDT'],
-    rpcAssets: ['ETH', 'FLIP', 'USDC', 'USDT'],
+    chainflipAssets: ['Eth', 'Flip', 'Usdc', 'Usdt', 'Wbtc'],
+    assets: ['ETH', 'FLIP', 'USDC', 'USDT', 'WBTC'],
+    rpcAssets: ['ETH', 'FLIP', 'USDC', 'USDT', 'WBTC'],
     gasAsset: 'Eth',
     addressType: 'Eth',
     blockTimeSeconds: 12,
@@ -243,17 +264,17 @@ export const chainConstants = {
     blockTimeSeconds: 10 * 60,
   },
   Arbitrum: {
-    chainflipAssets: ['ArbUsdc', 'ArbEth'],
-    assets: ['USDC', 'ETH'],
-    rpcAssets: ['USDC', 'ETH'],
+    chainflipAssets: ['ArbUsdc', 'ArbUsdt', 'ArbEth'],
+    assets: ['USDC', 'USDT', 'ETH'],
+    rpcAssets: ['USDC', 'USDT', 'ETH'],
     gasAsset: 'ArbEth',
     addressType: 'Arb',
     blockTimeSeconds: 0.26,
   },
   Solana: {
-    chainflipAssets: ['Sol', 'SolUsdc'],
-    assets: ['SOL', 'USDC'],
-    rpcAssets: ['SOL', 'USDC'],
+    chainflipAssets: ['Sol', 'SolUsdc', 'SolUsdt'],
+    assets: ['SOL', 'USDC', 'USDT'],
+    rpcAssets: ['SOL', 'USDC', 'USDT'],
     gasAsset: 'Sol',
     addressType: 'Sol',
     blockTimeSeconds: 0.8,
@@ -292,12 +313,15 @@ export const internalAssetToRpcAsset: InternalAssetMap<AssetAndChain> & {
   Flip: { chain: 'Ethereum', asset: 'FLIP' },
   Usdc: { chain: 'Ethereum', asset: 'USDC' },
   Usdt: { chain: 'Ethereum', asset: 'USDT' },
+  Wbtc: { chain: 'Ethereum', asset: 'WBTC' },
   Dot: { chain: 'Polkadot', asset: 'DOT' },
   Btc: { chain: 'Bitcoin', asset: 'BTC' },
   ArbUsdc: { chain: 'Arbitrum', asset: 'USDC' },
+  ArbUsdt: { chain: 'Arbitrum', asset: 'USDT' },
   ArbEth: { chain: 'Arbitrum', asset: 'ETH' },
   Sol: { chain: 'Solana', asset: 'SOL' },
   SolUsdc: { chain: 'Solana', asset: 'USDC' },
+  SolUsdt: { chain: 'Solana', asset: 'USDT' },
   HubDot: { chain: 'Assethub', asset: 'DOT' },
   HubUsdt: { chain: 'Assethub', asset: 'USDT' },
   HubUsdc: { chain: 'Assethub', asset: 'USDC' },
@@ -326,6 +350,9 @@ export const assetContractId: InternalAssetMap<number> & { Dot: 4 } = {
   HubDot: 11,
   HubUsdt: 12,
   HubUsdc: 13,
+  Wbtc: 14,
+  ArbUsdt: 15,
+  SolUsdt: 16,
 };
 
 export function getInternalAsset(asset: BaseAssetAndChain): BaseChainflipAsset;
@@ -343,17 +370,20 @@ export function getInternalAsset(asset: UncheckedAssetAndChain, assert = true) {
       FLIP: 'Flip',
       ETH: 'Eth',
       USDT: 'Usdt',
+      WBTC: 'Wbtc',
     },
     Bitcoin: {
       BTC: 'Btc',
     },
     Arbitrum: {
       USDC: 'ArbUsdc',
+      USDT: 'ArbUsdt',
       ETH: 'ArbEth',
     },
     Solana: {
       SOL: 'Sol',
       USDC: 'SolUsdc',
+      USDT: 'SolUsdt',
     },
     Assethub: {
       USDC: 'HubUsdc',
@@ -431,11 +461,14 @@ export const chainflipAssetToPriceAssetMap: Record<
   ArbEth: 'Eth',
   Usdc: 'Usdc',
   ArbUsdc: 'Usdc',
+  ArbUsdt: 'Usdt',
   SolUsdc: 'Usdc',
+  SolUsdt: 'Usdt',
   HubUsdc: 'Usdc',
   Usdt: 'Usdt',
   HubUsdt: 'Usdt',
   Dot: null,
   Flip: null,
   HubDot: null,
+  Wbtc: 'Btc',
 };

@@ -6,6 +6,7 @@ exports[`parsers > cfAccountInfo > parses the latest cfAccountInfo schema for an
     "Arbitrum": {
       "ETH": 0n,
       "USDC": 0n,
+      "USDT": 0n,
     },
     "Assethub": {
       "DOT": 0n,
@@ -20,10 +21,12 @@ exports[`parsers > cfAccountInfo > parses the latest cfAccountInfo schema for an
       "FLIP": 0n,
       "USDC": 0n,
       "USDT": 0n,
+      "WBTC": 0n,
     },
     "Solana": {
       "SOL": 0n,
       "USDC": 0n,
+      "USDT": 0n,
     },
   },
   "bond": 0n,
@@ -31,6 +34,7 @@ exports[`parsers > cfAccountInfo > parses the latest cfAccountInfo schema for an
     "Arbitrum": {
       "ETH": [],
       "USDC": [],
+      "USDT": [],
     },
     "Assethub": {
       "DOT": [],
@@ -67,10 +71,12 @@ exports[`parsers > cfAccountInfo > parses the latest cfAccountInfo schema for an
       "FLIP": [],
       "USDC": [],
       "USDT": [],
+      "WBTC": [],
     },
     "Solana": {
       "SOL": [],
       "USDC": [],
+      "USDT": [],
     },
   },
   "collateral_balances": [],
@@ -78,6 +84,7 @@ exports[`parsers > cfAccountInfo > parses the latest cfAccountInfo schema for an
     "Arbitrum": {
       "ETH": 0n,
       "USDC": 0n,
+      "USDT": 0n,
     },
     "Assethub": {
       "DOT": 0n,
@@ -92,10 +99,12 @@ exports[`parsers > cfAccountInfo > parses the latest cfAccountInfo schema for an
       "FLIP": 0n,
       "USDC": 0n,
       "USDT": 0n,
+      "WBTC": 0n,
     },
     "Solana": {
       "SOL": 0n,
       "USDC": 0n,
+      "USDT": 0n,
     },
   },
   "estimated_redeemable_balance": 99999975540394000000n,
@@ -126,6 +135,7 @@ exports[`parsers > cfAccountInfo > parses the latest cfAccountInfo schema for an
     "Arbitrum": {
       "ETH": 0n,
       "USDC": 0n,
+      "USDT": 0n,
     },
     "Assethub": {
       "DOT": 0n,
@@ -140,10 +150,12 @@ exports[`parsers > cfAccountInfo > parses the latest cfAccountInfo schema for an
       "FLIP": 0n,
       "USDC": 0n,
       "USDT": 0n,
+      "WBTC": 0n,
     },
     "Solana": {
       "SOL": 0n,
       "USDC": 0n,
+      "USDT": 0n,
     },
   },
   "bond": 0n,
@@ -151,6 +163,7 @@ exports[`parsers > cfAccountInfo > parses the latest cfAccountInfo schema for an
     "Arbitrum": {
       "ETH": [],
       "USDC": [],
+      "USDT": [],
     },
     "Assethub": {
       "DOT": [],
@@ -187,10 +200,12 @@ exports[`parsers > cfAccountInfo > parses the latest cfAccountInfo schema for an
       "FLIP": [],
       "USDC": [],
       "USDT": [],
+      "WBTC": [],
     },
     "Solana": {
       "SOL": [],
       "USDC": [],
+      "USDT": [],
     },
   },
   "collateral_balances": undefined,
@@ -198,6 +213,7 @@ exports[`parsers > cfAccountInfo > parses the latest cfAccountInfo schema for an
     "Arbitrum": {
       "ETH": 0n,
       "USDC": 0n,
+      "USDT": 0n,
     },
     "Assethub": {
       "DOT": 0n,
@@ -212,10 +228,12 @@ exports[`parsers > cfAccountInfo > parses the latest cfAccountInfo schema for an
       "FLIP": 0n,
       "USDC": 0n,
       "USDT": 0n,
+      "WBTC": 0n,
     },
     "Solana": {
       "SOL": 0n,
       "USDC": 0n,
+      "USDT": 0n,
     },
   },
   "estimated_redeemable_balance": 99999975540394000000n,
