@@ -2005,6 +2005,18 @@ exports[`HttpClient > with server > handles cf_supported_assets 1`] = `
     "asset": "USDT",
     "chain": "Solana",
   },
+  {
+    "asset": "DOT",
+    "chain": "Assethub",
+  },
+  {
+    "asset": "USDC",
+    "chain": "Assethub",
+  },
+  {
+    "asset": "USDT",
+    "chain": "Assethub",
+  },
 ]
 `;
 
