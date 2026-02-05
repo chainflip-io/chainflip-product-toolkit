@@ -9,11 +9,6 @@ const baseConfig = defineConfig({
   format: ['esm', 'cjs'],
   target: 'es2022',
   skipNodeModulesBundle: true,
-  outExtensions: ({ format }) => {
-    const type = format === 'es' ? 'm' : 'c';
-
-    return { js: `.${type}js`, dts: `.d.${type}ts` };
-  },
 });
 
 const BUILD_TARGET = process.env.BUILD_TARGET;
