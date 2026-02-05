@@ -192,6 +192,10 @@ export const brokerAliasMap: AccountAliasMap = {
     twitter: '@ellipalwallet',
   },
   cFPZ7XoAWHFBJy2t2t5rupQ3fvMKRyCpxDHjnmtD42XAEjxcW: { name: 'SafePal', twitter: '@SafePal' },
+  cFNqDaZ9apGKt9uXaGQGucWuizVeTms2cXq8hnYM8g7y99Cpy: { 
+    name: 'Trocador', 
+    twitter: '@TrocadorApp'
+  },
 } as const;
 
 export const lpAliasMap: AccountAliasMap = {
