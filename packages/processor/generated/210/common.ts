@@ -139,19 +139,18 @@ export const palletCfIngressEgressPalletSafeMode = z.object({
   vaultDepositWitnessingEnabled: z.boolean(),
 });
 
-export const stateChainRuntimeChainflipGenericElectionsGenericElectionsSafeMode = z.object({
-  oraclePriceElections: z.boolean(),
-});
+export const stateChainRuntimeChainflipWitnessingGenericElectionsGenericElectionsSafeMode =
+  z.object({ oraclePriceElections: z.boolean() });
 
-export const stateChainRuntimeChainflipEthereumElectionsEthereumElectionsSafeMode = z.object({
-  stateChainGatewayWitnessing: z.boolean(),
-  keyManagerWitnessing: z.boolean(),
-  scUtilsWitnessing: z.boolean(),
-});
+export const stateChainRuntimeChainflipWitnessingEthereumElectionsEthereumElectionsSafeMode =
+  z.object({
+    stateChainGatewayWitnessing: z.boolean(),
+    keyManagerWitnessing: z.boolean(),
+    scUtilsWitnessing: z.boolean(),
+  });
 
-export const stateChainRuntimeChainflipArbitrumElectionsArbitrumElectionsSafeMode = z.object({
-  keyManagerWitnessing: z.boolean(),
-});
+export const stateChainRuntimeChainflipWitnessingArbitrumElectionsArbitrumElectionsSafeMode =
+  z.object({ keyManagerWitnessing: z.boolean() });
 
 export const stateChainRuntimeSafeModeInnerRuntimeSafeMode = z.object({
   emissions: palletCfEmissionsPalletSafeMode,
@@ -181,9 +180,9 @@ export const stateChainRuntimeSafeModeInnerRuntimeSafeMode = z.object({
   ingressEgressArbitrum: palletCfIngressEgressPalletSafeMode,
   ingressEgressSolana: palletCfIngressEgressPalletSafeMode,
   ingressEgressAssethub: palletCfIngressEgressPalletSafeMode,
-  electionsGeneric: stateChainRuntimeChainflipGenericElectionsGenericElectionsSafeMode,
-  ethereumElections: stateChainRuntimeChainflipEthereumElectionsEthereumElectionsSafeMode,
-  arbitrumElections: stateChainRuntimeChainflipArbitrumElectionsArbitrumElectionsSafeMode,
+  electionsGeneric: stateChainRuntimeChainflipWitnessingGenericElectionsGenericElectionsSafeMode,
+  ethereumElections: stateChainRuntimeChainflipWitnessingEthereumElectionsEthereumElectionsSafeMode,
+  arbitrumElections: stateChainRuntimeChainflipWitnessingArbitrumElectionsArbitrumElectionsSafeMode,
 });
 
 export const palletCfEnvironmentSafeModeUpdate = z.discriminatedUnion('__kind', [
@@ -1261,20 +1260,22 @@ export const palletCfLendingPoolsLoanRepaidActionType = z.discriminatedUnion('__
 export const palletCfElectionsElectoralSystemsCompositeTuple8ImplsCompositeElectionIdentifierExtra =
   simpleEnum(['A', 'B', 'C', 'D', 'EE', 'FF', 'G', 'HH']);
 
-export const stateChainRuntimeChainflipEthereumElectionsEthereumElectoralEvents = z.object({
-  __kind: z.literal('ReorgDetected'),
-  reorgedBlocks: z.object({ start: numberOrHex, end: numberOrHex }),
-});
+export const stateChainRuntimeChainflipWitnessingEthereumElectionsEthereumElectoralEvents =
+  z.object({
+    __kind: z.literal('ReorgDetected'),
+    reorgedBlocks: z.object({ start: numberOrHex, end: numberOrHex }),
+  });
 
 export const palletCfElectionsElectoralSystemsCompositeTuple6ImplsCompositeElectionIdentifierExtra =
   simpleEnum(['A', 'B', 'C', 'D', 'EE', 'FF']);
 
 export const cfChainsWitnessPeriodBlockWitnessRange = z.object({ root: numberOrHex });
 
-export const stateChainRuntimeChainflipArbitrumElectionsArbitrumElectoralEvents = z.object({
-  __kind: z.literal('ReorgDetected'),
-  reorgedBlocks: z.object({
-    start: cfChainsWitnessPeriodBlockWitnessRange,
-    end: cfChainsWitnessPeriodBlockWitnessRange,
-  }),
-});
+export const stateChainRuntimeChainflipWitnessingArbitrumElectionsArbitrumElectoralEvents =
+  z.object({
+    __kind: z.literal('ReorgDetected'),
+    reorgedBlocks: z.object({
+      start: cfChainsWitnessPeriodBlockWitnessRange,
+      end: cfChainsWitnessPeriodBlockWitnessRange,
+    }),
+  });

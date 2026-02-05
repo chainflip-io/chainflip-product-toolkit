@@ -80,7 +80,7 @@
     "network": "mainnet"
   },
   "210": {
-    "hash": "0x28c2ae6d8bbbfc660f9b130c92ea9c96e08f3244eb10c4c9db95ffd679cd3371",
-    "network": "localnet"
+    "hash": "0x1ac25eb2d5bce2a7fef5b604b67563001f63ed96294a033753078da7d9b998fd",
+    "network": "backspin"
   }
 }
