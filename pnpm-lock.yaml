@@ -78,8 +78,8 @@ importers:
   packages/bitcoin:
     dependencies:
       '@chainflip/utils':
-        specifier: 0.8.18
-        version: 0.8.18
+        specifier: 2.1.0-beta.1
+        version: 2.1.0-beta.1
       bignumber.js:
         specifier: ^9.3.1
         version: 9.3.1
@@ -99,8 +99,8 @@ importers:
         specifier: 1.9.3
         version: 1.9.3
       '@chainflip/utils':
-        specifier: 0.8.18
-        version: 0.8.18
+        specifier: 2.1.0-beta.1
+        version: 2.1.0-beta.1
       '@polkadot/types':
         specifier: ^16.5.4
         version: 16.5.4
@@ -114,8 +114,8 @@ importers:
   packages/delegation:
     dependencies:
       '@chainflip/utils':
-        specifier: ^0.8.22
-        version: 0.8.22
+        specifier: 2.1.0-beta.1
+        version: 2.1.0-beta.1
       scale-ts:
         specifier: ^1.6.1
         version: 1.6.1
@@ -144,8 +144,8 @@ importers:
   packages/extrinsics:
     devDependencies:
       '@chainflip/utils':
-        specifier: 0.8.18
-        version: 0.8.18
+        specifier: 2.1.0-beta.1
+        version: 2.1.0-beta.1
       '@polkadot/types':
         specifier: ^16.5.4
         version: 16.5.4
@@ -153,8 +153,8 @@ importers:
   packages/processor:
     dependencies:
       '@chainflip/utils':
-        specifier: 0.8.18
-        version: 0.8.18
+        specifier: 2.1.0-beta.1
+        version: 2.1.0-beta.1
       zod:
         specifier: ^3.25.75
         version: 3.25.75
@@ -169,8 +169,8 @@ importers:
   packages/redis:
     dependencies:
       '@chainflip/utils':
-        specifier: 0.11.2-wbtc-dev.2
-        version: 0.11.2-wbtc-dev.2
+        specifier: 2.1.0-beta.1
+        version: 2.1.0-beta.1
       bignumber.js:
         specifier: ^9.3.1
         version: 9.3.1
@@ -184,8 +184,8 @@ importers:
   packages/rpc:
     dependencies:
       '@chainflip/utils':
-        specifier: 0.11.2-wbtc-dev.2
-        version: 0.11.2-wbtc-dev.2
+        specifier: 2.1.0-beta.1
+        version: 2.1.0-beta.1
       zod:
         specifier: ^3.25.75
         version: 3.25.75
@@ -203,8 +203,8 @@ importers:
   packages/scale:
     dependencies:
       '@chainflip/utils':
-        specifier: ^0.8.22
-        version: 0.8.22
+        specifier: 2.1.0-beta.1
+        version: 2.1.0-beta.1
       scale-ts:
         specifier: ^1.6.1
         version: 1.6.1
@@ -219,8 +219,8 @@ importers:
         specifier: ^1.11.0
         version: 1.11.0
       '@chainflip/utils':
-        specifier: ^0.8.22
-        version: 0.8.22
+        specifier: 2.1.0-beta.1
+        version: 2.1.0-beta.1
       '@coral-xyz/anchor':
         specifier: ^0.32.1
         version: 0.32.1(bufferutil@4.0.9)(typescript@5.9.3)(utf-8-validate@5.0.10)
@@ -244,8 +244,8 @@ importers:
   packages/testing:
     dependencies:
       '@chainflip/utils':
-        specifier: ^0.8.22
-        version: 0.8.22
+        specifier: 2.1.0-beta.1
+        version: 2.1.0-beta.1
       vitest:
         specifier: 4.0.18
         version: 4.0.18(@types/node@25.2.3)(@vitest/ui@4.0.18)(tsx@4.21.0)(yaml@2.8.1)
@@ -330,17 +330,14 @@ packages:
   '@chainflip/scale@1.11.0':
     resolution: {integrity: sha512-gLs2pARutz6JJSKth92TYQEHVWvwpavWNUARB9626t+QxlparHyL10t9XibD2X1sr+GLXWKj2q5qXOSGU8CICA==}
 
-  '@chainflip/utils@0.11.2-wbtc-dev.2':
-    resolution: {integrity: sha512-ce9SM4c8EfBuAu6IYe6IO8eX7KK7I/2oABVDqAdNGcVKzOdyspkI/yRp/Dp4c0YZjOcYsZDbJp4RVLNztcTr4A==}
-
-  '@chainflip/utils@0.8.18':
-    resolution: {integrity: sha512-qaKtasZSfCcEICR3Bo6IUabOkBsmldsKmDbGTRr0WBQlUyOA2SNwZRN9EP73ZQofWyI3luRN2tFGS54O3bYazQ==}
-
   '@chainflip/utils@0.8.2':
     resolution: {integrity: sha512-wVWSdd1i8+RY4IPqCLdsr/b2Y5cGTzSv6kE/nKhFhcUPELUO0YTRoVote/mUQ/Kd9MiQFaDiS1AEtcPZ0H2W6w==}
 
   '@chainflip/utils@0.8.22':
     resolution: {integrity: sha512-VVerCmYtxW6rk3HCKnJzYAC60kf8Xv66Sp7ittMzpuJ9kzu+IeycY6lHv/I7GJnagy3zeuL6PNGWqdAMpuF+TQ==}
+
+  '@chainflip/utils@2.1.0-beta.1':
+    resolution: {integrity: sha512-FqauoQppwmSxBoL0egs69CqmYa49lQ9xLgchMYfc8ON3rf389mQWyhH7o1XGqbI1Jo50+NzUMFKP3fCh79u/yw==}
 
   '@coral-xyz/anchor-errors@0.31.1':
     resolution: {integrity: sha512-NhNEku4F3zzUSBtrYz84FzYWm48+9OvmT1Hhnwr6GnPQry2dsEqH/ti/7ASjjpoFTWRnPXrjAIT1qM6Isop+LQ==}
@@ -3428,18 +3425,6 @@ snapshots:
       '@chainflip/utils': 0.8.22
       scale-ts: 1.6.1
 
-  '@chainflip/utils@0.11.2-wbtc-dev.2':
-    dependencies:
-      '@date-fns/utc': 2.1.1
-      bignumber.js: 9.3.1
-      date-fns: 4.1.0
-
-  '@chainflip/utils@0.8.18':
-    dependencies:
-      '@date-fns/utc': 2.1.1
-      bignumber.js: 9.3.1
-      date-fns: 4.1.0
-
   '@chainflip/utils@0.8.2':
     dependencies:
       '@date-fns/utc': 2.1.1
@@ -3449,6 +3434,13 @@ snapshots:
   '@chainflip/utils@0.8.22':
     dependencies:
       '@date-fns/utc': 2.1.1
+      bignumber.js: 9.3.1
+      date-fns: 4.1.0
+
+  '@chainflip/utils@2.1.0-beta.1':
+    dependencies:
+      '@date-fns/utc': 2.1.1
+      '@noble/hashes': 2.0.1
       bignumber.js: 9.3.1
       date-fns: 4.1.0
 
