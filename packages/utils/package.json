@@ -1,6 +1,6 @@
 {
   "name": "@chainflip/utils",
-  "version": "0.11.4",
+  "version": "2.1.0-beta.2",
   "type": "module",
   "scripts": {
     "eslint:check": "pnpm eslint --max-warnings 0 './**/*.ts'",
@@ -9,7 +9,7 @@
     "prettier:write": "pnpm prettier:base --write",
     "clean": "rm -rf dist",
     "prepublish": "pnpm test run && pnpm build:clean",
-    "build": "tsup",
+    "build": "tsdown",
     "build:clean": "pnpm clean && pnpm build",
     "test:ci": "CI=1 pnpm t run",
     "test": "vitest",
@@ -26,24 +26,17 @@
         "default": "./dist/*.cjs"
       },
       "import": {
-        "types": "./dist/*.d.ts",
-        "default": "./dist/*.js"
+        "types": "./dist/*.d.mts",
+        "default": "./dist/*.mjs"
       }
     }
   },
-  "typesVersions": {
-    "*": {
-      "*": [
-        "dist/*.d.ts"
-      ]
-    }
-  },
   "devDependencies": {
-    "@noble/hashes": "^2.0.1",
     "@vitest/ui": "4.0.18"
   },
   "dependencies": {
     "@date-fns/utc": "^2.1.1",
+    "@noble/hashes": "^2.0.1",
     "bignumber.js": "^9.3.1",
     "date-fns": "4.1.0"
   },

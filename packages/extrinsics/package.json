@@ -8,13 +8,13 @@
     "prettier:check": "pnpm prettier:base --check",
     "prettier:write": "pnpm prettier:base --write",
     "clean": "rm -rf dist",
-    "build": "pnpm clean && pnpm tsup",
+    "build": "pnpm clean && pnpm tsdown",
     "prepublish": "pnpm test run && pnpm build",
     "test:ci": "CI=1 pnpm t run",
     "test": "vitest"
   },
   "devDependencies": {
-    "@chainflip/utils": "0.8.18",
+    "@chainflip/utils": "2.1.0-beta.1",
     "@polkadot/types": "^16.5.4"
   },
   "files": [
@@ -28,7 +28,7 @@
       },
       "import": {
         "types": "./dist/*.d.mts",
-        "default": "./dist/*.js"
+        "default": "./dist/*.mjs"
       }
     },
     ".": {
@@ -38,7 +38,7 @@
       },
       "import": {
         "types": "./dist/index.d.mts",
-        "default": "./dist/index.js"
+        "default": "./dist/index.mjs"
       }
     }
   },

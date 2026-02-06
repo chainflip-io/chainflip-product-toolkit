@@ -1,6 +1,6 @@
 {
   "name": "@chainflip/scale",
-  "version": "1.11.0",
+  "version": "2.1.0-beta.1",
   "type": "module",
   "scripts": {
     "eslint:check": "pnpm eslint --max-warnings 0 './**/*.ts'",
@@ -9,7 +9,7 @@
     "prettier:write": "pnpm prettier:base --write",
     "clean": "rm -rf dist",
     "prepublish": "pnpm test run && pnpm build:clean",
-    "build": "tsup",
+    "build": "tsdown",
     "build:clean": "pnpm clean && pnpm build",
     "test:ci": "CI=1 pnpm t run",
     "test": "vitest",
@@ -26,8 +26,8 @@
         "default": "./dist/*.cjs"
       },
       "import": {
-        "types": "./dist/*.d.ts",
-        "default": "./dist/*.js"
+        "types": "./dist/*.d.mts",
+        "default": "./dist/*.mjs"
       }
     }
   },
@@ -35,7 +35,7 @@
     "@vitest/ui": "4.0.18"
   },
   "dependencies": {
-    "@chainflip/utils": "^0.8.22",
+    "@chainflip/utils": "2.1.0-beta.1",
     "scale-ts": "^1.6.1"
   },
   "repository": "https://github.com/chainflip-io/chainflip-product-toolkit.git",

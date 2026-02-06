@@ -15,28 +15,7 @@ import {
   type ProcessorStore,
   type State,
 } from './types';
-
-export function timedMethod<P extends ProcessorStore<any, any>, I extends IndexerStore>(
-  target: Processor<P, I>,
-  propertyKey: string,
-  descriptor: PropertyDescriptor,
-) {
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-  const method = descriptor.value;
-  assert(typeof method === 'function');
-  // eslint-disable-next-line no-param-reassign
-  descriptor.value = async function (
-    this: Processor<ProcessorStore<any, any>, IndexerStore>,
-    ...args: unknown[]
-  ) {
-    const start = performance.now();
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
-    const result = await method.apply(this, args);
-    this.timings[propertyKey] = performance.now() - start;
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-    return result;
-  };
-}
+import { timedMethod } from './utils';
 
 export default class Processor<P extends ProcessorStore<unknown, unknown>, I extends IndexerStore> {
   batchSize = 50;
