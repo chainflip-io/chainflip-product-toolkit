@@ -31,7 +31,7 @@
     "micromatch": "^4.0.8",
     "prettier": "^3.8.1",
     "syncpack": "^13.0.4",
-    "tsdown": "^0.20.1",
+    "tsdown": "^0.20.3",
     "tsup": "^8.5.1",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3",
