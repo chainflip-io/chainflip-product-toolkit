@@ -71,6 +71,10 @@ EthereumIngressEgress:
 Funding:
   - Funded:
     - source: added (Funding.Funded.source.2.asset.14)
+  - RedemptionExpired:
+    - txHash: added (Funding.RedemptionExpired.txHash)
+  - RedemptionSettled:
+    - undefined: added (Funding.RedemptionSettled)
 
 Governance:
   - NewGovernanceCouncil: added

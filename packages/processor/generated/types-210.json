@@ -2933,17 +2933,25 @@
       }
     },
     "RedemptionSettled": {
-      "type": "tuple",
-      "values": [
-        {
+      "type": "struct",
+      "fields": {
+        "accountId": {
           "type": "primitive",
           "value": "AccountId32"
         },
-        {
+        "amount": {
           "type": "primitive",
           "value": "u128"
+        },
+        "txHash": {
+          "type": "array",
+          "value": {
+            "type": "primitive",
+            "value": "u8"
+          },
+          "length": 32
         }
-      ]
+      }
     },
     "RedemptionExpired": {
       "type": "struct",
@@ -2951,6 +2959,14 @@
         "accountId": {
           "type": "primitive",
           "value": "AccountId32"
+        },
+        "txHash": {
+          "type": "array",
+          "value": {
+            "type": "primitive",
+            "value": "u8"
+          },
+          "length": 32
         }
       }
     },
