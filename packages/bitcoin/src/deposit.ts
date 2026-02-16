@@ -88,6 +88,7 @@ export const findVaultSwapData = async (
       retryDuration: data.retryDuration,
       minPrice: getX128PriceFromAmounts(amount, data.minOutputAmount),
       maxOraclePriceSlippage: 'maxOraclePriceSlippage' in data ? data.maxOraclePriceSlippage : null,
+      refundCcmMetadata: null,
     },
     destinationAddress: data.destinationAddress,
     outputAsset: data.outputAsset,
