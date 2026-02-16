@@ -27,9 +27,10 @@ jobs:
           GITHUB_COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
         run: |
           commit_message="$GITHUB_COMMIT_MESSAGE"
-          if [[ $commit_message =~ @chainflip/([a-z-]+)/v[0-9]+\.[0-9]+\.[0-9]+ ]]; then
+          if [[ $commit_message =~ @chainflip/([a-z-]+)/v[0-9]+\.[0-9]+\.[0-9]+[^[:space:]]*(@([a-z-]+))? ]]; then
             echo "Publishing ${BASH_REMATCH[1]} package"
             echo "publish=${BASH_REMATCH[1]}" >> $GITHUB_OUTPUT
+            echo "custom_tag=${BASH_REMATCH[3]}" >> $GITHUB_OUTPUT
             echo "PACKAGE_JSON_PATH=packages/${BASH_REMATCH[1]}/package.json" >> $GITHUB_ENV
           else
             echo "No package name found in commit message"
@@ -40,11 +41,17 @@ jobs:
         id: check-version
         if: steps.check-commit-message.outputs.publish != ''
         run: |
-          version=$(jq -r .version $PACKAGE_JSON_PATH)
-          if [[ $version =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
-            echo "Stable version detected: $version"
-            echo "publish_tag=latest" >> $GITHUB_OUTPUT
+          custom_tag="${{ steps.check-commit-message.outputs.custom_tag }}"
+          if [ -n "$custom_tag" ]; then
+            echo "Custom tag from commit message: $custom_tag"
+            echo "publish_tag=$custom_tag" >> $GITHUB_OUTPUT
           else
-            echo "Pre-release version detected: $version"
-            echo "publish_tag=pre-release" >> $GITHUB_OUTPUT
+            version=$(jq -r .version $PACKAGE_JSON_PATH)
+            if [[ $version =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+              echo "Stable version detected: $version"
+              echo "publish_tag=latest" >> $GITHUB_OUTPUT
+            else
+              echo "Pre-release version detected: $version"
+              echo "publish_tag=pre-release" >> $GITHUB_OUTPUT
+            fi
           fi

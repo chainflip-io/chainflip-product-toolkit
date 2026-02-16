@@ -30,6 +30,11 @@ const args = yargs(process.argv)
     demandOption: true,
     choices: await fs.readdir(path.join(root, 'packages')),
   })
+  .option('tag', {
+    alias: 't',
+    type: 'string',
+    description: 'custom npm tag to publish with (e.g. "next")',
+  })
   .option('dry-run', {
     demandOption: false,
     default: !['0', 'false'].includes(process.env.DRY_RUN?.toLowerCase() ?? 'true'),
@@ -110,7 +115,8 @@ const execCommand = async (cmd: string, print = false) => {
 };
 
 const openVersionPR = async () => {
-  const message = `chore(${args.package}): release ${packageJson.name}/v${newVersion}`;
+  const tagSuffix = args.tag ? `@${args.tag}` : '';
+  const message = `chore(${args.package}): release ${packageJson.name}/v${newVersion}${tagSuffix}`;
   const newBranch = `chore/release-${args.package}-${newVersion}`;
   await execCommand(`git switch -c ${newBranch}`);
   await execCommand(`pnpm --filter ${packageJson.name} exec pnpm version ${newVersion}`);
