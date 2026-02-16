@@ -14,7 +14,7 @@
     "test": "vitest"
   },
   "dependencies": {
-    "@chainflip/utils": "2.1.0-beta.1",
+    "@chainflip/utils": "2.1.0",
     "scale-ts": "^1.6.1",
     "viem": "^2.46.1"
   },

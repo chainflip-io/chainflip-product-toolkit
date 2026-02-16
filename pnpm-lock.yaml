@@ -78,8 +78,8 @@ importers:
   packages/bitcoin:
     dependencies:
       '@chainflip/utils':
-        specifier: 2.1.0-beta.1
-        version: 2.1.0-beta.1
+        specifier: 2.1.0
+        version: 2.1.0
       bignumber.js:
         specifier: ^9.3.1
         version: 9.3.1
@@ -99,8 +99,8 @@ importers:
         specifier: 1.9.3
         version: 1.9.3
       '@chainflip/utils':
-        specifier: 2.1.0-beta.1
-        version: 2.1.0-beta.1
+        specifier: 2.1.0
+        version: 2.1.0
       '@polkadot/types':
         specifier: ^16.5.4
         version: 16.5.4
@@ -114,8 +114,8 @@ importers:
   packages/delegation:
     dependencies:
       '@chainflip/utils':
-        specifier: 2.1.0-beta.1
-        version: 2.1.0-beta.1
+        specifier: 2.1.0
+        version: 2.1.0
       scale-ts:
         specifier: ^1.6.1
         version: 1.6.1
@@ -144,8 +144,8 @@ importers:
   packages/extrinsics:
     devDependencies:
       '@chainflip/utils':
-        specifier: 2.1.0-beta.1
-        version: 2.1.0-beta.1
+        specifier: 2.1.0
+        version: 2.1.0
       '@polkadot/types':
         specifier: ^16.5.4
         version: 16.5.4
@@ -153,8 +153,8 @@ importers:
   packages/processor:
     dependencies:
       '@chainflip/utils':
-        specifier: 2.1.0-beta.1
-        version: 2.1.0-beta.1
+        specifier: 2.1.0
+        version: 2.1.0
       zod:
         specifier: ^3.25.75
         version: 3.25.75
@@ -169,8 +169,8 @@ importers:
   packages/redis:
     dependencies:
       '@chainflip/utils':
-        specifier: 2.1.0-beta.1
-        version: 2.1.0-beta.1
+        specifier: 2.1.0
+        version: 2.1.0
       bignumber.js:
         specifier: ^9.3.1
         version: 9.3.1
@@ -184,8 +184,8 @@ importers:
   packages/rpc:
     dependencies:
       '@chainflip/utils':
-        specifier: 2.1.0-beta.1
-        version: 2.1.0-beta.1
+        specifier: 2.1.0
+        version: 2.1.0
       zod:
         specifier: ^3.25.75
         version: 3.25.75
@@ -203,8 +203,8 @@ importers:
   packages/scale:
     dependencies:
       '@chainflip/utils':
-        specifier: 2.1.0-beta.1
-        version: 2.1.0-beta.1
+        specifier: 2.1.0
+        version: 2.1.0
       scale-ts:
         specifier: ^1.6.1
         version: 1.6.1
@@ -219,8 +219,8 @@ importers:
         specifier: ^1.11.0
         version: 1.11.0
       '@chainflip/utils':
-        specifier: 2.1.0-beta.1
-        version: 2.1.0-beta.1
+        specifier: 2.1.0
+        version: 2.1.0
       '@coral-xyz/anchor':
         specifier: ^0.32.1
         version: 0.32.1(bufferutil@4.0.9)(typescript@5.9.3)(utf-8-validate@5.0.10)
@@ -244,8 +244,8 @@ importers:
   packages/testing:
     dependencies:
       '@chainflip/utils':
-        specifier: 2.1.0-beta.1
-        version: 2.1.0-beta.1
+        specifier: 2.1.0
+        version: 2.1.0
       vitest:
         specifier: 4.0.18
         version: 4.0.18(@types/node@25.2.3)(@vitest/ui@4.0.18)(tsx@4.21.0)(yaml@2.8.1)
@@ -336,8 +336,8 @@ packages:
   '@chainflip/utils@0.8.22':
     resolution: {integrity: sha512-VVerCmYtxW6rk3HCKnJzYAC60kf8Xv66Sp7ittMzpuJ9kzu+IeycY6lHv/I7GJnagy3zeuL6PNGWqdAMpuF+TQ==}
 
-  '@chainflip/utils@2.1.0-beta.1':
-    resolution: {integrity: sha512-FqauoQppwmSxBoL0egs69CqmYa49lQ9xLgchMYfc8ON3rf389mQWyhH7o1XGqbI1Jo50+NzUMFKP3fCh79u/yw==}
+  '@chainflip/utils@2.1.0':
+    resolution: {integrity: sha512-40bNhTaSzQHDAMv2m/QAckwEzsVXmXrdkhDcd+CRil9JFUSeWUlRxRKcwlbtp7FyrA3ql+0G7Guw8+LsX2Jlhw==}
 
   '@coral-xyz/anchor-errors@0.31.1':
     resolution: {integrity: sha512-NhNEku4F3zzUSBtrYz84FzYWm48+9OvmT1Hhnwr6GnPQry2dsEqH/ti/7ASjjpoFTWRnPXrjAIT1qM6Isop+LQ==}
@@ -1001,6 +1001,7 @@ packages:
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [x64]
     os: [linux]
+    libc: [glibc]
 
   '@rolldown/binding-linux-x64-gnu@1.0.0-rc.4':
     resolution: {integrity: sha512-DZaN1f0PGp/bSvKhtw50pPsnln4T13ycDq1FrDWRiHmWt1JeW+UtYg9touPFf8yt993p8tS2QjybpzKNTxYEwg==}
@@ -3437,7 +3438,7 @@ snapshots:
       bignumber.js: 9.3.1
       date-fns: 4.1.0
 
-  '@chainflip/utils@2.1.0-beta.1':
+  '@chainflip/utils@2.1.0':
     dependencies:
       '@date-fns/utc': 2.1.1
       '@noble/hashes': 2.0.1

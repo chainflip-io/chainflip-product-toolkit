@@ -34,7 +34,7 @@
     }
   },
   "dependencies": {
-    "@chainflip/utils": "2.1.0-beta.1",
+    "@chainflip/utils": "2.1.0",
     "bignumber.js": "^9.3.1",
     "ioredis": "^5.9.3",
     "zod": "^3.25.75"
