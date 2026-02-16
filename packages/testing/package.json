@@ -9,8 +9,7 @@
     "prettier:write": "pnpm prettier:base --write",
     "prepublish": "pnpm build && pnpm test run",
     "clean": "rm -rf dist",
-    "tsup:build": "tsup ./src/index.ts --format esm --dts --treeshake",
-    "build": "pnpm clean && pnpm tsup:build",
+    "build": "tsdown",
     "test:ci": "CI=1 pnpm t run",
     "test": "vitest"
   },
@@ -25,12 +24,18 @@
   ],
   "exports": {
     ".": {
-      "import": "./dist/index.js",
-      "types": "./dist/index.d.ts"
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      },
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      }
     }
   },
   "dependencies": {
-    "@chainflip/utils": "^0.8.22",
+    "@chainflip/utils": "2.1.0-beta.1",
     "vitest": "4.0.18"
   }
 }

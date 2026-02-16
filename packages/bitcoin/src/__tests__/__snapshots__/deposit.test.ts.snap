@@ -20,6 +20,7 @@ exports[`findVaultSwapData > gets the vault swap data (ArbEth) 1`] = `
     "maxOraclePriceSlippage": null,
     "minPrice": 34028236692093846346337460743176821145600000000000n,
     "refundAddress": "tb1pdz3akc5wa2gr69v3x87tfg0ka597dxqvfl6zhqx4y202y63cgw0q3rgpm6",
+    "refundCcmMetadata": null,
     "retryDuration": 90,
   },
 }
@@ -50,6 +51,7 @@ exports[`findVaultSwapData > gets the vault swap data (Btc) 1`] = `
     "maxOraclePriceSlippage": 5,
     "minPrice": 3402823669209384634633746074317682114560000n,
     "refundAddress": "tb1qhjurnfz4qah4rg7ntue6x287ehdvded20rj9vh",
+    "refundCcmMetadata": null,
     "retryDuration": 50,
   },
 }
@@ -80,6 +82,7 @@ exports[`findVaultSwapData > gets the vault swap data (Dot) 1`] = `
     "maxOraclePriceSlippage": null,
     "minPrice": 34028236692093846346337460743176821145600000n,
     "refundAddress": "tb1qhjurnfz4qah4rg7ntue6x287ehdvded20rj9vh",
+    "refundCcmMetadata": null,
     "retryDuration": 69,
   },
 }
@@ -105,6 +108,7 @@ exports[`findVaultSwapData > gets the vault swap data (Eth) 1`] = `
     "maxOraclePriceSlippage": null,
     "minPrice": 3402823669209384634633746074317682114560000000000n,
     "refundAddress": "tb1qvwmuc3pjhwju287sjs5vg7467t2jlymn35lwsj",
+    "refundCcmMetadata": null,
     "retryDuration": 100,
   },
 }
@@ -135,6 +139,7 @@ exports[`findVaultSwapData > gets the vault swap data (HubDot) 1`] = `
     "maxOraclePriceSlippage": 1,
     "minPrice": 34028236692093846346337460743176821145600000n,
     "refundAddress": "tb1qhjurnfz4qah4rg7ntue6x287ehdvded20rj9vh",
+    "refundCcmMetadata": null,
     "retryDuration": 69,
   },
 }
@@ -163,6 +168,7 @@ exports[`findVaultSwapData > gets the vault swap data (Sol) 1`] = `
     "maxOraclePriceSlippage": null,
     "minPrice": 340282366920938463463374607431768211456000n,
     "refundAddress": "tb1qhjurnfz4qah4rg7ntue6x287ehdvded20rj9vh",
+    "refundCcmMetadata": null,
     "retryDuration": 80,
   },
 }
@@ -191,6 +197,7 @@ exports[`findVaultSwapData > returns null for block if no hash found 1`] = `
     "maxOraclePriceSlippage": null,
     "minPrice": 3402823669209384634633746074317682114560000000000n,
     "refundAddress": "tb1qhjurnfz4qah4rg7ntue6x287ehdvded20rj9vh",
+    "refundCcmMetadata": null,
     "retryDuration": 100,
   },
 }
@@ -219,6 +226,7 @@ exports[`findVaultSwapData > returns null for block if no hash found 2`] = `
     "maxOraclePriceSlippage": null,
     "minPrice": 3402823669209384634633746074317682114560000000000n,
     "refundAddress": "tb1qhjurnfz4qah4rg7ntue6x287ehdvded20rj9vh",
+    "refundCcmMetadata": null,
     "retryDuration": 100,
   },
 }
@@ -247,6 +255,7 @@ exports[`findVaultSwapData > returns null for block if no hash found 3`] = `
     "maxOraclePriceSlippage": null,
     "minPrice": 3402823669209384634633746074317682114560000000000n,
     "refundAddress": "tb1qhjurnfz4qah4rg7ntue6x287ehdvded20rj9vh",
+    "refundCcmMetadata": null,
     "retryDuration": 100,
   },
 }
@@ -275,6 +284,7 @@ exports[`findVaultSwapData > returns null for block if the block isn't found 1`]
     "maxOraclePriceSlippage": null,
     "minPrice": 3402823669209384634633746074317682114560000000000n,
     "refundAddress": "tb1qhjurnfz4qah4rg7ntue6x287ehdvded20rj9vh",
+    "refundCcmMetadata": null,
     "retryDuration": 100,
   },
 }
@@ -303,6 +313,7 @@ exports[`findVaultSwapData > returns null for block if the request fails 1`] = `
     "maxOraclePriceSlippage": null,
     "minPrice": 3402823669209384634633746074317682114560000000000n,
     "refundAddress": "tb1qhjurnfz4qah4rg7ntue6x287ehdvded20rj9vh",
+    "refundCcmMetadata": null,
     "retryDuration": 100,
   },
 }

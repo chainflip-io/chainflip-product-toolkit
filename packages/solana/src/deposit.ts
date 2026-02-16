@@ -10,8 +10,10 @@ import {
   type PartiallyDecodedInstruction,
   type ParsedTransactionWithMeta,
 } from '@solana/web3.js';
+import { addresses, SolanaAsset, SolanaNetwork, TokenMintAddress } from './consts';
 import { devnet, mainnet } from './idls';
 import { swapSchema } from './schemas';
+import { determineInputAsset } from './tx';
 
 const getSolanaConnection = (solanaEndpoint: string) => {
   const { url, headers } = parseUrlWithBasicAuth(solanaEndpoint);
@@ -39,19 +41,6 @@ export type Transfer = {
   amount: bigint;
   slot: number;
 };
-
-type SolanaNetwork = 'mainnet' | 'devnet';
-type SupportedToken = 'SolUsdc';
-type TokenMintAddress = string & { __brand: 'TokenMintAddress' };
-
-const addresses = {
-  mainnet: {
-    SolUsdc: 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v',
-  },
-  devnet: {
-    SolUsdc: '4zMMC9srt5Ri5X14GAgXhaHii3GnPAEERYPJgZJDncDU',
-  },
-} as Record<SolanaNetwork, Record<SupportedToken, TokenMintAddress>>;
 
 const getSolDiff = (tx: VersionedTransactionResponse, publicKey: PublicKey) => {
   assert(tx.meta !== null, 'tx meta is null');
@@ -235,7 +224,7 @@ export class TransactionMatchingError extends Error {
 export const findTransactionSignatures = async (
   rpcUrl: string,
   depositAddress: string,
-  asset: 'Sol' | 'SolUsdc',
+  asset: SolanaAsset,
   deposits: DepositInfo[],
   network: SolanaNetwork,
   reportingErrorTolerance = 50,
@@ -300,11 +289,6 @@ export const findVaultSwapData = async (
   rpcUrl: string,
   signature: string,
 ): Promise<VaultSwapData<string, HexString | SolanaCcmAdditionalData | null> | null> => {
-  const methodToAsset = {
-    x_swap_native: 'Sol',
-    x_swap_token: 'SolUsdc',
-  } as const;
-
   const connection = getSolanaConnection(rpcUrl);
 
   const tx = await connection.getParsedTransaction(signature, {
@@ -324,7 +308,7 @@ export const findVaultSwapData = async (
 
   return {
     depositChainBlockHeight: tx.slot,
-    inputAsset: methodToAsset[data.name],
+    inputAsset: determineInputAsset(tx),
     ...data.data,
   };
 };

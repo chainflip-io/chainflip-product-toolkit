@@ -1,13 +1,13 @@
 {
   "name": "@chainflip/processor",
-  "version": "2.1.0",
+  "version": "2.1.0-beta.6",
   "description": "",
   "type": "module",
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@chainflip/utils": "0.8.18",
+    "@chainflip/utils": "2.1.0-beta.1",
     "zod": "^3.25.75"
   },
   "devDependencies": {
@@ -36,21 +36,21 @@
   "exports": {
     "./*": {
       "require": {
-        "types": "./dist/*.d.ts",
+        "types": "./dist/*.d.cts",
         "default": "./dist/*.cjs"
       },
       "import": {
-        "types": "./dist/*.d.ts",
+        "types": "./dist/*.d.mts",
         "default": "./dist/*.mjs"
       }
     },
     ".": {
       "require": {
-        "types": "./dist/index.d.ts",
+        "types": "./dist/index.d.cts",
         "default": "./dist/index.cjs"
       },
       "import": {
-        "types": "./dist/index.d.ts",
+        "types": "./dist/index.d.mts",
         "default": "./dist/index.mjs"
       }
     }

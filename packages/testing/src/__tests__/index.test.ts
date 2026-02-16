@@ -35,6 +35,7 @@ describe(buildChainAssetMap, () => {
         "Arbitrum": {
           "ETH": null,
           "USDC": null,
+          "USDT": null,
         },
         "Assethub": {
           "DOT": null,
@@ -49,13 +50,12 @@ describe(buildChainAssetMap, () => {
           "FLIP": null,
           "USDC": null,
           "USDT": null,
-        },
-        "Polkadot": {
-          "DOT": null,
+          "WBTC": null,
         },
         "Solana": {
           "SOL": null,
           "USDC": null,
+          "USDT": null,
         },
       }
     `);
@@ -67,7 +67,6 @@ describe(buildChainAssetMap, () => {
         ArbEth: 1,
         ArbUsdc: 2,
         Btc: 3,
-        Dot: 4,
         Eth: 5,
         Flip: 6,
         HubDot: 7,
@@ -83,6 +82,7 @@ describe(buildChainAssetMap, () => {
         "Arbitrum": {
           "ETH": 1,
           "USDC": 2,
+          "USDT": null,
         },
         "Assethub": {
           "DOT": 7,
@@ -97,13 +97,12 @@ describe(buildChainAssetMap, () => {
           "FLIP": 6,
           "USDC": 12,
           "USDT": 13,
-        },
-        "Polkadot": {
-          "DOT": 4,
+          "WBTC": null,
         },
         "Solana": {
           "SOL": 10,
           "USDC": 11,
+          "USDT": null,
         },
       }
     `);
@@ -117,6 +116,7 @@ describe(buildChainBaseAssetMap, () => {
         "Arbitrum": {
           "ETH": null,
           "USDC": null,
+          "USDT": null,
         },
         "Assethub": {
           "DOT": null,
@@ -130,13 +130,12 @@ describe(buildChainBaseAssetMap, () => {
           "ETH": null,
           "FLIP": null,
           "USDT": null,
-        },
-        "Polkadot": {
-          "DOT": null,
+          "WBTC": null,
         },
         "Solana": {
           "SOL": null,
           "USDC": null,
+          "USDT": null,
         },
       }
     `);
@@ -148,7 +147,6 @@ describe(buildChainBaseAssetMap, () => {
         ArbEth: 1,
         ArbUsdc: 2,
         Btc: 3,
-        Dot: 4,
         Eth: 5,
         Flip: 6,
         HubDot: 7,
@@ -163,6 +161,7 @@ describe(buildChainBaseAssetMap, () => {
         "Arbitrum": {
           "ETH": 1,
           "USDC": 2,
+          "USDT": null,
         },
         "Assethub": {
           "DOT": 7,
@@ -176,13 +175,12 @@ describe(buildChainBaseAssetMap, () => {
           "ETH": 5,
           "FLIP": 6,
           "USDT": 13,
-        },
-        "Polkadot": {
-          "DOT": 4,
+          "WBTC": null,
         },
         "Solana": {
           "SOL": 10,
           "USDC": 11,
+          "USDT": null,
         },
       }
     `);
@@ -197,7 +195,6 @@ describe(buildChainMap, () => {
         "Assethub": null,
         "Bitcoin": null,
         "Ethereum": null,
-        "Polkadot": null,
         "Solana": null,
       }
     `);
@@ -209,7 +206,6 @@ describe(buildChainMap, () => {
         Ethereum: 'Ethereum',
         Solana: 'Solana',
         Bitcoin: 'Bitcoin',
-        Polkadot: 'Polkadot',
         Arbitrum: 'Arbitrum',
         Assethub: 'Assethub',
       }),
@@ -219,7 +215,6 @@ describe(buildChainMap, () => {
         "Assethub": "Assethub",
         "Bitcoin": "Bitcoin",
         "Ethereum": "Ethereum",
-        "Polkadot": "Polkadot",
         "Solana": "Solana",
       }
     `);

@@ -1,6 +1,6 @@
 {
   "name": "@chainflip/redis",
-  "version": "1.0.2",
+  "version": "2.1.0-beta.1",
   "type": "module",
   "scripts": {
     "eslint:check": "pnpm eslint --max-warnings 0 './**/*.ts'",
@@ -8,9 +8,7 @@
     "prettier:check": "pnpm prettier:base --check",
     "prettier:write": "pnpm prettier:base --write",
     "prepublish": "pnpm build && pnpm test run",
-    "clean": "rm -rf dist",
-    "tsup:build": "tsup ./src/index.ts --format esm,cjs --dts --treeshake",
-    "build": "pnpm clean && pnpm tsup:build",
+    "build": "tsdown",
     "test:ci": "CI=1 pnpm t run",
     "test": "vitest"
   },
@@ -30,13 +28,13 @@
         "default": "./dist/index.cjs"
       },
       "import": {
-        "types": "./dist/index.d.ts",
-        "default": "./dist/index.js"
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
       }
     }
   },
   "dependencies": {
-    "@chainflip/utils": "0.8.18",
+    "@chainflip/utils": "2.1.0-beta.1",
     "bignumber.js": "^9.3.1",
     "ioredis": "^5.9.3",
     "zod": "^3.25.75"

@@ -36,20 +36,20 @@ export const buildChainAssetMap = <T>(
     USDC: overrides?.Usdc ?? defaultValue,
     USDT: overrides?.Usdt ?? defaultValue,
     FLIP: overrides?.Flip ?? defaultValue,
+    WBTC: overrides?.Wbtc ?? defaultValue,
   },
   Bitcoin: {
     BTC: overrides?.Btc ?? defaultValue,
   },
-  Polkadot: {
-    DOT: overrides?.Dot ?? defaultValue,
-  },
   Solana: {
     SOL: overrides?.Sol ?? defaultValue,
     USDC: overrides?.SolUsdc ?? defaultValue,
+    USDT: overrides?.SolUsdt ?? defaultValue,
   },
   Arbitrum: {
     ETH: overrides?.ArbEth ?? defaultValue,
     USDC: overrides?.ArbUsdc ?? defaultValue,
+    USDT: overrides?.ArbUsdt ?? defaultValue,
   },
   Assethub: {
     DOT: overrides?.HubDot ?? defaultValue,
@@ -66,20 +66,20 @@ export const buildChainBaseAssetMap = <T>(
     ETH: overrides?.Eth ?? defaultValue,
     USDT: overrides?.Usdt ?? defaultValue,
     FLIP: overrides?.Flip ?? defaultValue,
+    WBTC: overrides?.Wbtc ?? defaultValue,
   },
   Bitcoin: {
     BTC: overrides?.Btc ?? defaultValue,
   },
-  Polkadot: {
-    DOT: overrides?.Dot ?? defaultValue,
-  },
   Solana: {
     SOL: overrides?.Sol ?? defaultValue,
     USDC: overrides?.SolUsdc ?? defaultValue,
+    USDT: overrides?.SolUsdt ?? defaultValue,
   },
   Arbitrum: {
     ETH: overrides?.ArbEth ?? defaultValue,
     USDC: overrides?.ArbUsdc ?? defaultValue,
+    USDT: overrides?.ArbUsdt ?? defaultValue,
   },
   Assethub: {
     DOT: overrides?.HubDot ?? defaultValue,
@@ -94,7 +94,6 @@ export const buildChainMap = <T>(
 ): ChainMap<T> => ({
   Ethereum: overrides?.Ethereum ?? defaultValue,
   Bitcoin: overrides?.Bitcoin ?? defaultValue,
-  Polkadot: overrides?.Polkadot ?? defaultValue,
   Solana: overrides?.Solana ?? defaultValue,
   Arbitrum: overrides?.Arbitrum ?? defaultValue,
   Assethub: overrides?.Assethub ?? defaultValue,

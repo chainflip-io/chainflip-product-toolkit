@@ -17,53 +17,57 @@ export const numericString = z.string().regex(/^[0-9]+$/);
 
 export const numberOrHex = z.union([z.number(), u256, numericString]).transform((n) => BigInt(n));
 
-const chainAssetMapFactory = <Z extends z.ZodTypeAny>(parser: Z, _defaultValue: z.input<Z>) =>
-  z
-    .object({
-      Bitcoin: z.object({ BTC: parser }),
-      Ethereum: z.object({ ETH: parser, USDC: parser, FLIP: parser, USDT: parser }),
-      Polkadot: z.object({ DOT: parser }),
-      Arbitrum: z.object({ ETH: parser, USDC: parser }),
-      Solana: z.object({ SOL: parser, USDC: parser }),
-      Assethub: z.object({ DOT: parser, USDC: parser, USDT: parser }),
-    })
-    .omit({ Polkadot: true }); // TODO(1.12): remove polkadot all together from parser
+const chainAssetMapFactory = <Z extends z.ZodTypeAny>(parser: Z, defaultValue: z.input<Z>) =>
+  z.object({
+    Bitcoin: z.object({ BTC: parser }),
+    Ethereum: z.object({
+      ETH: parser,
+      USDC: parser,
+      FLIP: parser,
+      USDT: parser,
+      WBTC: parser.default(defaultValue),
+    }),
+    Arbitrum: z.object({ ETH: parser, USDC: parser, USDT: parser.default(defaultValue) }),
+    Solana: z.object({ SOL: parser, USDC: parser, USDT: parser.default(defaultValue) }),
+    Assethub: z.object({ DOT: parser, USDC: parser, USDT: parser }),
+  });
 
-const chainBaseAssetMapFactory = <Z extends z.ZodTypeAny>(parser: Z, _defaultValue: z.input<Z>) =>
-  z
-    .object({
-      Bitcoin: z.object({ BTC: parser }),
-      Ethereum: z.object({ ETH: parser, FLIP: parser, USDT: parser }),
-      Polkadot: z.object({ DOT: parser }),
-      Arbitrum: z.object({ ETH: parser, USDC: parser }),
-      Solana: z.object({ SOL: parser, USDC: parser }),
-      Assethub: z.object({ DOT: parser, USDC: parser, USDT: parser }),
-    })
-    .omit({ Polkadot: true }); // TODO(1.12): remove polkadot all together from parser
+const chainBaseAssetMapFactory = <Z extends z.ZodTypeAny>(parser: Z, defaultValue: z.input<Z>) =>
+  z.object({
+    Bitcoin: z.object({ BTC: parser }),
+    Ethereum: z.object({
+      ETH: parser,
+      FLIP: parser,
+      USDT: parser,
+      WBTC: parser.default(defaultValue),
+    }),
+    Arbitrum: z.object({ ETH: parser, USDC: parser, USDT: parser.default(defaultValue) }),
+    Solana: z.object({ SOL: parser, USDC: parser, USDT: parser.default(defaultValue) }),
+    Assethub: z.object({ DOT: parser, USDC: parser, USDT: parser }),
+  });
 
 const chainMapFactory = <Z extends z.ZodTypeAny>(parser: Z, _defaultValue: z.input<Z>) =>
-  z
-    .object({
-      Bitcoin: parser,
-      Ethereum: parser,
-      Polkadot: parser,
-      Arbitrum: parser,
-      Solana: parser,
-      Assethub: parser,
-    })
-    .omit({ Polkadot: true }); // TODO(1.12): remove polkadot all together from parser
+  z.object({
+    Bitcoin: parser,
+    Ethereum: parser,
+    Arbitrum: parser,
+    Solana: parser,
+    Assethub: parser,
+  });
 
 const rpcAssetSchema = z.union([
   z.object({ chain: z.literal('Bitcoin'), asset: z.literal('BTC') }),
-  z.object({ chain: z.literal('Polkadot'), asset: z.literal('DOT') }),
   z.object({ chain: z.literal('Ethereum'), asset: z.literal('FLIP') }),
   z.object({ chain: z.literal('Ethereum'), asset: z.literal('ETH') }),
   z.object({ chain: z.literal('Ethereum'), asset: z.literal('USDC') }),
   z.object({ chain: z.literal('Ethereum'), asset: z.literal('USDT') }),
+  z.object({ chain: z.literal('Ethereum'), asset: z.literal('WBTC') }),
   z.object({ chain: z.literal('Arbitrum'), asset: z.literal('ETH') }),
   z.object({ chain: z.literal('Arbitrum'), asset: z.literal('USDC') }),
+  z.object({ chain: z.literal('Arbitrum'), asset: z.literal('USDT') }),
   z.object({ chain: z.literal('Solana'), asset: z.literal('SOL') }),
   z.object({ chain: z.literal('Solana'), asset: z.literal('USDC') }),
+  z.object({ chain: z.literal('Solana'), asset: z.literal('USDT') }),
   z.object({ chain: z.literal('Assethub'), asset: z.literal('DOT') }),
   z.object({ chain: z.literal('Assethub'), asset: z.literal('USDC') }),
   z.object({ chain: z.literal('Assethub'), asset: z.literal('USDT') }),

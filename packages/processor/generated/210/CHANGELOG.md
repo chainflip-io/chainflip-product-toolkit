@@ -71,6 +71,10 @@ EthereumIngressEgress:
 Funding:
   - Funded:
     - source: added (Funding.Funded.source.2.asset.14)
+  - RedemptionExpired:
+    - txHash: added (Funding.RedemptionExpired.txHash)
+  - RedemptionSettled:
+    - undefined: added (Funding.RedemptionSettled)
 
 Governance:
   - NewGovernanceCouncil: added
@@ -126,6 +130,8 @@ LiquidityPools:
     - quoteAsset: added (LiquidityPools.RangeOrderUpdated.quoteAsset.14)
 
 LiquidityProvider:
+  - AssetBalancePurgeFailed: added
+  - AssetBalancePurged: added
   - AssetTransferred:
     - asset: added (LiquidityProvider.AssetTransferred.asset.14)
   - LiquidityDepositAddressReady:
@@ -187,6 +193,7 @@ Swapping:
   - SwapExecuted:
     - inputAsset: added (Swapping.SwapExecuted.inputAsset.14)
     - outputAsset: added (Swapping.SwapExecuted.outputAsset.14)
+    - oracleDelta: changed (Swapping.SwapExecuted.oracleDelta)
   - SwapRequested:
     - inputAsset: added (Swapping.SwapRequested.inputAsset.14)
     - outputAsset: added (Swapping.SwapRequested.outputAsset.14)

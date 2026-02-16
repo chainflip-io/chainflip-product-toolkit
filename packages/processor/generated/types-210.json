@@ -1934,7 +1934,7 @@
                   },
                   "electionsGeneric": {
                     "type": "struct",
-                    "$name": "StateChainRuntimeChainflipGenericElectionsGenericElectionsSafeMode",
+                    "$name": "StateChainRuntimeChainflipWitnessingGenericElectionsGenericElectionsSafeMode",
                     "fields": {
                       "oraclePriceElections": {
                         "type": "primitive",
@@ -1944,7 +1944,7 @@
                   },
                   "ethereumElections": {
                     "type": "struct",
-                    "$name": "StateChainRuntimeChainflipEthereumElectionsEthereumElectionsSafeMode",
+                    "$name": "StateChainRuntimeChainflipWitnessingEthereumElectionsEthereumElectionsSafeMode",
                     "fields": {
                       "stateChainGatewayWitnessing": {
                         "type": "primitive",
@@ -1962,7 +1962,7 @@
                   },
                   "arbitrumElections": {
                     "type": "struct",
-                    "$name": "StateChainRuntimeChainflipArbitrumElectionsArbitrumElectionsSafeMode",
+                    "$name": "StateChainRuntimeChainflipWitnessingArbitrumElectionsArbitrumElectionsSafeMode",
                     "fields": {
                       "keyManagerWitnessing": {
                         "type": "primitive",
@@ -2933,17 +2933,25 @@
       }
     },
     "RedemptionSettled": {
-      "type": "tuple",
-      "values": [
-        {
+      "type": "struct",
+      "fields": {
+        "accountId": {
           "type": "primitive",
           "value": "AccountId32"
         },
-        {
+        "amount": {
           "type": "primitive",
           "value": "u128"
+        },
+        "txHash": {
+          "type": "array",
+          "value": {
+            "type": "primitive",
+            "value": "u8"
+          },
+          "length": 32
         }
-      ]
+      }
     },
     "RedemptionExpired": {
       "type": "struct",
@@ -2951,6 +2959,14 @@
         "accountId": {
           "type": "primitive",
           "value": "AccountId32"
+        },
+        "txHash": {
+          "type": "array",
+          "value": {
+            "type": "primitive",
+            "value": "u8"
+          },
+          "length": 32
         }
       }
     },
@@ -13329,7 +13345,7 @@
           "type": "option",
           "value": {
             "type": "primitive",
-            "value": "i16"
+            "value": "i32"
           }
         }
       }
@@ -17534,6 +17550,647 @@
         "amount": {
           "type": "primitive",
           "value": "u128"
+        }
+      }
+    },
+    "AssetBalancePurged": {
+      "type": "struct",
+      "fields": {
+        "accountId": {
+          "type": "primitive",
+          "value": "AccountId32"
+        },
+        "asset": {
+          "type": "enum",
+          "$name": "cfPrimitivesChainsAssetsAnyAsset",
+          "values": [
+            {
+              "name": "__Unused0",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "Eth",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "Flip",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "Usdc",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "Dot",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "Btc",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "ArbEth",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "ArbUsdc",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "Usdt",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "Sol",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "SolUsdc",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "HubDot",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "HubUsdt",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "HubUsdc",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "Wbtc",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "ArbUsdt",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "SolUsdt",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            }
+          ]
+        },
+        "amount": {
+          "type": "primitive",
+          "value": "u128"
+        },
+        "egressId": {
+          "type": "tuple",
+          "values": [
+            {
+              "type": "enum",
+              "$name": "cfPrimitivesChainsForeignChain",
+              "values": [
+                {
+                  "name": "__Unused0",
+                  "value": {
+                    "type": "primitive",
+                    "value": "null"
+                  }
+                },
+                {
+                  "name": "Ethereum",
+                  "value": {
+                    "type": "primitive",
+                    "value": "null"
+                  }
+                },
+                {
+                  "name": "Polkadot",
+                  "value": {
+                    "type": "primitive",
+                    "value": "null"
+                  }
+                },
+                {
+                  "name": "Bitcoin",
+                  "value": {
+                    "type": "primitive",
+                    "value": "null"
+                  }
+                },
+                {
+                  "name": "Arbitrum",
+                  "value": {
+                    "type": "primitive",
+                    "value": "null"
+                  }
+                },
+                {
+                  "name": "Solana",
+                  "value": {
+                    "type": "primitive",
+                    "value": "null"
+                  }
+                },
+                {
+                  "name": "Assethub",
+                  "value": {
+                    "type": "primitive",
+                    "value": "null"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "primitive",
+              "value": "u64"
+            }
+          ]
+        },
+        "destinationAddress": {
+          "type": "enum",
+          "$name": "cfChainsAddressEncodedAddress",
+          "values": [
+            {
+              "name": "Eth",
+              "value": {
+                "type": "array",
+                "value": {
+                  "type": "primitive",
+                  "value": "u8"
+                },
+                "length": 20
+              }
+            },
+            {
+              "name": "Dot",
+              "value": {
+                "type": "array",
+                "value": {
+                  "type": "primitive",
+                  "value": "u8"
+                },
+                "length": 32
+              }
+            },
+            {
+              "name": "Btc",
+              "value": {
+                "type": "primitive",
+                "value": "Bytes"
+              }
+            },
+            {
+              "name": "Arb",
+              "value": {
+                "type": "array",
+                "value": {
+                  "type": "primitive",
+                  "value": "u8"
+                },
+                "length": 20
+              }
+            },
+            {
+              "name": "Sol",
+              "value": {
+                "type": "array",
+                "value": {
+                  "type": "primitive",
+                  "value": "u8"
+                },
+                "length": 32
+              }
+            },
+            {
+              "name": "Hub",
+              "value": {
+                "type": "array",
+                "value": {
+                  "type": "primitive",
+                  "value": "u8"
+                },
+                "length": 32
+              }
+            }
+          ]
+        },
+        "fee": {
+          "type": "primitive",
+          "value": "u128"
+        }
+      }
+    },
+    "AssetBalancePurgeFailed": {
+      "type": "struct",
+      "fields": {
+        "accountId": {
+          "type": "primitive",
+          "value": "AccountId32"
+        },
+        "asset": {
+          "type": "enum",
+          "$name": "cfPrimitivesChainsAssetsAnyAsset",
+          "values": [
+            {
+              "name": "__Unused0",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "Eth",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "Flip",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "Usdc",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "Dot",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "Btc",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "ArbEth",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "ArbUsdc",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "Usdt",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "Sol",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "SolUsdc",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "HubDot",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "HubUsdt",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "HubUsdc",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "Wbtc",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "ArbUsdt",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "SolUsdt",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            }
+          ]
+        },
+        "amount": {
+          "type": "primitive",
+          "value": "u128"
+        },
+        "error": {
+          "type": "enum",
+          "$name": "spRuntimeDispatchError",
+          "values": [
+            {
+              "name": "Other",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "CannotLookup",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "BadOrigin",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "Module",
+              "value": {
+                "type": "struct",
+                "$name": "SpRuntimeModuleError",
+                "fields": {
+                  "index": {
+                    "type": "primitive",
+                    "value": "u8"
+                  },
+                  "error": {
+                    "type": "array",
+                    "value": {
+                      "type": "primitive",
+                      "value": "u8"
+                    },
+                    "length": 4
+                  }
+                }
+              }
+            },
+            {
+              "name": "ConsumerRemaining",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "NoProviders",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "TooManyConsumers",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "Token",
+              "value": {
+                "type": "enum",
+                "$name": "spRuntimeTokenError",
+                "values": [
+                  {
+                    "name": "FundsUnavailable",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  },
+                  {
+                    "name": "OnlyProvider",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  },
+                  {
+                    "name": "BelowMinimum",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  },
+                  {
+                    "name": "CannotCreate",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  },
+                  {
+                    "name": "UnknownAsset",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  },
+                  {
+                    "name": "Frozen",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  },
+                  {
+                    "name": "Unsupported",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  },
+                  {
+                    "name": "CannotCreateHold",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  },
+                  {
+                    "name": "NotExpendable",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  },
+                  {
+                    "name": "Blocked",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Arithmetic",
+              "value": {
+                "type": "enum",
+                "$name": "spArithmeticArithmeticError",
+                "values": [
+                  {
+                    "name": "Underflow",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  },
+                  {
+                    "name": "Overflow",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  },
+                  {
+                    "name": "DivisionByZero",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Transactional",
+              "value": {
+                "type": "enum",
+                "$name": "spRuntimeTransactionalError",
+                "values": [
+                  {
+                    "name": "LimitReached",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  },
+                  {
+                    "name": "NoLayer",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Exhausted",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "Corruption",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "Unavailable",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "RootNotAllowed",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            }
+          ]
         }
       }
     }
@@ -50442,7 +51099,7 @@
     },
     "ElectoralEvent": {
       "type": "enum",
-      "$name": "stateChainRuntimeChainflipBitcoinElectionsBitcoinElectoralEvents",
+      "$name": "stateChainRuntimeChainflipWitnessingBitcoinElectionsBitcoinElectoralEvents",
       "values": [
         {
           "name": "ReorgDetected",
@@ -50503,7 +51160,7 @@
     },
     "ElectoralEvent": {
       "type": "enum",
-      "$name": "stateChainRuntimeChainflipGenericElectionsGenericElectoralEvents",
+      "$name": "stateChainRuntimeChainflipWitnessingGenericElectionsGenericElectoralEvents",
       "values": [
         {
           "name": "OraclePricesUpdated",
@@ -50514,7 +51171,7 @@
                 "type": "array",
                 "value": {
                   "type": "struct",
-                  "$name": "StateChainRuntimeChainflipGenericElectionsOraclePriceUpdate",
+                  "$name": "StateChainRuntimeChainflipWitnessingGenericElectionsOraclePriceUpdate",
                   "fields": {
                     "price": {
                       "type": "primitive",
@@ -50733,7 +51390,7 @@
     },
     "ElectoralEvent": {
       "type": "enum",
-      "$name": "stateChainRuntimeChainflipEthereumElectionsEthereumElectoralEvents",
+      "$name": "stateChainRuntimeChainflipWitnessingEthereumElectionsEthereumElectoralEvents",
       "values": [
         {
           "name": "ReorgDetected",
@@ -50829,7 +51486,7 @@
     },
     "ElectoralEvent": {
       "type": "enum",
-      "$name": "stateChainRuntimeChainflipArbitrumElectionsArbitrumElectoralEvents",
+      "$name": "stateChainRuntimeChainflipWitnessingArbitrumElectionsArbitrumElectoralEvents",
       "values": [
         {
           "name": "ReorgDetected",
