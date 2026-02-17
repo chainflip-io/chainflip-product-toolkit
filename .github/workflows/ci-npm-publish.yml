@@ -1,7 +1,7 @@
 name: NPM Publish CI 🛰️
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}-${{ inputs.npm_tag }}-${{ inputs.package }}
+  group: ${{ github.workflow }}-${{ github.event_name == 'push' && github.sha || format('{0}-{1}-{2}', github.ref, inputs.npm_tag, inputs.package) }}
   cancel-in-progress: true
 
 on:
