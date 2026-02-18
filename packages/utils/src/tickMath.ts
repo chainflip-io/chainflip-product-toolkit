@@ -1,20 +1,20 @@
 import BigNumber from 'bignumber.js';
-import { assetConstants, type ChainflipAsset } from './chainflip';
+import { anyAssetConstants, AnyChainflipAsset } from './chainflip';
 
 export const MIN_TICK = -887272;
 export const MAX_TICK = -MIN_TICK;
 export const FULL_TICK_RANGE = { start: MIN_TICK, end: MAX_TICK };
 
-export const tickToRate = (tick: number, baseAsset: ChainflipAsset): number => {
+export const tickToRate = (tick: number, baseAsset: AnyChainflipAsset): number => {
   // https://blog.uniswap.org/uniswap-v3-math-primer
   const baseRate = new BigNumber(1.0001 ** tick);
-  const rateDecimals = assetConstants.Usdc.decimals - assetConstants[baseAsset].decimals;
+  const rateDecimals = anyAssetConstants.Usdc.decimals - anyAssetConstants[baseAsset].decimals;
 
   return baseRate.shiftedBy(-rateDecimals).toNumber();
 };
 
-export const rateToTick = (rate: BigNumber.Value, baseAsset: ChainflipAsset): number => {
-  const rateDecimals = assetConstants.Usdc.decimals - assetConstants[baseAsset].decimals;
+export const rateToTick = (rate: BigNumber.Value, baseAsset: AnyChainflipAsset): number => {
+  const rateDecimals = anyAssetConstants.Usdc.decimals - anyAssetConstants[baseAsset].decimals;
   const rawRate = new BigNumber(rate).shiftedBy(rateDecimals);
 
   let tick = Math.log(rawRate.toNumber()) / Math.log(1.0001);
