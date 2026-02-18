@@ -75,7 +75,7 @@ export type AnyAddressType = AddressType | LegacyAddressType;
 
 export type AssetOfChain<C extends ChainflipChain> = (typeof chainConstants)[C]['assets'][number];
 export type AnyAssetOfChain<C extends AnyChainflipChain> =
-  (typeof chainConstants)[C]['assets'][number];
+  (typeof anyChainConstants)[C]['assets'][number];
 
 export type ChainAssetMap<T> = {
   [C in ChainflipChain]: {
@@ -206,14 +206,6 @@ export const chainConstants = {
     addressType: 'Eth',
     blockTimeSeconds: 12,
   },
-  Polkadot: {
-    chainflipAssets: ['Dot'],
-    assets: ['DOT'],
-    rpcAssets: ['DOT'],
-    gasAsset: 'Dot',
-    addressType: 'Dot',
-    blockTimeSeconds: 6,
-  },
   Bitcoin: {
     chainflipAssets: ['Btc'],
     assets: ['BTC'],
@@ -245,6 +237,26 @@ export const chainConstants = {
     gasAsset: 'HubDot',
     addressType: 'Hub',
     blockTimeSeconds: 12,
+  },
+} as const satisfies ChainMap<{
+  chainflipAssets: ChainflipAsset[];
+  assets: AssetSymbol[];
+  /** @deprecated use `assets` instead */
+  rpcAssets: AssetSymbol[];
+  gasAsset: ChainflipAsset;
+  addressType: AddressType;
+  blockTimeSeconds: number;
+}>;
+
+export const anyChainConstants = {
+  ...chainConstants,
+  Polkadot: {
+    chainflipAssets: ['Dot'],
+    assets: ['DOT'],
+    rpcAssets: ['DOT'],
+    gasAsset: 'Dot',
+    addressType: 'Dot',
+    blockTimeSeconds: 6,
   },
 } as const satisfies AnyChainMap<{
   chainflipAssets: AnyChainflipAsset[];
