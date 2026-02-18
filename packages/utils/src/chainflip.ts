@@ -442,3 +442,15 @@ export const chainflipAssetToPriceAssetMap: Record<
   HubDot: null,
   Wbtc: 'Btc',
 };
+
+export function isChainflipAsset(asset: string): asset is ChainflipAsset {
+  return (chainflipAssets as readonly string[]).includes(asset);
+}
+
+export function isLegacyChainflipAsset(asset: string): asset is LegacyChainflipAsset {
+  return (legacyChainflipAssets as readonly string[]).includes(asset);
+}
+
+export function isAnyChainflipAsset(asset: string): asset is AnyChainflipAsset {
+  return isChainflipAsset(asset) || isLegacyChainflipAsset(asset);
+}
