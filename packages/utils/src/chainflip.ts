@@ -466,3 +466,15 @@ export function isLegacyChainflipAsset(asset: string): asset is LegacyChainflipA
 export function isAnyChainflipAsset(asset: string): asset is AnyChainflipAsset {
   return isChainflipAsset(asset) || isLegacyChainflipAsset(asset);
 }
+
+export function isChainflipChain(chain: string): chain is ChainflipChain {
+  return (chainflipChains as readonly string[]).includes(chain);
+}
+
+export function isLegacyChainflipChain(chain: string): chain is LegacyChainflipChain {
+  return (legacyChainflipChains as readonly string[]).includes(chain);
+}
+
+export function isAnyChainflipChain(chain: string): chain is AnyChainflipChain {
+  return isChainflipChain(chain) || isLegacyChainflipChain(chain);
+}
