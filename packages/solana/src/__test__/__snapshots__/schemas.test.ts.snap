@@ -58,35 +58,6 @@ exports[`swapSchema > handles Bitcoin destinations 1`] = `
 }
 `;
 
-exports[`swapSchema > handles Polkadot destinations 1`] = `
-{
-  "affiliateFees": [],
-  "amount": 100000000n,
-  "brokerFee": {
-    "account": "cFMTNSQQVfBo2HqtekvhLPfZY764kuJDVFG1EvnnDGYxc3LRW",
-    "commissionBps": 0,
-  },
-  "ccmDepositMetadata": {
-    "ccmAdditionalData": null,
-    "channelMetadata": {
-      "gasBudget": "0xa",
-      "message": "0xdeadbeef",
-    },
-  },
-  "dcaParams": null,
-  "destinationAddress": "1BzDB5n2rfSJwvuCW9deKY9XnUyys8Gy44SoX8tRNDCFBhx",
-  "maxBoostFee": 0,
-  "outputAsset": "Dot",
-  "refundParams": {
-    "maxOraclePriceSlippage": null,
-    "minPrice": 6616846606368726564647178815965546002365481543n,
-    "refundAddress": "3yKDHJgzS2GbZB9qruoadRYtq8597HZifnRju7fHpdRC",
-    "refundCcmMetadata": null,
-    "retryDuration": 100,
-  },
-}
-`;
-
 exports[`swapSchema > handles Solana destinations 1`] = `
 {
   "affiliateFees": [],

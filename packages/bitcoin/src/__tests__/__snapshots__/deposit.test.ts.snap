@@ -57,37 +57,6 @@ exports[`findVaultSwapData > gets the vault swap data (Btc) 1`] = `
 }
 `;
 
-exports[`findVaultSwapData > gets the vault swap data (Dot) 1`] = `
-{
-  "affiliateFees": [
-    {
-      "accountIndex": 1,
-      "commissionBps": 10,
-    },
-  ],
-  "amount": 100000n,
-  "brokerFee": {
-    "account": null,
-    "commissionBps": 0,
-  },
-  "ccmDepositMetadata": null,
-  "dcaParams": null,
-  "depositAddress": "tb1pjpqkt5ghr3lts922ykufct49trhmkjesmvmrfrq88w7fd0ewwtaq0da2gg",
-  "depositChainBlockHeight": 3902357,
-  "destinationAddress": "167ZvRqc7V6HrEUSvtV8c3JRUtPjJhHXUpAwhmPktAGj1uzq",
-  "inputAsset": "Btc",
-  "maxBoostFee": 0,
-  "outputAsset": "Dot",
-  "refundParams": {
-    "maxOraclePriceSlippage": null,
-    "minPrice": 34028236692093846346337460743176821145600000n,
-    "refundAddress": "tb1qhjurnfz4qah4rg7ntue6x287ehdvded20rj9vh",
-    "refundCcmMetadata": null,
-    "retryDuration": 69,
-  },
-}
-`;
-
 exports[`findVaultSwapData > gets the vault swap data (Eth) 1`] = `
 {
   "affiliateFees": [],

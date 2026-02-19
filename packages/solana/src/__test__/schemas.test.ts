@@ -10,11 +10,6 @@ describe('swapSchema', () => {
   it.each([
     ['Bitcoin', assetContractId.Btc, 'bc1qqt3juqef9azhd0zeuamu9c30pg5xdllvmks2ja'],
     [
-      'Polkadot',
-      assetContractId.Dot,
-      ss58.decode('1BzDB5n2rfSJwvuCW9deKY9XnUyys8Gy44SoX8tRNDCFBhx').data,
-    ],
-    [
       'Assethub',
       assetContractId.HubDot,
       ss58.decode('1BzDB5n2rfSJwvuCW9deKY9XnUyys8Gy44SoX8tRNDCFBhx').data,
