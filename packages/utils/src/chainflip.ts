@@ -192,10 +192,15 @@ export const anyAssetConstants = {
   decimals: number;
 }>;
 
-export const assetSymbols = Object.values(assetConstants)
+export type AssetSymbol = (typeof assetConstants)[ChainflipAsset]['symbol'];
+export const assetSymbols: AssetSymbol[] = Object.values(assetConstants)
   .map((a) => a.symbol)
   .filter((s, i, arr) => arr.indexOf(s) === i);
-export type AssetSymbol = (typeof assetSymbols)[number];
+
+export type AnyAssetSymbol = (typeof anyAssetConstants)[AnyChainflipAsset]['symbol'];
+export const anyAssetSymbols: AnyAssetSymbol[] = Object.values(anyAssetConstants)
+  .map((a) => a.symbol)
+  .filter((s, i, arr) => arr.indexOf(s) === i);
 
 export const chainConstants = {
   Ethereum: {
