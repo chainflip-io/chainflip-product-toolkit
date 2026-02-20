@@ -15,7 +15,7 @@
     "coverage": "vitest run --coverage"
   },
   "dependencies": {
-    "@chainflip/utils": "2.1.2-beta.5",
+    "@chainflip/utils": "2.1.2-beta.6",
     "zod": "^3.25.75"
   },
   "devDependencies": {

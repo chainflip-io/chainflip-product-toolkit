@@ -179,7 +179,7 @@ export const assetConstants = {
   HubUsdt: { chain: 'Assethub', symbol: 'USDT', decimals: 6 },
 } as const satisfies InternalAssetMap<{
   chain: ChainflipChain;
-  symbol: string;
+  symbol: AssetSymbol;
   decimals: number;
 }>;
 
@@ -188,7 +188,7 @@ export const anyAssetConstants = {
   Dot: { chain: 'Polkadot', symbol: 'DOT', decimals: 10 },
 } as const satisfies AnyInternalAssetMap<{
   chain: AnyChainflipChain;
-  symbol: string;
+  symbol: AssetSymbol;
   decimals: number;
 }>;
 
@@ -199,7 +199,6 @@ export const chainConstants = {
   Ethereum: {
     chainflipAssets: ['Eth', 'Flip', 'Usdc', 'Usdt', 'Wbtc'],
     assets: ['ETH', 'FLIP', 'USDC', 'USDT', 'WBTC'],
-    rpcAssets: ['ETH', 'FLIP', 'USDC', 'USDT', 'WBTC'],
     gasAsset: 'Eth',
     addressType: 'Eth',
     blockTimeSeconds: 12,
@@ -207,7 +206,6 @@ export const chainConstants = {
   Bitcoin: {
     chainflipAssets: ['Btc'],
     assets: ['BTC'],
-    rpcAssets: ['BTC'],
     gasAsset: 'Btc',
     addressType: 'Btc',
     blockTimeSeconds: 10 * 60,
@@ -215,7 +213,6 @@ export const chainConstants = {
   Arbitrum: {
     chainflipAssets: ['ArbUsdc', 'ArbUsdt', 'ArbEth'],
     assets: ['USDC', 'USDT', 'ETH'],
-    rpcAssets: ['USDC', 'USDT', 'ETH'],
     gasAsset: 'ArbEth',
     addressType: 'Arb',
     blockTimeSeconds: 0.26,
@@ -223,7 +220,6 @@ export const chainConstants = {
   Solana: {
     chainflipAssets: ['Sol', 'SolUsdc', 'SolUsdt'],
     assets: ['SOL', 'USDC', 'USDT'],
-    rpcAssets: ['SOL', 'USDC', 'USDT'],
     gasAsset: 'Sol',
     addressType: 'Sol',
     blockTimeSeconds: 0.8,
@@ -231,7 +227,6 @@ export const chainConstants = {
   Assethub: {
     chainflipAssets: ['HubDot', 'HubUsdt', 'HubUsdc'],
     assets: ['DOT', 'USDT', 'USDC'],
-    rpcAssets: ['DOT', 'USDT', 'USDC'],
     gasAsset: 'HubDot',
     addressType: 'Hub',
     blockTimeSeconds: 3,
@@ -239,8 +234,6 @@ export const chainConstants = {
 } as const satisfies ChainMap<{
   chainflipAssets: ChainflipAsset[];
   assets: AssetSymbol[];
-  /** @deprecated use `assets` instead */
-  rpcAssets: AssetSymbol[];
   gasAsset: ChainflipAsset;
   addressType: AddressType;
   blockTimeSeconds: number;
@@ -251,7 +244,6 @@ export const anyChainConstants = {
   Polkadot: {
     chainflipAssets: ['Dot'],
     assets: ['DOT'],
-    rpcAssets: ['DOT'],
     gasAsset: 'Dot',
     addressType: 'Dot',
     blockTimeSeconds: 6,
@@ -259,8 +251,6 @@ export const anyChainConstants = {
 } as const satisfies AnyChainMap<{
   chainflipAssets: AnyChainflipAsset[];
   assets: AssetSymbol[];
-  /** @deprecated use `assets` instead */
-  rpcAssets: AssetSymbol[];
   gasAsset: AnyChainflipAsset;
   addressType: AnyAddressType;
   blockTimeSeconds: number;
