@@ -2441,9 +2441,9 @@ describe('parsers', () => {
     });
 
     it('parses the 1.12 cfSafeModeStatuses response', () => {
-      const lendingPoolEnabledRpcAssets = chainflipAssets
-        .filter((asset) => asset !== 'Dot')
-        .map((asset) => internalAssetToRpcAsset[asset]);
+      const lendingPoolEnabledRpcAssets = chainflipAssets.map(
+        (asset) => internalAssetToRpcAsset[asset],
+      );
 
       const result = cfSafeModeStatuses.parse({
         ...safeModeStatuses,

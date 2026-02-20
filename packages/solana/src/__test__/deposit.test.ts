@@ -524,7 +524,7 @@ describe(findVaultSwapData, () => {
       amount: 0.01e9,
       retryDurationBlocks: 80,
     },
-    Dot: {
+    HubDot: {
       destinationAddress: ss58.decode('167ZvRqc7V6HrEUSvtV8c3JRUtPjJhHXUpAwhmPktAGj1uzq').data,
       brokerCommission: 0,
       amount: 0.001e9,

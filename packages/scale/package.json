@@ -35,7 +35,7 @@
     "@vitest/ui": "4.0.18"
   },
   "dependencies": {
-    "@chainflip/utils": "2.1.0",
+    "@chainflip/utils": "2.1.2-beta.6",
     "scale-ts": "^1.6.1"
   },
   "repository": "https://github.com/chainflip-io/chainflip-product-toolkit.git",

@@ -98,7 +98,6 @@ describe(findVaultSwapData, () => {
     ['Eth', 1, 2, 30, 5, 1, 100, address1, undefined, undefined],
     ['ArbEth', 1, 2, 15, 10, 0.1, 90, address2, undefined, undefined],
     ['Sol', 20, 100, 10, 15, 0.01, 80, undefined, undefined, undefined],
-    ['Dot', 1, 2, 0, 0, 0.001, 69, undefined, [{ accountIndex: 1, commissionBps: 10 }], undefined],
     ['HubDot', 1, 2, 0, 0, 0.001, 69, undefined, [{ accountIndex: 1, commissionBps: 10 }], 1],
     ['Btc', 1, 2, 5, 20, 0.0001, 50, undefined, [{ accountIndex: 2, commissionBps: 20 }], 5],
   ] as const)(

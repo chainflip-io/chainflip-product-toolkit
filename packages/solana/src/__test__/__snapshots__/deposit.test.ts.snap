@@ -134,66 +134,6 @@ exports[`findVaultSwapData > handles swap native for Btc on mainnet 1`] = `
 }
 `;
 
-exports[`findVaultSwapData > handles swap native for Dot on devnet 1`] = `
-{
-  "affiliateFees": [
-    {
-      "accountIndex": 1,
-      "commissionBps": 10,
-    },
-  ],
-  "amount": 1000000n,
-  "brokerFee": {
-    "account": "cFMTNSQQVfBo2HqtekvhLPfZY764kuJDVFG1EvnnDGYxc3LRW",
-    "commissionBps": 0,
-  },
-  "ccmDepositMetadata": null,
-  "dcaParams": null,
-  "depositChainBlockHeight": 365289019,
-  "destinationAddress": "167ZvRqc7V6HrEUSvtV8c3JRUtPjJhHXUpAwhmPktAGj1uzq",
-  "inputAsset": "Sol",
-  "maxBoostFee": 0,
-  "outputAsset": "Dot",
-  "refundParams": {
-    "maxOraclePriceSlippage": null,
-    "minPrice": 0n,
-    "refundAddress": "3yKDHJgzS2GbZB9qruoadRYtq8597HZifnRju7fHpdRC",
-    "refundCcmMetadata": null,
-    "retryDuration": 69,
-  },
-}
-`;
-
-exports[`findVaultSwapData > handles swap native for Dot on mainnet 1`] = `
-{
-  "affiliateFees": [
-    {
-      "accountIndex": 1,
-      "commissionBps": 10,
-    },
-  ],
-  "amount": 1000000n,
-  "brokerFee": {
-    "account": "cFMTNSQQVfBo2HqtekvhLPfZY764kuJDVFG1EvnnDGYxc3LRW",
-    "commissionBps": 0,
-  },
-  "ccmDepositMetadata": null,
-  "dcaParams": null,
-  "depositChainBlockHeight": 365289019,
-  "destinationAddress": "167ZvRqc7V6HrEUSvtV8c3JRUtPjJhHXUpAwhmPktAGj1uzq",
-  "inputAsset": "Sol",
-  "maxBoostFee": 0,
-  "outputAsset": "Dot",
-  "refundParams": {
-    "maxOraclePriceSlippage": null,
-    "minPrice": 0n,
-    "refundAddress": "3yKDHJgzS2GbZB9qruoadRYtq8597HZifnRju7fHpdRC",
-    "refundCcmMetadata": null,
-    "retryDuration": 69,
-  },
-}
-`;
-
 exports[`findVaultSwapData > handles swap native for Eth on devnet 1`] = `
 {
   "affiliateFees": [],
@@ -276,6 +216,66 @@ exports[`findVaultSwapData > handles swap native for Eth on mainnet 1`] = `
     "refundAddress": "12MYcNumSQCn81yKRfrk5P5ThM5ivkLiZda979hhKJDR",
     "refundCcmMetadata": null,
     "retryDuration": 100,
+  },
+}
+`;
+
+exports[`findVaultSwapData > handles swap native for HubDot on devnet 1`] = `
+{
+  "affiliateFees": [
+    {
+      "accountIndex": 1,
+      "commissionBps": 10,
+    },
+  ],
+  "amount": 1000000n,
+  "brokerFee": {
+    "account": "cFMTNSQQVfBo2HqtekvhLPfZY764kuJDVFG1EvnnDGYxc3LRW",
+    "commissionBps": 0,
+  },
+  "ccmDepositMetadata": null,
+  "dcaParams": null,
+  "depositChainBlockHeight": 365289019,
+  "destinationAddress": "167ZvRqc7V6HrEUSvtV8c3JRUtPjJhHXUpAwhmPktAGj1uzq",
+  "inputAsset": "Sol",
+  "maxBoostFee": 0,
+  "outputAsset": "HubDot",
+  "refundParams": {
+    "maxOraclePriceSlippage": null,
+    "minPrice": 0n,
+    "refundAddress": "3yKDHJgzS2GbZB9qruoadRYtq8597HZifnRju7fHpdRC",
+    "refundCcmMetadata": null,
+    "retryDuration": 69,
+  },
+}
+`;
+
+exports[`findVaultSwapData > handles swap native for HubDot on mainnet 1`] = `
+{
+  "affiliateFees": [
+    {
+      "accountIndex": 1,
+      "commissionBps": 10,
+    },
+  ],
+  "amount": 1000000n,
+  "brokerFee": {
+    "account": "cFMTNSQQVfBo2HqtekvhLPfZY764kuJDVFG1EvnnDGYxc3LRW",
+    "commissionBps": 0,
+  },
+  "ccmDepositMetadata": null,
+  "dcaParams": null,
+  "depositChainBlockHeight": 365289019,
+  "destinationAddress": "167ZvRqc7V6HrEUSvtV8c3JRUtPjJhHXUpAwhmPktAGj1uzq",
+  "inputAsset": "Sol",
+  "maxBoostFee": 0,
+  "outputAsset": "HubDot",
+  "refundParams": {
+    "maxOraclePriceSlippage": null,
+    "minPrice": 0n,
+    "refundAddress": "3yKDHJgzS2GbZB9qruoadRYtq8597HZifnRju7fHpdRC",
+    "refundCcmMetadata": null,
+    "retryDuration": 69,
   },
 }
 `;

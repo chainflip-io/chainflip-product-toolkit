@@ -5,8 +5,6 @@ export const chainflipAssets = [
   'Wbtc',
   'Flip',
   'Eth',
-  // Polkadot
-  'Dot',
   // Bitcoin
   'Btc',
   // Arbitrum
@@ -23,9 +21,16 @@ export const chainflipAssets = [
   'HubUsdc',
 ] as const;
 
+export const legacyChainflipAssets = [
+  // Polkadot
+  'Dot',
+] as const;
+
 export type ChainflipAsset = (typeof chainflipAssets)[number];
 
-export const assetSymbols = ['USDC', 'USDT', 'WBTC', 'FLIP', 'DOT', 'ETH', 'BTC', 'SOL'] as const;
+export type LegacyChainflipAsset = (typeof legacyChainflipAssets)[number];
+
+export type AnyChainflipAsset = ChainflipAsset | LegacyChainflipAsset;
 
 export const priceAssets = [
   'Btc',
@@ -38,13 +43,8 @@ export const priceAssets = [
 ] as const;
 export type PriceAsset = (typeof priceAssets)[number];
 
-/** @deprecated use `assetSymbols` instead */
-export const rpcAssets = assetSymbols;
-export type AssetSymbol = (typeof assetSymbols)[number];
-/** @deprecated use `AssetSymbol` instead */
-export type RpcAsset = AssetSymbol;
-
 export type BaseChainflipAsset = Exclude<ChainflipAsset, 'Usdc'>;
+export type AnyBaseChainflipAsset = Exclude<AnyChainflipAsset, 'Usdc'>;
 
 export const baseChainflipAssets = chainflipAssets.filter(
   (asset): asset is BaseChainflipAsset => asset !== 'Usdc',
@@ -53,57 +53,90 @@ export const baseChainflipAssets = chainflipAssets.filter(
 export const chainflipEvmChains = ['Ethereum', 'Arbitrum'] as const;
 export type ChainflipEvmChain = (typeof chainflipEvmChains)[number];
 
-export const chainflipChains = [
-  ...chainflipEvmChains,
-  'Bitcoin',
-  'Polkadot',
-  'Solana',
-  'Assethub',
-] as const;
+export const chainflipChains = [...chainflipEvmChains, 'Bitcoin', 'Solana', 'Assethub'] as const;
 export type ChainflipChain = (typeof chainflipChains)[number];
+
+export const legacyChainflipChains = ['Polkadot'] as const;
+export type LegacyChainflipChain = (typeof legacyChainflipChains)[number];
+
+export type AnyChainflipChain = ChainflipChain | LegacyChainflipChain;
 
 export const chainflipNetworks = ['backspin', 'sisyphos', 'perseverance', 'mainnet'] as const;
 export type ChainflipNetwork = (typeof chainflipNetworks)[number];
 
-export const addressTypes = ['Eth', 'Btc', 'Dot', 'Arb', 'Sol', 'Hub'] as const;
+export const addressTypes = ['Eth', 'Btc', 'Arb', 'Sol', 'Hub'] as const;
 export type AddressType = (typeof addressTypes)[number];
 
-export type AssetOfChain<C extends Exclude<ChainflipChain, 'Polkadot'>> =
-  (typeof chainConstants)[C]['assets'][number];
+export const legacyAddressTypes = ['Dot'] as const;
+export type LegacyAddressType = (typeof legacyAddressTypes)[number];
+export type AnyAddressType = AddressType | LegacyAddressType;
+
+export type AssetOfChain<C extends ChainflipChain> = (typeof chainConstants)[C]['assets'][number];
+export type AnyAssetOfChain<C extends AnyChainflipChain> =
+  (typeof anyChainConstants)[C]['assets'][number];
 
 export type ChainAssetMap<T> = {
-  [C in Exclude<ChainflipChain, 'Polkadot'>]: {
+  [C in ChainflipChain]: {
     [A in AssetOfChain<C>]: T;
   };
 };
 
+export type AnyChainAssetMap<T> = {
+  [C in AnyChainflipChain]: {
+    [A in AnyAssetOfChain<C>]: T;
+  };
+};
+
 export type BaseChainAssetMap<T> = {
-  [C in Exclude<ChainflipChain, 'Polkadot'>]: {
-    [A in Exclude<BaseChainflipAsset, 'Dot'> as Extract<
-      (typeof assetConstants)[A],
-      { chain: C }
-    >['symbol']]: T;
+  [C in ChainflipChain]: {
+    [A in BaseChainflipAsset as Extract<(typeof assetConstants)[A], { chain: C }>['symbol']]: T;
+  };
+};
+
+export type AnyBaseChainAssetMap<T> = {
+  [C in AnyChainflipChain]: {
+    [A in BaseChainflipAsset as Extract<(typeof anyAssetConstants)[A], { chain: C }>['symbol']]: T;
   };
 };
 
 export type AssetAndChain = {
-  [C in Exclude<ChainflipChain, 'Polkadot'>]: {
+  [C in ChainflipChain]: {
     [A in keyof ChainAssetMap<unknown>[C]]: { chain: C; asset: A };
   }[keyof ChainAssetMap<unknown>[C]];
-}[Exclude<ChainflipChain, 'Polkadot'>];
+}[ChainflipChain];
+
+export type AnyAssetAndChain = {
+  [C in AnyChainflipChain]: {
+    [A in keyof AnyChainAssetMap<unknown>[C]]: { chain: C; asset: A };
+  }[keyof AnyChainAssetMap<unknown>[C]];
+}[AnyChainflipChain];
 
 export type BaseAssetAndChain = Exclude<AssetAndChain, { chain: 'Ethereum'; asset: 'USDC' }>;
+export type AnyBaseAssetAndChain = Exclude<AnyAssetAndChain, { chain: 'Ethereum'; asset: 'USDC' }>;
 
 export type ChainMap<T> = {
-  [C in Exclude<ChainflipChain, 'Polkadot'>]: T;
+  [C in ChainflipChain]: T;
+};
+
+export type AnyChainMap<T> = {
+  [C in AnyChainflipChain]: T;
 };
 
 export type InternalAssetMap<T> = {
-  [A in Exclude<ChainflipAsset, 'Dot'>]: T;
+  [A in ChainflipAsset]: T;
+};
+
+export type AnyInternalAssetMap<T> = {
+  [A in AnyChainflipAsset]: T;
 };
 
 export type UncheckedAssetAndChain = {
   chain: ChainflipChain;
+  asset: AssetSymbol;
+};
+
+export type AnyUncheckedAssetAndChain = {
+  chain: AnyChainflipChain;
   asset: AssetSymbol;
 };
 
@@ -122,143 +155,55 @@ export function readAssetValue<T>(
   map: ChainAssetMap<T> | BaseChainAssetMap<T>,
   asset: ChainflipAsset | BaseChainflipAsset,
 ): T {
-  const chainValues = map[assetConstants[asset].chain as Exclude<ChainflipChain, 'Polkadot'>];
+  const chainValues = map[assetConstants[asset].chain];
   return chainValues[assetConstants[asset].symbol as keyof typeof chainValues];
 }
 
 export const assetConstants = {
-  Eth: {
-    chain: 'Ethereum',
-    symbol: 'ETH',
-    rpcAsset: 'ETH',
-    decimals: 18,
-  },
-  Flip: {
-    chain: 'Ethereum',
-    symbol: 'FLIP',
-    rpcAsset: 'FLIP',
-    decimals: 18,
-  },
-  Usdc: {
-    chain: 'Ethereum',
-    symbol: 'USDC',
-    rpcAsset: 'USDC',
-    decimals: 6,
-  },
-  Usdt: {
-    chain: 'Ethereum',
-    symbol: 'USDT',
-    rpcAsset: 'USDT',
-    decimals: 6,
-  },
-  Wbtc: {
-    chain: 'Ethereum',
-    symbol: 'WBTC',
-    rpcAsset: 'WBTC',
-    decimals: 8,
-  },
-  Dot: {
-    chain: 'Polkadot',
-    symbol: 'DOT',
-    rpcAsset: 'DOT',
-    decimals: 10,
-  },
-  Btc: {
-    chain: 'Bitcoin',
-    symbol: 'BTC',
-    rpcAsset: 'BTC',
-    decimals: 8,
-  },
-  ArbUsdc: {
-    chain: 'Arbitrum',
-    symbol: 'USDC',
-    rpcAsset: 'USDC',
-    decimals: 6,
-  },
-  ArbUsdt: {
-    chain: 'Arbitrum',
-    symbol: 'USDT',
-    rpcAsset: 'USDT',
-    decimals: 6,
-  },
-  ArbEth: {
-    chain: 'Arbitrum',
-    symbol: 'ETH',
-    rpcAsset: 'ETH',
-    decimals: 18,
-  },
-  Sol: {
-    chain: 'Solana',
-    symbol: 'SOL',
-    rpcAsset: 'SOL',
-    decimals: 9,
-  },
-  SolUsdc: {
-    chain: 'Solana',
-    symbol: 'USDC',
-    rpcAsset: 'USDC',
-    decimals: 6,
-  },
-  SolUsdt: {
-    chain: 'Solana',
-    symbol: 'USDT',
-    rpcAsset: 'USDT',
-    decimals: 6,
-  },
-  HubDot: {
-    chain: 'Assethub',
-    symbol: 'DOT',
-    rpcAsset: 'DOT',
-    decimals: 10,
-  },
-  HubUsdc: {
-    chain: 'Assethub',
-    symbol: 'USDC',
-    rpcAsset: 'USDC',
-    decimals: 6,
-  },
-  HubUsdt: {
-    chain: 'Assethub',
-    symbol: 'USDT',
-    rpcAsset: 'USDT',
-    decimals: 6,
-  },
+  Eth: { chain: 'Ethereum', symbol: 'ETH', decimals: 18 },
+  Flip: { chain: 'Ethereum', symbol: 'FLIP', decimals: 18 },
+  Usdc: { chain: 'Ethereum', symbol: 'USDC', decimals: 6 },
+  Usdt: { chain: 'Ethereum', symbol: 'USDT', decimals: 6 },
+  Wbtc: { chain: 'Ethereum', symbol: 'WBTC', decimals: 8 },
+  Btc: { chain: 'Bitcoin', symbol: 'BTC', decimals: 8 },
+  ArbUsdc: { chain: 'Arbitrum', symbol: 'USDC', decimals: 6 },
+  ArbUsdt: { chain: 'Arbitrum', symbol: 'USDT', decimals: 6 },
+  ArbEth: { chain: 'Arbitrum', symbol: 'ETH', decimals: 18 },
+  Sol: { chain: 'Solana', symbol: 'SOL', decimals: 9 },
+  SolUsdc: { chain: 'Solana', symbol: 'USDC', decimals: 6 },
+  SolUsdt: { chain: 'Solana', symbol: 'USDT', decimals: 6 },
+  HubDot: { chain: 'Assethub', symbol: 'DOT', decimals: 10 },
+  HubUsdc: { chain: 'Assethub', symbol: 'USDC', decimals: 6 },
+  HubUsdt: { chain: 'Assethub', symbol: 'USDT', decimals: 6 },
 } as const satisfies InternalAssetMap<{
   chain: ChainflipChain;
   symbol: AssetSymbol;
-  /** @deprecated use `symbol` instead */
-  rpcAsset: AssetSymbol;
   decimals: number;
-}> & {
-  Dot: {
-    chain: 'Polkadot';
-    symbol: 'DOT';
-    rpcAsset: 'DOT';
-    decimals: 10;
-  };
-};
+}>;
+
+export const anyAssetConstants = {
+  ...assetConstants,
+  Dot: { chain: 'Polkadot', symbol: 'DOT', decimals: 10 },
+} as const satisfies AnyInternalAssetMap<{
+  chain: AnyChainflipChain;
+  symbol: AssetSymbol;
+  decimals: number;
+}>;
+
+export const assetSymbols = ['BTC', 'DOT', 'ETH', 'FLIP', 'SOL', 'USDC', 'USDT', 'WBTC'] as const;
+export type AssetSymbol = (typeof assetSymbols)[number];
 
 export const chainConstants = {
   Ethereum: {
     chainflipAssets: ['Eth', 'Flip', 'Usdc', 'Usdt', 'Wbtc'],
     assets: ['ETH', 'FLIP', 'USDC', 'USDT', 'WBTC'],
-    rpcAssets: ['ETH', 'FLIP', 'USDC', 'USDT', 'WBTC'],
     gasAsset: 'Eth',
     addressType: 'Eth',
     blockTimeSeconds: 12,
   },
-  Polkadot: {
-    chainflipAssets: ['Dot'],
-    assets: ['DOT'],
-    rpcAssets: ['DOT'],
-    gasAsset: 'Dot',
-    addressType: 'Dot',
-    blockTimeSeconds: 6,
-  },
   Bitcoin: {
     chainflipAssets: ['Btc'],
     assets: ['BTC'],
-    rpcAssets: ['BTC'],
     gasAsset: 'Btc',
     addressType: 'Btc',
     blockTimeSeconds: 10 * 60,
@@ -266,7 +211,6 @@ export const chainConstants = {
   Arbitrum: {
     chainflipAssets: ['ArbUsdc', 'ArbUsdt', 'ArbEth'],
     assets: ['USDC', 'USDT', 'ETH'],
-    rpcAssets: ['USDC', 'USDT', 'ETH'],
     gasAsset: 'ArbEth',
     addressType: 'Arb',
     blockTimeSeconds: 0.26,
@@ -274,7 +218,6 @@ export const chainConstants = {
   Solana: {
     chainflipAssets: ['Sol', 'SolUsdc', 'SolUsdt'],
     assets: ['SOL', 'USDC', 'USDT'],
-    rpcAssets: ['SOL', 'USDC', 'USDT'],
     gasAsset: 'Sol',
     addressType: 'Sol',
     blockTimeSeconds: 0.8,
@@ -282,39 +225,41 @@ export const chainConstants = {
   Assethub: {
     chainflipAssets: ['HubDot', 'HubUsdt', 'HubUsdc'],
     assets: ['DOT', 'USDT', 'USDC'],
-    rpcAssets: ['DOT', 'USDT', 'USDC'],
     gasAsset: 'HubDot',
     addressType: 'Hub',
-    blockTimeSeconds: 12,
+    blockTimeSeconds: 3,
   },
 } as const satisfies ChainMap<{
   chainflipAssets: ChainflipAsset[];
   assets: AssetSymbol[];
-  /** @deprecated use `assets` instead */
-  rpcAssets: AssetSymbol[];
   gasAsset: ChainflipAsset;
   addressType: AddressType;
   blockTimeSeconds: number;
-}> & {
-  Polkadot: {
-    chainflipAssets: ['Dot'];
-    assets: ['DOT'];
-    rpcAssets: ['DOT'];
-    gasAsset: 'Dot';
-    addressType: 'Dot';
-    blockTimeSeconds: 6;
-  };
-};
+}>;
 
-export const internalAssetToRpcAsset: InternalAssetMap<AssetAndChain> & {
-  Dot: { chain: 'Polkadot'; asset: 'DOT' };
-} = {
+export const anyChainConstants = {
+  ...chainConstants,
+  Polkadot: {
+    chainflipAssets: ['Dot'],
+    assets: ['DOT'],
+    gasAsset: 'Dot',
+    addressType: 'Dot',
+    blockTimeSeconds: 6,
+  },
+} as const satisfies AnyChainMap<{
+  chainflipAssets: AnyChainflipAsset[];
+  assets: AssetSymbol[];
+  gasAsset: AnyChainflipAsset;
+  addressType: AnyAddressType;
+  blockTimeSeconds: number;
+}>;
+
+export const internalAssetToRpcAsset: InternalAssetMap<AssetAndChain> = {
   Eth: { chain: 'Ethereum', asset: 'ETH' },
   Flip: { chain: 'Ethereum', asset: 'FLIP' },
   Usdc: { chain: 'Ethereum', asset: 'USDC' },
   Usdt: { chain: 'Ethereum', asset: 'USDT' },
   Wbtc: { chain: 'Ethereum', asset: 'WBTC' },
-  Dot: { chain: 'Polkadot', asset: 'DOT' },
   Btc: { chain: 'Bitcoin', asset: 'BTC' },
   ArbUsdc: { chain: 'Arbitrum', asset: 'USDC' },
   ArbUsdt: { chain: 'Arbitrum', asset: 'USDT' },
@@ -327,20 +272,25 @@ export const internalAssetToRpcAsset: InternalAssetMap<AssetAndChain> & {
   HubUsdc: { chain: 'Assethub', asset: 'USDC' },
 };
 
-export const chainContractId: ChainMap<number> & { Polkadot: 2 } = {
+export const anyInternalAssetToRpcAsset: AnyInternalAssetMap<AnyAssetAndChain> = {
+  ...internalAssetToRpcAsset,
+  Dot: { chain: 'Polkadot', asset: 'DOT' },
+};
+
+export const chainContractId: ChainMap<number> = {
   Ethereum: 1,
-  Polkadot: 2,
+  // Polkadot: 2, keeping for legacy reasons
   Bitcoin: 3,
   Arbitrum: 4,
   Solana: 5,
   Assethub: 6,
 };
 
-export const assetContractId: InternalAssetMap<number> & { Dot: 4 } = {
+export const assetContractId: InternalAssetMap<number> = {
   Eth: 1,
   Flip: 2,
   Usdc: 3,
-  Dot: 4,
+  // Dot: 4, keeping for legacy reasons
   Usdt: 8,
   Btc: 5,
   ArbEth: 6,
@@ -392,12 +342,31 @@ export function getInternalAsset(asset: UncheckedAssetAndChain, assert = true) {
     },
   };
 
-  const chain = map[asset.chain as Exclude<ChainflipChain, 'Polkadot'>];
+  const chain = map[asset.chain];
   const internalAsset = chain?.[asset.asset as keyof typeof chain] as ChainflipAsset | undefined;
 
   if (internalAsset) return internalAsset;
   if (assert) throw new Error(`invalid asset and chain combination: ${JSON.stringify(asset)}`);
   return null;
+}
+
+export function getAnyInternalAsset(asset: AnyUncheckedAssetAndChain): AnyChainflipAsset;
+export function getAnyInternalAsset(
+  asset: AnyUncheckedAssetAndChain,
+  assert: true,
+): AnyChainflipAsset;
+export function getAnyInternalAsset(
+  asset: AnyUncheckedAssetAndChain,
+  assert: boolean,
+): AnyChainflipAsset | null;
+export function getAnyInternalAsset(asset: AnyUncheckedAssetAndChain, assert = true) {
+  switch (asset.chain) {
+    case 'Polkadot':
+      if (asset.asset === 'DOT') return 'Dot';
+    // eslint-disable-next-line no-fallthrough -- explicitly allow fallthrough
+    default:
+      return getInternalAsset(asset as UncheckedAssetAndChain, assert);
+  }
 }
 
 export function isValidAssetAndChain(
@@ -467,8 +436,31 @@ export const chainflipAssetToPriceAssetMap: Record<
   HubUsdc: 'Usdc',
   Usdt: 'Usdt',
   HubUsdt: 'Usdt',
-  Dot: null,
   Flip: null,
   HubDot: null,
   Wbtc: 'Btc',
 };
+
+export function isChainflipAsset(asset: string): asset is ChainflipAsset {
+  return (chainflipAssets as readonly string[]).includes(asset);
+}
+
+export function isLegacyChainflipAsset(asset: string): asset is LegacyChainflipAsset {
+  return (legacyChainflipAssets as readonly string[]).includes(asset);
+}
+
+export function isAnyChainflipAsset(asset: string): asset is AnyChainflipAsset {
+  return isChainflipAsset(asset) || isLegacyChainflipAsset(asset);
+}
+
+export function isChainflipChain(chain: string): chain is ChainflipChain {
+  return (chainflipChains as readonly string[]).includes(chain);
+}
+
+export function isLegacyChainflipChain(chain: string): chain is LegacyChainflipChain {
+  return (legacyChainflipChains as readonly string[]).includes(chain);
+}
+
+export function isAnyChainflipChain(chain: string): chain is AnyChainflipChain {
+  return isChainflipChain(chain) || isLegacyChainflipChain(chain);
+}

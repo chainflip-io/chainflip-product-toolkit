@@ -1,16 +1,11 @@
-import {
-  assetConstants,
-  type ChainflipAsset,
-  type ChainflipChain,
-} from '@chainflip/utils/chainflip';
+import { assetConstants, type ChainMap, type ChainflipAsset } from '@chainflip/utils/chainflip';
 import { Struct, Bytes, u16, u128, u8, Vector, CodecType } from 'scale-ts';
 
-const addressByteLengths: Record<ChainflipChain, number | undefined> = {
+const addressByteLengths: ChainMap<number | undefined> = {
   Bitcoin: undefined,
   Arbitrum: 20,
   Ethereum: 20,
   Solana: 32,
-  Polkadot: 32,
   Assethub: 32,
 };
 
