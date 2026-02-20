@@ -66,7 +66,6 @@ const swapParams = z
         destinationAddress = params.dst_address.toString('utf8');
         break;
       case 'Assethub':
-      case 'Polkadot':
         destinationAddress = ss58.encode({
           data: params.dst_address,
           ss58Format: POLKADOT_SS58_PREFIX,

@@ -111,7 +111,7 @@ export const broadcastParsers = {
       })
       .transform(({ hash }) => hash),
   }),
-} as const satisfies Record<Exclude<ChainflipChain, 'Solana' | 'Polkadot'>, z.ZodTypeAny>;
+} as const satisfies Record<Exclude<ChainflipChain, 'Solana'>, z.ZodTypeAny>;
 
 const accountFee = z
   .object({
@@ -162,14 +162,14 @@ export const vaultDepositSchema = jsonString.pipe(
     .transform(transformKeysToCamelCase),
 );
 
-type ChainBroadcast<C extends Exclude<ChainflipChain, 'Solana' | 'Polkadot'>> = z.infer<
+type ChainBroadcast<C extends Exclude<ChainflipChain, 'Solana'>> = z.infer<
   (typeof broadcastParsers)[C]
 >;
 
 export type EthereumBroadcast = ChainBroadcast<'Ethereum'>;
 export type AssethubBroadcast = ChainBroadcast<'Assethub'>;
 export type BitcoinBroadcast = ChainBroadcast<'Bitcoin'>;
-export type Broadcast = ChainBroadcast<Exclude<ChainflipChain, 'Solana' | 'Polkadot'>>;
+export type Broadcast = ChainBroadcast<Exclude<ChainflipChain, 'Solana'>>;
 
 export const mempoolTransaction = jsonString.pipe(
   z.object({

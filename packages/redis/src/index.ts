@@ -51,7 +51,7 @@ export default class RedisClient {
     chain: ChainflipChain,
     broadcastId: number | bigint,
   ): Promise<Broadcast | null> {
-    if (chain === 'Solana' || chain === 'Polkadot') return null;
+    if (chain === 'Solana') return null;
     const key = `broadcast:${chain}:${broadcastId}`;
     const value = await this.client.get(key);
     return value ? broadcastParsers[chain].parse(JSON.parse(value)) : null;
