@@ -5,11 +5,7 @@
   "files": [
     "dist"
   ],
-  "scripts": {
-    "build": "mkdir -p dist && cp '../../eslint.config.js' dist/eslint.config.js",
-    "clean": "rm -rf dist",
-    "prepublish": "pnpm clean && pnpm build"
-  },
+  "scripts": {},
   "peerDependencies": {
     "@eslint/js": "^9.13.0",
     "eslint": "^9.13.0",
@@ -19,8 +15,8 @@
   },
   "exports": {
     ".": {
-      "import": "./dist/eslint.config.js",
-      "require": "./dist/eslint.config.js"
+      "import": "./base.js",
+      "require": "./base.js"
     }
   },
   "repository": "https://github.com/chainflip-io/chainflip-product-toolkit.git",
