@@ -234,7 +234,7 @@ export const chainConstants = {
     rpcAssets: ['DOT', 'USDT', 'USDC'],
     gasAsset: 'HubDot',
     addressType: 'Hub',
-    blockTimeSeconds: 12,
+    blockTimeSeconds: 3,
   },
 } as const satisfies ChainMap<{
   chainflipAssets: ChainflipAsset[];
