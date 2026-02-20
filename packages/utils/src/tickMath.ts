@@ -1,5 +1,5 @@
 import BigNumber from 'bignumber.js';
-import { anyAssetConstants, AnyChainflipAsset } from './chainflip';
+import { anyAssetConstants, type AnyChainflipAsset } from './chainflip';
 
 export const MIN_TICK = -887272;
 export const MAX_TICK = -MIN_TICK;
