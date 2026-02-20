@@ -46,8 +46,6 @@ export type PriceAsset = (typeof priceAssets)[number];
 export type BaseChainflipAsset = Exclude<ChainflipAsset, 'Usdc'>;
 export type AnyBaseChainflipAsset = Exclude<AnyChainflipAsset, 'Usdc'>;
 
-export type NonDeprecatedBaseChainflipAsset = Exclude<BaseChainflipAsset, LegacyChainflipAsset>;
-
 export const baseChainflipAssets = chainflipAssets.filter(
   (asset): asset is BaseChainflipAsset => asset !== 'Usdc',
 );
