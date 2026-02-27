@@ -93,6 +93,20 @@ export const ingressEgressEnvironment: z.input<typeof cfIngressEgressEnvironment
     Solana: '0x0',
     Assethub: '0x0',
   },
+  ingress_delays: {
+    Arbitrum: 0,
+    Ethereum: 0,
+    Bitcoin: 0,
+    Solana: 0,
+    Assethub: 0,
+  },
+  boost_delays: {
+    Arbitrum: 0,
+    Ethereum: 0,
+    Bitcoin: 0,
+    Solana: 0,
+    Assethub: 0,
+  },
 };
 
 export const swappingEnvironment: z.input<typeof cfSwappingEnvironment> = {
@@ -1239,6 +1253,11 @@ export const safeModeStatuses: z.input<typeof cfSafeModeStatuses> = {
   lending_pools: {
     add_boost_funds_enabled: true,
     stop_boosting_enabled: true,
+    borrowing_enabled: [],
+    add_lender_funds_enabled: [],
+    withdraw_lender_funds_enabled: [],
+    add_collateral_enabled: [],
+    remove_collateral_enabled: [],
   },
   reputation: {
     reporting_enabled: true,
