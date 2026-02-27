@@ -3,14 +3,88 @@ import * as ss58 from '@chainflip/utils/ss58';
 import * as base58 from '@chainflip/utils/base58';
 import { hexToBytes } from '@chainflip/utils/bytes';
 
-export const simpleEnum = <U extends string, T extends readonly [U, ...U[]]>(values: T) =>
-  z.object({ __kind: z.enum(values) }).transform(({ __kind }) => __kind!);
-
-export const cfPrimitivesChainsAssetsEthAsset = simpleEnum(['Eth', 'Flip', 'Usdc', 'Usdt', 'Wbtc']);
-
 export const hexString = z
   .string()
   .refine((v): v is `0x${string}` => /^0x[\da-f]*$/i.test(v), { message: 'Invalid hex string' });
+
+export const spRuntimeModuleError = z.object({ index: z.number(), error: hexString });
+
+export const simpleEnum = <U extends string, T extends readonly [U, ...U[]]>(values: T) =>
+  z.object({ __kind: z.enum(values) }).transform(({ __kind }) => __kind!);
+
+export const spRuntimeTokenError = simpleEnum([
+  'FundsUnavailable',
+  'OnlyProvider',
+  'BelowMinimum',
+  'CannotCreate',
+  'UnknownAsset',
+  'Frozen',
+  'Unsupported',
+  'CannotCreateHold',
+  'NotExpendable',
+  'Blocked',
+]);
+
+export const spArithmeticArithmeticError = simpleEnum(['Underflow', 'Overflow', 'DivisionByZero']);
+
+export const spRuntimeTransactionalError = simpleEnum(['LimitReached', 'NoLayer']);
+
+export const spRuntimeProvingTrieTrieError = simpleEnum([
+  'InvalidStateRoot',
+  'IncompleteDatabase',
+  'ValueAtIncompleteKey',
+  'DecoderError',
+  'InvalidHash',
+  'DuplicateKey',
+  'ExtraneousNode',
+  'ExtraneousValue',
+  'ExtraneousHashReference',
+  'InvalidChildReference',
+  'ValueMismatch',
+  'IncompleteProof',
+  'RootMismatch',
+  'DecodeError',
+]);
+
+export const spRuntimeDispatchError = z.discriminatedUnion('__kind', [
+  z.object({ __kind: z.literal('Other') }),
+  z.object({ __kind: z.literal('CannotLookup') }),
+  z.object({ __kind: z.literal('BadOrigin') }),
+  z.object({ __kind: z.literal('Module'), value: spRuntimeModuleError }),
+  z.object({ __kind: z.literal('ConsumerRemaining') }),
+  z.object({ __kind: z.literal('NoProviders') }),
+  z.object({ __kind: z.literal('TooManyConsumers') }),
+  z.object({ __kind: z.literal('Token'), value: spRuntimeTokenError }),
+  z.object({ __kind: z.literal('Arithmetic'), value: spArithmeticArithmeticError }),
+  z.object({ __kind: z.literal('Transactional'), value: spRuntimeTransactionalError }),
+  z.object({ __kind: z.literal('Exhausted') }),
+  z.object({ __kind: z.literal('Corruption') }),
+  z.object({ __kind: z.literal('Unavailable') }),
+  z.object({ __kind: z.literal('RootNotAllowed') }),
+  z.object({ __kind: z.literal('Trie'), value: spRuntimeProvingTrieTrieError }),
+]);
+
+export const numericString = z
+  .string()
+  .refine((v) => /^\d+$/.test(v), { message: 'Invalid numeric string' });
+
+export const numberOrHex = z
+  .union([z.number(), hexString, numericString])
+  .transform((n) => BigInt(n));
+
+export const spWeightsWeightV2Weight = z.object({ refTime: numberOrHex, proofSize: numberOrHex });
+
+export const frameSupportDispatchDispatchClass = simpleEnum(['Normal', 'Operational', 'Mandatory']);
+
+export const frameSupportDispatchPays = simpleEnum(['Yes', 'No']);
+
+export const frameSystemDispatchEventInfo = z.object({
+  weight: spWeightsWeightV2Weight,
+  class: frameSupportDispatchDispatchClass,
+  paysFee: frameSupportDispatchPays,
+});
+
+export const cfPrimitivesChainsAssetsEthAsset = simpleEnum(['Eth', 'Flip', 'Usdc', 'Usdt', 'Wbtc']);
 
 export const cfPrimitivesChainsAssetsArbAsset = simpleEnum(['ArbEth', 'ArbUsdc', 'ArbUsdt']);
 
@@ -204,14 +278,6 @@ export const accountId = z
   ])
   .transform((value) => ss58.encode({ data: value, ss58Format: 2112 }) as `cF${string}`);
 
-export const numericString = z
-  .string()
-  .refine((v) => /^\d+$/.test(v), { message: 'Invalid numeric string' });
-
-export const numberOrHex = z
-  .union([z.number(), hexString, numericString])
-  .transform((n) => BigInt(n));
-
 export const cfTraitsFundingSource = z.discriminatedUnion('__kind', [
   z.object({ __kind: z.literal('EthTransaction'), txHash: hexString, funder: hexString }),
   z.object({ __kind: z.literal('Swap'), swapRequestId: numberOrHex }),
@@ -222,10 +288,61 @@ export const cfTraitsFundingSource = z.discriminatedUnion('__kind', [
   }),
 ]);
 
+export const palletCfValidatorDelegationDelegationAmount = z.discriminatedUnion('__kind', [
+  z.object({ __kind: z.literal('Max') }),
+  z.object({ __kind: z.literal('Some'), value: numberOrHex }),
+]);
+
+export const palletCfFundingRedemptionAmount = z.discriminatedUnion('__kind', [
+  z.object({ __kind: z.literal('Max') }),
+  z.object({ __kind: z.literal('Exact'), value: numberOrHex }),
+]);
+
+export const stateChainRuntimeChainflipEthereumScCallsDelegationApi = z.discriminatedUnion(
+  '__kind',
+  [
+    z.object({
+      __kind: z.literal('Delegate'),
+      operator: accountId,
+      increase: palletCfValidatorDelegationDelegationAmount,
+    }),
+    z.object({
+      __kind: z.literal('Undelegate'),
+      decrease: palletCfValidatorDelegationDelegationAmount,
+    }),
+    z.object({
+      __kind: z.literal('Redeem'),
+      amount: palletCfFundingRedemptionAmount,
+      address: hexString,
+      executor: hexString.nullish(),
+    }),
+  ],
+);
+
+export const stateChainRuntimeChainflipEthereumScCallsEthereumSCApi = z.object({
+  __kind: z.literal('Delegation'),
+  call: stateChainRuntimeChainflipEthereumScCallsDelegationApi,
+});
+
+export const frameSupportDispatchPostDispatchInfo = z.object({
+  actualWeight: spWeightsWeightV2Weight.nullish(),
+  paysFee: frameSupportDispatchPays,
+});
+
+export const spRuntimeDispatchErrorWithPostInfo = z.object({
+  postInfo: frameSupportDispatchPostDispatchInfo,
+  error: spRuntimeDispatchError,
+});
+
 export const palletCfGovernanceGovernanceCouncil = z.object({
   members: z.array(accountId),
   threshold: z.number(),
 });
+
+export const dispatchResult = z.discriminatedUnion('__kind', [
+  z.object({ __kind: z.literal('Ok') }),
+  z.object({ __kind: z.literal('Err'), value: spRuntimeDispatchError }),
+]);
 
 export const cfChainsAddressEncodedAddress = z
   .object({ __kind: z.enum(['Eth', 'Dot', 'Btc', 'Arb', 'Sol', 'Hub']), value: hexString })
@@ -432,42 +549,6 @@ export const cfChainsRefundParametersChannelRefundParameters = z.object({
 
 export const cfPrimitivesSwapLeg = simpleEnum(['FromStable', 'ToStable']);
 
-export const spRuntimeModuleError = z.object({ index: z.number(), error: hexString });
-
-export const spRuntimeTokenError = simpleEnum([
-  'FundsUnavailable',
-  'OnlyProvider',
-  'BelowMinimum',
-  'CannotCreate',
-  'UnknownAsset',
-  'Frozen',
-  'Unsupported',
-  'CannotCreateHold',
-  'NotExpendable',
-  'Blocked',
-]);
-
-export const spArithmeticArithmeticError = simpleEnum(['Underflow', 'Overflow', 'DivisionByZero']);
-
-export const spRuntimeTransactionalError = simpleEnum(['LimitReached', 'NoLayer']);
-
-export const spRuntimeDispatchError = z.discriminatedUnion('__kind', [
-  z.object({ __kind: z.literal('Other') }),
-  z.object({ __kind: z.literal('CannotLookup') }),
-  z.object({ __kind: z.literal('BadOrigin') }),
-  z.object({ __kind: z.literal('Module'), value: spRuntimeModuleError }),
-  z.object({ __kind: z.literal('ConsumerRemaining') }),
-  z.object({ __kind: z.literal('NoProviders') }),
-  z.object({ __kind: z.literal('TooManyConsumers') }),
-  z.object({ __kind: z.literal('Token'), value: spRuntimeTokenError }),
-  z.object({ __kind: z.literal('Arithmetic'), value: spArithmeticArithmeticError }),
-  z.object({ __kind: z.literal('Transactional'), value: spRuntimeTransactionalError }),
-  z.object({ __kind: z.literal('Exhausted') }),
-  z.object({ __kind: z.literal('Corruption') }),
-  z.object({ __kind: z.literal('Unavailable') }),
-  z.object({ __kind: z.literal('RootNotAllowed') }),
-]);
-
 export const palletCfSwappingPalletConfigUpdate = z.discriminatedUnion('__kind', [
   z.object({
     __kind: z.literal('MaximumSwapAmount'),
@@ -504,6 +585,12 @@ export const palletCfSwappingPalletConfigUpdate = z.discriminatedUnion('__kind',
     asset: cfPrimitivesChainsAssetsAnyAsset,
     rate: z.number().nullish(),
   }),
+  z.object({
+    __kind: z.literal('SetDefaultOraclePriceSlippageProtectionForAsset'),
+    baseAsset: cfPrimitivesChainsAssetsAnyAsset,
+    quoteAsset: cfPrimitivesChainsAssetsAnyAsset,
+    bps: z.number().nullish(),
+  }),
 ]);
 
 export const cfChainsEvmDepositDetails = z.object({ txHashes: z.array(hexString).nullish() });
@@ -537,6 +624,48 @@ export const palletCfEthereumIngressEgressDepositAction = z.discriminatedUnion('
 ]);
 
 export const cfChainsDepositOriginType = simpleEnum(['DepositChannel', 'Vault']);
+
+export const solPrimPdaPdaError = simpleEnum([
+  'NotAValidPoint',
+  'TooManySeeds',
+  'SeedTooLarge',
+  'BumpSeedBadLuck',
+]);
+
+export const cfChainsCcmCheckerCcmValidityError = simpleEnum([
+  'CannotDecodeCcmAdditionalData',
+  'CcmIsTooLong',
+  'CcmAdditionalDataContainsInvalidAccounts',
+  'RedundantDataSupplied',
+  'InvalidDestinationAddress',
+  'TooManyAddressLookupTables',
+]);
+
+export const cfChainsSolApiSolanaTransactionBuildingError = z.discriminatedUnion('__kind', [
+  z.object({ __kind: z.literal('CannotLookupApiEnvironment') }),
+  z.object({ __kind: z.literal('CannotLookupCurrentAggKey') }),
+  z.object({ __kind: z.literal('CannotLookupComputePrice') }),
+  z.object({ __kind: z.literal('NoNonceAccountsSet') }),
+  z.object({ __kind: z.literal('NoAvailableNonceAccount') }),
+  z.object({ __kind: z.literal('FailedToDeriveAddress'), value: solPrimPdaPdaError }),
+  z.object({ __kind: z.literal('InvalidCcm'), value: cfChainsCcmCheckerCcmValidityError }),
+  z.object({ __kind: z.literal('FailedToSerializeFinalTransaction') }),
+  z.object({ __kind: z.literal('FinalTransactionExceededMaxLength'), value: z.number() }),
+  z.object({ __kind: z.literal('DispatchError'), value: spRuntimeDispatchError }),
+  z.object({ __kind: z.literal('AltsNotYetWitnessed') }),
+  z.object({ __kind: z.literal('AltsInvalid') }),
+]);
+
+export const cfChainsExecutexSwapAndCallError = z.discriminatedUnion('__kind', [
+  z.object({ __kind: z.literal('Unsupported') }),
+  z.object({
+    __kind: z.literal('FailedToBuildCcmForSolana'),
+    value: cfChainsSolApiSolanaTransactionBuildingError,
+  }),
+  z.object({ __kind: z.literal('DispatchError'), value: spRuntimeDispatchError }),
+  z.object({ __kind: z.literal('NoVault') }),
+  z.object({ __kind: z.literal('AuxDataNotReady') }),
+]);
 
 export const palletCfEthereumIngressEgressDepositFailedReason = z.discriminatedUnion('__kind', [
   z.object({ __kind: z.literal('BelowMinimumDeposit') }),
@@ -608,6 +737,19 @@ export const cfTraitsScheduledEgressDetailsEthereum = z.object({
   egressAmount: numberOrHex,
   feeWithheld: numberOrHex,
 });
+
+export const cfChainsAllBatchError = z.discriminatedUnion('__kind', [
+  z.object({ __kind: z.literal('NotRequired') }),
+  z.object({ __kind: z.literal('UnsupportedToken') }),
+  z.object({ __kind: z.literal('VaultAccountNotSet') }),
+  z.object({ __kind: z.literal('AggKeyNotSet') }),
+  z.object({ __kind: z.literal('UtxoSelectionFailed') }),
+  z.object({
+    __kind: z.literal('FailedToBuildSolanaTransaction'),
+    value: cfChainsSolApiSolanaTransactionBuildingError,
+  }),
+  z.object({ __kind: z.literal('DispatchError'), value: spRuntimeDispatchError }),
+]);
 
 export const cfPrimitivesAccountRole = simpleEnum([
   'Unregistered',
@@ -803,7 +945,7 @@ export const cfTraitsLiquidityIncreaseOrDecreaseU128 = z.discriminatedUnion('__k
   z.object({ __kind: z.literal('Decrease'), value: numberOrHex }),
 ]);
 
-export const palletCfPoolsAssetPair = z.object({ assets: cfAmmCommonPoolPairsMap });
+export const cfAmmCommonAssetPair = z.object({ assets: cfAmmCommonPoolPairsMap });
 
 export const palletCfPoolsCloseOrder = z.discriminatedUnion('__kind', [
   z.object({

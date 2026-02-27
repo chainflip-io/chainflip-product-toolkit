@@ -1,18 +1,27 @@
 New or removed pallets:
   ArbitrumElections: added
   EthereumElections: added
+  Historical: added
+
+ArbitrumBroadcaster:
+  - BroadcastCallbackExecuted: removed
 
 ArbitrumIngressEgress:
   - AssetEgressStatusChanged:
     - asset: added (ArbitrumIngressEgress.AssetEgressStatusChanged.asset.2)
+  - CcmEgressInvalid:
+    - error: added (ArbitrumIngressEgress.CcmEgressInvalid.error.1.9.14)
   - DepositBoosted:
     - asset: added (ArbitrumIngressEgress.DepositBoosted.asset.2)
   - DepositFailed:
+    - reason: added (ArbitrumIngressEgress.DepositFailed.reason.3.14)
     - details: added (ArbitrumIngressEgress.DepositFailed.details.0.depositWitness.asset.2)
   - DepositFetchesScheduled:
     - asset: added (ArbitrumIngressEgress.DepositFetchesScheduled.asset.2)
   - DepositFinalised:
     - asset: added (ArbitrumIngressEgress.DepositFinalised.asset.2)
+  - FailedToBuildAllBatchCall:
+    - error: added (ArbitrumIngressEgress.FailedToBuildAllBatchCall.error.5.9.14)
   - InsufficientBoostLiquidity:
     - asset: added (ArbitrumIngressEgress.InsufficientBoostLiquidity.asset.2)
   - InvalidCcmRefunded:
@@ -27,14 +36,40 @@ AssetBalances:
     - asset: added (AssetBalances.AccountCredited.asset.14)
   - AccountDebited:
     - asset: added (AssetBalances.AccountDebited.asset.14)
+  - RefundSkipped:
+    - reason: added (AssetBalances.RefundSkipped.reason.14)
+
+AssethubBroadcaster:
+  - BroadcastCallbackExecuted: removed
 
 AssethubIngressEgress:
+  - CcmEgressInvalid:
+    - error: added (AssethubIngressEgress.CcmEgressInvalid.error.1.9.14)
   - DepositFailed:
+    - reason: added (AssethubIngressEgress.DepositFailed.reason.3.14)
     - details: added (AssethubIngressEgress.DepositFailed.details.1.vaultWitness.outputAsset.14)
+  - FailedToBuildAllBatchCall:
+    - error: added (AssethubIngressEgress.FailedToBuildAllBatchCall.error.5.9.14)
+
+BitcoinBroadcaster:
+  - BroadcastCallbackExecuted: removed
 
 BitcoinIngressEgress:
+  - CcmEgressInvalid:
+    - error: added (BitcoinIngressEgress.CcmEgressInvalid.error.1.9.14)
   - DepositFailed:
+    - reason: added (BitcoinIngressEgress.DepositFailed.reason.3.14)
     - details: added (BitcoinIngressEgress.DepositFailed.details.1.vaultWitness.outputAsset.14)
+  - FailedToBuildAllBatchCall:
+    - error: added (BitcoinIngressEgress.FailedToBuildAllBatchCall.error.5.9.14)
+
+BitcoinThresholdSigner:
+  - ThresholdDispatchComplete:
+    - result: added (BitcoinThresholdSigner.ThresholdDispatchComplete.result.1.14)
+
+Emissions:
+  - FlipBurnSkipped:
+    - reason: added (Emissions.FlipBurnSkipped.reason.14)
 
 Environment:
   - AddedNewArbAsset:
@@ -48,17 +83,25 @@ Environment:
   - UpdatedEthAsset:
     - 0: added (Environment.UpdatedEthAsset.0.4)
 
+EthereumBroadcaster:
+  - BroadcastCallbackExecuted: removed
+
 EthereumIngressEgress:
   - AssetEgressStatusChanged:
     - asset: added (EthereumIngressEgress.AssetEgressStatusChanged.asset.4)
+  - CcmEgressInvalid:
+    - error: added (EthereumIngressEgress.CcmEgressInvalid.error.1.9.14)
   - DepositBoosted:
     - asset: added (EthereumIngressEgress.DepositBoosted.asset.4)
   - DepositFailed:
+    - reason: added (EthereumIngressEgress.DepositFailed.reason.3.14)
     - details: added (EthereumIngressEgress.DepositFailed.details.0.depositWitness.asset.4)
   - DepositFetchesScheduled:
     - asset: added (EthereumIngressEgress.DepositFetchesScheduled.asset.4)
   - DepositFinalised:
     - asset: added (EthereumIngressEgress.DepositFinalised.asset.4)
+  - FailedToBuildAllBatchCall:
+    - error: added (EthereumIngressEgress.FailedToBuildAllBatchCall.error.5.9.14)
   - InsufficientBoostLiquidity:
     - asset: added (EthereumIngressEgress.InsufficientBoostLiquidity.asset.4)
   - InvalidCcmRefunded:
@@ -68,6 +111,10 @@ EthereumIngressEgress:
   - TransferFallbackRequested:
     - asset: added (EthereumIngressEgress.TransferFallbackRequested.asset.4)
 
+EvmThresholdSigner:
+  - ThresholdDispatchComplete:
+    - result: added (EvmThresholdSigner.ThresholdDispatchComplete.result.1.14)
+
 Funding:
   - Funded:
     - source: added (Funding.Funded.source.2.asset.14)
@@ -75,8 +122,14 @@ Funding:
     - txHash: added (Funding.RedemptionExpired.txHash)
   - RedemptionSettled:
     - undefined: added (Funding.RedemptionSettled)
+  - SCCallCannotBeExecuted:
+    - callError: added (Funding.SCCallCannotBeExecuted.callError.error.14)
 
 Governance:
+  - FailedExecution:
+    - 14: added (Governance.FailedExecution.14)
+  - GovKeyCallExecutionFailed:
+    - error: added (Governance.GovKeyCallExecutionFailed.error.14)
   - NewGovernanceCouncil: added
 
 LendingPools:
@@ -128,6 +181,8 @@ LiquidityPools:
   - RangeOrderUpdated:
     - baseAsset: added (LiquidityPools.RangeOrderUpdated.baseAsset.14)
     - quoteAsset: added (LiquidityPools.RangeOrderUpdated.quoteAsset.14)
+  - ScheduledLimitOrderUpdateDispatchFailure:
+    - error: added (LiquidityPools.ScheduledLimitOrderUpdateDispatchFailure.error.14)
 
 LiquidityProvider:
   - AssetBalancePurgeFailed: added
@@ -139,21 +194,46 @@ LiquidityProvider:
   - WithdrawalEgressScheduled:
     - asset: added (LiquidityProvider.WithdrawalEgressScheduled.asset.14)
 
+PolkadotBroadcaster:
+  - BroadcastCallbackExecuted: removed
+
 PolkadotIngressEgress:
+  - CcmEgressInvalid:
+    - error: added (PolkadotIngressEgress.CcmEgressInvalid.error.1.9.14)
   - DepositFailed:
+    - reason: added (PolkadotIngressEgress.DepositFailed.reason.3.14)
     - details: added (PolkadotIngressEgress.DepositFailed.details.1.vaultWitness.outputAsset.14)
+  - FailedToBuildAllBatchCall:
+    - error: added (PolkadotIngressEgress.FailedToBuildAllBatchCall.error.5.9.14)
+
+PolkadotThresholdSigner:
+  - ThresholdDispatchComplete:
+    - result: added (PolkadotThresholdSigner.ThresholdDispatchComplete.result.1.14)
+
+Session:
+  - NewQueued: added
+  - ValidatorDisabled: added
+  - ValidatorReenabled: added
+
+SolanaBroadcaster:
+  - BroadcastCallbackExecuted: removed
 
 SolanaIngressEgress:
   - AssetEgressStatusChanged:
     - asset: added (SolanaIngressEgress.AssetEgressStatusChanged.asset.2)
+  - CcmEgressInvalid:
+    - error: added (SolanaIngressEgress.CcmEgressInvalid.error.1.9.14)
   - DepositBoosted:
     - asset: added (SolanaIngressEgress.DepositBoosted.asset.2)
   - DepositFailed:
+    - reason: added (SolanaIngressEgress.DepositFailed.reason.3.14)
     - details: added (SolanaIngressEgress.DepositFailed.details.0.depositWitness.asset.2)
   - DepositFetchesScheduled:
     - asset: added (SolanaIngressEgress.DepositFetchesScheduled.asset.2)
   - DepositFinalised:
     - asset: added (SolanaIngressEgress.DepositFinalised.asset.2)
+  - FailedToBuildAllBatchCall:
+    - error: added (SolanaIngressEgress.FailedToBuildAllBatchCall.error.5.9.14)
   - InsufficientBoostLiquidity:
     - asset: added (SolanaIngressEgress.InsufficientBoostLiquidity.asset.2)
   - InvalidCcmRefunded:
@@ -162,6 +242,10 @@ SolanaIngressEgress:
     - update: added (SolanaIngressEgress.PalletConfigUpdated.update.1.asset.2)
   - TransferFallbackRequested:
     - asset: added (SolanaIngressEgress.TransferFallbackRequested.asset.2)
+
+SolanaThresholdSigner:
+  - ThresholdDispatchComplete:
+    - result: added (SolanaThresholdSigner.ThresholdDispatchComplete.result.1.14)
 
 Swapping:
   - AccountCreationDepositAddressReady:
@@ -172,9 +256,10 @@ Swapping:
   - CreditedOnChain:
     - asset: added (Swapping.CreditedOnChain.asset.14)
   - PalletConfigUpdated:
-    - update: added (Swapping.PalletConfigUpdated.update.0.asset.14)
+    - update: added (Swapping.PalletConfigUpdated.update.11)
   - RefundEgressIgnored:
     - asset: added (Swapping.RefundEgressIgnored.asset.14)
+    - reason: added (Swapping.RefundEgressIgnored.reason.14)
   - RefundEgressScheduled:
     - asset: added (Swapping.RefundEgressScheduled.asset.14)
     - egressFee: added (Swapping.RefundEgressScheduled.egressFee.1.14)
@@ -187,10 +272,12 @@ Swapping:
     - destinationAsset: added (Swapping.SwapDepositAddressReady.destinationAsset.14)
   - SwapEgressIgnored:
     - asset: added (Swapping.SwapEgressIgnored.asset.14)
+    - reason: added (Swapping.SwapEgressIgnored.reason.14)
   - SwapEgressScheduled:
     - asset: added (Swapping.SwapEgressScheduled.asset.14)
     - egressFee: added (Swapping.SwapEgressScheduled.egressFee.1.14)
   - SwapExecuted:
+    - oracleDeltaExFees: added (Swapping.SwapExecuted.oracleDeltaExFees)
     - inputAsset: added (Swapping.SwapExecuted.inputAsset.14)
     - outputAsset: added (Swapping.SwapExecuted.outputAsset.14)
     - oracleDelta: changed (Swapping.SwapExecuted.oracleDelta)
@@ -200,6 +287,11 @@ Swapping:
   - WithdrawalRequested:
     - egressAsset: added (Swapping.WithdrawalRequested.egressAsset.14)
 
+System:
+  - ExtrinsicFailed:
+    - dispatchError: added (System.ExtrinsicFailed.dispatchError.14)
+  - RejectedInvalidAuthorizedUpgrade: added
+
 TradingStrategy:
   - FundsAddedToStrategy:
     - amounts: added (TradingStrategy.FundsAddedToStrategy.amounts.key.14)
@@ -207,3 +299,9 @@ TradingStrategy:
     - update: added (TradingStrategy.PalletConfigUpdated.update.0.asset.14)
   - StrategyDeployed:
     - strategy: added (TradingStrategy.StrategyDeployed.strategy.0.baseAsset.14)
+
+Witnesser:
+  - PrewitnessExecutionFailed:
+    - error: added (Witnesser.PrewitnessExecutionFailed.error.14)
+  - WitnessExecutionFailed:
+    - error: added (Witnesser.WitnessExecutionFailed.error.14)
