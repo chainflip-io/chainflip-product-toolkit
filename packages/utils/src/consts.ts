@@ -194,6 +194,10 @@ export const brokerAliasMap: AccountAliasMap = {
   cFPZ7XoAWHFBJy2t2t5rupQ3fvMKRyCpxDHjnmtD42XAEjxcW: { name: 'SafePal', twitter: '@SafePal' },
   cFNqDaZ9apGKt9uXaGQGucWuizVeTms2cXq8hnYM8g7y99Cpy: { name: 'Trocador', twitter: '@TrocadorApp' },
   cFMDwBJmeivhWdYp6wSjDUdzqDV64A4efceRYHyHWTPHfQUZX: { name: 'Xverse', twitter: '@xverse' },
+  cFJ3dosNpW1X2GniSPsUKzWMnJW7NBBcNbimUBDnxa1Cfb551: {
+    name: 'OrangeRock',
+    twitter: '@orangerock.xyz',
+  },
 } as const;
 
 export const lpAliasMap: AccountAliasMap = {
