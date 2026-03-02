@@ -163,19 +163,20 @@ export const cfIngressEgressEnvironment = z
     witness_safety_margins: chainMapFactory(z.number().nullable(), null),
     egress_dust_limits: chainAssetMapFactory(numberOrHex, 0),
     channel_opening_fees: chainMapFactory(numberOrHex, 0),
-    ingress_delays: chainMapFactory(z.number(), 0).optional(), // TODO(1.12): remove after all networks upgraded
-    boost_delays: chainMapFactory(z.number(), 0).optional(), // TODO(1.12): remove after all networks upgraded
+    ingress_delays: chainMapFactory(z.number(), 0),
+    boost_delays: chainMapFactory(z.number(), 0),
   })
   .transform(rename({ egress_dust_limits: 'minimum_egress_amounts' }));
 
 export const cfSwappingEnvironment = z.object({
   maximum_swap_amounts: chainAssetMapFactory(numberOrHex.nullable(), null),
   network_fee_hundredth_pips: z.number(),
-  swap_retry_delay_blocks: z.number().optional(),
-  max_swap_retry_duration_blocks: z.number().optional(),
-  max_swap_request_duration_blocks: z.number().optional(),
-  minimum_chunk_size: chainAssetMapFactory(numberOrHex.nullable(), null).optional(),
+  swap_retry_delay_blocks: z.number(),
+  max_swap_retry_duration_blocks: z.number(),
+  max_swap_request_duration_blocks: z.number(),
+  minimum_chunk_size: chainAssetMapFactory(numberOrHex.nullable(), null),
   network_fees: networkFees,
+  default_oracle_price_protection: chainAssetMapFactory(z.number().nullable(), null).optional(), // TODO(2.1): remove after all networks upgraded
 });
 
 export const cfFundingEnvironment = z.object({
@@ -365,29 +366,23 @@ export const liquidityProvider = z.object({
   refund_addresses: chainMapFactory(z.string().nullable(), null),
   earned_fees: chainAssetMapFactory(numberOrHex, 0),
   boost_balances: chainAssetMapFactory(boostBalances, []),
-  lending_positions: z
-    .array(
-      z.intersection(
-        rpcAssetSchema,
-        z.object({
-          total_amount: numberOrHex,
-          available_amount: numberOrHex,
-        }),
-      ),
-    )
-    // TODO(1.12): remove after all networks upgraded
-    .optional(),
-  collateral_balances: z
-    .array(
-      z.intersection(
-        rpcAssetSchema,
-        z.object({
-          amount: numberOrHex,
-        }),
-      ),
-    )
-    // TODO(1.12): remove after all networks upgraded
-    .optional(),
+  lending_positions: z.array(
+    z.intersection(
+      rpcAssetSchema,
+      z.object({
+        total_amount: numberOrHex,
+        available_amount: numberOrHex,
+      }),
+    ),
+  ),
+  collateral_balances: z.array(
+    z.intersection(
+      rpcAssetSchema,
+      z.object({
+        amount: numberOrHex,
+      }),
+    ),
+  ),
 });
 
 export const validator = z.object({
@@ -634,7 +629,7 @@ export const cfOraclePrices = z.array(
     updated_at_statechain_block: z.number(),
     base_asset: z.enum(priceAssets),
     quote_asset: z.enum(priceAssets),
-    price_status: z.enum(['UpToDate', 'Stale', 'MaybeStale']).optional(), // TODO remove `optional` after backspin updates
+    price_status: z.enum(['UpToDate', 'Stale', 'MaybeStale']),
   }),
 );
 
@@ -702,12 +697,11 @@ export const cfSafeModeStatuses = z.object({
   lending_pools: z.object({
     add_boost_funds_enabled: z.boolean(),
     stop_boosting_enabled: z.boolean(),
-    // TODO(1.12): remove `optional` after all networks upgraded
-    borrowing_enabled: z.array(rpcAssetSchema).optional(),
-    add_lender_funds_enabled: z.array(rpcAssetSchema).optional(),
-    withdraw_lender_funds_enabled: z.array(rpcAssetSchema).optional(),
-    add_collateral_enabled: z.array(rpcAssetSchema).optional(),
-    remove_collateral_enabled: z.array(rpcAssetSchema).optional(),
+    borrowing_enabled: z.array(rpcAssetSchema),
+    add_lender_funds_enabled: z.array(rpcAssetSchema),
+    withdraw_lender_funds_enabled: z.array(rpcAssetSchema),
+    add_collateral_enabled: z.array(rpcAssetSchema),
+    remove_collateral_enabled: z.array(rpcAssetSchema),
   }),
   broadcast_ethereum: broadcastPalletSafeModeStatuses,
   broadcast_bitcoin: broadcastPalletSafeModeStatuses,
