@@ -16,6 +16,12 @@ exports[`parsers > cfAccountInfo > parses the latest cfAccountInfo schema for an
     "Bitcoin": {
       "BTC": 19842n,
     },
+    "Bsc": {
+      "BNB": 0n,
+      "USDC": 0n,
+      "USDT": 0n,
+      "WBTC": 0n,
+    },
     "Ethereum": {
       "ETH": 0n,
       "FLIP": 0n,
@@ -26,6 +32,10 @@ exports[`parsers > cfAccountInfo > parses the latest cfAccountInfo schema for an
     "Solana": {
       "SOL": 0n,
       "USDC": 0n,
+      "USDT": 0n,
+    },
+    "Tron": {
+      "TRX": 0n,
       "USDT": 0n,
     },
   },
@@ -66,6 +76,12 @@ exports[`parsers > cfAccountInfo > parses the latest cfAccountInfo schema for an
         },
       ],
     },
+    "Bsc": {
+      "BNB": [],
+      "USDC": [],
+      "USDT": [],
+      "WBTC": [],
+    },
     "Ethereum": {
       "ETH": [],
       "FLIP": [],
@@ -76,6 +92,10 @@ exports[`parsers > cfAccountInfo > parses the latest cfAccountInfo schema for an
     "Solana": {
       "SOL": [],
       "USDC": [],
+      "USDT": [],
+    },
+    "Tron": {
+      "TRX": [],
       "USDT": [],
     },
   },
@@ -94,6 +114,12 @@ exports[`parsers > cfAccountInfo > parses the latest cfAccountInfo schema for an
     "Bitcoin": {
       "BTC": 0n,
     },
+    "Bsc": {
+      "BNB": 0n,
+      "USDC": 0n,
+      "USDT": 0n,
+      "WBTC": 0n,
+    },
     "Ethereum": {
       "ETH": 0n,
       "FLIP": 0n,
@@ -104,6 +130,10 @@ exports[`parsers > cfAccountInfo > parses the latest cfAccountInfo schema for an
     "Solana": {
       "SOL": 0n,
       "USDC": 0n,
+      "USDT": 0n,
+    },
+    "Tron": {
+      "TRX": 0n,
       "USDT": 0n,
     },
   },
@@ -121,8 +151,10 @@ exports[`parsers > cfAccountInfo > parses the latest cfAccountInfo schema for an
     "Arbitrum": null,
     "Assethub": null,
     "Bitcoin": "bc1qqt3juqef9azhd0zeuamu9c30pg5xdllvmks2ja",
+    "Bsc": null,
     "Ethereum": "0xacd7c0481fc71dce9e3e8bd4cca5828ce8302629",
     "Solana": "7zLEfU3nQKqnfrN2A5yNEiFd1Vt9D7maVaoSAV8invMT",
+    "Tron": null,
   },
   "role": "liquidity_provider",
   "vanity_name": "Chainflip Testnet LP BOOST",

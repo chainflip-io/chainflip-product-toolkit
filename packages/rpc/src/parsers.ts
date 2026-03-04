@@ -30,6 +30,17 @@ const chainAssetMapFactory = <Z extends z.ZodTypeAny>(parser: Z, defaultValue: z
     Arbitrum: z.object({ ETH: parser, USDC: parser, USDT: parser.default(defaultValue) }),
     Solana: z.object({ SOL: parser, USDC: parser, USDT: parser.default(defaultValue) }),
     Assethub: z.object({ DOT: parser, USDC: parser, USDT: parser }),
+    Bsc: z
+      .object({
+        BNB: parser.default(defaultValue),
+        USDC: parser.default(defaultValue),
+        USDT: parser.default(defaultValue),
+        WBTC: parser.default(defaultValue),
+      })
+      .optional(),
+    Tron: z
+      .object({ TRX: parser.default(defaultValue), USDT: parser.default(defaultValue) })
+      .optional(),
   });
 
 const chainBaseAssetMapFactory = <Z extends z.ZodTypeAny>(parser: Z, defaultValue: z.input<Z>) =>
@@ -44,15 +55,28 @@ const chainBaseAssetMapFactory = <Z extends z.ZodTypeAny>(parser: Z, defaultValu
     Arbitrum: z.object({ ETH: parser, USDC: parser, USDT: parser.default(defaultValue) }),
     Solana: z.object({ SOL: parser, USDC: parser, USDT: parser.default(defaultValue) }),
     Assethub: z.object({ DOT: parser, USDC: parser, USDT: parser }),
+    Bsc: z
+      .object({
+        BNB: parser.default(defaultValue),
+        USDC: parser.default(defaultValue),
+        USDT: parser.default(defaultValue),
+        WBTC: parser.default(defaultValue),
+      })
+      .optional(),
+    Tron: z
+      .object({ TRX: parser.default(defaultValue), USDT: parser.default(defaultValue) })
+      .optional(),
   });
 
-const chainMapFactory = <Z extends z.ZodTypeAny>(parser: Z, _defaultValue: z.input<Z>) =>
+const chainMapFactory = <Z extends z.ZodTypeAny>(parser: Z, defaultValue: z.input<Z>) =>
   z.object({
     Bitcoin: parser,
     Ethereum: parser,
     Arbitrum: parser,
     Solana: parser,
     Assethub: parser,
+    Bsc: parser.default(defaultValue).optional(),
+    Tron: parser.default(defaultValue).optional(),
   });
 
 const rpcAssetSchema = z.union([
@@ -71,6 +95,12 @@ const rpcAssetSchema = z.union([
   z.object({ chain: z.literal('Assethub'), asset: z.literal('DOT') }),
   z.object({ chain: z.literal('Assethub'), asset: z.literal('USDC') }),
   z.object({ chain: z.literal('Assethub'), asset: z.literal('USDT') }),
+  z.object({ chain: z.literal('Bsc'), asset: z.literal('BNB') }),
+  z.object({ chain: z.literal('Bsc'), asset: z.literal('USDC') }),
+  z.object({ chain: z.literal('Bsc'), asset: z.literal('USDT') }),
+  z.object({ chain: z.literal('Bsc'), asset: z.literal('WBTC') }),
+  z.object({ chain: z.literal('Tron'), asset: z.literal('TRX') }),
+  z.object({ chain: z.literal('Tron'), asset: z.literal('USDT') }),
 ]);
 
 const networkFee = z.object({
@@ -282,6 +312,9 @@ export const requestSwapParameterEncoding = z.discriminatedUnion('chain', [
   evmBrokerRequestSwapParameterEncoding.extend({
     chain: z.literal('Arbitrum'),
   }),
+  evmBrokerRequestSwapParameterEncoding.extend({
+    chain: z.literal('Bsc'),
+  }),
   z.object({
     chain: z.literal('Solana'),
     program_id: z.string(),
@@ -293,6 +326,13 @@ export const requestSwapParameterEncoding = z.discriminatedUnion('chain', [
         is_writable: z.boolean(),
       }),
     ),
+  }),
+  z.object({
+    chain: z.literal('Tron'),
+    to: hexString,
+    calldata: hexString,
+    value: numberOrHex,
+    source_token_address: hexString.optional(),
   }),
 ]);
 
