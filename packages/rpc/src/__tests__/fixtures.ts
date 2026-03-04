@@ -48,6 +48,10 @@ export const supportedAssets = [
   { chain: 'Assethub', asset: 'DOT' },
   { chain: 'Assethub', asset: 'USDC' },
   { chain: 'Assethub', asset: 'USDT' },
+  { chain: 'Bsc', asset: 'BNB' },
+  { chain: 'Bsc', asset: 'USDT' },
+  { chain: 'Tron', asset: 'TRX' },
+  { chain: 'Tron', asset: 'USDT' },
 ];
 
 export const ingressEgressEnvironment: z.input<typeof cfIngressEgressEnvironment> = {
@@ -57,6 +61,8 @@ export const ingressEgressEnvironment: z.input<typeof cfIngressEgressEnvironment
     Arbitrum: { ETH: '0x0', USDC: '0x0', USDT: '0x0' },
     Solana: { SOL: '0x0', USDC: '0x0', USDT: '0x0' },
     Assethub: { DOT: '0x0', USDC: '0x0', USDT: '0x0' },
+    Bsc: { BNB: '0x0', USDC: '0x0', USDT: '0x0', WBTC: '0x0' },
+    Tron: { TRX: '0x0', USDT: '0x0' },
   },
   ingress_fees: {
     Ethereum: { ETH: '0x55730', FLIP: '0x0', USDC: '0x0', USDT: '0x0', WBTC: '0x0' },
@@ -64,6 +70,8 @@ export const ingressEgressEnvironment: z.input<typeof cfIngressEgressEnvironment
     Arbitrum: { ETH: '0x574b457d400', USDC: '0x231b', USDT: '0x231b' },
     Solana: { SOL: '0xb0', USDC: '0x0', USDT: '0x0' },
     Assethub: { DOT: '0x0', USDC: '0x0', USDT: '0x0' },
+    Bsc: { BNB: '0x0', USDC: '0x0', USDT: '0x0', WBTC: '0x0' },
+    Tron: { TRX: '0x0', USDT: '0x0' },
   },
   egress_fees: {
     Ethereum: { ETH: '0x77a10', FLIP: '0x0', USDC: '0x0', USDT: '0x0', WBTC: '0x0' },
@@ -71,6 +79,8 @@ export const ingressEgressEnvironment: z.input<typeof cfIngressEgressEnvironment
     Arbitrum: { ETH: '0x74645ca7000', USDC: '0x2701', USDT: '0x2701' },
     Solana: { SOL: '0xb0', USDC: '0x0', USDT: '0x0' },
     Assethub: { DOT: '0x0', USDC: '0x0', USDT: '0x0' },
+    Bsc: { BNB: '0x0', USDC: '0x0', USDT: '0x0', WBTC: '0x0' },
+    Tron: { TRX: '0x0', USDT: '0x0' },
   },
   witness_safety_margins: {
     Bitcoin: 2,
@@ -78,6 +88,8 @@ export const ingressEgressEnvironment: z.input<typeof cfIngressEgressEnvironment
     Arbitrum: 1,
     Solana: 1,
     Assethub: null,
+    Bsc: 1,
+    Tron: 1,
   },
   egress_dust_limits: {
     Ethereum: { ETH: '0x1', FLIP: '0x1', USDC: '0x1', USDT: '0x1', WBTC: '0x1' },
@@ -85,6 +97,8 @@ export const ingressEgressEnvironment: z.input<typeof cfIngressEgressEnvironment
     Arbitrum: { ETH: '0x1', USDC: '0x1', USDT: '0x1' },
     Solana: { SOL: '0x1', USDC: '0x1', USDT: '0x1' },
     Assethub: { DOT: '0x0', USDC: '0x0', USDT: '0x0' },
+    Bsc: { BNB: '0x1', USDC: '0x1', USDT: '0x1', WBTC: '0x1' },
+    Tron: { TRX: '0x1', USDT: '0x1' },
   },
   channel_opening_fees: {
     Arbitrum: '0x0',
@@ -92,6 +106,8 @@ export const ingressEgressEnvironment: z.input<typeof cfIngressEgressEnvironment
     Bitcoin: '0x0',
     Solana: '0x0',
     Assethub: '0x0',
+    Bsc: '0x0',
+    Tron: '0x0',
   },
   ingress_delays: {
     Arbitrum: 0,
@@ -99,6 +115,8 @@ export const ingressEgressEnvironment: z.input<typeof cfIngressEgressEnvironment
     Bitcoin: 0,
     Solana: 0,
     Assethub: 0,
+    Bsc: 0,
+    Tron: 0,
   },
   boost_delays: {
     Arbitrum: 0,
@@ -106,6 +124,8 @@ export const ingressEgressEnvironment: z.input<typeof cfIngressEgressEnvironment
     Bitcoin: 0,
     Solana: 0,
     Assethub: 0,
+    Bsc: 0,
+    Tron: 0,
   },
 };
 
@@ -136,6 +156,8 @@ export const swappingEnvironment: z.input<typeof cfSwappingEnvironment> = {
       USDC: null,
       USDT: null,
     },
+    Bsc: { BNB: null, USDC: null, USDT: null, WBTC: null },
+    Tron: { TRX: null, USDT: null },
   },
   network_fee_hundredth_pips: 1000,
   swap_retry_delay_blocks: 5,
@@ -167,6 +189,8 @@ export const swappingEnvironment: z.input<typeof cfSwappingEnvironment> = {
       USDC: '0x0',
       USDT: '0x0',
     },
+    Bsc: { BNB: '0x0', USDC: '0x0', USDT: '0x0', WBTC: '0x0' },
+    Tron: { TRX: '0x0', USDT: '0x0' },
   },
   network_fees: {
     regular_network_fee: {
@@ -200,6 +224,8 @@ export const swappingEnvironment: z.input<typeof cfSwappingEnvironment> = {
           USDT: 0,
           USDC: 0,
         },
+        Bsc: { BNB: 0, USDC: 0, USDT: 0, WBTC: 0 },
+        Tron: { TRX: 0, USDT: 0 },
       },
     },
     internal_swap_network_fee: {
@@ -234,6 +260,8 @@ export const swappingEnvironment: z.input<typeof cfSwappingEnvironment> = {
           USDT: 0,
           USDC: 0,
         },
+        Bsc: { BNB: 0, USDC: 0, USDT: 0, WBTC: 0 },
+        Tron: { TRX: 0, USDT: 0 },
       },
     },
   },
@@ -479,6 +507,46 @@ export const poolsEnvironment: z.input<typeof cfPoolsEnvironment> = {
       USDC: null,
       USDT: null,
     },
+    Bnb: {
+      BNB: {
+        limit_order_fee_hundredth_pips: 20,
+        range_order_fee_hundredth_pips: 20,
+        range_order_total_fees_earned: { base: '0x0', quote: '0x0' },
+        limit_order_total_fees_earned: { base: '0x0', quote: '0x0' },
+        range_total_swap_inputs: { base: '0x0', quote: '0x0' },
+        limit_total_swap_inputs: { base: '0x0', quote: '0x0' },
+        quote_asset: { chain: 'Ethereum', asset: 'USDC' },
+      },
+      USDT: {
+        limit_order_fee_hundredth_pips: 20,
+        range_order_fee_hundredth_pips: 20,
+        range_order_total_fees_earned: { base: '0x0', quote: '0x0' },
+        limit_order_total_fees_earned: { base: '0x0', quote: '0x0' },
+        range_total_swap_inputs: { base: '0x0', quote: '0x0' },
+        limit_total_swap_inputs: { base: '0x0', quote: '0x0' },
+        quote_asset: { chain: 'Ethereum', asset: 'USDC' },
+      },
+    },
+    Tron: {
+      TRX: {
+        limit_order_fee_hundredth_pips: 20,
+        range_order_fee_hundredth_pips: 20,
+        range_order_total_fees_earned: { base: '0x0', quote: '0x0' },
+        limit_order_total_fees_earned: { base: '0x0', quote: '0x0' },
+        range_total_swap_inputs: { base: '0x0', quote: '0x0' },
+        limit_total_swap_inputs: { base: '0x0', quote: '0x0' },
+        quote_asset: { chain: 'Ethereum', asset: 'USDC' },
+      },
+      USDT: {
+        limit_order_fee_hundredth_pips: 20,
+        range_order_fee_hundredth_pips: 20,
+        range_order_total_fees_earned: { base: '0x0', quote: '0x0' },
+        limit_order_total_fees_earned: { base: '0x0', quote: '0x0' },
+        range_total_swap_inputs: { base: '0x0', quote: '0x0' },
+        limit_total_swap_inputs: { base: '0x0', quote: '0x0' },
+        quote_asset: { chain: 'Ethereum', asset: 'USDC' },
+      },
+    },
   },
 };
 
@@ -602,6 +670,8 @@ export const emptyChainAssetMap = {
   Arbitrum: { ETH: '0x0', USDC: '0x0', USDT: '0x0' },
   Solana: { SOL: '0x0', USDC: '0x0', USDT: '0x0' },
   Assethub: { DOT: '0x0', USDT: '0x0', USDC: '0x0' },
+  Bnb: { BNB: '0x0', USDT: '0x0' },
+  Tron: { TRX: '0x0', USDT: '0x0' },
 };
 
 export const unregisteredAccount: z.input<typeof unregistered> = {
@@ -613,6 +683,8 @@ export const unregisteredAccount: z.input<typeof unregistered> = {
     Arbitrum: { ETH: '0x0', USDC: '0x0', USDT: '0x0' },
     Solana: { SOL: '0x0', USDC: '0x0', USDT: '0x0' },
     Assethub: { DOT: '0x0', USDC: '0x0', USDT: '0x0' },
+    Bsc: { BNB: '0x0', USDC: '0x0', USDT: '0x0', WBTC: '0x0' },
+    Tron: { TRX: '0x0', USDT: '0x0' },
   },
   bond: '0x0',
   estimated_redeemable_balance: '0x0',
@@ -647,6 +719,13 @@ export const liquidityProviderAccount: z.input<typeof liquidityProvider> = {
       USDT: '0x0',
       USDC: '0x0',
     },
+    Bsc: {
+      BNB: '0x0',
+      USDC: '0x0',
+      USDT: '0x0',
+      WBTC: '0x0',
+    },
+    Tron: { TRX: '0x0', USDT: '0x0' },
   },
   bond: '0x0',
   estimated_redeemable_balance: '0x56bc747ee70ef7e80',
@@ -657,6 +736,8 @@ export const liquidityProviderAccount: z.input<typeof liquidityProvider> = {
     Arbitrum: null,
     Solana: '7zLEfU3nQKqnfrN2A5yNEiFd1Vt9D7maVaoSAV8invMT',
     Assethub: null,
+    Bsc: null,
+    Tron: null,
   },
   earned_fees: {
     Ethereum: {
@@ -684,6 +765,13 @@ export const liquidityProviderAccount: z.input<typeof liquidityProvider> = {
       USDT: '0x0',
       USDC: '0x0',
     },
+    Bsc: {
+      BNB: '0x0',
+      USDC: '0x0',
+      USDT: '0x0',
+      WBTC: '0x0',
+    },
+    Tron: { TRX: '0x0', USDT: '0x0' },
   },
   boost_balances: {
     Ethereum: {
@@ -733,6 +821,13 @@ export const liquidityProviderAccount: z.input<typeof liquidityProvider> = {
       USDT: [],
       USDC: [],
     },
+    Bsc: {
+      BNB: [],
+      USDC: [],
+      USDT: [],
+      WBTC: [],
+    },
+    Tron: { TRX: [], USDT: [] },
   },
   lending_positions: [
     {
@@ -763,6 +858,8 @@ export const brokerAccount: z.input<typeof broker> = {
     Arbitrum: { ETH: 0, USDC: 0, USDT: 0 },
     Solana: { SOL: 0, USDC: 0, USDT: 0 },
     Assethub: { DOT: 0, USDC: 0, USDT: 0 },
+    Bsc: { BNB: 0, USDC: 0, USDT: 0, WBTC: 0 },
+    Tron: { TRX: 0, USDT: 0 },
   },
   btc_vault_deposit_address: 'tb1pqyqszqgpqyqszqgpqyqszqgpqyqszqgpqyqszqgpqyqszqgpqyqsn60vlk',
   affiliates: [
@@ -803,6 +900,8 @@ export const brokerAccountNoAffiliates: z.input<typeof broker> = {
       USDC: 0,
       USDT: 0,
     },
+    Bsc: { BNB: 0, USDC: 0, USDT: 0, WBTC: 0 },
+    Tron: { TRX: 0, USDT: 0 },
   },
   bond: '0x0',
   asset_balances: emptyChainAssetMap,
@@ -1175,6 +1274,13 @@ export const tradingStrategiesLimits: z.input<typeof cfGetTradingStrategyLimits>
       USDT: null,
       USDC: null,
     },
+    Bsc: {
+      BNB: null,
+      USDC: null,
+      USDT: null,
+      WBTC: null,
+    },
+    Tron: { TRX: null, USDT: 20000000000 },
   },
   minimum_added_funds_amount: {
     Ethereum: {
@@ -1202,6 +1308,13 @@ export const tradingStrategiesLimits: z.input<typeof cfGetTradingStrategyLimits>
       USDT: null,
       USDC: null,
     },
+    Bsc: {
+      BNB: null,
+      USDC: null,
+      USDT: null,
+      WBTC: null,
+    },
+    Tron: { TRX: null, USDT: 10000000 },
   },
 };
 

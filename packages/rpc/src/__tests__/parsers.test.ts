@@ -861,6 +861,10 @@ describe('parsers', () => {
                 "USDC": 0n,
                 "USDT": 0n,
               },
+              "Tron": {
+                "TRX": 0n,
+                "USDT": 0n,
+              },
             },
             "minimum_egress_amounts": {
               "Arbitrum": {
@@ -2069,6 +2073,10 @@ describe('parsers', () => {
               "USDC": 0n,
               "USDT": 0n,
             },
+            "Tron": {
+              "TRX": 0n,
+              "USDT": 0n,
+            },
           },
           "blocked": [
             "cFNfitvPd2acNNFgijVN3Ls4gG112PZPq7sY2FGtPgEk25wV9",
@@ -2459,6 +2467,30 @@ describe('parsers', () => {
                 "asset": "USDC",
                 "chain": "Assethub",
               },
+              {
+                "asset": "BNB",
+                "chain": "Bsc",
+              },
+              {
+                "asset": "USDC",
+                "chain": "Bsc",
+              },
+              {
+                "asset": "USDT",
+                "chain": "Bsc",
+              },
+              {
+                "asset": "WBTC",
+                "chain": "Bsc",
+              },
+              {
+                "asset": "TRX",
+                "chain": "Tron",
+              },
+              {
+                "asset": "USDT",
+                "chain": "Tron",
+              },
             ],
             "add_lender_funds_enabled": [
               {
@@ -2520,6 +2552,30 @@ describe('parsers', () => {
               {
                 "asset": "USDC",
                 "chain": "Assethub",
+              },
+              {
+                "asset": "BNB",
+                "chain": "Bsc",
+              },
+              {
+                "asset": "USDC",
+                "chain": "Bsc",
+              },
+              {
+                "asset": "USDT",
+                "chain": "Bsc",
+              },
+              {
+                "asset": "WBTC",
+                "chain": "Bsc",
+              },
+              {
+                "asset": "TRX",
+                "chain": "Tron",
+              },
+              {
+                "asset": "USDT",
+                "chain": "Tron",
               },
             ],
             "borrowing_enabled": [
@@ -2583,6 +2639,30 @@ describe('parsers', () => {
                 "asset": "USDC",
                 "chain": "Assethub",
               },
+              {
+                "asset": "BNB",
+                "chain": "Bsc",
+              },
+              {
+                "asset": "USDC",
+                "chain": "Bsc",
+              },
+              {
+                "asset": "USDT",
+                "chain": "Bsc",
+              },
+              {
+                "asset": "WBTC",
+                "chain": "Bsc",
+              },
+              {
+                "asset": "TRX",
+                "chain": "Tron",
+              },
+              {
+                "asset": "USDT",
+                "chain": "Tron",
+              },
             ],
             "remove_collateral_enabled": [
               {
@@ -2644,6 +2724,30 @@ describe('parsers', () => {
               {
                 "asset": "USDC",
                 "chain": "Assethub",
+              },
+              {
+                "asset": "BNB",
+                "chain": "Bsc",
+              },
+              {
+                "asset": "USDC",
+                "chain": "Bsc",
+              },
+              {
+                "asset": "USDT",
+                "chain": "Bsc",
+              },
+              {
+                "asset": "WBTC",
+                "chain": "Bsc",
+              },
+              {
+                "asset": "TRX",
+                "chain": "Tron",
+              },
+              {
+                "asset": "USDT",
+                "chain": "Tron",
               },
             ],
             "stop_boosting_enabled": true,
@@ -2707,6 +2811,30 @@ describe('parsers', () => {
               {
                 "asset": "USDC",
                 "chain": "Assethub",
+              },
+              {
+                "asset": "BNB",
+                "chain": "Bsc",
+              },
+              {
+                "asset": "USDC",
+                "chain": "Bsc",
+              },
+              {
+                "asset": "USDT",
+                "chain": "Bsc",
+              },
+              {
+                "asset": "WBTC",
+                "chain": "Bsc",
+              },
+              {
+                "asset": "TRX",
+                "chain": "Tron",
+              },
+              {
+                "asset": "USDT",
+                "chain": "Tron",
               },
             ],
           },
