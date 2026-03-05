@@ -2324,6 +2324,9 @@ describe('parsers', () => {
       });
       expect(result).toMatchInlineSnapshot(`
         {
+          "arbitrum_elections": {
+            "key_manager_witnessing": true,
+          },
           "asset_balances": {
             "reconciliation_enabled": true,
           },
@@ -2356,6 +2359,11 @@ describe('parsers', () => {
           },
           "emissions": {
             "emissions_sync_enabled": true,
+          },
+          "ethereum_elections": {
+            "key_manager_witnessing": true,
+            "sc_utils_witnessing": true,
+            "state_chain_gateway_witnessing": true,
           },
           "funding": {
             "redeem_enabled": true,
@@ -2398,17 +2406,9 @@ describe('parsers', () => {
           },
           "lending_pools": {
             "add_boost_funds_enabled": true,
-            "add_collateral_enabled": [
+            "add_collateral": [
               {
-                "asset": "USDC",
-                "chain": "Ethereum",
-              },
-              {
-                "asset": "USDT",
-                "chain": "Ethereum",
-              },
-              {
-                "asset": "WBTC",
+                "asset": "ETH",
                 "chain": "Ethereum",
               },
               {
@@ -2416,7 +2416,7 @@ describe('parsers', () => {
                 "chain": "Ethereum",
               },
               {
-                "asset": "ETH",
+                "asset": "USDC",
                 "chain": "Ethereum",
               },
               {
@@ -2424,16 +2424,16 @@ describe('parsers', () => {
                 "chain": "Bitcoin",
               },
               {
+                "asset": "ETH",
+                "chain": "Arbitrum",
+              },
+              {
                 "asset": "USDC",
                 "chain": "Arbitrum",
               },
               {
                 "asset": "USDT",
-                "chain": "Arbitrum",
-              },
-              {
-                "asset": "ETH",
-                "chain": "Arbitrum",
+                "chain": "Ethereum",
               },
               {
                 "asset": "SOL",
@@ -2441,10 +2441,6 @@ describe('parsers', () => {
               },
               {
                 "asset": "USDC",
-                "chain": "Solana",
-              },
-              {
-                "asset": "USDT",
                 "chain": "Solana",
               },
               {
@@ -2458,19 +2454,23 @@ describe('parsers', () => {
               {
                 "asset": "USDC",
                 "chain": "Assethub",
+              },
+              {
+                "asset": "WBTC",
+                "chain": "Ethereum",
+              },
+              {
+                "asset": "USDT",
+                "chain": "Arbitrum",
+              },
+              {
+                "asset": "USDT",
+                "chain": "Solana",
               },
             ],
-            "add_lender_funds_enabled": [
+            "add_lender_funds": [
               {
-                "asset": "USDC",
-                "chain": "Ethereum",
-              },
-              {
-                "asset": "USDT",
-                "chain": "Ethereum",
-              },
-              {
-                "asset": "WBTC",
+                "asset": "ETH",
                 "chain": "Ethereum",
               },
               {
@@ -2478,7 +2478,7 @@ describe('parsers', () => {
                 "chain": "Ethereum",
               },
               {
-                "asset": "ETH",
+                "asset": "USDC",
                 "chain": "Ethereum",
               },
               {
@@ -2486,16 +2486,16 @@ describe('parsers', () => {
                 "chain": "Bitcoin",
               },
               {
+                "asset": "ETH",
+                "chain": "Arbitrum",
+              },
+              {
                 "asset": "USDC",
                 "chain": "Arbitrum",
               },
               {
                 "asset": "USDT",
-                "chain": "Arbitrum",
-              },
-              {
-                "asset": "ETH",
-                "chain": "Arbitrum",
+                "chain": "Ethereum",
               },
               {
                 "asset": "SOL",
@@ -2503,10 +2503,6 @@ describe('parsers', () => {
               },
               {
                 "asset": "USDC",
-                "chain": "Solana",
-              },
-              {
-                "asset": "USDT",
                 "chain": "Solana",
               },
               {
@@ -2520,19 +2516,23 @@ describe('parsers', () => {
               {
                 "asset": "USDC",
                 "chain": "Assethub",
+              },
+              {
+                "asset": "WBTC",
+                "chain": "Ethereum",
+              },
+              {
+                "asset": "USDT",
+                "chain": "Arbitrum",
+              },
+              {
+                "asset": "USDT",
+                "chain": "Solana",
               },
             ],
-            "borrowing_enabled": [
+            "borrowing": [
               {
-                "asset": "USDC",
-                "chain": "Ethereum",
-              },
-              {
-                "asset": "USDT",
-                "chain": "Ethereum",
-              },
-              {
-                "asset": "WBTC",
+                "asset": "ETH",
                 "chain": "Ethereum",
               },
               {
@@ -2540,7 +2540,7 @@ describe('parsers', () => {
                 "chain": "Ethereum",
               },
               {
-                "asset": "ETH",
+                "asset": "USDC",
                 "chain": "Ethereum",
               },
               {
@@ -2548,16 +2548,16 @@ describe('parsers', () => {
                 "chain": "Bitcoin",
               },
               {
+                "asset": "ETH",
+                "chain": "Arbitrum",
+              },
+              {
                 "asset": "USDC",
                 "chain": "Arbitrum",
               },
               {
                 "asset": "USDT",
-                "chain": "Arbitrum",
-              },
-              {
-                "asset": "ETH",
-                "chain": "Arbitrum",
+                "chain": "Ethereum",
               },
               {
                 "asset": "SOL",
@@ -2565,10 +2565,6 @@ describe('parsers', () => {
               },
               {
                 "asset": "USDC",
-                "chain": "Solana",
-              },
-              {
-                "asset": "USDT",
                 "chain": "Solana",
               },
               {
@@ -2582,19 +2578,24 @@ describe('parsers', () => {
               {
                 "asset": "USDC",
                 "chain": "Assethub",
+              },
+              {
+                "asset": "WBTC",
+                "chain": "Ethereum",
+              },
+              {
+                "asset": "USDT",
+                "chain": "Arbitrum",
+              },
+              {
+                "asset": "USDT",
+                "chain": "Solana",
               },
             ],
-            "remove_collateral_enabled": [
+            "liquidations_enabled": true,
+            "remove_collateral": [
               {
-                "asset": "USDC",
-                "chain": "Ethereum",
-              },
-              {
-                "asset": "USDT",
-                "chain": "Ethereum",
-              },
-              {
-                "asset": "WBTC",
+                "asset": "ETH",
                 "chain": "Ethereum",
               },
               {
@@ -2602,7 +2603,7 @@ describe('parsers', () => {
                 "chain": "Ethereum",
               },
               {
-                "asset": "ETH",
+                "asset": "USDC",
                 "chain": "Ethereum",
               },
               {
@@ -2610,16 +2611,16 @@ describe('parsers', () => {
                 "chain": "Bitcoin",
               },
               {
+                "asset": "ETH",
+                "chain": "Arbitrum",
+              },
+              {
                 "asset": "USDC",
                 "chain": "Arbitrum",
               },
               {
                 "asset": "USDT",
-                "chain": "Arbitrum",
-              },
-              {
-                "asset": "ETH",
-                "chain": "Arbitrum",
+                "chain": "Ethereum",
               },
               {
                 "asset": "SOL",
@@ -2627,10 +2628,6 @@ describe('parsers', () => {
               },
               {
                 "asset": "USDC",
-                "chain": "Solana",
-              },
-              {
-                "asset": "USDT",
                 "chain": "Solana",
               },
               {
@@ -2644,20 +2641,24 @@ describe('parsers', () => {
               {
                 "asset": "USDC",
                 "chain": "Assethub",
+              },
+              {
+                "asset": "WBTC",
+                "chain": "Ethereum",
+              },
+              {
+                "asset": "USDT",
+                "chain": "Arbitrum",
+              },
+              {
+                "asset": "USDT",
+                "chain": "Solana",
               },
             ],
             "stop_boosting_enabled": true,
-            "withdraw_lender_funds_enabled": [
+            "withdraw_lender_funds": [
               {
-                "asset": "USDC",
-                "chain": "Ethereum",
-              },
-              {
-                "asset": "USDT",
-                "chain": "Ethereum",
-              },
-              {
-                "asset": "WBTC",
+                "asset": "ETH",
                 "chain": "Ethereum",
               },
               {
@@ -2665,7 +2666,7 @@ describe('parsers', () => {
                 "chain": "Ethereum",
               },
               {
-                "asset": "ETH",
+                "asset": "USDC",
                 "chain": "Ethereum",
               },
               {
@@ -2673,16 +2674,16 @@ describe('parsers', () => {
                 "chain": "Bitcoin",
               },
               {
+                "asset": "ETH",
+                "chain": "Arbitrum",
+              },
+              {
                 "asset": "USDC",
                 "chain": "Arbitrum",
               },
               {
                 "asset": "USDT",
-                "chain": "Arbitrum",
-              },
-              {
-                "asset": "ETH",
-                "chain": "Arbitrum",
+                "chain": "Ethereum",
               },
               {
                 "asset": "SOL",
@@ -2690,10 +2691,6 @@ describe('parsers', () => {
               },
               {
                 "asset": "USDC",
-                "chain": "Solana",
-              },
-              {
-                "asset": "USDT",
                 "chain": "Solana",
               },
               {
@@ -2707,6 +2704,18 @@ describe('parsers', () => {
               {
                 "asset": "USDC",
                 "chain": "Assethub",
+              },
+              {
+                "asset": "WBTC",
+                "chain": "Ethereum",
+              },
+              {
+                "asset": "USDT",
+                "chain": "Arbitrum",
+              },
+              {
+                "asset": "USDT",
+                "chain": "Solana",
               },
             ],
           },
@@ -2724,6 +2733,7 @@ describe('parsers', () => {
           },
           "swapping": {
             "broker_registration_enabled": true,
+            "deposit_enabled": true,
             "swaps_enabled": true,
             "withdrawals_enabled": true,
           },
