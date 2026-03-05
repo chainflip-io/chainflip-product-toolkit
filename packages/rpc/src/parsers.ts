@@ -656,6 +656,7 @@ export const cfSafeModeStatuses = z.object({
     swaps_enabled: z.boolean(),
     withdrawals_enabled: z.boolean(),
     broker_registration_enabled: z.boolean(),
+    deposit_enabled: z.boolean(),
   }),
   liquidity_provider: z.object({
     deposit_enabled: z.boolean(),
@@ -697,11 +698,12 @@ export const cfSafeModeStatuses = z.object({
   lending_pools: z.object({
     add_boost_funds_enabled: z.boolean(),
     stop_boosting_enabled: z.boolean(),
-    borrowing_enabled: z.array(rpcAssetSchema),
-    add_lender_funds_enabled: z.array(rpcAssetSchema),
-    withdraw_lender_funds_enabled: z.array(rpcAssetSchema),
-    add_collateral_enabled: z.array(rpcAssetSchema),
-    remove_collateral_enabled: z.array(rpcAssetSchema),
+    borrowing: cfSupportedAssets,
+    add_lender_funds: cfSupportedAssets,
+    withdraw_lender_funds: cfSupportedAssets,
+    add_collateral: cfSupportedAssets,
+    remove_collateral: cfSupportedAssets,
+    liquidations_enabled: z.boolean(),
   }),
   broadcast_ethereum: broadcastPalletSafeModeStatuses,
   broadcast_bitcoin: broadcastPalletSafeModeStatuses,
@@ -716,6 +718,20 @@ export const cfSafeModeStatuses = z.object({
   ingress_egress_solana: ingressEgressPalletSafeModeStatuses,
   ingress_egress_assethub: ingressEgressPalletSafeModeStatuses,
   witnesser: z.enum(['CodeRed', 'CodeGreen', 'CodeAmber']),
+  ethereum_elections: z
+    .object({
+      state_chain_gateway_witnessing: z.boolean(),
+      key_manager_witnessing: z.boolean(),
+      sc_utils_witnessing: z.boolean(),
+    })
+    // TODO(2.1): remove after all networks upgraded
+    .optional(),
+  arbitrum_elections: z
+    .object({
+      key_manager_witnessing: z.boolean(),
+    })
+    // TODO(2.1): remove after all networks upgraded
+    .optional(),
   elections_generic: z.object({
     oracle_price_elections: z.boolean(),
   }),

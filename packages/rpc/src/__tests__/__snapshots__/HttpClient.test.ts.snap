@@ -1868,6 +1868,9 @@ exports[`HttpClient > with server > handles cf_loan_accounts 1`] = `
 
 exports[`HttpClient > with server > handles cf_safe_mode_statuses 1`] = `
 {
+  "arbitrum_elections": {
+    "key_manager_witnessing": true,
+  },
   "asset_balances": {
     "reconciliation_enabled": true,
   },
@@ -1900,6 +1903,11 @@ exports[`HttpClient > with server > handles cf_safe_mode_statuses 1`] = `
   },
   "emissions": {
     "emissions_sync_enabled": true,
+  },
+  "ethereum_elections": {
+    "key_manager_witnessing": true,
+    "sc_utils_witnessing": true,
+    "state_chain_gateway_witnessing": true,
   },
   "funding": {
     "redeem_enabled": true,
@@ -1942,12 +1950,318 @@ exports[`HttpClient > with server > handles cf_safe_mode_statuses 1`] = `
   },
   "lending_pools": {
     "add_boost_funds_enabled": true,
-    "add_collateral_enabled": [],
-    "add_lender_funds_enabled": [],
-    "borrowing_enabled": [],
-    "remove_collateral_enabled": [],
+    "add_collateral": [
+      {
+        "asset": "ETH",
+        "chain": "Ethereum",
+      },
+      {
+        "asset": "FLIP",
+        "chain": "Ethereum",
+      },
+      {
+        "asset": "USDC",
+        "chain": "Ethereum",
+      },
+      {
+        "asset": "BTC",
+        "chain": "Bitcoin",
+      },
+      {
+        "asset": "ETH",
+        "chain": "Arbitrum",
+      },
+      {
+        "asset": "USDC",
+        "chain": "Arbitrum",
+      },
+      {
+        "asset": "USDT",
+        "chain": "Ethereum",
+      },
+      {
+        "asset": "SOL",
+        "chain": "Solana",
+      },
+      {
+        "asset": "USDC",
+        "chain": "Solana",
+      },
+      {
+        "asset": "DOT",
+        "chain": "Assethub",
+      },
+      {
+        "asset": "USDT",
+        "chain": "Assethub",
+      },
+      {
+        "asset": "USDC",
+        "chain": "Assethub",
+      },
+      {
+        "asset": "WBTC",
+        "chain": "Ethereum",
+      },
+      {
+        "asset": "USDT",
+        "chain": "Arbitrum",
+      },
+      {
+        "asset": "USDT",
+        "chain": "Solana",
+      },
+    ],
+    "add_lender_funds": [
+      {
+        "asset": "ETH",
+        "chain": "Ethereum",
+      },
+      {
+        "asset": "FLIP",
+        "chain": "Ethereum",
+      },
+      {
+        "asset": "USDC",
+        "chain": "Ethereum",
+      },
+      {
+        "asset": "BTC",
+        "chain": "Bitcoin",
+      },
+      {
+        "asset": "ETH",
+        "chain": "Arbitrum",
+      },
+      {
+        "asset": "USDC",
+        "chain": "Arbitrum",
+      },
+      {
+        "asset": "USDT",
+        "chain": "Ethereum",
+      },
+      {
+        "asset": "SOL",
+        "chain": "Solana",
+      },
+      {
+        "asset": "USDC",
+        "chain": "Solana",
+      },
+      {
+        "asset": "DOT",
+        "chain": "Assethub",
+      },
+      {
+        "asset": "USDT",
+        "chain": "Assethub",
+      },
+      {
+        "asset": "USDC",
+        "chain": "Assethub",
+      },
+      {
+        "asset": "WBTC",
+        "chain": "Ethereum",
+      },
+      {
+        "asset": "USDT",
+        "chain": "Arbitrum",
+      },
+      {
+        "asset": "USDT",
+        "chain": "Solana",
+      },
+    ],
+    "borrowing": [
+      {
+        "asset": "ETH",
+        "chain": "Ethereum",
+      },
+      {
+        "asset": "FLIP",
+        "chain": "Ethereum",
+      },
+      {
+        "asset": "USDC",
+        "chain": "Ethereum",
+      },
+      {
+        "asset": "BTC",
+        "chain": "Bitcoin",
+      },
+      {
+        "asset": "ETH",
+        "chain": "Arbitrum",
+      },
+      {
+        "asset": "USDC",
+        "chain": "Arbitrum",
+      },
+      {
+        "asset": "USDT",
+        "chain": "Ethereum",
+      },
+      {
+        "asset": "SOL",
+        "chain": "Solana",
+      },
+      {
+        "asset": "USDC",
+        "chain": "Solana",
+      },
+      {
+        "asset": "DOT",
+        "chain": "Assethub",
+      },
+      {
+        "asset": "USDT",
+        "chain": "Assethub",
+      },
+      {
+        "asset": "USDC",
+        "chain": "Assethub",
+      },
+      {
+        "asset": "WBTC",
+        "chain": "Ethereum",
+      },
+      {
+        "asset": "USDT",
+        "chain": "Arbitrum",
+      },
+      {
+        "asset": "USDT",
+        "chain": "Solana",
+      },
+    ],
+    "liquidations_enabled": true,
+    "remove_collateral": [
+      {
+        "asset": "ETH",
+        "chain": "Ethereum",
+      },
+      {
+        "asset": "FLIP",
+        "chain": "Ethereum",
+      },
+      {
+        "asset": "USDC",
+        "chain": "Ethereum",
+      },
+      {
+        "asset": "BTC",
+        "chain": "Bitcoin",
+      },
+      {
+        "asset": "ETH",
+        "chain": "Arbitrum",
+      },
+      {
+        "asset": "USDC",
+        "chain": "Arbitrum",
+      },
+      {
+        "asset": "USDT",
+        "chain": "Ethereum",
+      },
+      {
+        "asset": "SOL",
+        "chain": "Solana",
+      },
+      {
+        "asset": "USDC",
+        "chain": "Solana",
+      },
+      {
+        "asset": "DOT",
+        "chain": "Assethub",
+      },
+      {
+        "asset": "USDT",
+        "chain": "Assethub",
+      },
+      {
+        "asset": "USDC",
+        "chain": "Assethub",
+      },
+      {
+        "asset": "WBTC",
+        "chain": "Ethereum",
+      },
+      {
+        "asset": "USDT",
+        "chain": "Arbitrum",
+      },
+      {
+        "asset": "USDT",
+        "chain": "Solana",
+      },
+    ],
     "stop_boosting_enabled": true,
-    "withdraw_lender_funds_enabled": [],
+    "withdraw_lender_funds": [
+      {
+        "asset": "ETH",
+        "chain": "Ethereum",
+      },
+      {
+        "asset": "FLIP",
+        "chain": "Ethereum",
+      },
+      {
+        "asset": "USDC",
+        "chain": "Ethereum",
+      },
+      {
+        "asset": "BTC",
+        "chain": "Bitcoin",
+      },
+      {
+        "asset": "ETH",
+        "chain": "Arbitrum",
+      },
+      {
+        "asset": "USDC",
+        "chain": "Arbitrum",
+      },
+      {
+        "asset": "USDT",
+        "chain": "Ethereum",
+      },
+      {
+        "asset": "SOL",
+        "chain": "Solana",
+      },
+      {
+        "asset": "USDC",
+        "chain": "Solana",
+      },
+      {
+        "asset": "DOT",
+        "chain": "Assethub",
+      },
+      {
+        "asset": "USDT",
+        "chain": "Assethub",
+      },
+      {
+        "asset": "USDC",
+        "chain": "Assethub",
+      },
+      {
+        "asset": "WBTC",
+        "chain": "Ethereum",
+      },
+      {
+        "asset": "USDT",
+        "chain": "Arbitrum",
+      },
+      {
+        "asset": "USDT",
+        "chain": "Solana",
+      },
+    ],
   },
   "liquidity_provider": {
     "deposit_enabled": true,
@@ -1963,6 +2277,7 @@ exports[`HttpClient > with server > handles cf_safe_mode_statuses 1`] = `
   },
   "swapping": {
     "broker_registration_enabled": true,
+    "deposit_enabled": true,
     "swaps_enabled": true,
     "withdrawals_enabled": true,
   },
