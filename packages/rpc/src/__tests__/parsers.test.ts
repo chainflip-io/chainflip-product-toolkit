@@ -20,6 +20,7 @@ import {
   cfMonitoringSimulateAuction,
   cfSafeModeStatuses,
   cfLendingPoolSupplyBalances,
+  cfIngressEgressEnvironment,
 } from '../parsers';
 import {
   cfAccountInfoOperator,
@@ -252,6 +253,36 @@ describe('parsers', () => {
             Polkadot: 0,
             Solana: 0,
             Assethub: 0,
+          },
+          boost_minimum_add_funds_amounts: {
+            Ethereum: {
+              ETH: '0x1',
+              FLIP: '0x1',
+              USDC: '0x1',
+              USDT: '0x1',
+              WBTC: '0x1',
+            },
+            Polkadot: {
+              DOT: '0x1',
+            },
+            Bitcoin: {
+              BTC: '0x2af8',
+            },
+            Arbitrum: {
+              ETH: '0x1',
+              USDC: '0x1',
+              USDT: '0x1',
+            },
+            Solana: {
+              SOL: '0x1',
+              USDC: '0x1',
+              USDT: '0x1',
+            },
+            Assethub: {
+              DOT: '0x1',
+              USDT: '0x1',
+              USDC: '0x1',
+            },
           },
         },
         swapping: {
@@ -766,6 +797,33 @@ describe('parsers', () => {
               "Bitcoin": 0,
               "Ethereum": 0,
               "Solana": 0,
+            },
+            "boost_minimum_add_funds_amounts": {
+              "Arbitrum": {
+                "ETH": 1n,
+                "USDC": 1n,
+                "USDT": 1n,
+              },
+              "Assethub": {
+                "DOT": 1n,
+                "USDC": 1n,
+                "USDT": 1n,
+              },
+              "Bitcoin": {
+                "BTC": 11000n,
+              },
+              "Ethereum": {
+                "ETH": 1n,
+                "FLIP": 1n,
+                "USDC": 1n,
+                "USDT": 1n,
+                "WBTC": 1n,
+              },
+              "Solana": {
+                "SOL": 1n,
+                "USDC": 1n,
+                "USDT": 1n,
+              },
             },
             "channel_opening_fees": {
               "Arbitrum": 0n,
@@ -1374,6 +1432,362 @@ describe('parsers', () => {
               },
             },
             "swap_retry_delay_blocks": 5,
+          },
+        }
+      `);
+    });
+  });
+
+  describe('cfIngressEgressEnvironment', () => {
+    it('parses the cfIngressEgressEnvironment response', () => {
+      const result = cfIngressEgressEnvironment.parse({
+        minimum_deposit_amounts: {
+          Ethereum: {
+            ETH: '0x0',
+            FLIP: '0x0',
+            USDC: '0x0',
+            USDT: '0x0',
+            WBTC: '0x0',
+          },
+          Polkadot: {
+            DOT: '0x0',
+          },
+          Bitcoin: {
+            BTC: '0x0',
+          },
+          Arbitrum: {
+            ETH: '0x0',
+            USDC: '0x0',
+            USDT: '0x0',
+          },
+          Solana: {
+            SOL: '0x0',
+            USDC: '0x0',
+            USDT: '0x0',
+          },
+          Assethub: {
+            DOT: '0x0',
+            USDT: '0x0',
+            USDC: '0x0',
+          },
+        },
+        ingress_fees: {
+          Ethereum: {
+            ETH: '0x61fe87f5f47',
+            FLIP: '0x1ed52651597e37',
+            USDC: '0x5498',
+            USDT: '0x54a2',
+            WBTC: '0x20',
+          },
+          Polkadot: {
+            DOT: '0xbc28f20',
+          },
+          Bitcoin: {
+            BTC: '0x75',
+          },
+          Arbitrum: {
+            ETH: '0x117c2a669d8',
+            USDC: '0xe28',
+            USDT: '0xe28',
+          },
+          Solana: {
+            SOL: '0x5e841',
+            USDC: '0xe214',
+            USDT: '0xe21d',
+          },
+          Assethub: {
+            DOT: '0xbc59299',
+            USDT: '0x9a5d',
+            USDC: '0x9a57',
+          },
+        },
+        egress_fees: {
+          Ethereum: {
+            ETH: '0x893124bebca',
+            FLIP: '0x22afcb1b84adff',
+            USDC: '0x5f2b',
+            USDT: '0x5f36',
+            WBTC: '0x24',
+          },
+          Polkadot: {
+            DOT: '0xbc4d910',
+          },
+          Bitcoin: {
+            BTC: '0x108',
+          },
+          Arbitrum: {
+            ETH: '0x17503888d20',
+            USDC: '0xfbb',
+            USDT: '0xfbb',
+          },
+          Solana: {
+            SOL: '0x36be',
+            USDC: '0x39a1b',
+            USDT: '0x39a3e',
+          },
+          Assethub: {
+            DOT: '0xbc7dd1f',
+            USDT: '0x9a7b',
+            USDC: '0x9a75',
+          },
+        },
+        witness_safety_margins: {
+          Polkadot: null,
+          Ethereum: 2,
+          Bitcoin: 5,
+          Arbitrum: 1,
+          Solana: null,
+          Assethub: null,
+        },
+        egress_dust_limits: {
+          Ethereum: {
+            ETH: '0x1',
+            FLIP: '0x1',
+            USDC: '0x1',
+            USDT: '0x1',
+            WBTC: '0x1',
+          },
+          Polkadot: {
+            DOT: '0x1',
+          },
+          Bitcoin: {
+            BTC: '0x258',
+          },
+          Arbitrum: {
+            ETH: '0x1',
+            USDC: '0x1',
+            USDT: '0x1',
+          },
+          Solana: {
+            SOL: '0x1',
+            USDC: '0x1',
+            USDT: '0x1',
+          },
+          Assethub: {
+            DOT: '0x1',
+            USDT: '0x1',
+            USDC: '0x1',
+          },
+        },
+        channel_opening_fees: {
+          Arbitrum: '0x0',
+          Ethereum: '0x2710',
+          Polkadot: '0x2710',
+          Bitcoin: '0x2710',
+          Solana: '0x0',
+          Assethub: '0x0',
+        },
+        ingress_delays: {
+          Bitcoin: 0,
+          Solana: 10,
+          Assethub: 0,
+          Polkadot: 0,
+          Ethereum: 0,
+          Arbitrum: 0,
+        },
+        boost_delays: {
+          Arbitrum: 0,
+          Polkadot: 0,
+          Assethub: 0,
+          Bitcoin: 0,
+          Ethereum: 0,
+          Solana: 0,
+        },
+        boost_minimum_add_funds_amounts: {
+          Ethereum: {
+            ETH: '0x1',
+            FLIP: '0x1',
+            USDC: '0x1',
+            USDT: '0x1',
+            WBTC: '0x1',
+          },
+          Polkadot: {
+            DOT: '0x1',
+          },
+          Bitcoin: {
+            BTC: '0x2af8',
+          },
+          Arbitrum: {
+            ETH: '0x1',
+            USDC: '0x1',
+            USDT: '0x1',
+          },
+          Solana: {
+            SOL: '0x1',
+            USDC: '0x1',
+            USDT: '0x1',
+          },
+          Assethub: {
+            DOT: '0x1',
+            USDT: '0x1',
+            USDC: '0x1',
+          },
+        },
+      });
+      expect(result).toMatchInlineSnapshot(`
+        {
+          "boost_delays": {
+            "Arbitrum": 0,
+            "Assethub": 0,
+            "Bitcoin": 0,
+            "Ethereum": 0,
+            "Solana": 0,
+          },
+          "boost_minimum_add_funds_amounts": {
+            "Arbitrum": {
+              "ETH": 1n,
+              "USDC": 1n,
+              "USDT": 1n,
+            },
+            "Assethub": {
+              "DOT": 1n,
+              "USDC": 1n,
+              "USDT": 1n,
+            },
+            "Bitcoin": {
+              "BTC": 11000n,
+            },
+            "Ethereum": {
+              "ETH": 1n,
+              "FLIP": 1n,
+              "USDC": 1n,
+              "USDT": 1n,
+              "WBTC": 1n,
+            },
+            "Solana": {
+              "SOL": 1n,
+              "USDC": 1n,
+              "USDT": 1n,
+            },
+          },
+          "channel_opening_fees": {
+            "Arbitrum": 0n,
+            "Assethub": 0n,
+            "Bitcoin": 10000n,
+            "Ethereum": 10000n,
+            "Solana": 0n,
+          },
+          "egress_fees": {
+            "Arbitrum": {
+              "ETH": 1602082082080n,
+              "USDC": 4027n,
+              "USDT": 4027n,
+            },
+            "Assethub": {
+              "DOT": 197647647n,
+              "USDC": 39541n,
+              "USDT": 39547n,
+            },
+            "Bitcoin": {
+              "BTC": 264n,
+            },
+            "Ethereum": {
+              "ETH": 9427760180170n,
+              "FLIP": 9763436083064319n,
+              "USDC": 24363n,
+              "USDT": 24374n,
+              "WBTC": 36n,
+            },
+            "Solana": {
+              "SOL": 14014n,
+              "USDC": 236059n,
+              "USDT": 236094n,
+            },
+          },
+          "ingress_delays": {
+            "Arbitrum": 0,
+            "Assethub": 0,
+            "Bitcoin": 0,
+            "Ethereum": 0,
+            "Solana": 10,
+          },
+          "ingress_fees": {
+            "Arbitrum": {
+              "ETH": 1201561561560n,
+              "USDC": 3624n,
+              "USDT": 3624n,
+            },
+            "Assethub": {
+              "DOT": 197497497n,
+              "USDC": 39511n,
+              "USDT": 39517n,
+            },
+            "Bitcoin": {
+              "BTC": 117n,
+            },
+            "Ethereum": {
+              "ETH": 6734114414407n,
+              "FLIP": 8678609851612727n,
+              "USDC": 21656n,
+              "USDT": 21666n,
+              "WBTC": 32n,
+            },
+            "Solana": {
+              "SOL": 387137n,
+              "USDC": 57876n,
+              "USDT": 57885n,
+            },
+          },
+          "minimum_deposit_amounts": {
+            "Arbitrum": {
+              "ETH": 0n,
+              "USDC": 0n,
+              "USDT": 0n,
+            },
+            "Assethub": {
+              "DOT": 0n,
+              "USDC": 0n,
+              "USDT": 0n,
+            },
+            "Bitcoin": {
+              "BTC": 0n,
+            },
+            "Ethereum": {
+              "ETH": 0n,
+              "FLIP": 0n,
+              "USDC": 0n,
+              "USDT": 0n,
+              "WBTC": 0n,
+            },
+            "Solana": {
+              "SOL": 0n,
+              "USDC": 0n,
+              "USDT": 0n,
+            },
+          },
+          "minimum_egress_amounts": {
+            "Arbitrum": {
+              "ETH": 1n,
+              "USDC": 1n,
+              "USDT": 1n,
+            },
+            "Assethub": {
+              "DOT": 1n,
+              "USDC": 1n,
+              "USDT": 1n,
+            },
+            "Bitcoin": {
+              "BTC": 600n,
+            },
+            "Ethereum": {
+              "ETH": 1n,
+              "FLIP": 1n,
+              "USDC": 1n,
+              "USDT": 1n,
+              "WBTC": 1n,
+            },
+            "Solana": {
+              "SOL": 1n,
+              "USDC": 1n,
+              "USDT": 1n,
+            },
+          },
+          "witness_safety_margins": {
+            "Arbitrum": 1,
+            "Assethub": null,
+            "Bitcoin": 5,
+            "Ethereum": 2,
+            "Solana": null,
           },
         }
       `);
