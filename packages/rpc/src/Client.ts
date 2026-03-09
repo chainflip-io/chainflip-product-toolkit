@@ -23,6 +23,7 @@ export type RequestMap = Map<
 
 export type ClientOpts = {
   archiveNodeUrl?: string;
+  retryOnHeaderNotFound?: boolean;
 };
 
 export default abstract class Client {
@@ -30,6 +31,7 @@ export default abstract class Client {
   private timer: ReturnType<typeof setTimeout> | null = null;
   private requestMap: RequestMap = new Map();
   private readonly archiveNodeUrl?: string;
+  private readonly retryOnHeaderNotFound: boolean;
   readonly eventTarget = new EventTarget();
 
   constructor(
@@ -37,6 +39,7 @@ export default abstract class Client {
     opts: ClientOpts = {},
   ) {
     this.archiveNodeUrl = opts.archiveNodeUrl;
+    this.retryOnHeaderNotFound = opts.retryOnHeaderNotFound ?? false;
   }
 
   protected abstract send<const T extends RpcMethod>(
@@ -101,7 +104,7 @@ export default abstract class Client {
     });
   }
 
-  sendRequest<const T extends RpcMethod>(
+  private enqueueRequest<const T extends RpcMethod>(
     method: T,
     ...params: RpcRequest[T]
   ): Promise<RpcResult<T>> {
@@ -117,25 +120,44 @@ export default abstract class Client {
         void this.handleBatch();
       }, 0);
     }
+    return deferred.promise;
+  }
 
-    return deferred.promise.catch((error) => {
-      if (error instanceof Error) {
-        if (
-          this.archiveNodeUrl &&
-          error.message.includes('Unknown block: State already discarded')
-        ) {
-          this.eventTarget.dispatchEvent(
-            new CustomEvent('archiveNodeFallback', { detail: { method, params } }),
-          );
-          return new (this.constructor as { new (url: string): Client })(
-            this.archiveNodeUrl,
-          ).sendRequest(method, ...params);
+  sendRequest<const T extends RpcMethod>(
+    method: T,
+    ...params: RpcRequest[T]
+  ): Promise<RpcResult<T>> {
+    const attempt = (retriesLeft: number): Promise<RpcResult<T>> =>
+      this.enqueueRequest(method, ...params).catch((error) => {
+        if (error instanceof Error) {
+          if (
+            this.retryOnHeaderNotFound &&
+            retriesLeft > 0 &&
+            error.message.includes('Unknown block: Header was not found in the database')
+          ) {
+            return new Promise<void>((resolve) => setTimeout(resolve, 6_000)).then(() =>
+              attempt(retriesLeft - 1),
+            );
+          }
+
+          if (
+            this.archiveNodeUrl &&
+            error.message.includes('Unknown block: State already discarded')
+          ) {
+            this.eventTarget.dispatchEvent(
+              new CustomEvent('archiveNodeFallback', { detail: { method, params } }),
+            );
+            return new (this.constructor as { new (url: string): Client })(
+              this.archiveNodeUrl,
+            ).sendRequest(method, ...params);
+          }
+
+          Error.captureStackTrace(error);
         }
+        throw error;
+      });
 
-        Error.captureStackTrace(error);
-      }
-      throw error;
-    });
+    return attempt(5);
   }
 
   methods(): RpcMethod[] {

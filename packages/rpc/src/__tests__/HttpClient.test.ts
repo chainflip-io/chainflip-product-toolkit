@@ -276,6 +276,87 @@ describe(HttpClient, () => {
     });
   });
 
+  describe('with retryOnHeaderNotFound', () => {
+    // Captured before any test-level mocking so we always have the real implementation
+    const originalSetTimeout = globalThis.setTimeout;
+
+    const headerNotFoundResponse = {
+      ok: true,
+      json: () =>
+        Promise.resolve([
+          {
+            jsonrpc: '2.0',
+            error: {
+              code: -32022,
+              message: 'Unknown block: Header was not found in the database: 0x1234',
+            },
+            id: '1-1-1-1-1',
+          },
+        ]),
+    } as Response;
+
+    const successResponse = {
+      ok: true,
+      json: () =>
+        Promise.resolve([{ jsonrpc: '2.0', result: [['cFhello', 'world']], id: '1-1-1-1-1' }]),
+    } as Response;
+
+    beforeEach(() => {
+      vi.spyOn(crypto, 'randomUUID').mockReturnValue('1-1-1-1-1');
+      // Redirect 6-second retry delays to 0ms so tests don't actually wait
+      vi.spyOn(globalThis, 'setTimeout').mockImplementation(
+        (fn: any, delay?: number, ...args: any[]) =>
+          originalSetTimeout(fn, delay === 6_000 ? 0 : delay, ...args) as any,
+      );
+    });
+
+    it('retries and succeeds after a header not found error', async () => {
+      vi.spyOn(globalThis, 'fetch')
+        .mockResolvedValueOnce(headerNotFoundResponse)
+        .mockResolvedValueOnce(successResponse);
+
+      const client = new HttpClient('http://cf.rpc', { retryOnHeaderNotFound: true });
+      await expect(client.sendRequest('cf_accounts', '0x1234')).resolves.toEqual([
+        ['cFhello', 'world'],
+      ]);
+      expect(vi.mocked(fetch)).toHaveBeenCalledTimes(2);
+    });
+
+    it('retries multiple times before succeeding', async () => {
+      vi.spyOn(globalThis, 'fetch')
+        .mockResolvedValueOnce(headerNotFoundResponse)
+        .mockResolvedValueOnce(headerNotFoundResponse)
+        .mockResolvedValueOnce(headerNotFoundResponse)
+        .mockResolvedValueOnce(successResponse);
+
+      const client = new HttpClient('http://cf.rpc', { retryOnHeaderNotFound: true });
+      await expect(client.sendRequest('cf_accounts', '0x1234')).resolves.toEqual([
+        ['cFhello', 'world'],
+      ]);
+      expect(vi.mocked(fetch)).toHaveBeenCalledTimes(4);
+    });
+
+    it('throws after exhausting all 5 retries', async () => {
+      vi.spyOn(globalThis, 'fetch').mockResolvedValue(headerNotFoundResponse);
+
+      const client = new HttpClient('http://cf.rpc', { retryOnHeaderNotFound: true });
+      await expect(client.sendRequest('cf_accounts', '0x1234')).rejects.toThrow(
+        'RPC error [-32022]: Unknown block: Header was not found in the database: 0x1234',
+      );
+      expect(vi.mocked(fetch)).toHaveBeenCalledTimes(6); // 1 initial + 5 retries
+    });
+
+    it('does not retry when retryOnHeaderNotFound is not set', async () => {
+      vi.spyOn(globalThis, 'fetch').mockResolvedValueOnce(headerNotFoundResponse);
+
+      const client = new HttpClient('http://cf.rpc');
+      await expect(client.sendRequest('cf_accounts', '0x1234')).rejects.toThrow(
+        'RPC error [-32022]: Unknown block: Header was not found in the database: 0x1234',
+      );
+      expect(vi.mocked(fetch)).toHaveBeenCalledTimes(1);
+    });
+  });
+
   describe('with server', () => {
     let server: Server;
     let callCounter = 0;
