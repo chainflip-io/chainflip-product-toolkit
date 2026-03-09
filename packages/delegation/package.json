@@ -16,7 +16,7 @@
   "dependencies": {
     "@chainflip/utils": "2.1.2",
     "scale-ts": "^1.6.1",
-    "viem": "^2.46.3"
+    "viem": "^2.47.0"
   },
   "files": [
     "dist",
