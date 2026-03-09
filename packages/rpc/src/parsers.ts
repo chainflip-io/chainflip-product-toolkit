@@ -165,6 +165,7 @@ export const cfIngressEgressEnvironment = z
     channel_opening_fees: chainMapFactory(numberOrHex, 0),
     ingress_delays: chainMapFactory(z.number(), 0),
     boost_delays: chainMapFactory(z.number(), 0),
+    boost_minimum_add_funds_amounts: chainAssetMapFactory(numberOrHex.nullable(), null).optional(), // TODO(2.1): remove `optional()` after all networks upgraded
   })
   .transform(rename({ egress_dust_limits: 'minimum_egress_amounts' }));
 
