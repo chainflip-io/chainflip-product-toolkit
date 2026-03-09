@@ -1,4 +1,5 @@
 import { type DeferredPromise, deferredPromise } from '@chainflip/utils/async';
+import { setTimeout as sleep } from 'timers/promises';
 import {
   type RpcRequest,
   type RpcMethod,
@@ -135,9 +136,7 @@ export default abstract class Client {
             retriesLeft > 0 &&
             error.message.includes('Unknown block: Header was not found in the database')
           ) {
-            return new Promise<void>((resolve) => setTimeout(resolve, 6_000)).then(() =>
-              attempt(retriesLeft - 1),
-            );
+            return sleep(6_000).then(() => attempt(retriesLeft - 1));
           }
 
           if (

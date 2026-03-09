@@ -53,6 +53,8 @@ import {
   vaultAddresses,
 } from './fixtures';
 
+vi.mock('timers/promises', () => ({ setTimeout: vi.fn().mockResolvedValue(undefined) }));
+
 const isHexString = (value: unknown): value is HexString =>
   typeof value === 'string' && value.startsWith('0x');
 
@@ -277,9 +279,6 @@ describe(HttpClient, () => {
   });
 
   describe('with retryOnHeaderNotFound', () => {
-    // Captured before any test-level mocking so we always have the real implementation
-    const originalSetTimeout = globalThis.setTimeout;
-
     const headerNotFoundResponse = {
       ok: true,
       json: () =>
@@ -303,11 +302,6 @@ describe(HttpClient, () => {
 
     beforeEach(() => {
       vi.spyOn(crypto, 'randomUUID').mockReturnValue('1-1-1-1-1');
-      // Redirect 6-second retry delays to 0ms so tests don't actually wait
-      vi.spyOn(globalThis, 'setTimeout').mockImplementation(
-        (fn: any, delay?: number, ...args: any[]) =>
-          originalSetTimeout(fn, delay === 6_000 ? 0 : delay, ...args) as any,
-      );
     });
 
     it('retries and succeeds after a header not found error', async () => {
