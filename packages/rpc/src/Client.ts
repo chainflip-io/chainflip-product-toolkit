@@ -107,7 +107,7 @@ export default abstract class Client {
 
   private enqueueRequest<const T extends RpcMethod>(
     method: T,
-    ...params: RpcRequest[T]
+    params: RpcRequest[T],
   ): Promise<RpcResult<T>> {
     if (!rpcResult[method]) {
       return Promise.reject(new Error(`Unknown method: ${method}`));
@@ -124,39 +124,48 @@ export default abstract class Client {
     return deferred.promise;
   }
 
-  sendRequest<const T extends RpcMethod>(
+  async sendRequest<const T extends RpcMethod>(
     method: T,
     ...params: RpcRequest[T]
   ): Promise<RpcResult<T>> {
-    const attempt = (retriesLeft: number): Promise<RpcResult<T>> =>
-      this.enqueueRequest(method, ...params).catch((error) => {
-        if (error instanceof Error) {
-          if (
-            this.retryOnHeaderNotFound &&
-            retriesLeft > 0 &&
-            error.message.includes('Unknown block: Header was not found in the database')
-          ) {
-            return sleep(6_000).then(() => attempt(retriesLeft - 1));
-          }
+    const retries = this.retryOnHeaderNotFound ? 5 : 0;
+    let lastError!: Error;
 
-          if (
-            this.archiveNodeUrl &&
-            error.message.includes('Unknown block: State already discarded')
-          ) {
-            this.eventTarget.dispatchEvent(
-              new CustomEvent('archiveNodeFallback', { detail: { method, params } }),
-            );
-            return new (this.constructor as { new (url: string): Client })(
-              this.archiveNodeUrl,
-            ).sendRequest(method, ...params);
-          }
+    for (let i = 0; i <= retries; i += 1) {
+      const result = await this.enqueueRequest(method, params).then(
+        (value) => ({ ok: true as const, value }),
+        (error) => ({ ok: false as const, error: error as Error }),
+      );
 
-          Error.captureStackTrace(error);
-        }
-        throw error;
-      });
+      if (result.ok) return result.value;
 
-    return attempt(5);
+      lastError = result.error;
+
+      if (
+        i < retries &&
+        lastError.message.includes('Unknown block: Header was not found in the database')
+      ) {
+        await sleep(6_000);
+        continue;
+      }
+
+      break;
+    }
+
+    if (
+      this.archiveNodeUrl &&
+      lastError.message.includes('Unknown block: State already discarded')
+    ) {
+      this.eventTarget.dispatchEvent(
+        new CustomEvent('archiveNodeFallback', { detail: { method, params } }),
+      );
+      return new (this.constructor as { new (url: string): Client })(
+        this.archiveNodeUrl,
+      ).sendRequest(method, ...params);
+    }
+
+    if (lastError instanceof Error) Error.captureStackTrace(lastError);
+    throw lastError;
   }
 
   methods(): RpcMethod[] {
