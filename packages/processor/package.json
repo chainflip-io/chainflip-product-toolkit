@@ -1,6 +1,6 @@
 {
   "name": "@chainflip/processor",
-  "version": "2.1.3",
+  "version": "2.1.3-bsc-dev.1",
   "description": "",
   "type": "module",
   "keywords": [],
@@ -8,10 +8,10 @@
   "license": "ISC",
   "dependencies": {
     "@chainflip/utils": "2.1.2",
+    "@chainflip/rpc": "2.1.2-bsc-dev.1",
     "zod": "^3.25.75"
   },
   "devDependencies": {
-    "@chainflip/rpc": "1.9.3",
     "@polkadot/types": "^16.5.4"
   },
   "scripts": {
