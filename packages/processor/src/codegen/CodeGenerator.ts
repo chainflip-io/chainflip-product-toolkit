@@ -47,6 +47,8 @@ const shortChainToLongChain = {
   Dot: 'Polkadot',
   Sol: 'Solana',
   Hub: 'Assethub',
+  Bsc: 'Bsc',
+  Tron: 'Tron',
 } as const;
 
 const addressTransforms: Record<keyof typeof shortChainToLongChain, string | null> = {
@@ -56,6 +58,8 @@ const addressTransforms: Record<keyof typeof shortChainToLongChain, string | nul
   Eth: null,
   Sol: 'base58.encode(hexToBytes(value))',
   Hub: 'ss58.encode({ data: value, ss58Format: 0 })',
+  Bsc: null,
+  Tron: null,
 };
 
 const addressImports: Record<keyof typeof shortChainToLongChain, [string, string][] | null> = {
@@ -68,6 +72,8 @@ const addressImports: Record<keyof typeof shortChainToLongChain, [string, string
     ['hexToBytes', '@chainflip/utils/bytes'],
   ],
   Hub: [['* as ss58', '@chainflip/utils/ss58']],
+  Bsc: null,
+  Tron: null,
 };
 
 function assertIsKnownChain(value: string): asserts value is keyof typeof shortChainToLongChain {
