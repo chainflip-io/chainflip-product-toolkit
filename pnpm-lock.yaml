@@ -12,8 +12,8 @@ importers:
         specifier: ^9.39.3
         version: 9.39.3
       '@rolldown/binding-darwin-arm64':
-        specifier: 1.0.0-rc.6
-        version: 1.0.0-rc.6
+        specifier: 1.0.0-rc.9
+        version: 1.0.0-rc.9
       '@rolldown/binding-linux-x64-gnu':
         specifier: 1.0.0-rc.6
         version: 1.0.0-rc.6
@@ -958,8 +958,8 @@ packages:
     cpu: [arm64]
     os: [darwin]
 
-  '@rolldown/binding-darwin-arm64@1.0.0-rc.6':
-    resolution: {integrity: sha512-+tJhD21KvGNtUrpLXrZQlT+j5HZKiEwR2qtcZb3vNOUpvoT9QjEykr75ZW/Kr0W89gose/HVXU6351uVZD8Qvw==}
+  '@rolldown/binding-darwin-arm64@1.0.0-rc.9':
+    resolution: {integrity: sha512-J7Zk3kLYFsLtuH6U+F4pS2sYVzac0qkjcO5QxHS7OS7yZu2LRs+IXo+uvJ/mvpyUljDJ3LROZPoQfgBIpCMhdQ==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [arm64]
     os: [darwin]
@@ -2857,6 +2857,7 @@ packages:
   syncpack@14.0.0:
     resolution: {integrity: sha512-OfAa3Oip5YC9Ad1jEs92Hw08Wy4JfdpdeequIwaJGsQG0tJtb8gpQfCdLuBefsk6n8WiUdt/5qmzcW+BDXtzbQ==}
     engines: {node: '>=14.17.0'}
+    deprecated: 'pnpm users: upgrade to 14.0.2 or newer'
     hasBin: true
 
   text-encoding-utf-8@1.0.2:
@@ -3826,7 +3827,7 @@ snapshots:
   '@rolldown/binding-darwin-arm64@1.0.0-rc.3':
     optional: true
 
-  '@rolldown/binding-darwin-arm64@1.0.0-rc.6': {}
+  '@rolldown/binding-darwin-arm64@1.0.0-rc.9': {}
 
   '@rolldown/binding-darwin-x64@1.0.0-rc.3':
     optional: true
