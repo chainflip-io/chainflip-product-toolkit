@@ -198,6 +198,10 @@ export const brokerAliasMap: AccountAliasMap = {
     name: 'OrangeRock',
     twitter: '@orangerock.xyz',
   },
+  cFLTrurprjV8jTV1yXop6Px8bG1hk4JKV6rgvQJU9nkneDYwg: {
+    name: 'CoolWallet',
+    twitter: '@coolwallet',
+  },
 } as const;
 
 export const lpAliasMap: AccountAliasMap = {
