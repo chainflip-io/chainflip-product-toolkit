@@ -477,6 +477,66 @@ function printCsv(methodStats: MethodStats[]): void {
 }
 
 // ---------------------------------------------------------------------------
+// Report printer (synchronous — safe to call from a signal handler)
+// ---------------------------------------------------------------------------
+
+function printReport(
+  allMethods: MethodConfig[],
+  results: CallResult[],
+  reportBlockHashes: string[],
+): void {
+  const methodStats = allMethods
+    .filter((m) => results.some((r) => r.method === m.name))
+    .map((m) => buildStats(m, results));
+
+  switch (OUTPUT_FORMAT) {
+    case 'json':
+      printJson(methodStats);
+      break;
+    case 'csv':
+      printCsv(methodStats);
+      break;
+    default: {
+      printTable(methodStats, reportBlockHashes);
+
+      // Highlight slow outliers (avg > 1000ms)
+      const slowMethods = methodStats.filter((s) => parseFloat(s.avgMs) > 1000);
+      if (slowMethods.length > 0) {
+        console.log('\n=== Slow Methods (avg > 1000ms) ===');
+        for (const s of slowMethods) {
+          console.log(`  ${s.method}: avg=${s.avgMs}ms, max=${s.maxMs}ms`);
+        }
+      }
+
+      // Highlight high error rates (>20%)
+      const errorProne = methodStats.filter((s) => parseFloat(s.errorRate) > 20);
+      if (errorProne.length > 0) {
+        console.log('\n=== High Error Rate Methods (>20%) ===');
+        for (const s of errorProne) {
+          console.log(`  ${s.method}: ${s.errorRate} errors (${s.errorCalls}/${s.totalCalls})`);
+        }
+      }
+
+      // Temporal drift: largest avg time difference between first and last block
+      const driftable = methodStats.filter((s) => s.perBlock.length >= 2);
+      if (driftable.length > 0) {
+        console.log('\n=== Temporal Drift (first vs last block avg) ===');
+        for (const s of driftable) {
+          const first = parseFloat(s.perBlock[0]!.avgMs);
+          const last = parseFloat(s.perBlock.at(-1)!.avgMs);
+          const delta = last - first;
+          const sign = delta >= 0 ? '+' : '';
+          console.log(
+            `  ${s.method.padEnd(48)} ${sign}${fmt(delta)}ms  (${s.perBlock[0]!.avgMs}ms → ${s.perBlock.at(-1)!.avgMs}ms)`,
+          );
+        }
+      }
+      break;
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
 // Main benchmark loop
 // ---------------------------------------------------------------------------
 
@@ -531,22 +591,20 @@ Write ops:    ${INCLUDE_WRITES ? 'included (WARNING: may mutate state!)' : 'excl
 Methods:      ${allMethods.length}
     `);
 
-    let running = true;
     let pollCount = 0;
 
-    process.on('SIGINT', () => {
-      running = false;
-      console.log('\n\nCtrl+C received — stopping after current poll...');
+    process.once('SIGINT', () => {
+      process.stdout.write('\n\nCtrl+C received — generating report...\n\n');
+      printReport(allMethods, results, []);
+      process.exit(0);
     });
 
-    while (running) {
+    while (true) {
       pollCount++;
       process.stdout.write(`[Poll ${String(pollCount).padStart(4)}] `);
       await runOnePoll(allMethods, results, (pollCount - 1) * RUNS);
       console.log();
-      if (running) {
-        await new Promise<void>((resolve) => setTimeout(resolve, 6_000));
-      }
+      await new Promise<void>((resolve) => setTimeout(resolve, 6_000));
     }
   } else {
     console.log(`
@@ -599,58 +657,7 @@ Methods:      ${allMethods.length}
 
   console.log();
 
-  // Build stats per method
-  const reportBlockHashes = CONTINUOUS_MODE ? [] : BLOCK_HASHES;
-  const methodStats = allMethods
-    .filter((m) => results.some((r) => r.method === m.name))
-    .map((m) => buildStats(m, results));
-
-  // Render report
-  switch (OUTPUT_FORMAT) {
-    case 'json':
-      printJson(methodStats);
-      break;
-    case 'csv':
-      printCsv(methodStats);
-      break;
-    default: {
-      printTable(methodStats, reportBlockHashes);
-
-      // Highlight slow outliers (avg > 1000ms)
-      const slowMethods = methodStats.filter((s) => parseFloat(s.avgMs) > 1000);
-      if (slowMethods.length > 0) {
-        console.log('\n=== Slow Methods (avg > 1000ms) ===');
-        for (const s of slowMethods) {
-          console.log(`  ${s.method}: avg=${s.avgMs}ms, max=${s.maxMs}ms`);
-        }
-      }
-
-      // Highlight high error rates (>20%)
-      const errorProne = methodStats.filter((s) => parseFloat(s.errorRate) > 20);
-      if (errorProne.length > 0) {
-        console.log('\n=== High Error Rate Methods (>20%) ===');
-        for (const s of errorProne) {
-          console.log(`  ${s.method}: ${s.errorRate} errors (${s.errorCalls}/${s.totalCalls})`);
-        }
-      }
-
-      // Temporal drift: largest avg time difference between first and last block
-      const driftable = methodStats.filter((s) => s.perBlock.length >= 2);
-      if (driftable.length > 0) {
-        console.log('\n=== Temporal Drift (first vs last block avg) ===');
-        for (const s of driftable) {
-          const first = parseFloat(s.perBlock[0]!.avgMs);
-          const last = parseFloat(s.perBlock.at(-1)!.avgMs);
-          const delta = last - first;
-          const sign = delta >= 0 ? '+' : '';
-          console.log(
-            `  ${s.method.padEnd(48)} ${sign}${fmt(delta)}ms  (${s.perBlock[0]!.avgMs}ms → ${s.perBlock.at(-1)!.avgMs}ms)`,
-          );
-        }
-      }
-      break;
-    }
-  }
+  printReport(allMethods, results, BLOCK_HASHES);
 }
 
 run().catch((err) => {
