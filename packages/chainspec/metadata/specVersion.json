@@ -82,5 +82,9 @@
   "210": {
     "hash": "0x80d717fbc531f92671f35d0e216454a3bcfb4d9be6bade5019fa44e5651bf83b",
     "network": "backspin"
+  },
+  "220": {
+    "hash": "0x595086c02615e65ec404264ec341b4ddb3cc8c00d799112c96a731e0df59406b",
+    "network": "backspin"
   }
 }
