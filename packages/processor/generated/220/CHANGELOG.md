@@ -1,0 +1,2 @@
+Swapping:
+  - AffiliateDeregistration: added
