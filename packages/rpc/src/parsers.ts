@@ -835,6 +835,60 @@ export const cfLendingPoolSupplyBalances = z.array(
   ),
 );
 
+const ingressEgressDeposit = z.object({
+  deposit_chain_block_height: z.number(),
+  deposit_address: z.string(),
+  amount: z.string(),
+  asset: z.object({ chain: z.string(), asset: z.string() }),
+  deposit_details: z
+    .union([
+      z.object({ tx_hashes: z.array(z.string()) }),
+      z.object({ tx_id: z.string(), vout: z.number() }),
+    ])
+    .nullable(),
+});
+
+const ingressEgressBroadcast = z.object({
+  broadcast_id: z.number(),
+  broadcast_chain_block_height: z.number(),
+  tx_out_id: z.unknown(),
+  tx_ref: z.unknown(),
+});
+
+const ingressEgressVaultDeposit = z.object({
+  tx_id: z.string(),
+  deposit_chain_block_height: z.number().nullable().optional(),
+  input_asset: z.object({ chain: z.string(), asset: z.string() }),
+  output_asset: z.object({ chain: z.string(), asset: z.string() }),
+  amount: z.string(),
+  destination_address: z.string(),
+  ccm_deposit_metadata: z.unknown().nullable().optional(),
+  deposit_details: z.unknown().nullable().optional(),
+  broker_fee: z.object({ account: z.string(), bps: z.number() }).nullable().optional(),
+  affiliate_fees: z.array(z.object({ account: z.string(), bps: z.number() })),
+  refund_params: z
+    .object({
+      retry_duration: z.number(),
+      refund_address: z.string(),
+      min_price: z.string(),
+      refund_ccm_metadata: z.unknown().nullable().optional(),
+      max_oracle_price_slippage: z.unknown().nullable().optional(),
+    })
+    .nullable()
+    .optional(),
+  dca_params: z
+    .object({ number_of_chunks: z.number(), chunk_interval: z.number() })
+    .nullable()
+    .optional(),
+  max_boost_fee: z.number().optional(),
+});
+
+export const cfIngressEgressEvents = z.object({
+  deposits: z.array(ingressEgressDeposit),
+  broadcasts: z.array(ingressEgressBroadcast),
+  vault_deposits: z.array(ingressEgressVaultDeposit),
+});
+
 export const cfVaultAddresses = z
   .object({
     ethereum: z.object({ Eth: z.array(z.number()).length(20).transform(bytesToHex) }),

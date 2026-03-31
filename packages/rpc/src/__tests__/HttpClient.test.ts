@@ -87,6 +87,7 @@ describe(HttpClient, () => {
         "cf_get_trading_strategy_limits",
         "cf_get_vault_addresses",
         "cf_ingress_egress_environment",
+        "cf_ingress_egress_events",
         "cf_lending_config",
         "cf_lending_pool_supply_balances",
         "cf_lending_pools",

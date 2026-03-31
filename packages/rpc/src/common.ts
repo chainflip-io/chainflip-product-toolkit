@@ -45,6 +45,7 @@ import {
   cfMonitoringSimulateAuction,
   cfVaultAddresses,
   cfLendingPoolSupplyBalances,
+  cfIngressEgressEvents,
   brokerRequestAccountCreationDepositAddress,
 } from './parsers';
 
@@ -232,6 +233,7 @@ export type RpcRequest = WithHash<{
   cf_loan_accounts: [accountId?: string];
   cf_lending_pool_supply_balances: [asset?: UncheckedAssetAndChain];
   cf_get_vault_addresses: [];
+  cf_ingress_egress_events: [chain: Chain];
 }> & {
   chain_getBlockHash: [blockHeight?: number];
   broker_request_swap_deposit_address: [
@@ -312,6 +314,7 @@ export const rpcResult = {
   cf_loan_accounts: cfLoanAccounts,
   cf_lending_pool_supply_balances: cfLendingPoolSupplyBalances,
   cf_get_vault_addresses: cfVaultAddresses,
+  cf_ingress_egress_events: cfIngressEgressEvents,
 } as const satisfies { [K in keyof RpcRequest]: z.ZodTypeAny };
 
 export type RpcMethod = keyof RpcRequest;
