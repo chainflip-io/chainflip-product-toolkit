@@ -1,6 +1,8 @@
 import { bytesToHex } from '@chainflip/utils/bytes';
 import { priceAssets } from '@chainflip/utils/chainflip';
+import { CHAINFLIP_SS58_PREFIX } from '@chainflip/utils/consts';
 import { isUndefined } from '@chainflip/utils/guard';
+import * as ss58 from '@chainflip/utils/ss58';
 import { isHex } from '@chainflip/utils/string';
 import { type HexString } from '@chainflip/utils/types';
 import { z } from 'zod';
@@ -842,8 +844,11 @@ const ingressEgressDeposit = z.object({
   asset: z.object({ chain: z.string(), asset: z.string() }),
   deposit_details: z
     .union([
-      z.object({ tx_hashes: z.array(z.string()) }),
-      z.object({ tx_id: z.string(), vout: z.number() }),
+      z.object({ tx_hashes: z.array(hexString) }),
+      z.object({
+        tx_id: z.string().transform((v) => (v.startsWith('0x') ? (v as `0x${string}`) : `0x${v}`)),
+        vout: z.number().int(),
+      }),
     ])
     .nullable(),
 });
@@ -864,8 +869,26 @@ const ingressEgressVaultDeposit = z.object({
   destination_address: z.string(),
   ccm_deposit_metadata: z.unknown().nullable().optional(),
   deposit_details: z.unknown().nullable().optional(),
-  broker_fee: z.object({ account: z.string(), bps: z.number() }).nullable().optional(),
-  affiliate_fees: z.array(z.object({ account: z.string(), bps: z.number() })),
+  broker_fee: z
+    .object({
+      account: z
+        .string()
+        .transform((v) =>
+          ss58.encode({ data: ss58.decode(v).data, ss58Format: CHAINFLIP_SS58_PREFIX }),
+        ),
+      bps: z.number(),
+    })
+    .optional(),
+  affiliate_fees: z.array(
+    z.object({
+      account: z
+        .string()
+        .transform((v) =>
+          ss58.encode({ data: ss58.decode(v).data, ss58Format: CHAINFLIP_SS58_PREFIX }),
+        ),
+      bps: z.number(),
+    }),
+  ),
   refund_params: z
     .object({
       retry_duration: z.number(),

@@ -21,6 +21,7 @@ import {
   cfSafeModeStatuses,
   cfLendingPoolSupplyBalances,
   cfIngressEgressEnvironment,
+  cfIngressEgressEvents,
 } from '../parsers';
 import {
   cfAccountInfoOperator,
@@ -3176,6 +3177,98 @@ describe('parsers', () => {
           "witnesser": "CodeGreen",
         }
       `);
+    });
+  });
+
+  describe('cfIngressEgressEvents', () => {
+    it('parses bitcoin deposit with tx_id without 0x prefix', () => {
+      const result = cfIngressEgressEvents.parse({
+        deposits: [
+          {
+            deposit_chain_block_height: 4909710,
+            deposit_address: 'tb1p6ngleqcveacg3nagh7l6g4mpxzs5lxarpgsa94qvgj835s870k4q0teat6',
+            amount: '0x30b30',
+            asset: { chain: 'Bitcoin', asset: 'BTC' },
+            deposit_details: {
+              tx_id: '66df941560b9045ffcf97e2acd2e301afc1d2afc84eaa9ee7c4b3c564d677c8b',
+              vout: 0,
+            },
+          },
+        ],
+        broadcasts: [],
+        vault_deposits: [],
+      });
+
+      expect(result.deposits[0].deposit_details).toEqual({
+        tx_id: '0x66df941560b9045ffcf97e2acd2e301afc1d2afc84eaa9ee7c4b3c564d677c8b',
+        vout: 0,
+      });
+    });
+
+    it('parses bitcoin deposit with tx_id already having 0x prefix', () => {
+      const result = cfIngressEgressEvents.parse({
+        deposits: [
+          {
+            deposit_chain_block_height: 100,
+            deposit_address: 'addr',
+            amount: '100',
+            asset: { chain: 'Bitcoin', asset: 'BTC' },
+            deposit_details: {
+              tx_id: '0xabcdef',
+              vout: 1,
+            },
+          },
+        ],
+        broadcasts: [],
+        vault_deposits: [],
+      });
+
+      expect(result.deposits[0].deposit_details).toEqual({
+        tx_id: '0xabcdef',
+        vout: 1,
+      });
+    });
+
+    it('re-encodes vault deposit broker_fee and affiliate_fees accounts to Chainflip SS58', () => {
+      const result = cfIngressEgressEvents.parse({
+        deposits: [],
+        broadcasts: [],
+        vault_deposits: [
+          {
+            tx_id: '0x1010',
+            deposit_chain_block_height: 3,
+            input_asset: { chain: 'Ethereum', asset: 'ETH' },
+            output_asset: { chain: 'Ethereum', asset: 'FLIP' },
+            amount: '0x1f4',
+            destination_address: '0x4444444444444444444444444444444444444444',
+            ccm_deposit_metadata: null,
+            deposit_details: null,
+            broker_fee: {
+              account: '5CT5jwBEAhveEjgiSCQbkaKcKcUyF3VJ8qNXM9rXsuQyn3Kd',
+              bps: 2,
+            },
+            affiliate_fees: [
+              {
+                account: '5CT5jwBEAhveEjgiSCQbkaKcKcUyF3VJ8qNXM9rXsuQyn3Kd',
+                bps: 10,
+              },
+            ],
+            refund_params: null,
+            dca_params: null,
+            max_boost_fee: 0,
+          },
+        ],
+      });
+
+      const vaultDeposit = result.vault_deposits[0];
+      expect(vaultDeposit.broker_fee).toEqual({
+        account: 'cFJFriHLc7J1Rau7T1qAEHDsrWWH7QBbJt4D2Q38YkrtfwqoV',
+        bps: 2,
+      });
+      expect(vaultDeposit.affiliate_fees[0]).toEqual({
+        account: 'cFJFriHLc7J1Rau7T1qAEHDsrWWH7QBbJt4D2Q38YkrtfwqoV',
+        bps: 10,
+      });
     });
   });
 });
