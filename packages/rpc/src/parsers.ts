@@ -846,9 +846,7 @@ const ingressEgressDeposit = z.object({
     .union([
       z.object({ tx_hashes: z.array(hexString) }),
       z.object({
-        tx_id: z
-          .string()
-          .transform((v): `0x${string}` => (v.startsWith('0x') ? (v as `0x${string}`) : `0x${v}`)),
+        tx_id: z.string().transform((v) => (v.startsWith('0x') ? (v as `0x${string}`) : `0x${v}`)),
         vout: z.number().int(),
       }),
     ])
