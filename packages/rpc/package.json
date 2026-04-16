@@ -1,6 +1,6 @@
 {
   "name": "@chainflip/rpc",
-  "version": "2.1.2-bsc-dev.1",
+  "version": "2.1.2-bsc-dev.2",
   "type": "module",
   "scripts": {
     "eslint:check": "pnpm eslint --max-warnings 0 './**/*.ts'",
@@ -15,7 +15,7 @@
     "coverage": "vitest run --coverage"
   },
   "dependencies": {
-    "@chainflip/utils": "2.1.4-bsc-dev.1",
+    "@chainflip/utils": "2.1.4-bsc-dev.2",
     "zod": "^3.25.75"
   },
   "devDependencies": {
