@@ -26,7 +26,7 @@ export const chainflipAssets = [
   'BscWbtc',
   // Tron
   'Trx',
-  'TronUsdt',
+  'TrxUsdt',
 ] as const;
 
 export const legacyChainflipAssets = [
@@ -194,7 +194,7 @@ export const assetConstants = {
   BscUsdt: { chain: 'Bsc', symbol: 'USDT', decimals: 18 },
   BscWbtc: { chain: 'Bsc', symbol: 'WBTC', decimals: 18 },
   Trx: { chain: 'Tron', symbol: 'TRX', decimals: 6 },
-  TronUsdt: { chain: 'Tron', symbol: 'USDT', decimals: 6 },
+  TrxUsdt: { chain: 'Tron', symbol: 'USDT', decimals: 6 },
 } as const satisfies InternalAssetMap<{
   chain: ChainflipChain;
   symbol: AssetSymbol;
@@ -268,7 +268,7 @@ export const chainConstants = {
     blockTimeSeconds: 0.45,
   },
   Tron: {
-    chainflipAssets: ['Trx', 'TronUsdt'],
+    chainflipAssets: ['Trx', 'TrxUsdt'],
     assets: ['TRX', 'USDT'],
     gasAsset: 'Trx',
     addressType: 'Tron',
@@ -320,7 +320,7 @@ export const internalAssetToRpcAsset: InternalAssetMap<AssetAndChain> = {
   BscUsdt: { chain: 'Bsc', asset: 'USDT' },
   BscWbtc: { chain: 'Bsc', asset: 'WBTC' },
   Trx: { chain: 'Tron', asset: 'TRX' },
-  TronUsdt: { chain: 'Tron', asset: 'USDT' },
+  TrxUsdt: { chain: 'Tron', asset: 'USDT' },
 };
 
 export const anyInternalAssetToRpcAsset: AnyInternalAssetMap<AnyAssetAndChain> = {
@@ -357,7 +357,7 @@ export const assetContractId: InternalAssetMap<number> = {
   ArbUsdt: 15,
   SolUsdt: 16,
   Trx: 17,
-  TronUsdt: 18,
+  TrxUsdt: 18,
   Bnb: 19,
   BscUsdt: 20,
   BscUsdc: 21,
@@ -407,7 +407,7 @@ export function getInternalAsset(asset: UncheckedAssetAndChain, assert = true) {
     },
     Tron: {
       TRX: 'Trx',
-      USDT: 'TronUsdt',
+      USDT: 'TrxUsdt',
     },
   };
 
@@ -513,7 +513,7 @@ export const chainflipAssetToPriceAssetMap: Record<
   BscUsdt: 'Usdt',
   BscWbtc: 'Btc',
   Trx: null,
-  TronUsdt: 'Usdt',
+  TrxUsdt: 'Usdt',
 };
 
 export function isChainflipAsset(asset: string): asset is ChainflipAsset {
