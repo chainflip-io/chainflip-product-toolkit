@@ -314,8 +314,7 @@ export const chainContractId: ChainMap<number> = {
   Arbitrum: 4,
   Solana: 5,
   Assethub: 6,
-  // Bsc: 7
-  Tron: 8,
+  Tron: 7,
 };
 
 export const assetContractId: InternalAssetMap<number> = {
