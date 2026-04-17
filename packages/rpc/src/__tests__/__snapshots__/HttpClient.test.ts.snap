@@ -35,6 +35,10 @@ exports[`HttpClient > with server > gets broker account info 1`] = `
       "USDC": 0n,
       "USDT": 0n,
     },
+    "Tron": {
+      "TRX": 0n,
+      "USDT": 0n,
+    },
   },
   "bond": 0n,
   "btc_vault_deposit_address": "tb1pqyqszqgpqyqszqgpqyqszqgpqyqszqgpqyqszqgpqyqszqgpqyqsn60vlk",
@@ -62,6 +66,10 @@ exports[`HttpClient > with server > gets broker account info 1`] = `
     "Solana": {
       "SOL": 0n,
       "USDC": 0n,
+      "USDT": 0n,
+    },
+    "Tron": {
+      "TRX": 0n,
       "USDT": 0n,
     },
   },
@@ -100,6 +108,10 @@ exports[`HttpClient > with server > gets broker account info 2 1`] = `
       "USDC": 0n,
       "USDT": 0n,
     },
+    "Tron": {
+      "TRX": 0n,
+      "USDT": 0n,
+    },
   },
   "bond": 0n,
   "earned_fees": {
@@ -126,6 +138,10 @@ exports[`HttpClient > with server > gets broker account info 2 1`] = `
     "Solana": {
       "SOL": 0n,
       "USDC": 0n,
+      "USDT": 0n,
+    },
+    "Tron": {
+      "TRX": 0n,
       "USDT": 0n,
     },
   },
@@ -161,6 +177,10 @@ exports[`HttpClient > with server > gets delegator account info 1`] = `
     "Solana": {
       "SOL": 0n,
       "USDC": 0n,
+      "USDT": 0n,
+    },
+    "Tron": {
+      "TRX": 0n,
       "USDT": 0n,
     },
   },
@@ -201,6 +221,10 @@ exports[`HttpClient > with server > gets delegator account info 2 1`] = `
     "Solana": {
       "SOL": 0n,
       "USDC": 0n,
+      "USDT": 0n,
+    },
+    "Tron": {
+      "TRX": 0n,
       "USDT": 0n,
     },
   },
@@ -245,6 +269,10 @@ exports[`HttpClient > with server > gets lp account info 1`] = `
     "Solana": {
       "SOL": 0n,
       "USDC": 0n,
+      "USDT": 0n,
+    },
+    "Tron": {
+      "TRX": 0n,
       "USDT": 0n,
     },
   },
@@ -297,6 +325,10 @@ exports[`HttpClient > with server > gets lp account info 1`] = `
       "USDC": [],
       "USDT": [],
     },
+    "Tron": {
+      "TRX": [],
+      "USDT": [],
+    },
   },
   "collateral_balances": [],
   "earned_fees": {
@@ -325,6 +357,10 @@ exports[`HttpClient > with server > gets lp account info 1`] = `
       "USDC": 0n,
       "USDT": 0n,
     },
+    "Tron": {
+      "TRX": 0n,
+      "USDT": 0n,
+    },
   },
   "estimated_redeemable_balance": 99999975540394000000n,
   "flip_balance": 99999975540394000000n,
@@ -342,6 +378,7 @@ exports[`HttpClient > with server > gets lp account info 1`] = `
     "Bitcoin": "bc1qqt3juqef9azhd0zeuamu9c30pg5xdllvmks2ja",
     "Ethereum": "0xacd7c0481fc71dce9e3e8bd4cca5828ce8302629",
     "Solana": "7zLEfU3nQKqnfrN2A5yNEiFd1Vt9D7maVaoSAV8invMT",
+    "Tron": null,
   },
   "role": "liquidity_provider",
   "vanity_name": "Chainflip Testnet LP BOOST",
@@ -373,6 +410,10 @@ exports[`HttpClient > with server > gets lp total balances 1`] = `
   "Solana": {
     "SOL": 0n,
     "USDC": 0n,
+    "USDT": 0n,
+  },
+  "Tron": {
+    "TRX": 0n,
     "USDT": 0n,
   },
 }
@@ -451,6 +492,10 @@ exports[`HttpClient > with server > gets unregistered account info 1`] = `
       "USDC": 0n,
       "USDT": 0n,
     },
+    "Tron": {
+      "TRX": 0n,
+      "USDT": 0n,
+    },
   },
   "bond": 0n,
   "estimated_redeemable_balance": 0n,
@@ -486,6 +531,10 @@ exports[`HttpClient > with server > gets validator account info 1`] = `
     "Solana": {
       "SOL": 0n,
       "USDC": 0n,
+      "USDT": 0n,
+    },
+    "Tron": {
+      "TRX": 0n,
       "USDT": 0n,
     },
   },
@@ -536,6 +585,10 @@ exports[`HttpClient > with server > gets validator account info with an operator
     "Solana": {
       "SOL": 0n,
       "USDC": 0n,
+      "USDT": 0n,
+    },
+    "Tron": {
+      "TRX": 0n,
       "USDT": 0n,
     },
   },
@@ -728,6 +781,38 @@ exports[`HttpClient > with server > handles cf_environment 1`] = `
       "Bitcoin": 0,
       "Ethereum": 0,
       "Solana": 0,
+      "Tron": 0,
+    },
+    "boost_minimum_add_funds_amounts": {
+      "Arbitrum": {
+        "ETH": null,
+        "USDC": null,
+        "USDT": null,
+      },
+      "Assethub": {
+        "DOT": null,
+        "USDC": null,
+        "USDT": null,
+      },
+      "Bitcoin": {
+        "BTC": null,
+      },
+      "Ethereum": {
+        "ETH": null,
+        "FLIP": null,
+        "USDC": null,
+        "USDT": null,
+        "WBTC": null,
+      },
+      "Solana": {
+        "SOL": null,
+        "USDC": null,
+        "USDT": null,
+      },
+      "Tron": {
+        "TRX": null,
+        "USDT": null,
+      },
     },
     "channel_opening_fees": {
       "Arbitrum": 0n,
@@ -735,6 +820,7 @@ exports[`HttpClient > with server > handles cf_environment 1`] = `
       "Bitcoin": 0n,
       "Ethereum": 0n,
       "Solana": 0n,
+      "Tron": 0n,
     },
     "egress_fees": {
       "Arbitrum": {
@@ -762,6 +848,10 @@ exports[`HttpClient > with server > handles cf_environment 1`] = `
         "USDC": 0n,
         "USDT": 0n,
       },
+      "Tron": {
+        "TRX": 0n,
+        "USDT": 0n,
+      },
     },
     "ingress_delays": {
       "Arbitrum": 0,
@@ -769,6 +859,7 @@ exports[`HttpClient > with server > handles cf_environment 1`] = `
       "Bitcoin": 0,
       "Ethereum": 0,
       "Solana": 0,
+      "Tron": 0,
     },
     "ingress_fees": {
       "Arbitrum": {
@@ -794,6 +885,10 @@ exports[`HttpClient > with server > handles cf_environment 1`] = `
       "Solana": {
         "SOL": 176n,
         "USDC": 0n,
+        "USDT": 0n,
+      },
+      "Tron": {
+        "TRX": 0n,
         "USDT": 0n,
       },
     },
@@ -823,6 +918,10 @@ exports[`HttpClient > with server > handles cf_environment 1`] = `
         "USDC": 0n,
         "USDT": 0n,
       },
+      "Tron": {
+        "TRX": 0n,
+        "USDT": 0n,
+      },
     },
     "minimum_egress_amounts": {
       "Arbitrum": {
@@ -850,6 +949,10 @@ exports[`HttpClient > with server > handles cf_environment 1`] = `
         "USDC": 1n,
         "USDT": 1n,
       },
+      "Tron": {
+        "TRX": 1n,
+        "USDT": 1n,
+      },
     },
     "witness_safety_margins": {
       "Arbitrum": 1,
@@ -857,6 +960,7 @@ exports[`HttpClient > with server > handles cf_environment 1`] = `
       "Bitcoin": 2,
       "Ethereum": 2,
       "Solana": 1,
+      "Tron": null,
     },
   },
   "pools": {
@@ -1207,9 +1311,90 @@ exports[`HttpClient > with server > handles cf_environment 1`] = `
           },
         },
       },
+      "Tron": {
+        "TRX": {
+          "limit_order_fee_hundredth_pips": 0,
+          "limit_order_total_fees_earned": {
+            "base": "0x0",
+            "quote": "0x0",
+          },
+          "limit_total_swap_inputs": {
+            "base": "0x0",
+            "quote": "0x0",
+          },
+          "quote_asset": {
+            "asset": "USDC",
+            "chain": "Ethereum",
+          },
+          "range_order_fee_hundredth_pips": 0,
+          "range_order_total_fees_earned": {
+            "base": "0x0",
+            "quote": "0x0",
+          },
+          "range_total_swap_inputs": {
+            "base": "0x0",
+            "quote": "0x0",
+          },
+        },
+        "USDT": {
+          "limit_order_fee_hundredth_pips": 0,
+          "limit_order_total_fees_earned": {
+            "base": "0x0",
+            "quote": "0x0",
+          },
+          "limit_total_swap_inputs": {
+            "base": "0x0",
+            "quote": "0x0",
+          },
+          "quote_asset": {
+            "asset": "USDC",
+            "chain": "Ethereum",
+          },
+          "range_order_fee_hundredth_pips": 0,
+          "range_order_total_fees_earned": {
+            "base": "0x0",
+            "quote": "0x0",
+          },
+          "range_total_swap_inputs": {
+            "base": "0x0",
+            "quote": "0x0",
+          },
+        },
+      },
     },
   },
   "swapping": {
+    "default_oracle_price_protection": {
+      "Arbitrum": {
+        "ETH": null,
+        "USDC": null,
+        "USDT": null,
+      },
+      "Assethub": {
+        "DOT": null,
+        "USDC": null,
+        "USDT": null,
+      },
+      "Bitcoin": {
+        "BTC": null,
+      },
+      "Ethereum": {
+        "ETH": null,
+        "FLIP": null,
+        "USDC": null,
+        "USDT": null,
+        "WBTC": null,
+      },
+      "Solana": {
+        "SOL": null,
+        "USDC": null,
+        "USDT": null,
+      },
+      "Tron": {
+        "TRX": null,
+        "USDT": null,
+      },
+    },
     "max_swap_request_duration_blocks": 14400,
     "max_swap_retry_duration_blocks": 600,
     "maximum_swap_amounts": {
@@ -1236,6 +1421,10 @@ exports[`HttpClient > with server > handles cf_environment 1`] = `
       "Solana": {
         "SOL": null,
         "USDC": null,
+        "USDT": null,
+      },
+      "Tron": {
+        "TRX": null,
         "USDT": null,
       },
     },
@@ -1265,6 +1454,10 @@ exports[`HttpClient > with server > handles cf_environment 1`] = `
         "USDC": 1000000000n,
         "USDT": 1000000000n,
       },
+      "Tron": {
+        "TRX": 0n,
+        "USDT": 0n,
+      },
     },
     "network_fee_hundredth_pips": 1000,
     "network_fees": {
@@ -1293,6 +1486,10 @@ exports[`HttpClient > with server > handles cf_environment 1`] = `
           "Solana": {
             "SOL": 0n,
             "USDC": 0n,
+            "USDT": 0n,
+          },
+          "Tron": {
+            "TRX": 0n,
             "USDT": 0n,
           },
         },
@@ -1326,6 +1523,10 @@ exports[`HttpClient > with server > handles cf_environment 1`] = `
           "Solana": {
             "SOL": 0n,
             "USDC": 0n,
+            "USDT": 0n,
+          },
+          "Tron": {
+            "TRX": 0n,
             "USDT": 0n,
           },
         },
@@ -1509,6 +1710,10 @@ exports[`HttpClient > with server > handles cf_get_trading_strategy_limits 1`] =
       "USDC": 10000000,
       "USDT": 10000000,
     },
+    "Tron": {
+      "TRX": null,
+      "USDT": null,
+    },
   },
   "minimum_deployment_amount": {
     "Arbitrum": {
@@ -1536,6 +1741,10 @@ exports[`HttpClient > with server > handles cf_get_trading_strategy_limits 1`] =
       "USDC": 20000000000,
       "USDT": 20000000000,
     },
+    "Tron": {
+      "TRX": null,
+      "USDT": null,
+    },
   },
 }
 `;
@@ -1561,6 +1770,38 @@ exports[`HttpClient > with server > handles cf_ingress_egress_environment 1`] = 
     "Bitcoin": 0,
     "Ethereum": 0,
     "Solana": 0,
+    "Tron": 0,
+  },
+  "boost_minimum_add_funds_amounts": {
+    "Arbitrum": {
+      "ETH": null,
+      "USDC": null,
+      "USDT": null,
+    },
+    "Assethub": {
+      "DOT": null,
+      "USDC": null,
+      "USDT": null,
+    },
+    "Bitcoin": {
+      "BTC": null,
+    },
+    "Ethereum": {
+      "ETH": null,
+      "FLIP": null,
+      "USDC": null,
+      "USDT": null,
+      "WBTC": null,
+    },
+    "Solana": {
+      "SOL": null,
+      "USDC": null,
+      "USDT": null,
+    },
+    "Tron": {
+      "TRX": null,
+      "USDT": null,
+    },
   },
   "channel_opening_fees": {
     "Arbitrum": 0n,
@@ -1568,6 +1809,7 @@ exports[`HttpClient > with server > handles cf_ingress_egress_environment 1`] = 
     "Bitcoin": 0n,
     "Ethereum": 0n,
     "Solana": 0n,
+    "Tron": 0n,
   },
   "egress_fees": {
     "Arbitrum": {
@@ -1595,6 +1837,10 @@ exports[`HttpClient > with server > handles cf_ingress_egress_environment 1`] = 
       "USDC": 0n,
       "USDT": 0n,
     },
+    "Tron": {
+      "TRX": 0n,
+      "USDT": 0n,
+    },
   },
   "ingress_delays": {
     "Arbitrum": 0,
@@ -1602,6 +1848,7 @@ exports[`HttpClient > with server > handles cf_ingress_egress_environment 1`] = 
     "Bitcoin": 0,
     "Ethereum": 0,
     "Solana": 0,
+    "Tron": 0,
   },
   "ingress_fees": {
     "Arbitrum": {
@@ -1627,6 +1874,10 @@ exports[`HttpClient > with server > handles cf_ingress_egress_environment 1`] = 
     "Solana": {
       "SOL": 176n,
       "USDC": 0n,
+      "USDT": 0n,
+    },
+    "Tron": {
+      "TRX": 0n,
       "USDT": 0n,
     },
   },
@@ -1656,6 +1907,10 @@ exports[`HttpClient > with server > handles cf_ingress_egress_environment 1`] = 
       "USDC": 0n,
       "USDT": 0n,
     },
+    "Tron": {
+      "TRX": 0n,
+      "USDT": 0n,
+    },
   },
   "minimum_egress_amounts": {
     "Arbitrum": {
@@ -1683,6 +1938,10 @@ exports[`HttpClient > with server > handles cf_ingress_egress_environment 1`] = 
       "USDC": 1n,
       "USDT": 1n,
     },
+    "Tron": {
+      "TRX": 1n,
+      "USDT": 1n,
+    },
   },
   "witness_safety_margins": {
     "Arbitrum": 1,
@@ -1690,6 +1949,7 @@ exports[`HttpClient > with server > handles cf_ingress_egress_environment 1`] = 
     "Bitcoin": 2,
     "Ethereum": 2,
     "Solana": 1,
+    "Tron": null,
   },
 }
 `;
@@ -1898,6 +2158,10 @@ exports[`HttpClient > with server > handles cf_safe_mode_statuses 1`] = `
     "egress_witnessing_enabled": true,
     "retry_enabled": true,
   },
+  "broadcast_tron": {
+    "egress_witnessing_enabled": true,
+    "retry_enabled": true,
+  },
   "elections_generic": {
     "oracle_price_elections": true,
   },
@@ -1943,6 +2207,12 @@ exports[`HttpClient > with server > handles cf_safe_mode_statuses 1`] = `
     "vault_deposit_witnessing_enabled": true,
   },
   "ingress_egress_solana": {
+    "boost_deposits_enabled": true,
+    "deposit_channel_creation_enabled": true,
+    "deposit_channel_witnessing_enabled": true,
+    "vault_deposit_witnessing_enabled": true,
+  },
+  "ingress_egress_tron": {
     "boost_deposits_enabled": true,
     "deposit_channel_creation_enabled": true,
     "deposit_channel_witnessing_enabled": true,
@@ -2365,11 +2635,50 @@ exports[`HttpClient > with server > handles cf_supported_assets 1`] = `
     "asset": "USDT",
     "chain": "Assethub",
   },
+  {
+    "asset": "TRX",
+    "chain": "Tron",
+  },
+  {
+    "asset": "USDT",
+    "chain": "Tron",
+  },
 ]
 `;
 
 exports[`HttpClient > with server > handles cf_swapping_environment 1`] = `
 {
+  "default_oracle_price_protection": {
+    "Arbitrum": {
+      "ETH": null,
+      "USDC": null,
+      "USDT": null,
+    },
+    "Assethub": {
+      "DOT": null,
+      "USDC": null,
+      "USDT": null,
+    },
+    "Bitcoin": {
+      "BTC": null,
+    },
+    "Ethereum": {
+      "ETH": null,
+      "FLIP": null,
+      "USDC": null,
+      "USDT": null,
+      "WBTC": null,
+    },
+    "Solana": {
+      "SOL": null,
+      "USDC": null,
+      "USDT": null,
+    },
+    "Tron": {
+      "TRX": null,
+      "USDT": null,
+    },
+  },
   "max_swap_request_duration_blocks": 14400,
   "max_swap_retry_duration_blocks": 600,
   "maximum_swap_amounts": {
@@ -2396,6 +2705,10 @@ exports[`HttpClient > with server > handles cf_swapping_environment 1`] = `
     "Solana": {
       "SOL": null,
       "USDC": null,
+      "USDT": null,
+    },
+    "Tron": {
+      "TRX": null,
       "USDT": null,
     },
   },
@@ -2425,6 +2738,10 @@ exports[`HttpClient > with server > handles cf_swapping_environment 1`] = `
       "USDC": 1000000000n,
       "USDT": 1000000000n,
     },
+    "Tron": {
+      "TRX": 0n,
+      "USDT": 0n,
+    },
   },
   "network_fee_hundredth_pips": 1000,
   "network_fees": {
@@ -2453,6 +2770,10 @@ exports[`HttpClient > with server > handles cf_swapping_environment 1`] = `
         "Solana": {
           "SOL": 0n,
           "USDC": 0n,
+          "USDT": 0n,
+        },
+        "Tron": {
+          "TRX": 0n,
           "USDT": 0n,
         },
       },
@@ -2486,6 +2807,10 @@ exports[`HttpClient > with server > handles cf_swapping_environment 1`] = `
         "Solana": {
           "SOL": 0n,
           "USDC": 0n,
+          "USDT": 0n,
+        },
+        "Tron": {
+          "TRX": 0n,
           "USDT": 0n,
         },
       },
