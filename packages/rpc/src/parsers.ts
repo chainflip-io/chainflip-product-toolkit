@@ -32,6 +32,7 @@ const chainAssetMapFactory = <Z extends z.ZodTypeAny>(parser: Z, defaultValue: z
     Arbitrum: z.object({ ETH: parser, USDC: parser, USDT: parser.default(defaultValue) }),
     Solana: z.object({ SOL: parser, USDC: parser, USDT: parser.default(defaultValue) }),
     Assethub: z.object({ DOT: parser, USDC: parser, USDT: parser }),
+    Tron: z.object({ TRX: parser, USDT: parser.default(defaultValue) }),
   });
 
 const chainBaseAssetMapFactory = <Z extends z.ZodTypeAny>(parser: Z, defaultValue: z.input<Z>) =>
@@ -46,6 +47,7 @@ const chainBaseAssetMapFactory = <Z extends z.ZodTypeAny>(parser: Z, defaultValu
     Arbitrum: z.object({ ETH: parser, USDC: parser, USDT: parser.default(defaultValue) }),
     Solana: z.object({ SOL: parser, USDC: parser, USDT: parser.default(defaultValue) }),
     Assethub: z.object({ DOT: parser, USDC: parser, USDT: parser }),
+    Tron: z.object({ TRX: parser, USDT: parser.default(defaultValue) }),
   });
 
 const chainMapFactory = <Z extends z.ZodTypeAny>(parser: Z, _defaultValue: z.input<Z>) =>
@@ -55,6 +57,7 @@ const chainMapFactory = <Z extends z.ZodTypeAny>(parser: Z, _defaultValue: z.inp
     Arbitrum: parser,
     Solana: parser,
     Assethub: parser,
+    Tron: parser,
   });
 
 const rpcAssetSchema = z.union([
@@ -73,6 +76,8 @@ const rpcAssetSchema = z.union([
   z.object({ chain: z.literal('Assethub'), asset: z.literal('DOT') }),
   z.object({ chain: z.literal('Assethub'), asset: z.literal('USDC') }),
   z.object({ chain: z.literal('Assethub'), asset: z.literal('USDT') }),
+  z.object({ chain: z.literal('Tron'), asset: z.literal('TRX') }),
+  z.object({ chain: z.literal('Tron'), asset: z.literal('USDT') }),
 ]);
 
 const networkFee = z.object({
@@ -167,7 +172,7 @@ export const cfIngressEgressEnvironment = z
     channel_opening_fees: chainMapFactory(numberOrHex, 0),
     ingress_delays: chainMapFactory(z.number(), 0),
     boost_delays: chainMapFactory(z.number(), 0),
-    boost_minimum_add_funds_amounts: chainAssetMapFactory(numberOrHex.nullable(), null).optional(), // TODO(2.1): remove `optional()` after all networks upgraded
+    boost_minimum_add_funds_amounts: chainAssetMapFactory(numberOrHex.nullable(), null),
   })
   .transform(rename({ egress_dust_limits: 'minimum_egress_amounts' }));
 
@@ -179,7 +184,7 @@ export const cfSwappingEnvironment = z.object({
   max_swap_request_duration_blocks: z.number(),
   minimum_chunk_size: chainAssetMapFactory(numberOrHex.nullable(), null),
   network_fees: networkFees,
-  default_oracle_price_protection: chainAssetMapFactory(z.number().nullable(), null).optional(), // TODO(2.1): remove after all networks upgraded
+  default_oracle_price_protection: chainAssetMapFactory(z.number().nullable(), null),
 });
 
 export const cfFundingEnvironment = z.object({
@@ -714,27 +719,23 @@ export const cfSafeModeStatuses = z.object({
   broadcast_arbitrum: broadcastPalletSafeModeStatuses,
   broadcast_solana: broadcastPalletSafeModeStatuses,
   broadcast_assethub: broadcastPalletSafeModeStatuses,
+  broadcast_tron: broadcastPalletSafeModeStatuses,
   ingress_egress_ethereum: ingressEgressPalletSafeModeStatuses,
   ingress_egress_bitcoin: ingressEgressPalletSafeModeStatuses,
   ingress_egress_polkadot: ingressEgressPalletSafeModeStatuses,
   ingress_egress_arbitrum: ingressEgressPalletSafeModeStatuses,
   ingress_egress_solana: ingressEgressPalletSafeModeStatuses,
   ingress_egress_assethub: ingressEgressPalletSafeModeStatuses,
+  ingress_egress_tron: ingressEgressPalletSafeModeStatuses,
   witnesser: z.enum(['CodeRed', 'CodeGreen', 'CodeAmber']),
-  ethereum_elections: z
-    .object({
-      state_chain_gateway_witnessing: z.boolean(),
-      key_manager_witnessing: z.boolean(),
-      sc_utils_witnessing: z.boolean(),
-    })
-    // TODO(2.1): remove after all networks upgraded
-    .optional(),
-  arbitrum_elections: z
-    .object({
-      key_manager_witnessing: z.boolean(),
-    })
-    // TODO(2.1): remove after all networks upgraded
-    .optional(),
+  ethereum_elections: z.object({
+    state_chain_gateway_witnessing: z.boolean(),
+    key_manager_witnessing: z.boolean(),
+    sc_utils_witnessing: z.boolean(),
+  }),
+  arbitrum_elections: z.object({
+    key_manager_witnessing: z.boolean(),
+  }),
   elections_generic: z.object({
     oracle_price_elections: z.boolean(),
   }),

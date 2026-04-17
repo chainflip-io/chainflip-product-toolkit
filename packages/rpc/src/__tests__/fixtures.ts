@@ -48,6 +48,8 @@ export const supportedAssets = [
   { chain: 'Assethub', asset: 'DOT' },
   { chain: 'Assethub', asset: 'USDC' },
   { chain: 'Assethub', asset: 'USDT' },
+  { chain: 'Tron', asset: 'TRX' },
+  { chain: 'Tron', asset: 'USDT' },
 ];
 
 export const ingressEgressEnvironment: z.input<typeof cfIngressEgressEnvironment> = {
@@ -57,6 +59,7 @@ export const ingressEgressEnvironment: z.input<typeof cfIngressEgressEnvironment
     Arbitrum: { ETH: '0x0', USDC: '0x0', USDT: '0x0' },
     Solana: { SOL: '0x0', USDC: '0x0', USDT: '0x0' },
     Assethub: { DOT: '0x0', USDC: '0x0', USDT: '0x0' },
+    Tron: { TRX: '0x0', USDT: '0x0' },
   },
   ingress_fees: {
     Ethereum: { ETH: '0x55730', FLIP: '0x0', USDC: '0x0', USDT: '0x0', WBTC: '0x0' },
@@ -64,6 +67,7 @@ export const ingressEgressEnvironment: z.input<typeof cfIngressEgressEnvironment
     Arbitrum: { ETH: '0x574b457d400', USDC: '0x231b', USDT: '0x231b' },
     Solana: { SOL: '0xb0', USDC: '0x0', USDT: '0x0' },
     Assethub: { DOT: '0x0', USDC: '0x0', USDT: '0x0' },
+    Tron: { TRX: '0x0', USDT: '0x0' },
   },
   egress_fees: {
     Ethereum: { ETH: '0x77a10', FLIP: '0x0', USDC: '0x0', USDT: '0x0', WBTC: '0x0' },
@@ -71,6 +75,7 @@ export const ingressEgressEnvironment: z.input<typeof cfIngressEgressEnvironment
     Arbitrum: { ETH: '0x74645ca7000', USDC: '0x2701', USDT: '0x2701' },
     Solana: { SOL: '0xb0', USDC: '0x0', USDT: '0x0' },
     Assethub: { DOT: '0x0', USDC: '0x0', USDT: '0x0' },
+    Tron: { TRX: '0x0', USDT: '0x0' },
   },
   witness_safety_margins: {
     Bitcoin: 2,
@@ -78,6 +83,7 @@ export const ingressEgressEnvironment: z.input<typeof cfIngressEgressEnvironment
     Arbitrum: 1,
     Solana: 1,
     Assethub: null,
+    Tron: null,
   },
   egress_dust_limits: {
     Ethereum: { ETH: '0x1', FLIP: '0x1', USDC: '0x1', USDT: '0x1', WBTC: '0x1' },
@@ -85,6 +91,7 @@ export const ingressEgressEnvironment: z.input<typeof cfIngressEgressEnvironment
     Arbitrum: { ETH: '0x1', USDC: '0x1', USDT: '0x1' },
     Solana: { SOL: '0x1', USDC: '0x1', USDT: '0x1' },
     Assethub: { DOT: '0x0', USDC: '0x0', USDT: '0x0' },
+    Tron: { TRX: '0x1', USDT: '0x1' },
   },
   channel_opening_fees: {
     Arbitrum: '0x0',
@@ -92,6 +99,7 @@ export const ingressEgressEnvironment: z.input<typeof cfIngressEgressEnvironment
     Bitcoin: '0x0',
     Solana: '0x0',
     Assethub: '0x0',
+    Tron: '0x0',
   },
   ingress_delays: {
     Arbitrum: 0,
@@ -99,6 +107,7 @@ export const ingressEgressEnvironment: z.input<typeof cfIngressEgressEnvironment
     Bitcoin: 0,
     Solana: 0,
     Assethub: 0,
+    Tron: 0,
   },
   boost_delays: {
     Arbitrum: 0,
@@ -106,6 +115,15 @@ export const ingressEgressEnvironment: z.input<typeof cfIngressEgressEnvironment
     Bitcoin: 0,
     Solana: 0,
     Assethub: 0,
+    Tron: 0,
+  },
+  boost_minimum_add_funds_amounts: {
+    Ethereum: { ETH: null, FLIP: null, USDC: null, USDT: null, WBTC: null },
+    Bitcoin: { BTC: null },
+    Arbitrum: { ETH: null, USDC: null, USDT: null },
+    Solana: { SOL: null, USDC: null, USDT: null },
+    Assethub: { DOT: null, USDC: null, USDT: null },
+    Tron: { TRX: null, USDT: null },
   },
 };
 
@@ -134,6 +152,10 @@ export const swappingEnvironment: z.input<typeof cfSwappingEnvironment> = {
     Assethub: {
       DOT: null,
       USDC: null,
+      USDT: null,
+    },
+    Tron: {
+      TRX: null,
       USDT: null,
     },
   },
@@ -165,6 +187,10 @@ export const swappingEnvironment: z.input<typeof cfSwappingEnvironment> = {
     Assethub: {
       DOT: '0x0',
       USDC: '0x0',
+      USDT: '0x0',
+    },
+    Tron: {
+      TRX: '0x0',
       USDT: '0x0',
     },
   },
@@ -200,6 +226,10 @@ export const swappingEnvironment: z.input<typeof cfSwappingEnvironment> = {
           USDT: 0,
           USDC: 0,
         },
+        Tron: {
+          TRX: 0,
+          USDT: 0,
+        },
       },
     },
     internal_swap_network_fee: {
@@ -234,8 +264,20 @@ export const swappingEnvironment: z.input<typeof cfSwappingEnvironment> = {
           USDT: 0,
           USDC: 0,
         },
+        Tron: {
+          TRX: 0,
+          USDT: 0,
+        },
       },
     },
+  },
+  default_oracle_price_protection: {
+    Ethereum: { ETH: null, FLIP: null, USDC: null, USDT: null, WBTC: null },
+    Bitcoin: { BTC: null },
+    Arbitrum: { ETH: null, USDC: null, USDT: null },
+    Solana: { SOL: null, USDC: null, USDT: null },
+    Assethub: { DOT: null, USDC: null, USDT: null },
+    Tron: { TRX: null, USDT: null },
   },
 };
 
@@ -479,6 +521,10 @@ export const poolsEnvironment: z.input<typeof cfPoolsEnvironment> = {
       USDC: null,
       USDT: null,
     },
+    Tron: {
+      TRX: null,
+      USDT: null,
+    },
   },
 };
 
@@ -602,6 +648,7 @@ export const emptyChainAssetMap = {
   Arbitrum: { ETH: '0x0', USDC: '0x0', USDT: '0x0' },
   Solana: { SOL: '0x0', USDC: '0x0', USDT: '0x0' },
   Assethub: { DOT: '0x0', USDT: '0x0', USDC: '0x0' },
+  Tron: { TRX: '0x0', USDT: '0x0' },
 };
 
 export const unregisteredAccount: z.input<typeof unregistered> = {
@@ -613,6 +660,7 @@ export const unregisteredAccount: z.input<typeof unregistered> = {
     Arbitrum: { ETH: '0x0', USDC: '0x0', USDT: '0x0' },
     Solana: { SOL: '0x0', USDC: '0x0', USDT: '0x0' },
     Assethub: { DOT: '0x0', USDC: '0x0', USDT: '0x0' },
+    Tron: { TRX: '0x0', USDT: '0x0' },
   },
   bond: '0x0',
   estimated_redeemable_balance: '0x0',
@@ -647,6 +695,10 @@ export const liquidityProviderAccount: z.input<typeof liquidityProvider> = {
       USDT: '0x0',
       USDC: '0x0',
     },
+    Tron: {
+      TRX: '0x0',
+      USDT: '0x0',
+    },
   },
   bond: '0x0',
   estimated_redeemable_balance: '0x56bc747ee70ef7e80',
@@ -657,6 +709,7 @@ export const liquidityProviderAccount: z.input<typeof liquidityProvider> = {
     Arbitrum: null,
     Solana: '7zLEfU3nQKqnfrN2A5yNEiFd1Vt9D7maVaoSAV8invMT',
     Assethub: null,
+    Tron: null,
   },
   earned_fees: {
     Ethereum: {
@@ -683,6 +736,10 @@ export const liquidityProviderAccount: z.input<typeof liquidityProvider> = {
       DOT: '0x0',
       USDT: '0x0',
       USDC: '0x0',
+    },
+    Tron: {
+      TRX: '0x0',
+      USDT: '0x0',
     },
   },
   boost_balances: {
@@ -733,6 +790,10 @@ export const liquidityProviderAccount: z.input<typeof liquidityProvider> = {
       USDT: [],
       USDC: [],
     },
+    Tron: {
+      TRX: [],
+      USDT: [],
+    },
   },
   lending_positions: [
     {
@@ -763,6 +824,7 @@ export const brokerAccount: z.input<typeof broker> = {
     Arbitrum: { ETH: 0, USDC: 0, USDT: 0 },
     Solana: { SOL: 0, USDC: 0, USDT: 0 },
     Assethub: { DOT: 0, USDC: 0, USDT: 0 },
+    Tron: { TRX: 0, USDT: 0 },
   },
   btc_vault_deposit_address: 'tb1pqyqszqgpqyqszqgpqyqszqgpqyqszqgpqyqszqgpqyqszqgpqyqsn60vlk',
   affiliates: [
@@ -801,6 +863,10 @@ export const brokerAccountNoAffiliates: z.input<typeof broker> = {
     Assethub: {
       DOT: 0,
       USDC: 0,
+      USDT: 0,
+    },
+    Tron: {
+      TRX: 0,
       USDT: 0,
     },
   },
@@ -1175,6 +1241,10 @@ export const tradingStrategiesLimits: z.input<typeof cfGetTradingStrategyLimits>
       USDT: null,
       USDC: null,
     },
+    Tron: {
+      TRX: null,
+      USDT: null,
+    },
   },
   minimum_added_funds_amount: {
     Ethereum: {
@@ -1201,6 +1271,10 @@ export const tradingStrategiesLimits: z.input<typeof cfGetTradingStrategyLimits>
       DOT: null,
       USDT: null,
       USDC: null,
+    },
+    Tron: {
+      TRX: null,
+      USDT: null,
     },
   },
 };
@@ -1388,6 +1462,10 @@ export const safeModeStatuses: z.input<typeof cfSafeModeStatuses> = {
     retry_enabled: true,
     egress_witnessing_enabled: true,
   },
+  broadcast_tron: {
+    retry_enabled: true,
+    egress_witnessing_enabled: true,
+  },
   witnesser: 'CodeGreen',
   ingress_egress_ethereum: {
     boost_deposits_enabled: true,
@@ -1420,6 +1498,12 @@ export const safeModeStatuses: z.input<typeof cfSafeModeStatuses> = {
     vault_deposit_witnessing_enabled: true,
   },
   ingress_egress_assethub: {
+    boost_deposits_enabled: true,
+    deposit_channel_creation_enabled: true,
+    deposit_channel_witnessing_enabled: true,
+    vault_deposit_witnessing_enabled: true,
+  },
+  ingress_egress_tron: {
     boost_deposits_enabled: true,
     deposit_channel_creation_enabled: true,
     deposit_channel_witnessing_enabled: true,
