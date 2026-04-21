@@ -801,7 +801,7 @@ export const cfLoanAccount = z.object({
       asset: rpcAssetSchema,
       principal_amount: numberOrHex,
       loan_type: z
-        .union([z.object({ User: accountId }), z.object({ Boost: numberOrHex })])
+        .object({ User: accountId })
         // TODO(2.2): Remove optional() once 2.2 goes live on all networks
         .optional(),
     }),
