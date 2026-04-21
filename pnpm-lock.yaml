@@ -81,8 +81,8 @@ importers:
         specifier: 2.1.2
         version: 2.1.2
       bignumber.js:
-        specifier: ^10.0.2
-        version: 10.0.2
+        specifier: ^11.0.0
+        version: 11.0.0
       bitcoinjs-lib:
         specifier: 7.0.1
         version: 7.0.1(typescript@5.9.3)
@@ -172,8 +172,8 @@ importers:
         specifier: 2.1.2
         version: 2.1.2
       bignumber.js:
-        specifier: ^10.0.2
-        version: 10.0.2
+        specifier: ^11.0.0
+        version: 11.0.0
       ioredis:
         specifier: ^5.10.1
         version: 5.10.1
@@ -259,8 +259,8 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0
       bignumber.js:
-        specifier: ^10.0.2
-        version: 10.0.2
+        specifier: ^11.0.0
+        version: 11.0.0
       date-fns:
         specifier: 4.1.0
         version: 4.1.0
@@ -1562,8 +1562,8 @@ packages:
   bech32@2.0.0:
     resolution: {integrity: sha512-LcknSilhIGatDAsY1ak2I8VtGaHNhgMSYVxFrGLXv+xLHytaKZKcaUJJUE7qmBr7h33o5YQwP55pMI0xmkpJwg==}
 
-  bignumber.js@10.0.2:
-    resolution: {integrity: sha512-E8Wp9O06QA6lneJ4aRUXKYf/1GIomqUEmUMwtIOMtDxf1U52ffJY+y7JBk/8wRafA8qOIqLnXQGqonYXZdBnFQ==}
+  bignumber.js@11.0.0:
+    resolution: {integrity: sha512-pkOSwKRi2HLwEbmTNf7C0M9lw3Z5dXQ1irbanJvySh/nJQBcFsMxF+g5o2JEn5BPFmfAqYalrhOwoFdLJXohEg==}
 
   bignumber.js@9.3.1:
     resolution: {integrity: sha512-Ko0uX15oIUS7wJ3Rb30Fs6SkVbLmPBAKdlm7q9+ak9bbIeFf0MwuBsQV6z7+X768/cHsfg+WlysDWJcmthjsjQ==}
@@ -4491,7 +4491,7 @@ snapshots:
 
   bech32@2.0.0: {}
 
-  bignumber.js@10.0.2: {}
+  bignumber.js@11.0.0: {}
 
   bignumber.js@9.3.1: {}
 
