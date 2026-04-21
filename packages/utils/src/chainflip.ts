@@ -53,16 +53,10 @@ export const baseChainflipAssets = chainflipAssets.filter(
   (asset): asset is BaseChainflipAsset => asset !== 'Usdc',
 );
 
-export const chainflipEvmChains = ['Ethereum', 'Arbitrum'] as const;
+export const chainflipEvmChains = ['Ethereum', 'Arbitrum', 'Tron'] as const;
 export type ChainflipEvmChain = (typeof chainflipEvmChains)[number];
 
-export const chainflipChains = [
-  ...chainflipEvmChains,
-  'Bitcoin',
-  'Solana',
-  'Assethub',
-  'Tron',
-] as const;
+export const chainflipChains = [...chainflipEvmChains, 'Bitcoin', 'Solana', 'Assethub'] as const;
 export type ChainflipChain = (typeof chainflipChains)[number];
 
 export const legacyChainflipChains = ['Polkadot'] as const;
@@ -73,7 +67,7 @@ export type AnyChainflipChain = ChainflipChain | LegacyChainflipChain;
 export const chainflipNetworks = ['backspin', 'sisyphos', 'perseverance', 'mainnet'] as const;
 export type ChainflipNetwork = (typeof chainflipNetworks)[number];
 
-export const addressTypes = ['Eth', 'Btc', 'Arb', 'Sol', 'Hub', 'Trx'] as const;
+export const addressTypes = ['Eth', 'Btc', 'Arb', 'Sol', 'Hub', 'Tron'] as const;
 export type AddressType = (typeof addressTypes)[number];
 
 export const legacyAddressTypes = ['Dot'] as const;
@@ -254,7 +248,7 @@ export const chainConstants = {
     chainflipAssets: ['Trx', 'TrxUsdt'],
     assets: ['TRX', 'USDT'],
     gasAsset: 'Trx',
-    addressType: 'Trx',
+    addressType: 'Tron',
     blockTimeSeconds: 3,
   },
 } as const satisfies ChainMap<{
