@@ -107,6 +107,33 @@ export const ingressEgressEnvironment: z.input<typeof cfIngressEgressEnvironment
     Solana: 0,
     Assethub: 0,
   },
+  boost_minimum_add_funds_amounts: {
+    Ethereum: {
+      ETH: '0x1',
+      FLIP: '0x1',
+      USDC: '0x1',
+      USDT: '0x1',
+      WBTC: '0x1',
+    },
+    Bitcoin: {
+      BTC: '0x2af8',
+    },
+    Arbitrum: {
+      ETH: '0x1',
+      USDC: '0x1',
+      USDT: '0x1',
+    },
+    Solana: {
+      SOL: '0x1',
+      USDC: '0x1',
+      USDT: '0x1',
+    },
+    Assethub: {
+      DOT: '0x1',
+      USDT: '0x1',
+      USDC: '0x1',
+    },
+  },
 };
 
 export const swappingEnvironment: z.input<typeof cfSwappingEnvironment> = {
@@ -235,6 +262,33 @@ export const swappingEnvironment: z.input<typeof cfSwappingEnvironment> = {
           USDC: 0,
         },
       },
+    },
+  },
+  default_oracle_price_protection: {
+    Ethereum: {
+      ETH: 10000,
+      FLIP: null,
+      USDC: null,
+      USDT: 10000,
+      WBTC: 10000,
+    },
+    Bitcoin: {
+      BTC: 10000,
+    },
+    Arbitrum: {
+      ETH: 10000,
+      USDC: 10000,
+      USDT: 10000,
+    },
+    Solana: {
+      SOL: 10000,
+      USDC: 10000,
+      USDT: 10000,
+    },
+    Assethub: {
+      DOT: null,
+      USDT: 100,
+      USDC: 100,
     },
   },
 };
@@ -1781,7 +1835,7 @@ export const lendingConfig: z.input<typeof cfLendingConfig> = {
   minimum_update_collateral_amount_usd: '0x989680',
 };
 
-export const loanAccounts: z.input<typeof cfLoanAccounts> = [
+export const loanAccounts210: z.input<typeof cfLoanAccounts> = [
   {
     account: 'cFL8fmgKZcchhtLagBH2GKfsuWxBqUaD5CYE1m7DFb8DBSLJ1',
     collateral_topup_asset: {
@@ -1818,6 +1872,45 @@ export const loanAccounts: z.input<typeof cfLoanAccounts> = [
   },
 ];
 
+export const loanAccounts220: z.input<typeof cfLoanAccounts> = [
+  {
+    account: 'cFL8fmgKZcchhtLagBH2GKfsuWxBqUaD5CYE1m7DFb8DBSLJ1',
+    collateral_topup_asset: {
+      chain: 'Bitcoin',
+      asset: 'BTC',
+    },
+    ltv_ratio: '1333333333',
+    collateral: [
+      {
+        chain: 'Bitcoin',
+        asset: 'BTC',
+        amount: '0x3',
+      },
+    ],
+    loans: [
+      {
+        loan_id: 1,
+        asset: {
+          chain: 'Ethereum',
+          asset: 'USDC',
+        },
+        loan_type: {
+          User: 'cFPdef3hF5zEwbWUG6ZaCJ3X7mTvEeAog7HxZ8QyFcCgDVGDM',
+        },
+        principal_amount: '0x3e8',
+      },
+    ],
+    liquidation_status: {
+      liquidation_swaps: [
+        {
+          swap_request_id: 1,
+          loan_id: 1,
+        },
+      ],
+      liquidation_type: 'Hard',
+    },
+  },
+];
 export const lendingPoolSupplyBalances: z.input<typeof cfLendingPoolSupplyBalances> = [
   {
     chain: 'Bitcoin',

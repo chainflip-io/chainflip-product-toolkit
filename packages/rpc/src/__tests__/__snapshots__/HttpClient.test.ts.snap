@@ -729,6 +729,33 @@ exports[`HttpClient > with server > handles cf_environment 1`] = `
       "Ethereum": 0,
       "Solana": 0,
     },
+    "boost_minimum_add_funds_amounts": {
+      "Arbitrum": {
+        "ETH": 1n,
+        "USDC": 1n,
+        "USDT": 1n,
+      },
+      "Assethub": {
+        "DOT": 1n,
+        "USDC": 1n,
+        "USDT": 1n,
+      },
+      "Bitcoin": {
+        "BTC": 11000n,
+      },
+      "Ethereum": {
+        "ETH": 1n,
+        "FLIP": 1n,
+        "USDC": 1n,
+        "USDT": 1n,
+        "WBTC": 1n,
+      },
+      "Solana": {
+        "SOL": 1n,
+        "USDC": 1n,
+        "USDT": 1n,
+      },
+    },
     "channel_opening_fees": {
       "Arbitrum": 0n,
       "Assethub": 0n,
@@ -1210,6 +1237,33 @@ exports[`HttpClient > with server > handles cf_environment 1`] = `
     },
   },
   "swapping": {
+    "default_oracle_price_protection": {
+      "Arbitrum": {
+        "ETH": 10000,
+        "USDC": 10000,
+        "USDT": 10000,
+      },
+      "Assethub": {
+        "DOT": null,
+        "USDC": 100,
+        "USDT": 100,
+      },
+      "Bitcoin": {
+        "BTC": 10000,
+      },
+      "Ethereum": {
+        "ETH": 10000,
+        "FLIP": null,
+        "USDC": null,
+        "USDT": 10000,
+        "WBTC": 10000,
+      },
+      "Solana": {
+        "SOL": 10000,
+        "USDC": 10000,
+        "USDT": 10000,
+      },
+    },
     "max_swap_request_duration_blocks": 14400,
     "max_swap_retry_duration_blocks": 600,
     "maximum_swap_amounts": {
@@ -1561,6 +1615,33 @@ exports[`HttpClient > with server > handles cf_ingress_egress_environment 1`] = 
     "Bitcoin": 0,
     "Ethereum": 0,
     "Solana": 0,
+  },
+  "boost_minimum_add_funds_amounts": {
+    "Arbitrum": {
+      "ETH": 1n,
+      "USDC": 1n,
+      "USDT": 1n,
+    },
+    "Assethub": {
+      "DOT": 1n,
+      "USDC": 1n,
+      "USDT": 1n,
+    },
+    "Bitcoin": {
+      "BTC": 11000n,
+    },
+    "Ethereum": {
+      "ETH": 1n,
+      "FLIP": 1n,
+      "USDC": 1n,
+      "USDT": 1n,
+      "WBTC": 1n,
+    },
+    "Solana": {
+      "SOL": 1n,
+      "USDC": 1n,
+      "USDT": 1n,
+    },
   },
   "channel_opening_fees": {
     "Arbitrum": 0n,
@@ -2370,6 +2451,33 @@ exports[`HttpClient > with server > handles cf_supported_assets 1`] = `
 
 exports[`HttpClient > with server > handles cf_swapping_environment 1`] = `
 {
+  "default_oracle_price_protection": {
+    "Arbitrum": {
+      "ETH": 10000,
+      "USDC": 10000,
+      "USDT": 10000,
+    },
+    "Assethub": {
+      "DOT": null,
+      "USDC": 100,
+      "USDT": 100,
+    },
+    "Bitcoin": {
+      "BTC": 10000,
+    },
+    "Ethereum": {
+      "ETH": 10000,
+      "FLIP": null,
+      "USDC": null,
+      "USDT": 10000,
+      "WBTC": 10000,
+    },
+    "Solana": {
+      "SOL": 10000,
+      "USDC": 10000,
+      "USDT": 10000,
+    },
+  },
   "max_swap_request_duration_blocks": 14400,
   "max_swap_retry_duration_blocks": 600,
   "maximum_swap_amounts": {
