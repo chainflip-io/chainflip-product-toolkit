@@ -81,6 +81,7 @@ describe(HttpClient, () => {
         "cf_eth_state_chain_gateway_address",
         "cf_failed_call_arbitrum",
         "cf_failed_call_ethereum",
+        "cf_failed_call_tron",
         "cf_flip_supply",
         "cf_funding_environment",
         "cf_get_trading_strategies",
@@ -451,6 +452,7 @@ describe(HttpClient, () => {
           return respond(liquidityProviderAccount.asset_balances);
         case 'cf_failed_call_ethereum':
         case 'cf_failed_call_arbitrum':
+        case 'cf_failed_call_tron':
           if (body.params[0] === 1) return respond(failedCallEvm);
           return respond(null);
         case 'cf_authority_emission_per_block':
@@ -989,11 +991,11 @@ describe(HttpClient, () => {
       expect(callCounter).toEqual(1);
     });
 
-    it.each(['cf_failed_call_ethereum', 'cf_failed_call_arbitrum'])(
+    it.each(['ethereum' as const, 'arbitrum' as const, 'tron' as const])(
       'handles failed calls (%s)',
-      async () => {
-        expect(await client.sendRequest('cf_failed_call_ethereum', 1)).toEqual(failedCallEvm);
-        expect(await client.sendRequest('cf_failed_call_ethereum', 2)).toBeNull();
+      async (method: 'ethereum' | 'arbitrum' | 'tron') => {
+        expect(await client.sendRequest(`cf_failed_call_${method}`, 1)).toEqual(failedCallEvm);
+        expect(await client.sendRequest(`cf_failed_call_${method}`, 2)).toBeNull();
       },
     );
 
