@@ -1835,6 +1835,7 @@ export const lendingConfig: z.input<typeof cfLendingConfig> = {
   minimum_update_collateral_amount_usd: '0x989680',
 };
 
+// TODO(2.2): Remove once 2.2 goes live on all networks
 export const loanAccounts210: z.input<typeof cfLoanAccounts> = [
   {
     account: 'cFL8fmgKZcchhtLagBH2GKfsuWxBqUaD5CYE1m7DFb8DBSLJ1',

@@ -802,6 +802,7 @@ export const cfLoanAccount = z.object({
       principal_amount: numberOrHex,
       loan_type: z
         .union([z.object({ User: accountId }), z.object({ Boost: numberOrHex })])
+        // TODO(2.2): Remove optional() once 2.2 goes live on all networks
         .optional(),
     }),
   ),
