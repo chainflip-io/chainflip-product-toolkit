@@ -184,8 +184,8 @@ importers:
   packages/rpc:
     dependencies:
       '@chainflip/utils':
-        specifier: 2.1.7-tron-dev.1
-        version: 2.1.7-tron-dev.1
+        specifier: 2.1.7-tron-dev.2
+        version: 2.1.7-tron-dev.2
       zod:
         specifier: ^3.25.75
         version: 3.25.75
@@ -335,8 +335,8 @@ packages:
   '@chainflip/utils@2.1.2':
     resolution: {integrity: sha512-ujHjiVRdm5AbN5XotoIlVtN7RMmkR7PnrMW/pGhWg+2Yr6vtKyKas/GSRHrX4VGnm7H1j7xKcSuj9GNag60n5A==}
 
-  '@chainflip/utils@2.1.7-tron-dev.1':
-    resolution: {integrity: sha512-AGgvcYem8w/lHD6T9QF6ocj1/jmKyva9gSac58GwVpz1dQMN3VEsFqjPdoZ1F3tF2YXGRDrSvr7ihDBdkiHzfw==}
+  '@chainflip/utils@2.1.7-tron-dev.2':
+    resolution: {integrity: sha512-HseLrxVBN/LTpk3CAuTkOOMdI9PX8AQEBMqjGtTz2yuw21ZUN+D51sCHa3+zjsXtKuKb/C8/mmV0Ri330SJVLA==}
 
   '@coral-xyz/anchor-errors@0.31.1':
     resolution: {integrity: sha512-NhNEku4F3zzUSBtrYz84FzYWm48+9OvmT1Hhnwr6GnPQry2dsEqH/ti/7ASjjpoFTWRnPXrjAIT1qM6Isop+LQ==}
@@ -3336,7 +3336,7 @@ snapshots:
       bignumber.js: 9.3.1
       date-fns: 4.1.0
 
-  '@chainflip/utils@2.1.7-tron-dev.1':
+  '@chainflip/utils@2.1.7-tron-dev.2':
     dependencies:
       '@date-fns/utc': 2.1.1
       '@noble/hashes': 2.0.1
