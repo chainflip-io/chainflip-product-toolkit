@@ -600,6 +600,16 @@ export const cfTradingStrategy = z.object({
         base_asset: rpcAssetSchema,
       }),
     }),
+    z.object({
+      OracleTracking: z.object({
+        min_buy_offset_tick: z.number(),
+        max_buy_offset_tick: z.number(),
+        min_sell_offset_tick: z.number(),
+        max_sell_offset_tick: z.number(),
+        base_asset: rpcAssetSchema,
+        quote_asset: rpcAssetSchema,
+      }),
+    }),
   ]),
   balance: z.array(z.tuple([rpcAssetSchema, numberOrHex])),
 });

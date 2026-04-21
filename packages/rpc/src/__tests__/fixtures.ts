@@ -1200,6 +1200,42 @@ export const tradingStrategies: z.input<typeof cfGetTradingStrategies> = [
       ],
     ],
   },
+  {
+    lp_id: 'cFJt3kyUdXvaoarfxJDLrFmHFqkXUgnVZ4zqqDLLTRjbJosmK',
+    strategy_id: 'cFNyy169p7yCy3F9p4bb7mW27Tse3F1v8hw8yTv21Qzwq23xW',
+    strategy: {
+      OracleTracking: {
+        min_buy_offset_tick: 2,
+        max_buy_offset_tick: 8,
+        min_sell_offset_tick: -10,
+        max_sell_offset_tick: -1,
+        base_asset: {
+          chain: 'Ethereum',
+          asset: 'USDT',
+        },
+        quote_asset: {
+          chain: 'Ethereum',
+          asset: 'USDC',
+        },
+      },
+    },
+    balance: [
+      [
+        {
+          chain: 'Ethereum',
+          asset: 'USDC',
+        },
+        '0x0',
+      ],
+      [
+        {
+          chain: 'Ethereum',
+          asset: 'USDT',
+        },
+        '0x55ae82600',
+      ],
+    ],
+  },
 ];
 
 export const tradingStrategiesLimits: z.input<typeof cfGetTradingStrategyLimits> = {
