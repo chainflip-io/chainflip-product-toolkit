@@ -167,7 +167,7 @@ export const cfIngressEgressEnvironment = z
     channel_opening_fees: chainMapFactory(numberOrHex, 0),
     ingress_delays: chainMapFactory(z.number(), 0),
     boost_delays: chainMapFactory(z.number(), 0),
-    boost_minimum_add_funds_amounts: chainAssetMapFactory(numberOrHex.nullable(), null).optional(), // TODO(2.1): remove `optional()` after all networks upgraded
+    boost_minimum_add_funds_amounts: chainAssetMapFactory(numberOrHex.nullable(), null),
   })
   .transform(rename({ egress_dust_limits: 'minimum_egress_amounts' }));
 
@@ -179,7 +179,7 @@ export const cfSwappingEnvironment = z.object({
   max_swap_request_duration_blocks: z.number(),
   minimum_chunk_size: chainAssetMapFactory(numberOrHex.nullable(), null),
   network_fees: networkFees,
-  default_oracle_price_protection: chainAssetMapFactory(z.number().nullable(), null).optional(), // TODO(2.1): remove after all networks upgraded
+  default_oracle_price_protection: chainAssetMapFactory(z.number().nullable(), null),
 });
 
 export const cfFundingEnvironment = z.object({
@@ -721,20 +721,14 @@ export const cfSafeModeStatuses = z.object({
   ingress_egress_solana: ingressEgressPalletSafeModeStatuses,
   ingress_egress_assethub: ingressEgressPalletSafeModeStatuses,
   witnesser: z.enum(['CodeRed', 'CodeGreen', 'CodeAmber']),
-  ethereum_elections: z
-    .object({
-      state_chain_gateway_witnessing: z.boolean(),
-      key_manager_witnessing: z.boolean(),
-      sc_utils_witnessing: z.boolean(),
-    })
-    // TODO(2.1): remove after all networks upgraded
-    .optional(),
-  arbitrum_elections: z
-    .object({
-      key_manager_witnessing: z.boolean(),
-    })
-    // TODO(2.1): remove after all networks upgraded
-    .optional(),
+  ethereum_elections: z.object({
+    state_chain_gateway_witnessing: z.boolean(),
+    key_manager_witnessing: z.boolean(),
+    sc_utils_witnessing: z.boolean(),
+  }),
+  arbitrum_elections: z.object({
+    key_manager_witnessing: z.boolean(),
+  }),
   elections_generic: z.object({
     oracle_price_elections: z.boolean(),
   }),
@@ -806,6 +800,10 @@ export const cfLoanAccount = z.object({
       loan_id: z.number(),
       asset: rpcAssetSchema,
       principal_amount: numberOrHex,
+      loan_type: z
+        .object({ User: accountId })
+        // TODO(2.2): Remove optional() once 2.2 goes live on all networks
+        .optional(),
     }),
   ),
   liquidation_status: z

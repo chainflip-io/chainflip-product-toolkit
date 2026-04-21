@@ -31,7 +31,8 @@ import {
   lendingPools,
   lendingPoolSupplyBalances,
   liquidityProviderAccount,
-  loanAccounts,
+  loanAccounts210,
+  loanAccounts220,
   monitoringSimulateAuction,
   poolOrders,
   safeModeStatuses,
@@ -423,6 +424,37 @@ describe('parsers', () => {
                   USDC: 0,
                 },
               },
+            },
+          },
+
+          default_oracle_price_protection: {
+            Ethereum: {
+              ETH: 10000,
+              FLIP: null,
+              USDC: null,
+              USDT: 10000,
+              WBTC: 10000,
+            },
+            Polkadot: {
+              DOT: null,
+            },
+            Bitcoin: {
+              BTC: 10000,
+            },
+            Arbitrum: {
+              ETH: 10000,
+              USDC: 10000,
+              USDT: 10000,
+            },
+            Solana: {
+              SOL: 10000,
+              USDC: 10000,
+              USDT: 10000,
+            },
+            Assethub: {
+              DOT: null,
+              USDT: 100,
+              USDC: 100,
             },
           },
         },
@@ -1307,6 +1339,33 @@ describe('parsers', () => {
             },
           },
           "swapping": {
+            "default_oracle_price_protection": {
+              "Arbitrum": {
+                "ETH": 10000,
+                "USDC": 10000,
+                "USDT": 10000,
+              },
+              "Assethub": {
+                "DOT": null,
+                "USDC": 100,
+                "USDT": 100,
+              },
+              "Bitcoin": {
+                "BTC": 10000,
+              },
+              "Ethereum": {
+                "ETH": 10000,
+                "FLIP": null,
+                "USDC": null,
+                "USDT": 10000,
+                "WBTC": 10000,
+              },
+              "Solana": {
+                "SOL": 10000,
+                "USDC": 10000,
+                "USDT": 10000,
+              },
+            },
             "max_swap_request_duration_blocks": 14400,
             "max_swap_retry_duration_blocks": 600,
             "maximum_swap_amounts": {
@@ -1934,6 +1993,37 @@ describe('parsers', () => {
                 USDC: 0,
               },
             },
+          },
+        },
+
+        default_oracle_price_protection: {
+          Ethereum: {
+            ETH: 10000,
+            FLIP: null,
+            USDC: null,
+            USDT: 10000,
+            WBTC: 10000,
+          },
+          Polkadot: {
+            DOT: null,
+          },
+          Bitcoin: {
+            BTC: 10000,
+          },
+          Arbitrum: {
+            ETH: 10000,
+            USDC: 10000,
+            USDT: 10000,
+          },
+          Solana: {
+            SOL: 10000,
+            USDC: 10000,
+            USDT: 10000,
+          },
+          Assethub: {
+            DOT: null,
+            USDT: 100,
+            USDC: 100,
           },
         },
       });
@@ -2606,8 +2696,8 @@ describe('parsers', () => {
   });
 
   describe('cfLoanAccounts', () => {
-    it('parses the cfLoanAccounts response', () => {
-      const result = cfLoanAccounts.parse(loanAccounts);
+    it('parses the 2.1 cfLoanAccounts response', () => {
+      const result = cfLoanAccounts.parse(loanAccounts210);
       expect(result).toMatchInlineSnapshot(`
         [
           {
@@ -2639,6 +2729,50 @@ describe('parsers', () => {
                   "chain": "Ethereum",
                 },
                 "loan_id": 1,
+                "principal_amount": 1000n,
+              },
+            ],
+            "ltv_ratio": 1333333333n,
+          },
+        ]
+      `);
+    });
+    it('parses the 2.2 cfLoanAccounts response', () => {
+      const result = cfLoanAccounts.parse(loanAccounts220);
+      expect(result).toMatchInlineSnapshot(`
+        [
+          {
+            "account": "cFL8fmgKZcchhtLagBH2GKfsuWxBqUaD5CYE1m7DFb8DBSLJ1",
+            "collateral": [
+              {
+                "amount": 3n,
+                "asset": "BTC",
+                "chain": "Bitcoin",
+              },
+            ],
+            "collateral_topup_asset": {
+              "asset": "BTC",
+              "chain": "Bitcoin",
+            },
+            "liquidation_status": {
+              "liquidation_swaps": [
+                {
+                  "loan_id": 1,
+                  "swap_request_id": 1,
+                },
+              ],
+              "liquidation_type": "Hard",
+            },
+            "loans": [
+              {
+                "asset": {
+                  "asset": "USDC",
+                  "chain": "Ethereum",
+                },
+                "loan_id": 1,
+                "loan_type": {
+                  "User": "cFPdef3hF5zEwbWUG6ZaCJ3X7mTvEeAog7HxZ8QyFcCgDVGDM",
+                },
                 "principal_amount": 1000n,
               },
             ],
