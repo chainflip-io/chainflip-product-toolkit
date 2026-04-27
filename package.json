@@ -34,7 +34,7 @@
     "tsdown": "^0.21.9",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3",
-    "typescript-eslint": "^8.58.2",
+    "typescript-eslint": "^8.59.0",
     "vite-tsconfig-paths": "^6.1.1",
     "vitest": "4.0.18",
     "yargs": "^18.0.0"
