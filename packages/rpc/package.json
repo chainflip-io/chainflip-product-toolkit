@@ -1,6 +1,6 @@
 {
   "name": "@chainflip/rpc",
-  "version": "2.2.0-tron-dev.3",
+  "version": "2.2.0-tron-dev.4",
   "type": "module",
   "scripts": {
     "eslint:check": "pnpm eslint --max-warnings 0 './**/*.ts'",
@@ -15,7 +15,7 @@
     "coverage": "vitest run --coverage"
   },
   "dependencies": {
-    "@chainflip/utils": "2.1.7-tron-dev.2",
+    "@chainflip/utils": "2.2.0-tron-dev.3",
     "zod": "^3.25.75"
   },
   "devDependencies": {

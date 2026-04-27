@@ -290,6 +290,10 @@ export const requestSwapParameterEncoding = z.discriminatedUnion('chain', [
   evmBrokerRequestSwapParameterEncoding.extend({
     chain: z.literal('Arbitrum'),
   }),
+  evmBrokerRequestSwapParameterEncoding.extend({
+    chain: z.literal('Tron'),
+    note: hexString,
+  }),
   z.object({
     chain: z.literal('Solana'),
     program_id: z.string(),

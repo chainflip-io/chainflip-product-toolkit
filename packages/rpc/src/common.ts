@@ -101,7 +101,7 @@ type RequestSwapParameterEncodingParams = [
         retry_duration: number;
       }
     | {
-        chain: 'Ethereum' | 'Arbitrum';
+        chain: 'Ethereum' | 'Arbitrum' | 'Tron';
         input_amount: `0x${string}`;
         refund_parameters: FillOrKillParams;
       }
