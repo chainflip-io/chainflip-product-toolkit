@@ -129,7 +129,7 @@ export const vaultDepositSchema = jsonString.pipe(
       output_asset: assetAndChain,
       deposit_chain_block_height: z.number().nullable().optional(),
       affiliate_fees: z.array(accountFee),
-      broker_fee: accountFee.optional(),
+      broker_fee: accountFee.nullable().optional(),
       max_boost_fee: z.number().optional(),
       dca_params: z
         .object({
