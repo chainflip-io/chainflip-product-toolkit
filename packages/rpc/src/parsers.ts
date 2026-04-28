@@ -886,6 +886,7 @@ const ingressEgressVaultDeposit = z.object({
         ),
       bps: z.number(),
     })
+    .nullable()
     .optional(),
   affiliate_fees: z.array(
     z.object({
