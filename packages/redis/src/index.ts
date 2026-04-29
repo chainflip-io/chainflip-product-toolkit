@@ -46,10 +46,6 @@ export default class RedisClient {
   async getBroadcast(
     chain: ChainflipChain,
     broadcastId: number | bigint,
-  ): Promise<Broadcast | null>;
-  async getBroadcast(
-    chain: ChainflipChain,
-    broadcastId: number | bigint,
   ): Promise<Broadcast | null> {
     if (chain === 'Solana') return null;
     const key = `broadcast:${chain}:${broadcastId}`;

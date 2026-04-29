@@ -169,8 +169,8 @@ importers:
   packages/redis:
     dependencies:
       '@chainflip/utils':
-        specifier: 2.1.2
-        version: 2.1.2
+        specifier: 2.2.0-tron-dev.3
+        version: 2.2.0-tron-dev.3
       bignumber.js:
         specifier: ^10.0.2
         version: 10.0.2
