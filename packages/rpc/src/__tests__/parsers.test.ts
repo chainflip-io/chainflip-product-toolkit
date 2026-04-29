@@ -22,8 +22,10 @@ import {
   cfLendingPoolSupplyBalances,
   cfIngressEgressEnvironment,
   cfIngressEgressEvents,
+  cfAllLoans,
 } from '../parsers';
 import {
+  allLoans,
   cfAccountInfoOperator,
   cfOraclePrice,
   emptyChainAssetMap,
@@ -3403,6 +3405,39 @@ describe('parsers', () => {
         account: 'cFJFriHLc7J1Rau7T1qAEHDsrWWH7QBbJt4D2Q38YkrtfwqoV',
         bps: 10,
       });
+    });
+  });
+  describe('cfAllLoans', () => {
+    it('parses the cfAllLoans response', () => {
+      const result = cfAllLoans.parse(allLoans);
+      expect(result).toMatchInlineSnapshot(`
+        [
+          {
+            "asset": {
+              "asset": "BTC",
+              "chain": "Bitcoin",
+            },
+            "created_at": 1497,
+            "loan_id": 0,
+            "loan_type": {
+              "User": "cFPdef3hF5zEwbWUG6ZaCJ3X7mTvEeAog7HxZ8QyFcCgDVGDM",
+            },
+            "principal_amount": 100010000n,
+          },
+          {
+            "asset": {
+              "asset": "BTC",
+              "chain": "Bitcoin",
+            },
+            "created_at": 1498,
+            "loan_id": 1,
+            "loan_type": {
+              "Boost": 5n,
+            },
+            "principal_amount": 100000000n,
+          },
+        ]
+      `);
     });
   });
 });

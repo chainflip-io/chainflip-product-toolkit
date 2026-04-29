@@ -12,6 +12,7 @@ import { type AssetAndChain, type cfSwapRate } from '../parsers';
 import {
   accountCreationDepositAddress,
   accounts,
+  allLoans,
   auctionState,
   availablePools,
   boostPoolsDepth,
@@ -68,6 +69,7 @@ describe(HttpClient, () => {
         "broker_request_swap_parameter_encoding",
         "cf_account_info",
         "cf_accounts",
+        "cf_all_loans",
         "cf_auction_state",
         "cf_authority_emission_per_block",
         "cf_available_pools",
@@ -479,6 +481,8 @@ describe(HttpClient, () => {
           return respond(lendingConfig);
         case 'cf_loan_accounts':
           return respond(loanAccounts210);
+        case 'cf_all_loans':
+          return respond(allLoans);
         case 'cf_lending_pool_supply_balances':
           return respond(lendingPoolSupplyBalances);
         case 'cf_get_vault_addresses':
@@ -595,6 +599,7 @@ describe(HttpClient, () => {
       ['cf_lending_pools'],
       ['cf_loan_accounts'],
       ['cf_lending_pool_supply_balances'],
+      ['cf_all_loans'],
     ] as [SimpleRpcMethod, string?][])('handles %s', async (method, id) => {
       if (id) vi.spyOn(crypto, 'randomUUID').mockImplementationOnce(() => id as any);
       expect(await client.sendRequest(method)).toMatchSnapshot();
