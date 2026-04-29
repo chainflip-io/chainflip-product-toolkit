@@ -3,6 +3,8 @@ ArbitrumBroadcaster:
     - transactionPayload: added (ArbitrumBroadcaster.CallResigned.transactionPayload)
 
 ArbitrumIngressEgress:
+  - CcmEgressInvalid:
+    - error: added (ArbitrumIngressEgress.CcmEgressInvalid.error.5)
   - DepositBoosted:
     - amounts: added (ArbitrumIngressEgress.DepositBoosted.amounts.key)
 
@@ -11,6 +13,8 @@ AssethubBroadcaster:
     - transactionPayload: added (AssethubBroadcaster.CallResigned.transactionPayload)
 
 AssethubIngressEgress:
+  - CcmEgressInvalid:
+    - error: added (AssethubIngressEgress.CcmEgressInvalid.error.5)
   - DepositBoosted:
     - amounts: added (AssethubIngressEgress.DepositBoosted.amounts.key)
 
@@ -19,18 +23,32 @@ BitcoinBroadcaster:
     - transactionPayload: added (BitcoinBroadcaster.CallResigned.transactionPayload)
 
 BitcoinIngressEgress:
+  - CcmEgressInvalid:
+    - error: added (BitcoinIngressEgress.CcmEgressInvalid.error.5)
   - DepositBoosted:
     - amounts: added (BitcoinIngressEgress.DepositBoosted.amounts.key)
+
+Environment:
+  - RuntimeSafeModeUpdated:
+    - safeMode: removed (Environment.RuntimeSafeModeUpdated.safeMode.2.lendingPools.addCollateral)
 
 EthereumBroadcaster:
   - CallResigned:
     - transactionPayload: added (EthereumBroadcaster.CallResigned.transactionPayload)
 
 EthereumIngressEgress:
+  - CcmEgressInvalid:
+    - error: added (EthereumIngressEgress.CcmEgressInvalid.error.5)
   - DepositBoosted:
     - amounts: added (EthereumIngressEgress.DepositBoosted.amounts.key)
 
 LendingPools:
+  - CollateralAdded: removed
+  - CollateralRemoved: removed
+  - LendingFundsAdded:
+    - actionType: added (LendingPools.LendingFundsAdded.actionType)
+  - LendingFundsRemoved:
+    - actionType: added (LendingPools.LendingFundsRemoved.actionType)
   - LoanCreated:
     - loanType: added (LendingPools.LoanCreated.loanType)
     - borrowerId: removed (LendingPools.LoanCreated.borrowerId)
@@ -44,6 +62,8 @@ PolkadotBroadcaster:
     - transactionPayload: added (PolkadotBroadcaster.CallResigned.transactionPayload)
 
 PolkadotIngressEgress:
+  - CcmEgressInvalid:
+    - error: added (PolkadotIngressEgress.CcmEgressInvalid.error.5)
   - DepositBoosted:
     - amounts: added (PolkadotIngressEgress.DepositBoosted.amounts.key)
 
@@ -52,6 +72,8 @@ SolanaBroadcaster:
     - transactionPayload: added (SolanaBroadcaster.CallResigned.transactionPayload)
 
 SolanaIngressEgress:
+  - CcmEgressInvalid:
+    - error: added (SolanaIngressEgress.CcmEgressInvalid.error.5)
   - DepositBoosted:
     - amounts: added (SolanaIngressEgress.DepositBoosted.amounts.key)
 

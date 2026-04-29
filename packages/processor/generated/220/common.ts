@@ -1,8 +1,186 @@
 import { z } from 'zod';
 import * as ss58 from '@chainflip/utils/ss58';
 
+export const palletCfEmissionsPalletSafeMode = z.object({ emissionsSyncEnabled: z.boolean() });
+
+export const palletCfFundingPalletSafeMode = z.object({ redeemEnabled: z.boolean() });
+
+export const palletCfSwappingPalletSafeMode = z.object({
+  swapsEnabled: z.boolean(),
+  withdrawalsEnabled: z.boolean(),
+  brokerRegistrationEnabled: z.boolean(),
+  depositEnabled: z.boolean(),
+});
+
+export const palletCfLpPalletSafeMode = z.object({
+  depositEnabled: z.boolean(),
+  withdrawalEnabled: z.boolean(),
+  internalSwapsEnabled: z.boolean(),
+});
+
+export const palletCfValidatorPalletSafeMode = z.object({
+  authorityRotationEnabled: z.boolean(),
+  startBiddingEnabled: z.boolean(),
+  stopBiddingEnabled: z.boolean(),
+});
+
+export const palletCfPoolsPalletSafeMode = z.object({
+  rangeOrderUpdateEnabled: z.boolean(),
+  limitOrderUpdateEnabled: z.boolean(),
+});
+
+export const palletCfTradingStrategyPalletSafeMode = z.object({
+  strategyUpdatesEnabled: z.boolean(),
+  strategyClosureEnabled: z.boolean(),
+  strategyExecutionEnabled: z.boolean(),
+});
+
 export const simpleEnum = <U extends string, T extends readonly [U, ...U[]]>(values: T) =>
   z.object({ __kind: z.enum(values) }).transform(({ __kind }) => __kind!);
+
+export const cfPrimitivesChainsAssetsAnyAsset = simpleEnum([
+  'Eth',
+  'Flip',
+  'Usdc',
+  'Dot',
+  'Btc',
+  'ArbEth',
+  'ArbUsdc',
+  'Usdt',
+  'Sol',
+  'SolUsdc',
+  'HubDot',
+  'HubUsdt',
+  'HubUsdc',
+  'Wbtc',
+  'ArbUsdt',
+  'SolUsdt',
+]);
+
+export const cfTraitsSafeModeSafeModeSet = z.discriminatedUnion('__kind', [
+  z.object({ __kind: z.literal('Green') }),
+  z.object({ __kind: z.literal('Red') }),
+  z.object({ __kind: z.literal('Amber'), value: z.array(cfPrimitivesChainsAssetsAnyAsset) }),
+]);
+
+export const palletCfLendingPoolsPalletSafeMode = z.object({
+  addBoostFundsEnabled: z.boolean(),
+  stopBoostingEnabled: z.boolean(),
+  borrowing: cfTraitsSafeModeSafeModeSet,
+  addLenderFunds: cfTraitsSafeModeSafeModeSet,
+  withdrawLenderFunds: cfTraitsSafeModeSafeModeSet,
+  liquidationsEnabled: z.boolean(),
+});
+
+export const palletCfReputationPalletSafeMode = z.object({ reportingEnabled: z.boolean() });
+
+export const palletCfAssetBalancesPalletSafeMode = z.object({ reconciliationEnabled: z.boolean() });
+
+export const palletCfThresholdSignaturePalletSafeMode = z.object({ slashingEnabled: z.boolean() });
+
+export const palletCfBroadcastPalletSafeMode = z.object({
+  retryEnabled: z.boolean(),
+  egressWitnessingEnabled: z.boolean(),
+});
+
+export const stateChainRuntimeSafeModeWitnesserCallPermission = z.object({
+  governance: z.boolean(),
+  funding: z.boolean(),
+  swapping: z.boolean(),
+  ethereumBroadcast: z.boolean(),
+  ethereumChainTracking: z.boolean(),
+  ethereumIngressEgress: z.boolean(),
+  ethereumVault: z.boolean(),
+  polkadotBroadcast: z.boolean(),
+  polkadotChainTracking: z.boolean(),
+  polkadotIngressEgress: z.boolean(),
+  polkadotVault: z.boolean(),
+  bitcoinBroadcast: z.boolean(),
+  bitcoinChainTracking: z.boolean(),
+  bitcoinIngressEgress: z.boolean(),
+  bitcoinVault: z.boolean(),
+  arbitrumBroadcast: z.boolean(),
+  arbitrumChainTracking: z.boolean(),
+  arbitrumIngressEgress: z.boolean(),
+  arbitrumVault: z.boolean(),
+  solanaBroadcast: z.boolean(),
+  solanaVault: z.boolean(),
+  assethubBroadcast: z.boolean(),
+  assethubChainTracking: z.boolean(),
+  assethubIngressEgress: z.boolean(),
+  assethubVault: z.boolean(),
+});
+
+export const palletCfWitnesserPalletSafeMode = z.discriminatedUnion('__kind', [
+  z.object({ __kind: z.literal('CodeGreen') }),
+  z.object({ __kind: z.literal('CodeRed') }),
+  z.object({
+    __kind: z.literal('CodeAmber'),
+    value: stateChainRuntimeSafeModeWitnesserCallPermission,
+  }),
+]);
+
+export const palletCfIngressEgressPalletSafeMode = z.object({
+  boostDepositsEnabled: z.boolean(),
+  depositChannelCreationEnabled: z.boolean(),
+  depositChannelWitnessingEnabled: z.boolean(),
+  vaultDepositWitnessingEnabled: z.boolean(),
+});
+
+export const stateChainRuntimeChainflipWitnessingGenericElectionsGenericElectionsSafeMode =
+  z.object({ oraclePriceElections: z.boolean() });
+
+export const stateChainRuntimeChainflipWitnessingEthereumElectionsEthereumElectionsSafeMode =
+  z.object({
+    stateChainGatewayWitnessing: z.boolean(),
+    keyManagerWitnessing: z.boolean(),
+    scUtilsWitnessing: z.boolean(),
+  });
+
+export const stateChainRuntimeChainflipWitnessingArbitrumElectionsArbitrumElectionsSafeMode =
+  z.object({ keyManagerWitnessing: z.boolean() });
+
+export const stateChainRuntimeSafeModeInnerRuntimeSafeMode = z.object({
+  emissions: palletCfEmissionsPalletSafeMode,
+  funding: palletCfFundingPalletSafeMode,
+  swapping: palletCfSwappingPalletSafeMode,
+  liquidityProvider: palletCfLpPalletSafeMode,
+  validator: palletCfValidatorPalletSafeMode,
+  pools: palletCfPoolsPalletSafeMode,
+  tradingStrategies: palletCfTradingStrategyPalletSafeMode,
+  lendingPools: palletCfLendingPoolsPalletSafeMode,
+  reputation: palletCfReputationPalletSafeMode,
+  assetBalances: palletCfAssetBalancesPalletSafeMode,
+  thresholdSignatureEvm: palletCfThresholdSignaturePalletSafeMode,
+  thresholdSignatureBitcoin: palletCfThresholdSignaturePalletSafeMode,
+  thresholdSignaturePolkadot: palletCfThresholdSignaturePalletSafeMode,
+  thresholdSignatureSolana: palletCfThresholdSignaturePalletSafeMode,
+  broadcastEthereum: palletCfBroadcastPalletSafeMode,
+  broadcastBitcoin: palletCfBroadcastPalletSafeMode,
+  broadcastPolkadot: palletCfBroadcastPalletSafeMode,
+  broadcastArbitrum: palletCfBroadcastPalletSafeMode,
+  broadcastSolana: palletCfBroadcastPalletSafeMode,
+  broadcastAssethub: palletCfBroadcastPalletSafeMode,
+  witnesser: palletCfWitnesserPalletSafeMode,
+  ingressEgressEthereum: palletCfIngressEgressPalletSafeMode,
+  ingressEgressBitcoin: palletCfIngressEgressPalletSafeMode,
+  ingressEgressPolkadot: palletCfIngressEgressPalletSafeMode,
+  ingressEgressArbitrum: palletCfIngressEgressPalletSafeMode,
+  ingressEgressSolana: palletCfIngressEgressPalletSafeMode,
+  ingressEgressAssethub: palletCfIngressEgressPalletSafeMode,
+  electionsGeneric: stateChainRuntimeChainflipWitnessingGenericElectionsGenericElectionsSafeMode,
+  ethereumElections: stateChainRuntimeChainflipWitnessingEthereumElectionsEthereumElectionsSafeMode,
+  arbitrumElections: stateChainRuntimeChainflipWitnessingArbitrumElectionsArbitrumElectionsSafeMode,
+});
+
+export const palletCfEnvironmentSafeModeUpdate = z.discriminatedUnion('__kind', [
+  z.object({ __kind: z.literal('CodeRed') }),
+  z.object({ __kind: z.literal('CodeGreen') }),
+  z.object({
+    __kind: z.literal('CodeAmber'),
+    value: stateChainRuntimeSafeModeInnerRuntimeSafeMode,
+  }),
+]);
 
 export const cfPrimitivesWitnessingTaskName = simpleEnum([
   'Ethereum',
@@ -49,12 +227,6 @@ export const cfChainsDotPolkadotTransactionData = z.object({ encodedExtrinsic: h
 
 export const cfChainsBtcBitcoinTransactionData = z.object({ encodedTransaction: hexString });
 
-export const cfPrimitivesChainsAssetsEthAsset = simpleEnum(['Eth', 'Flip', 'Usdc', 'Usdt', 'Wbtc']);
-
-export const cfTraitsLendingBoostSource = simpleEnum(['LendingPool', 'BoostPool']);
-
-export const cfChainsEvmDepositDetails = z.object({ txHashes: z.array(hexString).nullish() });
-
 export const cfPrimitivesChainsForeignChain = simpleEnum([
   'Ethereum',
   'Polkadot',
@@ -63,6 +235,109 @@ export const cfPrimitivesChainsForeignChain = simpleEnum([
   'Solana',
   'Assethub',
 ]);
+
+export const solPrimPdaPdaError = simpleEnum([
+  'NotAValidPoint',
+  'TooManySeeds',
+  'SeedTooLarge',
+  'BumpSeedBadLuck',
+]);
+
+export const cfChainsCcmCheckerCcmValidityError = simpleEnum([
+  'CannotDecodeCcmAdditionalData',
+  'CcmIsTooLong',
+  'CcmAdditionalDataContainsInvalidAccounts',
+  'RedundantDataSupplied',
+  'InvalidDestinationAddress',
+  'TooManyAddressLookupTables',
+]);
+
+export const spRuntimeModuleError = z.object({ index: z.number(), error: hexString });
+
+export const spRuntimeTokenError = simpleEnum([
+  'FundsUnavailable',
+  'OnlyProvider',
+  'BelowMinimum',
+  'CannotCreate',
+  'UnknownAsset',
+  'Frozen',
+  'Unsupported',
+  'CannotCreateHold',
+  'NotExpendable',
+  'Blocked',
+]);
+
+export const spArithmeticArithmeticError = simpleEnum(['Underflow', 'Overflow', 'DivisionByZero']);
+
+export const spRuntimeTransactionalError = simpleEnum(['LimitReached', 'NoLayer']);
+
+export const spRuntimeProvingTrieTrieError = simpleEnum([
+  'InvalidStateRoot',
+  'IncompleteDatabase',
+  'ValueAtIncompleteKey',
+  'DecoderError',
+  'InvalidHash',
+  'DuplicateKey',
+  'ExtraneousNode',
+  'ExtraneousValue',
+  'ExtraneousHashReference',
+  'InvalidChildReference',
+  'ValueMismatch',
+  'IncompleteProof',
+  'RootMismatch',
+  'DecodeError',
+]);
+
+export const spRuntimeDispatchError = z.discriminatedUnion('__kind', [
+  z.object({ __kind: z.literal('Other') }),
+  z.object({ __kind: z.literal('CannotLookup') }),
+  z.object({ __kind: z.literal('BadOrigin') }),
+  z.object({ __kind: z.literal('Module'), value: spRuntimeModuleError }),
+  z.object({ __kind: z.literal('ConsumerRemaining') }),
+  z.object({ __kind: z.literal('NoProviders') }),
+  z.object({ __kind: z.literal('TooManyConsumers') }),
+  z.object({ __kind: z.literal('Token'), value: spRuntimeTokenError }),
+  z.object({ __kind: z.literal('Arithmetic'), value: spArithmeticArithmeticError }),
+  z.object({ __kind: z.literal('Transactional'), value: spRuntimeTransactionalError }),
+  z.object({ __kind: z.literal('Exhausted') }),
+  z.object({ __kind: z.literal('Corruption') }),
+  z.object({ __kind: z.literal('Unavailable') }),
+  z.object({ __kind: z.literal('RootNotAllowed') }),
+  z.object({ __kind: z.literal('Trie'), value: spRuntimeProvingTrieTrieError }),
+]);
+
+export const cfChainsSolApiSolanaTransactionBuildingError = z.discriminatedUnion('__kind', [
+  z.object({ __kind: z.literal('CannotLookupApiEnvironment') }),
+  z.object({ __kind: z.literal('CannotLookupCurrentAggKey') }),
+  z.object({ __kind: z.literal('CannotLookupComputePrice') }),
+  z.object({ __kind: z.literal('NoNonceAccountsSet') }),
+  z.object({ __kind: z.literal('NoAvailableNonceAccount') }),
+  z.object({ __kind: z.literal('FailedToDeriveAddress'), value: solPrimPdaPdaError }),
+  z.object({ __kind: z.literal('InvalidCcm'), value: cfChainsCcmCheckerCcmValidityError }),
+  z.object({ __kind: z.literal('FailedToSerializeFinalTransaction') }),
+  z.object({ __kind: z.literal('FinalTransactionExceededMaxLength'), value: z.number() }),
+  z.object({ __kind: z.literal('DispatchError'), value: spRuntimeDispatchError }),
+  z.object({ __kind: z.literal('AltsNotYetWitnessed') }),
+  z.object({ __kind: z.literal('AltsInvalid') }),
+]);
+
+export const cfChainsExecutexSwapAndCallError = z.discriminatedUnion('__kind', [
+  z.object({ __kind: z.literal('Unsupported') }),
+  z.object({
+    __kind: z.literal('FailedToBuildCcmForSolana'),
+    value: cfChainsSolApiSolanaTransactionBuildingError,
+  }),
+  z.object({ __kind: z.literal('DispatchError'), value: spRuntimeDispatchError }),
+  z.object({ __kind: z.literal('NoVault') }),
+  z.object({ __kind: z.literal('AuxDataNotReady') }),
+  z.object({ __kind: z.literal('NoChannelAvailable') }),
+]);
+
+export const cfPrimitivesChainsAssetsEthAsset = simpleEnum(['Eth', 'Flip', 'Usdc', 'Usdt', 'Wbtc']);
+
+export const cfTraitsLendingBoostSource = simpleEnum(['LendingPool', 'BoostPool']);
+
+export const cfChainsEvmDepositDetails = z.object({ txHashes: z.array(hexString).nullish() });
 
 export const palletCfEthereumIngressEgressRefundReason = simpleEnum([
   'InvalidBrokerFees',
@@ -285,25 +560,6 @@ export const palletCfAssethubIngressEgressDepositAction = z.discriminatedUnion('
   z.object({ __kind: z.literal('Unrefundable') }),
 ]);
 
-export const cfPrimitivesChainsAssetsAnyAsset = simpleEnum([
-  'Eth',
-  'Flip',
-  'Usdc',
-  'Dot',
-  'Btc',
-  'ArbEth',
-  'ArbUsdc',
-  'Usdt',
-  'Sol',
-  'SolUsdc',
-  'HubDot',
-  'HubUsdt',
-  'HubUsdc',
-  'Wbtc',
-  'ArbUsdt',
-  'SolUsdt',
-]);
-
 export const palletCfTradingStrategyTradingStrategy = z.discriminatedUnion('__kind', [
   z.object({
     __kind: z.literal('TickZeroCentered'),
@@ -405,9 +661,25 @@ export const palletCfLendingPoolsPalletConfigUpdate = z.discriminatedUnion('__ki
     __kind: z.literal('SetMinimumAmounts'),
     minimumLoanAmountUsd: numberOrHex,
     minimumUpdateLoanAmountUsd: numberOrHex,
-    minimumUpdateCollateralAmountUsd: numberOrHex,
+    minimumUpdateSupplyAmountUsd: numberOrHex,
     minimumSupplyAmountUsd: numberOrHex,
   }),
+]);
+
+export const palletCfLendingPoolsSupplyAddedActionType = z.discriminatedUnion('__kind', [
+  z.object({ __kind: z.literal('Manual') }),
+  z.object({ __kind: z.literal('SystemTopup') }),
+  z.object({
+    __kind: z.literal('SystemLiquidationExcessAmount'),
+    loanId: numberOrHex,
+    swapRequestId: numberOrHex,
+  }),
+  z.object({ __kind: z.literal('SystemLiquidationUnusedAmount') }),
+]);
+
+export const palletCfLendingPoolsSupplyRemovedActionType = simpleEnum([
+  'Manual',
+  'SystemLiquidation',
 ]);
 
 export const palletCfLendingPoolsGeneralLendingLoanType = z.discriminatedUnion('__kind', [
