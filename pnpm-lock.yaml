@@ -15,8 +15,8 @@ importers:
         specifier: 1.0.0-rc.16
         version: 1.0.0-rc.16
       '@rolldown/binding-linux-x64-gnu':
-        specifier: 1.0.0-rc.16
-        version: 1.0.0-rc.16
+        specifier: 1.0.0-rc.17
+        version: 1.0.0-rc.17
       '@types/node':
         specifier: ^25.6.0
         version: 25.6.0
@@ -1009,6 +1009,12 @@ packages:
 
   '@rolldown/binding-linux-x64-gnu@1.0.0-rc.16':
     resolution: {integrity: sha512-FIb8+uG49sZBtLTn+zt1AJ20TqVcqWeSIyoVt0or7uAWesgKaHbiBh6OpA/k9v0LTt+PTrb1Lao133kP4uVxkg==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [x64]
+    os: [linux]
+
+  '@rolldown/binding-linux-x64-gnu@1.0.0-rc.17':
+    resolution: {integrity: sha512-cLnjV3xfo7KslbU41Z7z8BH/E1y5mzUYzAqih1d1MDaIGZRCMqTijqLv76/P7fyHuvUcfGsIpqCdddbxLLK9rA==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [x64]
     os: [linux]
@@ -3874,7 +3880,10 @@ snapshots:
   '@rolldown/binding-linux-s390x-gnu@1.0.0-rc.16':
     optional: true
 
-  '@rolldown/binding-linux-x64-gnu@1.0.0-rc.16': {}
+  '@rolldown/binding-linux-x64-gnu@1.0.0-rc.16':
+    optional: true
+
+  '@rolldown/binding-linux-x64-gnu@1.0.0-rc.17': {}
 
   '@rolldown/binding-linux-x64-musl@1.0.0-rc.16':
     optional: true
