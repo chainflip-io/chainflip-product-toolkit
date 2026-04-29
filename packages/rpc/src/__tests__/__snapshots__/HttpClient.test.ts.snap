@@ -560,6 +560,35 @@ exports[`HttpClient > with server > gets validator account info with an operator
 }
 `;
 
+exports[`HttpClient > with server > handles cf_all_loans 1`] = `
+[
+  {
+    "asset": {
+      "asset": "BTC",
+      "chain": "Bitcoin",
+    },
+    "created_at": 1497,
+    "loan_id": 0,
+    "loan_type": {
+      "User": "cFPdef3hF5zEwbWUG6ZaCJ3X7mTvEeAog7HxZ8QyFcCgDVGDM",
+    },
+    "principal_amount": 100010000n,
+  },
+  {
+    "asset": {
+      "asset": "BTC",
+      "chain": "Bitcoin",
+    },
+    "created_at": 1498,
+    "loan_id": 1,
+    "loan_type": {
+      "Boost": 5n,
+    },
+    "principal_amount": 100000000n,
+  },
+]
+`;
+
 exports[`HttpClient > with server > handles cf_auction_state 1`] = `
 {
   "auction_size_range": [

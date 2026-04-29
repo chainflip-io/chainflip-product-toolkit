@@ -793,6 +793,14 @@ export const cfLendingConfig = z.object({
   minimum_update_collateral_amount_usd: numberOrHex.optional(), // TODO(2.2): Remove optional() once 2.2 goes live on all networks
 });
 
+const cfLoan = z.object({
+  loan_id: z.number(),
+  asset: rpcAssetSchema,
+  principal_amount: numberOrHex,
+  loan_type: z.union([z.object({ User: accountId }), z.object({ Boost: numberOrHex })]).optional(), // TODO(2.2): Remove optional() once 2.2 goes live on all networks
+  created_at: z.number().optional(), // TODO(2.2): Remove optional() once 2.2 goes live on all networks
+});
+
 export const cfLoanAccount = z.object({
   account: accountId,
   collateral_topup_asset: rpcAssetSchema.nullable(),
@@ -805,17 +813,7 @@ export const cfLoanAccount = z.object({
       }),
     ),
   ),
-  loans: z.array(
-    z.object({
-      loan_id: z.number(),
-      asset: rpcAssetSchema,
-      principal_amount: numberOrHex,
-      loan_type: z
-        .object({ User: accountId })
-        // TODO(2.2): Remove optional() once 2.2 goes live on all networks
-        .optional(),
-    }),
-  ),
+  loans: z.array(cfLoan),
   liquidation_status: z
     .object({
       liquidation_swaps: z.array(
@@ -947,3 +945,5 @@ export const cfVaultAddresses = z
       Bitcoin: bitcoinAddresses,
     };
   });
+
+export const cfAllLoans = z.array(cfLoan);

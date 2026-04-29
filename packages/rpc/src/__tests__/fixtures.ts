@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import {
+  cfAllLoans,
   type broker,
   type brokerRequestAccountCreationDepositAddress,
   type brokerRequestSwapDepositAddress,
@@ -2103,3 +2104,30 @@ export const vaultAddresses: z.input<typeof cfVaultAddresses> = {
   // },
   // predicted_seconds_until_next_vault_rotation: 257184,
 } as const;
+
+export const allLoans: z.input<typeof cfAllLoans> = [
+  {
+    loan_id: 0,
+    loan_type: {
+      User: 'cFPdef3hF5zEwbWUG6ZaCJ3X7mTvEeAog7HxZ8QyFcCgDVGDM',
+    },
+    asset: {
+      chain: 'Bitcoin',
+      asset: 'BTC',
+    },
+    created_at: 1497,
+    principal_amount: '0x5f60810',
+  },
+  {
+    loan_id: 1,
+    loan_type: {
+      Boost: 5,
+    },
+    asset: {
+      chain: 'Bitcoin',
+      asset: 'BTC',
+    },
+    created_at: 1498,
+    principal_amount: '0x5F5E100',
+  },
+];
