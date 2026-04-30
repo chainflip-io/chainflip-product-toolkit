@@ -55,7 +55,7 @@ export const depositSchema = jsonString.pipe(
     amount: u128,
     asset: assetAndChain,
     deposit_chain_block_height: z.number(),
-    deposit_details: z.union([evmDeposit, bitcoinDeposit, assethubDeposit]).nullable(),
+    deposit_details: z.union([evmDeposit, bitcoinDeposit, assethubDeposit]).nullable().optional(),
   }),
 );
 

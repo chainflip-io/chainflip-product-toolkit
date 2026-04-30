@@ -55,7 +55,7 @@ describe('depositSchema', () => {
 
     // build the redis record from the RPC-parsed deposit (as it would be written)
     const redisRecord = JSON.stringify({
-      amount: deposit.amount,
+      amount: deposit.amount.toString(),
       asset: deposit.asset,
       deposit_chain_block_height: deposit.deposit_chain_block_height,
       deposit_details: deposit.deposit_details,
@@ -101,7 +101,7 @@ describe('depositSchema', () => {
     });
 
     const redisRecord = JSON.stringify({
-      amount: deposit.amount,
+      amount: deposit.amount.toString(),
       asset: deposit.asset,
       deposit_chain_block_height: deposit.deposit_chain_block_height,
       deposit_details: deposit.deposit_details,
@@ -161,7 +161,7 @@ describe('vaultDepositSchema', () => {
 
     // build the redis record from the RPC-parsed vault deposit (as it would be written)
     const redisRecord = JSON.stringify({
-      amount: vaultDeposit.amount,
+      amount: vaultDeposit.amount.toString(),
       destination_address: vaultDeposit.destination_address,
       input_asset: vaultDeposit.input_asset,
       output_asset: vaultDeposit.output_asset,
@@ -171,7 +171,7 @@ describe('vaultDepositSchema', () => {
       max_boost_fee: vaultDeposit.max_boost_fee,
       dca_params: vaultDeposit.dca_params,
       refund_params: {
-        min_price: vaultDeposit.refund_params!.min_price,
+        min_price: vaultDeposit.refund_params!.min_price.toString(),
         retry_duration: vaultDeposit.refund_params!.retry_duration,
         refund_address: vaultDeposit.refund_params!.refund_address,
       },
