@@ -1,3 +1,5 @@
+import { assert as assertion } from './assertion';
+
 export const chainflipAssets = [
   // Ethereum
   'Usdc',
@@ -464,3 +466,52 @@ export function isLegacyChainflipChain(chain: string): chain is LegacyChainflipC
 export function isAnyChainflipChain(chain: string): chain is AnyChainflipChain {
   return isChainflipChain(chain) || isLegacyChainflipChain(chain);
 }
+
+const parseSemver = (version: `${string}.${string}.${string}`) => {
+  const [major, minor, patch] = version.split('.').map(Number);
+  assertion(
+    !Number.isNaN(major) && !Number.isNaN(minor) && !Number.isNaN(patch),
+    `Invalid semver version: ${version}`,
+  );
+  return { major, minor, patch };
+};
+
+// Parses block spec strings like "chainflip-node@101200"
+const parseBlockSpecId = (blockVersion: string) => {
+  const stringVersion = /@(\d+)$/.exec(blockVersion)?.[1];
+  assertion(stringVersion, `Could not parse spec version from blockVersion: ${blockVersion}`);
+
+  const digitCount = Math.ceil(stringVersion.length / 3);
+  const paddedVersion = stringVersion.padStart(digitCount * 3, '0');
+  const major = Number.parseInt(paddedVersion.slice(0, digitCount), 10);
+  const minor = Number.parseInt(paddedVersion.slice(digitCount, digitCount * 2), 10);
+  const patch = Number.parseInt(paddedVersion.slice(digitCount * 2, digitCount * 3), 10);
+
+  return { major, minor, patch };
+};
+
+/**
+ * returns -1 if a < b
+ * returns 0 if a == b
+ * returns 1 if a > b
+ */
+const compareSemvers = (
+  a: { major: number; minor: number; patch: number },
+  b: { major: number; minor: number; patch: number },
+) => {
+  if (a.major < b.major) return -1;
+  if (a.major > b.major) return 1;
+
+  if (a.minor < b.minor) return -1;
+  if (a.minor > b.minor) return 1;
+
+  if (a.patch < b.patch) return -1;
+  if (a.patch > b.patch) return 1;
+
+  return 0;
+};
+
+export const isBlockSpecLessThanVersion = (
+  desiredVersion: `${string}.${string}.${string}`,
+  blockVersion: string,
+) => compareSemvers(parseBlockSpecId(blockVersion), parseSemver(desiredVersion)) === -1;
