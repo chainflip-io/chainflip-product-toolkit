@@ -32,7 +32,12 @@ const chainAssetMapFactory = <Z extends z.ZodTypeAny>(parser: Z, defaultValue: z
     Arbitrum: z.object({ ETH: parser, USDC: parser, USDT: parser.default(defaultValue) }),
     Solana: z.object({ SOL: parser, USDC: parser, USDT: parser.default(defaultValue) }),
     Assethub: z.object({ DOT: parser, USDC: parser, USDT: parser }),
-    Tron: z.object({ TRX: parser, USDT: parser.default(defaultValue) }),
+    // TODO(2.2): remove Tron default
+    Tron: z
+      .object({ TRX: parser, USDT: parser.default(defaultValue) })
+      .default({ TRX: defaultValue, USDT: defaultValue } as z.input<Z> extends never
+        ? never
+        : { TRX: z.input<Z>; USDT: z.input<Z> }),
   });
 
 const chainBaseAssetMapFactory = <Z extends z.ZodTypeAny>(parser: Z, defaultValue: z.input<Z>) =>
@@ -47,17 +52,22 @@ const chainBaseAssetMapFactory = <Z extends z.ZodTypeAny>(parser: Z, defaultValu
     Arbitrum: z.object({ ETH: parser, USDC: parser, USDT: parser.default(defaultValue) }),
     Solana: z.object({ SOL: parser, USDC: parser, USDT: parser.default(defaultValue) }),
     Assethub: z.object({ DOT: parser, USDC: parser, USDT: parser }),
-    Tron: z.object({ TRX: parser, USDT: parser.default(defaultValue) }),
+    // TODO(2.2): remove Tron default
+    Tron: z
+      .object({ TRX: parser, USDT: parser.default(defaultValue) })
+      .default({ TRX: defaultValue, USDT: defaultValue } as z.input<Z> extends never
+        ? never
+        : { TRX: z.input<Z>; USDT: z.input<Z> }),
   });
 
-const chainMapFactory = <Z extends z.ZodTypeAny>(parser: Z, _defaultValue: z.input<Z>) =>
+const chainMapFactory = <Z extends z.ZodTypeAny>(parser: Z, defaultValue: z.input<Z>) =>
   z.object({
     Bitcoin: parser,
     Ethereum: parser,
     Arbitrum: parser,
     Solana: parser,
     Assethub: parser,
-    Tron: parser,
+    Tron: parser.default(defaultValue), // TODO(2.2): remove Tron default
   });
 
 const rpcAssetSchema = z.union([
@@ -723,14 +733,14 @@ export const cfSafeModeStatuses = z.object({
   broadcast_arbitrum: broadcastPalletSafeModeStatuses,
   broadcast_solana: broadcastPalletSafeModeStatuses,
   broadcast_assethub: broadcastPalletSafeModeStatuses,
-  broadcast_tron: broadcastPalletSafeModeStatuses,
+  broadcast_tron: broadcastPalletSafeModeStatuses.optional(), // TODO(2.2): remove optional once all nodes include Tron
   ingress_egress_ethereum: ingressEgressPalletSafeModeStatuses,
   ingress_egress_bitcoin: ingressEgressPalletSafeModeStatuses,
   ingress_egress_polkadot: ingressEgressPalletSafeModeStatuses,
   ingress_egress_arbitrum: ingressEgressPalletSafeModeStatuses,
   ingress_egress_solana: ingressEgressPalletSafeModeStatuses,
   ingress_egress_assethub: ingressEgressPalletSafeModeStatuses,
-  ingress_egress_tron: ingressEgressPalletSafeModeStatuses,
+  ingress_egress_tron: ingressEgressPalletSafeModeStatuses.optional(), // TODO(2.2): remove optional once all nodes include Tron
   witnesser: z.enum(['CodeRed', 'CodeGreen', 'CodeAmber']),
   ethereum_elections: z.object({
     state_chain_gateway_witnessing: z.boolean(),
