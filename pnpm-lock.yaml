@@ -169,8 +169,8 @@ importers:
   packages/redis:
     dependencies:
       '@chainflip/utils':
-        specifier: 2.2.0-tron-dev.3
-        version: 2.2.0-tron-dev.3
+        specifier: 2.2.0-alpha.1
+        version: 2.2.0-alpha.1
       bignumber.js:
         specifier: ^11.1.1
         version: 11.1.1
@@ -340,9 +340,6 @@ packages:
 
   '@chainflip/utils@2.2.0-alpha.1':
     resolution: {integrity: sha512-jP3BnsBX+M//G0+qePvugyFOlzyWHBFpxTT60QkIV2NY9IhWL04LgcfX0kyzM7IAk1G3Ynaj77KI3kwx9ItXqQ==}
-
-  '@chainflip/utils@2.2.0-tron-dev.3':
-    resolution: {integrity: sha512-O5OTNIdRgF29cscbeTk8t8CaUy52viKJvAvB43mqzTyX24Bbus80ta5WYJgNumneWuet3F7j3VLu6eZWAGkSQg==}
 
   '@coral-xyz/anchor-errors@0.31.1':
     resolution: {integrity: sha512-NhNEku4F3zzUSBtrYz84FzYWm48+9OvmT1Hhnwr6GnPQry2dsEqH/ti/7ASjjpoFTWRnPXrjAIT1qM6Isop+LQ==}
@@ -1671,9 +1668,6 @@ packages:
 
   bech32@2.0.0:
     resolution: {integrity: sha512-LcknSilhIGatDAsY1ak2I8VtGaHNhgMSYVxFrGLXv+xLHytaKZKcaUJJUE7qmBr7h33o5YQwP55pMI0xmkpJwg==}
-
-  bignumber.js@10.0.2:
-    resolution: {integrity: sha512-E8Wp9O06QA6lneJ4aRUXKYf/1GIomqUEmUMwtIOMtDxf1U52ffJY+y7JBk/8wRafA8qOIqLnXQGqonYXZdBnFQ==}
 
   bignumber.js@11.1.1:
     resolution: {integrity: sha512-LNkCYMieJqAts/Sj5094B92c5q+yRPlXWpABJnHMbUjB/F8AUjELmSmYX5mxbNiY/QnGnJvJIrnRuW5gUqbW5Q==}
@@ -3475,13 +3469,6 @@ snapshots:
       bignumber.js: 11.1.1
       date-fns: 4.1.0
 
-  '@chainflip/utils@2.2.0-tron-dev.3':
-    dependencies:
-      '@date-fns/utc': 2.1.1
-      '@noble/hashes': 2.0.1
-      bignumber.js: 10.0.2
-      date-fns: 4.1.0
-
   '@coral-xyz/anchor-errors@0.31.1': {}
 
   '@coral-xyz/anchor@0.32.1(bufferutil@4.0.9)(typescript@5.9.3)(utf-8-validate@5.0.10)':
@@ -4708,8 +4695,6 @@ snapshots:
   base64-js@1.5.1: {}
 
   bech32@2.0.0: {}
-
-  bignumber.js@10.0.2: {}
 
   bignumber.js@11.1.1: {}
 
