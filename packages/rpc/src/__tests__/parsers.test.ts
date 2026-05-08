@@ -163,6 +163,10 @@ describe('parsers', () => {
               USDC: '0x0',
               USDT: '0x0',
             },
+            Tron: {
+              TRX: '0x0',
+              USDT: '0x0',
+            },
           },
           egress_fees: {
             Ethereum: {
@@ -193,6 +197,10 @@ describe('parsers', () => {
               USDC: '0x0',
               USDT: '0x0',
             },
+            Tron: {
+              TRX: '0x0',
+              USDT: '0x0',
+            },
           },
           witness_safety_margins: {
             Arbitrum: 1,
@@ -201,6 +209,7 @@ describe('parsers', () => {
             Bitcoin: 2,
             Polkadot: null,
             Assethub: null,
+            Tron: null,
           },
           egress_dust_limits: {
             Ethereum: {
@@ -231,6 +240,10 @@ describe('parsers', () => {
               USDC: '0x1',
               USDT: '0x1',
             },
+            Tron: {
+              TRX: '0x1',
+              USDT: '0x1',
+            },
           },
           channel_opening_fees: {
             Ethereum: '0x0',
@@ -239,6 +252,7 @@ describe('parsers', () => {
             Polkadot: '0x0',
             Solana: '0x0',
             Assethub: '0x0',
+            Tron: '0x0',
           },
           ingress_delays: {
             Ethereum: 0,
@@ -247,6 +261,7 @@ describe('parsers', () => {
             Polkadot: 0,
             Solana: 10,
             Assethub: 0,
+            Tron: 0,
           },
           boost_delays: {
             Ethereum: 0,
@@ -255,6 +270,7 @@ describe('parsers', () => {
             Polkadot: 0,
             Solana: 0,
             Assethub: 0,
+            Tron: 0,
           },
           boost_minimum_add_funds_amounts: {
             Ethereum: {
@@ -284,6 +300,10 @@ describe('parsers', () => {
               DOT: '0x1',
               USDT: '0x1',
               USDC: '0x1',
+            },
+            Tron: {
+              TRX: '0x1',
+              USDT: '0x1',
             },
           },
         },
@@ -315,6 +335,10 @@ describe('parsers', () => {
             Assethub: {
               DOT: null,
               USDC: null,
+              USDT: null,
+            },
+            Tron: {
+              TRX: null,
               USDT: null,
             },
           },
@@ -350,6 +374,10 @@ describe('parsers', () => {
               DOT: '0x1d1a94a2000',
               USDC: '0x3b9aca00',
               USDT: '0x3b9aca00',
+            },
+            Tron: {
+              TRX: '0x0',
+              USDT: '0x0',
             },
           },
           network_fees: {
@@ -387,6 +415,10 @@ describe('parsers', () => {
                   USDT: 0,
                   USDC: 0,
                 },
+                Tron: {
+                  TRX: 0,
+                  USDT: 0,
+                },
               },
             },
             internal_swap_network_fee: {
@@ -423,6 +455,10 @@ describe('parsers', () => {
                   USDT: 0,
                   USDC: 0,
                 },
+                Tron: {
+                  TRX: 0,
+                  USDT: 0,
+                },
               },
             },
           },
@@ -455,6 +491,10 @@ describe('parsers', () => {
               DOT: null,
               USDT: 100,
               USDC: 100,
+            },
+            Tron: {
+              TRX: null,
+              USDT: 10000,
             },
           },
         },
@@ -814,6 +854,10 @@ describe('parsers', () => {
                 },
               },
             },
+            Tron: {
+              TRX: null,
+              USDT: null,
+            },
           },
         },
       });
@@ -830,6 +874,7 @@ describe('parsers', () => {
               "Bitcoin": 0,
               "Ethereum": 0,
               "Solana": 0,
+              "Tron": 0,
             },
             "boost_minimum_add_funds_amounts": {
               "Arbitrum": {
@@ -857,6 +902,10 @@ describe('parsers', () => {
                 "USDC": 1n,
                 "USDT": 1n,
               },
+              "Tron": {
+                "TRX": 1n,
+                "USDT": 1n,
+              },
             },
             "channel_opening_fees": {
               "Arbitrum": 0n,
@@ -864,6 +913,7 @@ describe('parsers', () => {
               "Bitcoin": 0n,
               "Ethereum": 0n,
               "Solana": 0n,
+              "Tron": 0n,
             },
             "egress_fees": {
               "Arbitrum": {
@@ -891,6 +941,10 @@ describe('parsers', () => {
                 "USDC": 0n,
                 "USDT": 0n,
               },
+              "Tron": {
+                "TRX": 0n,
+                "USDT": 0n,
+              },
             },
             "ingress_delays": {
               "Arbitrum": 0,
@@ -898,6 +952,7 @@ describe('parsers', () => {
               "Bitcoin": 0,
               "Ethereum": 0,
               "Solana": 10,
+              "Tron": 0,
             },
             "ingress_fees": {
               "Arbitrum": {
@@ -923,6 +978,10 @@ describe('parsers', () => {
               "Solana": {
                 "SOL": 795005000n,
                 "USDC": 0n,
+                "USDT": 0n,
+              },
+              "Tron": {
+                "TRX": 0n,
                 "USDT": 0n,
               },
             },
@@ -952,6 +1011,10 @@ describe('parsers', () => {
                 "USDC": 0n,
                 "USDT": 0n,
               },
+              "Tron": {
+                "TRX": 0n,
+                "USDT": 0n,
+              },
             },
             "minimum_egress_amounts": {
               "Arbitrum": {
@@ -979,6 +1042,10 @@ describe('parsers', () => {
                 "USDC": 1n,
                 "USDT": 1n,
               },
+              "Tron": {
+                "TRX": 1n,
+                "USDT": 1n,
+              },
             },
             "witness_safety_margins": {
               "Arbitrum": 1,
@@ -986,6 +1053,7 @@ describe('parsers', () => {
               "Bitcoin": 2,
               "Ethereum": 2,
               "Solana": 1,
+              "Tron": null,
             },
           },
           "pools": {
@@ -1336,6 +1404,56 @@ describe('parsers', () => {
                   },
                 },
               },
+              "Tron": {
+                "TRX": {
+                  "limit_order_fee_hundredth_pips": 0,
+                  "limit_order_total_fees_earned": {
+                    "base": "0x0",
+                    "quote": "0x0",
+                  },
+                  "limit_total_swap_inputs": {
+                    "base": "0x0",
+                    "quote": "0x0",
+                  },
+                  "quote_asset": {
+                    "asset": "USDC",
+                    "chain": "Ethereum",
+                  },
+                  "range_order_fee_hundredth_pips": 0,
+                  "range_order_total_fees_earned": {
+                    "base": "0x0",
+                    "quote": "0x0",
+                  },
+                  "range_total_swap_inputs": {
+                    "base": "0x0",
+                    "quote": "0x0",
+                  },
+                },
+                "USDT": {
+                  "limit_order_fee_hundredth_pips": 0,
+                  "limit_order_total_fees_earned": {
+                    "base": "0x0",
+                    "quote": "0x0",
+                  },
+                  "limit_total_swap_inputs": {
+                    "base": "0x0",
+                    "quote": "0x0",
+                  },
+                  "quote_asset": {
+                    "asset": "USDC",
+                    "chain": "Ethereum",
+                  },
+                  "range_order_fee_hundredth_pips": 0,
+                  "range_order_total_fees_earned": {
+                    "base": "0x0",
+                    "quote": "0x0",
+                  },
+                  "range_total_swap_inputs": {
+                    "base": "0x0",
+                    "quote": "0x0",
+                  },
+                },
+              },
             },
           },
           "swapping": {
@@ -1363,6 +1481,10 @@ describe('parsers', () => {
               "Solana": {
                 "SOL": 10000,
                 "USDC": 10000,
+                "USDT": 10000,
+              },
+              "Tron": {
+                "TRX": null,
                 "USDT": 10000,
               },
             },
@@ -1394,6 +1516,10 @@ describe('parsers', () => {
                 "USDC": null,
                 "USDT": null,
               },
+              "Tron": {
+                "TRX": null,
+                "USDT": null,
+              },
             },
             "minimum_chunk_size": {
               "Arbitrum": {
@@ -1420,6 +1546,10 @@ describe('parsers', () => {
                 "SOL": 5000000000n,
                 "USDC": 1000000000n,
                 "USDT": 1000000000n,
+              },
+              "Tron": {
+                "TRX": 0n,
+                "USDT": 0n,
               },
             },
             "network_fee_hundredth_pips": 1000,
@@ -1449,6 +1579,10 @@ describe('parsers', () => {
                   "Solana": {
                     "SOL": 0n,
                     "USDC": 0n,
+                    "USDT": 0n,
+                  },
+                  "Tron": {
+                    "TRX": 0n,
                     "USDT": 0n,
                   },
                 },
@@ -1482,6 +1616,10 @@ describe('parsers', () => {
                   "Solana": {
                     "SOL": 0n,
                     "USDC": 0n,
+                    "USDT": 0n,
+                  },
+                  "Tron": {
+                    "TRX": 0n,
                     "USDT": 0n,
                   },
                 },
@@ -1530,6 +1668,10 @@ describe('parsers', () => {
             USDT: '0x0',
             USDC: '0x0',
           },
+          Tron: {
+            TRX: '0x0',
+            USDT: '0x0',
+          },
         },
         ingress_fees: {
           Ethereum: {
@@ -1559,6 +1701,10 @@ describe('parsers', () => {
             DOT: '0xbc59299',
             USDT: '0x9a5d',
             USDC: '0x9a57',
+          },
+          Tron: {
+            TRX: '0x0',
+            USDT: '0x0',
           },
         },
         egress_fees: {
@@ -1590,6 +1736,10 @@ describe('parsers', () => {
             USDT: '0x9a7b',
             USDC: '0x9a75',
           },
+          Tron: {
+            TRX: '0x0',
+            USDT: '0x0',
+          },
         },
         witness_safety_margins: {
           Polkadot: null,
@@ -1598,6 +1748,7 @@ describe('parsers', () => {
           Arbitrum: 1,
           Solana: null,
           Assethub: null,
+          Tron: null,
         },
         egress_dust_limits: {
           Ethereum: {
@@ -1628,6 +1779,10 @@ describe('parsers', () => {
             USDT: '0x1',
             USDC: '0x1',
           },
+          Tron: {
+            TRX: '0x1',
+            USDT: '0x1',
+          },
         },
         channel_opening_fees: {
           Arbitrum: '0x0',
@@ -1636,6 +1791,7 @@ describe('parsers', () => {
           Bitcoin: '0x2710',
           Solana: '0x0',
           Assethub: '0x0',
+          Tron: '0x0',
         },
         ingress_delays: {
           Bitcoin: 0,
@@ -1644,6 +1800,7 @@ describe('parsers', () => {
           Polkadot: 0,
           Ethereum: 0,
           Arbitrum: 0,
+          Tron: 0,
         },
         boost_delays: {
           Arbitrum: 0,
@@ -1652,6 +1809,7 @@ describe('parsers', () => {
           Bitcoin: 0,
           Ethereum: 0,
           Solana: 0,
+          Tron: 0,
         },
         boost_minimum_add_funds_amounts: {
           Ethereum: {
@@ -1682,6 +1840,10 @@ describe('parsers', () => {
             USDT: '0x1',
             USDC: '0x1',
           },
+          Tron: {
+            TRX: '0x1',
+            USDT: '0x1',
+          },
         },
       });
       expect(result).toMatchInlineSnapshot(`
@@ -1692,6 +1854,7 @@ describe('parsers', () => {
             "Bitcoin": 0,
             "Ethereum": 0,
             "Solana": 0,
+            "Tron": 0,
           },
           "boost_minimum_add_funds_amounts": {
             "Arbitrum": {
@@ -1719,6 +1882,10 @@ describe('parsers', () => {
               "USDC": 1n,
               "USDT": 1n,
             },
+            "Tron": {
+              "TRX": 1n,
+              "USDT": 1n,
+            },
           },
           "channel_opening_fees": {
             "Arbitrum": 0n,
@@ -1726,6 +1893,7 @@ describe('parsers', () => {
             "Bitcoin": 10000n,
             "Ethereum": 10000n,
             "Solana": 0n,
+            "Tron": 0n,
           },
           "egress_fees": {
             "Arbitrum": {
@@ -1753,6 +1921,10 @@ describe('parsers', () => {
               "USDC": 236059n,
               "USDT": 236094n,
             },
+            "Tron": {
+              "TRX": 0n,
+              "USDT": 0n,
+            },
           },
           "ingress_delays": {
             "Arbitrum": 0,
@@ -1760,6 +1932,7 @@ describe('parsers', () => {
             "Bitcoin": 0,
             "Ethereum": 0,
             "Solana": 10,
+            "Tron": 0,
           },
           "ingress_fees": {
             "Arbitrum": {
@@ -1787,6 +1960,10 @@ describe('parsers', () => {
               "USDC": 57876n,
               "USDT": 57885n,
             },
+            "Tron": {
+              "TRX": 0n,
+              "USDT": 0n,
+            },
           },
           "minimum_deposit_amounts": {
             "Arbitrum": {
@@ -1812,6 +1989,10 @@ describe('parsers', () => {
             "Solana": {
               "SOL": 0n,
               "USDC": 0n,
+              "USDT": 0n,
+            },
+            "Tron": {
+              "TRX": 0n,
               "USDT": 0n,
             },
           },
@@ -1841,6 +2022,10 @@ describe('parsers', () => {
               "USDC": 1n,
               "USDT": 1n,
             },
+            "Tron": {
+              "TRX": 1n,
+              "USDT": 1n,
+            },
           },
           "witness_safety_margins": {
             "Arbitrum": 1,
@@ -1848,6 +2033,7 @@ describe('parsers', () => {
             "Bitcoin": 5,
             "Ethereum": 2,
             "Solana": null,
+            "Tron": null,
           },
         }
       `);
@@ -1886,6 +2072,10 @@ describe('parsers', () => {
             USDC: null,
             USDT: null,
           },
+          Tron: {
+            TRX: null,
+            USDT: null,
+          },
         },
         network_fee_hundredth_pips: 1000,
         swap_retry_delay_blocks: 5,
@@ -1919,6 +2109,10 @@ describe('parsers', () => {
             DOT: '0x1d1a94a2000',
             USDC: '0x3b9aca00',
             USDT: '0x3b9aca00',
+          },
+          Tron: {
+            TRX: '0x0',
+            USDT: '0x0',
           },
         },
         network_fees: {
@@ -1956,6 +2150,10 @@ describe('parsers', () => {
                 USDT: 0,
                 USDC: 0,
               },
+              Tron: {
+                TRX: 0,
+                USDT: 0,
+              },
             },
           },
           internal_swap_network_fee: {
@@ -1992,6 +2190,10 @@ describe('parsers', () => {
                 USDT: 0,
                 USDC: 0,
               },
+              Tron: {
+                TRX: 0,
+                USDT: 0,
+              },
             },
           },
         },
@@ -2024,6 +2226,10 @@ describe('parsers', () => {
             DOT: null,
             USDT: 100,
             USDC: 100,
+          },
+          Tron: {
+            TRX: null,
+            USDT: 10000,
           },
         },
       });
@@ -2406,6 +2612,10 @@ describe('parsers', () => {
               },
             },
           },
+          Tron: {
+            TRX: null,
+            USDT: null,
+          },
         },
       });
 
@@ -2422,6 +2632,7 @@ describe('parsers', () => {
           Arbitrum: { ETH: null, USDC: null },
           Solana: { SOL: null, USDC: null },
           Assethub: { DOT: null, USDC: null, USDT: null },
+          Tron: { TRX: null, USDT: null },
         },
       });
 
@@ -2572,6 +2783,10 @@ describe('parsers', () => {
             "Solana": {
               "SOL": 0n,
               "USDC": 0n,
+              "USDT": 0n,
+            },
+            "Tron": {
+              "TRX": 0n,
               "USDT": 0n,
             },
           },
@@ -2903,6 +3118,10 @@ describe('parsers', () => {
             "egress_witnessing_enabled": true,
             "retry_enabled": true,
           },
+          "broadcast_tron": {
+            "egress_witnessing_enabled": true,
+            "retry_enabled": true,
+          },
           "elections_generic": {
             "oracle_price_elections": true,
           },
@@ -2948,6 +3167,12 @@ describe('parsers', () => {
             "vault_deposit_witnessing_enabled": true,
           },
           "ingress_egress_solana": {
+            "boost_deposits_enabled": true,
+            "deposit_channel_creation_enabled": true,
+            "deposit_channel_witnessing_enabled": true,
+            "vault_deposit_witnessing_enabled": true,
+          },
+          "ingress_egress_tron": {
             "boost_deposits_enabled": true,
             "deposit_channel_creation_enabled": true,
             "deposit_channel_witnessing_enabled": true,

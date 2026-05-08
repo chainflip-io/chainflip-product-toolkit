@@ -63,20 +63,24 @@ export type PendingDeposit = Omit<z.output<typeof depositSchema>, 'deposit_detai
   tx_refs: string[];
 };
 
-export const broadcastParsers = {
-  Ethereum: z.object({
-    tx_out_id: z.object({
-      signature: z.object({
-        k_times_g_address: z.array(z.number()),
-        s: z.array(z.number()),
-      }),
+const evmBroadcast = z.object({
+  tx_out_id: z.object({
+    signature: z.object({
+      k_times_g_address: z.array(z.number()),
+      s: z.array(z.number()),
     }),
-    tx_ref: z
-      .object({
-        hash: hexString,
-      })
-      .transform(({ hash }) => hash),
   }),
+  tx_ref: z
+    .object({
+      hash: hexString,
+    })
+    .transform(({ hash }) => hash),
+});
+
+export const broadcastParsers = {
+  Ethereum: evmBroadcast,
+  Arbitrum: evmBroadcast,
+  Tron: evmBroadcast,
   Assethub: z.object({
     tx_out_id: z.object({ signature: z.string() }),
     tx_ref: z
@@ -95,19 +99,6 @@ export const broadcastParsers = {
     tx_ref: z
       .object({
         hash: z.string().transform((value) => (value.startsWith('0x') ? value.slice(2) : value)),
-      })
-      .transform(({ hash }) => hash),
-  }),
-  Arbitrum: z.object({
-    tx_out_id: z.object({
-      signature: z.object({
-        k_times_g_address: z.array(z.number()),
-        s: z.array(z.number()),
-      }),
-    }),
-    tx_ref: z
-      .object({
-        hash: hexString,
       })
       .transform(({ hash }) => hash),
   }),

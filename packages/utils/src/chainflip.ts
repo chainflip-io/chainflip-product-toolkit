@@ -17,6 +17,9 @@ export const chainflipAssets = [
   'Sol',
   'SolUsdc',
   'SolUsdt',
+  // Tron
+  'Trx',
+  'TrxUsdt',
   // Assethub
   'HubDot',
   'HubUsdt',
@@ -52,7 +55,7 @@ export const baseChainflipAssets = chainflipAssets.filter(
   (asset): asset is BaseChainflipAsset => asset !== 'Usdc',
 );
 
-export const chainflipEvmChains = ['Ethereum', 'Arbitrum'] as const;
+export const chainflipEvmChains = ['Ethereum', 'Arbitrum', 'Tron'] as const;
 export type ChainflipEvmChain = (typeof chainflipEvmChains)[number];
 
 export const chainflipChains = [...chainflipEvmChains, 'Bitcoin', 'Solana', 'Assethub'] as const;
@@ -66,7 +69,7 @@ export type AnyChainflipChain = ChainflipChain | LegacyChainflipChain;
 export const chainflipNetworks = ['backspin', 'sisyphos', 'perseverance', 'mainnet'] as const;
 export type ChainflipNetwork = (typeof chainflipNetworks)[number];
 
-export const addressTypes = ['Eth', 'Btc', 'Arb', 'Sol', 'Hub'] as const;
+export const addressTypes = ['Eth', 'Btc', 'Arb', 'Sol', 'Hub', 'Tron'] as const;
 export type AddressType = (typeof addressTypes)[number];
 
 export const legacyAddressTypes = ['Dot'] as const;
@@ -177,6 +180,8 @@ export const assetConstants = {
   HubDot: { chain: 'Assethub', symbol: 'DOT', decimals: 10 },
   HubUsdc: { chain: 'Assethub', symbol: 'USDC', decimals: 6 },
   HubUsdt: { chain: 'Assethub', symbol: 'USDT', decimals: 6 },
+  Trx: { chain: 'Tron', symbol: 'TRX', decimals: 6 },
+  TrxUsdt: { chain: 'Tron', symbol: 'USDT', decimals: 6 },
 } as const satisfies InternalAssetMap<{
   chain: ChainflipChain;
   symbol: AssetSymbol;
@@ -192,7 +197,17 @@ export const anyAssetConstants = {
   decimals: number;
 }>;
 
-export const assetSymbols = ['BTC', 'DOT', 'ETH', 'FLIP', 'SOL', 'USDC', 'USDT', 'WBTC'] as const;
+export const assetSymbols = [
+  'BTC',
+  'DOT',
+  'ETH',
+  'FLIP',
+  'SOL',
+  'USDC',
+  'USDT',
+  'WBTC',
+  'TRX',
+] as const;
 export type AssetSymbol = (typeof assetSymbols)[number];
 
 export const chainConstants = {
@@ -229,6 +244,13 @@ export const chainConstants = {
     assets: ['DOT', 'USDT', 'USDC'],
     gasAsset: 'HubDot',
     addressType: 'Hub',
+    blockTimeSeconds: 3,
+  },
+  Tron: {
+    chainflipAssets: ['Trx', 'TrxUsdt'],
+    assets: ['TRX', 'USDT'],
+    gasAsset: 'Trx',
+    addressType: 'Tron',
     blockTimeSeconds: 3,
   },
 } as const satisfies ChainMap<{
@@ -272,6 +294,8 @@ export const internalAssetToRpcAsset: InternalAssetMap<AssetAndChain> = {
   HubDot: { chain: 'Assethub', asset: 'DOT' },
   HubUsdt: { chain: 'Assethub', asset: 'USDT' },
   HubUsdc: { chain: 'Assethub', asset: 'USDC' },
+  Trx: { chain: 'Tron', asset: 'TRX' },
+  TrxUsdt: { chain: 'Tron', asset: 'USDT' },
 };
 
 export const anyInternalAssetToRpcAsset: AnyInternalAssetMap<AnyAssetAndChain> = {
@@ -286,6 +310,7 @@ export const chainContractId: ChainMap<number> = {
   Arbitrum: 4,
   Solana: 5,
   Assethub: 6,
+  Tron: 7,
 };
 
 export const assetContractId: InternalAssetMap<number> = {
@@ -305,6 +330,8 @@ export const assetContractId: InternalAssetMap<number> = {
   Wbtc: 14,
   ArbUsdt: 15,
   SolUsdt: 16,
+  Trx: 17,
+  TrxUsdt: 18,
 };
 
 export function getInternalAsset(asset: BaseAssetAndChain): BaseChainflipAsset;
@@ -341,6 +368,10 @@ export function getInternalAsset(asset: UncheckedAssetAndChain, assert = true) {
       USDC: 'HubUsdc',
       USDT: 'HubUsdt',
       DOT: 'HubDot',
+    },
+    Tron: {
+      TRX: 'Trx',
+      USDT: 'TrxUsdt',
     },
   };
 
@@ -441,6 +472,8 @@ export const chainflipAssetToPriceAssetMap: Record<
   Flip: null,
   HubDot: null,
   Wbtc: 'Btc',
+  Trx: null,
+  TrxUsdt: 'Usdt',
 };
 
 export function isChainflipAsset(asset: string): asset is ChainflipAsset {

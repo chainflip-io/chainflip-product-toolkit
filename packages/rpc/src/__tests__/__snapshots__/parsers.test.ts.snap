@@ -28,6 +28,10 @@ exports[`parsers > cfAccountInfo > parses the latest cfAccountInfo schema for an
       "USDC": 0n,
       "USDT": 0n,
     },
+    "Tron": {
+      "TRX": 0n,
+      "USDT": 0n,
+    },
   },
   "bond": 0n,
   "boost_balances": {
@@ -78,6 +82,10 @@ exports[`parsers > cfAccountInfo > parses the latest cfAccountInfo schema for an
       "USDC": [],
       "USDT": [],
     },
+    "Tron": {
+      "TRX": [],
+      "USDT": [],
+    },
   },
   "collateral_balances": [],
   "earned_fees": {
@@ -106,6 +114,10 @@ exports[`parsers > cfAccountInfo > parses the latest cfAccountInfo schema for an
       "USDC": 0n,
       "USDT": 0n,
     },
+    "Tron": {
+      "TRX": 0n,
+      "USDT": 0n,
+    },
   },
   "estimated_redeemable_balance": 99999975540394000000n,
   "flip_balance": 99999975540394000000n,
@@ -123,6 +135,7 @@ exports[`parsers > cfAccountInfo > parses the latest cfAccountInfo schema for an
     "Bitcoin": "bc1qqt3juqef9azhd0zeuamu9c30pg5xdllvmks2ja",
     "Ethereum": "0xacd7c0481fc71dce9e3e8bd4cca5828ce8302629",
     "Solana": "7zLEfU3nQKqnfrN2A5yNEiFd1Vt9D7maVaoSAV8invMT",
+    "Tron": null,
   },
   "role": "liquidity_provider",
   "vanity_name": "Chainflip Testnet LP BOOST",
