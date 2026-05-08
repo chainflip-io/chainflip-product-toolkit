@@ -118,14 +118,6 @@ export const ingressEgressEnvironment: z.input<typeof cfIngressEgressEnvironment
     Tron: 0,
   },
   boost_minimum_add_funds_amounts: {
-    Ethereum: { ETH: null, FLIP: null, USDC: null, USDT: null, WBTC: null },
-    Bitcoin: { BTC: null },
-    Arbitrum: { ETH: null, USDC: null, USDT: null },
-    Solana: { SOL: null, USDC: null, USDT: null },
-    Assethub: { DOT: null, USDC: null, USDT: null },
-    Tron: { TRX: null, USDT: null },
-  },
-  boost_minimum_add_funds_amounts: {
     Ethereum: {
       ETH: '0x1',
       FLIP: '0x1',
