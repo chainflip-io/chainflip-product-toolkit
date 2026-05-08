@@ -785,33 +785,33 @@ exports[`HttpClient > with server > handles cf_environment 1`] = `
     },
     "boost_minimum_add_funds_amounts": {
       "Arbitrum": {
-        "ETH": null,
-        "USDC": null,
-        "USDT": null,
+        "ETH": 1n,
+        "USDC": 1n,
+        "USDT": 1n,
       },
       "Assethub": {
-        "DOT": null,
-        "USDC": null,
-        "USDT": null,
+        "DOT": 1n,
+        "USDC": 1n,
+        "USDT": 1n,
       },
       "Bitcoin": {
-        "BTC": null,
+        "BTC": 11000n,
       },
       "Ethereum": {
-        "ETH": null,
-        "FLIP": null,
-        "USDC": null,
-        "USDT": null,
-        "WBTC": null,
+        "ETH": 1n,
+        "FLIP": 1n,
+        "USDC": 1n,
+        "USDT": 1n,
+        "WBTC": 1n,
       },
       "Solana": {
-        "SOL": null,
-        "USDC": null,
-        "USDT": null,
+        "SOL": 1n,
+        "USDC": 1n,
+        "USDT": 1n,
       },
       "Tron": {
-        "TRX": null,
-        "USDT": null,
+        "TRX": 1n,
+        "USDT": 1n,
       },
     },
     "channel_opening_fees": {
@@ -1366,29 +1366,29 @@ exports[`HttpClient > with server > handles cf_environment 1`] = `
   "swapping": {
     "default_oracle_price_protection": {
       "Arbitrum": {
-        "ETH": null,
-        "USDC": null,
-        "USDT": null,
+        "ETH": 10000,
+        "USDC": 10000,
+        "USDT": 10000,
       },
       "Assethub": {
         "DOT": null,
-        "USDC": null,
-        "USDT": null,
+        "USDC": 100,
+        "USDT": 100,
       },
       "Bitcoin": {
-        "BTC": null,
+        "BTC": 10000,
       },
       "Ethereum": {
-        "ETH": null,
+        "ETH": 10000,
         "FLIP": null,
         "USDC": null,
-        "USDT": null,
-        "WBTC": null,
+        "USDT": 10000,
+        "WBTC": 10000,
       },
       "Solana": {
-        "SOL": null,
-        "USDC": null,
-        "USDT": null,
+        "SOL": 10000,
+        "USDC": 10000,
+        "USDT": 10000,
       },
       "Tron": {
         "TRX": null,
@@ -1679,6 +1679,42 @@ exports[`HttpClient > with server > handles cf_get_trading_strategies 1`] = `
     },
     "strategy_id": "cFJr8vEYc1mr1CEsdRugUJqdyBnyNdq8idNFKmQ2AaYbDz1Zm",
   },
+  {
+    "balance": [
+      [
+        {
+          "asset": "USDC",
+          "chain": "Ethereum",
+        },
+        0n,
+      ],
+      [
+        {
+          "asset": "USDT",
+          "chain": "Ethereum",
+        },
+        23000000000n,
+      ],
+    ],
+    "lp_id": "cFJt3kyUdXvaoarfxJDLrFmHFqkXUgnVZ4zqqDLLTRjbJosmK",
+    "strategy": {
+      "OracleTracking": {
+        "base_asset": {
+          "asset": "USDT",
+          "chain": "Ethereum",
+        },
+        "max_buy_offset_tick": 8,
+        "max_sell_offset_tick": -1,
+        "min_buy_offset_tick": 2,
+        "min_sell_offset_tick": -10,
+        "quote_asset": {
+          "asset": "USDC",
+          "chain": "Ethereum",
+        },
+      },
+    },
+    "strategy_id": "cFNyy169p7yCy3F9p4bb7mW27Tse3F1v8hw8yTv21Qzwq23xW",
+  },
 ]
 `;
 
@@ -1774,33 +1810,33 @@ exports[`HttpClient > with server > handles cf_ingress_egress_environment 1`] = 
   },
   "boost_minimum_add_funds_amounts": {
     "Arbitrum": {
-      "ETH": null,
-      "USDC": null,
-      "USDT": null,
+      "ETH": 1n,
+      "USDC": 1n,
+      "USDT": 1n,
     },
     "Assethub": {
-      "DOT": null,
-      "USDC": null,
-      "USDT": null,
+      "DOT": 1n,
+      "USDC": 1n,
+      "USDT": 1n,
     },
     "Bitcoin": {
-      "BTC": null,
+      "BTC": 11000n,
     },
     "Ethereum": {
-      "ETH": null,
-      "FLIP": null,
-      "USDC": null,
-      "USDT": null,
-      "WBTC": null,
+      "ETH": 1n,
+      "FLIP": 1n,
+      "USDC": 1n,
+      "USDT": 1n,
+      "WBTC": 1n,
     },
     "Solana": {
-      "SOL": null,
-      "USDC": null,
-      "USDT": null,
+      "SOL": 1n,
+      "USDC": 1n,
+      "USDT": 1n,
     },
     "Tron": {
-      "TRX": null,
-      "USDT": null,
+      "TRX": 1n,
+      "USDT": 1n,
     },
   },
   "channel_opening_fees": {
@@ -2650,29 +2686,29 @@ exports[`HttpClient > with server > handles cf_swapping_environment 1`] = `
 {
   "default_oracle_price_protection": {
     "Arbitrum": {
-      "ETH": null,
-      "USDC": null,
-      "USDT": null,
+      "ETH": 10000,
+      "USDC": 10000,
+      "USDT": 10000,
     },
     "Assethub": {
       "DOT": null,
-      "USDC": null,
-      "USDT": null,
+      "USDC": 100,
+      "USDT": 100,
     },
     "Bitcoin": {
-      "BTC": null,
+      "BTC": 10000,
     },
     "Ethereum": {
-      "ETH": null,
+      "ETH": 10000,
       "FLIP": null,
       "USDC": null,
-      "USDT": null,
-      "WBTC": null,
+      "USDT": 10000,
+      "WBTC": 10000,
     },
     "Solana": {
-      "SOL": null,
-      "USDC": null,
-      "USDT": null,
+      "SOL": 10000,
+      "USDC": 10000,
+      "USDT": 10000,
     },
     "Tron": {
       "TRX": null,

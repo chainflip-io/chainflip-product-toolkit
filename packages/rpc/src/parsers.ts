@@ -619,6 +619,16 @@ export const cfTradingStrategy = z.object({
         base_asset: rpcAssetSchema,
       }),
     }),
+    z.object({
+      OracleTracking: z.object({
+        min_buy_offset_tick: z.number(),
+        max_buy_offset_tick: z.number(),
+        min_sell_offset_tick: z.number(),
+        max_sell_offset_tick: z.number(),
+        base_asset: rpcAssetSchema,
+        quote_asset: rpcAssetSchema,
+      }),
+    }),
   ]),
   balance: z.array(z.tuple([rpcAssetSchema, numberOrHex])),
 });
@@ -723,8 +733,8 @@ export const cfSafeModeStatuses = z.object({
     borrowing: cfSupportedAssets,
     add_lender_funds: cfSupportedAssets,
     withdraw_lender_funds: cfSupportedAssets,
-    add_collateral: cfSupportedAssets,
-    remove_collateral: cfSupportedAssets,
+    add_collateral: cfSupportedAssets.optional(), // TODO(2.2): Remove optional() once 2.2 goes live on all networks
+    remove_collateral: cfSupportedAssets.optional(), // TODO(2.2): Remove optional() once 2.2 goes live on all networks
     liquidations_enabled: z.boolean(),
   }),
   broadcast_ethereum: broadcastPalletSafeModeStatuses,
@@ -801,7 +811,7 @@ export const cfLendingConfig = z.object({
   minimum_loan_amount_usd: numberOrHex,
   minimum_supply_amount_usd: numberOrHex,
   minimum_update_loan_amount_usd: numberOrHex,
-  minimum_update_collateral_amount_usd: numberOrHex,
+  minimum_update_collateral_amount_usd: numberOrHex.optional(), // TODO(2.2): Remove optional() once 2.2 goes live on all networks
 });
 
 export const cfLoanAccount = z.object({
@@ -821,6 +831,10 @@ export const cfLoanAccount = z.object({
       loan_id: z.number(),
       asset: rpcAssetSchema,
       principal_amount: numberOrHex,
+      loan_type: z
+        .object({ User: accountId })
+        // TODO(2.2): Remove optional() once 2.2 goes live on all networks
+        .optional(),
     }),
   ),
   liquidation_status: z
@@ -852,10 +866,12 @@ export const cfLendingPoolSupplyBalances = z.array(
   ),
 );
 
+const u128 = z.union([z.number(), numericString, hexString]).transform((arg) => BigInt(arg));
+
 const ingressEgressDeposit = z.object({
   deposit_chain_block_height: z.number(),
   deposit_address: z.string(),
-  amount: z.string(),
+  amount: u128,
   asset: z.object({ chain: z.string(), asset: z.string() }),
   deposit_details: z
     .union([
@@ -865,14 +881,27 @@ const ingressEgressDeposit = z.object({
         vout: z.number().int(),
       }),
     ])
-    .nullable(),
+    .nullable()
+    .optional(),
 });
+
+const txRef = z.object({ hash: z.string() });
+
+const txOutId = z.union([
+  z.object({ hash: z.string() }),
+  z.object({
+    signature: z.object({
+      s: z.array(z.number()),
+      k_times_g_address: z.array(z.number()),
+    }),
+  }),
+]);
 
 const ingressEgressBroadcast = z.object({
   broadcast_id: z.number(),
   broadcast_chain_block_height: z.number(),
-  tx_out_id: z.unknown(),
-  tx_ref: z.unknown(),
+  tx_out_id: txOutId,
+  tx_ref: txRef,
 });
 
 const ingressEgressVaultDeposit = z.object({
@@ -880,7 +909,7 @@ const ingressEgressVaultDeposit = z.object({
   deposit_chain_block_height: z.number().nullable().optional(),
   input_asset: z.object({ chain: z.string(), asset: z.string() }),
   output_asset: z.object({ chain: z.string(), asset: z.string() }),
-  amount: z.string(),
+  amount: u128,
   destination_address: z.string(),
   ccm_deposit_metadata: z.unknown().nullable().optional(),
   deposit_details: z.unknown().nullable().optional(),
@@ -893,6 +922,7 @@ const ingressEgressVaultDeposit = z.object({
         ),
       bps: z.number(),
     })
+    .nullable()
     .optional(),
   affiliate_fees: z.array(
     z.object({
@@ -908,9 +938,9 @@ const ingressEgressVaultDeposit = z.object({
     .object({
       retry_duration: z.number(),
       refund_address: z.string(),
-      min_price: z.string(),
+      min_price: u128,
       refund_ccm_metadata: z.unknown().nullable().optional(),
-      max_oracle_price_slippage: z.unknown().nullable().optional(),
+      max_oracle_price_slippage: z.number().nullable().optional(),
     })
     .nullable()
     .optional(),

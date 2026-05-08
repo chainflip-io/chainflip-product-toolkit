@@ -31,7 +31,8 @@ import {
   lendingPools,
   lendingPoolSupplyBalances,
   liquidityProviderAccount,
-  loanAccounts,
+  loanAccounts210,
+  loanAccounts220,
   monitoringSimulateAuction,
   poolOrders,
   safeModeStatuses,
@@ -461,13 +462,40 @@ describe('parsers', () => {
               },
             },
           },
+
           default_oracle_price_protection: {
-            Ethereum: { ETH: null, FLIP: null, USDC: null, USDT: null, WBTC: null },
-            Bitcoin: { BTC: null },
-            Arbitrum: { ETH: null, USDC: null, USDT: null },
-            Solana: { SOL: null, USDC: null, USDT: null },
-            Assethub: { DOT: null, USDC: null, USDT: null },
-            Tron: { TRX: null, USDT: null },
+            Ethereum: {
+              ETH: 10000,
+              FLIP: null,
+              USDC: null,
+              USDT: 10000,
+              WBTC: 10000,
+            },
+            Polkadot: {
+              DOT: null,
+            },
+            Bitcoin: {
+              BTC: 10000,
+            },
+            Arbitrum: {
+              ETH: 10000,
+              USDC: 10000,
+              USDT: 10000,
+            },
+            Solana: {
+              SOL: 10000,
+              USDC: 10000,
+              USDT: 10000,
+            },
+            Assethub: {
+              DOT: null,
+              USDT: 100,
+              USDC: 100,
+            },
+            Tron: {
+              TRX: null,
+              USDT: 10000,
+            },
           },
         },
         funding: {
@@ -1431,33 +1459,33 @@ describe('parsers', () => {
           "swapping": {
             "default_oracle_price_protection": {
               "Arbitrum": {
-                "ETH": null,
-                "USDC": null,
-                "USDT": null,
+                "ETH": 10000,
+                "USDC": 10000,
+                "USDT": 10000,
               },
               "Assethub": {
                 "DOT": null,
-                "USDC": null,
-                "USDT": null,
+                "USDC": 100,
+                "USDT": 100,
               },
               "Bitcoin": {
-                "BTC": null,
+                "BTC": 10000,
               },
               "Ethereum": {
-                "ETH": null,
+                "ETH": 10000,
                 "FLIP": null,
                 "USDC": null,
-                "USDT": null,
-                "WBTC": null,
+                "USDT": 10000,
+                "WBTC": 10000,
               },
               "Solana": {
-                "SOL": null,
-                "USDC": null,
-                "USDT": null,
+                "SOL": 10000,
+                "USDC": 10000,
+                "USDT": 10000,
               },
               "Tron": {
                 "TRX": null,
-                "USDT": null,
+                "USDT": 10000,
               },
             },
             "max_swap_request_duration_blocks": 14400,
@@ -2169,13 +2197,40 @@ describe('parsers', () => {
             },
           },
         },
+
         default_oracle_price_protection: {
-          Ethereum: { ETH: null, FLIP: null, USDC: null, USDT: null, WBTC: null },
-          Bitcoin: { BTC: null },
-          Arbitrum: { ETH: null, USDC: null, USDT: null },
-          Solana: { SOL: null, USDC: null, USDT: null },
-          Assethub: { DOT: null, USDC: null, USDT: null },
-          Tron: { TRX: null, USDT: null },
+          Ethereum: {
+            ETH: 10000,
+            FLIP: null,
+            USDC: null,
+            USDT: 10000,
+            WBTC: 10000,
+          },
+          Polkadot: {
+            DOT: null,
+          },
+          Bitcoin: {
+            BTC: 10000,
+          },
+          Arbitrum: {
+            ETH: 10000,
+            USDC: 10000,
+            USDT: 10000,
+          },
+          Solana: {
+            SOL: 10000,
+            USDC: 10000,
+            USDT: 10000,
+          },
+          Assethub: {
+            DOT: null,
+            USDT: 100,
+            USDC: 100,
+          },
+          Tron: {
+            TRX: null,
+            USDT: 10000,
+          },
         },
       });
     });
@@ -2672,7 +2727,7 @@ describe('parsers', () => {
     it('parses the cfGetTradingStrategies response', () => {
       const result = cfGetTradingStrategies.parse(tradingStrategies);
 
-      expect(result.length).toEqual(4);
+      expect(result.length).toEqual(5);
     });
   });
   describe('cfGetTradingStrategyLimits', () => {
@@ -2856,8 +2911,8 @@ describe('parsers', () => {
   });
 
   describe('cfLoanAccounts', () => {
-    it('parses the cfLoanAccounts response', () => {
-      const result = cfLoanAccounts.parse(loanAccounts);
+    it('parses the 2.1 cfLoanAccounts response', () => {
+      const result = cfLoanAccounts.parse(loanAccounts210);
       expect(result).toMatchInlineSnapshot(`
         [
           {
@@ -2889,6 +2944,50 @@ describe('parsers', () => {
                   "chain": "Ethereum",
                 },
                 "loan_id": 1,
+                "principal_amount": 1000n,
+              },
+            ],
+            "ltv_ratio": 1333333333n,
+          },
+        ]
+      `);
+    });
+    it('parses the 2.2 cfLoanAccounts response', () => {
+      const result = cfLoanAccounts.parse(loanAccounts220);
+      expect(result).toMatchInlineSnapshot(`
+        [
+          {
+            "account": "cFL8fmgKZcchhtLagBH2GKfsuWxBqUaD5CYE1m7DFb8DBSLJ1",
+            "collateral": [
+              {
+                "amount": 3n,
+                "asset": "BTC",
+                "chain": "Bitcoin",
+              },
+            ],
+            "collateral_topup_asset": {
+              "asset": "BTC",
+              "chain": "Bitcoin",
+            },
+            "liquidation_status": {
+              "liquidation_swaps": [
+                {
+                  "loan_id": 1,
+                  "swap_request_id": 1,
+                },
+              ],
+              "liquidation_type": "Hard",
+            },
+            "loans": [
+              {
+                "asset": {
+                  "asset": "USDC",
+                  "chain": "Ethereum",
+                },
+                "loan_id": 1,
+                "loan_type": {
+                  "User": "cFPdef3hF5zEwbWUG6ZaCJ3X7mTvEeAog7HxZ8QyFcCgDVGDM",
+                },
                 "principal_amount": 1000n,
               },
             ],

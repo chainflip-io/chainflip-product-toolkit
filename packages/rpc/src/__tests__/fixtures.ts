@@ -125,6 +125,37 @@ export const ingressEgressEnvironment: z.input<typeof cfIngressEgressEnvironment
     Assethub: { DOT: null, USDC: null, USDT: null },
     Tron: { TRX: null, USDT: null },
   },
+  boost_minimum_add_funds_amounts: {
+    Ethereum: {
+      ETH: '0x1',
+      FLIP: '0x1',
+      USDC: '0x1',
+      USDT: '0x1',
+      WBTC: '0x1',
+    },
+    Bitcoin: {
+      BTC: '0x2af8',
+    },
+    Arbitrum: {
+      ETH: '0x1',
+      USDC: '0x1',
+      USDT: '0x1',
+    },
+    Solana: {
+      SOL: '0x1',
+      USDC: '0x1',
+      USDT: '0x1',
+    },
+    Assethub: {
+      DOT: '0x1',
+      USDT: '0x1',
+      USDC: '0x1',
+    },
+    Tron: {
+      TRX: '0x1',
+      USDT: '0x1',
+    },
+  },
 };
 
 export const swappingEnvironment: z.input<typeof cfSwappingEnvironment> = {
@@ -272,12 +303,31 @@ export const swappingEnvironment: z.input<typeof cfSwappingEnvironment> = {
     },
   },
   default_oracle_price_protection: {
-    Ethereum: { ETH: null, FLIP: null, USDC: null, USDT: null, WBTC: null },
-    Bitcoin: { BTC: null },
-    Arbitrum: { ETH: null, USDC: null, USDT: null },
-    Solana: { SOL: null, USDC: null, USDT: null },
-    Assethub: { DOT: null, USDC: null, USDT: null },
-    Tron: { TRX: null, USDT: null },
+    Ethereum: {
+      ETH: 10000,
+      FLIP: null,
+      USDC: null,
+      USDT: 10000,
+      WBTC: 10000,
+    },
+    Bitcoin: {
+      BTC: 10000,
+    },
+    Arbitrum: {
+      ETH: 10000,
+      USDC: 10000,
+      USDT: 10000,
+    },
+    Solana: {
+      SOL: 10000,
+      USDC: 10000,
+      USDT: 10000,
+    },
+    Assethub: {
+      DOT: null,
+      USDT: 100,
+      USDC: 100,
+    },
   },
 };
 
@@ -1212,6 +1262,42 @@ export const tradingStrategies: z.input<typeof cfGetTradingStrategies> = [
       ],
     ],
   },
+  {
+    lp_id: 'cFJt3kyUdXvaoarfxJDLrFmHFqkXUgnVZ4zqqDLLTRjbJosmK',
+    strategy_id: 'cFNyy169p7yCy3F9p4bb7mW27Tse3F1v8hw8yTv21Qzwq23xW',
+    strategy: {
+      OracleTracking: {
+        min_buy_offset_tick: 2,
+        max_buy_offset_tick: 8,
+        min_sell_offset_tick: -10,
+        max_sell_offset_tick: -1,
+        base_asset: {
+          chain: 'Ethereum',
+          asset: 'USDT',
+        },
+        quote_asset: {
+          chain: 'Ethereum',
+          asset: 'USDC',
+        },
+      },
+    },
+    balance: [
+      [
+        {
+          chain: 'Ethereum',
+          asset: 'USDC',
+        },
+        '0x0',
+      ],
+      [
+        {
+          chain: 'Ethereum',
+          asset: 'USDT',
+        },
+        '0x55ae82600',
+      ],
+    ],
+  },
 ];
 
 export const tradingStrategiesLimits: z.input<typeof cfGetTradingStrategyLimits> = {
@@ -1865,7 +1951,8 @@ export const lendingConfig: z.input<typeof cfLendingConfig> = {
   minimum_update_collateral_amount_usd: '0x989680',
 };
 
-export const loanAccounts: z.input<typeof cfLoanAccounts> = [
+// TODO(2.2): Remove once 2.2 goes live on all networks
+export const loanAccounts210: z.input<typeof cfLoanAccounts> = [
   {
     account: 'cFL8fmgKZcchhtLagBH2GKfsuWxBqUaD5CYE1m7DFb8DBSLJ1',
     collateral_topup_asset: {
@@ -1902,6 +1989,45 @@ export const loanAccounts: z.input<typeof cfLoanAccounts> = [
   },
 ];
 
+export const loanAccounts220: z.input<typeof cfLoanAccounts> = [
+  {
+    account: 'cFL8fmgKZcchhtLagBH2GKfsuWxBqUaD5CYE1m7DFb8DBSLJ1',
+    collateral_topup_asset: {
+      chain: 'Bitcoin',
+      asset: 'BTC',
+    },
+    ltv_ratio: '1333333333',
+    collateral: [
+      {
+        chain: 'Bitcoin',
+        asset: 'BTC',
+        amount: '0x3',
+      },
+    ],
+    loans: [
+      {
+        loan_id: 1,
+        asset: {
+          chain: 'Ethereum',
+          asset: 'USDC',
+        },
+        loan_type: {
+          User: 'cFPdef3hF5zEwbWUG6ZaCJ3X7mTvEeAog7HxZ8QyFcCgDVGDM',
+        },
+        principal_amount: '0x3e8',
+      },
+    ],
+    liquidation_status: {
+      liquidation_swaps: [
+        {
+          swap_request_id: 1,
+          loan_id: 1,
+        },
+      ],
+      liquidation_type: 'Hard',
+    },
+  },
+];
 export const lendingPoolSupplyBalances: z.input<typeof cfLendingPoolSupplyBalances> = [
   {
     chain: 'Bitcoin',

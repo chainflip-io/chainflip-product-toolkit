@@ -70,15 +70,14 @@ const getTokenDiff = (
 
   const owner = publicKey.toBase58();
 
-  const preTokenAmount = tx.meta.preTokenBalances.find(
-    (b) => b.mint === tokenMintAddress && b.owner === owner,
-  );
-  const postTokenAmount = tx.meta.postTokenBalances.find(
-    (b) => b.mint === tokenMintAddress && b.owner === owner,
-  );
-
-  const preBalance = BigInt(preTokenAmount?.uiTokenAmount.amount ?? 0);
-  const postBalance = BigInt(postTokenAmount?.uiTokenAmount.amount ?? 0);
+  const preBalance = tx.meta.preTokenBalances
+    .filter((b) => b.mint === tokenMintAddress && b.owner === owner)
+    // Handle multiple token account creations in the same transaction by summing up all balances of accounts owned by the same owner and mint
+    .reduce((sum, b) => sum + BigInt(b.uiTokenAmount.amount), 0n);
+  const postBalance = tx.meta.postTokenBalances
+    .filter((b) => b.mint === tokenMintAddress && b.owner === owner)
+    // Handle multiple token account creations in the same transaction by summing up all balances of accounts owned by the same owner and mint
+    .reduce((sum, b) => sum + BigInt(b.uiTokenAmount.amount), 0n);
   return postBalance - preBalance;
 };
 

@@ -19,6 +19,7 @@ import combineTxs from './fixtures/combineTxs.json';
 import devnet from './fixtures/devnet.json';
 import doubleTransfer from './fixtures/doubleTransfer.json';
 import maxBlockError from './fixtures/maxBlockError.json';
+import multipleTokenAccounts from './fixtures/multipleTokenAccounts.json';
 import notVaultSwap from './fixtures/notVaultSwap.json';
 import paginate1 from './fixtures/paginate1.json';
 import paginate2 from './fixtures/paginate2.json';
@@ -311,6 +312,25 @@ describe(findTransactionSignatures, () => {
     ).rejects.toThrowErrorMatchingInlineSnapshot(
       `[TransactionMatchingError: transfers are too new]`,
     );
+  });
+
+  it('sums all token accounts when a tx creates multiple accounts for the same owner and mint', async () => {
+    // Regression test for tx 25nS8WuLqkQ4qkHpJpyGrRpiCxEYzKPN7vKeNzbsGE7scNgXe74ip6WNW2HxxKT5ViE6p7DsweKB9gbc4M3jygZs
+    // (slot 415551828): a single tx created two USDT accounts for deposit address
+    // 7f3msGebEdNAeWGhnFDobgXJYcWwvJDmCuv6bzmWunCf — a non-canonical account (index 1, 0 USDT)
+    // and the canonical ATA (index 3, 0.001 USDT). The old .find() matched index 1 first, giving
+    // diff=0 which was filtered out, causing the deposit to be missed.
+    mockFetch(multipleTokenAccounts);
+    const result = await findTransactionSignatures(
+      'https://solana.rpc',
+      '7f3msGebEdNAeWGhnFDobgXJYcWwvJDmCuv6bzmWunCf',
+      'SolUsdt',
+      [{ amount: 1000n, maxSlot: Infinity }],
+      'mainnet',
+    );
+    expect(result).toStrictEqual([
+      ['25nS8WuLqkQ4qkHpJpyGrRpiCxEYzKPN7vKeNzbsGE7scNgXe74ip6WNW2HxxKT5ViE6p7DsweKB9gbc4M3jygZs'],
+    ]);
   });
 
   it('works with SolUsdc transfers from RPC', async () => {
