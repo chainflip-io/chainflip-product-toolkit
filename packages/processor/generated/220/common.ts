@@ -73,8 +73,6 @@ export const palletCfLendingPoolsPalletSafeMode = z.object({
   borrowing: cfTraitsSafeModeSafeModeSet,
   addLenderFunds: cfTraitsSafeModeSafeModeSet,
   withdrawLenderFunds: cfTraitsSafeModeSafeModeSet,
-  addCollateral: cfTraitsSafeModeSafeModeSet,
-  removeCollateral: cfTraitsSafeModeSafeModeSet,
   liquidationsEnabled: z.boolean(),
 });
 
@@ -248,6 +246,7 @@ export const cfPrimitivesWitnessingTaskName = simpleEnum([
   'Solana',
   'Assethub',
   'Oracle',
+  'Tron',
 ]);
 
 export const palletCfTokenholderGovernanceProposal = z.discriminatedUnion('__kind', [
@@ -660,6 +659,7 @@ export const cfChainsExecutexSwapAndCallError = z.discriminatedUnion('__kind', [
   z.object({ __kind: z.literal('DispatchError'), value: spRuntimeDispatchError }),
   z.object({ __kind: z.literal('NoVault') }),
   z.object({ __kind: z.literal('AuxDataNotReady') }),
+  z.object({ __kind: z.literal('NoChannelAvailable') }),
 ]);
 
 export const palletCfEthereumIngressEgressDepositFailedReason = z.discriminatedUnion('__kind', [
@@ -732,6 +732,8 @@ export const cfTraitsScheduledEgressDetailsEthereum = z.object({
   egressAmount: numberOrHex,
   feeWithheld: numberOrHex,
 });
+
+export const cfTraitsLendingBoostSource = simpleEnum(['LendingPool', 'BoostPool']);
 
 export const cfPrimitivesChainsAssetsDotAsset = simpleEnum(['Dot']);
 
@@ -1340,6 +1342,7 @@ export const palletCfTradingStrategyPalletConfigUpdate = z.discriminatedUnion('_
 export const palletCfLendingPoolsBoostConfiguration = z.object({
   networkFeeDeductionFromBoostPercent: z.number(),
   minimumAddFundsAmount: z.array(z.tuple([cfPrimitivesChainsAssetsAnyAsset, numberOrHex])),
+  minLendingPoolShare: z.number(),
 });
 
 export const palletCfLendingPoolsGeneralLendingConfigInterestRateConfiguration = z.object({
@@ -1357,7 +1360,6 @@ export const palletCfLendingPoolsGeneralLendingConfigLendingPoolConfiguration = 
 
 export const palletCfLendingPoolsGeneralLendingConfigLtvThresholds = z.object({
   target: z.number(),
-  topup: z.number().nullish(),
   softLiquidation: z.number(),
   softLiquidationAbort: z.number(),
   hardLiquidation: z.number(),
@@ -1406,9 +1408,10 @@ export const palletCfLendingPoolsPalletConfigUpdate = z.discriminatedUnion('__ki
     __kind: z.literal('SetMinimumAmounts'),
     minimumLoanAmountUsd: numberOrHex,
     minimumUpdateLoanAmountUsd: numberOrHex,
-    minimumUpdateCollateralAmountUsd: numberOrHex,
+    minimumUpdateSupplyAmountUsd: numberOrHex,
     minimumSupplyAmountUsd: numberOrHex,
   }),
+  z.object({ __kind: z.literal('SetLiquidationCoverageFactor'), value: z.number() }),
 ]);
 
 export const palletCfLendingPoolsBoostBoostPoolId = z.object({
@@ -1416,14 +1419,34 @@ export const palletCfLendingPoolsBoostBoostPoolId = z.object({
   tier: z.number(),
 });
 
-export const palletCfLendingPoolsCollateralAddedActionType = z.discriminatedUnion('__kind', [
+export const palletCfLendingPoolsSupplyAddedActionType = z.discriminatedUnion('__kind', [
   z.object({ __kind: z.literal('Manual') }),
-  z.object({ __kind: z.literal('SystemTopup') }),
   z.object({
     __kind: z.literal('SystemLiquidationExcessAmount'),
     loanId: numberOrHex,
     swapRequestId: numberOrHex,
   }),
+  z.object({
+    __kind: z.literal('SystemLiquidationUnusedAmount'),
+    loanId: numberOrHex,
+    swapRequestId: numberOrHex,
+  }),
+]);
+
+export const palletCfLendingPoolsSupplyRemovedActionType = simpleEnum([
+  'Manual',
+  'SystemLiquidation',
+]);
+
+export const palletCfLendingPoolsGeneralLendingLoanType = z.discriminatedUnion('__kind', [
+  z.object({ __kind: z.literal('User'), value: accountId }),
+  z.object({ __kind: z.literal('Boost'), value: numberOrHex }),
+]);
+
+export const palletCfLendingPoolsLoanRepaidActionType = z.discriminatedUnion('__kind', [
+  z.object({ __kind: z.literal('Manual') }),
+  z.object({ __kind: z.literal('Liquidation'), swapRequestId: numberOrHex }),
+  z.object({ __kind: z.literal('BoostFinalisation') }),
 ]);
 
 export const cfChainsChainStateTron = z.object({ blockHeight: numberOrHex });

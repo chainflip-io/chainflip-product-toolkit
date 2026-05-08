@@ -1,4 +1,5 @@
 New or removed pallets:
+  Historical: removed
   TronBroadcaster: added
   TronChainTracking: added
   TronElections: added
@@ -16,7 +17,10 @@ ArbitrumIngressEgress:
     - egressId: added (ArbitrumIngressEgress.CcmBroadcastRequested.egressId.0.7)
   - CcmEgressInvalid:
     - egressId: added (ArbitrumIngressEgress.CcmEgressInvalid.egressId.0.7)
+    - error: added (ArbitrumIngressEgress.CcmEgressInvalid.error.5)
   - DepositBoosted:
+    - amounts: added (ArbitrumIngressEgress.DepositBoosted.amounts.key)
+    - boostFee: added (ArbitrumIngressEgress.DepositBoosted.boostFee.key)
     - action: added (ArbitrumIngressEgress.DepositBoosted.action.4.egressId.0.7)
   - DepositFailed:
     - details: added (ArbitrumIngressEgress.DepositFailed.details.1.vaultWitness.outputAsset.17)
@@ -50,7 +54,10 @@ AssethubIngressEgress:
     - egressId: added (AssethubIngressEgress.CcmBroadcastRequested.egressId.0.7)
   - CcmEgressInvalid:
     - egressId: added (AssethubIngressEgress.CcmEgressInvalid.egressId.0.7)
+    - error: added (AssethubIngressEgress.CcmEgressInvalid.error.5)
   - DepositBoosted:
+    - amounts: added (AssethubIngressEgress.DepositBoosted.amounts.key)
+    - boostFee: added (AssethubIngressEgress.DepositBoosted.boostFee.key)
     - action: added (AssethubIngressEgress.DepositBoosted.action.4.egressId.0.7)
   - DepositFailed:
     - details: added (AssethubIngressEgress.DepositFailed.details.1.vaultWitness.outputAsset.17)
@@ -70,7 +77,10 @@ BitcoinIngressEgress:
     - egressId: added (BitcoinIngressEgress.CcmBroadcastRequested.egressId.0.7)
   - CcmEgressInvalid:
     - egressId: added (BitcoinIngressEgress.CcmEgressInvalid.egressId.0.7)
+    - error: added (BitcoinIngressEgress.CcmEgressInvalid.error.5)
   - DepositBoosted:
+    - amounts: added (BitcoinIngressEgress.DepositBoosted.amounts.key)
+    - boostFee: added (BitcoinIngressEgress.DepositBoosted.boostFee.key)
     - action: added (BitcoinIngressEgress.DepositBoosted.action.4.egressId.0.7)
   - DepositFailed:
     - details: added (BitcoinIngressEgress.DepositFailed.details.1.vaultWitness.outputAsset.17)
@@ -99,7 +109,10 @@ EthereumIngressEgress:
     - egressId: added (EthereumIngressEgress.CcmBroadcastRequested.egressId.0.7)
   - CcmEgressInvalid:
     - egressId: added (EthereumIngressEgress.CcmEgressInvalid.egressId.0.7)
+    - error: added (EthereumIngressEgress.CcmEgressInvalid.error.5)
   - DepositBoosted:
+    - amounts: added (EthereumIngressEgress.DepositBoosted.amounts.key)
+    - boostFee: added (EthereumIngressEgress.DepositBoosted.boostFee.key)
     - action: added (EthereumIngressEgress.DepositBoosted.action.4.egressId.0.7)
   - DepositFailed:
     - details: added (EthereumIngressEgress.DepositFailed.details.1.vaultWitness.outputAsset.17)
@@ -112,27 +125,34 @@ Funding:
   - Funded:
     - source: added (Funding.Funded.source.2.asset.17)
 
+Grandpa:
+  - GrandpaVoteDelegated: added
+  - GrandpaVoteDelegationRemoved: added
+
 LendingPools:
   - BoostFundsAdded:
     - boostPool: added (LendingPools.BoostFundsAdded.boostPool.asset.17)
   - BoostPoolCreated:
     - boostPool: added (LendingPools.BoostPoolCreated.boostPool.asset.17)
-  - CollateralAdded:
-    - collateral: added (LendingPools.CollateralAdded.collateral.key.17)
-  - CollateralRemoved:
-    - collateral: added (LendingPools.CollateralRemoved.collateral.key.17)
-  - CollateralTopupAssetUpdated:
-    - collateralTopupAsset: added (LendingPools.CollateralTopupAssetUpdated.collateralTopupAsset.17)
+  - CollateralAdded: removed
+  - CollateralRemoved: removed
+  - CollateralTopupAssetUpdated: removed
   - LendingFundsAdded:
+    - actionType: added (LendingPools.LendingFundsAdded.actionType)
     - asset: added (LendingPools.LendingFundsAdded.asset.17)
   - LendingFundsRemoved:
+    - actionType: added (LendingPools.LendingFundsRemoved.actionType)
     - asset: added (LendingPools.LendingFundsRemoved.asset.17)
   - LendingPoolCreated:
     - asset: added (LendingPools.LendingPoolCreated.asset.17)
   - LoanCreated:
+    - loanType: added (LendingPools.LoanCreated.loanType)
+    - borrowerId: removed (LendingPools.LoanCreated.borrowerId)
     - asset: added (LendingPools.LoanCreated.asset.17)
+  - LoanRepaid:
+    - actionType: added (LendingPools.LoanRepaid.actionType.2)
   - PalletConfigUpdated:
-    - update: added (LendingPools.PalletConfigUpdated.update.0.config.minimumAddFundsAmount.key.17)
+    - update: added (LendingPools.PalletConfigUpdated.update.11)
   - StoppedBoosting:
     - boostPool: added (LendingPools.StoppedBoosting.boostPool.asset.17)
 
@@ -190,7 +210,10 @@ PolkadotIngressEgress:
     - egressId: added (PolkadotIngressEgress.CcmBroadcastRequested.egressId.0.7)
   - CcmEgressInvalid:
     - egressId: added (PolkadotIngressEgress.CcmEgressInvalid.egressId.0.7)
+    - error: added (PolkadotIngressEgress.CcmEgressInvalid.error.5)
   - DepositBoosted:
+    - amounts: added (PolkadotIngressEgress.DepositBoosted.amounts.key)
+    - boostFee: added (PolkadotIngressEgress.DepositBoosted.boostFee.key)
     - action: added (PolkadotIngressEgress.DepositBoosted.action.4.egressId.0.7)
   - DepositFailed:
     - details: added (PolkadotIngressEgress.DepositFailed.details.1.vaultWitness.outputAsset.17)
@@ -216,7 +239,10 @@ SolanaIngressEgress:
     - egressId: added (SolanaIngressEgress.CcmBroadcastRequested.egressId.0.7)
   - CcmEgressInvalid:
     - egressId: added (SolanaIngressEgress.CcmEgressInvalid.egressId.0.7)
+    - error: added (SolanaIngressEgress.CcmEgressInvalid.error.5)
   - DepositBoosted:
+    - amounts: added (SolanaIngressEgress.DepositBoosted.amounts.key)
+    - boostFee: added (SolanaIngressEgress.DepositBoosted.boostFee.key)
     - action: added (SolanaIngressEgress.DepositBoosted.action.4.egressId.0.7)
   - DepositFailed:
     - details: added (SolanaIngressEgress.DepositFailed.details.1.vaultWitness.outputAsset.17)
