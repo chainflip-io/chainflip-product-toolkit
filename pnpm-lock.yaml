@@ -160,8 +160,8 @@ importers:
         version: 3.25.75
     devDependencies:
       '@chainflip/rpc':
-        specifier: 1.9.3
-        version: 1.9.3
+        specifier: 2.2.0-tron-dev.4
+        version: 2.2.0-tron-dev.4
       '@polkadot/types':
         specifier: ^16.5.6
         version: 16.5.6
@@ -322,6 +322,9 @@ packages:
 
   '@chainflip/rpc@1.9.3':
     resolution: {integrity: sha512-vmOcq0ZaF+GcN1Ikb3ExnJWlZ2pHKFS++r8a1FfYa4nCzV/Xt8Hg9rP8g30VJNv13pZ21kXcchd1/v3EFJfgqw==}
+
+  '@chainflip/rpc@2.2.0-tron-dev.4':
+    resolution: {integrity: sha512-dYYw5WMm0i7Nt5Ef6MCo0sbeCB6CjyeM9bVcm+g7e9HL/DxoPrIfP62nJ8jM1keon+TuW0ZlcDJXw4ThjgTtIw==}
 
   '@chainflip/scale@1.11.0':
     resolution: {integrity: sha512-gLs2pARutz6JJSKth92TYQEHVWvwpavWNUARB9626t+QxlparHyL10t9XibD2X1sr+GLXWKj2q5qXOSGU8CICA==}
@@ -1570,6 +1573,9 @@ packages:
 
   bech32@2.0.0:
     resolution: {integrity: sha512-LcknSilhIGatDAsY1ak2I8VtGaHNhgMSYVxFrGLXv+xLHytaKZKcaUJJUE7qmBr7h33o5YQwP55pMI0xmkpJwg==}
+
+  bignumber.js@10.0.2:
+    resolution: {integrity: sha512-E8Wp9O06QA6lneJ4aRUXKYf/1GIomqUEmUMwtIOMtDxf1U52ffJY+y7JBk/8wRafA8qOIqLnXQGqonYXZdBnFQ==}
 
   bignumber.js@11.1.1:
     resolution: {integrity: sha512-LNkCYMieJqAts/Sj5094B92c5q+yRPlXWpABJnHMbUjB/F8AUjELmSmYX5mxbNiY/QnGnJvJIrnRuW5gUqbW5Q==}
@@ -3323,6 +3329,11 @@ snapshots:
       '@chainflip/utils': 0.8.2
       zod: 3.25.75
 
+  '@chainflip/rpc@2.2.0-tron-dev.4':
+    dependencies:
+      '@chainflip/utils': 2.2.0-tron-dev.3
+      zod: 3.25.75
+
   '@chainflip/scale@1.11.0':
     dependencies:
       '@chainflip/utils': 0.8.22
@@ -4510,6 +4521,8 @@ snapshots:
   base64-js@1.5.1: {}
 
   bech32@2.0.0: {}
+
+  bignumber.js@10.0.2: {}
 
   bignumber.js@11.1.1: {}
 
