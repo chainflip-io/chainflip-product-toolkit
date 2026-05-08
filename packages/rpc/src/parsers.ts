@@ -786,7 +786,7 @@ export const cfLendingPools = z.array(
 export const cfLendingConfig = z.object({
   ltv_thresholds: z.object({
     target: z.number(),
-    topup: z.number().nullish(),
+    topup: z.number().nullish(), // TODO(2.2): check if can be removed entirely
     soft_liquidation: z.number(),
     soft_liquidation_abort: z.number(),
     hard_liquidation: z.number(),
@@ -816,7 +816,7 @@ export const cfLendingConfig = z.object({
 
 export const cfLoanAccount = z.object({
   account: accountId,
-  collateral_topup_asset: rpcAssetSchema.nullish(),
+  collateral_topup_asset: rpcAssetSchema.nullish(), // TODO(2.2): check if can be removed entirely
   ltv_ratio: numberOrHex.nullable(),
   collateral: z.array(
     z.intersection(
