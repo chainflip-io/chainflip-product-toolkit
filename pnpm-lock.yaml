@@ -184,8 +184,8 @@ importers:
   packages/rpc:
     dependencies:
       '@chainflip/utils':
-        specifier: 2.2.0-tron-dev.3
-        version: 2.2.0-tron-dev.3
+        specifier: 2.2.0-alpha.1
+        version: 2.2.0-alpha.1
       zod:
         specifier: ^3.25.75
         version: 3.25.75
@@ -337,6 +337,9 @@ packages:
 
   '@chainflip/utils@2.1.2':
     resolution: {integrity: sha512-ujHjiVRdm5AbN5XotoIlVtN7RMmkR7PnrMW/pGhWg+2Yr6vtKyKas/GSRHrX4VGnm7H1j7xKcSuj9GNag60n5A==}
+
+  '@chainflip/utils@2.2.0-alpha.1':
+    resolution: {integrity: sha512-jP3BnsBX+M//G0+qePvugyFOlzyWHBFpxTT60QkIV2NY9IhWL04LgcfX0kyzM7IAk1G3Ynaj77KI3kwx9ItXqQ==}
 
   '@chainflip/utils@2.2.0-tron-dev.3':
     resolution: {integrity: sha512-O5OTNIdRgF29cscbeTk8t8CaUy52viKJvAvB43mqzTyX24Bbus80ta5WYJgNumneWuet3F7j3VLu6eZWAGkSQg==}
@@ -3463,6 +3466,13 @@ snapshots:
       '@date-fns/utc': 2.1.1
       '@noble/hashes': 2.0.1
       bignumber.js: 9.3.1
+      date-fns: 4.1.0
+
+  '@chainflip/utils@2.2.0-alpha.1':
+    dependencies:
+      '@date-fns/utc': 2.1.1
+      '@noble/hashes': 2.2.0
+      bignumber.js: 11.1.1
       date-fns: 4.1.0
 
   '@chainflip/utils@2.2.0-tron-dev.3':
