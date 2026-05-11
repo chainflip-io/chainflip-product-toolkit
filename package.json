@@ -30,7 +30,7 @@
     "lint-staged": "^17.0.4",
     "micromatch": "^4.0.8",
     "prettier": "^3.8.3",
-    "syncpack": "^14.3.1",
+    "syncpack": "^15.1.2",
     "tsdown": "^0.22.0",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3",
