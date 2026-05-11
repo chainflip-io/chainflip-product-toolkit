@@ -771,6 +771,7 @@ export const cfLendingPools = z.array(
     total_amount: numberOrHex,
     available_amount: numberOrHex,
     utilisation_rate: z.number(),
+    utilisation_cap: z.number().optional(), // TODO(2.2): remove optional once all networks have been upgraded
     current_interest_rate: z.number(),
     origination_fee: z.number(),
     liquidation_fee: z.number(),

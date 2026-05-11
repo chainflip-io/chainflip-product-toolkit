@@ -2850,6 +2850,7 @@ describe('parsers', () => {
             "liquidation_fee": 500,
             "origination_fee": 100,
             "total_amount": 200000000n,
+            "utilisation_cap": 1000000,
             "utilisation_rate": 0,
           },
           {
@@ -2868,6 +2869,7 @@ describe('parsers', () => {
             "liquidation_fee": 500,
             "origination_fee": 100,
             "total_amount": 0n,
+            "utilisation_cap": 1000000,
             "utilisation_rate": 10000,
           },
         ]
