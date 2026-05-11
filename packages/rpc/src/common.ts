@@ -47,6 +47,7 @@ import {
   cfLendingPoolSupplyBalances,
   cfIngressEgressEvents,
   brokerRequestAccountCreationDepositAddress,
+  cfAllLoans,
 } from './parsers';
 
 type Nullish<T> = T | null | undefined;
@@ -235,6 +236,7 @@ export type RpcRequest = WithHash<{
   cf_lending_pool_supply_balances: [asset?: UncheckedAssetAndChain];
   cf_get_vault_addresses: [];
   cf_ingress_egress_events: [chain: Chain];
+  cf_all_loans: [];
 }> & {
   chain_getBlockHash: [blockHeight?: number];
   broker_request_swap_deposit_address: [
@@ -317,6 +319,7 @@ export const rpcResult = {
   cf_lending_pool_supply_balances: cfLendingPoolSupplyBalances,
   cf_get_vault_addresses: cfVaultAddresses,
   cf_ingress_egress_events: cfIngressEgressEvents,
+  cf_all_loans: cfAllLoans,
 } as const satisfies { [K in keyof RpcRequest]: z.ZodTypeAny };
 
 export type RpcMethod = keyof RpcRequest;
