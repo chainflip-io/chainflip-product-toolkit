@@ -71,6 +71,7 @@ const swapParams = z
           ss58Format: POLKADOT_SS58_PREFIX,
         });
         break;
+      case 'Tron':
       case 'Solana':
         destinationAddress = base58.encode(params.dst_address);
         break;

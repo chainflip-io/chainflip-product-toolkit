@@ -153,8 +153,8 @@ importers:
   packages/processor:
     dependencies:
       '@chainflip/utils':
-        specifier: 2.2.0-alpha.1
-        version: 2.2.0-alpha.1
+        specifier: 2.2.0-alpha.2
+        version: 2.2.0-alpha.2
       zod:
         specifier: ^3.25.75
         version: 3.25.75
@@ -219,8 +219,8 @@ importers:
         specifier: ^1.11.0
         version: 1.11.0
       '@chainflip/utils':
-        specifier: 2.1.2
-        version: 2.1.2
+        specifier: 2.2.0-alpha.2
+        version: 2.2.0-alpha.2
       '@coral-xyz/anchor':
         specifier: ^0.32.1
         version: 0.32.1(bufferutil@4.0.9)(typescript@5.9.3)(utf-8-validate@5.0.10)
@@ -340,6 +340,9 @@ packages:
 
   '@chainflip/utils@2.2.0-alpha.1':
     resolution: {integrity: sha512-jP3BnsBX+M//G0+qePvugyFOlzyWHBFpxTT60QkIV2NY9IhWL04LgcfX0kyzM7IAk1G3Ynaj77KI3kwx9ItXqQ==}
+
+  '@chainflip/utils@2.2.0-alpha.2':
+    resolution: {integrity: sha512-BqJH3V/gpN0sgvjhrbBCzpCJ/NqXxO4H4SBDC+ZqLFFxgAg0xQw1SP6zmY9vL/BJe1ukB/shE316qCJxFouUIA==}
 
   '@coral-xyz/anchor-errors@0.31.1':
     resolution: {integrity: sha512-NhNEku4F3zzUSBtrYz84FzYWm48+9OvmT1Hhnwr6GnPQry2dsEqH/ti/7ASjjpoFTWRnPXrjAIT1qM6Isop+LQ==}
@@ -3460,6 +3463,13 @@ snapshots:
       date-fns: 4.1.0
 
   '@chainflip/utils@2.2.0-alpha.1':
+    dependencies:
+      '@date-fns/utc': 2.1.1
+      '@noble/hashes': 2.2.0
+      bignumber.js: 11.1.1
+      date-fns: 4.1.0
+
+  '@chainflip/utils@2.2.0-alpha.2':
     dependencies:
       '@date-fns/utc': 2.1.1
       '@noble/hashes': 2.2.0

@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest';
 import * as base58 from '../base58';
-import { isValidTronAddress } from '../tron';
+import { hexToTronAddress, isValidTronAddress } from '../tron';
 
 describe('tron', () => {
   it.each([
@@ -31,5 +31,20 @@ describe('tron', () => {
       throw new Error('decode error');
     });
     expect(isValidTronAddress('TNPeeaaFB7K9cmo4uQpcU32zGK8G1NYqeL')).toBe(false);
+  });
+});
+
+describe('hex to tron address', () => {
+  it.each([
+    // USDT contract address
+    ['a614f803b6fd780986a42c78ec9c7f77e6ded13c', 'TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t'],
+    // with 0x prefix
+    ['0xd1d633d0dc6abc20098bf82a3e3e73d2e6eb67b3', 'TV6iqCJLAGYgVFccmARRLUBoAGM5FeMGqz'],
+  ])('hexToTronAddress(%s) === %s', (hex, expected) => {
+    expect(hexToTronAddress(hex)).toBe(expected);
+  });
+
+  it('throws on invalid hex length', () => {
+    expect(() => hexToTronAddress('deadbeef')).toThrow('Invalid hex length');
   });
 });
