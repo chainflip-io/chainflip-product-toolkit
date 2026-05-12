@@ -57,7 +57,7 @@ const addressTransforms: Record<keyof typeof shortChainToLongChain, string | nul
   Eth: null,
   Sol: 'base58.encode(hexToBytes(value))',
   Hub: 'ss58.encode({ data: value, ss58Format: 0 })',
-  Tron: 'base58.encode(hexToBytes(value))',
+  Tron: 'hexToTronAddress(value)',
 };
 
 const addressImports: Record<keyof typeof shortChainToLongChain, [string, string][] | null> = {
@@ -70,10 +70,7 @@ const addressImports: Record<keyof typeof shortChainToLongChain, [string, string
     ['hexToBytes', '@chainflip/utils/bytes'],
   ],
   Hub: [['* as ss58', '@chainflip/utils/ss58']],
-  Tron: [
-    ['* as base58', '@chainflip/utils/base58'],
-    ['hexToBytes', '@chainflip/utils/bytes'],
-  ],
+  Tron: [['hexToTronAddress', '@chainflip/utils/tron']],
 };
 
 function assertIsKnownChain(value: string): asserts value is keyof typeof shortChainToLongChain {
