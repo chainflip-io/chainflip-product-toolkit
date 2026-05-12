@@ -219,8 +219,8 @@ importers:
         specifier: ^1.11.0
         version: 1.11.0
       '@chainflip/utils':
-        specifier: 2.1.2
-        version: 2.1.2
+        specifier: 2.2.0-alpha.2
+        version: 2.2.0-alpha.2
       '@coral-xyz/anchor':
         specifier: ^0.32.1
         version: 0.32.1(bufferutil@4.0.9)(typescript@5.9.3)(utf-8-validate@5.0.10)
