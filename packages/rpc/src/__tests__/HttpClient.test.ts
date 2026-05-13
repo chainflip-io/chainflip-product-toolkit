@@ -54,7 +54,10 @@ import {
   vaultAddresses,
 } from './fixtures';
 
-vi.mock('timers/promises', () => ({ setTimeout: vi.fn().mockResolvedValue(undefined) }));
+vi.mock('@chainflip/utils/async', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('@chainflip/utils/async')>();
+  return { ...actual, sleep: vi.fn().mockResolvedValue(undefined) };
+});
 
 const isHexString = (value: unknown): value is HexString =>
   typeof value === 'string' && value.startsWith('0x');
