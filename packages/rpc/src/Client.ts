@@ -1,5 +1,4 @@
-import { type DeferredPromise, deferredPromise } from '@chainflip/utils/async';
-import { setTimeout as sleep } from 'timers/promises';
+import { type DeferredPromise, deferredPromise, sleep } from '@chainflip/utils/async';
 import {
   type RpcRequest,
   type RpcMethod,
