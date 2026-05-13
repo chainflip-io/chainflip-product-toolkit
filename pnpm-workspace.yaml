@@ -1,2 +1,7 @@
 packages:
   - packages/**
+
+# minimum release age must be 14 days unless @chainflip packages
+minimumReleaseAge: 1209600
+minimumReleaseAgeExclude:
+  - '@chainflip/*'
