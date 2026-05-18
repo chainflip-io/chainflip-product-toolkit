@@ -1,5 +1,5 @@
 import { sha256 } from '@noble/hashes/sha2.js';
-import { hexToBytes } from '@noble/hashes/utils.js';
+import { bytesToHex, hexToBytes } from '@noble/hashes/utils.js';
 import assert from 'assert';
 import * as base58 from './base58';
 
@@ -15,6 +15,12 @@ export const isValidTronAddress = (address: string) => {
   } catch {
     return false;
   }
+};
+
+export const tronAddressToHex = (address: string) => {
+  const bytes = base58.decode(address);
+  assert(bytes.length === 25, 'Invalid tron address length');
+  return bytesToHex(bytes.slice(1, 21));
 };
 
 export const hexToTronAddress = (hex: string) => {
