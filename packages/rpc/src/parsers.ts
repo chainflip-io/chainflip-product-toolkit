@@ -903,6 +903,29 @@ const ingressEgressBroadcast = z.object({
   tx_ref: txRef,
 });
 
+const foreignChain = z.enum(['Ethereum', 'Polkadot', 'Bitcoin', 'Arbitrum', 'Solana', 'Assethub']); // TODO: add Tron for 2.2?
+
+const foreignChainAddress = z.union([
+  z.object({ Eth: z.string() }),
+  z.object({ Dot: z.string() }),
+  z.object({ Btc: z.unknown() }), // do we care about inner structure here or just need to know the source chain
+  z.object({ Arb: z.string() }),
+  z.object({ Sol: z.string() }),
+  z.object({ Hub: z.string() }),
+]);
+
+const ccmChannelMetadata = z.object({
+  message: z.string(),
+  gas_budget: u128,
+  ccm_additional_data: z.string(),
+});
+
+const ccmDepositMetadata = z.object({
+  channel_metadata: ccmChannelMetadata,
+  source_chain: foreignChain,
+  source_address: foreignChainAddress.nullable(),
+});
+
 const ingressEgressVaultDeposit = z.object({
   tx_id: z.string(),
   deposit_chain_block_height: z.number().nullable().optional(),
@@ -910,7 +933,7 @@ const ingressEgressVaultDeposit = z.object({
   output_asset: z.object({ chain: z.string(), asset: z.string() }),
   amount: u128,
   destination_address: z.string(),
-  ccm_deposit_metadata: z.unknown().nullable().optional(),
+  ccm_deposit_metadata: ccmDepositMetadata.nullable(),
   deposit_details: z.unknown().nullable().optional(),
   broker_fee: z
     .object({
@@ -938,7 +961,7 @@ const ingressEgressVaultDeposit = z.object({
       retry_duration: z.number(),
       refund_address: z.string(),
       min_price: u128,
-      refund_ccm_metadata: z.unknown().nullable().optional(),
+      refund_ccm_metadata: ccmChannelMetadata.nullable(),
       max_oracle_price_slippage: z.number().nullable().optional(),
     })
     .nullable()
