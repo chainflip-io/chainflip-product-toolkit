@@ -310,6 +310,7 @@ export const requestSwapParameterEncoding = z.discriminatedUnion('chain', [
     to: tronAddress,
     calldata: z.string(),
     note: hexString,
+    value: numberOrHex,
     source_token_address: tronAddress.optional(),
   }),
   z.object({
