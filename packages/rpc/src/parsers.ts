@@ -4,6 +4,7 @@ import { CHAINFLIP_SS58_PREFIX } from '@chainflip/utils/consts';
 import { isUndefined } from '@chainflip/utils/guard';
 import * as ss58 from '@chainflip/utils/ss58';
 import { isHex } from '@chainflip/utils/string';
+import { isValidTronAddress } from '@chainflip/utils/tron';
 import { type HexString } from '@chainflip/utils/types';
 import { z } from 'zod';
 
@@ -18,6 +19,10 @@ export const u256 = hexString.transform((value) => BigInt(value));
 export const numericString = z.string().regex(/^[0-9]+$/);
 
 export const numberOrHex = z.union([z.number(), u256, numericString]).transform((n) => BigInt(n));
+
+export const tronAddress = z
+  .string()
+  .refine(isValidTronAddress, { message: 'Invalid tron address' });
 
 const chainAssetMapFactory = <Z extends z.ZodTypeAny>(parser: Z, defaultValue: z.input<Z>) =>
   z.object({
@@ -302,6 +307,8 @@ export const requestSwapParameterEncoding = z.discriminatedUnion('chain', [
   }),
   evmBrokerRequestSwapParameterEncoding.extend({
     chain: z.literal('Tron'),
+    to: tronAddress,
+    calldata: z.string(),
     note: hexString,
   }),
   z.object({
