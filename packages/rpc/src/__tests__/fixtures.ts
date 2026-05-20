@@ -2011,6 +2011,21 @@ export const loanAccounts220: z.input<typeof cfLoanAccounts> = [
         },
         principal_amount: '0x3e8',
       },
+      {
+        loan_id: 1,
+        asset: {
+          chain: 'Ethereum',
+          asset: 'USDC',
+        },
+        loan_type: {
+          User: 'cFPdef3hF5zEwbWUG6ZaCJ3X7mTvEeAog7HxZ8QyFcCgDVGDM',
+        },
+        broker: {
+          account: 'cFM8kRvLBXagj6ZXvrt7wCM4jGmHvb5842jTtXXg3mRHjrvKy',
+          bps: 5,
+        },
+        principal_amount: '0x3e8',
+      },
     ],
     liquidation_status: {
       liquidation_swaps: [

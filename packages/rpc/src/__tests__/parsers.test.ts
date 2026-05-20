@@ -2994,6 +2994,21 @@ describe('parsers', () => {
                 },
                 "principal_amount": 1000n,
               },
+              {
+                "asset": {
+                  "asset": "USDC",
+                  "chain": "Ethereum",
+                },
+                "broker": {
+                  "account": "cFM8kRvLBXagj6ZXvrt7wCM4jGmHvb5842jTtXXg3mRHjrvKy",
+                  "bps": 5,
+                },
+                "loan_id": 1,
+                "loan_type": {
+                  "User": "cFPdef3hF5zEwbWUG6ZaCJ3X7mTvEeAog7HxZ8QyFcCgDVGDM",
+                },
+                "principal_amount": 1000n,
+              },
             ],
             "ltv_ratio": 1333333333n,
           },
