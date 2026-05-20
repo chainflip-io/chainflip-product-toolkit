@@ -353,7 +353,7 @@ export const broker = z.object({
   role: z.literal('broker'),
   ...accountInfoCommon,
   earned_fees: chainAssetMapFactory(numberOrHex, 0),
-  btc_vault_deposit_address: z.string().nullable().optional(),
+  btc_vault_deposit_address: z.string().nullish(),
   affiliates: z
     .array(z.object({ account_id: accountId, short_id: z.number(), withdrawal_address: hexString }))
     .optional()
@@ -895,8 +895,7 @@ const ingressEgressDeposit = z.object({
         vout: z.number().int(),
       }),
     ])
-    .nullable()
-    .optional(),
+    .nullish(),
 });
 
 const txRef = z.object({ hash: z.string() });
@@ -920,13 +919,13 @@ const ingressEgressBroadcast = z.object({
 
 const ingressEgressVaultDeposit = z.object({
   tx_id: z.string(),
-  deposit_chain_block_height: z.number().nullable().optional(),
+  deposit_chain_block_height: z.number().nullish(),
   input_asset: z.object({ chain: z.string(), asset: z.string() }),
   output_asset: z.object({ chain: z.string(), asset: z.string() }),
   amount: u128,
   destination_address: z.string(),
-  ccm_deposit_metadata: z.unknown().nullable().optional(),
-  deposit_details: z.unknown().nullable().optional(),
+  ccm_deposit_metadata: z.unknown().nullish(),
+  deposit_details: z.unknown().nullish(),
   broker_fee: z
     .object({
       account: z
@@ -936,8 +935,7 @@ const ingressEgressVaultDeposit = z.object({
         ),
       bps: z.number(),
     })
-    .nullable()
-    .optional(),
+    .nullish(),
   affiliate_fees: z.array(
     z.object({
       account: z
@@ -953,15 +951,11 @@ const ingressEgressVaultDeposit = z.object({
       retry_duration: z.number(),
       refund_address: z.string(),
       min_price: u128,
-      refund_ccm_metadata: z.unknown().nullable().optional(),
-      max_oracle_price_slippage: z.number().nullable().optional(),
+      refund_ccm_metadata: z.unknown().nullish(),
+      max_oracle_price_slippage: z.number().nullish(),
     })
-    .nullable()
-    .optional(),
-  dca_params: z
-    .object({ number_of_chunks: z.number(), chunk_interval: z.number() })
-    .nullable()
-    .optional(),
+    .nullish(),
+  dca_params: z.object({ number_of_chunks: z.number(), chunk_interval: z.number() }).nullish(),
   max_boost_fee: z.number().optional(),
 });
 

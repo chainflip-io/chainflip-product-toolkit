@@ -2,6 +2,9 @@ import { describe, expect, it } from 'vitest';
 import { cfIngressEgressEvents } from '../../../rpc/src/parsers';
 import { depositSchema, vaultDepositSchema } from '../parsers';
 
+const stringifyWithBigInt = (value: unknown): string =>
+  JSON.stringify(value, (_, v) => (typeof v === 'bigint' ? v.toString() : v));
+
 describe('depositSchema', () => {
   it('throws if the assets is invalid', () => {
     expect(() =>
@@ -160,43 +163,23 @@ describe('vaultDepositSchema', () => {
     const vaultDeposit = parsed.vault_deposits[0];
 
     // build the redis record from the RPC-parsed vault deposit (as it would be written)
-    const redisRecord = JSON.stringify({
-      amount: vaultDeposit.amount.toString(),
-      destination_address: vaultDeposit.destination_address,
-      input_asset: vaultDeposit.input_asset,
-      output_asset: vaultDeposit.output_asset,
-      deposit_chain_block_height: vaultDeposit.deposit_chain_block_height,
-      affiliate_fees: vaultDeposit.affiliate_fees,
-      broker_fee: vaultDeposit.broker_fee,
-      max_boost_fee: vaultDeposit.max_boost_fee,
-      dca_params: vaultDeposit.dca_params,
-      refund_params: {
-        min_price: vaultDeposit.refund_params!.min_price.toString(),
-        retry_duration: vaultDeposit.refund_params!.retry_duration,
-        refund_address: vaultDeposit.refund_params!.refund_address,
-      },
-      ccm_deposit_metadata: vaultDeposit.ccm_deposit_metadata,
-    });
+    const redisRecord = stringifyWithBigInt(vaultDeposit);
 
     // read it back with vaultDepositSchema
     const result = vaultDepositSchema.parse(redisRecord);
 
-    expect(result).toEqual({
-      amount: 500n,
-      destinationAddress: '0x4444444444444444444444444444444444444444',
-      inputAsset: 'Eth',
-      outputAsset: 'Flip',
-      depositChainBlockHeight: 3,
-      affiliateFees: [],
-      brokerFee: { account: 'cFJFriHLc7J1Rau7T1qAEHDsrWWH7QBbJt4D2Q38YkrtfwqoV', commissionBps: 2 },
-      maxBoostFee: 5,
-      dcaParams: { numberOfChunks: 10, chunkInterval: 2 },
-      refundParams: {
-        minPrice: 0n,
-        retryDuration: 0,
-        refundAddress: '0x541f563237a309b3a61e33bdf07a8930bdba8d99',
+    expect(result).toStrictEqual({
+      ...vaultDeposit,
+      input_asset: 'Eth',
+      output_asset: 'Flip',
+      broker_fee: {
+        account: 'cFJFriHLc7J1Rau7T1qAEHDsrWWH7QBbJt4D2Q38YkrtfwqoV',
+        commissionBps: 2,
       },
-      ccmDepositMetadata: null,
+      deposit_details: {
+        ...vaultDeposit.deposit_details!,
+        type: 'EVM',
+      },
     });
   });
 });

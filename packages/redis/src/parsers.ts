@@ -10,7 +10,6 @@ import { CHAINFLIP_SS58_PREFIX } from '@chainflip/utils/consts';
 import { hexEncodeNumber } from '@chainflip/utils/number';
 import * as ss58 from '@chainflip/utils/ss58';
 import { z } from 'zod';
-import { transformKeysToCamelCase } from './utils';
 
 const uncheckedAssetAndChain = z.object({
   asset: z.string(),
@@ -50,12 +49,14 @@ const assethubDeposit = z
   .object({ extrinsic_index: z.number() })
   .transform((obj) => ({ ...obj, type: 'Assethub' as const }));
 
+const depositDetailsSchema = z.union([evmDeposit, bitcoinDeposit, assethubDeposit]);
+
 export const depositSchema = jsonString.pipe(
   z.object({
     amount: u128,
     asset: assetAndChain,
     deposit_chain_block_height: z.number(),
-    deposit_details: z.union([evmDeposit, bitcoinDeposit, assethubDeposit]).nullable().optional(),
+    deposit_details: depositDetailsSchema.nullish(),
   }),
 );
 
@@ -112,45 +113,44 @@ const accountFee = z
   .transform(({ account, bps }) => ({ account, commissionBps: bps }));
 
 export const vaultDepositSchema = jsonString.pipe(
-  z
-    .object({
-      amount: u128,
-      destination_address: z.string(),
-      input_asset: assetAndChain,
-      output_asset: assetAndChain,
-      deposit_chain_block_height: z.number().nullable().optional(),
-      affiliate_fees: z.array(accountFee),
-      broker_fee: accountFee.nullable().optional(),
-      max_boost_fee: z.number().optional(),
-      dca_params: z
-        .object({
-          chunk_interval: z.number(),
-          number_of_chunks: z.number(),
-        })
-        .nullable()
-        .optional(),
-      refund_params: z
-        .object({
-          min_price: u128,
-          retry_duration: z.number(),
-          refund_address: z.string(),
-        })
-        .nullable()
-        .optional(),
-      ccm_deposit_metadata: z
-        .object({
-          channel_metadata: z.object({
-            ccm_additional_data: z.any(),
-            message: z.string(),
-            gas_budget: z
-              .union([numericString, hexString])
-              .transform((n) => hexEncodeNumber(BigInt(n))),
-          }),
-        })
-        .nullable()
-        .optional(),
-    })
-    .transform(transformKeysToCamelCase),
+  z.object({
+    tx_id: hexString.optional(),
+    amount: u128,
+    destination_address: z.string(),
+    input_asset: assetAndChain,
+    output_asset: assetAndChain,
+    deposit_chain_block_height: z.number().nullish(),
+    affiliate_fees: z.array(accountFee),
+    broker_fee: accountFee.nullish(),
+    max_boost_fee: z.number().nullish(),
+    deposit_details: depositDetailsSchema.nullish(),
+    dca_params: z
+      .object({
+        chunk_interval: z.number(),
+        number_of_chunks: z.number(),
+      })
+      .nullish(),
+    refund_params: z
+      .object({
+        min_price: u128,
+        retry_duration: z.number(),
+        refund_address: z.string(),
+        refund_ccm_metadata: z.unknown().nullish(),
+        max_oracle_price_slippage: z.number().nullish(),
+      })
+      .nullish(),
+    ccm_deposit_metadata: z
+      .object({
+        channel_metadata: z.object({
+          ccm_additional_data: z.any(),
+          message: z.string(),
+          gas_budget: z
+            .union([numericString, hexString])
+            .transform((n) => hexEncodeNumber(BigInt(n))),
+        }),
+      })
+      .nullish(),
+  }),
 );
 
 type ChainBroadcast<C extends Exclude<ChainflipChain, 'Solana'>> = z.infer<
