@@ -835,7 +835,7 @@ const cfLoan = z.object({
       account: accountId,
       bps: z.number(),
     })
-    .optional(), // TODO(2.2): Remove optional() once 2.2 goes live on all networks
+    .nullish(), // TODO(2.2): Make nullable() once 2.2 goes live on all networks
 });
 
 export const cfLoanAccount = z.object({
