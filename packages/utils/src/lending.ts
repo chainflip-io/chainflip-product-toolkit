@@ -45,7 +45,7 @@ export const calculateTotalEffectiveBorrowableAmount = ({
   const totalEffectiveBorrowableAmount = new BigNumber(totalAmount)
     .multipliedBy(utilisationCapBps ?? 10_000)
     .div(10_000)
-    .toFixed();
+    .toFixed(0);
 
   return bigintMax(BigInt(totalEffectiveBorrowableAmount) - totalBorrowedAmount, 0n);
 };
