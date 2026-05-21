@@ -1,5 +1,10 @@
 import { describe, expect, it } from 'vitest';
-import { calculateTotalEffectiveBorrowableAmount, ppmToBps } from '../lending';
+import {
+  calculateBorrowPowerUsedBps,
+  calculateLoanToValueBps,
+  calculateTotalEffectiveBorrowableAmount,
+  ppmToBps,
+} from '../lending';
 
 describe(ppmToBps, () => {
   it('converts 100% utilisation (1_000_000 ppm) to 10_000 bps', () => {
@@ -83,5 +88,89 @@ describe(calculateTotalEffectiveBorrowableAmount, () => {
         totalAvailableAmount: 5_000n,
       }),
     ).toBe(5_000n);
+  });
+});
+
+describe('calculateLoanToValueBps', () => {
+  it('returns 0 if totalCollateralBalanceUsd is 0', () => {
+    expect(
+      calculateLoanToValueBps({ totalBorrowAmountUsd: 100, totalCollateralBalanceUsd: 0 }),
+    ).toBe(0);
+  });
+
+  it('calculates loan to value in bps', () => {
+    expect(
+      calculateLoanToValueBps({ totalBorrowAmountUsd: 500, totalCollateralBalanceUsd: 1000 }),
+    ).toBe(5000);
+    expect(
+      calculateLoanToValueBps({ totalBorrowAmountUsd: 1000, totalCollateralBalanceUsd: 1000 }),
+    ).toBe(10000);
+    expect(
+      calculateLoanToValueBps({ totalBorrowAmountUsd: 0, totalCollateralBalanceUsd: 1000 }),
+    ).toBe(0);
+  });
+
+  it('handles floating point values', () => {
+    expect(
+      calculateLoanToValueBps({ totalBorrowAmountUsd: 250.5, totalCollateralBalanceUsd: 1000 }),
+    ).toBeCloseTo(2505);
+  });
+});
+
+describe('calculateBorrowPowerUsedBps', () => {
+  it('returns 0 if totalCollateralBalanceUsd is 0', () => {
+    expect(
+      calculateBorrowPowerUsedBps({
+        totalBorrowAmountUsd: 100,
+        totalCollateralBalanceUsd: 0,
+        thresholdDecimal: 0.79,
+      }),
+    ).toBe(0);
+  });
+
+  it('returns 0 if liquidationThresholdDecimal is 0', () => {
+    expect(
+      calculateBorrowPowerUsedBps({
+        totalBorrowAmountUsd: 100,
+        totalCollateralBalanceUsd: 1000,
+        thresholdDecimal: 0,
+      }),
+    ).toBe(0);
+  });
+
+  it('calculates borrow power used in bps', () => {
+    expect(
+      calculateBorrowPowerUsedBps({
+        totalBorrowAmountUsd: 850,
+        totalCollateralBalanceUsd: 1000,
+        thresholdDecimal: 0.79,
+      }),
+    ).toBe(10759);
+
+    expect(
+      calculateBorrowPowerUsedBps({
+        totalBorrowAmountUsd: 425,
+        totalCollateralBalanceUsd: 1000,
+        thresholdDecimal: 0.79,
+      }),
+    ).toBe(5379);
+
+    expect(
+      calculateBorrowPowerUsedBps({
+        totalBorrowAmountUsd: 0,
+        totalCollateralBalanceUsd: 1000,
+        thresholdDecimal: 0.79,
+      }),
+    ).toBe(0);
+  });
+
+  it('handles floating point values', () => {
+    expect(
+      calculateBorrowPowerUsedBps({
+        totalBorrowAmountUsd: 123.45,
+        totalCollateralBalanceUsd: 1000,
+        thresholdDecimal: 0.79,
+      }),
+    ).toBe(1562);
   });
 });
