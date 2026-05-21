@@ -19,6 +19,7 @@ import {
   mempoolTransaction,
   vaultDepositSchema,
 } from './parsers';
+import { transformKeysToCamelCase } from './utils';
 
 export default class RedisClient {
   private client;
@@ -41,6 +42,10 @@ export default class RedisClient {
   ): Promise<BitcoinBroadcast | null>;
   async getBroadcast(
     chain: 'Arbitrum',
+    broadcastId: number | bigint,
+  ): Promise<EthereumBroadcast | null>;
+  async getBroadcast(
+    chain: 'Tron',
     broadcastId: number | bigint,
   ): Promise<EthereumBroadcast | null>;
   async getBroadcast(
@@ -97,7 +102,8 @@ export default class RedisClient {
 
     const redisTxId = chain === 'Bitcoin' && isHex(`0x${txId}`) ? reverseBytes(`0x${txId}`) : txId;
     const value = await this.client.get(`vault_deposit:${chain}:${redisTxId}`);
-    return value ? vaultDepositSchema.parse(value) : null;
+    const parsed = value ? vaultDepositSchema.parse(value) : null;
+    return transformKeysToCamelCase(parsed);
   }
 
   quit() {

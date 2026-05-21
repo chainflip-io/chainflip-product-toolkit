@@ -330,6 +330,12 @@ describe(RedisClient, () => {
           "ccmDepositMetadata": null,
           "dcaParams": null,
           "depositChainBlockHeight": 7755386,
+          "depositDetails": {
+            "txHashes": [
+              "0x5775a3ac8821d3d13bf965eb29668bec1df4f4af66e6722367ceca1171406c37",
+            ],
+            "type": "EVM",
+          },
           "destinationAddress": "0xcb583c817964a2c527608f8b813a4c9bddb559a9",
           "inputAsset": "Eth",
           "maxBoostFee": 0,
@@ -439,6 +445,7 @@ describe(RedisClient, () => {
             "numberOfChunks": 5,
           },
           "depositChainBlockHeight": 1,
+          "depositDetails": null,
           "destinationAddress": "0xcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcf",
           "inputAsset": "Eth",
           "maxBoostFee": 5,
