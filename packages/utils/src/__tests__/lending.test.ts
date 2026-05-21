@@ -4,6 +4,7 @@ import {
   calculateLoanToValueBps,
   calculateTotalEffectiveBorrowableAmount,
   ppmToBps,
+  ppmToDecimal,
 } from '../lending';
 
 describe(ppmToBps, () => {
@@ -26,6 +27,28 @@ describe(ppmToBps, () => {
 
   it('returns 0 for 0 ppm', () => {
     expect(ppmToBps(0)).toBe(0);
+  });
+});
+
+describe(ppmToDecimal, () => {
+  it('converts 100% utilisation (1_000_000 ppm) to 1', () => {
+    expect(ppmToDecimal(1_000_000)).toBe(1);
+  });
+
+  it('converts 50% utilisation (500_000 ppm) to 0.5', () => {
+    expect(ppmToDecimal(500_000)).toBe(0.5);
+  });
+
+  it('converts 1% utilisation (10_000 ppm) to 0.01', () => {
+    expect(ppmToDecimal(10_000)).toBe(0.01);
+  });
+
+  it('converts 1 ppm to 0.000001', () => {
+    expect(ppmToDecimal(1)).toBe(0.000001);
+  });
+
+  it('returns 0 for 0 ppm', () => {
+    expect(ppmToDecimal(0)).toBe(0);
   });
 });
 
