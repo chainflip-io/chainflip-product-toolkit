@@ -35,15 +35,15 @@ export const calculateBorrowPowerUsedBps = ({
 export const calculateTotalEffectiveBorrowableAmount = ({
   totalAmount,
   totalAvailableAmount,
-  utilisationCap,
+  utilisationCapBps,
 }: {
   totalAmount: bigint;
   totalAvailableAmount: bigint;
-  utilisationCap?: number | null;
+  utilisationCapBps?: number | null; // 10_000 for 100%, for example
 }) => {
   const totalBorrowedAmount = totalAmount - totalAvailableAmount;
   const totalEffectiveBorrowableAmount = new BigNumber(totalAmount)
-    .multipliedBy(ppmToBps(utilisationCap ?? 1_000_000))
+    .multipliedBy(utilisationCapBps ?? 10_000)
     .div(10_000)
     .toFixed();
 

@@ -67,7 +67,7 @@ describe(calculateTotalEffectiveBorrowableAmount, () => {
       calculateTotalEffectiveBorrowableAmount({
         totalAmount: 2_000n,
         totalAvailableAmount: 800n,
-        utilisationCap: null,
+        utilisationCapBps: null,
       }),
     ).toBe(800n);
   });
@@ -78,7 +78,7 @@ describe(calculateTotalEffectiveBorrowableAmount, () => {
       calculateTotalEffectiveBorrowableAmount({
         totalAmount: 1_000n,
         totalAvailableAmount: 600n,
-        utilisationCap: 500_000,
+        utilisationCapBps: 5_000,
       }),
     ).toBe(100n);
   });
@@ -89,7 +89,7 @@ describe(calculateTotalEffectiveBorrowableAmount, () => {
       calculateTotalEffectiveBorrowableAmount({
         totalAmount: 1_000n,
         totalAvailableAmount: 400n,
-        utilisationCap: 500_000,
+        utilisationCapBps: 5_000,
       }),
     ).toBe(0n);
   });
@@ -99,7 +99,7 @@ describe(calculateTotalEffectiveBorrowableAmount, () => {
       calculateTotalEffectiveBorrowableAmount({
         totalAmount: 1_000n,
         totalAvailableAmount: 0n,
-        utilisationCap: 1_000_000,
+        utilisationCapBps: 10_000,
       }),
     ).toBe(0n);
   });
