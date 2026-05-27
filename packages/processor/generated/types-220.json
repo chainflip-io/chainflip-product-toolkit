@@ -56769,6 +56769,13 @@
         "principalAmount": {
           "type": "primitive",
           "value": "u128"
+        },
+        "brokerId": {
+          "type": "option",
+          "value": {
+            "type": "primitive",
+            "value": "AccountId32"
+          }
         }
       }
     },
