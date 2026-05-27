@@ -192,6 +192,19 @@ export default abstract class CodeGenerator {
     return itemName;
   }
 
+  /**
+   * The exports to emit for one generated item. Default: just the item itself.
+   * Overridable so subclasses can emit companion exports (e.g. an event
+   * descriptor) alongside it. Only applied to per-item modules, not `common`.
+   */
+  protected itemExports(
+    name: string,
+    code: CodegenResult,
+    _parserName: string,
+  ): Map<string, CodegenResult> {
+    return new Map([[name, code]]);
+  }
+
   *generate(def: ParsedMetadata) {
     const unhandledItems = new Set(this.trackedItems);
     const generatedItems = new Set<string>();
@@ -217,7 +230,7 @@ export default abstract class CodeGenerator {
 
         yield new Module(
           this.getFileName(palletName, itemName),
-          new Map([[name, generatedCode]]),
+          this.itemExports(name, generatedCode, parserName),
           this.getGlobalImports(),
           palletName,
         );

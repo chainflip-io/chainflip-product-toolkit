@@ -322,8 +322,11 @@ describe(CodeGenerator, () => {
           "topLevelDir/palletOne/eventOne.ts",
           "import { z } from 'zod';
       import { reusedStruct } from '../common';
+      import { defineEvent } from '@chainflip/processor/event';
 
       export const palletOneEventOne = reusedStruct;
+
+      export const palletOneEventOneEvent = defineEvent('PalletOne.EventOne', palletOneEventOne);
       ",
           "utf8",
         ],
