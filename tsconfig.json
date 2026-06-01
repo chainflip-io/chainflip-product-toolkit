@@ -27,6 +27,7 @@
       "@/chainspec/*": ["./packages/chainspec/src/*"],
       "@/scale/*": ["./packages/scale/src/*"],
       "@/testing": ["./packages/testing/src/index"],
+      "@chainflip/processor/event": ["./packages/processor/src/processor/event"],
     },
 
     /* Modules */

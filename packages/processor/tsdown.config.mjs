@@ -9,6 +9,11 @@ const baseConfig = defineConfig({
   format: ['esm', 'cjs'],
   target: 'es2022',
   skipNodeModulesBundle: true,
+  // The generated event files self-import `@chainflip/processor/event` so consumers
+  // resolve it from the installed package. A tsconfig path alias lets `tsc --noEmit`
+  // resolve it from source pre-build; keep it external here so the bundler doesn't
+  // rewrite it to a relative source path via that alias.
+  external: [/^@chainflip\/processor\//],
 });
 
 const BUILD_TARGET = process.env.BUILD_TARGET;
