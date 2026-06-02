@@ -3,8 +3,11 @@
 exports[`CodeGenerator > filters on selected events > EventOne 1`] = `
 "import { z } from 'zod';
 import { myEnum } from '../common';
+import { defineEvent } from '@chainflip/processor/event';
 
 export const enumsEventOne = myEnum;
+
+export const enumsEventOneEvent = defineEvent('Enums.EventOne', enumsEventOne);
 "
 `;
 
@@ -21,23 +24,35 @@ export const myEnum = simpleEnum(['Flip', 'Usdc', 'Eth']);
 exports[`CodeGenerator > generates a lot of stuff > AccountId32 1`] = `
 "import { z } from 'zod';
 import { accountId } from '../common';
+import { defineEvent } from '@chainflip/processor/event';
 
 export const primitivesAccountId32 = accountId;
+
+export const primitivesAccountId32Event = defineEvent(
+  'Primitives.AccountId32',
+  primitivesAccountId32,
+);
 "
 `;
 
 exports[`CodeGenerator > generates a lot of stuff > Bytes 1`] = `
 "import { z } from 'zod';
 import { hexString } from '../common';
+import { defineEvent } from '@chainflip/processor/event';
 
 export const primitivesBytes = hexString;
+
+export const primitivesBytesEvent = defineEvent('Primitives.Bytes', primitivesBytes);
 "
 `;
 
 exports[`CodeGenerator > generates a lot of stuff > Call 1`] = `
 "import { z } from 'zod';
+import { defineEvent } from '@chainflip/processor/event';
 
 export const primitivesCall = z.unknown();
+
+export const primitivesCallEvent = defineEvent('Primitives.Call', primitivesCall);
 "
 `;
 
@@ -51,6 +66,7 @@ import {
   moneySymbol,
   numberOrHex,
 } from '../common';
+import { defineEvent } from '@chainflip/processor/event';
 
 export const structsEventOne = z.object({
   i8: z.number(),
@@ -97,59 +113,82 @@ export const structsEventOne = z.object({
   flattenedEnumThing: enumWithFlattenedField,
   arrayOfIdentifiers: z.array(moneySymbol),
 });
+
+export const structsEventOneEvent = defineEvent('Structs.EventOne', structsEventOne);
 "
 `;
 
 exports[`CodeGenerator > generates a lot of stuff > EventOne 2`] = `
 "import { z } from 'zod';
 import { myEnum } from '../common';
+import { defineEvent } from '@chainflip/processor/event';
 
 export const enumsEventOne = myEnum;
+
+export const enumsEventOneEvent = defineEvent('Enums.EventOne', enumsEventOne);
 "
 `;
 
 exports[`CodeGenerator > generates a lot of stuff > H160 1`] = `
 "import { z } from 'zod';
 import { hexString } from '../common';
+import { defineEvent } from '@chainflip/processor/event';
 
 export const primitivesH160 = hexString;
+
+export const primitivesH160Event = defineEvent('Primitives.H160', primitivesH160);
 "
 `;
 
 exports[`CodeGenerator > generates a lot of stuff > H256 1`] = `
 "import { z } from 'zod';
 import { hexString } from '../common';
+import { defineEvent } from '@chainflip/processor/event';
 
 export const primitivesH256 = hexString;
+
+export const primitivesH256Event = defineEvent('Primitives.H256', primitivesH256);
 "
 `;
 
 exports[`CodeGenerator > generates a lot of stuff > Percent 1`] = `
 "import { z } from 'zod';
+import { defineEvent } from '@chainflip/processor/event';
 
 export const primitivesPercent = z.number();
+
+export const primitivesPercentEvent = defineEvent('Primitives.Percent', primitivesPercent);
 "
 `;
 
 exports[`CodeGenerator > generates a lot of stuff > Permill 1`] = `
 "import { z } from 'zod';
+import { defineEvent } from '@chainflip/processor/event';
 
 export const primitivesPermill = z.number();
+
+export const primitivesPermillEvent = defineEvent('Primitives.Permill', primitivesPermill);
 "
 `;
 
 exports[`CodeGenerator > generates a lot of stuff > U256 1`] = `
 "import { z } from 'zod';
 import { numberOrHex } from '../common';
+import { defineEvent } from '@chainflip/processor/event';
 
 export const primitivesU256 = numberOrHex;
+
+export const primitivesU256Event = defineEvent('Primitives.U256', primitivesU256);
 "
 `;
 
 exports[`CodeGenerator > generates a lot of stuff > bool 1`] = `
 "import { z } from 'zod';
+import { defineEvent } from '@chainflip/processor/event';
 
 export const primitivesBool = z.boolean();
+
+export const primitivesBoolEvent = defineEvent('Primitives.bool', primitivesBool);
 "
 `;
 
@@ -213,82 +252,118 @@ export const myEnum = z.discriminatedUnion('__kind', [
 
 exports[`CodeGenerator > generates a lot of stuff > i8 1`] = `
 "import { z } from 'zod';
+import { defineEvent } from '@chainflip/processor/event';
 
 export const primitivesI8 = z.number();
+
+export const primitivesI8Event = defineEvent('Primitives.i8', primitivesI8);
 "
 `;
 
 exports[`CodeGenerator > generates a lot of stuff > i16 1`] = `
 "import { z } from 'zod';
+import { defineEvent } from '@chainflip/processor/event';
 
 export const primitivesI16 = z.number();
+
+export const primitivesI16Event = defineEvent('Primitives.i16', primitivesI16);
 "
 `;
 
 exports[`CodeGenerator > generates a lot of stuff > i32 1`] = `
 "import { z } from 'zod';
+import { defineEvent } from '@chainflip/processor/event';
 
 export const primitivesI32 = z.number();
+
+export const primitivesI32Event = defineEvent('Primitives.i32', primitivesI32);
 "
 `;
 
 exports[`CodeGenerator > generates a lot of stuff > null 1`] = `
 "import { z } from 'zod';
+import { defineEvent } from '@chainflip/processor/event';
 
 export const primitivesNull = z.null();
+
+export const primitivesNullEvent = defineEvent('Primitives.null', primitivesNull);
 "
 `;
 
 exports[`CodeGenerator > generates a lot of stuff > u8 1`] = `
 "import { z } from 'zod';
+import { defineEvent } from '@chainflip/processor/event';
 
 export const primitivesU8 = z.number();
+
+export const primitivesU8Event = defineEvent('Primitives.u8', primitivesU8);
 "
 `;
 
 exports[`CodeGenerator > generates a lot of stuff > u16 1`] = `
 "import { z } from 'zod';
+import { defineEvent } from '@chainflip/processor/event';
 
 export const primitivesU16 = z.number();
+
+export const primitivesU16Event = defineEvent('Primitives.u16', primitivesU16);
 "
 `;
 
 exports[`CodeGenerator > generates a lot of stuff > u32 1`] = `
 "import { z } from 'zod';
+import { defineEvent } from '@chainflip/processor/event';
 
 export const primitivesU32 = z.number();
+
+export const primitivesU32Event = defineEvent('Primitives.u32', primitivesU32);
 "
 `;
 
 exports[`CodeGenerator > generates a lot of stuff > u64 1`] = `
 "import { z } from 'zod';
 import { numberOrHex } from '../common';
+import { defineEvent } from '@chainflip/processor/event';
 
 export const primitivesU64 = numberOrHex;
+
+export const primitivesU64Event = defineEvent('Primitives.u64', primitivesU64);
 "
 `;
 
 exports[`CodeGenerator > generates a lot of stuff > u128 1`] = `
 "import { z } from 'zod';
 import { numberOrHex } from '../common';
+import { defineEvent } from '@chainflip/processor/event';
 
 export const primitivesU128 = numberOrHex;
+
+export const primitivesU128Event = defineEvent('Primitives.u128', primitivesU128);
 "
 `;
 
 exports[`CodeGenerator > generates a named struct once > AnotherEvent 1`] = `
 "import { z } from 'zod';
 import { reusedStruct } from '../common';
+import { defineEvent } from '@chainflip/processor/event';
 
 export const palletOneAnotherEvent = reusedStruct;
+
+export const palletOneAnotherEventEvent = defineEvent(
+  'PalletOne.AnotherEvent',
+  palletOneAnotherEvent,
+);
 "
 `;
 
 exports[`CodeGenerator > generates a named struct once > EventOne 1`] = `
 "import { z } from 'zod';
 import { reusedStruct } from '../common';
+import { defineEvent } from '@chainflip/processor/event';
 
 export const palletOneEventOne = reusedStruct;
+
+export const palletOneEventOneEvent = defineEvent('PalletOne.EventOne', palletOneEventOne);
 "
 `;
 
@@ -302,8 +377,11 @@ export const reusedStruct = z.object({ field: z.number() });
 exports[`CodeGenerator > generates the encoded address enum > EventOne 1`] = `
 "import { z } from 'zod';
 import { cfChainsAddressEncodedAddress } from '../common';
+import { defineEvent } from '@chainflip/processor/event';
 
 export const palletOneEventOne = cfChainsAddressEncodedAddress;
+
+export const palletOneEventOneEvent = defineEvent('PalletOne.EventOne', palletOneEventOne);
 "
 `;
 

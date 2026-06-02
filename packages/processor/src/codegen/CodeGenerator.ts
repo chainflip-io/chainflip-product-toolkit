@@ -316,4 +316,23 @@ export default class CodeGenerator extends BaseCodeGenerator {
   protected override getGlobalImports(): string[] {
     return ["import { z } from 'zod';"];
   }
+
+  protected override itemExports(
+    name: string,
+    code: CodegenResult,
+    parserName: string,
+  ): Map<string, CodegenResult> {
+    const exports = new Map([[name, code]]);
+    // Emit a typed event descriptor alongside the bare schema:
+    //   export const <name>Event = defineEvent('Pallet.Event', <name>);
+    // The descriptor references the schema (same file) textually, so it carries
+    // no dependency of its own; only `defineEvent` needs importing.
+    exports.set(
+      `${name}Event`,
+      new Code(`defineEvent('${parserName}', ${name})`, [
+        new Identifier('defineEvent', '@chainflip/processor/event'),
+      ]),
+    );
+    return exports;
+  }
 }
