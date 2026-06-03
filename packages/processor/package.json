@@ -1,17 +1,17 @@
 {
   "name": "@chainflip/processor",
-  "version": "2.2.0-alpha.5",
+  "version": "2.2.0-alpha.6",
   "description": "",
   "type": "module",
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@chainflip/rpc": "2.2.0-alpha.1",
     "@chainflip/utils": "2.2.0-alpha.2",
     "zod": "^3.25.75"
   },
   "devDependencies": {
-    "@chainflip/rpc": "2.2.0-alpha.1",
     "@polkadot/types": "^16.5.6"
   },
   "scripts": {
