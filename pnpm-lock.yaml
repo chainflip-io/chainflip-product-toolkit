@@ -152,6 +152,9 @@ importers:
 
   packages/processor:
     dependencies:
+      '@chainflip/rpc':
+        specifier: 2.2.0-alpha.1
+        version: 2.2.0-alpha.1
       '@chainflip/utils':
         specifier: 2.2.0-alpha.2
         version: 2.2.0-alpha.2
@@ -159,9 +162,6 @@ importers:
         specifier: ^3.25.75
         version: 3.25.75
     devDependencies:
-      '@chainflip/rpc':
-        specifier: 2.2.0-alpha.1
-        version: 2.2.0-alpha.1
       '@polkadot/types':
         specifier: ^16.5.6
         version: 16.5.6
@@ -986,7 +986,6 @@ packages:
   '@rolldown/binding-darwin-arm64@1.0.0':
     resolution: {integrity: sha512-6XcD+8k0gPVItNagEw78/qqcBDwKcwDYS8V2hRmVsfUSIrd8cWe/CBvRDI5toqFyPfj+FJr6t8U6Xj2P2prEew==}
     engines: {node: ^20.19.0 || >=22.12.0}
-    cpu: [arm64]
     os: [darwin]
 
   '@rolldown/binding-darwin-arm64@1.0.0-rc.16':
@@ -1094,7 +1093,6 @@ packages:
   '@rolldown/binding-linux-x64-gnu@1.0.0-rc.18':
     resolution: {integrity: sha512-uCo8ElcCIAMyYAZyuIZ81oFkhTSIllNvUCHCAlbhlN4ji3uC28h7IIdlXyIvGO7HsuqnV9p3rD/bpH7XhIyhRw==}
     engines: {node: ^20.19.0 || >=22.12.0}
-    cpu: [x64]
     os: [linux]
 
   '@rolldown/binding-linux-x64-musl@1.0.0':
