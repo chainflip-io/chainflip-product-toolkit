@@ -14,5 +14,8 @@ describe(isBlockSpecLessThanVersion, () => {
     expect(isBlockSpecLessThanVersion('3.0.0', 'chainflip@220')).toBe(true);
 
     expect(isBlockSpecLessThanVersion('3.0.0', 'chainflip@21200')).toBe(true);
+    expect(isBlockSpecLessThanVersion('3.0.0', '21200')).toBe(true);
+    expect(isBlockSpecLessThanVersion('2.2.0', '220')).toBe(false);
+    expect(isBlockSpecLessThanVersion('3.0.0', '220')).toBe(true);
   });
 });

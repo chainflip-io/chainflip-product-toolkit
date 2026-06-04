@@ -509,9 +509,9 @@ const parseSemver = (version: `${string}.${string}.${string}`) => {
   return { major, minor, patch };
 };
 
-// Parses block spec strings like "chainflip-node@101200"
+// Parses block spec strings like "chainflip-node@101200" or "101200"
 const parseBlockSpecId = (blockVersion: string) => {
-  const stringVersion = /@(\d+)$/.exec(blockVersion)?.[1];
+  const stringVersion = /@?(\d+)$/.exec(blockVersion)?.[1];
   assertion(stringVersion, `Could not parse spec version from blockVersion: ${blockVersion}`);
 
   const digitCount = Math.ceil(stringVersion.length / 3);
