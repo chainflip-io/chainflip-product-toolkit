@@ -5,6 +5,7 @@ import {
   cfChainsSwapOrigin,
   palletCfSwappingCcmFailReason,
 } from '../common';
+import { defineEvent } from '@chainflip/processor/event';
 
 export const swappingCcmFailed = z.object({
   reason: palletCfSwappingCcmFailReason,
@@ -12,3 +13,5 @@ export const swappingCcmFailed = z.object({
   depositMetadata: cfChainsCcmDepositMetadataGenericEncodedAddress,
   origin: cfChainsSwapOrigin,
 });
+
+export const swappingCcmFailedEvent = defineEvent('Swapping.CcmFailed', swappingCcmFailed);

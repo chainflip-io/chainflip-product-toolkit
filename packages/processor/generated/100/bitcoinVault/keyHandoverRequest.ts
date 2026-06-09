@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { accountId, cfChainsBtcAggKey, numberOrHex } from '../common';
+import { defineEvent } from '@chainflip/processor/event';
 
 export const bitcoinVaultKeyHandoverRequest = z.object({
   ceremonyId: numberOrHex,
@@ -10,3 +11,8 @@ export const bitcoinVaultKeyHandoverRequest = z.object({
   newKey: cfChainsBtcAggKey,
   toEpoch: z.number(),
 });
+
+export const bitcoinVaultKeyHandoverRequestEvent = defineEvent(
+  'BitcoinVault.KeyHandoverRequest',
+  bitcoinVaultKeyHandoverRequest,
+);

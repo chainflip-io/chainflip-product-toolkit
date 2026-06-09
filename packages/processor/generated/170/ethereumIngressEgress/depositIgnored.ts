@@ -6,6 +6,7 @@ import {
   numberOrHex,
   palletCfEthereumIngressEgressDepositIgnoredReason,
 } from '../common';
+import { defineEvent } from '@chainflip/processor/event';
 
 export const ethereumIngressEgressDepositIgnored = z.object({
   depositAddress: hexString,
@@ -14,3 +15,8 @@ export const ethereumIngressEgressDepositIgnored = z.object({
   depositDetails: cfChainsEvmDepositDetails,
   reason: palletCfEthereumIngressEgressDepositIgnoredReason,
 });
+
+export const ethereumIngressEgressDepositIgnoredEvent = defineEvent(
+  'EthereumIngressEgress.DepositIgnored',
+  ethereumIngressEgressDepositIgnored,
+);

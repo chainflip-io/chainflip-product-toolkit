@@ -5,6 +5,7 @@ import {
   cfPrimitivesChainsAssetsAnyAsset,
   numberOrHex,
 } from '../common';
+import { defineEvent } from '@chainflip/processor/event';
 
 export const swappingSwapAmountTooLow = z.object({
   asset: cfPrimitivesChainsAssetsAnyAsset,
@@ -12,3 +13,8 @@ export const swappingSwapAmountTooLow = z.object({
   destinationAddress: cfChainsAddressEncodedAddress,
   origin: cfChainsSwapOrigin,
 });
+
+export const swappingSwapAmountTooLowEvent = defineEvent(
+  'Swapping.SwapAmountTooLow',
+  swappingSwapAmountTooLow,
+);

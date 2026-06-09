@@ -5,6 +5,7 @@ import {
   cfChainsEvmTransaction,
   palletCfBroadcastBroadcastAttemptId,
 } from '../common';
+import { defineEvent } from '@chainflip/processor/event';
 
 export const ethereumBroadcasterTransactionBroadcastRequest = z.object({
   broadcastAttemptId: palletCfBroadcastBroadcastAttemptId,
@@ -12,3 +13,8 @@ export const ethereumBroadcasterTransactionBroadcastRequest = z.object({
   transactionPayload: cfChainsEvmTransaction,
   transactionOutId: cfChainsEvmSchnorrVerificationComponents,
 });
+
+export const ethereumBroadcasterTransactionBroadcastRequestEvent = defineEvent(
+  'EthereumBroadcaster.TransactionBroadcastRequest',
+  ethereumBroadcasterTransactionBroadcastRequest,
+);

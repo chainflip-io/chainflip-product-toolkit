@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { cfPrimitivesChainsAssetsEthAsset, numberOrHex } from '../common';
+import { defineEvent } from '@chainflip/processor/event';
 
 export const ethereumIngressEgressInsufficientBoostLiquidity = z.object({
   prewitnessedDepositId: numberOrHex,
@@ -7,3 +8,8 @@ export const ethereumIngressEgressInsufficientBoostLiquidity = z.object({
   amountAttempted: numberOrHex,
   channelId: numberOrHex,
 });
+
+export const ethereumIngressEgressInsufficientBoostLiquidityEvent = defineEvent(
+  'EthereumIngressEgress.InsufficientBoostLiquidity',
+  ethereumIngressEgressInsufficientBoostLiquidity,
+);

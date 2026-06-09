@@ -8,6 +8,7 @@ import {
   cfPrimitivesDcaParameters,
   numberOrHex,
 } from '../common';
+import { defineEvent } from '@chainflip/processor/event';
 
 export const swappingSwapDepositAddressReady = z.object({
   depositAddress: cfChainsAddressEncodedAddress,
@@ -24,3 +25,8 @@ export const swappingSwapDepositAddressReady = z.object({
   refundParameters: cfChainsChannelRefundParametersGenericEncodedAddress.nullish(),
   dcaParameters: cfPrimitivesDcaParameters.nullish(),
 });
+
+export const swappingSwapDepositAddressReadyEvent = defineEvent(
+  'Swapping.SwapDepositAddressReady',
+  swappingSwapDepositAddressReady,
+);

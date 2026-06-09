@@ -147,7 +147,7 @@ LendingPools:
     - asset: added (LendingPools.LendingPoolCreated.asset.17)
   - LoanCreated:
     - loanType: added (LendingPools.LoanCreated.loanType)
-    - brokerId: added (LendingPools.LoanCreated.brokerId)
+    - broker: added (LendingPools.LoanCreated.broker)
     - borrowerId: removed (LendingPools.LoanCreated.borrowerId)
     - asset: added (LendingPools.LoanCreated.asset.17)
   - LoanRepaid:

@@ -5,6 +5,7 @@ import {
   hexString,
   palletCfBroadcastBroadcastAttemptId,
 } from '../common';
+import { defineEvent } from '@chainflip/processor/event';
 
 export const polkadotBroadcasterTransactionBroadcastRequest = z.object({
   broadcastAttemptId: palletCfBroadcastBroadcastAttemptId,
@@ -12,3 +13,8 @@ export const polkadotBroadcasterTransactionBroadcastRequest = z.object({
   transactionPayload: cfChainsDotPolkadotTransactionData,
   transactionOutId: hexString,
 });
+
+export const polkadotBroadcasterTransactionBroadcastRequestEvent = defineEvent(
+  'PolkadotBroadcaster.TransactionBroadcastRequest',
+  polkadotBroadcasterTransactionBroadcastRequest,
+);
