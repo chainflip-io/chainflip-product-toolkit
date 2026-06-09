@@ -5,6 +5,7 @@ import {
   numberOrHex,
   palletCfPolkadotIngressEgressDepositIgnoredReason,
 } from '../common';
+import { defineEvent } from '@chainflip/processor/event';
 
 export const polkadotIngressEgressDepositIgnored = z.object({
   depositAddress: hexString,
@@ -12,3 +13,8 @@ export const polkadotIngressEgressDepositIgnored = z.object({
   amount: numberOrHex,
   reason: palletCfPolkadotIngressEgressDepositIgnoredReason,
 });
+
+export const polkadotIngressEgressDepositIgnoredEvent = defineEvent(
+  'PolkadotIngressEgress.DepositIgnored',
+  polkadotIngressEgressDepositIgnored,
+);

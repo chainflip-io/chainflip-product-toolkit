@@ -6,6 +6,7 @@ import {
   numberOrHex,
   palletCfEthereumIngressEgressDepositAction,
 } from '../common';
+import { defineEvent } from '@chainflip/processor/event';
 
 export const ethereumIngressEgressDepositFinalised = z.object({
   depositAddress: hexString,
@@ -17,3 +18,8 @@ export const ethereumIngressEgressDepositFinalised = z.object({
   action: palletCfEthereumIngressEgressDepositAction,
   channelId: numberOrHex,
 });
+
+export const ethereumIngressEgressDepositFinalisedEvent = defineEvent(
+  'EthereumIngressEgress.DepositFinalised',
+  ethereumIngressEgressDepositFinalised,
+);

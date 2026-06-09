@@ -5,6 +5,7 @@ import {
   hexString,
   numberOrHex,
 } from '../common';
+import { defineEvent } from '@chainflip/processor/event';
 
 export const polkadotIngressEgressEgressScheduled = z.object({
   id: z.tuple([cfPrimitivesChainsForeignChain, numberOrHex]),
@@ -12,3 +13,8 @@ export const polkadotIngressEgressEgressScheduled = z.object({
   amount: numberOrHex,
   destinationAddress: hexString,
 });
+
+export const polkadotIngressEgressEgressScheduledEvent = defineEvent(
+  'PolkadotIngressEgress.EgressScheduled',
+  polkadotIngressEgressEgressScheduled,
+);

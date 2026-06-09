@@ -5,6 +5,7 @@ import {
   numberOrHex,
   palletCfSolanaIngressEgressDepositAction,
 } from '../common';
+import { defineEvent } from '@chainflip/processor/event';
 
 export const solanaIngressEgressDepositBoosted = z.object({
   depositAddress: hexString,
@@ -17,3 +18,8 @@ export const solanaIngressEgressDepositBoosted = z.object({
   boostFee: numberOrHex,
   action: palletCfSolanaIngressEgressDepositAction,
 });
+
+export const solanaIngressEgressDepositBoostedEvent = defineEvent(
+  'SolanaIngressEgress.DepositBoosted',
+  solanaIngressEgressDepositBoosted,
+);

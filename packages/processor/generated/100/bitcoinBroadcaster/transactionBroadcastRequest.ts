@@ -5,6 +5,7 @@ import {
   hexString,
   palletCfBroadcastBroadcastAttemptId,
 } from '../common';
+import { defineEvent } from '@chainflip/processor/event';
 
 export const bitcoinBroadcasterTransactionBroadcastRequest = z.object({
   broadcastAttemptId: palletCfBroadcastBroadcastAttemptId,
@@ -12,3 +13,8 @@ export const bitcoinBroadcasterTransactionBroadcastRequest = z.object({
   transactionPayload: cfChainsBtcBitcoinTransactionData,
   transactionOutId: hexString,
 });
+
+export const bitcoinBroadcasterTransactionBroadcastRequestEvent = defineEvent(
+  'BitcoinBroadcaster.TransactionBroadcastRequest',
+  bitcoinBroadcasterTransactionBroadcastRequest,
+);

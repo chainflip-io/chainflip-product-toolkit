@@ -6,6 +6,7 @@ import {
   cfTraitsLiquiditySwapType,
   numberOrHex,
 } from '../common';
+import { defineEvent } from '@chainflip/processor/event';
 
 export const swappingSwapScheduled = z.object({
   swapId: numberOrHex,
@@ -18,3 +19,8 @@ export const swappingSwapScheduled = z.object({
   brokerCommission: numberOrHex.nullish(),
   executeAt: z.number(),
 });
+
+export const swappingSwapScheduledEvent = defineEvent(
+  'Swapping.SwapScheduled',
+  swappingSwapScheduled,
+);

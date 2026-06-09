@@ -5,6 +5,7 @@ import {
   cfPrimitivesChainsAssetsAnyAsset,
   numberOrHex,
 } from '../common';
+import { defineEvent } from '@chainflip/processor/event';
 
 export const liquidityProviderLiquidityDepositAddressReady = z.object({
   channelId: numberOrHex,
@@ -13,3 +14,8 @@ export const liquidityProviderLiquidityDepositAddressReady = z.object({
   accountId,
   depositChainExpiryBlock: numberOrHex,
 });
+
+export const liquidityProviderLiquidityDepositAddressReadyEvent = defineEvent(
+  'LiquidityProvider.LiquidityDepositAddressReady',
+  liquidityProviderLiquidityDepositAddressReady,
+);

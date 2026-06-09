@@ -56770,11 +56770,21 @@
           "type": "primitive",
           "value": "u128"
         },
-        "brokerId": {
+        "broker": {
           "type": "option",
           "value": {
-            "type": "primitive",
-            "value": "AccountId32"
+            "type": "struct",
+            "$name": "CfPrimitivesBeneficiaryAccountId32",
+            "fields": {
+              "account": {
+                "type": "primitive",
+                "value": "AccountId32"
+              },
+              "bps": {
+                "type": "primitive",
+                "value": "u16"
+              }
+            }
           }
         }
       }

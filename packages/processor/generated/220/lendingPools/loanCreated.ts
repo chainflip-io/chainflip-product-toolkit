@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import {
-  accountId,
+  cfPrimitivesBeneficiaryAccountId32,
   cfPrimitivesChainsAssetsAnyAsset,
   numberOrHex,
   palletCfLendingPoolsGeneralLendingLoanType,
@@ -12,7 +12,7 @@ export const lendingPoolsLoanCreated = z.object({
   asset: cfPrimitivesChainsAssetsAnyAsset,
   loanType: palletCfLendingPoolsGeneralLendingLoanType,
   principalAmount: numberOrHex,
-  brokerId: accountId.nullish(),
+  broker: cfPrimitivesBeneficiaryAccountId32.nullish(),
 });
 
 export const lendingPoolsLoanCreatedEvent = defineEvent(

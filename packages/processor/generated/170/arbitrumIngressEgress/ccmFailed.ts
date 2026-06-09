@@ -5,6 +5,7 @@ import {
   cfChainsCcmFailReason,
   cfChainsSwapOrigin,
 } from '../common';
+import { defineEvent } from '@chainflip/processor/event';
 
 export const arbitrumIngressEgressCcmFailed = z.object({
   reason: cfChainsCcmFailReason,
@@ -12,3 +13,8 @@ export const arbitrumIngressEgressCcmFailed = z.object({
   depositMetadata: cfChainsCcmDepositMetadataGenericEncodedAddress,
   origin: cfChainsSwapOrigin,
 });
+
+export const arbitrumIngressEgressCcmFailedEvent = defineEvent(
+  'ArbitrumIngressEgress.CcmFailed',
+  arbitrumIngressEgressCcmFailed,
+);

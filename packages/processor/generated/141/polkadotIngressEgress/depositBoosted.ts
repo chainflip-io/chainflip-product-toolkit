@@ -5,6 +5,7 @@ import {
   numberOrHex,
   palletCfPolkadotIngressEgressDepositAction,
 } from '../common';
+import { defineEvent } from '@chainflip/processor/event';
 
 export const polkadotIngressEgressDepositBoosted = z.object({
   depositAddress: hexString,
@@ -16,3 +17,8 @@ export const polkadotIngressEgressDepositBoosted = z.object({
   boostFee: numberOrHex,
   action: palletCfPolkadotIngressEgressDepositAction,
 });
+
+export const polkadotIngressEgressDepositBoostedEvent = defineEvent(
+  'PolkadotIngressEgress.DepositBoosted',
+  polkadotIngressEgressDepositBoosted,
+);

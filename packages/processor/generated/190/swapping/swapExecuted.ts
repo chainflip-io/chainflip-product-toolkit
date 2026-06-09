@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { cfPrimitivesChainsAssetsAnyAsset, numberOrHex } from '../common';
+import { defineEvent } from '@chainflip/processor/event';
 
 export const swappingSwapExecuted = z.object({
   swapRequestId: numberOrHex,
@@ -12,3 +13,5 @@ export const swappingSwapExecuted = z.object({
   intermediateAmount: numberOrHex.nullish(),
   outputAmount: numberOrHex,
 });
+
+export const swappingSwapExecutedEvent = defineEvent('Swapping.SwapExecuted', swappingSwapExecuted);

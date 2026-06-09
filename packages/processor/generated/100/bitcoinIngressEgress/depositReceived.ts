@@ -5,6 +5,7 @@ import {
   cfPrimitivesChainsAssetsBtcAsset,
   numberOrHex,
 } from '../common';
+import { defineEvent } from '@chainflip/processor/event';
 
 export const bitcoinIngressEgressDepositReceived = z.object({
   depositAddress: cfChainsBtcScriptPubkey,
@@ -12,3 +13,8 @@ export const bitcoinIngressEgressDepositReceived = z.object({
   amount: numberOrHex,
   depositDetails: cfChainsBtcUtxoId,
 });
+
+export const bitcoinIngressEgressDepositReceivedEvent = defineEvent(
+  'BitcoinIngressEgress.DepositReceived',
+  bitcoinIngressEgressDepositReceived,
+);

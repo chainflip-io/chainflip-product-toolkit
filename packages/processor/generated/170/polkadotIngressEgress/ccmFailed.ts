@@ -5,6 +5,7 @@ import {
   cfChainsCcmFailReason,
   cfChainsSwapOrigin,
 } from '../common';
+import { defineEvent } from '@chainflip/processor/event';
 
 export const polkadotIngressEgressCcmFailed = z.object({
   reason: cfChainsCcmFailReason,
@@ -12,3 +13,8 @@ export const polkadotIngressEgressCcmFailed = z.object({
   depositMetadata: cfChainsCcmDepositMetadataGenericEncodedAddress,
   origin: cfChainsSwapOrigin,
 });
+
+export const polkadotIngressEgressCcmFailedEvent = defineEvent(
+  'PolkadotIngressEgress.CcmFailed',
+  polkadotIngressEgressCcmFailed,
+);

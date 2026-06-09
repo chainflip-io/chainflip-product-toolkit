@@ -1,4 +1,10 @@
 import { z } from 'zod';
 import { numberOrHex } from '../common';
+import { defineEvent } from '@chainflip/processor/event';
 
 export const ethereumVaultKeyHandoverFailure = z.object({ ceremonyId: numberOrHex });
+
+export const ethereumVaultKeyHandoverFailureEvent = defineEvent(
+  'EthereumVault.KeyHandoverFailure',
+  ethereumVaultKeyHandoverFailure,
+);

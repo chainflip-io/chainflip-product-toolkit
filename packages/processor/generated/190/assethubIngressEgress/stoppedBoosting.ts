@@ -4,6 +4,7 @@ import {
   numberOrHex,
   palletCfAssethubIngressEgressBoostPoolIdAssethub,
 } from '../common';
+import { defineEvent } from '@chainflip/processor/event';
 
 export const assethubIngressEgressStoppedBoosting = z.object({
   boosterId: accountId,
@@ -11,3 +12,8 @@ export const assethubIngressEgressStoppedBoosting = z.object({
   unlockedAmount: numberOrHex,
   pendingBoosts: z.array(numberOrHex),
 });
+
+export const assethubIngressEgressStoppedBoostingEvent = defineEvent(
+  'AssethubIngressEgress.StoppedBoosting',
+  assethubIngressEgressStoppedBoosting,
+);

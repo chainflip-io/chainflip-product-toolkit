@@ -5,6 +5,7 @@ import {
   cfPrimitivesChainsAssetsAnyAsset,
   numberOrHex,
 } from '../common';
+import { defineEvent } from '@chainflip/processor/event';
 
 export const swappingSwapDepositAddressReady = z.object({
   depositAddress: cfChainsAddressEncodedAddress,
@@ -18,3 +19,8 @@ export const swappingSwapDepositAddressReady = z.object({
   boostFee: z.number(),
   channelOpeningFee: numberOrHex,
 });
+
+export const swappingSwapDepositAddressReadyEvent = defineEvent(
+  'Swapping.SwapDepositAddressReady',
+  swappingSwapDepositAddressReady,
+);
