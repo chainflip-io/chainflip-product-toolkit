@@ -303,7 +303,9 @@ export const findVaultSwapData = async (
 
   const coder = new BorshInstructionCoder(idl);
   const decoded = coder.decode(instruction.data, 'base58');
-  const data = swapSchema.parse(decoded);
+  const { success, data } = swapSchema.safeParse(decoded);
+
+  if (!success) return null;
 
   return {
     depositChainBlockHeight: tx.slot,

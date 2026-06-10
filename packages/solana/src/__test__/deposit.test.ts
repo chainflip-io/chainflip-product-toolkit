@@ -510,6 +510,23 @@ describe(findVaultSwapData, () => {
     expect(data).toBeNull();
   });
 
+  it('returns null when vault swap instruction data fails schema validation', async () => {
+    // Instruction data with an unrecognised discriminator so coder.decode returns null,
+    // triggering the safeParse failure path instead of throwing.
+    const tx = JSON.parse(JSON.stringify(swapTokenDevnet));
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+    tx.result.transaction.message.instructions[0].data = '11111111';
+
+    mockFetchWithResponses([tx]);
+
+    const data = await findVaultSwapData(
+      'https://solana.rpc',
+      '3LWDhFzGAxKt65xKe19iUGmCiHBc5FDSUV8fETr4TavMP98YFEtso6pyf7ZEcZRjNC5Qka8bfQNUfzVP3r2C77Mo',
+    );
+
+    expect(data).toBeNull();
+  });
+
   const address1 = '12MYcNumSQCn81yKRfrk5P5ThM5ivkLiZda979hhKJDR';
   const address2 = '2BcYzxGN9CeSNo4dF61533xS3ytgwJxRyFYMoNSoZjUp';
   const ccmAdditionalData: SolanaCcmAdditionalData = {
