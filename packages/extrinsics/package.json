@@ -1,6 +1,6 @@
 {
   "name": "@chainflip/extrinsics",
-  "version": "1.6.2",
+  "version": "2.2.0-beta.0",
   "type": "module",
   "scripts": {
     "eslint:check": "pnpm eslint --max-warnings 0 './**/*.ts'",
@@ -14,7 +14,7 @@
     "test": "vitest"
   },
   "devDependencies": {
-    "@chainflip/utils": "2.1.2",
+    "@chainflip/utils": "2.2.0-beta.0",
     "@polkadot/types": "^16.5.6"
   },
   "files": [

@@ -96,11 +96,11 @@ importers:
   packages/chainspec:
     devDependencies:
       '@chainflip/rpc':
-        specifier: 1.9.3
-        version: 1.9.3
+        specifier: 2.2.0-beta.0
+        version: 2.2.0-beta.0
       '@chainflip/utils':
-        specifier: 2.1.2
-        version: 2.1.2
+        specifier: 2.2.0-beta.0
+        version: 2.2.0-beta.0
       '@polkadot/types':
         specifier: ^16.5.6
         version: 16.5.6
@@ -114,8 +114,8 @@ importers:
   packages/delegation:
     dependencies:
       '@chainflip/utils':
-        specifier: 2.1.2
-        version: 2.1.2
+        specifier: 2.2.0-beta.0
+        version: 2.2.0-beta.0
       scale-ts:
         specifier: ^1.6.1
         version: 1.6.1
@@ -144,8 +144,8 @@ importers:
   packages/extrinsics:
     devDependencies:
       '@chainflip/utils':
-        specifier: 2.1.2
-        version: 2.1.2
+        specifier: 2.2.0-beta.0
+        version: 2.2.0-beta.0
       '@polkadot/types':
         specifier: ^16.5.6
         version: 16.5.6
@@ -153,11 +153,11 @@ importers:
   packages/processor:
     dependencies:
       '@chainflip/rpc':
-        specifier: 2.2.0-alpha.1
-        version: 2.2.0-alpha.1
+        specifier: 2.2.0-beta.0
+        version: 2.2.0-beta.0
       '@chainflip/utils':
-        specifier: 2.2.0-alpha.2
-        version: 2.2.0-alpha.2
+        specifier: 2.2.0-beta.0
+        version: 2.2.0-beta.0
       zod:
         specifier: ^3.25.75
         version: 3.25.75
@@ -169,8 +169,8 @@ importers:
   packages/redis:
     dependencies:
       '@chainflip/utils':
-        specifier: 2.2.0-alpha.1
-        version: 2.2.0-alpha.1
+        specifier: 2.2.0-beta.0
+        version: 2.2.0-beta.0
       bignumber.js:
         specifier: ^11.1.1
         version: 11.1.1
@@ -244,8 +244,8 @@ importers:
   packages/testing:
     dependencies:
       '@chainflip/utils':
-        specifier: 2.1.2
-        version: 2.1.2
+        specifier: 2.2.0-beta.0
+        version: 2.2.0-beta.0
       vitest:
         specifier: 4.0.18
         version: 4.0.18(@types/node@25.6.2)(@vitest/ui@4.0.18)(tsx@4.21.0)(yaml@2.8.4)
@@ -320,26 +320,11 @@ packages:
     resolution: {integrity: sha512-6zABk/ECA/QYSCQ1NGiVwwbQerUCZ+TQbp64Q3AgmfNvurHH0j8TtXa1qbShXA6qqkpAj4V5W8pP6mLe1mcMqA==}
     engines: {node: '>=18'}
 
-  '@chainflip/rpc@1.9.3':
-    resolution: {integrity: sha512-vmOcq0ZaF+GcN1Ikb3ExnJWlZ2pHKFS++r8a1FfYa4nCzV/Xt8Hg9rP8g30VJNv13pZ21kXcchd1/v3EFJfgqw==}
-
-  '@chainflip/rpc@2.2.0-alpha.1':
-    resolution: {integrity: sha512-ZUFX8pQUSF3JKAcVili2uuvscHaLlHMKnqdpm72V5rXrKxYMHT4FLG1W+tPhdSTrifL/vPzjDz+Brd7rQfFvlg==}
+  '@chainflip/rpc@2.2.0-beta.0':
+    resolution: {integrity: sha512-OwF9z8yJWJOzpUaolY8+v/AsGWmuQhSGowzciSbKqI68/QaRnv7S8+xtpWgdTEE1ip0p4lffEY2790KUqxH3Ew==}
 
   '@chainflip/scale@2.2.0-beta.0':
     resolution: {integrity: sha512-Rin/+0pfqAQfG7mLHZ++Yv/2y1ka7r+OdYU5vGUIDeTrTex2jwXJpBt9vac/0eOAnN8WCedjA/fs5p3FIn97pQ==}
-
-  '@chainflip/utils@0.8.2':
-    resolution: {integrity: sha512-wVWSdd1i8+RY4IPqCLdsr/b2Y5cGTzSv6kE/nKhFhcUPELUO0YTRoVote/mUQ/Kd9MiQFaDiS1AEtcPZ0H2W6w==}
-
-  '@chainflip/utils@2.1.2':
-    resolution: {integrity: sha512-ujHjiVRdm5AbN5XotoIlVtN7RMmkR7PnrMW/pGhWg+2Yr6vtKyKas/GSRHrX4VGnm7H1j7xKcSuj9GNag60n5A==}
-
-  '@chainflip/utils@2.2.0-alpha.1':
-    resolution: {integrity: sha512-jP3BnsBX+M//G0+qePvugyFOlzyWHBFpxTT60QkIV2NY9IhWL04LgcfX0kyzM7IAk1G3Ynaj77KI3kwx9ItXqQ==}
-
-  '@chainflip/utils@2.2.0-alpha.2':
-    resolution: {integrity: sha512-BqJH3V/gpN0sgvjhrbBCzpCJ/NqXxO4H4SBDC+ZqLFFxgAg0xQw1SP6zmY9vL/BJe1ukB/shE316qCJxFouUIA==}
 
   '@chainflip/utils@2.2.0-beta.0':
     resolution: {integrity: sha512-QcUrJe3JtWsepcSBB4/AGWyfXrxckG1PfFeds0tgGwX8fmZOFy3q8+L/j6g9CoXd0uEYd4MNs2H6Kp/HslVm2g==}
@@ -839,10 +824,6 @@ packages:
   '@noble/hashes@1.8.0':
     resolution: {integrity: sha512-jCs9ldd7NwzpgXDIf6P3+NrHh9/sD6CQdxHyjQI+h/6rDNo88ypBxxz45UDuZHz9r3tNz7N/VInSVoVdtXEI4A==}
     engines: {node: ^14.21.3 || >=16}
-
-  '@noble/hashes@2.0.1':
-    resolution: {integrity: sha512-XlOlEbQcE9fmuXxrVTXCTlG2nlRXa9Rj3rr5Ue/+tX+nmkgbX720YHh0VR3hBF9xDvwnb8D2shVGOwNx+ulArw==}
-    engines: {node: '>= 20.19.0'}
 
   '@noble/hashes@2.2.0':
     resolution: {integrity: sha512-IYqDGiTXab6FniAgnSdZwgWbomxpy9FtYvLKs7wCUs2a8RkITG+DFGO1DM9cr+E3/RgADRpFjrKVaJ1z6sjtEg==}
@@ -1674,9 +1655,6 @@ packages:
 
   bignumber.js@11.1.1:
     resolution: {integrity: sha512-LNkCYMieJqAts/Sj5094B92c5q+yRPlXWpABJnHMbUjB/F8AUjELmSmYX5mxbNiY/QnGnJvJIrnRuW5gUqbW5Q==}
-
-  bignumber.js@9.3.1:
-    resolution: {integrity: sha512-Ko0uX15oIUS7wJ3Rb30Fs6SkVbLmPBAKdlm7q9+ak9bbIeFf0MwuBsQV6z7+X768/cHsfg+WlysDWJcmthjsjQ==}
 
   bip174@3.0.0:
     resolution: {integrity: sha512-N3vz3rqikLEu0d6yQL8GTrSkpYb35NQKWMR7Hlza0lOj6ZOlvQ3Xr7N9Y+JPebaCVoEUHdBeBSuLxcHr71r+Lw==}
@@ -3428,47 +3406,15 @@ snapshots:
 
   '@bcoe/v8-coverage@1.0.2': {}
 
-  '@chainflip/rpc@1.9.3':
+  '@chainflip/rpc@2.2.0-beta.0':
     dependencies:
-      '@chainflip/utils': 0.8.2
-      zod: 3.25.75
-
-  '@chainflip/rpc@2.2.0-alpha.1':
-    dependencies:
-      '@chainflip/utils': 2.2.0-alpha.1
+      '@chainflip/utils': 2.2.0-beta.0
       zod: 3.25.75
 
   '@chainflip/scale@2.2.0-beta.0':
     dependencies:
       '@chainflip/utils': 2.2.0-beta.0
       scale-ts: 1.6.1
-
-  '@chainflip/utils@0.8.2':
-    dependencies:
-      '@date-fns/utc': 2.1.1
-      bignumber.js: 9.3.1
-      date-fns: 4.1.0
-
-  '@chainflip/utils@2.1.2':
-    dependencies:
-      '@date-fns/utc': 2.1.1
-      '@noble/hashes': 2.0.1
-      bignumber.js: 9.3.1
-      date-fns: 4.1.0
-
-  '@chainflip/utils@2.2.0-alpha.1':
-    dependencies:
-      '@date-fns/utc': 2.1.1
-      '@noble/hashes': 2.2.0
-      bignumber.js: 11.1.1
-      date-fns: 4.1.0
-
-  '@chainflip/utils@2.2.0-alpha.2':
-    dependencies:
-      '@date-fns/utc': 2.1.1
-      '@noble/hashes': 2.2.0
-      bignumber.js: 11.1.1
-      date-fns: 4.1.0
 
   '@chainflip/utils@2.2.0-beta.0':
     dependencies:
@@ -3851,8 +3797,6 @@ snapshots:
       '@noble/hashes': 1.8.0
 
   '@noble/hashes@1.8.0': {}
-
-  '@noble/hashes@2.0.1': {}
 
   '@noble/hashes@2.2.0': {}
 
@@ -4705,8 +4649,6 @@ snapshots:
   bech32@2.0.0: {}
 
   bignumber.js@11.1.1: {}
-
-  bignumber.js@9.3.1: {}
 
   bip174@3.0.0:
     dependencies:
