@@ -216,11 +216,11 @@ importers:
   packages/solana:
     dependencies:
       '@chainflip/scale':
-        specifier: ^1.11.0
-        version: 1.11.0
+        specifier: ^2.2.0-beta.0
+        version: 2.2.0-beta.0
       '@chainflip/utils':
-        specifier: 2.2.0-alpha.2
-        version: 2.2.0-alpha.2
+        specifier: 2.2.0-beta.0
+        version: 2.2.0-beta.0
       '@coral-xyz/anchor':
         specifier: ^0.32.1
         version: 0.32.1(bufferutil@4.0.9)(typescript@5.9.3)(utf-8-validate@5.0.10)
@@ -326,14 +326,11 @@ packages:
   '@chainflip/rpc@2.2.0-alpha.1':
     resolution: {integrity: sha512-ZUFX8pQUSF3JKAcVili2uuvscHaLlHMKnqdpm72V5rXrKxYMHT4FLG1W+tPhdSTrifL/vPzjDz+Brd7rQfFvlg==}
 
-  '@chainflip/scale@1.11.0':
-    resolution: {integrity: sha512-gLs2pARutz6JJSKth92TYQEHVWvwpavWNUARB9626t+QxlparHyL10t9XibD2X1sr+GLXWKj2q5qXOSGU8CICA==}
+  '@chainflip/scale@2.2.0-beta.0':
+    resolution: {integrity: sha512-Rin/+0pfqAQfG7mLHZ++Yv/2y1ka7r+OdYU5vGUIDeTrTex2jwXJpBt9vac/0eOAnN8WCedjA/fs5p3FIn97pQ==}
 
   '@chainflip/utils@0.8.2':
     resolution: {integrity: sha512-wVWSdd1i8+RY4IPqCLdsr/b2Y5cGTzSv6kE/nKhFhcUPELUO0YTRoVote/mUQ/Kd9MiQFaDiS1AEtcPZ0H2W6w==}
-
-  '@chainflip/utils@0.8.22':
-    resolution: {integrity: sha512-VVerCmYtxW6rk3HCKnJzYAC60kf8Xv66Sp7ittMzpuJ9kzu+IeycY6lHv/I7GJnagy3zeuL6PNGWqdAMpuF+TQ==}
 
   '@chainflip/utils@2.1.2':
     resolution: {integrity: sha512-ujHjiVRdm5AbN5XotoIlVtN7RMmkR7PnrMW/pGhWg+2Yr6vtKyKas/GSRHrX4VGnm7H1j7xKcSuj9GNag60n5A==}
@@ -3441,18 +3438,12 @@ snapshots:
       '@chainflip/utils': 2.2.0-alpha.1
       zod: 3.25.75
 
-  '@chainflip/scale@1.11.0':
+  '@chainflip/scale@2.2.0-beta.0':
     dependencies:
-      '@chainflip/utils': 0.8.22
+      '@chainflip/utils': 2.2.0-beta.0
       scale-ts: 1.6.1
 
   '@chainflip/utils@0.8.2':
-    dependencies:
-      '@date-fns/utc': 2.1.1
-      bignumber.js: 9.3.1
-      date-fns: 4.1.0
-
-  '@chainflip/utils@0.8.22':
     dependencies:
       '@date-fns/utc': 2.1.1
       bignumber.js: 9.3.1

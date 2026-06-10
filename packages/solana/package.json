@@ -14,8 +14,8 @@
     "test": "vitest"
   },
   "dependencies": {
-    "@chainflip/scale": "^1.11.0",
-    "@chainflip/utils": "2.2.0-alpha.2",
+    "@chainflip/scale": "^2.2.0-beta.0",
+    "@chainflip/utils": "2.2.0-beta.0",
     "@coral-xyz/anchor": "^0.32.1",
     "@solana/web3.js": "^1.98.4",
     "bn.js": "^5.2.3",
