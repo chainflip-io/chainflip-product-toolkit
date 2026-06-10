@@ -87,7 +87,7 @@ export const findVaultSwapData = async (
       refundAddress: tx.vout[2].scriptPubKey.address,
       retryDuration: data.retryDuration,
       minPrice: getX128PriceFromAmounts(amount, data.minOutputAmount),
-      maxOraclePriceSlippage: 'maxOraclePriceSlippage' in data ? data.maxOraclePriceSlippage : null,
+      maxOraclePriceSlippage: data.maxOraclePriceSlippage,
       refundCcmMetadata: null,
     },
     destinationAddress: data.destinationAddress,
