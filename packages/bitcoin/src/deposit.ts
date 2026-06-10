@@ -4,15 +4,18 @@ import { bytesToHex } from '@chainflip/utils/bytes';
 import { type ChainflipAsset, assetConstants, assetContractId } from '@chainflip/utils/chainflip';
 import { POLKADOT_SS58_PREFIX } from '@chainflip/utils/consts';
 import * as ss58 from '@chainflip/utils/ss58';
+import { hexToTronAddress } from '@chainflip/utils/tron';
 import { type VaultSwapData } from '@chainflip/utils/types';
 import BigNumber from 'bignumber.js';
 import * as rpc from './rpc';
-import { createSwapDataCodecV0, createSwapDataCodecV1, UtxoDataV0, UtxoDataV1 } from './scale';
+import { createSwapDataCodecV1, UtxoDataV1 } from './scale';
 
 const encodeChainAddress = (data: Uint8Array, asset: ChainflipAsset) => {
   switch (assetConstants[asset].chain) {
     case 'Solana':
       return base58.encode(data);
+    case 'Tron':
+      return hexToTronAddress(bytesToHex(data));
     case 'Assethub':
       return ss58.encode({ data, ss58Format: POLKADOT_SS58_PREFIX });
     case 'Ethereum':
@@ -33,12 +36,10 @@ const parseVaultSwapData = (data: Uint8Array) => {
   const outputAsset = contractIdToInternalAsset[contractId];
 
   let destinationAddress: Uint8Array;
-  let parameters: UtxoDataV0 | UtxoDataV1;
+  let parameters: UtxoDataV1;
 
   if (version === 1) {
     ({ destinationAddress, parameters } = createSwapDataCodecV1(outputAsset).dec(data));
-  } else if (version === 0) {
-    ({ destinationAddress, parameters } = createSwapDataCodecV0(outputAsset).dec(data));
   } else {
     throw new Error('unsupported version');
   }

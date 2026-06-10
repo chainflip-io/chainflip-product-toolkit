@@ -5,7 +5,7 @@ import * as ss58 from '@chainflip/utils/ss58';
 import { describe, expect, it, type MockInstance } from 'vitest';
 import { spyOn } from '@/testing';
 import { findVaultSwapData } from '../deposit';
-import { createSwapDataCodecV0, createSwapDataCodecV1 } from '../scale';
+import { createSwapDataCodecV1 } from '../scale';
 import { tx, block } from './fixtures';
 
 const mockFetch = (results: unknown[], status = 200) =>
@@ -42,29 +42,21 @@ const buildNullData = ({
   affiliates?: { accountIndex: number; commissionBps: number }[];
   maxOraclePriceSlippage?: number;
 }) => {
-  const common = {
-    retryDuration,
-    affiliates,
-    boostFee,
-    brokerFee,
-    chunkInterval,
-    numberOfChunks,
-    minOutputAmount,
-  };
-
-  const bytes = maxOraclePriceSlippage
-    ? createSwapDataCodecV1(destinationAsset).enc({
-        version: 1,
-        destinationAsset: assetContractId[destinationAsset],
-        destinationAddress,
-        parameters: { ...common, maxOraclePriceSlippage },
-      })
-    : createSwapDataCodecV0(destinationAsset).enc({
-        version: 0,
-        destinationAsset: assetContractId[destinationAsset],
-        destinationAddress,
-        parameters: common,
-      });
+  const bytes = createSwapDataCodecV1(destinationAsset).enc({
+    version: 1,
+    destinationAsset: assetContractId[destinationAsset],
+    destinationAddress,
+    parameters: {
+      retryDuration,
+      affiliates,
+      boostFee,
+      brokerFee,
+      chunkInterval,
+      numberOfChunks,
+      minOutputAmount,
+      maxOraclePriceSlippage: maxOraclePriceSlippage ?? 0,
+    },
+  });
 
   return [
     0x6a, // OP_RETURN
@@ -82,6 +74,7 @@ const addresses = {
   Dot: ss58.decode('167ZvRqc7V6HrEUSvtV8c3JRUtPjJhHXUpAwhmPktAGj1uzq').data,
   Btc: new TextEncoder().encode('tb1qhjurnfz4qah4rg7ntue6x287ehdvded20rj9vh'),
   HubDot: ss58.decode('167ZvRqc7V6HrEUSvtV8c3JRUtPjJhHXUpAwhmPktAGj1uzq').data,
+  Trx: hexToBytes('0xa56a6be23b6cf39d9448ff6e897c29c41c8fbdff'),
 };
 
 type Mutable<T> = T extends readonly (infer U)[]
@@ -100,6 +93,7 @@ describe(findVaultSwapData, () => {
     ['Sol', 20, 100, 10, 15, 0.01, 80, undefined, undefined, undefined],
     ['HubDot', 1, 2, 0, 0, 0.001, 69, undefined, [{ accountIndex: 1, commissionBps: 10 }], 1],
     ['Btc', 1, 2, 5, 20, 0.0001, 50, undefined, [{ accountIndex: 2, commissionBps: 20 }], 5],
+    ['Trx', 1, 2, 3, 7, 0.5, 75, undefined, undefined, 2],
   ] as const)(
     'gets the vault swap data (%s)',
     async (
