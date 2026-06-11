@@ -57,6 +57,10 @@ describe(buildChainAssetMap, () => {
           "USDC": null,
           "USDT": null,
         },
+        "Tron": {
+          "TRX": null,
+          "USDT": null,
+        },
       }
     `);
   });
@@ -76,6 +80,8 @@ describe(buildChainAssetMap, () => {
         SolUsdc: 11,
         Usdc: 12,
         Usdt: 13,
+        Trx: 14,
+        TrxUsdt: 15,
       }),
     ).toMatchInlineSnapshot(`
       {
@@ -103,6 +109,10 @@ describe(buildChainAssetMap, () => {
           "SOL": 10,
           "USDC": 11,
           "USDT": null,
+        },
+        "Tron": {
+          "TRX": 14,
+          "USDT": 15,
         },
       }
     `);
@@ -137,6 +147,10 @@ describe(buildChainBaseAssetMap, () => {
           "USDC": null,
           "USDT": null,
         },
+        "Tron": {
+          "TRX": null,
+          "USDT": null,
+        },
       }
     `);
   });
@@ -155,6 +169,8 @@ describe(buildChainBaseAssetMap, () => {
         Sol: 10,
         SolUsdc: 11,
         Usdt: 13,
+        Trx: 14,
+        TrxUsdt: 15,
       }),
     ).toMatchInlineSnapshot(`
       {
@@ -182,6 +198,10 @@ describe(buildChainBaseAssetMap, () => {
           "USDC": 11,
           "USDT": null,
         },
+        "Tron": {
+          "TRX": 14,
+          "USDT": 15,
+        },
       }
     `);
   });
@@ -196,6 +216,7 @@ describe(buildChainMap, () => {
         "Bitcoin": null,
         "Ethereum": null,
         "Solana": null,
+        "Tron": null,
       }
     `);
   });
@@ -208,6 +229,7 @@ describe(buildChainMap, () => {
         Bitcoin: 'Bitcoin',
         Arbitrum: 'Arbitrum',
         Assethub: 'Assethub',
+        Tron: 'Tron',
       }),
     ).toMatchInlineSnapshot(`
       {
@@ -216,6 +238,7 @@ describe(buildChainMap, () => {
         "Bitcoin": "Bitcoin",
         "Ethereum": "Ethereum",
         "Solana": "Solana",
+        "Tron": "Tron",
       }
     `);
   });
