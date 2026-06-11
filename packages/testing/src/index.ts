@@ -56,6 +56,10 @@ export const buildChainAssetMap = <T>(
     USDC: overrides?.HubUsdc ?? defaultValue,
     USDT: overrides?.HubUsdt ?? defaultValue,
   },
+  Tron: {
+    TRX: overrides?.Trx ?? defaultValue,
+    USDT: overrides?.TrxUsdt ?? defaultValue,
+  },
 });
 
 export const buildChainBaseAssetMap = <T>(
@@ -86,6 +90,10 @@ export const buildChainBaseAssetMap = <T>(
     USDC: overrides?.HubUsdc ?? defaultValue,
     USDT: overrides?.HubUsdt ?? defaultValue,
   },
+  Tron: {
+    TRX: overrides?.Trx ?? defaultValue,
+    USDT: overrides?.TrxUsdt ?? defaultValue,
+  },
 });
 
 export const buildChainMap = <T>(
@@ -97,4 +105,5 @@ export const buildChainMap = <T>(
   Solana: overrides?.Solana ?? defaultValue,
   Arbitrum: overrides?.Arbitrum ?? defaultValue,
   Assethub: overrides?.Assethub ?? defaultValue,
+  Tron: overrides?.Tron ?? defaultValue,
 });
