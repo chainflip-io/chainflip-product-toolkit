@@ -7,24 +7,8 @@ const addressByteLengths: ChainMap<number | undefined> = {
   Ethereum: 20,
   Solana: 32,
   Assethub: 32,
+  Tron: 20,
 };
-
-// TODO: remove after 1.11 is live on all networks
-export const createSwapDataCodecV0 = (asset: ChainflipAsset) =>
-  Struct({
-    version: u8,
-    destinationAsset: u8,
-    destinationAddress: Bytes(addressByteLengths[assetConstants[asset].chain]),
-    parameters: Struct({
-      retryDuration: u16,
-      minOutputAmount: u128,
-      numberOfChunks: u16,
-      chunkInterval: u16,
-      boostFee: u8,
-      brokerFee: u8,
-      affiliates: Vector(Struct({ accountIndex: u8, commissionBps: u8 })),
-    }),
-  });
 
 export const createSwapDataCodecV1 = (asset: ChainflipAsset) =>
   Struct({
@@ -43,5 +27,4 @@ export const createSwapDataCodecV1 = (asset: ChainflipAsset) =>
     }),
   });
 
-export type UtxoDataV0 = CodecType<ReturnType<typeof createSwapDataCodecV0>>['parameters'];
 export type UtxoDataV1 = CodecType<ReturnType<typeof createSwapDataCodecV1>>['parameters'];
