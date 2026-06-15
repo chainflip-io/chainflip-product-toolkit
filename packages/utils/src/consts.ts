@@ -188,8 +188,8 @@ export const brokerAliasMap: AccountAliasMap = {
     twitter: '@MetaMask',
   },
   cFJt567jd8vooomo6z86sS9qenBodSYyPb6CKgqGESYJS4cFG: {
-    name: 'Ellipal Wallet',
-    twitter: '@ellipalwallet',
+    name: 'Makepay',
+    twitter: null,
   },
   cFPZ7XoAWHFBJy2t2t5rupQ3fvMKRyCpxDHjnmtD42XAEjxcW: { name: 'SafePal', twitter: '@SafePal' },
   cFNqDaZ9apGKt9uXaGQGucWuizVeTms2cXq8hnYM8g7y99Cpy: { name: 'Trocador', twitter: '@TrocadorApp' },
@@ -204,6 +204,10 @@ export const brokerAliasMap: AccountAliasMap = {
   },
   cFMbRyKPPQCUFUnkro1fTXpjgezXCR85H1dUT16D4eWWiU8bw: { name: 'Asgardex', twitter: '@asgardex' },
   cFM5vZK5pb726fs1kPmhFt66NwhfCYY6wcPEEjRd8QtTwEgyv: { name: 'Glide', twitter: null },
+  cFJqePDYKKvY3DmtTAdf53YYsSgcNb7bhcdhqcZL1zVwqo1Sm: {
+    name: 'Ellipal Wallet',
+    twitter: '@ELLIPAL',
+  },
 } as const;
 
 export const lpAliasMap: AccountAliasMap = {
