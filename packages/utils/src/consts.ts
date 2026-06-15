@@ -203,6 +203,7 @@ export const brokerAliasMap: AccountAliasMap = {
     twitter: '@coolwallet',
   },
   cFMbRyKPPQCUFUnkro1fTXpjgezXCR85H1dUT16D4eWWiU8bw: { name: 'Asgardex', twitter: '@asgardex' },
+  cFM5vZK5pb726fs1kPmhFt66NwhfCYY6wcPEEjRd8QtTwEgyv: { name: 'Glide', twitter: null },
 } as const;
 
 export const lpAliasMap: AccountAliasMap = {
