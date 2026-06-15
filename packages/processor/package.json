@@ -8,7 +8,7 @@
   "license": "ISC",
   "dependencies": {
     "@chainflip/rpc": "2.2.0-beta.0",
-    "@chainflip/utils": "2.2.0-beta.0",
+    "@chainflip/utils": "2.2.0",
     "zod": "^3.25.75"
   },
   "devDependencies": {
