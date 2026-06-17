@@ -2627,11 +2627,11 @@ describe('parsers', () => {
     it('uses default fee info when fee is null', () => {
       const result = cfPoolsEnvironment.parse({
         fees: {
-          Ethereum: { ETH: null, FLIP: null, USDC: null, USDT: null },
+          Ethereum: { ETH: null, FLIP: null, USDC: null, USDT: null, WBTC: null },
           Polkadot: { DOT: null },
           Bitcoin: { BTC: null },
-          Arbitrum: { ETH: null, USDC: null },
-          Solana: { SOL: null, USDC: null },
+          Arbitrum: { ETH: null, USDC: null, USDT: null },
+          Solana: { SOL: null, USDC: null, USDT: null },
           Assethub: { DOT: null, USDC: null, USDT: null },
           Tron: { TRX: null, USDT: null },
         },

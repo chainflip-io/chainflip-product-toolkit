@@ -24,7 +24,7 @@ export const tronAddress = z
   .string()
   .refine(isValidTronAddress, { message: 'Invalid tron address' });
 
-const chainAssetMapFactory = <Z extends z.ZodTypeAny>(parser: Z, defaultValue: z.input<Z>) =>
+const chainAssetMapFactory = <Z extends z.ZodTypeAny>(parser: Z, _defaultValue: z.input<Z>) =>
   z.object({
     Bitcoin: z.object({ BTC: parser }),
     Ethereum: z.object({
@@ -32,27 +32,27 @@ const chainAssetMapFactory = <Z extends z.ZodTypeAny>(parser: Z, defaultValue: z
       USDC: parser,
       FLIP: parser,
       USDT: parser,
-      WBTC: parser.default(defaultValue),
+      WBTC: parser,
     }),
-    Arbitrum: z.object({ ETH: parser, USDC: parser, USDT: parser.default(defaultValue) }),
-    Solana: z.object({ SOL: parser, USDC: parser, USDT: parser.default(defaultValue) }),
+    Arbitrum: z.object({ ETH: parser, USDC: parser, USDT: parser }),
+    Solana: z.object({ SOL: parser, USDC: parser, USDT: parser }),
     Assethub: z.object({ DOT: parser, USDC: parser, USDT: parser }),
-    Tron: z.object({ TRX: parser, USDT: parser.default(defaultValue) }),
+    Tron: z.object({ TRX: parser, USDT: parser }),
   });
 
-const chainBaseAssetMapFactory = <Z extends z.ZodTypeAny>(parser: Z, defaultValue: z.input<Z>) =>
+const chainBaseAssetMapFactory = <Z extends z.ZodTypeAny>(parser: Z, _defaultValue: z.input<Z>) =>
   z.object({
     Bitcoin: z.object({ BTC: parser }),
     Ethereum: z.object({
       ETH: parser,
       FLIP: parser,
       USDT: parser,
-      WBTC: parser.default(defaultValue),
+      WBTC: parser,
     }),
-    Arbitrum: z.object({ ETH: parser, USDC: parser, USDT: parser.default(defaultValue) }),
-    Solana: z.object({ SOL: parser, USDC: parser, USDT: parser.default(defaultValue) }),
+    Arbitrum: z.object({ ETH: parser, USDC: parser, USDT: parser }),
+    Solana: z.object({ SOL: parser, USDC: parser, USDT: parser }),
     Assethub: z.object({ DOT: parser, USDC: parser, USDT: parser }),
-    Tron: z.object({ TRX: parser, USDT: parser.default(defaultValue) }),
+    Tron: z.object({ TRX: parser, USDT: parser }),
   });
 
 const chainMapFactory = <Z extends z.ZodTypeAny>(parser: Z, _defaultValue: z.input<Z> = null) =>
