@@ -620,6 +620,7 @@ exports[`HttpClient > with server > handles cf_all_loans 1`] = `
       "asset": "BTC",
       "chain": "Bitcoin",
     },
+    "broker": null,
     "created_at": 1497,
     "loan_id": 0,
     "loan_type": {
@@ -632,6 +633,7 @@ exports[`HttpClient > with server > handles cf_all_loans 1`] = `
       "asset": "BTC",
       "chain": "Bitcoin",
     },
+    "broker": null,
     "created_at": 1498,
     "loan_id": 1,
     "loan_type": {
@@ -1421,7 +1423,7 @@ exports[`HttpClient > with server > handles cf_environment 1`] = `
       },
       "Tron": {
         "TRX": null,
-        "USDT": null,
+        "USDT": 10000,
       },
     },
     "max_swap_request_duration_blocks": 14400,
@@ -2035,11 +2037,9 @@ exports[`HttpClient > with server > handles cf_lending_config 1`] = `
     "soft_liquidation": 900000,
     "soft_liquidation_abort": 880000,
     "target": 800000,
-    "topup": null,
   },
   "minimum_loan_amount_usd": 100000000n,
   "minimum_supply_amount_usd": 100000000n,
-  "minimum_update_collateral_amount_usd": 10000000n,
   "minimum_update_loan_amount_usd": 10000000n,
   "network_fee_contributions": {
     "extra_interest": 10000,
@@ -2165,10 +2165,6 @@ exports[`HttpClient > with server > handles cf_loan_accounts 1`] = `
         "chain": "Bitcoin",
       },
     ],
-    "collateral_topup_asset": {
-      "asset": "BTC",
-      "chain": "Bitcoin",
-    },
     "liquidation_status": {
       "liquidation_swaps": [
         {
@@ -2184,7 +2180,28 @@ exports[`HttpClient > with server > handles cf_loan_accounts 1`] = `
           "asset": "USDC",
           "chain": "Ethereum",
         },
+        "broker": null,
+        "created_at": 1497,
         "loan_id": 1,
+        "loan_type": {
+          "User": "cFPdef3hF5zEwbWUG6ZaCJ3X7mTvEeAog7HxZ8QyFcCgDVGDM",
+        },
+        "principal_amount": 1000n,
+      },
+      {
+        "asset": {
+          "asset": "USDC",
+          "chain": "Ethereum",
+        },
+        "broker": {
+          "account": "cFM8kRvLBXagj6ZXvrt7wCM4jGmHvb5842jTtXXg3mRHjrvKy",
+          "bps": 5,
+        },
+        "created_at": 1498,
+        "loan_id": 1,
+        "loan_type": {
+          "User": "cFPdef3hF5zEwbWUG6ZaCJ3X7mTvEeAog7HxZ8QyFcCgDVGDM",
+        },
         "principal_amount": 1000n,
       },
     ],
@@ -2287,68 +2304,6 @@ exports[`HttpClient > with server > handles cf_safe_mode_statuses 1`] = `
   },
   "lending_pools": {
     "add_boost_funds_enabled": true,
-    "add_collateral": [
-      {
-        "asset": "ETH",
-        "chain": "Ethereum",
-      },
-      {
-        "asset": "FLIP",
-        "chain": "Ethereum",
-      },
-      {
-        "asset": "USDC",
-        "chain": "Ethereum",
-      },
-      {
-        "asset": "BTC",
-        "chain": "Bitcoin",
-      },
-      {
-        "asset": "ETH",
-        "chain": "Arbitrum",
-      },
-      {
-        "asset": "USDC",
-        "chain": "Arbitrum",
-      },
-      {
-        "asset": "USDT",
-        "chain": "Ethereum",
-      },
-      {
-        "asset": "SOL",
-        "chain": "Solana",
-      },
-      {
-        "asset": "USDC",
-        "chain": "Solana",
-      },
-      {
-        "asset": "DOT",
-        "chain": "Assethub",
-      },
-      {
-        "asset": "USDT",
-        "chain": "Assethub",
-      },
-      {
-        "asset": "USDC",
-        "chain": "Assethub",
-      },
-      {
-        "asset": "WBTC",
-        "chain": "Ethereum",
-      },
-      {
-        "asset": "USDT",
-        "chain": "Arbitrum",
-      },
-      {
-        "asset": "USDT",
-        "chain": "Solana",
-      },
-    ],
     "add_lender_funds": [
       {
         "asset": "ETH",
@@ -2474,68 +2429,6 @@ exports[`HttpClient > with server > handles cf_safe_mode_statuses 1`] = `
       },
     ],
     "liquidations_enabled": true,
-    "remove_collateral": [
-      {
-        "asset": "ETH",
-        "chain": "Ethereum",
-      },
-      {
-        "asset": "FLIP",
-        "chain": "Ethereum",
-      },
-      {
-        "asset": "USDC",
-        "chain": "Ethereum",
-      },
-      {
-        "asset": "BTC",
-        "chain": "Bitcoin",
-      },
-      {
-        "asset": "ETH",
-        "chain": "Arbitrum",
-      },
-      {
-        "asset": "USDC",
-        "chain": "Arbitrum",
-      },
-      {
-        "asset": "USDT",
-        "chain": "Ethereum",
-      },
-      {
-        "asset": "SOL",
-        "chain": "Solana",
-      },
-      {
-        "asset": "USDC",
-        "chain": "Solana",
-      },
-      {
-        "asset": "DOT",
-        "chain": "Assethub",
-      },
-      {
-        "asset": "USDT",
-        "chain": "Assethub",
-      },
-      {
-        "asset": "USDC",
-        "chain": "Assethub",
-      },
-      {
-        "asset": "WBTC",
-        "chain": "Ethereum",
-      },
-      {
-        "asset": "USDT",
-        "chain": "Arbitrum",
-      },
-      {
-        "asset": "USDT",
-        "chain": "Solana",
-      },
-    ],
     "stop_boosting_enabled": true,
     "withdraw_lender_funds": [
       {
@@ -2743,7 +2636,7 @@ exports[`HttpClient > with server > handles cf_swapping_environment 1`] = `
     },
     "Tron": {
       "TRX": null,
-      "USDT": null,
+      "USDT": 10000,
     },
   },
   "max_swap_request_duration_blocks": 14400,

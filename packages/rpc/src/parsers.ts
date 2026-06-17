@@ -24,7 +24,7 @@ export const tronAddress = z
   .string()
   .refine(isValidTronAddress, { message: 'Invalid tron address' });
 
-const chainAssetMapFactory = <Z extends z.ZodTypeAny>(parser: Z, defaultValue: z.input<Z>) =>
+const chainAssetMapFactory = <Z extends z.ZodTypeAny>(parser: Z, _defaultValue: z.input<Z>) =>
   z.object({
     Bitcoin: z.object({ BTC: parser }),
     Ethereum: z.object({
@@ -32,47 +32,37 @@ const chainAssetMapFactory = <Z extends z.ZodTypeAny>(parser: Z, defaultValue: z
       USDC: parser,
       FLIP: parser,
       USDT: parser,
-      WBTC: parser.default(defaultValue),
+      WBTC: parser,
     }),
-    Arbitrum: z.object({ ETH: parser, USDC: parser, USDT: parser.default(defaultValue) }),
-    Solana: z.object({ SOL: parser, USDC: parser, USDT: parser.default(defaultValue) }),
+    Arbitrum: z.object({ ETH: parser, USDC: parser, USDT: parser }),
+    Solana: z.object({ SOL: parser, USDC: parser, USDT: parser }),
     Assethub: z.object({ DOT: parser, USDC: parser, USDT: parser }),
-    // TODO(2.2): remove Tron default
-    Tron: z
-      .object({ TRX: parser, USDT: parser.default(defaultValue) })
-      .default({ TRX: defaultValue, USDT: defaultValue } as z.input<Z> extends never
-        ? never
-        : { TRX: z.input<Z>; USDT: z.input<Z> }),
+    Tron: z.object({ TRX: parser, USDT: parser }),
   });
 
-const chainBaseAssetMapFactory = <Z extends z.ZodTypeAny>(parser: Z, defaultValue: z.input<Z>) =>
+const chainBaseAssetMapFactory = <Z extends z.ZodTypeAny>(parser: Z, _defaultValue: z.input<Z>) =>
   z.object({
     Bitcoin: z.object({ BTC: parser }),
     Ethereum: z.object({
       ETH: parser,
       FLIP: parser,
       USDT: parser,
-      WBTC: parser.default(defaultValue),
+      WBTC: parser,
     }),
-    Arbitrum: z.object({ ETH: parser, USDC: parser, USDT: parser.default(defaultValue) }),
-    Solana: z.object({ SOL: parser, USDC: parser, USDT: parser.default(defaultValue) }),
+    Arbitrum: z.object({ ETH: parser, USDC: parser, USDT: parser }),
+    Solana: z.object({ SOL: parser, USDC: parser, USDT: parser }),
     Assethub: z.object({ DOT: parser, USDC: parser, USDT: parser }),
-    // TODO(2.2): remove Tron default
-    Tron: z
-      .object({ TRX: parser, USDT: parser.default(defaultValue) })
-      .default({ TRX: defaultValue, USDT: defaultValue } as z.input<Z> extends never
-        ? never
-        : { TRX: z.input<Z>; USDT: z.input<Z> }),
+    Tron: z.object({ TRX: parser, USDT: parser }),
   });
 
-const chainMapFactory = <Z extends z.ZodTypeAny>(parser: Z, defaultValue: z.input<Z>) =>
+const chainMapFactory = <Z extends z.ZodTypeAny>(parser: Z, _defaultValue: z.input<Z> = null) =>
   z.object({
     Bitcoin: parser,
     Ethereum: parser,
     Arbitrum: parser,
     Solana: parser,
     Assethub: parser,
-    Tron: parser.default(defaultValue), // TODO(2.2): remove Tron default
+    Tron: parser,
   });
 
 const rpcAssetSchema = z.union([
@@ -742,8 +732,6 @@ export const cfSafeModeStatuses = z.object({
     borrowing: cfSupportedAssets,
     add_lender_funds: cfSupportedAssets,
     withdraw_lender_funds: cfSupportedAssets,
-    add_collateral: cfSupportedAssets.optional(), // TODO(2.2): Remove optional() once 2.2 goes live on all networks
-    remove_collateral: cfSupportedAssets.optional(), // TODO(2.2): Remove optional() once 2.2 goes live on all networks
     liquidations_enabled: z.boolean(),
   }),
   broadcast_ethereum: broadcastPalletSafeModeStatuses,
@@ -752,14 +740,14 @@ export const cfSafeModeStatuses = z.object({
   broadcast_arbitrum: broadcastPalletSafeModeStatuses,
   broadcast_solana: broadcastPalletSafeModeStatuses,
   broadcast_assethub: broadcastPalletSafeModeStatuses,
-  broadcast_tron: broadcastPalletSafeModeStatuses.optional(), // TODO(2.2): remove optional once all nodes include Tron
+  broadcast_tron: broadcastPalletSafeModeStatuses,
   ingress_egress_ethereum: ingressEgressPalletSafeModeStatuses,
   ingress_egress_bitcoin: ingressEgressPalletSafeModeStatuses,
   ingress_egress_polkadot: ingressEgressPalletSafeModeStatuses,
   ingress_egress_arbitrum: ingressEgressPalletSafeModeStatuses,
   ingress_egress_solana: ingressEgressPalletSafeModeStatuses,
   ingress_egress_assethub: ingressEgressPalletSafeModeStatuses,
-  ingress_egress_tron: ingressEgressPalletSafeModeStatuses.optional(), // TODO(2.2): remove optional once all nodes include Tron
+  ingress_egress_tron: ingressEgressPalletSafeModeStatuses,
   witnesser: z.enum(['CodeRed', 'CodeGreen', 'CodeAmber']),
   ethereum_elections: z.object({
     state_chain_gateway_witnessing: z.boolean(),
@@ -780,7 +768,7 @@ export const cfLendingPools = z.array(
     total_amount: numberOrHex,
     available_amount: numberOrHex,
     utilisation_rate: z.number(),
-    utilisation_cap: z.number().optional(), // TODO(2.2): remove optional once all networks have been upgraded
+    utilisation_cap: z.number(),
     current_interest_rate: z.number(),
     origination_fee: z.number(),
     liquidation_fee: z.number(),
@@ -796,7 +784,6 @@ export const cfLendingPools = z.array(
 export const cfLendingConfig = z.object({
   ltv_thresholds: z.object({
     target: z.number(),
-    topup: z.number().nullish(), // TODO(2.2): check if can be removed entirely
     soft_liquidation: z.number(),
     soft_liquidation_abort: z.number(),
     hard_liquidation: z.number(),
@@ -821,26 +808,24 @@ export const cfLendingConfig = z.object({
   minimum_loan_amount_usd: numberOrHex,
   minimum_supply_amount_usd: numberOrHex,
   minimum_update_loan_amount_usd: numberOrHex,
-  minimum_update_collateral_amount_usd: numberOrHex.optional(), // TODO(2.2): Remove optional() once 2.2 goes live on all networks
 });
 
 const cfLoan = z.object({
   loan_id: z.number(),
   asset: rpcAssetSchema,
   principal_amount: numberOrHex,
-  loan_type: z.union([z.object({ User: accountId }), z.object({ Boost: numberOrHex })]).optional(), // TODO(2.2): Remove optional() once 2.2 goes live on all networks
-  created_at: z.number().optional(), // TODO(2.2): Remove optional() once 2.2 goes live on all networks
+  loan_type: z.union([z.object({ User: accountId }), z.object({ Boost: numberOrHex })]),
+  created_at: z.number(),
   broker: z
     .object({
       account: accountId,
       bps: z.number(),
     })
-    .nullish(), // TODO(2.2): Make nullable() once 2.2 goes live on all networks
+    .nullable(),
 });
 
 export const cfLoanAccount = z.object({
   account: accountId,
-  collateral_topup_asset: rpcAssetSchema.nullish(), // TODO(2.2): check if can be removed entirely
   ltv_ratio: numberOrHex.nullable(),
   collateral: z.array(
     z.intersection(

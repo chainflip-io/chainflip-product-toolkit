@@ -30,7 +30,7 @@ import {
   lendingPools,
   lendingPoolSupplyBalances,
   liquidityProviderAccount,
-  loanAccounts210,
+  loanAccounts220,
   LP_ACCOUNT_ID,
   poolOrderbook,
   poolOrders,
@@ -485,7 +485,7 @@ describe(HttpClient, () => {
         case 'cf_lending_config':
           return respond(lendingConfig);
         case 'cf_loan_accounts':
-          return respond(loanAccounts210);
+          return respond(loanAccounts220);
         case 'cf_all_loans':
           return respond(allLoans);
         case 'cf_lending_pool_supply_balances':

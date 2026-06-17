@@ -33,7 +33,6 @@ import {
   lendingPools,
   lendingPoolSupplyBalances,
   liquidityProviderAccount,
-  loanAccounts210,
   loanAccounts220,
   monitoringSimulateAuction,
   poolOrders,
@@ -2628,11 +2627,11 @@ describe('parsers', () => {
     it('uses default fee info when fee is null', () => {
       const result = cfPoolsEnvironment.parse({
         fees: {
-          Ethereum: { ETH: null, FLIP: null, USDC: null, USDT: null },
+          Ethereum: { ETH: null, FLIP: null, USDC: null, USDT: null, WBTC: null },
           Polkadot: { DOT: null },
           Bitcoin: { BTC: null },
-          Arbitrum: { ETH: null, USDC: null },
-          Solana: { SOL: null, USDC: null },
+          Arbitrum: { ETH: null, USDC: null, USDT: null },
+          Solana: { SOL: null, USDC: null, USDT: null },
           Assethub: { DOT: null, USDC: null, USDT: null },
           Tron: { TRX: null, USDT: null },
         },
@@ -2895,11 +2894,9 @@ describe('parsers', () => {
             "soft_liquidation": 900000,
             "soft_liquidation_abort": 880000,
             "target": 800000,
-            "topup": null,
           },
           "minimum_loan_amount_usd": 100000000n,
           "minimum_supply_amount_usd": 100000000n,
-          "minimum_update_collateral_amount_usd": 10000000n,
           "minimum_update_loan_amount_usd": 10000000n,
           "network_fee_contributions": {
             "extra_interest": 10000,
@@ -2915,47 +2912,6 @@ describe('parsers', () => {
   });
 
   describe('cfLoanAccounts', () => {
-    it('parses the 2.1 cfLoanAccounts response', () => {
-      const result = cfLoanAccounts.parse(loanAccounts210);
-      expect(result).toMatchInlineSnapshot(`
-        [
-          {
-            "account": "cFL8fmgKZcchhtLagBH2GKfsuWxBqUaD5CYE1m7DFb8DBSLJ1",
-            "collateral": [
-              {
-                "amount": 3n,
-                "asset": "BTC",
-                "chain": "Bitcoin",
-              },
-            ],
-            "collateral_topup_asset": {
-              "asset": "BTC",
-              "chain": "Bitcoin",
-            },
-            "liquidation_status": {
-              "liquidation_swaps": [
-                {
-                  "loan_id": 1,
-                  "swap_request_id": 1,
-                },
-              ],
-              "liquidation_type": "Hard",
-            },
-            "loans": [
-              {
-                "asset": {
-                  "asset": "USDC",
-                  "chain": "Ethereum",
-                },
-                "loan_id": 1,
-                "principal_amount": 1000n,
-              },
-            ],
-            "ltv_ratio": 1333333333n,
-          },
-        ]
-      `);
-    });
     it('parses the 2.2 cfLoanAccounts response', () => {
       const result = cfLoanAccounts.parse(loanAccounts220);
       expect(result).toMatchInlineSnapshot(`
@@ -2969,10 +2925,6 @@ describe('parsers', () => {
                 "chain": "Bitcoin",
               },
             ],
-            "collateral_topup_asset": {
-              "asset": "BTC",
-              "chain": "Bitcoin",
-            },
             "liquidation_status": {
               "liquidation_swaps": [
                 {
@@ -2988,6 +2940,8 @@ describe('parsers', () => {
                   "asset": "USDC",
                   "chain": "Ethereum",
                 },
+                "broker": null,
+                "created_at": 1497,
                 "loan_id": 1,
                 "loan_type": {
                   "User": "cFPdef3hF5zEwbWUG6ZaCJ3X7mTvEeAog7HxZ8QyFcCgDVGDM",
@@ -3003,6 +2957,7 @@ describe('parsers', () => {
                   "account": "cFM8kRvLBXagj6ZXvrt7wCM4jGmHvb5842jTtXXg3mRHjrvKy",
                   "bps": 5,
                 },
+                "created_at": 1498,
                 "loan_id": 1,
                 "loan_type": {
                   "User": "cFPdef3hF5zEwbWUG6ZaCJ3X7mTvEeAog7HxZ8QyFcCgDVGDM",
@@ -3199,68 +3154,6 @@ describe('parsers', () => {
           },
           "lending_pools": {
             "add_boost_funds_enabled": true,
-            "add_collateral": [
-              {
-                "asset": "ETH",
-                "chain": "Ethereum",
-              },
-              {
-                "asset": "FLIP",
-                "chain": "Ethereum",
-              },
-              {
-                "asset": "USDC",
-                "chain": "Ethereum",
-              },
-              {
-                "asset": "BTC",
-                "chain": "Bitcoin",
-              },
-              {
-                "asset": "ETH",
-                "chain": "Arbitrum",
-              },
-              {
-                "asset": "USDC",
-                "chain": "Arbitrum",
-              },
-              {
-                "asset": "USDT",
-                "chain": "Ethereum",
-              },
-              {
-                "asset": "SOL",
-                "chain": "Solana",
-              },
-              {
-                "asset": "USDC",
-                "chain": "Solana",
-              },
-              {
-                "asset": "DOT",
-                "chain": "Assethub",
-              },
-              {
-                "asset": "USDT",
-                "chain": "Assethub",
-              },
-              {
-                "asset": "USDC",
-                "chain": "Assethub",
-              },
-              {
-                "asset": "WBTC",
-                "chain": "Ethereum",
-              },
-              {
-                "asset": "USDT",
-                "chain": "Arbitrum",
-              },
-              {
-                "asset": "USDT",
-                "chain": "Solana",
-              },
-            ],
             "add_lender_funds": [
               {
                 "asset": "ETH",
@@ -3386,68 +3279,6 @@ describe('parsers', () => {
               },
             ],
             "liquidations_enabled": true,
-            "remove_collateral": [
-              {
-                "asset": "ETH",
-                "chain": "Ethereum",
-              },
-              {
-                "asset": "FLIP",
-                "chain": "Ethereum",
-              },
-              {
-                "asset": "USDC",
-                "chain": "Ethereum",
-              },
-              {
-                "asset": "BTC",
-                "chain": "Bitcoin",
-              },
-              {
-                "asset": "ETH",
-                "chain": "Arbitrum",
-              },
-              {
-                "asset": "USDC",
-                "chain": "Arbitrum",
-              },
-              {
-                "asset": "USDT",
-                "chain": "Ethereum",
-              },
-              {
-                "asset": "SOL",
-                "chain": "Solana",
-              },
-              {
-                "asset": "USDC",
-                "chain": "Solana",
-              },
-              {
-                "asset": "DOT",
-                "chain": "Assethub",
-              },
-              {
-                "asset": "USDT",
-                "chain": "Assethub",
-              },
-              {
-                "asset": "USDC",
-                "chain": "Assethub",
-              },
-              {
-                "asset": "WBTC",
-                "chain": "Ethereum",
-              },
-              {
-                "asset": "USDT",
-                "chain": "Arbitrum",
-              },
-              {
-                "asset": "USDT",
-                "chain": "Solana",
-              },
-            ],
             "stop_boosting_enabled": true,
             "withdraw_lender_funds": [
               {
@@ -3659,6 +3490,7 @@ describe('parsers', () => {
               "asset": "BTC",
               "chain": "Bitcoin",
             },
+            "broker": null,
             "created_at": 1497,
             "loan_id": 0,
             "loan_type": {
@@ -3671,6 +3503,7 @@ describe('parsers', () => {
               "asset": "BTC",
               "chain": "Bitcoin",
             },
+            "broker": null,
             "created_at": 1498,
             "loan_id": 1,
             "loan_type": {
