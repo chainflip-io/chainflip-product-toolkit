@@ -172,11 +172,11 @@ export const cfIngressEgressEnvironment = z
     minimum_deposit_amounts: chainAssetMapFactory(numberOrHex, 0),
     ingress_fees: chainAssetMapFactory(numberOrHex.nullable(), null),
     egress_fees: chainAssetMapFactory(numberOrHex.nullable(), null),
-    witness_safety_margins: chainMapFactory(z.number().nullable()),
+    witness_safety_margins: chainMapFactory(z.number().nullable(), null),
     egress_dust_limits: chainAssetMapFactory(numberOrHex, 0),
-    channel_opening_fees: chainMapFactory(numberOrHex),
-    ingress_delays: chainMapFactory(z.number()),
-    boost_delays: chainMapFactory(z.number()),
+    channel_opening_fees: chainMapFactory(numberOrHex, 0),
+    ingress_delays: chainMapFactory(z.number(), 0),
+    boost_delays: chainMapFactory(z.number(), 0),
     boost_minimum_add_funds_amounts: chainAssetMapFactory(numberOrHex.nullable(), null),
   })
   .transform(rename({ egress_dust_limits: 'minimum_egress_amounts' }));
