@@ -620,6 +620,7 @@ exports[`HttpClient > with server > handles cf_all_loans 1`] = `
       "asset": "BTC",
       "chain": "Bitcoin",
     },
+    "broker": null,
     "created_at": 1497,
     "loan_id": 0,
     "loan_type": {
@@ -632,6 +633,7 @@ exports[`HttpClient > with server > handles cf_all_loans 1`] = `
       "asset": "BTC",
       "chain": "Bitcoin",
     },
+    "broker": null,
     "created_at": 1498,
     "loan_id": 1,
     "loan_type": {
@@ -1421,7 +1423,7 @@ exports[`HttpClient > with server > handles cf_environment 1`] = `
       },
       "Tron": {
         "TRX": null,
-        "USDT": null,
+        "USDT": 10000,
       },
     },
     "max_swap_request_duration_blocks": 14400,
@@ -2035,7 +2037,6 @@ exports[`HttpClient > with server > handles cf_lending_config 1`] = `
     "soft_liquidation": 900000,
     "soft_liquidation_abort": 880000,
     "target": 800000,
-    "topup": null,
   },
   "minimum_loan_amount_usd": 100000000n,
   "minimum_supply_amount_usd": 100000000n,
@@ -2165,10 +2166,6 @@ exports[`HttpClient > with server > handles cf_loan_accounts 1`] = `
         "chain": "Bitcoin",
       },
     ],
-    "collateral_topup_asset": {
-      "asset": "BTC",
-      "chain": "Bitcoin",
-    },
     "liquidation_status": {
       "liquidation_swaps": [
         {
@@ -2184,7 +2181,28 @@ exports[`HttpClient > with server > handles cf_loan_accounts 1`] = `
           "asset": "USDC",
           "chain": "Ethereum",
         },
+        "broker": null,
+        "created_at": 1497,
         "loan_id": 1,
+        "loan_type": {
+          "User": "cFPdef3hF5zEwbWUG6ZaCJ3X7mTvEeAog7HxZ8QyFcCgDVGDM",
+        },
+        "principal_amount": 1000n,
+      },
+      {
+        "asset": {
+          "asset": "USDC",
+          "chain": "Ethereum",
+        },
+        "broker": {
+          "account": "cFM8kRvLBXagj6ZXvrt7wCM4jGmHvb5842jTtXXg3mRHjrvKy",
+          "bps": 5,
+        },
+        "created_at": 1498,
+        "loan_id": 1,
+        "loan_type": {
+          "User": "cFPdef3hF5zEwbWUG6ZaCJ3X7mTvEeAog7HxZ8QyFcCgDVGDM",
+        },
         "principal_amount": 1000n,
       },
     ],
@@ -2743,7 +2761,7 @@ exports[`HttpClient > with server > handles cf_swapping_environment 1`] = `
     },
     "Tron": {
       "TRX": null,
-      "USDT": null,
+      "USDT": 10000,
     },
   },
   "max_swap_request_duration_blocks": 14400,

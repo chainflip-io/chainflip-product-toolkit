@@ -321,6 +321,10 @@ export const swappingEnvironment: z.input<typeof cfSwappingEnvironment> = {
       USDT: 100,
       USDC: 100,
     },
+    Tron: {
+      TRX: null,
+      USDT: 10000,
+    },
   },
 };
 
@@ -1918,7 +1922,6 @@ export const lendingPools: z.input<typeof cfLendingPools> = [
 export const lendingConfig: z.input<typeof cfLendingConfig> = {
   ltv_thresholds: {
     target: 800000,
-    topup: null,
     soft_liquidation: 900000,
     soft_liquidation_abort: 880000,
     hard_liquidation: 950000,
@@ -1946,51 +1949,9 @@ export const lendingConfig: z.input<typeof cfLendingConfig> = {
   minimum_update_collateral_amount_usd: '0x989680',
 };
 
-// TODO(2.2): Remove once 2.2 goes live on all networks
-export const loanAccounts210: z.input<typeof cfLoanAccounts> = [
-  {
-    account: 'cFL8fmgKZcchhtLagBH2GKfsuWxBqUaD5CYE1m7DFb8DBSLJ1',
-    collateral_topup_asset: {
-      chain: 'Bitcoin',
-      asset: 'BTC',
-    },
-    ltv_ratio: '1333333333',
-    collateral: [
-      {
-        chain: 'Bitcoin',
-        asset: 'BTC',
-        amount: '0x3',
-      },
-    ],
-    loans: [
-      {
-        loan_id: 1,
-        asset: {
-          chain: 'Ethereum',
-          asset: 'USDC',
-        },
-        principal_amount: '0x3e8',
-      },
-    ],
-    liquidation_status: {
-      liquidation_swaps: [
-        {
-          swap_request_id: 1,
-          loan_id: 1,
-        },
-      ],
-      liquidation_type: 'Hard',
-    },
-  },
-];
-
 export const loanAccounts220: z.input<typeof cfLoanAccounts> = [
   {
     account: 'cFL8fmgKZcchhtLagBH2GKfsuWxBqUaD5CYE1m7DFb8DBSLJ1',
-    collateral_topup_asset: {
-      chain: 'Bitcoin',
-      asset: 'BTC',
-    },
     ltv_ratio: '1333333333',
     collateral: [
       {
@@ -2009,6 +1970,8 @@ export const loanAccounts220: z.input<typeof cfLoanAccounts> = [
         loan_type: {
           User: 'cFPdef3hF5zEwbWUG6ZaCJ3X7mTvEeAog7HxZ8QyFcCgDVGDM',
         },
+        created_at: 1497,
+        broker: null,
         principal_amount: '0x3e8',
       },
       {
@@ -2020,6 +1983,7 @@ export const loanAccounts220: z.input<typeof cfLoanAccounts> = [
         loan_type: {
           User: 'cFPdef3hF5zEwbWUG6ZaCJ3X7mTvEeAog7HxZ8QyFcCgDVGDM',
         },
+        created_at: 1498,
         broker: {
           account: 'cFM8kRvLBXagj6ZXvrt7wCM4jGmHvb5842jTtXXg3mRHjrvKy',
           bps: 5,
@@ -2205,6 +2169,7 @@ export const allLoans: z.input<typeof cfAllLoans> = [
       asset: 'BTC',
     },
     created_at: 1497,
+    broker: null,
     principal_amount: '0x5f60810',
   },
   {
@@ -2217,6 +2182,7 @@ export const allLoans: z.input<typeof cfAllLoans> = [
       asset: 'BTC',
     },
     created_at: 1498,
+    broker: null,
     principal_amount: '0x5F5E100',
   },
 ];
