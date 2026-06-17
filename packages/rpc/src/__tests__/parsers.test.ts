@@ -2897,7 +2897,6 @@ describe('parsers', () => {
           },
           "minimum_loan_amount_usd": 100000000n,
           "minimum_supply_amount_usd": 100000000n,
-          "minimum_update_collateral_amount_usd": 10000000n,
           "minimum_update_loan_amount_usd": 10000000n,
           "network_fee_contributions": {
             "extra_interest": 10000,
@@ -3155,68 +3154,6 @@ describe('parsers', () => {
           },
           "lending_pools": {
             "add_boost_funds_enabled": true,
-            "add_collateral": [
-              {
-                "asset": "ETH",
-                "chain": "Ethereum",
-              },
-              {
-                "asset": "FLIP",
-                "chain": "Ethereum",
-              },
-              {
-                "asset": "USDC",
-                "chain": "Ethereum",
-              },
-              {
-                "asset": "BTC",
-                "chain": "Bitcoin",
-              },
-              {
-                "asset": "ETH",
-                "chain": "Arbitrum",
-              },
-              {
-                "asset": "USDC",
-                "chain": "Arbitrum",
-              },
-              {
-                "asset": "USDT",
-                "chain": "Ethereum",
-              },
-              {
-                "asset": "SOL",
-                "chain": "Solana",
-              },
-              {
-                "asset": "USDC",
-                "chain": "Solana",
-              },
-              {
-                "asset": "DOT",
-                "chain": "Assethub",
-              },
-              {
-                "asset": "USDT",
-                "chain": "Assethub",
-              },
-              {
-                "asset": "USDC",
-                "chain": "Assethub",
-              },
-              {
-                "asset": "WBTC",
-                "chain": "Ethereum",
-              },
-              {
-                "asset": "USDT",
-                "chain": "Arbitrum",
-              },
-              {
-                "asset": "USDT",
-                "chain": "Solana",
-              },
-            ],
             "add_lender_funds": [
               {
                 "asset": "ETH",
@@ -3342,68 +3279,6 @@ describe('parsers', () => {
               },
             ],
             "liquidations_enabled": true,
-            "remove_collateral": [
-              {
-                "asset": "ETH",
-                "chain": "Ethereum",
-              },
-              {
-                "asset": "FLIP",
-                "chain": "Ethereum",
-              },
-              {
-                "asset": "USDC",
-                "chain": "Ethereum",
-              },
-              {
-                "asset": "BTC",
-                "chain": "Bitcoin",
-              },
-              {
-                "asset": "ETH",
-                "chain": "Arbitrum",
-              },
-              {
-                "asset": "USDC",
-                "chain": "Arbitrum",
-              },
-              {
-                "asset": "USDT",
-                "chain": "Ethereum",
-              },
-              {
-                "asset": "SOL",
-                "chain": "Solana",
-              },
-              {
-                "asset": "USDC",
-                "chain": "Solana",
-              },
-              {
-                "asset": "DOT",
-                "chain": "Assethub",
-              },
-              {
-                "asset": "USDT",
-                "chain": "Assethub",
-              },
-              {
-                "asset": "USDC",
-                "chain": "Assethub",
-              },
-              {
-                "asset": "WBTC",
-                "chain": "Ethereum",
-              },
-              {
-                "asset": "USDT",
-                "chain": "Arbitrum",
-              },
-              {
-                "asset": "USDT",
-                "chain": "Solana",
-              },
-            ],
             "stop_boosting_enabled": true,
             "withdraw_lender_funds": [
               {

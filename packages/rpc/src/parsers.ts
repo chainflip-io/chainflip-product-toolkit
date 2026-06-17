@@ -732,8 +732,6 @@ export const cfSafeModeStatuses = z.object({
     borrowing: cfSupportedAssets,
     add_lender_funds: cfSupportedAssets,
     withdraw_lender_funds: cfSupportedAssets,
-    add_collateral: cfSupportedAssets,
-    remove_collateral: cfSupportedAssets,
     liquidations_enabled: z.boolean(),
   }),
   broadcast_ethereum: broadcastPalletSafeModeStatuses,
@@ -810,7 +808,6 @@ export const cfLendingConfig = z.object({
   minimum_loan_amount_usd: numberOrHex,
   minimum_supply_amount_usd: numberOrHex,
   minimum_update_loan_amount_usd: numberOrHex,
-  minimum_update_collateral_amount_usd: numberOrHex,
 });
 
 const cfLoan = z.object({
