@@ -40,6 +40,7 @@ export type CfLoanAccounts = RpcResult<'cf_loan_accounts'>;
 export type CfLendingPoolSupplyBalances = RpcResult<'cf_lending_pool_supply_balances'>;
 export type CfVaultAddresses = RpcResult<'cf_get_vault_addresses'>;
 export type CfAllLoans = RpcResult<'cf_all_loans'>;
+export type CfAllAccountInfos = RpcResult<'cf_all_account_infos'>;
 
 export type CfAccountInfoResponse = RpcResponse<'cf_account_info'>;
 export type CfAccountsResponse = RpcResponse<'cf_accounts'>;
@@ -80,6 +81,7 @@ export type CfLoanAccountsResponse = RpcResponse<'cf_loan_accounts'>;
 export type CfLendingPoolSupplyBalancesResponse = RpcResponse<'cf_lending_pool_supply_balances'>;
 export type CfVaultAddressesResponse = RpcResponse<'cf_get_vault_addresses'>;
 export type CfAllLoansResponse = RpcResponse<'cf_all_loans'>;
+export type CfAllAccountInfosResponse = RpcResponse<'cf_all_account_infos'>;
 export type CfUnregisteredAccount = z.output<typeof unregistered>;
 export type CfBrokerAccount = z.output<typeof broker>;
 export type CfValidatorAccount = z.output<typeof validator>;

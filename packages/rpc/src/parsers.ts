@@ -445,6 +445,8 @@ export const cfAccountInfo = z
     }
   });
 
+export const cfAllAccountInfos = z.array(cfAccountInfo);
+
 export const cfAccounts = z.array(z.tuple([accountId, z.string()]));
 
 export const cfPoolPriceV2 = z.object({

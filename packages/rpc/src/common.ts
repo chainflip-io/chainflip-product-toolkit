@@ -48,6 +48,7 @@ import {
   cfIngressEgressEvents,
   brokerRequestAccountCreationDepositAddress,
   cfAllLoans,
+  cfAllAccountInfos,
 } from './parsers';
 
 type Nullish<T> = T | null | undefined;
@@ -63,6 +64,8 @@ type AssetSymbol = AssetAndChain['asset'];
 type UncheckedAssetAndChain = { asset: AssetSymbol; chain: Chain };
 
 type SwapFeeType = 'IngressDepositChannel' | 'IngressVaultSwap' | 'Network' | 'Egress';
+
+type AccountRole = 'Unregistered' | 'Validator' | 'LiquidityProvider' | 'Broker' | 'Operator';
 
 type AdditionalOrder = {
   LimitOrder: {
@@ -237,6 +240,7 @@ export type RpcRequest = WithHash<{
   cf_get_vault_addresses: [];
   cf_ingress_egress_events: [chain: Chain];
   cf_all_loans: [];
+  cf_all_account_infos: [roles?: Nullish<AccountRole[]>];
 }> & {
   chain_getBlockHash: [blockHeight?: number];
   broker_request_swap_deposit_address: [
@@ -320,6 +324,7 @@ export const rpcResult = {
   cf_get_vault_addresses: cfVaultAddresses,
   cf_ingress_egress_events: cfIngressEgressEvents,
   cf_all_loans: cfAllLoans,
+  cf_all_account_infos: cfAllAccountInfos,
 } as const satisfies { [K in keyof RpcRequest]: z.ZodTypeAny };
 
 export type RpcMethod = keyof RpcRequest;
