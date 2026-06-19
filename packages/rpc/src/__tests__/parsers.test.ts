@@ -2751,6 +2751,7 @@ describe('parsers', () => {
 
       expect(result).toMatchInlineSnapshot(`
         {
+          "account_id": "cFM7AjUFjqtrRStbEuNRYzEpjAqKEWP3om8FydieAhbqpqRKz",
           "active_delegation": {
             "delegation_fee_bps": 1500,
             "delegators": {
@@ -3524,6 +3525,7 @@ describe('parsers', () => {
       expect(result).toMatchInlineSnapshot(`
         [
           {
+            "account_id": "cFM7AjUFjqtrRStbEuNRYzEpjAqKEWP3om8FydieAhbqpqRKz",
             "active_delegation": {
               "delegation_fee_bps": 1500,
               "delegators": {
@@ -3586,6 +3588,7 @@ describe('parsers', () => {
             "vanity_name": "Buttoness",
           },
           {
+            "account_id": "cFKzr7DwLCRtSkou5H5moKri7g9WwJ4tAbVJv6dZGhLb811Tc",
             "apy_bp": 970,
             "asset_balances": {
               "Arbitrum": {
@@ -3637,6 +3640,7 @@ describe('parsers', () => {
             "role": "validator",
           },
           {
+            "account_id": "cFJ6qQZ3ybhMDPt7KXDUUj3aLC2DXaPm8rCLCfLEsyMRH2AXK",
             "apy_bp": 970,
             "asset_balances": {
               "Arbitrum": {
@@ -3689,6 +3693,7 @@ describe('parsers', () => {
             "role": "validator",
           },
           {
+            "account_id": "cFMVtnPTJFYFvnHXK14HZ6XWDSCAByTPZDWrTeFEc2B8A3m7M",
             "asset_balances": {
               "Arbitrum": {
                 "ETH": 0n,
@@ -3828,6 +3833,7 @@ describe('parsers', () => {
             "vanity_name": "Chainflip Testnet LP BOOST",
           },
           {
+            "account_id": "cFJjZKzA5rUTb9qkZMGfec7piCpiAQKr15B4nALzriMGQL8BE",
             "affiliates": [
               {
                 "account_id": "cFJjZKzA5rUTb9qkZMGfec7piCpiAQKr15B4nALzriMGQL8BE",
@@ -3904,6 +3910,7 @@ describe('parsers', () => {
             "role": "broker",
           },
           {
+            "account_id": "cFMmWJ1U3x1wZFo4qf36XKG8BxejtMvkKE9DZEt2UtASGMBMf",
             "affiliates": [],
             "asset_balances": {
               "Arbitrum": {
@@ -3973,6 +3980,7 @@ describe('parsers', () => {
             "role": "broker",
           },
           {
+            "account_id": "cFNzMM63izeZ2zqKiUpUVWLEd6YqzbVEAHgPtgHLDtAVG4Hmv",
             "asset_balances": {
               "Arbitrum": {
                 "ETH": 0n,
@@ -4014,6 +4022,7 @@ describe('parsers', () => {
             },
           },
           {
+            "account_id": "cFKvKKCcScNcWyrJRASocm7vZq5vU8QpQhqdVGU8PnMEwgud5",
             "asset_balances": {
               "Arbitrum": {
                 "ETH": 0n,

@@ -89,6 +89,7 @@ describe(WsClient, () => {
                     id: req.id,
                     jsonrpc: '2.0',
                     result: {
+                      account_id: 'cFaccount 1',
                       role: 'unregistered',
                       flip_balance: '0x0',
                       asset_balances: createChainAssetMap('0x0'),
@@ -102,6 +103,7 @@ describe(WsClient, () => {
                     id: req.id,
                     jsonrpc: '2.0',
                     result: {
+                      account_id: 'cFaccount 2',
                       role: 'unregistered',
                       flip_balance: '0x10',
                       asset_balances: createChainAssetMap('0x0'),
@@ -247,6 +249,7 @@ describe(WsClient, () => {
       .toMatchInlineSnapshot(`
         [
           {
+            "account_id": "cFaccount 1",
             "asset_balances": {
               "Arbitrum": {
                 "ETH": 0n,
@@ -284,6 +287,7 @@ describe(WsClient, () => {
             "role": "unregistered",
           },
           {
+            "account_id": "cFaccount 2",
             "asset_balances": {
               "Arbitrum": {
                 "ETH": 0n,

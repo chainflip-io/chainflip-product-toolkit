@@ -698,7 +698,18 @@ export const emptyChainAssetMap = {
   Tron: { TRX: '0x0', USDT: '0x0' },
 };
 
+export const VALIDATOR_ACCOUNT_ID = 'cFKzr7DwLCRtSkou5H5moKri7g9WwJ4tAbVJv6dZGhLb811Tc';
+export const VALIDATOR_ACCOUNT_ID2 = 'cFJ6qQZ3ybhMDPt7KXDUUj3aLC2DXaPm8rCLCfLEsyMRH2AXK';
+export const LP_ACCOUNT_ID = 'cFMVtnPTJFYFvnHXK14HZ6XWDSCAByTPZDWrTeFEc2B8A3m7M';
+export const BROKER_ACCOUNT_ID = 'cFJjZKzA5rUTb9qkZMGfec7piCpiAQKr15B4nALzriMGQL8BE';
+export const BROKER_ACCOUNT_ID2 = 'cFMmWJ1U3x1wZFo4qf36XKG8BxejtMvkKE9DZEt2UtASGMBMf';
+export const DELEGATOR_ACCOUNT_ID = 'cFNzMM63izeZ2zqKiUpUVWLEd6YqzbVEAHgPtgHLDtAVG4Hmv';
+export const DELEGATOR_ACCOUNT_ID2 = 'cFKvKKCcScNcWyrJRASocm7vZq5vU8QpQhqdVGU8PnMEwgud5';
+export const OPERATOR_ACCOUNT_ID = 'cFM7AjUFjqtrRStbEuNRYzEpjAqKEWP3om8FydieAhbqpqRKz';
+export const UNREGISTERED_ACCOUNT_ID = 'cFLEjm2hnGRRt7Ej9efeBQ9Yb7fDvjAfKEPVCBkkwAEMYDDtg';
+
 export const unregisteredAccount: z.input<typeof unregistered> = {
+  account_id: UNREGISTERED_ACCOUNT_ID,
   role: 'unregistered',
   flip_balance: '0x0',
   asset_balances: {
@@ -714,6 +725,7 @@ export const unregisteredAccount: z.input<typeof unregistered> = {
 };
 
 export const liquidityProviderAccount: z.input<typeof liquidityProvider> = {
+  account_id: LP_ACCOUNT_ID,
   vanity_name: 'Chainflip Testnet LP BOOST',
   flip_balance: '0x56bc747ee70ef7e80',
   asset_balances: {
@@ -854,6 +866,7 @@ export const liquidityProviderAccount: z.input<typeof liquidityProvider> = {
 };
 
 export const brokerAccount: z.input<typeof broker> = {
+  account_id: BROKER_ACCOUNT_ID,
   role: 'broker',
   flip_balance: '0x123dd89c5bb3f5009',
   estimated_redeemable_balance: '0x123dd89c5bb3f5009',
@@ -884,6 +897,7 @@ export const brokerAccount: z.input<typeof broker> = {
 };
 
 export const brokerAccountNoAffiliates: z.input<typeof broker> = {
+  account_id: BROKER_ACCOUNT_ID2,
   role: 'broker',
   flip_balance: '0x123dd89c5bb3f5009',
   earned_fees: {
@@ -923,6 +937,7 @@ export const brokerAccountNoAffiliates: z.input<typeof broker> = {
 };
 
 export const validatorAccount: z.input<typeof validator> = {
+  account_id: VALIDATOR_ACCOUNT_ID,
   role: 'validator',
   flip_balance: '0x35670aa54a62ccedacab',
   bond: '0x2fa71622a7b77fdf4d10',
@@ -942,6 +957,7 @@ export const validatorAccount: z.input<typeof validator> = {
 };
 
 export const validatorAccount2: z.input<typeof validator> = {
+  account_id: VALIDATOR_ACCOUNT_ID2,
   role: 'validator',
   flip_balance: '0x35670aa54a62ccedacab',
   bond: '0x2fa71622a7b77fdf4d10',
@@ -962,6 +978,7 @@ export const validatorAccount2: z.input<typeof validator> = {
 };
 
 const delegator1: z.input<typeof unregistered> = {
+  account_id: DELEGATOR_ACCOUNT_ID,
   flip_balance: '0x3635c9adc5dea00000',
   asset_balances: emptyChainAssetMap,
   bond: '0x0',
@@ -974,6 +991,7 @@ const delegator1: z.input<typeof unregistered> = {
 };
 
 const delegator2: z.input<typeof unregistered> = {
+  account_id: DELEGATOR_ACCOUNT_ID2,
   role: 'unregistered',
   flip_balance: '0x363756d3e8a67a7fec',
   asset_balances: emptyChainAssetMap,
@@ -990,6 +1008,7 @@ const delegator2: z.input<typeof unregistered> = {
 };
 
 export const cfAccountInfoOperator: z.input<typeof cfAccountInfo> = {
+  account_id: OPERATOR_ACCOUNT_ID,
   vanity_name: 'Buttoness',
   flip_balance: '0x363810b745006bc6c6',
   asset_balances: emptyChainAssetMap,
@@ -1018,14 +1037,6 @@ export const cfAccountInfoOperator: z.input<typeof cfAccountInfo> = {
     delegation_fee_bps: 1500,
   },
 };
-
-export const VALIDATOR_ACCOUNT_ID = 'cFKzr7DwLCRtSkou5H5moKri7g9WwJ4tAbVJv6dZGhLb811Tc';
-export const VALIDATOR_ACCOUNT_ID2 = 'cFJ6qQZ3ybhMDPt7KXDUUj3aLC2DXaPm8rCLCfLEsyMRH2AXK';
-export const LP_ACCOUNT_ID = 'cFMVtnPTJFYFvnHXK14HZ6XWDSCAByTPZDWrTeFEc2B8A3m7M';
-export const BROKER_ACCOUNT_ID = 'cFJjZKzA5rUTb9qkZMGfec7piCpiAQKr15B4nALzriMGQL8BE';
-export const BROKER_ACCOUNT_ID2 = 'cFMmWJ1U3x1wZFo4qf36XKG8BxejtMvkKE9DZEt2UtASGMBMf';
-export const DELEGATOR_ACCOUNT_ID = 'cFNzMM63izeZ2zqKiUpUVWLEd6YqzbVEAHgPtgHLDtAVG4Hmv';
-export const DELEGATOR_ACCOUNT_ID2 = 'cFKvKKCcScNcWyrJRASocm7vZq5vU8QpQhqdVGU8PnMEwgud5';
 
 export const accounts: Record<`cF${string}`, z.input<typeof cfAccountInfo>> = {
   [VALIDATOR_ACCOUNT_ID]: validatorAccount,
