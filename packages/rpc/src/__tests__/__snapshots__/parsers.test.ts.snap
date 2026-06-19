@@ -2,6 +2,7 @@
 
 exports[`parsers > cfAccountInfo > parses the latest cfAccountInfo schema for an lp 1`] = `
 {
+  "account_id": "cFMVtnPTJFYFvnHXK14HZ6XWDSCAByTPZDWrTeFEc2B8A3m7M",
   "asset_balances": {
     "Arbitrum": {
       "ETH": 0n,

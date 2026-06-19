@@ -323,6 +323,7 @@ const delegationStatus = z.object({
 });
 
 export const accountInfoCommon = {
+  account_id: accountId,
   vanity_name: z.string().optional(),
   flip_balance: numberOrHex,
   asset_balances: chainAssetMapFactory(numberOrHex, 0),
@@ -444,6 +445,8 @@ export const cfAccountInfo = z
       }
     }
   });
+
+export const cfAllAccountInfos = z.array(cfAccountInfo);
 
 export const cfAccounts = z.array(z.tuple([accountId, z.string()]));
 

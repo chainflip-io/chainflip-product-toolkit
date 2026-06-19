@@ -23,8 +23,10 @@ import {
   cfIngressEgressEnvironment,
   cfIngressEgressEvents,
   cfAllLoans,
+  cfAllAccountInfos,
 } from '../parsers';
 import {
+  accounts,
   allLoans,
   cfAccountInfoOperator,
   cfOraclePrice,
@@ -2749,6 +2751,7 @@ describe('parsers', () => {
 
       expect(result).toMatchInlineSnapshot(`
         {
+          "account_id": "cFM7AjUFjqtrRStbEuNRYzEpjAqKEWP3om8FydieAhbqpqRKz",
           "active_delegation": {
             "delegation_fee_bps": 1500,
             "delegators": {
@@ -3513,6 +3516,563 @@ describe('parsers', () => {
           },
         ]
       `);
+    });
+  });
+
+  describe('cfAllAccountInfos', () => {
+    it('parses an array of account infos for every role', () => {
+      const result = cfAllAccountInfos.parse([cfAccountInfoOperator, ...Object.values(accounts)]);
+      expect(result).toMatchInlineSnapshot(`
+        [
+          {
+            "account_id": "cFM7AjUFjqtrRStbEuNRYzEpjAqKEWP3om8FydieAhbqpqRKz",
+            "active_delegation": {
+              "delegation_fee_bps": 1500,
+              "delegators": {
+                "cFHsUq1uK5opJudRDczt7w4baiRDHR6Kdezw77u2JnRnCGKcs": 1000000000000000000000n,
+              },
+              "operator": "cFMjXCTxTHVkSqbKzeVwJ25TJxLqc1Vn9usPgUGmZhsyvHRQZ",
+              "validators": {
+                "cFNkiayhWvppDY5zSzG8rAYMaqbunLBAAbBQcAgFF4x1jaMSy": 5003891662143612383478n,
+              },
+            },
+            "allowed": [],
+            "asset_balances": {
+              "Arbitrum": {
+                "ETH": 0n,
+                "USDC": 0n,
+                "USDT": 0n,
+              },
+              "Assethub": {
+                "DOT": 0n,
+                "USDC": 0n,
+                "USDT": 0n,
+              },
+              "Bitcoin": {
+                "BTC": 0n,
+              },
+              "Ethereum": {
+                "ETH": 0n,
+                "FLIP": 0n,
+                "USDC": 0n,
+                "USDT": 0n,
+                "WBTC": 0n,
+              },
+              "Solana": {
+                "SOL": 0n,
+                "USDC": 0n,
+                "USDT": 0n,
+              },
+              "Tron": {
+                "TRX": 0n,
+                "USDT": 0n,
+              },
+            },
+            "blocked": [
+              "cFNfitvPd2acNNFgijVN3Ls4gG112PZPq7sY2FGtPgEk25wV9",
+            ],
+            "bond": 0n,
+            "estimated_redeemable_balance": 1000164110353054811846n,
+            "flip_balance": 1000164110353054811846n,
+            "role": "operator",
+            "upcoming_delegation": {
+              "delegation_acceptance": "Allow",
+              "delegation_fee_bps": 1500,
+              "delegators": {
+                "cFHsUq1uK5opJudRDczt7w4baiRDHR6Kdezw77u2JnRnCGKcs": 900000000000000000000n,
+              },
+              "validators": {
+                "cFNkiayhWvppDY5zSzG8rAYMaqbunLBAAbBQcAgFF4x1jaMSy": 9999996796922000000n,
+              },
+            },
+            "vanity_name": "Buttoness",
+          },
+          {
+            "account_id": "cFKzr7DwLCRtSkou5H5moKri7g9WwJ4tAbVJv6dZGhLb811Tc",
+            "apy_bp": 970,
+            "asset_balances": {
+              "Arbitrum": {
+                "ETH": 0n,
+                "USDC": 0n,
+                "USDT": 0n,
+              },
+              "Assethub": {
+                "DOT": 0n,
+                "USDC": 0n,
+                "USDT": 0n,
+              },
+              "Bitcoin": {
+                "BTC": 0n,
+              },
+              "Ethereum": {
+                "ETH": 0n,
+                "FLIP": 0n,
+                "USDC": 0n,
+                "USDT": 0n,
+                "WBTC": 0n,
+              },
+              "Solana": {
+                "SOL": 0n,
+                "USDC": 0n,
+                "USDT": 0n,
+              },
+              "Tron": {
+                "TRX": 0n,
+                "USDT": 0n,
+              },
+            },
+            "bond": 225033425976807428934928n,
+            "bound_redeem_address": "0x9a449133c6a8b4e117840b69e2a1d43634f562d3",
+            "estimated_redeemable_balance": 0n,
+            "flip_balance": 252186205332783022058667n,
+            "is_bidding": true,
+            "is_current_authority": true,
+            "is_current_backup": false,
+            "is_online": true,
+            "is_qualified": true,
+            "keyholder_epochs": [
+              197,
+              198,
+            ],
+            "last_heartbeat": 2930096,
+            "reputation_points": 2880,
+            "restricted_balances": {},
+            "role": "validator",
+          },
+          {
+            "account_id": "cFJ6qQZ3ybhMDPt7KXDUUj3aLC2DXaPm8rCLCfLEsyMRH2AXK",
+            "apy_bp": 970,
+            "asset_balances": {
+              "Arbitrum": {
+                "ETH": 0n,
+                "USDC": 0n,
+                "USDT": 0n,
+              },
+              "Assethub": {
+                "DOT": 0n,
+                "USDC": 0n,
+                "USDT": 0n,
+              },
+              "Bitcoin": {
+                "BTC": 0n,
+              },
+              "Ethereum": {
+                "ETH": 0n,
+                "FLIP": 0n,
+                "USDC": 0n,
+                "USDT": 0n,
+                "WBTC": 0n,
+              },
+              "Solana": {
+                "SOL": 0n,
+                "USDC": 0n,
+                "USDT": 0n,
+              },
+              "Tron": {
+                "TRX": 0n,
+                "USDT": 0n,
+              },
+            },
+            "bond": 225033425976807428934928n,
+            "bound_redeem_address": "0x9a449133c6a8b4e117840b69e2a1d43634f562d3",
+            "estimated_redeemable_balance": 0n,
+            "flip_balance": 252186205332783022058667n,
+            "is_bidding": true,
+            "is_current_authority": true,
+            "is_current_backup": false,
+            "is_online": true,
+            "is_qualified": true,
+            "keyholder_epochs": [
+              197,
+              198,
+            ],
+            "last_heartbeat": 2930096,
+            "operator": "cFM7AjUFjqtrRStbEuNRYzEpjAqKEWP3om8FydieAhbqpqRKz",
+            "reputation_points": 2880,
+            "restricted_balances": {},
+            "role": "validator",
+          },
+          {
+            "account_id": "cFMVtnPTJFYFvnHXK14HZ6XWDSCAByTPZDWrTeFEc2B8A3m7M",
+            "asset_balances": {
+              "Arbitrum": {
+                "ETH": 0n,
+                "USDC": 0n,
+                "USDT": 0n,
+              },
+              "Assethub": {
+                "DOT": 0n,
+                "USDC": 0n,
+                "USDT": 0n,
+              },
+              "Bitcoin": {
+                "BTC": 19842n,
+              },
+              "Ethereum": {
+                "ETH": 0n,
+                "FLIP": 0n,
+                "USDC": 0n,
+                "USDT": 0n,
+                "WBTC": 0n,
+              },
+              "Solana": {
+                "SOL": 0n,
+                "USDC": 0n,
+                "USDT": 0n,
+              },
+              "Tron": {
+                "TRX": 0n,
+                "USDT": 0n,
+              },
+            },
+            "bond": 0n,
+            "boost_balances": {
+              "Arbitrum": {
+                "ETH": [],
+                "USDC": [],
+                "USDT": [],
+              },
+              "Assethub": {
+                "DOT": [],
+                "USDC": [],
+                "USDT": [],
+              },
+              "Bitcoin": {
+                "BTC": [
+                  {
+                    "available_balance": 200000000n,
+                    "fee_tier": 5,
+                    "in_use_balance": 0n,
+                    "is_withdrawing": false,
+                    "total_balance": 200000000n,
+                  },
+                  {
+                    "available_balance": 200000000n,
+                    "fee_tier": 10,
+                    "in_use_balance": 0n,
+                    "is_withdrawing": false,
+                    "total_balance": 200000000n,
+                  },
+                  {
+                    "available_balance": 200000000n,
+                    "fee_tier": 30,
+                    "in_use_balance": 0n,
+                    "is_withdrawing": false,
+                    "total_balance": 200000000n,
+                  },
+                ],
+              },
+              "Ethereum": {
+                "ETH": [],
+                "FLIP": [],
+                "USDC": [],
+                "USDT": [],
+                "WBTC": [],
+              },
+              "Solana": {
+                "SOL": [],
+                "USDC": [],
+                "USDT": [],
+              },
+              "Tron": {
+                "TRX": [],
+                "USDT": [],
+              },
+            },
+            "collateral_balances": [],
+            "earned_fees": {
+              "Arbitrum": {
+                "ETH": 0n,
+                "USDC": 0n,
+                "USDT": 0n,
+              },
+              "Assethub": {
+                "DOT": 0n,
+                "USDC": 0n,
+                "USDT": 0n,
+              },
+              "Bitcoin": {
+                "BTC": 0n,
+              },
+              "Ethereum": {
+                "ETH": 0n,
+                "FLIP": 0n,
+                "USDC": 0n,
+                "USDT": 0n,
+                "WBTC": 0n,
+              },
+              "Solana": {
+                "SOL": 0n,
+                "USDC": 0n,
+                "USDT": 0n,
+              },
+              "Tron": {
+                "TRX": 0n,
+                "USDT": 0n,
+              },
+            },
+            "estimated_redeemable_balance": 99999975540394000000n,
+            "flip_balance": 99999975540394000000n,
+            "lending_positions": [
+              {
+                "asset": "BTC",
+                "available_amount": 200000000n,
+                "chain": "Bitcoin",
+                "total_amount": 200000000n,
+              },
+            ],
+            "refund_addresses": {
+              "Arbitrum": null,
+              "Assethub": null,
+              "Bitcoin": "bc1qqt3juqef9azhd0zeuamu9c30pg5xdllvmks2ja",
+              "Ethereum": "0xacd7c0481fc71dce9e3e8bd4cca5828ce8302629",
+              "Solana": "7zLEfU3nQKqnfrN2A5yNEiFd1Vt9D7maVaoSAV8invMT",
+              "Tron": null,
+            },
+            "role": "liquidity_provider",
+            "vanity_name": "Chainflip Testnet LP BOOST",
+          },
+          {
+            "account_id": "cFJjZKzA5rUTb9qkZMGfec7piCpiAQKr15B4nALzriMGQL8BE",
+            "affiliates": [
+              {
+                "account_id": "cFJjZKzA5rUTb9qkZMGfec7piCpiAQKr15B4nALzriMGQL8BE",
+                "short_id": 1,
+                "withdrawal_address": "0x9a449133c6a8b4e117840b69e2a1d43634f562d3",
+              },
+            ],
+            "asset_balances": {
+              "Arbitrum": {
+                "ETH": 0n,
+                "USDC": 0n,
+                "USDT": 0n,
+              },
+              "Assethub": {
+                "DOT": 0n,
+                "USDC": 0n,
+                "USDT": 0n,
+              },
+              "Bitcoin": {
+                "BTC": 0n,
+              },
+              "Ethereum": {
+                "ETH": 0n,
+                "FLIP": 0n,
+                "USDC": 0n,
+                "USDT": 0n,
+                "WBTC": 0n,
+              },
+              "Solana": {
+                "SOL": 0n,
+                "USDC": 0n,
+                "USDT": 0n,
+              },
+              "Tron": {
+                "TRX": 0n,
+                "USDT": 0n,
+              },
+            },
+            "bond": 0n,
+            "btc_vault_deposit_address": "tb1pqyqszqgpqyqszqgpqyqszqgpqyqszqgpqyqszqgpqyqszqgpqyqsn60vlk",
+            "earned_fees": {
+              "Arbitrum": {
+                "ETH": 0n,
+                "USDC": 0n,
+                "USDT": 0n,
+              },
+              "Assethub": {
+                "DOT": 0n,
+                "USDC": 0n,
+                "USDT": 0n,
+              },
+              "Bitcoin": {
+                "BTC": 12369718n,
+              },
+              "Ethereum": {
+                "ETH": 1485755635703031110n,
+                "FLIP": 39432662616362382590n,
+                "USDC": 1922285993n,
+                "USDT": 729506182n,
+                "WBTC": 12369718n,
+              },
+              "Solana": {
+                "SOL": 0n,
+                "USDC": 0n,
+                "USDT": 0n,
+              },
+              "Tron": {
+                "TRX": 0n,
+                "USDT": 0n,
+              },
+            },
+            "estimated_redeemable_balance": 21031117317233135625n,
+            "flip_balance": 21031117317233135625n,
+            "role": "broker",
+          },
+          {
+            "account_id": "cFMmWJ1U3x1wZFo4qf36XKG8BxejtMvkKE9DZEt2UtASGMBMf",
+            "affiliates": [],
+            "asset_balances": {
+              "Arbitrum": {
+                "ETH": 0n,
+                "USDC": 0n,
+                "USDT": 0n,
+              },
+              "Assethub": {
+                "DOT": 0n,
+                "USDC": 0n,
+                "USDT": 0n,
+              },
+              "Bitcoin": {
+                "BTC": 0n,
+              },
+              "Ethereum": {
+                "ETH": 0n,
+                "FLIP": 0n,
+                "USDC": 0n,
+                "USDT": 0n,
+                "WBTC": 0n,
+              },
+              "Solana": {
+                "SOL": 0n,
+                "USDC": 0n,
+                "USDT": 0n,
+              },
+              "Tron": {
+                "TRX": 0n,
+                "USDT": 0n,
+              },
+            },
+            "bond": 0n,
+            "earned_fees": {
+              "Arbitrum": {
+                "ETH": 0n,
+                "USDC": 0n,
+                "USDT": 0n,
+              },
+              "Assethub": {
+                "DOT": 0n,
+                "USDC": 0n,
+                "USDT": 0n,
+              },
+              "Bitcoin": {
+                "BTC": 12369718n,
+              },
+              "Ethereum": {
+                "ETH": 1485755635703031110n,
+                "FLIP": 39432662616362382590n,
+                "USDC": 1922285993n,
+                "USDT": 729506182n,
+                "WBTC": 12369718n,
+              },
+              "Solana": {
+                "SOL": 0n,
+                "USDC": 0n,
+                "USDT": 0n,
+              },
+              "Tron": {
+                "TRX": 0n,
+                "USDT": 0n,
+              },
+            },
+            "estimated_redeemable_balance": 21031117317233135625n,
+            "flip_balance": 21031117317233135625n,
+            "role": "broker",
+          },
+          {
+            "account_id": "cFNzMM63izeZ2zqKiUpUVWLEd6YqzbVEAHgPtgHLDtAVG4Hmv",
+            "asset_balances": {
+              "Arbitrum": {
+                "ETH": 0n,
+                "USDC": 0n,
+                "USDT": 0n,
+              },
+              "Assethub": {
+                "DOT": 0n,
+                "USDC": 0n,
+                "USDT": 0n,
+              },
+              "Bitcoin": {
+                "BTC": 0n,
+              },
+              "Ethereum": {
+                "ETH": 0n,
+                "FLIP": 0n,
+                "USDC": 0n,
+                "USDT": 0n,
+                "WBTC": 0n,
+              },
+              "Solana": {
+                "SOL": 0n,
+                "USDC": 0n,
+                "USDT": 0n,
+              },
+              "Tron": {
+                "TRX": 0n,
+                "USDT": 0n,
+              },
+            },
+            "bond": 0n,
+            "estimated_redeemable_balance": 1000000000000000000000n,
+            "flip_balance": 1000000000000000000000n,
+            "role": "unregistered",
+            "upcoming_delegation_status": {
+              "bid": 1000000000000000000000n,
+              "operator": "cFMjXCTxTHVkSqbKzeVwJ25TJxLqc1Vn9usPgUGmZhsyvHRQZ",
+            },
+          },
+          {
+            "account_id": "cFKvKKCcScNcWyrJRASocm7vZq5vU8QpQhqdVGU8PnMEwgud5",
+            "asset_balances": {
+              "Arbitrum": {
+                "ETH": 0n,
+                "USDC": 0n,
+                "USDT": 0n,
+              },
+              "Assethub": {
+                "DOT": 0n,
+                "USDC": 0n,
+                "USDT": 0n,
+              },
+              "Bitcoin": {
+                "BTC": 0n,
+              },
+              "Ethereum": {
+                "ETH": 0n,
+                "FLIP": 0n,
+                "USDC": 0n,
+                "USDT": 0n,
+                "WBTC": 0n,
+              },
+              "Solana": {
+                "SOL": 0n,
+                "USDC": 0n,
+                "USDT": 0n,
+              },
+              "Tron": {
+                "TRX": 0n,
+                "USDT": 0n,
+              },
+            },
+            "bond": 1000000000000000000000n,
+            "current_delegation_status": {
+              "bid": 1000000000000000000000n,
+              "operator": "cFMjXCTxTHVkSqbKzeVwJ25TJxLqc1Vn9usPgUGmZhsyvHRQZ",
+            },
+            "estimated_redeemable_balance": 0n,
+            "flip_balance": 1000111787496577859564n,
+            "role": "unregistered",
+            "upcoming_delegation_status": {
+              "bid": 1000000000000000000000n,
+              "operator": "cFMjXCTxTHVkSqbKzeVwJ25TJxLqc1Vn9usPgUGmZhsyvHRQZ",
+            },
+          },
+        ]
+      `);
+    });
+
+    it('parses an empty list', () => {
+      expect(cfAllAccountInfos.parse([])).toEqual([]);
     });
   });
 });
