@@ -212,7 +212,7 @@ export const assetSymbols = [
   'USDT',
   'WBTC',
   'TRX',
-  'BNB'
+  'BNB',
 ] as const;
 export type AssetSymbol = (typeof assetSymbols)[number];
 
@@ -349,7 +349,7 @@ export const assetContractId: InternalAssetMap<number> = {
   Trx: 17,
   TrxUsdt: 18,
   Bnb: 19,
-  BscUsdt: 20
+  BscUsdt: 20,
 };
 
 export function getInternalAsset(asset: BaseAssetAndChain): BaseChainflipAsset;
@@ -475,7 +475,10 @@ export function getInternalAssets(
   };
 }
 
-export const chainflipAssetToPriceAssetMap: Record<ChainflipAsset, Exclude<PriceAsset, 'Usd'> | null> = {
+export const chainflipAssetToPriceAssetMap: Record<
+  ChainflipAsset,
+  Exclude<PriceAsset, 'Usd'> | null
+> = {
   Btc: 'Btc',
   Sol: 'Sol',
   Eth: 'Eth',
