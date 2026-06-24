@@ -170,6 +170,10 @@ describe('parsers', () => {
               TRX: '0x0',
               USDT: '0x0',
             },
+            Bsc: {
+              BNB: '0x0',
+              USDT: '0x0',
+            },
           },
           egress_fees: {
             Ethereum: {
@@ -204,6 +208,10 @@ describe('parsers', () => {
               TRX: '0x0',
               USDT: '0x0',
             },
+            Bsc: {
+              BNB: '0x0',
+              USDT: '0x0',
+            },
           },
           witness_safety_margins: {
             Arbitrum: 1,
@@ -213,6 +221,7 @@ describe('parsers', () => {
             Polkadot: null,
             Assethub: null,
             Tron: null,
+            Bsc: null,
           },
           egress_dust_limits: {
             Ethereum: {
@@ -247,6 +256,10 @@ describe('parsers', () => {
               TRX: '0x1',
               USDT: '0x1',
             },
+            Bsc: {
+              BNB: '0x1',
+              USDT: '0x1',
+            },
           },
           channel_opening_fees: {
             Ethereum: '0x0',
@@ -256,6 +269,7 @@ describe('parsers', () => {
             Solana: '0x0',
             Assethub: '0x0',
             Tron: '0x0',
+            Bsc: '0x0',
           },
           ingress_delays: {
             Ethereum: 0,
@@ -265,6 +279,7 @@ describe('parsers', () => {
             Solana: 10,
             Assethub: 0,
             Tron: 0,
+            Bsc: 0,
           },
           boost_delays: {
             Ethereum: 0,
@@ -274,6 +289,7 @@ describe('parsers', () => {
             Solana: 0,
             Assethub: 0,
             Tron: 0,
+            Bsc: 0,
           },
           boost_minimum_add_funds_amounts: {
             Ethereum: {
@@ -306,6 +322,10 @@ describe('parsers', () => {
             },
             Tron: {
               TRX: '0x1',
+              USDT: '0x1',
+            },
+            Bsc: {
+              BNB: '0x1',
               USDT: '0x1',
             },
           },
@@ -344,6 +364,10 @@ describe('parsers', () => {
               TRX: null,
               USDT: null,
             },
+            Bsc: {
+              BNB: null,
+              USDT: null,
+            },
           },
           network_fee_hundredth_pips: 1000,
           swap_retry_delay_blocks: 5,
@@ -380,6 +404,10 @@ describe('parsers', () => {
             },
             Tron: {
               TRX: '0x0',
+              USDT: '0x0',
+            },
+            Bsc: {
+              BNB: '0x0',
               USDT: '0x0',
             },
           },
@@ -422,6 +450,10 @@ describe('parsers', () => {
                   TRX: 0,
                   USDT: 0,
                 },
+                Bsc: {
+                  BNB: 0,
+                  USDT: 0,
+                },
               },
             },
             internal_swap_network_fee: {
@@ -462,6 +494,10 @@ describe('parsers', () => {
                   TRX: 0,
                   USDT: 0,
                 },
+                Bsc: {
+                  BNB: 0,
+                  USDT: 0,
+                },
               },
             },
           },
@@ -497,6 +533,10 @@ describe('parsers', () => {
             },
             Tron: {
               TRX: null,
+              USDT: 10000,
+            },
+            Bsc: {
+              BNB: null,
               USDT: 10000,
             },
           },
@@ -861,6 +901,10 @@ describe('parsers', () => {
               TRX: null,
               USDT: null,
             },
+            Bsc: {
+              BNB: null,
+              USDT: null,
+            },
           },
         },
       });
@@ -875,6 +919,7 @@ describe('parsers', () => {
               "Arbitrum": 0,
               "Assethub": 0,
               "Bitcoin": 0,
+              "Bsc": 0,
               "Ethereum": 0,
               "Solana": 0,
               "Tron": 0,
@@ -892,6 +937,10 @@ describe('parsers', () => {
               },
               "Bitcoin": {
                 "BTC": 11000n,
+              },
+              "Bsc": {
+                "BNB": 1n,
+                "USDT": 1n,
               },
               "Ethereum": {
                 "ETH": 1n,
@@ -914,6 +963,7 @@ describe('parsers', () => {
               "Arbitrum": 0n,
               "Assethub": 0n,
               "Bitcoin": 0n,
+              "Bsc": 0n,
               "Ethereum": 0n,
               "Solana": 0n,
               "Tron": 0n,
@@ -931,6 +981,10 @@ describe('parsers', () => {
               },
               "Bitcoin": {
                 "BTC": 179n,
+              },
+              "Bsc": {
+                "BNB": 0n,
+                "USDT": 0n,
               },
               "Ethereum": {
                 "ETH": 490000n,
@@ -953,6 +1007,7 @@ describe('parsers', () => {
               "Arbitrum": 0,
               "Assethub": 0,
               "Bitcoin": 0,
+              "Bsc": 0,
               "Ethereum": 0,
               "Solana": 10,
               "Tron": 0,
@@ -970,6 +1025,10 @@ describe('parsers', () => {
               },
               "Bitcoin": {
                 "BTC": 79n,
+              },
+              "Bsc": {
+                "BNB": 0n,
+                "USDT": 0n,
               },
               "Ethereum": {
                 "ETH": 350000n,
@@ -1002,6 +1061,10 @@ describe('parsers', () => {
               "Bitcoin": {
                 "BTC": 0n,
               },
+              "Bsc": {
+                "BNB": 0n,
+                "USDT": 0n,
+              },
               "Ethereum": {
                 "ETH": 0n,
                 "FLIP": 0n,
@@ -1033,6 +1096,10 @@ describe('parsers', () => {
               "Bitcoin": {
                 "BTC": 600n,
               },
+              "Bsc": {
+                "BNB": 1n,
+                "USDT": 1n,
+              },
               "Ethereum": {
                 "ETH": 1n,
                 "FLIP": 1n,
@@ -1054,6 +1121,7 @@ describe('parsers', () => {
               "Arbitrum": 1,
               "Assethub": null,
               "Bitcoin": 2,
+              "Bsc": null,
               "Ethereum": 2,
               "Solana": 1,
               "Tron": null,
@@ -1232,6 +1300,56 @@ describe('parsers', () => {
                   "range_total_swap_inputs": {
                     "base": 1758387178n,
                     "quote": 714521511174n,
+                  },
+                },
+              },
+              "Bsc": {
+                "BNB": {
+                  "limit_order_fee_hundredth_pips": 0,
+                  "limit_order_total_fees_earned": {
+                    "base": "0x0",
+                    "quote": "0x0",
+                  },
+                  "limit_total_swap_inputs": {
+                    "base": "0x0",
+                    "quote": "0x0",
+                  },
+                  "quote_asset": {
+                    "asset": "USDC",
+                    "chain": "Ethereum",
+                  },
+                  "range_order_fee_hundredth_pips": 0,
+                  "range_order_total_fees_earned": {
+                    "base": "0x0",
+                    "quote": "0x0",
+                  },
+                  "range_total_swap_inputs": {
+                    "base": "0x0",
+                    "quote": "0x0",
+                  },
+                },
+                "USDT": {
+                  "limit_order_fee_hundredth_pips": 0,
+                  "limit_order_total_fees_earned": {
+                    "base": "0x0",
+                    "quote": "0x0",
+                  },
+                  "limit_total_swap_inputs": {
+                    "base": "0x0",
+                    "quote": "0x0",
+                  },
+                  "quote_asset": {
+                    "asset": "USDC",
+                    "chain": "Ethereum",
+                  },
+                  "range_order_fee_hundredth_pips": 0,
+                  "range_order_total_fees_earned": {
+                    "base": "0x0",
+                    "quote": "0x0",
+                  },
+                  "range_total_swap_inputs": {
+                    "base": "0x0",
+                    "quote": "0x0",
                   },
                 },
               },
@@ -1474,6 +1592,10 @@ describe('parsers', () => {
               "Bitcoin": {
                 "BTC": 10000,
               },
+              "Bsc": {
+                "BNB": null,
+                "USDT": 10000,
+              },
               "Ethereum": {
                 "ETH": 10000,
                 "FLIP": null,
@@ -1507,6 +1629,10 @@ describe('parsers', () => {
               "Bitcoin": {
                 "BTC": null,
               },
+              "Bsc": {
+                "BNB": null,
+                "USDT": null,
+              },
               "Ethereum": {
                 "ETH": null,
                 "FLIP": null,
@@ -1537,6 +1663,10 @@ describe('parsers', () => {
               },
               "Bitcoin": {
                 "BTC": 2000000n,
+              },
+              "Bsc": {
+                "BNB": 0n,
+                "USDT": 0n,
               },
               "Ethereum": {
                 "ETH": 200000000000000000n,
@@ -1571,6 +1701,10 @@ describe('parsers', () => {
                   },
                   "Bitcoin": {
                     "BTC": 0n,
+                  },
+                  "Bsc": {
+                    "BNB": 0n,
+                    "USDT": 0n,
                   },
                   "Ethereum": {
                     "ETH": 0n,
@@ -1608,6 +1742,10 @@ describe('parsers', () => {
                   },
                   "Bitcoin": {
                     "BTC": 0n,
+                  },
+                  "Bsc": {
+                    "BNB": 0n,
+                    "USDT": 0n,
                   },
                   "Ethereum": {
                     "ETH": 0n,
@@ -1675,6 +1813,10 @@ describe('parsers', () => {
             TRX: '0x0',
             USDT: '0x0',
           },
+          Bsc: {
+            BNB: '0x0',
+            USDT: '0x0',
+          },
         },
         ingress_fees: {
           Ethereum: {
@@ -1707,6 +1849,10 @@ describe('parsers', () => {
           },
           Tron: {
             TRX: '0x0',
+            USDT: '0x0',
+          },
+          Bsc: {
+            BNB: '0x0',
             USDT: '0x0',
           },
         },
@@ -1743,6 +1889,10 @@ describe('parsers', () => {
             TRX: '0x0',
             USDT: '0x0',
           },
+          Bsc: {
+            BNB: '0x0',
+            USDT: '0x0',
+          },
         },
         witness_safety_margins: {
           Polkadot: null,
@@ -1752,6 +1902,7 @@ describe('parsers', () => {
           Solana: null,
           Assethub: null,
           Tron: null,
+          Bsc: null,
         },
         egress_dust_limits: {
           Ethereum: {
@@ -1786,6 +1937,10 @@ describe('parsers', () => {
             TRX: '0x1',
             USDT: '0x1',
           },
+          Bsc: {
+            BNB: '0x1',
+            USDT: '0x1',
+          },
         },
         channel_opening_fees: {
           Arbitrum: '0x0',
@@ -1795,6 +1950,7 @@ describe('parsers', () => {
           Solana: '0x0',
           Assethub: '0x0',
           Tron: '0x0',
+          Bsc: '0x0',
         },
         ingress_delays: {
           Bitcoin: 0,
@@ -1804,6 +1960,7 @@ describe('parsers', () => {
           Ethereum: 0,
           Arbitrum: 0,
           Tron: 0,
+          Bsc: 0,
         },
         boost_delays: {
           Arbitrum: 0,
@@ -1813,6 +1970,7 @@ describe('parsers', () => {
           Ethereum: 0,
           Solana: 0,
           Tron: 0,
+          Bsc: 0,
         },
         boost_minimum_add_funds_amounts: {
           Ethereum: {
@@ -1847,6 +2005,10 @@ describe('parsers', () => {
             TRX: '0x1',
             USDT: '0x1',
           },
+          Bsc: {
+            BNB: '0x1',
+            USDT: '0x1',
+          },
         },
       });
       expect(result).toMatchInlineSnapshot(`
@@ -1855,6 +2017,7 @@ describe('parsers', () => {
             "Arbitrum": 0,
             "Assethub": 0,
             "Bitcoin": 0,
+            "Bsc": 0,
             "Ethereum": 0,
             "Solana": 0,
             "Tron": 0,
@@ -1872,6 +2035,10 @@ describe('parsers', () => {
             },
             "Bitcoin": {
               "BTC": 11000n,
+            },
+            "Bsc": {
+              "BNB": 1n,
+              "USDT": 1n,
             },
             "Ethereum": {
               "ETH": 1n,
@@ -1894,6 +2061,7 @@ describe('parsers', () => {
             "Arbitrum": 0n,
             "Assethub": 0n,
             "Bitcoin": 10000n,
+            "Bsc": 0n,
             "Ethereum": 10000n,
             "Solana": 0n,
             "Tron": 0n,
@@ -1911,6 +2079,10 @@ describe('parsers', () => {
             },
             "Bitcoin": {
               "BTC": 264n,
+            },
+            "Bsc": {
+              "BNB": 0n,
+              "USDT": 0n,
             },
             "Ethereum": {
               "ETH": 9427760180170n,
@@ -1933,6 +2105,7 @@ describe('parsers', () => {
             "Arbitrum": 0,
             "Assethub": 0,
             "Bitcoin": 0,
+            "Bsc": 0,
             "Ethereum": 0,
             "Solana": 10,
             "Tron": 0,
@@ -1950,6 +2123,10 @@ describe('parsers', () => {
             },
             "Bitcoin": {
               "BTC": 117n,
+            },
+            "Bsc": {
+              "BNB": 0n,
+              "USDT": 0n,
             },
             "Ethereum": {
               "ETH": 6734114414407n,
@@ -1982,6 +2159,10 @@ describe('parsers', () => {
             "Bitcoin": {
               "BTC": 0n,
             },
+            "Bsc": {
+              "BNB": 0n,
+              "USDT": 0n,
+            },
             "Ethereum": {
               "ETH": 0n,
               "FLIP": 0n,
@@ -2013,6 +2194,10 @@ describe('parsers', () => {
             "Bitcoin": {
               "BTC": 600n,
             },
+            "Bsc": {
+              "BNB": 1n,
+              "USDT": 1n,
+            },
             "Ethereum": {
               "ETH": 1n,
               "FLIP": 1n,
@@ -2034,6 +2219,7 @@ describe('parsers', () => {
             "Arbitrum": 1,
             "Assethub": null,
             "Bitcoin": 5,
+            "Bsc": null,
             "Ethereum": 2,
             "Solana": null,
             "Tron": null,
@@ -2079,6 +2265,10 @@ describe('parsers', () => {
             TRX: null,
             USDT: null,
           },
+          Bsc: {
+            BNB: null,
+            USDT: null,
+          },
         },
         network_fee_hundredth_pips: 1000,
         swap_retry_delay_blocks: 5,
@@ -2115,6 +2305,10 @@ describe('parsers', () => {
           },
           Tron: {
             TRX: '0x0',
+            USDT: '0x0',
+          },
+          Bsc: {
+            BNB: '0x0',
             USDT: '0x0',
           },
         },
@@ -2157,6 +2351,10 @@ describe('parsers', () => {
                 TRX: 0,
                 USDT: 0,
               },
+              Bsc: {
+                BNB: 0,
+                USDT: 0,
+              },
             },
           },
           internal_swap_network_fee: {
@@ -2197,6 +2395,10 @@ describe('parsers', () => {
                 TRX: 0,
                 USDT: 0,
               },
+              Bsc: {
+                BNB: 0,
+                USDT: 0,
+              },
             },
           },
         },
@@ -2232,6 +2434,10 @@ describe('parsers', () => {
           },
           Tron: {
             TRX: null,
+            USDT: 10000,
+          },
+          Bsc: {
+            BNB: null,
             USDT: 10000,
           },
         },
@@ -2619,6 +2825,10 @@ describe('parsers', () => {
             TRX: null,
             USDT: null,
           },
+          Bsc: {
+            BNB: null,
+            USDT: null,
+          },
         },
       });
 
@@ -2636,6 +2846,7 @@ describe('parsers', () => {
           Solana: { SOL: null, USDC: null, USDT: null },
           Assethub: { DOT: null, USDC: null, USDT: null },
           Tron: { TRX: null, USDT: null },
+          Bsc: { BNB: null, USDT: null },
         },
       });
 
@@ -2776,6 +2987,10 @@ describe('parsers', () => {
             },
             "Bitcoin": {
               "BTC": 0n,
+            },
+            "Bsc": {
+              "BNB": 0n,
+              "USDT": 0n,
             },
             "Ethereum": {
               "ETH": 0n,
@@ -3551,6 +3766,10 @@ describe('parsers', () => {
               "Bitcoin": {
                 "BTC": 0n,
               },
+              "Bsc": {
+                "BNB": 0n,
+                "USDT": 0n,
+              },
               "Ethereum": {
                 "ETH": 0n,
                 "FLIP": 0n,
@@ -3604,6 +3823,10 @@ describe('parsers', () => {
               "Bitcoin": {
                 "BTC": 0n,
               },
+              "Bsc": {
+                "BNB": 0n,
+                "USDT": 0n,
+              },
               "Ethereum": {
                 "ETH": 0n,
                 "FLIP": 0n,
@@ -3656,6 +3879,10 @@ describe('parsers', () => {
               "Bitcoin": {
                 "BTC": 0n,
               },
+              "Bsc": {
+                "BNB": 0n,
+                "USDT": 0n,
+              },
               "Ethereum": {
                 "ETH": 0n,
                 "FLIP": 0n,
@@ -3707,6 +3934,10 @@ describe('parsers', () => {
               },
               "Bitcoin": {
                 "BTC": 19842n,
+              },
+              "Bsc": {
+                "BNB": 0n,
+                "USDT": 0n,
               },
               "Ethereum": {
                 "ETH": 0n,
@@ -3762,6 +3993,10 @@ describe('parsers', () => {
                   },
                 ],
               },
+              "Bsc": {
+                "BNB": [],
+                "USDT": [],
+              },
               "Ethereum": {
                 "ETH": [],
                 "FLIP": [],
@@ -3794,6 +4029,10 @@ describe('parsers', () => {
               "Bitcoin": {
                 "BTC": 0n,
               },
+              "Bsc": {
+                "BNB": 0n,
+                "USDT": 0n,
+              },
               "Ethereum": {
                 "ETH": 0n,
                 "FLIP": 0n,
@@ -3825,6 +4064,7 @@ describe('parsers', () => {
               "Arbitrum": null,
               "Assethub": null,
               "Bitcoin": "bc1qqt3juqef9azhd0zeuamu9c30pg5xdllvmks2ja",
+              "Bsc": null,
               "Ethereum": "0xacd7c0481fc71dce9e3e8bd4cca5828ce8302629",
               "Solana": "7zLEfU3nQKqnfrN2A5yNEiFd1Vt9D7maVaoSAV8invMT",
               "Tron": null,
@@ -3854,6 +4094,10 @@ describe('parsers', () => {
               },
               "Bitcoin": {
                 "BTC": 0n,
+              },
+              "Bsc": {
+                "BNB": 0n,
+                "USDT": 0n,
               },
               "Ethereum": {
                 "ETH": 0n,
@@ -3887,6 +4131,10 @@ describe('parsers', () => {
               },
               "Bitcoin": {
                 "BTC": 12369718n,
+              },
+              "Bsc": {
+                "BNB": 0n,
+                "USDT": 0n,
               },
               "Ethereum": {
                 "ETH": 1485755635703031110n,
@@ -3926,6 +4174,10 @@ describe('parsers', () => {
               "Bitcoin": {
                 "BTC": 0n,
               },
+              "Bsc": {
+                "BNB": 0n,
+                "USDT": 0n,
+              },
               "Ethereum": {
                 "ETH": 0n,
                 "FLIP": 0n,
@@ -3957,6 +4209,10 @@ describe('parsers', () => {
               },
               "Bitcoin": {
                 "BTC": 12369718n,
+              },
+              "Bsc": {
+                "BNB": 0n,
+                "USDT": 0n,
               },
               "Ethereum": {
                 "ETH": 1485755635703031110n,
@@ -3994,6 +4250,10 @@ describe('parsers', () => {
               },
               "Bitcoin": {
                 "BTC": 0n,
+              },
+              "Bsc": {
+                "BNB": 0n,
+                "USDT": 0n,
               },
               "Ethereum": {
                 "ETH": 0n,
@@ -4036,6 +4296,10 @@ describe('parsers', () => {
               },
               "Bitcoin": {
                 "BTC": 0n,
+              },
+              "Bsc": {
+                "BNB": 0n,
+                "USDT": 0n,
               },
               "Ethereum": {
                 "ETH": 0n,

@@ -38,6 +38,7 @@ const chainAssetMapFactory = <Z extends z.ZodTypeAny>(parser: Z, _defaultValue: 
     Solana: z.object({ SOL: parser, USDC: parser, USDT: parser }),
     Assethub: z.object({ DOT: parser, USDC: parser, USDT: parser }),
     Tron: z.object({ TRX: parser, USDT: parser }),
+    Bsc: z.object({ BNB: parser, USDT: parser }),
   });
 
 const chainBaseAssetMapFactory = <Z extends z.ZodTypeAny>(parser: Z, _defaultValue: z.input<Z>) =>
@@ -53,6 +54,7 @@ const chainBaseAssetMapFactory = <Z extends z.ZodTypeAny>(parser: Z, _defaultVal
     Solana: z.object({ SOL: parser, USDC: parser, USDT: parser }),
     Assethub: z.object({ DOT: parser, USDC: parser, USDT: parser }),
     Tron: z.object({ TRX: parser, USDT: parser }),
+    Bsc: z.object({ BNB: parser, USDT: parser }),
   });
 
 const chainMapFactory = <Z extends z.ZodTypeAny>(parser: Z, _defaultValue: z.input<Z> = null) =>
@@ -63,6 +65,7 @@ const chainMapFactory = <Z extends z.ZodTypeAny>(parser: Z, _defaultValue: z.inp
     Solana: parser,
     Assethub: parser,
     Tron: parser,
+    Bsc: parser,
   });
 
 const rpcAssetSchema = z.union([
@@ -83,6 +86,8 @@ const rpcAssetSchema = z.union([
   z.object({ chain: z.literal('Assethub'), asset: z.literal('USDT') }),
   z.object({ chain: z.literal('Tron'), asset: z.literal('TRX') }),
   z.object({ chain: z.literal('Tron'), asset: z.literal('USDT') }),
+  z.object({ chain: z.literal('Bsc'), asset: z.literal('BNB') }),
+  z.object({ chain: z.literal('Bsc'), asset: z.literal('USDT') }),
 ]);
 
 const networkFee = z.object({
@@ -294,6 +299,9 @@ export const requestSwapParameterEncoding = z.discriminatedUnion('chain', [
   }),
   evmBrokerRequestSwapParameterEncoding.extend({
     chain: z.literal('Arbitrum'),
+  }),
+  evmBrokerRequestSwapParameterEncoding.extend({
+    chain: z.literal('Bsc'),
   }),
   z.object({
     chain: z.literal('Tron'),

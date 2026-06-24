@@ -24,6 +24,10 @@ exports[`HttpClient > with server > gets broker account info 1`] = `
     "Bitcoin": {
       "BTC": 0n,
     },
+    "Bsc": {
+      "BNB": 0n,
+      "USDT": 0n,
+    },
     "Ethereum": {
       "ETH": 0n,
       "FLIP": 0n,
@@ -56,6 +60,10 @@ exports[`HttpClient > with server > gets broker account info 1`] = `
     },
     "Bitcoin": {
       "BTC": 12369718n,
+    },
+    "Bsc": {
+      "BNB": 0n,
+      "USDT": 0n,
     },
     "Ethereum": {
       "ETH": 1485755635703031110n,
@@ -98,6 +106,10 @@ exports[`HttpClient > with server > gets broker account info 2 1`] = `
     "Bitcoin": {
       "BTC": 0n,
     },
+    "Bsc": {
+      "BNB": 0n,
+      "USDT": 0n,
+    },
     "Ethereum": {
       "ETH": 0n,
       "FLIP": 0n,
@@ -129,6 +141,10 @@ exports[`HttpClient > with server > gets broker account info 2 1`] = `
     },
     "Bitcoin": {
       "BTC": 12369718n,
+    },
+    "Bsc": {
+      "BNB": 0n,
+      "USDT": 0n,
     },
     "Ethereum": {
       "ETH": 1485755635703031110n,
@@ -169,6 +185,10 @@ exports[`HttpClient > with server > gets delegator account info 1`] = `
     },
     "Bitcoin": {
       "BTC": 0n,
+    },
+    "Bsc": {
+      "BNB": 0n,
+      "USDT": 0n,
     },
     "Ethereum": {
       "ETH": 0n,
@@ -214,6 +234,10 @@ exports[`HttpClient > with server > gets delegator account info 2 1`] = `
     },
     "Bitcoin": {
       "BTC": 0n,
+    },
+    "Bsc": {
+      "BNB": 0n,
+      "USDT": 0n,
     },
     "Ethereum": {
       "ETH": 0n,
@@ -263,6 +287,10 @@ exports[`HttpClient > with server > gets lp account info 1`] = `
     },
     "Bitcoin": {
       "BTC": 19842n,
+    },
+    "Bsc": {
+      "BNB": 0n,
+      "USDT": 0n,
     },
     "Ethereum": {
       "ETH": 0n,
@@ -318,6 +346,10 @@ exports[`HttpClient > with server > gets lp account info 1`] = `
         },
       ],
     },
+    "Bsc": {
+      "BNB": [],
+      "USDT": [],
+    },
     "Ethereum": {
       "ETH": [],
       "FLIP": [],
@@ -350,6 +382,10 @@ exports[`HttpClient > with server > gets lp account info 1`] = `
     "Bitcoin": {
       "BTC": 0n,
     },
+    "Bsc": {
+      "BNB": 0n,
+      "USDT": 0n,
+    },
     "Ethereum": {
       "ETH": 0n,
       "FLIP": 0n,
@@ -381,6 +417,7 @@ exports[`HttpClient > with server > gets lp account info 1`] = `
     "Arbitrum": null,
     "Assethub": null,
     "Bitcoin": "bc1qqt3juqef9azhd0zeuamu9c30pg5xdllvmks2ja",
+    "Bsc": null,
     "Ethereum": "0xacd7c0481fc71dce9e3e8bd4cca5828ce8302629",
     "Solana": "7zLEfU3nQKqnfrN2A5yNEiFd1Vt9D7maVaoSAV8invMT",
     "Tron": null,
@@ -404,6 +441,10 @@ exports[`HttpClient > with server > gets lp total balances 1`] = `
   },
   "Bitcoin": {
     "BTC": 19842n,
+  },
+  "Bsc": {
+    "BNB": 0n,
+    "USDT": 0n,
   },
   "Ethereum": {
     "ETH": 0n,
@@ -486,6 +527,10 @@ exports[`HttpClient > with server > gets unregistered account info 1`] = `
     "Bitcoin": {
       "BTC": 0n,
     },
+    "Bsc": {
+      "BNB": 0n,
+      "USDT": 0n,
+    },
     "Ethereum": {
       "ETH": 0n,
       "FLIP": 0n,
@@ -527,6 +572,10 @@ exports[`HttpClient > with server > gets validator account info 1`] = `
     },
     "Bitcoin": {
       "BTC": 0n,
+    },
+    "Bsc": {
+      "BNB": 0n,
+      "USDT": 0n,
     },
     "Ethereum": {
       "ETH": 0n,
@@ -582,6 +631,10 @@ exports[`HttpClient > with server > gets validator account info with an operator
     },
     "Bitcoin": {
       "BTC": 0n,
+    },
+    "Bsc": {
+      "BNB": 0n,
+      "USDT": 0n,
     },
     "Ethereum": {
       "ETH": 0n,
@@ -640,6 +693,10 @@ exports[`HttpClient > with server > handles cf_all_account_infos 1`] = `
       "Bitcoin": {
         "BTC": 0n,
       },
+      "Bsc": {
+        "BNB": 0n,
+        "USDT": 0n,
+      },
       "Ethereum": {
         "ETH": 0n,
         "FLIP": 0n,
@@ -692,6 +749,10 @@ exports[`HttpClient > with server > handles cf_all_account_infos 1`] = `
       "Bitcoin": {
         "BTC": 0n,
       },
+      "Bsc": {
+        "BNB": 0n,
+        "USDT": 0n,
+      },
       "Ethereum": {
         "ETH": 0n,
         "FLIP": 0n,
@@ -743,6 +804,10 @@ exports[`HttpClient > with server > handles cf_all_account_infos 1`] = `
       },
       "Bitcoin": {
         "BTC": 19842n,
+      },
+      "Bsc": {
+        "BNB": 0n,
+        "USDT": 0n,
       },
       "Ethereum": {
         "ETH": 0n,
@@ -798,6 +863,10 @@ exports[`HttpClient > with server > handles cf_all_account_infos 1`] = `
           },
         ],
       },
+      "Bsc": {
+        "BNB": [],
+        "USDT": [],
+      },
       "Ethereum": {
         "ETH": [],
         "FLIP": [],
@@ -830,6 +899,10 @@ exports[`HttpClient > with server > handles cf_all_account_infos 1`] = `
       "Bitcoin": {
         "BTC": 0n,
       },
+      "Bsc": {
+        "BNB": 0n,
+        "USDT": 0n,
+      },
       "Ethereum": {
         "ETH": 0n,
         "FLIP": 0n,
@@ -861,6 +934,7 @@ exports[`HttpClient > with server > handles cf_all_account_infos 1`] = `
       "Arbitrum": null,
       "Assethub": null,
       "Bitcoin": "bc1qqt3juqef9azhd0zeuamu9c30pg5xdllvmks2ja",
+      "Bsc": null,
       "Ethereum": "0xacd7c0481fc71dce9e3e8bd4cca5828ce8302629",
       "Solana": "7zLEfU3nQKqnfrN2A5yNEiFd1Vt9D7maVaoSAV8invMT",
       "Tron": null,
@@ -890,6 +964,10 @@ exports[`HttpClient > with server > handles cf_all_account_infos 1`] = `
       },
       "Bitcoin": {
         "BTC": 0n,
+      },
+      "Bsc": {
+        "BNB": 0n,
+        "USDT": 0n,
       },
       "Ethereum": {
         "ETH": 0n,
@@ -923,6 +1001,10 @@ exports[`HttpClient > with server > handles cf_all_account_infos 1`] = `
       },
       "Bitcoin": {
         "BTC": 12369718n,
+      },
+      "Bsc": {
+        "BNB": 0n,
+        "USDT": 0n,
       },
       "Ethereum": {
         "ETH": 1485755635703031110n,
@@ -962,6 +1044,10 @@ exports[`HttpClient > with server > handles cf_all_account_infos 1`] = `
       "Bitcoin": {
         "BTC": 0n,
       },
+      "Bsc": {
+        "BNB": 0n,
+        "USDT": 0n,
+      },
       "Ethereum": {
         "ETH": 0n,
         "FLIP": 0n,
@@ -993,6 +1079,10 @@ exports[`HttpClient > with server > handles cf_all_account_infos 1`] = `
       },
       "Bitcoin": {
         "BTC": 12369718n,
+      },
+      "Bsc": {
+        "BNB": 0n,
+        "USDT": 0n,
       },
       "Ethereum": {
         "ETH": 1485755635703031110n,
@@ -1030,6 +1120,10 @@ exports[`HttpClient > with server > handles cf_all_account_infos 1`] = `
       },
       "Bitcoin": {
         "BTC": 0n,
+      },
+      "Bsc": {
+        "BNB": 0n,
+        "USDT": 0n,
       },
       "Ethereum": {
         "ETH": 0n,
@@ -1072,6 +1166,10 @@ exports[`HttpClient > with server > handles cf_all_account_infos 1`] = `
       },
       "Bitcoin": {
         "BTC": 0n,
+      },
+      "Bsc": {
+        "BNB": 0n,
+        "USDT": 0n,
       },
       "Ethereum": {
         "ETH": 0n,
@@ -1303,6 +1401,7 @@ exports[`HttpClient > with server > handles cf_environment 1`] = `
       "Arbitrum": 0,
       "Assethub": 0,
       "Bitcoin": 0,
+      "Bsc": 0,
       "Ethereum": 0,
       "Solana": 0,
       "Tron": 0,
@@ -1320,6 +1419,10 @@ exports[`HttpClient > with server > handles cf_environment 1`] = `
       },
       "Bitcoin": {
         "BTC": 11000n,
+      },
+      "Bsc": {
+        "BNB": 1n,
+        "USDT": 1n,
       },
       "Ethereum": {
         "ETH": 1n,
@@ -1342,6 +1445,7 @@ exports[`HttpClient > with server > handles cf_environment 1`] = `
       "Arbitrum": 0n,
       "Assethub": 0n,
       "Bitcoin": 0n,
+      "Bsc": 0n,
       "Ethereum": 0n,
       "Solana": 0n,
       "Tron": 0n,
@@ -1359,6 +1463,10 @@ exports[`HttpClient > with server > handles cf_environment 1`] = `
       },
       "Bitcoin": {
         "BTC": 176n,
+      },
+      "Bsc": {
+        "BNB": 0n,
+        "USDT": 0n,
       },
       "Ethereum": {
         "ETH": 490000n,
@@ -1381,6 +1489,7 @@ exports[`HttpClient > with server > handles cf_environment 1`] = `
       "Arbitrum": 0,
       "Assethub": 0,
       "Bitcoin": 0,
+      "Bsc": 0,
       "Ethereum": 0,
       "Solana": 0,
       "Tron": 0,
@@ -1398,6 +1507,10 @@ exports[`HttpClient > with server > handles cf_environment 1`] = `
       },
       "Bitcoin": {
         "BTC": 78n,
+      },
+      "Bsc": {
+        "BNB": 0n,
+        "USDT": 0n,
       },
       "Ethereum": {
         "ETH": 350000n,
@@ -1430,6 +1543,10 @@ exports[`HttpClient > with server > handles cf_environment 1`] = `
       "Bitcoin": {
         "BTC": 0n,
       },
+      "Bsc": {
+        "BNB": 0n,
+        "USDT": 0n,
+      },
       "Ethereum": {
         "ETH": 0n,
         "FLIP": 0n,
@@ -1461,6 +1578,10 @@ exports[`HttpClient > with server > handles cf_environment 1`] = `
       "Bitcoin": {
         "BTC": 600n,
       },
+      "Bsc": {
+        "BNB": 1n,
+        "USDT": 1n,
+      },
       "Ethereum": {
         "ETH": 1n,
         "FLIP": 1n,
@@ -1482,6 +1603,7 @@ exports[`HttpClient > with server > handles cf_environment 1`] = `
       "Arbitrum": 1,
       "Assethub": null,
       "Bitcoin": 2,
+      "Bsc": null,
       "Ethereum": 2,
       "Solana": 1,
       "Tron": null,
@@ -1660,6 +1782,56 @@ exports[`HttpClient > with server > handles cf_environment 1`] = `
           "range_total_swap_inputs": {
             "base": 8996618n,
             "quote": 999734320n,
+          },
+        },
+      },
+      "Bsc": {
+        "BNB": {
+          "limit_order_fee_hundredth_pips": 0,
+          "limit_order_total_fees_earned": {
+            "base": "0x0",
+            "quote": "0x0",
+          },
+          "limit_total_swap_inputs": {
+            "base": "0x0",
+            "quote": "0x0",
+          },
+          "quote_asset": {
+            "asset": "USDC",
+            "chain": "Ethereum",
+          },
+          "range_order_fee_hundredth_pips": 0,
+          "range_order_total_fees_earned": {
+            "base": "0x0",
+            "quote": "0x0",
+          },
+          "range_total_swap_inputs": {
+            "base": "0x0",
+            "quote": "0x0",
+          },
+        },
+        "USDT": {
+          "limit_order_fee_hundredth_pips": 0,
+          "limit_order_total_fees_earned": {
+            "base": "0x0",
+            "quote": "0x0",
+          },
+          "limit_total_swap_inputs": {
+            "base": "0x0",
+            "quote": "0x0",
+          },
+          "quote_asset": {
+            "asset": "USDC",
+            "chain": "Ethereum",
+          },
+          "range_order_fee_hundredth_pips": 0,
+          "range_order_total_fees_earned": {
+            "base": "0x0",
+            "quote": "0x0",
+          },
+          "range_total_swap_inputs": {
+            "base": "0x0",
+            "quote": "0x0",
           },
         },
       },
@@ -1902,6 +2074,10 @@ exports[`HttpClient > with server > handles cf_environment 1`] = `
       "Bitcoin": {
         "BTC": 10000,
       },
+      "Bsc": {
+        "BNB": null,
+        "USDT": 10000,
+      },
       "Ethereum": {
         "ETH": 10000,
         "FLIP": null,
@@ -1935,6 +2111,10 @@ exports[`HttpClient > with server > handles cf_environment 1`] = `
       "Bitcoin": {
         "BTC": null,
       },
+      "Bsc": {
+        "BNB": null,
+        "USDT": null,
+      },
       "Ethereum": {
         "ETH": 65536n,
         "FLIP": null,
@@ -1965,6 +2145,10 @@ exports[`HttpClient > with server > handles cf_environment 1`] = `
       },
       "Bitcoin": {
         "BTC": 2000000n,
+      },
+      "Bsc": {
+        "BNB": 0n,
+        "USDT": 0n,
       },
       "Ethereum": {
         "ETH": 200000000000000000n,
@@ -1999,6 +2183,10 @@ exports[`HttpClient > with server > handles cf_environment 1`] = `
           },
           "Bitcoin": {
             "BTC": 0n,
+          },
+          "Bsc": {
+            "BNB": 0n,
+            "USDT": 0n,
           },
           "Ethereum": {
             "ETH": 0n,
@@ -2036,6 +2224,10 @@ exports[`HttpClient > with server > handles cf_environment 1`] = `
           },
           "Bitcoin": {
             "BTC": 0n,
+          },
+          "Bsc": {
+            "BNB": 0n,
+            "USDT": 0n,
           },
           "Ethereum": {
             "ETH": 0n,
@@ -2258,6 +2450,10 @@ exports[`HttpClient > with server > handles cf_get_trading_strategy_limits 1`] =
     "Bitcoin": {
       "BTC": null,
     },
+    "Bsc": {
+      "BNB": null,
+      "USDT": null,
+    },
     "Ethereum": {
       "ETH": null,
       "FLIP": null,
@@ -2288,6 +2484,10 @@ exports[`HttpClient > with server > handles cf_get_trading_strategy_limits 1`] =
     },
     "Bitcoin": {
       "BTC": null,
+    },
+    "Bsc": {
+      "BNB": null,
+      "USDT": null,
     },
     "Ethereum": {
       "ETH": null,
@@ -2328,6 +2528,7 @@ exports[`HttpClient > with server > handles cf_ingress_egress_environment 1`] = 
     "Arbitrum": 0,
     "Assethub": 0,
     "Bitcoin": 0,
+    "Bsc": 0,
     "Ethereum": 0,
     "Solana": 0,
     "Tron": 0,
@@ -2345,6 +2546,10 @@ exports[`HttpClient > with server > handles cf_ingress_egress_environment 1`] = 
     },
     "Bitcoin": {
       "BTC": 11000n,
+    },
+    "Bsc": {
+      "BNB": 1n,
+      "USDT": 1n,
     },
     "Ethereum": {
       "ETH": 1n,
@@ -2367,6 +2572,7 @@ exports[`HttpClient > with server > handles cf_ingress_egress_environment 1`] = 
     "Arbitrum": 0n,
     "Assethub": 0n,
     "Bitcoin": 0n,
+    "Bsc": 0n,
     "Ethereum": 0n,
     "Solana": 0n,
     "Tron": 0n,
@@ -2384,6 +2590,10 @@ exports[`HttpClient > with server > handles cf_ingress_egress_environment 1`] = 
     },
     "Bitcoin": {
       "BTC": 176n,
+    },
+    "Bsc": {
+      "BNB": 0n,
+      "USDT": 0n,
     },
     "Ethereum": {
       "ETH": 490000n,
@@ -2406,6 +2616,7 @@ exports[`HttpClient > with server > handles cf_ingress_egress_environment 1`] = 
     "Arbitrum": 0,
     "Assethub": 0,
     "Bitcoin": 0,
+    "Bsc": 0,
     "Ethereum": 0,
     "Solana": 0,
     "Tron": 0,
@@ -2423,6 +2634,10 @@ exports[`HttpClient > with server > handles cf_ingress_egress_environment 1`] = 
     },
     "Bitcoin": {
       "BTC": 78n,
+    },
+    "Bsc": {
+      "BNB": 0n,
+      "USDT": 0n,
     },
     "Ethereum": {
       "ETH": 350000n,
@@ -2455,6 +2670,10 @@ exports[`HttpClient > with server > handles cf_ingress_egress_environment 1`] = 
     "Bitcoin": {
       "BTC": 0n,
     },
+    "Bsc": {
+      "BNB": 0n,
+      "USDT": 0n,
+    },
     "Ethereum": {
       "ETH": 0n,
       "FLIP": 0n,
@@ -2486,6 +2705,10 @@ exports[`HttpClient > with server > handles cf_ingress_egress_environment 1`] = 
     "Bitcoin": {
       "BTC": 600n,
     },
+    "Bsc": {
+      "BNB": 1n,
+      "USDT": 1n,
+    },
     "Ethereum": {
       "ETH": 1n,
       "FLIP": 1n,
@@ -2507,6 +2730,7 @@ exports[`HttpClient > with server > handles cf_ingress_egress_environment 1`] = 
     "Arbitrum": 1,
     "Assethub": null,
     "Bitcoin": 2,
+    "Bsc": null,
     "Ethereum": 2,
     "Solana": 1,
     "Tron": null,
@@ -3096,6 +3320,14 @@ exports[`HttpClient > with server > handles cf_supported_assets 1`] = `
     "asset": "USDT",
     "chain": "Tron",
   },
+  {
+    "asset": "BNB",
+    "chain": "Bsc",
+  },
+  {
+    "asset": "USDT",
+    "chain": "Bsc",
+  },
 ]
 `;
 
@@ -3114,6 +3346,10 @@ exports[`HttpClient > with server > handles cf_swapping_environment 1`] = `
     },
     "Bitcoin": {
       "BTC": 10000,
+    },
+    "Bsc": {
+      "BNB": null,
+      "USDT": 10000,
     },
     "Ethereum": {
       "ETH": 10000,
@@ -3148,6 +3384,10 @@ exports[`HttpClient > with server > handles cf_swapping_environment 1`] = `
     "Bitcoin": {
       "BTC": null,
     },
+    "Bsc": {
+      "BNB": null,
+      "USDT": null,
+    },
     "Ethereum": {
       "ETH": 65536n,
       "FLIP": null,
@@ -3178,6 +3418,10 @@ exports[`HttpClient > with server > handles cf_swapping_environment 1`] = `
     },
     "Bitcoin": {
       "BTC": 2000000n,
+    },
+    "Bsc": {
+      "BNB": 0n,
+      "USDT": 0n,
     },
     "Ethereum": {
       "ETH": 200000000000000000n,
@@ -3212,6 +3456,10 @@ exports[`HttpClient > with server > handles cf_swapping_environment 1`] = `
         },
         "Bitcoin": {
           "BTC": 0n,
+        },
+        "Bsc": {
+          "BNB": 0n,
+          "USDT": 0n,
         },
         "Ethereum": {
           "ETH": 0n,
@@ -3249,6 +3497,10 @@ exports[`HttpClient > with server > handles cf_swapping_environment 1`] = `
         },
         "Bitcoin": {
           "BTC": 0n,
+        },
+        "Bsc": {
+          "BNB": 0n,
+          "USDT": 0n,
         },
         "Ethereum": {
           "ETH": 0n,
