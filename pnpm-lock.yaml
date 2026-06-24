@@ -153,11 +153,11 @@ importers:
   packages/processor:
     dependencies:
       '@chainflip/rpc':
-        specifier: 2.2.0
-        version: 2.2.0
+        specifier: 2.3.0-dev.0
+        version: 2.3.0-dev.0
       '@chainflip/utils':
-        specifier: 2.2.0
-        version: 2.2.0
+        specifier: 2.3.0-dev.0
+        version: 2.3.0-dev.0
       zod:
         specifier: ^3.25.75
         version: 3.25.75
@@ -322,6 +322,9 @@ packages:
 
   '@chainflip/rpc@2.2.0':
     resolution: {integrity: sha512-L3hBP6zOgepGav44cn9WmgXyAxw07e2vHILCbjYs1HfAETTQkNHfhcPK960Cu117b2dUURn1nL+UApzvP7Hikg==}
+
+  '@chainflip/rpc@2.3.0-dev.0':
+    resolution: {integrity: sha512-yVsDxse67yhJOJgwC0m+FP+sMiRUZL8+1OcQhh0erxvM2TvK2Y8vltCNWYg00tS3WNijeu6MGN8v38nPR9/FNQ==}
 
   '@chainflip/scale@2.2.0':
     resolution: {integrity: sha512-jxlfdkKEjMqjQSsORke6Z6Y83Sj1QUEzO9yg9pTe3NnmiEBihqxzo33+xt5GPiaLIcV8n89l7aVFXbZa8XuTSA==}
@@ -3412,6 +3415,11 @@ snapshots:
   '@chainflip/rpc@2.2.0':
     dependencies:
       '@chainflip/utils': 2.2.0
+      zod: 3.25.75
+
+  '@chainflip/rpc@2.3.0-dev.0':
+    dependencies:
+      '@chainflip/utils': 2.3.0-dev.0
       zod: 3.25.75
 
   '@chainflip/scale@2.2.0':
