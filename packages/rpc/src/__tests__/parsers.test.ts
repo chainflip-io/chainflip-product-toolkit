@@ -144,6 +144,7 @@ describe('parsers', () => {
               USDC: '0x0',
               USDT: '0x0',
               WBTC: '0x0',
+              CBBTC: '0x0',
             },
             Polkadot: {
               DOT: '0xbc28f20',
@@ -182,6 +183,7 @@ describe('parsers', () => {
               USDC: '0x0',
               USDT: '0x0',
               WBTC: '0x0',
+              CBBTC: '0x0',
             },
             Polkadot: {
               DOT: '0xbc4d910',
@@ -230,6 +232,7 @@ describe('parsers', () => {
               USDC: '0x1',
               USDT: '0x1',
               WBTC: '0x1',
+              CBBTC: '0x1',
             },
             Polkadot: {
               DOT: '0x1',
@@ -298,6 +301,7 @@ describe('parsers', () => {
               USDC: '0x1',
               USDT: '0x1',
               WBTC: '0x1',
+              CBBTC: '0x1',
             },
             Polkadot: {
               DOT: '0x1',
@@ -338,6 +342,7 @@ describe('parsers', () => {
               USDC: null,
               USDT: null,
               WBTC: null,
+              CBBTC: null,
             },
             Polkadot: {
               DOT: null,
@@ -380,6 +385,7 @@ describe('parsers', () => {
               USDC: '0x3b9aca00',
               USDT: '0x3b9aca00',
               WBTC: '0x1e8480',
+              CBBTC: '0x1e8480',
             },
             Polkadot: {
               DOT: '0x1d1a94a2000',
@@ -424,6 +430,7 @@ describe('parsers', () => {
                   USDC: 0,
                   USDT: 0,
                   WBTC: 0,
+                  CBBTC: 0,
                 },
                 Polkadot: {
                   DOT: 0,
@@ -468,6 +475,7 @@ describe('parsers', () => {
                   USDC: 0,
                   USDT: 0,
                   WBTC: 0,
+                  CBBTC: 0,
                 },
                 Polkadot: {
                   DOT: 0,
@@ -509,6 +517,7 @@ describe('parsers', () => {
               USDC: null,
               USDT: 10000,
               WBTC: 10000,
+              CBBTC: 10000,
             },
             Polkadot: {
               DOT: null,
@@ -622,6 +631,30 @@ describe('parsers', () => {
                 },
               },
               WBTC: {
+                limit_order_fee_hundredth_pips: 20,
+                range_order_fee_hundredth_pips: 20,
+                range_order_total_fees_earned: {
+                  base: '0x8961',
+                  quote: '0xda0f22',
+                },
+                limit_order_total_fees_earned: {
+                  base: '0x0',
+                  quote: '0xac0c',
+                },
+                range_total_swap_inputs: {
+                  base: '0x68cedbea',
+                  quote: '0xa65ccd0506',
+                },
+                limit_total_swap_inputs: {
+                  base: '0x0',
+                  quote: '0x8341e381',
+                },
+                quote_asset: {
+                  chain: 'Ethereum',
+                  asset: 'USDC',
+                },
+              },
+              CBBTC: {
                 limit_order_fee_hundredth_pips: 20,
                 range_order_fee_hundredth_pips: 20,
                 range_order_total_fees_earned: {
@@ -943,6 +976,7 @@ describe('parsers', () => {
                 "USDT": 1n,
               },
               "Ethereum": {
+                "CBBTC": 1n,
                 "ETH": 1n,
                 "FLIP": 1n,
                 "USDC": 1n,
@@ -987,6 +1021,7 @@ describe('parsers', () => {
                 "USDT": 0n,
               },
               "Ethereum": {
+                "CBBTC": 0n,
                 "ETH": 490000n,
                 "FLIP": 53930633n,
                 "USDC": 0n,
@@ -1031,6 +1066,7 @@ describe('parsers', () => {
                 "USDT": 0n,
               },
               "Ethereum": {
+                "CBBTC": 0n,
                 "ETH": 350000n,
                 "FLIP": 47938341n,
                 "USDC": 0n,
@@ -1066,6 +1102,7 @@ describe('parsers', () => {
                 "USDT": 0n,
               },
               "Ethereum": {
+                "CBBTC": 0n,
                 "ETH": 0n,
                 "FLIP": 0n,
                 "USDC": 0n,
@@ -1101,6 +1138,7 @@ describe('parsers', () => {
                 "USDT": 1n,
               },
               "Ethereum": {
+                "CBBTC": 1n,
                 "ETH": 1n,
                 "FLIP": 1n,
                 "USDC": 1n,
@@ -1354,6 +1392,30 @@ describe('parsers', () => {
                 },
               },
               "Ethereum": {
+                "CBBTC": {
+                  "limit_order_fee_hundredth_pips": 20,
+                  "limit_order_total_fees_earned": {
+                    "base": 0n,
+                    "quote": 44044n,
+                  },
+                  "limit_total_swap_inputs": {
+                    "base": 0n,
+                    "quote": 2202133377n,
+                  },
+                  "quote_asset": {
+                    "asset": "USDC",
+                    "chain": "Ethereum",
+                  },
+                  "range_order_fee_hundredth_pips": 20,
+                  "range_order_total_fees_earned": {
+                    "base": 35169n,
+                    "quote": 14290722n,
+                  },
+                  "range_total_swap_inputs": {
+                    "base": 1758387178n,
+                    "quote": 714521511174n,
+                  },
+                },
                 "ETH": {
                   "limit_order_fee_hundredth_pips": 20,
                   "limit_order_total_fees_earned": {
@@ -1597,6 +1659,7 @@ describe('parsers', () => {
                 "USDT": 10000,
               },
               "Ethereum": {
+                "CBBTC": 10000,
                 "ETH": 10000,
                 "FLIP": null,
                 "USDC": null,
@@ -1634,6 +1697,7 @@ describe('parsers', () => {
                 "USDT": null,
               },
               "Ethereum": {
+                "CBBTC": null,
                 "ETH": null,
                 "FLIP": null,
                 "USDC": null,
@@ -1669,6 +1733,7 @@ describe('parsers', () => {
                 "USDT": 0n,
               },
               "Ethereum": {
+                "CBBTC": 2000000n,
                 "ETH": 200000000000000000n,
                 "FLIP": 1000000000000000000000n,
                 "USDC": 1000000000n,
@@ -1707,6 +1772,7 @@ describe('parsers', () => {
                     "USDT": 0n,
                   },
                   "Ethereum": {
+                    "CBBTC": 0n,
                     "ETH": 0n,
                     "FLIP": 0n,
                     "USDC": 0n,
@@ -1748,6 +1814,7 @@ describe('parsers', () => {
                     "USDT": 0n,
                   },
                   "Ethereum": {
+                    "CBBTC": 0n,
                     "ETH": 0n,
                     "FLIP": 0n,
                     "USDC": 0n,
@@ -1787,6 +1854,7 @@ describe('parsers', () => {
             USDC: '0x0',
             USDT: '0x0',
             WBTC: '0x0',
+            CBBTC: '0x0',
           },
           Polkadot: {
             DOT: '0x0',
@@ -1825,6 +1893,7 @@ describe('parsers', () => {
             USDC: '0x5498',
             USDT: '0x54a2',
             WBTC: '0x20',
+            CBBTC: '0x20',
           },
           Polkadot: {
             DOT: '0xbc28f20',
@@ -1863,6 +1932,7 @@ describe('parsers', () => {
             USDC: '0x5f2b',
             USDT: '0x5f36',
             WBTC: '0x24',
+            CBBTC: '0x24',
           },
           Polkadot: {
             DOT: '0xbc4d910',
@@ -1911,6 +1981,7 @@ describe('parsers', () => {
             USDC: '0x1',
             USDT: '0x1',
             WBTC: '0x1',
+            CBBTC: '0x1',
           },
           Polkadot: {
             DOT: '0x1',
@@ -1979,6 +2050,7 @@ describe('parsers', () => {
             USDC: '0x1',
             USDT: '0x1',
             WBTC: '0x1',
+            CBBTC: '0x1',
           },
           Polkadot: {
             DOT: '0x1',
@@ -2041,6 +2113,7 @@ describe('parsers', () => {
               "USDT": 1n,
             },
             "Ethereum": {
+              "CBBTC": 1n,
               "ETH": 1n,
               "FLIP": 1n,
               "USDC": 1n,
@@ -2085,6 +2158,7 @@ describe('parsers', () => {
               "USDT": 0n,
             },
             "Ethereum": {
+              "CBBTC": 36n,
               "ETH": 9427760180170n,
               "FLIP": 9763436083064319n,
               "USDC": 24363n,
@@ -2129,6 +2203,7 @@ describe('parsers', () => {
               "USDT": 0n,
             },
             "Ethereum": {
+              "CBBTC": 32n,
               "ETH": 6734114414407n,
               "FLIP": 8678609851612727n,
               "USDC": 21656n,
@@ -2164,6 +2239,7 @@ describe('parsers', () => {
               "USDT": 0n,
             },
             "Ethereum": {
+              "CBBTC": 0n,
               "ETH": 0n,
               "FLIP": 0n,
               "USDC": 0n,
@@ -2199,6 +2275,7 @@ describe('parsers', () => {
               "USDT": 1n,
             },
             "Ethereum": {
+              "CBBTC": 1n,
               "ETH": 1n,
               "FLIP": 1n,
               "USDC": 1n,
@@ -2239,6 +2316,7 @@ describe('parsers', () => {
             USDC: null,
             USDT: null,
             WBTC: null,
+            CBBTC: null,
           },
           Polkadot: {
             DOT: null,
@@ -2281,6 +2359,7 @@ describe('parsers', () => {
             USDC: '0x3b9aca00',
             USDT: '0x3b9aca00',
             WBTC: '0x1e8480',
+            CBBTC: '0x1e8480',
           },
           Polkadot: {
             DOT: '0x1d1a94a2000',
@@ -2325,6 +2404,7 @@ describe('parsers', () => {
                 USDC: 0,
                 USDT: 0,
                 WBTC: 0,
+                CBBTC: 0,
               },
               Polkadot: {
                 DOT: 0,
@@ -2369,6 +2449,7 @@ describe('parsers', () => {
                 USDC: 0,
                 USDT: 0,
                 WBTC: 0,
+                CBBTC: 0,
               },
               Polkadot: {
                 DOT: 0,
@@ -2410,6 +2491,7 @@ describe('parsers', () => {
             USDC: null,
             USDT: 10000,
             WBTC: 10000,
+            CBBTC: 10000,
           },
           Polkadot: {
             DOT: null,
@@ -2523,6 +2605,30 @@ describe('parsers', () => {
               },
             },
             WBTC: {
+              limit_order_fee_hundredth_pips: 20,
+              range_order_fee_hundredth_pips: 20,
+              range_order_total_fees_earned: {
+                base: '0x70',
+                quote: '0x91aa0',
+              },
+              limit_order_total_fees_earned: {
+                base: '0xab',
+                quote: '0x49a9a',
+              },
+              range_total_swap_inputs: {
+                base: '0x5356ca',
+                quote: '0x6f212e4ff',
+              },
+              limit_total_swap_inputs: {
+                base: '0x7fb017',
+                quote: '0x3832ba417',
+              },
+              quote_asset: {
+                chain: 'Ethereum',
+                asset: 'USDC',
+              },
+            },
+            CBBTC: {
               limit_order_fee_hundredth_pips: 20,
               range_order_fee_hundredth_pips: 20,
               range_order_total_fees_earned: {
@@ -2839,7 +2945,7 @@ describe('parsers', () => {
     it('uses default fee info when fee is null', () => {
       const result = cfPoolsEnvironment.parse({
         fees: {
-          Ethereum: { ETH: null, FLIP: null, USDC: null, USDT: null, WBTC: null },
+          Ethereum: { ETH: null, FLIP: null, USDC: null, USDT: null, WBTC: null, CBBTC: null },
           Polkadot: { DOT: null },
           Bitcoin: { BTC: null },
           Arbitrum: { ETH: null, USDC: null, USDT: null },
@@ -2993,6 +3099,7 @@ describe('parsers', () => {
               "USDT": 0n,
             },
             "Ethereum": {
+              "CBBTC": 0n,
               "ETH": 0n,
               "FLIP": 0n,
               "USDC": 0n,
@@ -3771,6 +3878,7 @@ describe('parsers', () => {
                 "USDT": 0n,
               },
               "Ethereum": {
+                "CBBTC": 0n,
                 "ETH": 0n,
                 "FLIP": 0n,
                 "USDC": 0n,
@@ -3828,6 +3936,7 @@ describe('parsers', () => {
                 "USDT": 0n,
               },
               "Ethereum": {
+                "CBBTC": 0n,
                 "ETH": 0n,
                 "FLIP": 0n,
                 "USDC": 0n,
@@ -3884,6 +3993,7 @@ describe('parsers', () => {
                 "USDT": 0n,
               },
               "Ethereum": {
+                "CBBTC": 0n,
                 "ETH": 0n,
                 "FLIP": 0n,
                 "USDC": 0n,
@@ -3940,6 +4050,7 @@ describe('parsers', () => {
                 "USDT": 0n,
               },
               "Ethereum": {
+                "CBBTC": 0n,
                 "ETH": 0n,
                 "FLIP": 0n,
                 "USDC": 0n,
@@ -3998,6 +4109,7 @@ describe('parsers', () => {
                 "USDT": [],
               },
               "Ethereum": {
+                "CBBTC": [],
                 "ETH": [],
                 "FLIP": [],
                 "USDC": [],
@@ -4034,6 +4146,7 @@ describe('parsers', () => {
                 "USDT": 0n,
               },
               "Ethereum": {
+                "CBBTC": 0n,
                 "ETH": 0n,
                 "FLIP": 0n,
                 "USDC": 0n,
@@ -4100,6 +4213,7 @@ describe('parsers', () => {
                 "USDT": 0n,
               },
               "Ethereum": {
+                "CBBTC": 0n,
                 "ETH": 0n,
                 "FLIP": 0n,
                 "USDC": 0n,
@@ -4137,6 +4251,7 @@ describe('parsers', () => {
                 "USDT": 0n,
               },
               "Ethereum": {
+                "CBBTC": 12369718n,
                 "ETH": 1485755635703031110n,
                 "FLIP": 39432662616362382590n,
                 "USDC": 1922285993n,
@@ -4179,6 +4294,7 @@ describe('parsers', () => {
                 "USDT": 0n,
               },
               "Ethereum": {
+                "CBBTC": 0n,
                 "ETH": 0n,
                 "FLIP": 0n,
                 "USDC": 0n,
@@ -4215,6 +4331,7 @@ describe('parsers', () => {
                 "USDT": 0n,
               },
               "Ethereum": {
+                "CBBTC": 12369718n,
                 "ETH": 1485755635703031110n,
                 "FLIP": 39432662616362382590n,
                 "USDC": 1922285993n,
@@ -4256,6 +4373,7 @@ describe('parsers', () => {
                 "USDT": 0n,
               },
               "Ethereum": {
+                "CBBTC": 0n,
                 "ETH": 0n,
                 "FLIP": 0n,
                 "USDC": 0n,
@@ -4302,6 +4420,7 @@ describe('parsers', () => {
                 "USDT": 0n,
               },
               "Ethereum": {
+                "CBBTC": 0n,
                 "ETH": 0n,
                 "FLIP": 0n,
                 "USDC": 0n,

@@ -22,6 +22,7 @@ exports[`parsers > cfAccountInfo > parses the latest cfAccountInfo schema for an
       "USDT": 0n,
     },
     "Ethereum": {
+      "CBBTC": 0n,
       "ETH": 0n,
       "FLIP": 0n,
       "USDC": 0n,
@@ -80,6 +81,7 @@ exports[`parsers > cfAccountInfo > parses the latest cfAccountInfo schema for an
       "USDT": [],
     },
     "Ethereum": {
+      "CBBTC": [],
       "ETH": [],
       "FLIP": [],
       "USDC": [],
@@ -116,6 +118,7 @@ exports[`parsers > cfAccountInfo > parses the latest cfAccountInfo schema for an
       "USDT": 0n,
     },
     "Ethereum": {
+      "CBBTC": 0n,
       "ETH": 0n,
       "FLIP": 0n,
       "USDC": 0n,

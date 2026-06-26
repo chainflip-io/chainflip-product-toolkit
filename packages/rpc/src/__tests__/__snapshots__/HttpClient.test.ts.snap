@@ -29,6 +29,7 @@ exports[`HttpClient > with server > gets broker account info 1`] = `
       "USDT": 0n,
     },
     "Ethereum": {
+      "CBBTC": 0n,
       "ETH": 0n,
       "FLIP": 0n,
       "USDC": 0n,
@@ -66,6 +67,7 @@ exports[`HttpClient > with server > gets broker account info 1`] = `
       "USDT": 0n,
     },
     "Ethereum": {
+      "CBBTC": 12369718n,
       "ETH": 1485755635703031110n,
       "FLIP": 39432662616362382590n,
       "USDC": 1922285993n,
@@ -111,6 +113,7 @@ exports[`HttpClient > with server > gets broker account info 2 1`] = `
       "USDT": 0n,
     },
     "Ethereum": {
+      "CBBTC": 0n,
       "ETH": 0n,
       "FLIP": 0n,
       "USDC": 0n,
@@ -147,6 +150,7 @@ exports[`HttpClient > with server > gets broker account info 2 1`] = `
       "USDT": 0n,
     },
     "Ethereum": {
+      "CBBTC": 12369718n,
       "ETH": 1485755635703031110n,
       "FLIP": 39432662616362382590n,
       "USDC": 1922285993n,
@@ -191,6 +195,7 @@ exports[`HttpClient > with server > gets delegator account info 1`] = `
       "USDT": 0n,
     },
     "Ethereum": {
+      "CBBTC": 0n,
       "ETH": 0n,
       "FLIP": 0n,
       "USDC": 0n,
@@ -240,6 +245,7 @@ exports[`HttpClient > with server > gets delegator account info 2 1`] = `
       "USDT": 0n,
     },
     "Ethereum": {
+      "CBBTC": 0n,
       "ETH": 0n,
       "FLIP": 0n,
       "USDC": 0n,
@@ -293,6 +299,7 @@ exports[`HttpClient > with server > gets lp account info 1`] = `
       "USDT": 0n,
     },
     "Ethereum": {
+      "CBBTC": 0n,
       "ETH": 0n,
       "FLIP": 0n,
       "USDC": 0n,
@@ -351,6 +358,7 @@ exports[`HttpClient > with server > gets lp account info 1`] = `
       "USDT": [],
     },
     "Ethereum": {
+      "CBBTC": [],
       "ETH": [],
       "FLIP": [],
       "USDC": [],
@@ -387,6 +395,7 @@ exports[`HttpClient > with server > gets lp account info 1`] = `
       "USDT": 0n,
     },
     "Ethereum": {
+      "CBBTC": 0n,
       "ETH": 0n,
       "FLIP": 0n,
       "USDC": 0n,
@@ -447,6 +456,7 @@ exports[`HttpClient > with server > gets lp total balances 1`] = `
     "USDT": 0n,
   },
   "Ethereum": {
+    "CBBTC": 0n,
     "ETH": 0n,
     "FLIP": 0n,
     "USDC": 0n,
@@ -532,6 +542,7 @@ exports[`HttpClient > with server > gets unregistered account info 1`] = `
       "USDT": 0n,
     },
     "Ethereum": {
+      "CBBTC": 0n,
       "ETH": 0n,
       "FLIP": 0n,
       "USDC": 0n,
@@ -578,6 +589,7 @@ exports[`HttpClient > with server > gets validator account info 1`] = `
       "USDT": 0n,
     },
     "Ethereum": {
+      "CBBTC": 0n,
       "ETH": 0n,
       "FLIP": 0n,
       "USDC": 0n,
@@ -637,6 +649,7 @@ exports[`HttpClient > with server > gets validator account info with an operator
       "USDT": 0n,
     },
     "Ethereum": {
+      "CBBTC": 0n,
       "ETH": 0n,
       "FLIP": 0n,
       "USDC": 0n,
@@ -698,6 +711,7 @@ exports[`HttpClient > with server > handles cf_all_account_infos 1`] = `
         "USDT": 0n,
       },
       "Ethereum": {
+        "CBBTC": 0n,
         "ETH": 0n,
         "FLIP": 0n,
         "USDC": 0n,
@@ -754,6 +768,7 @@ exports[`HttpClient > with server > handles cf_all_account_infos 1`] = `
         "USDT": 0n,
       },
       "Ethereum": {
+        "CBBTC": 0n,
         "ETH": 0n,
         "FLIP": 0n,
         "USDC": 0n,
@@ -810,6 +825,7 @@ exports[`HttpClient > with server > handles cf_all_account_infos 1`] = `
         "USDT": 0n,
       },
       "Ethereum": {
+        "CBBTC": 0n,
         "ETH": 0n,
         "FLIP": 0n,
         "USDC": 0n,
@@ -868,6 +884,7 @@ exports[`HttpClient > with server > handles cf_all_account_infos 1`] = `
         "USDT": [],
       },
       "Ethereum": {
+        "CBBTC": [],
         "ETH": [],
         "FLIP": [],
         "USDC": [],
@@ -904,6 +921,7 @@ exports[`HttpClient > with server > handles cf_all_account_infos 1`] = `
         "USDT": 0n,
       },
       "Ethereum": {
+        "CBBTC": 0n,
         "ETH": 0n,
         "FLIP": 0n,
         "USDC": 0n,
@@ -970,6 +988,7 @@ exports[`HttpClient > with server > handles cf_all_account_infos 1`] = `
         "USDT": 0n,
       },
       "Ethereum": {
+        "CBBTC": 0n,
         "ETH": 0n,
         "FLIP": 0n,
         "USDC": 0n,
@@ -1007,6 +1026,7 @@ exports[`HttpClient > with server > handles cf_all_account_infos 1`] = `
         "USDT": 0n,
       },
       "Ethereum": {
+        "CBBTC": 12369718n,
         "ETH": 1485755635703031110n,
         "FLIP": 39432662616362382590n,
         "USDC": 1922285993n,
@@ -1049,6 +1069,7 @@ exports[`HttpClient > with server > handles cf_all_account_infos 1`] = `
         "USDT": 0n,
       },
       "Ethereum": {
+        "CBBTC": 0n,
         "ETH": 0n,
         "FLIP": 0n,
         "USDC": 0n,
@@ -1085,6 +1106,7 @@ exports[`HttpClient > with server > handles cf_all_account_infos 1`] = `
         "USDT": 0n,
       },
       "Ethereum": {
+        "CBBTC": 12369718n,
         "ETH": 1485755635703031110n,
         "FLIP": 39432662616362382590n,
         "USDC": 1922285993n,
@@ -1126,6 +1148,7 @@ exports[`HttpClient > with server > handles cf_all_account_infos 1`] = `
         "USDT": 0n,
       },
       "Ethereum": {
+        "CBBTC": 0n,
         "ETH": 0n,
         "FLIP": 0n,
         "USDC": 0n,
@@ -1172,6 +1195,7 @@ exports[`HttpClient > with server > handles cf_all_account_infos 1`] = `
         "USDT": 0n,
       },
       "Ethereum": {
+        "CBBTC": 0n,
         "ETH": 0n,
         "FLIP": 0n,
         "USDC": 0n,
@@ -1425,6 +1449,7 @@ exports[`HttpClient > with server > handles cf_environment 1`] = `
         "USDT": 1n,
       },
       "Ethereum": {
+        "CBBTC": 1n,
         "ETH": 1n,
         "FLIP": 1n,
         "USDC": 1n,
@@ -1469,6 +1494,7 @@ exports[`HttpClient > with server > handles cf_environment 1`] = `
         "USDT": 0n,
       },
       "Ethereum": {
+        "CBBTC": 0n,
         "ETH": 490000n,
         "FLIP": 0n,
         "USDC": 0n,
@@ -1513,6 +1539,7 @@ exports[`HttpClient > with server > handles cf_environment 1`] = `
         "USDT": 0n,
       },
       "Ethereum": {
+        "CBBTC": 0n,
         "ETH": 350000n,
         "FLIP": 0n,
         "USDC": 0n,
@@ -1548,6 +1575,7 @@ exports[`HttpClient > with server > handles cf_environment 1`] = `
         "USDT": 0n,
       },
       "Ethereum": {
+        "CBBTC": 0n,
         "ETH": 0n,
         "FLIP": 0n,
         "USDC": 0n,
@@ -1583,6 +1611,7 @@ exports[`HttpClient > with server > handles cf_environment 1`] = `
         "USDT": 1n,
       },
       "Ethereum": {
+        "CBBTC": 1n,
         "ETH": 1n,
         "FLIP": 1n,
         "USDC": 1n,
@@ -1836,6 +1865,30 @@ exports[`HttpClient > with server > handles cf_environment 1`] = `
         },
       },
       "Ethereum": {
+        "CBBTC": {
+          "limit_order_fee_hundredth_pips": 20,
+          "limit_order_total_fees_earned": {
+            "base": 0n,
+            "quote": 0n,
+          },
+          "limit_total_swap_inputs": {
+            "base": 0n,
+            "quote": 0n,
+          },
+          "quote_asset": {
+            "asset": "USDC",
+            "chain": "Ethereum",
+          },
+          "range_order_fee_hundredth_pips": 20,
+          "range_order_total_fees_earned": {
+            "base": 180n,
+            "quote": 19996n,
+          },
+          "range_total_swap_inputs": {
+            "base": 8996618n,
+            "quote": 999734320n,
+          },
+        },
         "ETH": {
           "limit_order_fee_hundredth_pips": 20,
           "limit_order_total_fees_earned": {
@@ -2079,6 +2132,7 @@ exports[`HttpClient > with server > handles cf_environment 1`] = `
         "USDT": 10000,
       },
       "Ethereum": {
+        "CBBTC": 10000,
         "ETH": 10000,
         "FLIP": null,
         "USDC": null,
@@ -2116,6 +2170,7 @@ exports[`HttpClient > with server > handles cf_environment 1`] = `
         "USDT": null,
       },
       "Ethereum": {
+        "CBBTC": null,
         "ETH": 65536n,
         "FLIP": null,
         "USDC": null,
@@ -2151,6 +2206,7 @@ exports[`HttpClient > with server > handles cf_environment 1`] = `
         "USDT": 0n,
       },
       "Ethereum": {
+        "CBBTC": 2000000n,
         "ETH": 200000000000000000n,
         "FLIP": 1000000000000000000000n,
         "USDC": 1000000000n,
@@ -2189,6 +2245,7 @@ exports[`HttpClient > with server > handles cf_environment 1`] = `
             "USDT": 0n,
           },
           "Ethereum": {
+            "CBBTC": 0n,
             "ETH": 0n,
             "FLIP": 0n,
             "USDC": 0n,
@@ -2230,6 +2287,7 @@ exports[`HttpClient > with server > handles cf_environment 1`] = `
             "USDT": 0n,
           },
           "Ethereum": {
+            "CBBTC": 0n,
             "ETH": 0n,
             "FLIP": 0n,
             "USDC": 0n,
@@ -2455,6 +2513,7 @@ exports[`HttpClient > with server > handles cf_get_trading_strategy_limits 1`] =
       "USDT": null,
     },
     "Ethereum": {
+      "CBBTC": null,
       "ETH": null,
       "FLIP": null,
       "USDC": 10000000,
@@ -2490,6 +2549,7 @@ exports[`HttpClient > with server > handles cf_get_trading_strategy_limits 1`] =
       "USDT": null,
     },
     "Ethereum": {
+      "CBBTC": null,
       "ETH": null,
       "FLIP": null,
       "USDC": 20000000000,
@@ -2552,6 +2612,7 @@ exports[`HttpClient > with server > handles cf_ingress_egress_environment 1`] = 
       "USDT": 1n,
     },
     "Ethereum": {
+      "CBBTC": 1n,
       "ETH": 1n,
       "FLIP": 1n,
       "USDC": 1n,
@@ -2596,6 +2657,7 @@ exports[`HttpClient > with server > handles cf_ingress_egress_environment 1`] = 
       "USDT": 0n,
     },
     "Ethereum": {
+      "CBBTC": 0n,
       "ETH": 490000n,
       "FLIP": 0n,
       "USDC": 0n,
@@ -2640,6 +2702,7 @@ exports[`HttpClient > with server > handles cf_ingress_egress_environment 1`] = 
       "USDT": 0n,
     },
     "Ethereum": {
+      "CBBTC": 0n,
       "ETH": 350000n,
       "FLIP": 0n,
       "USDC": 0n,
@@ -2675,6 +2738,7 @@ exports[`HttpClient > with server > handles cf_ingress_egress_environment 1`] = 
       "USDT": 0n,
     },
     "Ethereum": {
+      "CBBTC": 0n,
       "ETH": 0n,
       "FLIP": 0n,
       "USDC": 0n,
@@ -2710,6 +2774,7 @@ exports[`HttpClient > with server > handles cf_ingress_egress_environment 1`] = 
       "USDT": 1n,
     },
     "Ethereum": {
+      "CBBTC": 1n,
       "ETH": 1n,
       "FLIP": 1n,
       "USDC": 1n,
@@ -3352,6 +3417,7 @@ exports[`HttpClient > with server > handles cf_swapping_environment 1`] = `
       "USDT": 10000,
     },
     "Ethereum": {
+      "CBBTC": 10000,
       "ETH": 10000,
       "FLIP": null,
       "USDC": null,
@@ -3389,6 +3455,7 @@ exports[`HttpClient > with server > handles cf_swapping_environment 1`] = `
       "USDT": null,
     },
     "Ethereum": {
+      "CBBTC": null,
       "ETH": 65536n,
       "FLIP": null,
       "USDC": null,
@@ -3424,6 +3491,7 @@ exports[`HttpClient > with server > handles cf_swapping_environment 1`] = `
       "USDT": 0n,
     },
     "Ethereum": {
+      "CBBTC": 2000000n,
       "ETH": 200000000000000000n,
       "FLIP": 1000000000000000000000n,
       "USDC": 1000000000n,
@@ -3462,6 +3530,7 @@ exports[`HttpClient > with server > handles cf_swapping_environment 1`] = `
           "USDT": 0n,
         },
         "Ethereum": {
+          "CBBTC": 0n,
           "ETH": 0n,
           "FLIP": 0n,
           "USDC": 0n,
@@ -3503,6 +3572,7 @@ exports[`HttpClient > with server > handles cf_swapping_environment 1`] = `
           "USDT": 0n,
         },
         "Ethereum": {
+          "CBBTC": 0n,
           "ETH": 0n,
           "FLIP": 0n,
           "USDC": 0n,
