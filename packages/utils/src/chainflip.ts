@@ -5,6 +5,7 @@ export const chainflipAssets = [
   'Usdc',
   'Usdt',
   'Wbtc',
+  'Cbbtc',
   'Flip',
   'Eth',
   // Bitcoin
@@ -173,6 +174,7 @@ export const assetConstants = {
   Usdc: { chain: 'Ethereum', symbol: 'USDC', decimals: 6 },
   Usdt: { chain: 'Ethereum', symbol: 'USDT', decimals: 6 },
   Wbtc: { chain: 'Ethereum', symbol: 'WBTC', decimals: 8 },
+  Cbbtc: { chain: 'Ethereum', symbol: 'CBBTC', decimals: 8 },
   Btc: { chain: 'Bitcoin', symbol: 'BTC', decimals: 8 },
   ArbUsdc: { chain: 'Arbitrum', symbol: 'USDC', decimals: 6 },
   ArbUsdt: { chain: 'Arbitrum', symbol: 'USDT', decimals: 6 },
@@ -213,13 +215,14 @@ export const assetSymbols = [
   'WBTC',
   'TRX',
   'BNB',
+  'CBBTC',
 ] as const;
 export type AssetSymbol = (typeof assetSymbols)[number];
 
 export const chainConstants = {
   Ethereum: {
-    chainflipAssets: ['Eth', 'Flip', 'Usdc', 'Usdt', 'Wbtc'],
-    assets: ['ETH', 'FLIP', 'USDC', 'USDT', 'WBTC'],
+    chainflipAssets: ['Eth', 'Flip', 'Usdc', 'Usdt', 'Wbtc', 'Cbbtc'],
+    assets: ['ETH', 'FLIP', 'USDC', 'USDT', 'WBTC', 'CBBTC'],
     gasAsset: 'Eth',
     addressType: 'Eth',
     blockTimeSeconds: 12,
@@ -297,6 +300,7 @@ export const internalAssetToRpcAsset: InternalAssetMap<AssetAndChain> = {
   Usdc: { chain: 'Ethereum', asset: 'USDC' },
   Usdt: { chain: 'Ethereum', asset: 'USDT' },
   Wbtc: { chain: 'Ethereum', asset: 'WBTC' },
+  Cbbtc: { chain: 'Ethereum', asset: 'CBBTC' },
   Btc: { chain: 'Bitcoin', asset: 'BTC' },
   ArbUsdc: { chain: 'Arbitrum', asset: 'USDC' },
   ArbUsdt: { chain: 'Arbitrum', asset: 'USDT' },
@@ -350,6 +354,7 @@ export const assetContractId: InternalAssetMap<number> = {
   TrxUsdt: 18,
   Bnb: 19,
   BscUsdt: 20,
+  Cbbtc: 21,
 };
 
 export function getInternalAsset(asset: BaseAssetAndChain): BaseChainflipAsset;
@@ -368,6 +373,7 @@ export function getInternalAsset(asset: UncheckedAssetAndChain, assert = true) {
       ETH: 'Eth',
       USDT: 'Usdt',
       WBTC: 'Wbtc',
+      CBBTC: 'Cbbtc',
     },
     Bitcoin: {
       BTC: 'Btc',
@@ -494,6 +500,7 @@ export const chainflipAssetToPriceAssetMap: Record<
   Flip: null,
   HubDot: null,
   Wbtc: 'Btc',
+  Cbbtc: 'Btc',
   Trx: null,
   TrxUsdt: 'Usdt',
   Bnb: null,
