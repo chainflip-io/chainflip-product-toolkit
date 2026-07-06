@@ -166,7 +166,7 @@ export function createVaultParamsDecoder<T, U, V>(
   const additionalDataCodec = vaultCcmCfParametersCodec(refundAddressCodec);
 
   const tryVariants = (data: Uint8Array) => {
-    const errors = [];
+    const errors: Error[] = [];
     try {
       return {
         ok: true,

@@ -35,7 +35,7 @@ export default class Processor<P extends ProcessorStore<unknown, unknown>, I ext
   protected timings = {
     total: 0,
     extrinsicHandlers: 0,
-    eventHandlers: {} as Record<string, number[]>,
+    eventHandlers: {},
   } as Record<string, number | Record<string, number[]>>;
 
   constructor(
@@ -55,7 +55,7 @@ export default class Processor<P extends ProcessorStore<unknown, unknown>, I ext
     this.timings = {
       total: performance.now(),
       extrinsicHandlers: 0,
-      eventHandlers: {} as Record<string, number[]>,
+      eventHandlers: {},
     };
 
     return Promise.resolve();
