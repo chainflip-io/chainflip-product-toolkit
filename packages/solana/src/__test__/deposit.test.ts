@@ -588,7 +588,7 @@ describe(findVaultSwapData, () => {
         swapNative({
           ...swapData[asset],
           destinationAsset: asset,
-        } as Parameters<typeof swapNative>[0]),
+        }),
       ]);
 
       const data = await findVaultSwapData(
@@ -606,7 +606,7 @@ describe(findVaultSwapData, () => {
       const tx = swapNative({
         ...swapData[asset],
         destinationAsset: asset,
-      } as Parameters<typeof swapNative>[0]);
+      });
 
       tx.result.transaction.message.instructions[0].programId = mainnet.address;
 

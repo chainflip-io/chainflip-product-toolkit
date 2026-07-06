@@ -4,11 +4,10 @@ import { Server } from 'http';
 import { type AddressInfo } from 'net';
 import { promisify } from 'util';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { type z } from 'zod';
 import { spyOn } from '@/testing';
 import { RpcRequest, type JsonRpcRequest, type RpcMethod } from '../common';
 import { HttpClient } from '../index';
-import { type AssetAndChain, type cfSwapRate } from '../parsers';
+import { type AssetAndChain } from '../parsers';
 import {
   accountCreationDepositAddress,
   accounts,
@@ -386,7 +385,7 @@ describe(HttpClient, () => {
         return respond({
           intermediary: chain === 'Ethereum' && asset === 'USDC' ? null : '0x1',
           output: '0x1',
-        } as z.input<typeof cfSwapRate>);
+        });
       }
 
       switch (body.method) {

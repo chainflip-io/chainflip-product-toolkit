@@ -3,7 +3,6 @@ import { assetContractId, chainContractId } from '@chainflip/utils/chainflip';
 import * as ss58 from '@chainflip/utils/ss58';
 import { BN } from '@coral-xyz/anchor';
 import { describe, expect, it } from 'vitest';
-import { type z } from 'zod';
 import { swapSchema } from '../schemas';
 
 describe('swapSchema', () => {
@@ -38,7 +37,7 @@ describe('swapSchema', () => {
           ),
         },
       },
-    } as z.input<typeof swapSchema>);
+    });
     expect(result.data).toMatchSnapshot();
   });
 
@@ -61,7 +60,7 @@ describe('swapSchema', () => {
           ),
         },
       },
-    } as z.input<typeof swapSchema>);
+    });
     expect(result.data).toMatchInlineSnapshot(`
       {
         "affiliateFees": [
@@ -111,7 +110,7 @@ describe('swapSchema', () => {
             ccm_parameters: null,
           },
         },
-      } as z.input<typeof swapSchema>),
+      }),
     ).toThrowErrorMatchingInlineSnapshot(`
       [ZodError: [
         {
