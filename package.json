@@ -17,7 +17,7 @@
   "license": "ISC",
   "devDependencies": {
     "@eslint/js": "^9.39.4",
-    "@rolldown/binding-darwin-arm64": "1.0.0",
+    "@rolldown/binding-darwin-arm64": "1.1.2",
     "@rolldown/binding-linux-x64-gnu": "1.0.0-rc.18",
     "@types/node": "^25.6.2",
     "@types/yargs": "^17.0.35",
