@@ -15,8 +15,8 @@ importers:
         specifier: 1.1.2
         version: 1.1.2
       '@rolldown/binding-linux-x64-gnu':
-        specifier: 1.0.0-rc.18
-        version: 1.0.0-rc.18
+        specifier: 1.1.2
+        version: 1.1.2
       '@types/node':
         specifier: ^26.0.0
         version: 26.0.0
@@ -1094,8 +1094,8 @@ packages:
     os: [linux]
     libc: [glibc]
 
-  '@rolldown/binding-linux-x64-gnu@1.0.0-rc.18':
-    resolution: {integrity: sha512-uCo8ElcCIAMyYAZyuIZ81oFkhTSIllNvUCHCAlbhlN4ji3uC28h7IIdlXyIvGO7HsuqnV9p3rD/bpH7XhIyhRw==}
+  '@rolldown/binding-linux-x64-gnu@1.1.2':
+    resolution: {integrity: sha512-JY4w85pU3iAiJVMh5nuk4/Mh9GjMsupe8MrIN53rwxAZW64GKrWeJBuN6SxQg9QTU5uB1cxyhDzW8jqRn1EABw==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [x64]
     os: [linux]
@@ -4051,7 +4051,7 @@ snapshots:
   '@rolldown/binding-linux-x64-gnu@1.0.0-rc.16':
     optional: true
 
-  '@rolldown/binding-linux-x64-gnu@1.0.0-rc.18': {}
+  '@rolldown/binding-linux-x64-gnu@1.1.2': {}
 
   '@rolldown/binding-linux-x64-musl@1.0.0':
     optional: true
