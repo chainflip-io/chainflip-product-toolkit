@@ -81,8 +81,8 @@ importers:
         specifier: 2.2.0
         version: 2.2.0
       bignumber.js:
-        specifier: ^11.1.1
-        version: 11.1.1
+        specifier: ^11.1.4
+        version: 11.1.4
       bitcoinjs-lib:
         specifier: 7.0.1
         version: 7.0.1(typescript@5.9.3)
@@ -172,8 +172,8 @@ importers:
         specifier: 2.2.0
         version: 2.2.0
       bignumber.js:
-        specifier: ^11.1.1
-        version: 11.1.1
+        specifier: ^11.1.4
+        version: 11.1.4
       ioredis:
         specifier: ^5.11.1
         version: 5.11.1
@@ -259,8 +259,8 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0
       bignumber.js:
-        specifier: ^11.1.1
-        version: 11.1.1
+        specifier: ^11.1.4
+        version: 11.1.4
       date-fns:
         specifier: 4.1.0
         version: 4.1.0
@@ -1685,8 +1685,8 @@ packages:
   bech32@2.0.0:
     resolution: {integrity: sha512-LcknSilhIGatDAsY1ak2I8VtGaHNhgMSYVxFrGLXv+xLHytaKZKcaUJJUE7qmBr7h33o5YQwP55pMI0xmkpJwg==}
 
-  bignumber.js@11.1.1:
-    resolution: {integrity: sha512-LNkCYMieJqAts/Sj5094B92c5q+yRPlXWpABJnHMbUjB/F8AUjELmSmYX5mxbNiY/QnGnJvJIrnRuW5gUqbW5Q==}
+  bignumber.js@11.1.4:
+    resolution: {integrity: sha512-AJ9dSeaUGj2xu7tEwmdqb51dqdb633xo4njI9K8ZFfcLrNr0XN8/EPkkZUNaF9fkCblGt2zVwZymesUdGynEkQ==}
 
   bip174@3.0.0:
     resolution: {integrity: sha512-N3vz3rqikLEu0d6yQL8GTrSkpYb35NQKWMR7Hlza0lOj6ZOlvQ3Xr7N9Y+JPebaCVoEUHdBeBSuLxcHr71r+Lw==}
@@ -3447,7 +3447,7 @@ snapshots:
     dependencies:
       '@date-fns/utc': 2.1.1
       '@noble/hashes': 2.2.0
-      bignumber.js: 11.1.1
+      bignumber.js: 11.1.4
       date-fns: 4.1.0
 
   '@coral-xyz/anchor-errors@0.31.1': {}
@@ -4675,7 +4675,7 @@ snapshots:
 
   bech32@2.0.0: {}
 
-  bignumber.js@11.1.1: {}
+  bignumber.js@11.1.4: {}
 
   bip174@3.0.0:
     dependencies:
