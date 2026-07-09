@@ -135,6 +135,10 @@ export const brokerAliasMap: AccountAliasMap = {
     name: 'Trust Wallet',
     twitter: '@TrustWallet',
   },
+  cFL6CFZToDFaKC9M6wrBfULvjRi5UfqBNERLg57yDsqt7CnsG: {
+    name: 'Trust Wallet',
+    twitter: '@TrustWallet',
+  },
   cFNddmecxrTKfytLwV3s7KpBjmsvFAX8xUnrXfnvd4yqtr4vC: {
     name: 'Dexifier',
     twitter: '@DexifierX',
