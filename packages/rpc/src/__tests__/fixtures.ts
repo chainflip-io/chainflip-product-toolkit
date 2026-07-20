@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import {
   cfAllLoans,
+  cfRewardDistributionEstimate,
   type broker,
   type brokerRequestAccountCreationDepositAddress,
   type brokerRequestSwapDepositAddress,
@@ -2160,3 +2161,39 @@ export const allLoans: z.input<typeof cfAllLoans> = [
     principal_amount: '0x5F5E100',
   },
 ];
+
+export const rewardDistributionEstimate: z.input<typeof cfRewardDistributionEstimate> = {
+  epoch_index: 1234,
+  current_block: '0x1e8480',
+  current_epoch_started_at: 1900000,
+  epoch_duration: 43200,
+  bond: '0x152d02c7e14af6800000',
+  authority_count: 3,
+  total_rewards: '0x21e19e0c9bab2400000',
+  per_authority_share: '0xb469471f80140000',
+  reward_pool: [
+    {
+      account: VALIDATOR_ACCOUNT_ID,
+      bid: '0x1b1ae4d6e2ef500000',
+      bond: '0x152d02c7e14af6800000',
+      reward: '0xb469471f80140000',
+      role: 'operator',
+      managed_by: DELEGATOR_ACCOUNT_ID,
+      delegated_to: DELEGATOR_ACCOUNT_ID2,
+    },
+    {
+      account: VALIDATOR_ACCOUNT_ID2,
+      bid: 1000000000,
+      bond: '0x152d02c7e14af6800000',
+      reward: '0xb469471f80140000',
+      role: 'validator',
+    },
+    {
+      account: BROKER_ACCOUNT_ID,
+      bid: 0,
+      bond: 0,
+      reward: 0,
+      role: 'unregistered',
+    },
+  ],
+};

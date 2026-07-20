@@ -981,3 +981,26 @@ export const cfVaultAddresses = z
   });
 
 export const cfAllLoans = z.array(cfLoan);
+
+const AccountRewardRole = z.enum(['unregistered', 'validator', 'operator']);
+
+const accountReward = z.object({
+  account: accountId,
+  bid: numberOrHex,
+  bond: numberOrHex,
+  reward: numberOrHex,
+  role: AccountRewardRole,
+  managed_by: accountId.optional(),
+  delegated_to: accountId.optional(),
+});
+export const cfRewardDistributionEstimate = z.object({
+  epoch_index: numberOrHex,
+  current_block: numberOrHex,
+  current_epoch_started_at: numberOrHex,
+  epoch_duration: numberOrHex,
+  bond: numberOrHex,
+  authority_count: z.number(),
+  total_rewards: numberOrHex,
+  per_authority_share: numberOrHex,
+  reward_pool: z.array(accountReward),
+});

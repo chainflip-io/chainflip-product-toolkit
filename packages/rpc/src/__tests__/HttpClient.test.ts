@@ -35,6 +35,7 @@ import {
   poolOrders,
   poolPriceV2,
   poolsEnvironment,
+  rewardDistributionEstimate,
   runtimeVersion,
   safeModeStatuses,
   supportedAssets,
@@ -106,6 +107,7 @@ describe(HttpClient, () => {
         "cf_pool_price_v2",
         "cf_pools_environment",
         "cf_request_swap_parameter_encoding",
+        "cf_reward_distribution_estimate",
         "cf_safe_mode_statuses",
         "cf_supported_assets",
         "cf_swap_rate",
@@ -488,6 +490,8 @@ describe(HttpClient, () => {
           return respond(loanAccounts220);
         case 'cf_all_loans':
           return respond(allLoans);
+        case 'cf_reward_distribution_estimate':
+          return respond(rewardDistributionEstimate);
         case 'cf_all_account_infos':
           return respond(Object.values(accounts));
         case 'cf_lending_pool_supply_balances':
@@ -608,6 +612,7 @@ describe(HttpClient, () => {
       ['cf_lending_pool_supply_balances'],
       ['cf_all_loans'],
       ['cf_all_account_infos'],
+      ['cf_reward_distribution_estimate'],
     ] as [SimpleRpcMethod, string?][])('handles %s', async (method, id) => {
       if (id) vi.spyOn(crypto, 'randomUUID').mockImplementationOnce(() => id as any);
       expect(await client.sendRequest(method)).toMatchSnapshot();
