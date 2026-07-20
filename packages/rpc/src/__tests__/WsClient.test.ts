@@ -16,6 +16,7 @@ const createChainAssetMap = <T>(value: T): ChainAssetMap<T> => ({
   Solana: { SOL: value, USDC: value, USDT: value },
   Assethub: { DOT: value, USDC: value, USDT: value },
   Tron: { TRX: value, USDT: value },
+  Bsc: { BNB: value, USDT: value },
 });
 
 vi.mock(
@@ -264,6 +265,10 @@ describe(WsClient, () => {
               "Bitcoin": {
                 "BTC": 0n,
               },
+              "Bsc": {
+                "BNB": 0n,
+                "USDT": 0n,
+              },
               "Ethereum": {
                 "ETH": 0n,
                 "FLIP": 0n,
@@ -301,6 +306,10 @@ describe(WsClient, () => {
               },
               "Bitcoin": {
                 "BTC": 0n,
+              },
+              "Bsc": {
+                "BNB": 0n,
+                "USDT": 0n,
               },
               "Ethereum": {
                 "ETH": 0n,

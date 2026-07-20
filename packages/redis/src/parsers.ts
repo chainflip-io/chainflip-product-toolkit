@@ -82,6 +82,7 @@ export const broadcastParsers = {
   Ethereum: evmBroadcast,
   Arbitrum: evmBroadcast,
   Tron: evmBroadcast,
+  Bsc: evmBroadcast,
   Assethub: z.object({
     tx_out_id: z.object({ signature: z.string() }),
     tx_ref: z

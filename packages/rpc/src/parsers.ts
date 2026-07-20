@@ -38,6 +38,7 @@ const chainAssetMapFactory = <Z extends z.ZodTypeAny>(parser: Z, _defaultValue: 
     Solana: z.object({ SOL: parser, USDC: parser, USDT: parser }),
     Assethub: z.object({ DOT: parser, USDC: parser, USDT: parser }),
     Tron: z.object({ TRX: parser, USDT: parser }),
+    Bsc: z.object({ BNB: parser, USDT: parser }).optional(), // TODO(2.3): remove once all networks have upgraded
   });
 
 const chainBaseAssetMapFactory = <Z extends z.ZodTypeAny>(parser: Z, _defaultValue: z.input<Z>) =>
@@ -53,6 +54,7 @@ const chainBaseAssetMapFactory = <Z extends z.ZodTypeAny>(parser: Z, _defaultVal
     Solana: z.object({ SOL: parser, USDC: parser, USDT: parser }),
     Assethub: z.object({ DOT: parser, USDC: parser, USDT: parser }),
     Tron: z.object({ TRX: parser, USDT: parser }),
+    Bsc: z.object({ BNB: parser, USDT: parser }).optional(), // TODO(2.3): remove once all networks have upgraded
   });
 
 const chainMapFactory = <Z extends z.ZodTypeAny>(parser: Z, _defaultValue: z.input<Z> = null) =>
@@ -63,6 +65,7 @@ const chainMapFactory = <Z extends z.ZodTypeAny>(parser: Z, _defaultValue: z.inp
     Solana: parser,
     Assethub: parser,
     Tron: parser,
+    Bsc: parser.optional(), // TODO(2.3): remove once all networks have upgraded
   });
 
 const rpcAssetSchema = z.union([
@@ -83,6 +86,8 @@ const rpcAssetSchema = z.union([
   z.object({ chain: z.literal('Assethub'), asset: z.literal('USDT') }),
   z.object({ chain: z.literal('Tron'), asset: z.literal('TRX') }),
   z.object({ chain: z.literal('Tron'), asset: z.literal('USDT') }),
+  z.object({ chain: z.literal('Bsc'), asset: z.literal('BNB') }),
+  z.object({ chain: z.literal('Bsc'), asset: z.literal('USDT') }),
 ]);
 
 const networkFee = z.object({
@@ -295,6 +300,9 @@ export const requestSwapParameterEncoding = z.discriminatedUnion('chain', [
   evmBrokerRequestSwapParameterEncoding.extend({
     chain: z.literal('Arbitrum'),
   }),
+  evmBrokerRequestSwapParameterEncoding.extend({
+    chain: z.literal('Bsc'),
+  }), // TODO(2.3): remove once all networks have upgraded
   z.object({
     chain: z.literal('Tron'),
     to: tronAddress,
@@ -744,6 +752,7 @@ export const cfSafeModeStatuses = z.object({
   broadcast_solana: broadcastPalletSafeModeStatuses,
   broadcast_assethub: broadcastPalletSafeModeStatuses,
   broadcast_tron: broadcastPalletSafeModeStatuses,
+  broadcast_bsc: broadcastPalletSafeModeStatuses.optional(), // TODO(2.3): remove once all networks have upgraded
   ingress_egress_ethereum: ingressEgressPalletSafeModeStatuses,
   ingress_egress_bitcoin: ingressEgressPalletSafeModeStatuses,
   ingress_egress_polkadot: ingressEgressPalletSafeModeStatuses,
@@ -751,6 +760,7 @@ export const cfSafeModeStatuses = z.object({
   ingress_egress_solana: ingressEgressPalletSafeModeStatuses,
   ingress_egress_assethub: ingressEgressPalletSafeModeStatuses,
   ingress_egress_tron: ingressEgressPalletSafeModeStatuses,
+  ingress_egress_bsc: ingressEgressPalletSafeModeStatuses.optional(), // TODO(2.3): remove once all networks have upgraded
   witnesser: z.enum(['CodeRed', 'CodeGreen', 'CodeAmber']),
   ethereum_elections: z.object({
     state_chain_gateway_witnessing: z.boolean(),
@@ -760,6 +770,11 @@ export const cfSafeModeStatuses = z.object({
   arbitrum_elections: z.object({
     key_manager_witnessing: z.boolean(),
   }),
+  bsc_elections: z
+    .object({
+      key_manager_witnessing: z.boolean(),
+    })
+    .optional(), // TODO(2.3): remove once all networks have upgraded
   elections_generic: z.object({
     oracle_price_elections: z.boolean(),
   }),
