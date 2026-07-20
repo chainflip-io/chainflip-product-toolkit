@@ -145,8 +145,7 @@ type DecodedParams<Address, CcmAdditionalData> = {
 };
 
 type Result<T, E> =
-  | { ok: true; value: T; reason?: undefined }
-  | { ok: false; value?: undefined; reason: E };
+  { ok: true; value: T; reason?: undefined } | { ok: false; value?: undefined; reason: E };
 
 export function createVaultParamsDecoder<T, U>(
   refundAddressCodec: Codec<T>,

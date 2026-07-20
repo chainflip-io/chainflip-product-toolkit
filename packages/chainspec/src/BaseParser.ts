@@ -63,14 +63,7 @@ export type OptionType = { type: 'option'; value: ResolvedType };
 export type RangeType = { type: 'range'; value: ResolvedType };
 
 export type ResolvedType =
-  | PrimitiveType
-  | EnumType
-  | StructType
-  | MapType
-  | ArrayType
-  | TupleType
-  | OptionType
-  | RangeType;
+  PrimitiveType | EnumType | StructType | MapType | ArrayType | TupleType | OptionType | RangeType;
 
 export type ParsedMetadata = Record<string, Record<string, ResolvedType>>;
 

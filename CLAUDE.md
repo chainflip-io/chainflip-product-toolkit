@@ -66,6 +66,7 @@ This is the most important module to understand. It defines the canonical asset 
 ### Subpath Exports
 
 Packages use subpath exports extensively. Import specific modules, not the barrel:
+
 ```typescript
 import { sum } from '@chainflip/utils/math';
 import { assert } from '@chainflip/utils/assertion';
