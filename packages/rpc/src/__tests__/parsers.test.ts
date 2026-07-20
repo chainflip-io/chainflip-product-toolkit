@@ -24,6 +24,7 @@ import {
   cfIngressEgressEvents,
   cfAllLoans,
   cfAllAccountInfos,
+  cfRewardDistributionEstimate,
 } from '../parsers';
 import {
   accounts,
@@ -38,6 +39,7 @@ import {
   loanAccounts220,
   monitoringSimulateAuction,
   poolOrders,
+  rewardDistributionEstimate,
   safeModeStatuses,
   tradingStrategies,
   tradingStrategiesLimits,
@@ -4073,6 +4075,48 @@ describe('parsers', () => {
 
     it('parses an empty list', () => {
       expect(cfAllAccountInfos.parse([])).toEqual([]);
+    });
+  });
+
+  describe('cfRewardDistributionEstimate', () => {
+    it('parses the reward distribution estimate response', () => {
+      expect(cfRewardDistributionEstimate.parse(rewardDistributionEstimate)).toMatchInlineSnapshot(`
+        {
+          "authority_count": 3,
+          "bond": 100000000000000000000000n,
+          "current_block": 2000000n,
+          "current_epoch_started_at": 1900000n,
+          "epoch_duration": 43200n,
+          "epoch_index": 1234n,
+          "per_authority_share": 13000000000000000000n,
+          "reward_pool": [
+            {
+              "account": "cFKzr7DwLCRtSkou5H5moKri7g9WwJ4tAbVJv6dZGhLb811Tc",
+              "bid": 500000000000000000000n,
+              "bond": 100000000000000000000000n,
+              "delegated_to": "cFKvKKCcScNcWyrJRASocm7vZq5vU8QpQhqdVGU8PnMEwgud5",
+              "managed_by": "cFNzMM63izeZ2zqKiUpUVWLEd6YqzbVEAHgPtgHLDtAVG4Hmv",
+              "reward": 13000000000000000000n,
+              "role": "operator",
+            },
+            {
+              "account": "cFJ6qQZ3ybhMDPt7KXDUUj3aLC2DXaPm8rCLCfLEsyMRH2AXK",
+              "bid": 1000000000n,
+              "bond": 100000000000000000000000n,
+              "reward": 13000000000000000000n,
+              "role": "validator",
+            },
+            {
+              "account": "cFJjZKzA5rUTb9qkZMGfec7piCpiAQKr15B4nALzriMGQL8BE",
+              "bid": 0n,
+              "bond": 0n,
+              "reward": 0n,
+              "role": "unregistered",
+            },
+          ],
+          "total_rewards": 10000000000000000000000n,
+        }
+      `);
     });
   });
 });
