@@ -105,7 +105,7 @@ type RequestSwapParameterEncodingParams = [
         retry_duration: number;
       }
     | {
-        chain: 'Ethereum' | 'Arbitrum' | 'Tron';
+        chain: 'Ethereum' | 'Arbitrum' | 'Tron' | 'Bsc';
         input_amount: `0x${string}`;
         refund_parameters: FillOrKillParams;
       }
@@ -216,6 +216,7 @@ export type RpcRequest = WithHash<{
   cf_failed_call_ethereum: [broadcastId: number];
   cf_failed_call_arbitrum: [broadcastId: number];
   cf_failed_call_tron: [broadcastId: number];
+  cf_failed_call_bsc: [broadcastId: number];
   cf_authority_emission_per_block: [];
   cf_epoch_duration: [];
   cf_auction_state: [];
@@ -302,6 +303,7 @@ export const rpcResult = {
   cf_failed_call_ethereum: cfFailedCallEvm.nullable(),
   cf_failed_call_arbitrum: cfFailedCallEvm.nullable(),
   cf_failed_call_tron: cfFailedCallEvm.nullable(),
+  cf_failed_call_bsc: cfFailedCallEvm.nullable(),
   cf_authority_emission_per_block: numberOrHex,
   cf_epoch_duration: z.number(),
   cf_auction_state: cfAuctionState,

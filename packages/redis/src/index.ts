@@ -48,6 +48,7 @@ export default class RedisClient {
     chain: 'Tron',
     broadcastId: number | bigint,
   ): Promise<EthereumBroadcast | null>;
+  async getBroadcast(chain: 'Bsc', broadcastId: number | bigint): Promise<EthereumBroadcast | null>;
   async getBroadcast(
     chain: ChainflipChain,
     broadcastId: number | bigint,
