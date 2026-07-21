@@ -264,7 +264,7 @@ export const chainConstants = {
     assets: ['BNB', 'USDT'],
     gasAsset: 'Bnb',
     addressType: 'Bsc',
-    blockTimeSeconds: 3,
+    blockTimeSeconds: 0.45,
   },
 } as const satisfies ChainMap<{
   chainflipAssets: ChainflipAsset[];
