@@ -14,7 +14,7 @@
     "test": "vitest"
   },
   "devDependencies": {
-    "@chainflip/utils": "2.2.0",
+    "@chainflip/utils": "2.3.0-dev.3",
     "@polkadot/types": "^16.5.6"
   },
   "files": [
