@@ -78,8 +78,8 @@ importers:
   packages/bitcoin:
     dependencies:
       '@chainflip/utils':
-        specifier: 2.2.0
-        version: 2.2.0
+        specifier: 2.3.0-dev.3
+        version: 2.3.0-dev.3
       bignumber.js:
         specifier: ^11.1.5
         version: 11.1.5
@@ -114,8 +114,8 @@ importers:
   packages/delegation:
     dependencies:
       '@chainflip/utils':
-        specifier: 2.2.0
-        version: 2.2.0
+        specifier: 2.3.0-dev.3
+        version: 2.3.0-dev.3
       scale-ts:
         specifier: ^1.6.1
         version: 1.6.1
@@ -144,8 +144,8 @@ importers:
   packages/extrinsics:
     devDependencies:
       '@chainflip/utils':
-        specifier: 2.2.0
-        version: 2.2.0
+        specifier: 2.3.0-dev.3
+        version: 2.3.0-dev.3
       '@polkadot/types':
         specifier: ^16.5.6
         version: 16.5.6
@@ -169,8 +169,8 @@ importers:
   packages/redis:
     dependencies:
       '@chainflip/utils':
-        specifier: 2.2.0
-        version: 2.2.0
+        specifier: 2.3.0-dev.3
+        version: 2.3.0-dev.3
       bignumber.js:
         specifier: ^11.1.5
         version: 11.1.5
@@ -184,8 +184,8 @@ importers:
   packages/rpc:
     dependencies:
       '@chainflip/utils':
-        specifier: 2.2.0
-        version: 2.2.0
+        specifier: 2.3.0-dev.3
+        version: 2.3.0-dev.3
       zod:
         specifier: ^3.25.75
         version: 3.25.75
@@ -203,8 +203,8 @@ importers:
   packages/scale:
     dependencies:
       '@chainflip/utils':
-        specifier: 2.2.0
-        version: 2.2.0
+        specifier: 2.3.0-dev.3
+        version: 2.3.0-dev.3
       scale-ts:
         specifier: ^1.6.1
         version: 1.6.1
@@ -244,8 +244,8 @@ importers:
   packages/testing:
     dependencies:
       '@chainflip/utils':
-        specifier: 2.2.0
-        version: 2.2.0
+        specifier: 2.3.0-dev.3
+        version: 2.3.0-dev.3
       vitest:
         specifier: 4.0.18
         version: 4.0.18(@types/node@26.1.0)(@vitest/ui@4.0.18)(tsx@4.23.0)(yaml@2.9.0)
@@ -328,6 +328,9 @@ packages:
 
   '@chainflip/utils@2.2.0':
     resolution: {integrity: sha512-r73Llrba2i0M0k/JPaBufGM9rTOc91oWRqgDxbhTKufo6NHO3EEyWzg5yWlkSkyFkhw9oNUlBcVisF2V8zwU7A==}
+
+  '@chainflip/utils@2.3.0-dev.3':
+    resolution: {integrity: sha512-D0AqDlQEYW0ZXJxYyUpXj21NblUQhgygP6se8xBS6Qx+RXo2MqvMDyPyVUFTJpOpIkFXGAOhFXL2ti3iUdfdMg==}
 
   '@coral-xyz/anchor-errors@0.31.1':
     resolution: {integrity: sha512-NhNEku4F3zzUSBtrYz84FzYWm48+9OvmT1Hhnwr6GnPQry2dsEqH/ti/7ASjjpoFTWRnPXrjAIT1qM6Isop+LQ==}
@@ -3435,6 +3438,13 @@ snapshots:
       '@noble/hashes': 2.2.0
       bignumber.js: 11.1.5
       date-fns: 4.1.0
+
+  '@chainflip/utils@2.3.0-dev.3':
+    dependencies:
+      '@date-fns/utc': 2.1.1
+      '@noble/hashes': 2.2.0
+      bignumber.js: 11.1.5
+      date-fns: 4.4.0
 
   '@coral-xyz/anchor-errors@0.31.1': {}
 
