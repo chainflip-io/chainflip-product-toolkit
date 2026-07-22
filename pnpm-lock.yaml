@@ -96,11 +96,11 @@ importers:
   packages/chainspec:
     devDependencies:
       '@chainflip/rpc':
-        specifier: 2.2.0
-        version: 2.2.0
+        specifier: 2.3.0-dev.3
+        version: 2.3.0-dev.3
       '@chainflip/utils':
-        specifier: 2.2.0
-        version: 2.2.0
+        specifier: 2.3.0-dev.3
+        version: 2.3.0-dev.3
       '@polkadot/types':
         specifier: ^16.5.6
         version: 16.5.6
@@ -320,17 +320,11 @@ packages:
     resolution: {integrity: sha512-6zABk/ECA/QYSCQ1NGiVwwbQerUCZ+TQbp64Q3AgmfNvurHH0j8TtXa1qbShXA6qqkpAj4V5W8pP6mLe1mcMqA==}
     engines: {node: '>=18'}
 
-  '@chainflip/rpc@2.2.0':
-    resolution: {integrity: sha512-L3hBP6zOgepGav44cn9WmgXyAxw07e2vHILCbjYs1HfAETTQkNHfhcPK960Cu117b2dUURn1nL+UApzvP7Hikg==}
-
   '@chainflip/rpc@2.3.0-dev.3':
     resolution: {integrity: sha512-UyKUKeH/L/u0E0OBGcaaxsHog2XYK2XGLiIxkZPi5ZiPMsYKf9ksEonnsvZUNQajD8/hHPNZRrVQzI5ykjiQ8w==}
 
   '@chainflip/scale@2.3.0-dev.0':
     resolution: {integrity: sha512-ASGZ4SrCqbB6/GTxWuU0wzKISpZBH4Xh4KBMJRoUUao7DvgkkFZy0EpeF/NZNzwP+PfscfpyVVFsWc6c7IVewg==}
-
-  '@chainflip/utils@2.2.0':
-    resolution: {integrity: sha512-r73Llrba2i0M0k/JPaBufGM9rTOc91oWRqgDxbhTKufo6NHO3EEyWzg5yWlkSkyFkhw9oNUlBcVisF2V8zwU7A==}
 
   '@chainflip/utils@2.3.0-dev.3':
     resolution: {integrity: sha512-D0AqDlQEYW0ZXJxYyUpXj21NblUQhgygP6se8xBS6Qx+RXo2MqvMDyPyVUFTJpOpIkFXGAOhFXL2ti3iUdfdMg==}
@@ -1821,9 +1815,6 @@ packages:
   data-view-byte-offset@1.0.1:
     resolution: {integrity: sha512-BS8PfmtDGnrgYdOonGZQdLZslWIeCGFP9tpan0hi1Co2Zr2NKADsvGYA8XxuG/4UWgJ6Cjtv+YJnB6MM69QGlQ==}
     engines: {node: '>= 0.4'}
-
-  date-fns@4.1.0:
-    resolution: {integrity: sha512-Ukq0owbQXxa/U3EGtsdVBkR1w7KOQ5gIBqdH2hkvknzZPYvBxb/aa6E8L7tmjFtkwZBu3UXBbjIgPo/Ez4xaNg==}
 
   date-fns@4.4.0:
     resolution: {integrity: sha512-+1UMbeh68lH1SegH83CGWwpb6OHHbpSgr3+s5Eww5M4CAgswBpoWS0AjTOfEJ33HiYKz1hdj/KTFprzXHmq/6w==}
@@ -3425,11 +3416,6 @@ snapshots:
 
   '@bcoe/v8-coverage@1.0.2': {}
 
-  '@chainflip/rpc@2.2.0':
-    dependencies:
-      '@chainflip/utils': 2.2.0
-      zod: 3.25.75
-
   '@chainflip/rpc@2.3.0-dev.3':
     dependencies:
       '@chainflip/utils': 2.3.0-dev.3
@@ -3439,13 +3425,6 @@ snapshots:
     dependencies:
       '@chainflip/utils': 2.3.0-dev.3
       scale-ts: 1.6.1
-
-  '@chainflip/utils@2.2.0':
-    dependencies:
-      '@date-fns/utc': 2.1.1
-      '@noble/hashes': 2.2.0
-      bignumber.js: 11.1.5
-      date-fns: 4.1.0
 
   '@chainflip/utils@2.3.0-dev.3':
     dependencies:
@@ -4842,8 +4821,6 @@ snapshots:
       call-bound: 1.0.4
       es-errors: 1.3.0
       is-data-view: 1.0.2
-
-  date-fns@4.1.0: {}
 
   date-fns@4.4.0: {}
 
