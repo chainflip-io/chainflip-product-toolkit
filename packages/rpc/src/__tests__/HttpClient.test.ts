@@ -86,6 +86,7 @@ describe(HttpClient, () => {
         "cf_eth_key_manager_address",
         "cf_eth_state_chain_gateway_address",
         "cf_failed_call_arbitrum",
+        "cf_failed_call_bsc",
         "cf_failed_call_ethereum",
         "cf_failed_call_tron",
         "cf_flip_supply",

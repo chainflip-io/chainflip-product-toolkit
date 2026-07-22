@@ -1,6 +1,6 @@
 {
   "name": "@chainflip/bitcoin",
-  "version": "2.2.0",
+  "version": "2.3.0-dev.0",
   "type": "module",
   "scripts": {
     "eslint:check": "pnpm eslint --max-warnings 0 './**/*.ts'",
@@ -35,7 +35,7 @@
     }
   },
   "dependencies": {
-    "@chainflip/utils": "2.2.0",
+    "@chainflip/utils": "2.3.0-dev.3",
     "bignumber.js": "^11.1.5",
     "bitcoinjs-lib": "7.0.1",
     "scale-ts": "^1.6.1",

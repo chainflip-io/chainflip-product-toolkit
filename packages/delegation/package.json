@@ -1,6 +1,6 @@
 {
   "name": "@chainflip/delegation",
-  "version": "2.2.0",
+  "version": "2.3.0-dev.0",
   "type": "module",
   "scripts": {
     "eslint:check": "pnpm eslint --max-warnings 0 './**/*.ts'",
@@ -14,7 +14,7 @@
     "test": "vitest"
   },
   "dependencies": {
-    "@chainflip/utils": "2.2.0",
+    "@chainflip/utils": "2.3.0-dev.3",
     "scale-ts": "^1.6.1",
     "viem": "^2.54.4"
   },

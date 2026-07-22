@@ -8,6 +8,7 @@ const addressByteLengths: ChainMap<number | undefined> = {
   Solana: 32,
   Assethub: 32,
   Tron: 20,
+  Bsc: 20,
 };
 
 export const createSwapDataCodecV1 = (asset: ChainflipAsset) =>

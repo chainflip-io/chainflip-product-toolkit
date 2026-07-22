@@ -1,6 +1,6 @@
 {
   "name": "@chainflip/solana",
-  "version": "2.2.5",
+  "version": "2.3.0-dev.0",
   "type": "module",
   "scripts": {
     "eslint:check": "pnpm eslint --max-warnings 0 './**/*.ts'",
@@ -14,8 +14,8 @@
     "test": "vitest"
   },
   "dependencies": {
-    "@chainflip/scale": "^2.2.0",
-    "@chainflip/utils": "2.2.0",
+    "@chainflip/scale": "2.3.0-dev.0",
+    "@chainflip/utils": "2.3.0-dev.3",
     "@coral-xyz/anchor": "^0.32.1",
     "@solana/web3.js": "^1.98.4",
     "bn.js": "^5.2.4",
