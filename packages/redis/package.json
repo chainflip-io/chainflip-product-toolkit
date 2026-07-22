@@ -1,6 +1,6 @@
 {
   "name": "@chainflip/redis",
-  "version": "2.2.0",
+  "version": "2.3.0-dev.0",
   "type": "module",
   "scripts": {
     "eslint:check": "pnpm eslint --max-warnings 0 './**/*.ts'",
