@@ -60,6 +60,10 @@ export const buildChainAssetMap = <T>(
     TRX: overrides?.Trx ?? defaultValue,
     USDT: overrides?.TrxUsdt ?? defaultValue,
   },
+  Bsc: {
+    BNB: overrides?.Bnb ?? defaultValue,
+    USDT: overrides?.BscUsdt ?? defaultValue,
+  },
 });
 
 export const buildChainBaseAssetMap = <T>(
@@ -94,6 +98,10 @@ export const buildChainBaseAssetMap = <T>(
     TRX: overrides?.Trx ?? defaultValue,
     USDT: overrides?.TrxUsdt ?? defaultValue,
   },
+  Bsc: {
+    BNB: overrides?.Bnb ?? defaultValue,
+    USDT: overrides?.BscUsdt ?? defaultValue,
+  },
 });
 
 export const buildChainMap = <T>(
@@ -106,4 +114,5 @@ export const buildChainMap = <T>(
   Arbitrum: overrides?.Arbitrum ?? defaultValue,
   Assethub: overrides?.Assethub ?? defaultValue,
   Tron: overrides?.Tron ?? defaultValue,
+  Bsc: overrides?.Bsc ?? defaultValue,
 });

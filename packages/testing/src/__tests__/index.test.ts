@@ -45,6 +45,10 @@ describe(buildChainAssetMap, () => {
         "Bitcoin": {
           "BTC": null,
         },
+        "Bsc": {
+          "BNB": null,
+          "USDT": null,
+        },
         "Ethereum": {
           "ETH": null,
           "FLIP": null,
@@ -82,6 +86,8 @@ describe(buildChainAssetMap, () => {
         Usdt: 13,
         Trx: 14,
         TrxUsdt: 15,
+        Bnb: 16,
+        BscUsdt: 17,
       }),
     ).toMatchInlineSnapshot(`
       {
@@ -97,6 +103,10 @@ describe(buildChainAssetMap, () => {
         },
         "Bitcoin": {
           "BTC": 3,
+        },
+        "Bsc": {
+          "BNB": 16,
+          "USDT": 17,
         },
         "Ethereum": {
           "ETH": 5,
@@ -136,6 +146,10 @@ describe(buildChainBaseAssetMap, () => {
         "Bitcoin": {
           "BTC": null,
         },
+        "Bsc": {
+          "BNB": null,
+          "USDT": null,
+        },
         "Ethereum": {
           "ETH": null,
           "FLIP": null,
@@ -171,6 +185,8 @@ describe(buildChainBaseAssetMap, () => {
         Usdt: 13,
         Trx: 14,
         TrxUsdt: 15,
+        Bnb: 16,
+        BscUsdt: 17,
       }),
     ).toMatchInlineSnapshot(`
       {
@@ -186,6 +202,10 @@ describe(buildChainBaseAssetMap, () => {
         },
         "Bitcoin": {
           "BTC": 3,
+        },
+        "Bsc": {
+          "BNB": 16,
+          "USDT": 17,
         },
         "Ethereum": {
           "ETH": 5,
@@ -214,6 +234,7 @@ describe(buildChainMap, () => {
         "Arbitrum": null,
         "Assethub": null,
         "Bitcoin": null,
+        "Bsc": null,
         "Ethereum": null,
         "Solana": null,
         "Tron": null,
@@ -230,12 +251,14 @@ describe(buildChainMap, () => {
         Arbitrum: 'Arbitrum',
         Assethub: 'Assethub',
         Tron: 'Tron',
+        Bsc: 'Bsc',
       }),
     ).toMatchInlineSnapshot(`
       {
         "Arbitrum": "Arbitrum",
         "Assethub": "Assethub",
         "Bitcoin": "Bitcoin",
+        "Bsc": "Bsc",
         "Ethereum": "Ethereum",
         "Solana": "Solana",
         "Tron": "Tron",
