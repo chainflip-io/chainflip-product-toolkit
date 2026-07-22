@@ -20,6 +20,7 @@ const encodeChainAddress = (data: Uint8Array, asset: ChainflipAsset) => {
       return ss58.encode({ data, ss58Format: POLKADOT_SS58_PREFIX });
     case 'Ethereum':
     case 'Arbitrum':
+    case 'Bsc':
       return bytesToHex(data);
     case 'Bitcoin':
       return new TextDecoder().decode(data);
