@@ -60,6 +60,7 @@ const swapParams = z
     switch (chain) {
       case 'Arbitrum':
       case 'Ethereum':
+      case 'Bsc':
         destinationAddress = `0x${params.dst_address.toString('hex')}`;
         break;
       case 'Bitcoin':
