@@ -220,6 +220,10 @@ export const brokerAliasMap: AccountAliasMap = {
     name: 'Portal',
     twitter: null,
   },
+  cFPF5ckNqZLDJPQ46TLziGD88nzkpcmx4rW8hSRX7nJMfFLRU: {
+    name: '7.Exchange',
+    twitter: '@7exchangeDeFi',
+  },
 } as const;
 
 export const lpAliasMap: AccountAliasMap = {
