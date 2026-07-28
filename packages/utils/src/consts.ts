@@ -229,6 +229,14 @@ export const brokerAliasMap: AccountAliasMap = {
     name: 'Tangem',
     twitter: '@Tangem',
   },
+  cFNaYkHTE7EXMucztVyQ2gysvvHrL3vAbJ8dUJAG6HuabeBrV: {
+    name: 'Multiswap',
+    twitter: '@0xMultiSwap',
+  },
+  cFNrE4fpkiXck6kM2PXVsu5LzL7yJ5EtTrPwW8dcbjmKLMf3D: {
+    name: 'Kotova',
+    twitter: '@kotova_io',
+  },
 } as const;
 
 export const lpAliasMap: AccountAliasMap = {
