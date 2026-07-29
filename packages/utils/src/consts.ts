@@ -74,8 +74,16 @@ export const brokerAliasMap: AccountAliasMap = {
     name: 'Talisman',
     twitter: '@wearetalisman',
   },
+  cFJ2BuJiZyb7WdwwZSKYHSrchscNDGAZUxePoLJJGXjGduzGa: {
+    name: 'Talisman',
+    twitter: '@wearetalisman',
+  },
   cFN122fMqitRHRxhVnPHuGeQG1GQ5dQXb25J4FoJmn74x7Mhe: { name: 'OKX Wallet', twitter: '@okxweb3' },
   cFMYQgx3LhxLNDEiFC5nLXp5r1ZUrXocrQDqJB1Z3mqEegT6g: {
+    name: 'SubWallet',
+    twitter: '@subwalletapp',
+  },
+  cFNKcQzbNift6adwEYbXYTrLhPotn4Kb9JFpZVJti43264Mv2: {
     name: 'SubWallet',
     twitter: '@subwalletapp',
   },
