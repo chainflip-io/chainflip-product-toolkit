@@ -916,6 +916,13 @@
                 "type": "primitive",
                 "value": "null"
               }
+            },
+            {
+              "name": "Cbbtc",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
             }
           ]
         },
@@ -962,6 +969,13 @@
             },
             {
               "name": "Wbtc",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "Cbbtc",
               "value": {
                 "type": "primitive",
                 "value": "null"
@@ -1390,6 +1404,13 @@
                                       "type": "primitive",
                                       "value": "null"
                                     }
+                                  },
+                                  {
+                                    "name": "Cbbtc",
+                                    "value": {
+                                      "type": "primitive",
+                                      "value": "null"
+                                    }
                                   }
                                 ]
                               }
@@ -1569,6 +1590,13 @@
                                       "type": "primitive",
                                       "value": "null"
                                     }
+                                  },
+                                  {
+                                    "name": "Cbbtc",
+                                    "value": {
+                                      "type": "primitive",
+                                      "value": "null"
+                                    }
                                   }
                                 ]
                               }
@@ -1744,6 +1772,13 @@
                                   },
                                   {
                                     "name": "BscUsdt",
+                                    "value": {
+                                      "type": "primitive",
+                                      "value": "null"
+                                    }
+                                  },
+                                  {
+                                    "name": "Cbbtc",
                                     "value": {
                                       "type": "primitive",
                                       "value": "null"
@@ -2769,7 +2804,7 @@
     "FlipDistributed": {
       "type": "struct",
       "fields": {
-        "amount": {
+        "amounts": {
           "type": "array",
           "value": {
             "type": "tuple",
@@ -3432,6 +3467,13 @@
                       },
                       {
                         "name": "BscUsdt",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      },
+                      {
+                        "name": "Cbbtc",
                         "value": {
                           "type": "primitive",
                           "value": "null"
@@ -11312,6 +11354,13 @@
                 "type": "primitive",
                 "value": "null"
               }
+            },
+            {
+              "name": "Cbbtc",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
             }
           ]
         },
@@ -11465,6 +11514,13 @@
             },
             {
               "name": "BscUsdt",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "Cbbtc",
               "value": {
                 "type": "primitive",
                 "value": "null"
@@ -12756,7 +12812,7 @@
                         },
                         "refundAddress": {
                           "type": "enum",
-                          "$name": "cfChainsRefundParametersAccountOrAddress",
+                          "$name": "cfChainsRefundParametersAccountOrAddressForeignChainAddress",
                           "values": [
                             {
                               "name": "InternalAccount",
@@ -13716,6 +13772,13 @@
                 "type": "primitive",
                 "value": "null"
               }
+            },
+            {
+              "name": "Cbbtc",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
             }
           ]
         },
@@ -13865,6 +13928,13 @@
             },
             {
               "name": "BscUsdt",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "Cbbtc",
               "value": {
                 "type": "primitive",
                 "value": "null"
@@ -14515,6 +14585,13 @@
                 "type": "primitive",
                 "value": "null"
               }
+            },
+            {
+              "name": "Cbbtc",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
             }
           ]
         },
@@ -14664,6 +14741,13 @@
             },
             {
               "name": "BscUsdt",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "Cbbtc",
               "value": {
                 "type": "primitive",
                 "value": "null"
@@ -14945,6 +15029,13 @@
                 "type": "primitive",
                 "value": "null"
               }
+            },
+            {
+              "name": "Cbbtc",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
             }
           ]
         },
@@ -15105,6 +15196,13 @@
                 },
                 {
                   "name": "BscUsdt",
+                  "value": {
+                    "type": "primitive",
+                    "value": "null"
+                  }
+                },
+                {
+                  "name": "Cbbtc",
                   "value": {
                     "type": "primitive",
                     "value": "null"
@@ -15351,6 +15449,13 @@
                 "type": "primitive",
                 "value": "null"
               }
+            },
+            {
+              "name": "Cbbtc",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
             }
           ]
         },
@@ -15511,6 +15616,13 @@
                 },
                 {
                   "name": "BscUsdt",
+                  "value": {
+                    "type": "primitive",
+                    "value": "null"
+                  }
+                },
+                {
+                  "name": "Cbbtc",
                   "value": {
                     "type": "primitive",
                     "value": "null"
@@ -15757,6 +15869,13 @@
             },
             {
               "name": "BscUsdt",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "Cbbtc",
               "value": {
                 "type": "primitive",
                 "value": "null"
@@ -16017,6 +16136,13 @@
                 "type": "primitive",
                 "value": "null"
               }
+            },
+            {
+              "name": "Cbbtc",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
             }
           ]
         },
@@ -16203,6 +16329,13 @@
                 "type": "primitive",
                 "value": "null"
               }
+            },
+            {
+              "name": "Cbbtc",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
             }
           ]
         },
@@ -16369,6 +16502,13 @@
             },
             {
               "name": "BscUsdt",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "Cbbtc",
               "value": {
                 "type": "primitive",
                 "value": "null"
@@ -16871,6 +17011,13 @@
             },
             {
               "name": "BscUsdt",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "Cbbtc",
               "value": {
                 "type": "primitive",
                 "value": "null"
@@ -17428,6 +17575,13 @@
                 "type": "primitive",
                 "value": "null"
               }
+            },
+            {
+              "name": "Cbbtc",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
             }
           ]
         },
@@ -17594,6 +17748,13 @@
             },
             {
               "name": "BscUsdt",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "Cbbtc",
               "value": {
                 "type": "primitive",
                 "value": "null"
@@ -17769,6 +17930,13 @@
                       },
                       {
                         "name": "BscUsdt",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      },
+                      {
+                        "name": "Cbbtc",
                         "value": {
                           "type": "primitive",
                           "value": "null"
@@ -17985,6 +18153,13 @@
                       },
                       {
                         "name": "BscUsdt",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      },
+                      {
+                        "name": "Cbbtc",
                         "value": {
                           "type": "primitive",
                           "value": "null"
@@ -18210,6 +18385,13 @@
                           "type": "primitive",
                           "value": "null"
                         }
+                      },
+                      {
+                        "name": "Cbbtc",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
                       }
                     ]
                   },
@@ -18374,6 +18556,13 @@
                       },
                       {
                         "name": "BscUsdt",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      },
+                      {
+                        "name": "Cbbtc",
                         "value": {
                           "type": "primitive",
                           "value": "null"
@@ -18546,6 +18735,13 @@
                           "type": "primitive",
                           "value": "null"
                         }
+                      },
+                      {
+                        "name": "Cbbtc",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
                       }
                     ]
                   },
@@ -18695,6 +18891,13 @@
                       },
                       {
                         "name": "BscUsdt",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      },
+                      {
+                        "name": "Cbbtc",
                         "value": {
                           "type": "primitive",
                           "value": "null"
@@ -18953,6 +19156,13 @@
             },
             {
               "name": "BscUsdt",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "Cbbtc",
               "value": {
                 "type": "primitive",
                 "value": "null"
@@ -19779,6 +19989,13 @@
                 "type": "primitive",
                 "value": "null"
               }
+            },
+            {
+              "name": "Cbbtc",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
             }
           ]
         },
@@ -20117,6 +20334,13 @@
             },
             {
               "name": "BscUsdt",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "Cbbtc",
               "value": {
                 "type": "primitive",
                 "value": "null"
@@ -20610,6 +20834,13 @@
                 "type": "primitive",
                 "value": "null"
               }
+            },
+            {
+              "name": "Cbbtc",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
             }
           ]
         },
@@ -20772,6 +21003,13 @@
             },
             {
               "name": "BscUsdt",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "Cbbtc",
               "value": {
                 "type": "primitive",
                 "value": "null"
@@ -21110,6 +21348,13 @@
             },
             {
               "name": "BscUsdt",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "Cbbtc",
               "value": {
                 "type": "primitive",
                 "value": "null"
@@ -21509,6 +21754,13 @@
                 "type": "primitive",
                 "value": "null"
               }
+            },
+            {
+              "name": "Cbbtc",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
             }
           ]
         },
@@ -21823,6 +22075,13 @@
             },
             {
               "name": "Wbtc",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "Cbbtc",
               "value": {
                 "type": "primitive",
                 "value": "null"
@@ -22923,6 +23182,13 @@
                 "type": "primitive",
                 "value": "null"
               }
+            },
+            {
+              "name": "Cbbtc",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
             }
           ]
         }
@@ -23453,6 +23719,13 @@
                               "type": "primitive",
                               "value": "null"
                             }
+                          },
+                          {
+                            "name": "Cbbtc",
+                            "value": {
+                              "type": "primitive",
+                              "value": "null"
+                            }
                           }
                         ]
                       },
@@ -23524,6 +23797,13 @@
                           },
                           {
                             "name": "Wbtc",
+                            "value": {
+                              "type": "primitive",
+                              "value": "null"
+                            }
+                          },
+                          {
+                            "name": "Cbbtc",
                             "value": {
                               "type": "primitive",
                               "value": "null"
@@ -23711,6 +23991,13 @@
                           },
                           {
                             "name": "BscUsdt",
+                            "value": {
+                              "type": "primitive",
+                              "value": "null"
+                            }
+                          },
+                          {
+                            "name": "Cbbtc",
                             "value": {
                               "type": "primitive",
                               "value": "null"
@@ -24205,6 +24492,13 @@
             },
             {
               "name": "Wbtc",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "Cbbtc",
               "value": {
                 "type": "primitive",
                 "value": "null"
@@ -25302,6 +25596,13 @@
                 "type": "primitive",
                 "value": "null"
               }
+            },
+            {
+              "name": "Cbbtc",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
             }
           ]
         },
@@ -25674,6 +25975,13 @@
             },
             {
               "name": "Wbtc",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "Cbbtc",
               "value": {
                 "type": "primitive",
                 "value": "null"
@@ -26805,6 +27113,13 @@
                 "type": "primitive",
                 "value": "null"
               }
+            },
+            {
+              "name": "Cbbtc",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
             }
           ]
         },
@@ -26876,6 +27191,13 @@
                       },
                       {
                         "name": "Wbtc",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      },
+                      {
+                        "name": "Cbbtc",
                         "value": {
                           "type": "primitive",
                           "value": "null"
@@ -29096,6 +29418,13 @@
                           },
                           {
                             "name": "BscUsdt",
+                            "value": {
+                              "type": "primitive",
+                              "value": "null"
+                            }
+                          },
+                          {
+                            "name": "Cbbtc",
                             "value": {
                               "type": "primitive",
                               "value": "null"
@@ -34785,6 +35114,13 @@
                               "type": "primitive",
                               "value": "null"
                             }
+                          },
+                          {
+                            "name": "Cbbtc",
+                            "value": {
+                              "type": "primitive",
+                              "value": "null"
+                            }
                           }
                         ]
                       },
@@ -38641,6 +38977,13 @@
                 "type": "primitive",
                 "value": "null"
               }
+            },
+            {
+              "name": "Cbbtc",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
             }
           ]
         },
@@ -38790,6 +39133,13 @@
             },
             {
               "name": "BscUsdt",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "Cbbtc",
               "value": {
                 "type": "primitive",
                 "value": "null"
@@ -38964,6 +39314,13 @@
                 "type": "primitive",
                 "value": "null"
               }
+            },
+            {
+              "name": "Cbbtc",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
             }
           ]
         },
@@ -39113,6 +39470,13 @@
             },
             {
               "name": "BscUsdt",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "Cbbtc",
               "value": {
                 "type": "primitive",
                 "value": "null"
@@ -39371,6 +39735,13 @@
                 "type": "primitive",
                 "value": "null"
               }
+            },
+            {
+              "name": "Cbbtc",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
             }
           ]
         },
@@ -39520,6 +39891,13 @@
             },
             {
               "name": "BscUsdt",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "Cbbtc",
               "value": {
                 "type": "primitive",
                 "value": "null"
@@ -39745,6 +40123,13 @@
                 "type": "primitive",
                 "value": "null"
               }
+            },
+            {
+              "name": "Cbbtc",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
             }
           ]
         },
@@ -39894,6 +40279,13 @@
             },
             {
               "name": "BscUsdt",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "Cbbtc",
               "value": {
                 "type": "primitive",
                 "value": "null"
@@ -40064,6 +40456,13 @@
                 "type": "primitive",
                 "value": "null"
               }
+            },
+            {
+              "name": "Cbbtc",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
             }
           ]
         },
@@ -40213,6 +40612,13 @@
             },
             {
               "name": "BscUsdt",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "Cbbtc",
               "value": {
                 "type": "primitive",
                 "value": "null"
@@ -40766,6 +41172,13 @@
                         "type": "primitive",
                         "value": "null"
                       }
+                    },
+                    {
+                      "name": "Cbbtc",
+                      "value": {
+                        "type": "primitive",
+                        "value": "null"
+                      }
                     }
                   ]
                 },
@@ -40915,6 +41328,13 @@
                     },
                     {
                       "name": "BscUsdt",
+                      "value": {
+                        "type": "primitive",
+                        "value": "null"
+                      }
+                    },
+                    {
+                      "name": "Cbbtc",
                       "value": {
                         "type": "primitive",
                         "value": "null"
@@ -41097,6 +41517,13 @@
                           "type": "primitive",
                           "value": "null"
                         }
+                      },
+                      {
+                        "name": "Cbbtc",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
                       }
                     ]
                   },
@@ -41246,6 +41673,13 @@
                       },
                       {
                         "name": "BscUsdt",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      },
+                      {
+                        "name": "Cbbtc",
                         "value": {
                           "type": "primitive",
                           "value": "null"
@@ -41435,6 +41869,13 @@
                           "type": "primitive",
                           "value": "null"
                         }
+                      },
+                      {
+                        "name": "Cbbtc",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
                       }
                     ]
                   },
@@ -41584,6 +42025,13 @@
                       },
                       {
                         "name": "BscUsdt",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      },
+                      {
+                        "name": "Cbbtc",
                         "value": {
                           "type": "primitive",
                           "value": "null"
@@ -41764,6 +42212,13 @@
                           "type": "primitive",
                           "value": "null"
                         }
+                      },
+                      {
+                        "name": "Cbbtc",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
                       }
                     ]
                   },
@@ -41925,6 +42380,13 @@
                       },
                       {
                         "name": "BscUsdt",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      },
+                      {
+                        "name": "Cbbtc",
                         "value": {
                           "type": "primitive",
                           "value": "null"
@@ -44556,6 +45018,13 @@
                           },
                           {
                             "name": "BscUsdt",
+                            "value": {
+                              "type": "primitive",
+                              "value": "null"
+                            }
+                          },
+                          {
+                            "name": "Cbbtc",
                             "value": {
                               "type": "primitive",
                               "value": "null"
@@ -51153,6 +51622,13 @@
                               "type": "primitive",
                               "value": "null"
                             }
+                          },
+                          {
+                            "name": "Cbbtc",
+                            "value": {
+                              "type": "primitive",
+                              "value": "null"
+                            }
                           }
                         ]
                       },
@@ -55652,6 +56128,13 @@
                 "type": "primitive",
                 "value": "null"
               }
+            },
+            {
+              "name": "Cbbtc",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
             }
           ]
         },
@@ -55822,6 +56305,13 @@
                 "type": "primitive",
                 "value": "null"
               }
+            },
+            {
+              "name": "Cbbtc",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
             }
           ]
         },
@@ -55925,8 +56415,759 @@
                   }
                 }
               }
+            },
+            {
+              "name": "MaxWhitelistTimelock",
+              "value": {
+                "type": "struct",
+                "fields": {
+                  "seconds": {
+                    "type": "primitive",
+                    "value": "u64"
+                  }
+                }
+              }
+            },
+            {
+              "name": "MaxPendingWhitelistUpdates",
+              "value": {
+                "type": "struct",
+                "fields": {
+                  "count": {
+                    "type": "primitive",
+                    "value": "u32"
+                  }
+                }
+              }
+            },
+            {
+              "name": "MaxWhitelistEntries",
+              "value": {
+                "type": "struct",
+                "fields": {
+                  "count": {
+                    "type": "primitive",
+                    "value": "u32"
+                  }
+                }
+              }
             }
           ]
+        }
+      }
+    },
+    "WhitelistUpdateScheduled": {
+      "type": "struct",
+      "fields": {
+        "accountId": {
+          "type": "primitive",
+          "value": "AccountId32"
+        },
+        "change": {
+          "type": "enum",
+          "$name": "palletCfAssetBalancesWhitelistWhitelistChangeForeignChainAddress",
+          "values": [
+            {
+              "name": "Allow",
+              "value": {
+                "type": "enum",
+                "$name": "cfChainsRefundParametersAccountOrAddressForeignChainAddress",
+                "values": [
+                  {
+                    "name": "InternalAccount",
+                    "value": {
+                      "type": "primitive",
+                      "value": "AccountId32"
+                    }
+                  },
+                  {
+                    "name": "ExternalAddress",
+                    "value": {
+                      "type": "enum",
+                      "$name": "cfChainsAddressForeignChainAddress",
+                      "values": [
+                        {
+                          "name": "Eth",
+                          "value": {
+                            "type": "primitive",
+                            "value": "H160"
+                          }
+                        },
+                        {
+                          "name": "Dot",
+                          "value": {
+                            "type": "array",
+                            "value": {
+                              "type": "primitive",
+                              "value": "u8"
+                            },
+                            "length": 32
+                          }
+                        },
+                        {
+                          "name": "Btc",
+                          "value": {
+                            "type": "enum",
+                            "$name": "cfChainsBtcScriptPubkey",
+                            "values": [
+                              {
+                                "name": "P2PKH",
+                                "value": {
+                                  "type": "array",
+                                  "value": {
+                                    "type": "primitive",
+                                    "value": "u8"
+                                  },
+                                  "length": 20
+                                }
+                              },
+                              {
+                                "name": "P2SH",
+                                "value": {
+                                  "type": "array",
+                                  "value": {
+                                    "type": "primitive",
+                                    "value": "u8"
+                                  },
+                                  "length": 20
+                                }
+                              },
+                              {
+                                "name": "P2WPKH",
+                                "value": {
+                                  "type": "array",
+                                  "value": {
+                                    "type": "primitive",
+                                    "value": "u8"
+                                  },
+                                  "length": 20
+                                }
+                              },
+                              {
+                                "name": "P2WSH",
+                                "value": {
+                                  "type": "array",
+                                  "value": {
+                                    "type": "primitive",
+                                    "value": "u8"
+                                  },
+                                  "length": 32
+                                }
+                              },
+                              {
+                                "name": "Taproot",
+                                "value": {
+                                  "type": "array",
+                                  "value": {
+                                    "type": "primitive",
+                                    "value": "u8"
+                                  },
+                                  "length": 32
+                                }
+                              },
+                              {
+                                "name": "OtherSegwit",
+                                "value": {
+                                  "type": "struct",
+                                  "fields": {
+                                    "version": {
+                                      "type": "primitive",
+                                      "value": "u8"
+                                    },
+                                    "program": {
+                                      "type": "primitive",
+                                      "value": "Bytes"
+                                    }
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "name": "Arb",
+                          "value": {
+                            "type": "primitive",
+                            "value": "H160"
+                          }
+                        },
+                        {
+                          "name": "Sol",
+                          "value": {
+                            "type": "array",
+                            "value": {
+                              "type": "primitive",
+                              "value": "u8"
+                            },
+                            "length": 32
+                          }
+                        },
+                        {
+                          "name": "Hub",
+                          "value": {
+                            "type": "array",
+                            "value": {
+                              "type": "primitive",
+                              "value": "u8"
+                            },
+                            "length": 32
+                          }
+                        },
+                        {
+                          "name": "Tron",
+                          "value": {
+                            "type": "primitive",
+                            "value": "H160"
+                          }
+                        },
+                        {
+                          "name": "Bsc",
+                          "value": {
+                            "type": "primitive",
+                            "value": "H160"
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Remove",
+              "value": {
+                "type": "enum",
+                "$name": "cfChainsRefundParametersAccountOrAddressForeignChainAddress",
+                "values": [
+                  {
+                    "name": "InternalAccount",
+                    "value": {
+                      "type": "primitive",
+                      "value": "AccountId32"
+                    }
+                  },
+                  {
+                    "name": "ExternalAddress",
+                    "value": {
+                      "type": "enum",
+                      "$name": "cfChainsAddressForeignChainAddress",
+                      "values": [
+                        {
+                          "name": "Eth",
+                          "value": {
+                            "type": "primitive",
+                            "value": "H160"
+                          }
+                        },
+                        {
+                          "name": "Dot",
+                          "value": {
+                            "type": "array",
+                            "value": {
+                              "type": "primitive",
+                              "value": "u8"
+                            },
+                            "length": 32
+                          }
+                        },
+                        {
+                          "name": "Btc",
+                          "value": {
+                            "type": "enum",
+                            "$name": "cfChainsBtcScriptPubkey",
+                            "values": [
+                              {
+                                "name": "P2PKH",
+                                "value": {
+                                  "type": "array",
+                                  "value": {
+                                    "type": "primitive",
+                                    "value": "u8"
+                                  },
+                                  "length": 20
+                                }
+                              },
+                              {
+                                "name": "P2SH",
+                                "value": {
+                                  "type": "array",
+                                  "value": {
+                                    "type": "primitive",
+                                    "value": "u8"
+                                  },
+                                  "length": 20
+                                }
+                              },
+                              {
+                                "name": "P2WPKH",
+                                "value": {
+                                  "type": "array",
+                                  "value": {
+                                    "type": "primitive",
+                                    "value": "u8"
+                                  },
+                                  "length": 20
+                                }
+                              },
+                              {
+                                "name": "P2WSH",
+                                "value": {
+                                  "type": "array",
+                                  "value": {
+                                    "type": "primitive",
+                                    "value": "u8"
+                                  },
+                                  "length": 32
+                                }
+                              },
+                              {
+                                "name": "Taproot",
+                                "value": {
+                                  "type": "array",
+                                  "value": {
+                                    "type": "primitive",
+                                    "value": "u8"
+                                  },
+                                  "length": 32
+                                }
+                              },
+                              {
+                                "name": "OtherSegwit",
+                                "value": {
+                                  "type": "struct",
+                                  "fields": {
+                                    "version": {
+                                      "type": "primitive",
+                                      "value": "u8"
+                                    },
+                                    "program": {
+                                      "type": "primitive",
+                                      "value": "Bytes"
+                                    }
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "name": "Arb",
+                          "value": {
+                            "type": "primitive",
+                            "value": "H160"
+                          }
+                        },
+                        {
+                          "name": "Sol",
+                          "value": {
+                            "type": "array",
+                            "value": {
+                              "type": "primitive",
+                              "value": "u8"
+                            },
+                            "length": 32
+                          }
+                        },
+                        {
+                          "name": "Hub",
+                          "value": {
+                            "type": "array",
+                            "value": {
+                              "type": "primitive",
+                              "value": "u8"
+                            },
+                            "length": 32
+                          }
+                        },
+                        {
+                          "name": "Tron",
+                          "value": {
+                            "type": "primitive",
+                            "value": "H160"
+                          }
+                        },
+                        {
+                          "name": "Bsc",
+                          "value": {
+                            "type": "primitive",
+                            "value": "H160"
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "applyAt": {
+          "type": "primitive",
+          "value": "u64"
+        }
+      }
+    },
+    "WhitelistUpdateDropped": {
+      "type": "struct",
+      "fields": {
+        "accountId": {
+          "type": "primitive",
+          "value": "AccountId32"
+        },
+        "change": {
+          "type": "enum",
+          "$name": "palletCfAssetBalancesWhitelistWhitelistChangeForeignChainAddress",
+          "values": [
+            {
+              "name": "Allow",
+              "value": {
+                "type": "enum",
+                "$name": "cfChainsRefundParametersAccountOrAddressForeignChainAddress",
+                "values": [
+                  {
+                    "name": "InternalAccount",
+                    "value": {
+                      "type": "primitive",
+                      "value": "AccountId32"
+                    }
+                  },
+                  {
+                    "name": "ExternalAddress",
+                    "value": {
+                      "type": "enum",
+                      "$name": "cfChainsAddressForeignChainAddress",
+                      "values": [
+                        {
+                          "name": "Eth",
+                          "value": {
+                            "type": "primitive",
+                            "value": "H160"
+                          }
+                        },
+                        {
+                          "name": "Dot",
+                          "value": {
+                            "type": "array",
+                            "value": {
+                              "type": "primitive",
+                              "value": "u8"
+                            },
+                            "length": 32
+                          }
+                        },
+                        {
+                          "name": "Btc",
+                          "value": {
+                            "type": "enum",
+                            "$name": "cfChainsBtcScriptPubkey",
+                            "values": [
+                              {
+                                "name": "P2PKH",
+                                "value": {
+                                  "type": "array",
+                                  "value": {
+                                    "type": "primitive",
+                                    "value": "u8"
+                                  },
+                                  "length": 20
+                                }
+                              },
+                              {
+                                "name": "P2SH",
+                                "value": {
+                                  "type": "array",
+                                  "value": {
+                                    "type": "primitive",
+                                    "value": "u8"
+                                  },
+                                  "length": 20
+                                }
+                              },
+                              {
+                                "name": "P2WPKH",
+                                "value": {
+                                  "type": "array",
+                                  "value": {
+                                    "type": "primitive",
+                                    "value": "u8"
+                                  },
+                                  "length": 20
+                                }
+                              },
+                              {
+                                "name": "P2WSH",
+                                "value": {
+                                  "type": "array",
+                                  "value": {
+                                    "type": "primitive",
+                                    "value": "u8"
+                                  },
+                                  "length": 32
+                                }
+                              },
+                              {
+                                "name": "Taproot",
+                                "value": {
+                                  "type": "array",
+                                  "value": {
+                                    "type": "primitive",
+                                    "value": "u8"
+                                  },
+                                  "length": 32
+                                }
+                              },
+                              {
+                                "name": "OtherSegwit",
+                                "value": {
+                                  "type": "struct",
+                                  "fields": {
+                                    "version": {
+                                      "type": "primitive",
+                                      "value": "u8"
+                                    },
+                                    "program": {
+                                      "type": "primitive",
+                                      "value": "Bytes"
+                                    }
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "name": "Arb",
+                          "value": {
+                            "type": "primitive",
+                            "value": "H160"
+                          }
+                        },
+                        {
+                          "name": "Sol",
+                          "value": {
+                            "type": "array",
+                            "value": {
+                              "type": "primitive",
+                              "value": "u8"
+                            },
+                            "length": 32
+                          }
+                        },
+                        {
+                          "name": "Hub",
+                          "value": {
+                            "type": "array",
+                            "value": {
+                              "type": "primitive",
+                              "value": "u8"
+                            },
+                            "length": 32
+                          }
+                        },
+                        {
+                          "name": "Tron",
+                          "value": {
+                            "type": "primitive",
+                            "value": "H160"
+                          }
+                        },
+                        {
+                          "name": "Bsc",
+                          "value": {
+                            "type": "primitive",
+                            "value": "H160"
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Remove",
+              "value": {
+                "type": "enum",
+                "$name": "cfChainsRefundParametersAccountOrAddressForeignChainAddress",
+                "values": [
+                  {
+                    "name": "InternalAccount",
+                    "value": {
+                      "type": "primitive",
+                      "value": "AccountId32"
+                    }
+                  },
+                  {
+                    "name": "ExternalAddress",
+                    "value": {
+                      "type": "enum",
+                      "$name": "cfChainsAddressForeignChainAddress",
+                      "values": [
+                        {
+                          "name": "Eth",
+                          "value": {
+                            "type": "primitive",
+                            "value": "H160"
+                          }
+                        },
+                        {
+                          "name": "Dot",
+                          "value": {
+                            "type": "array",
+                            "value": {
+                              "type": "primitive",
+                              "value": "u8"
+                            },
+                            "length": 32
+                          }
+                        },
+                        {
+                          "name": "Btc",
+                          "value": {
+                            "type": "enum",
+                            "$name": "cfChainsBtcScriptPubkey",
+                            "values": [
+                              {
+                                "name": "P2PKH",
+                                "value": {
+                                  "type": "array",
+                                  "value": {
+                                    "type": "primitive",
+                                    "value": "u8"
+                                  },
+                                  "length": 20
+                                }
+                              },
+                              {
+                                "name": "P2SH",
+                                "value": {
+                                  "type": "array",
+                                  "value": {
+                                    "type": "primitive",
+                                    "value": "u8"
+                                  },
+                                  "length": 20
+                                }
+                              },
+                              {
+                                "name": "P2WPKH",
+                                "value": {
+                                  "type": "array",
+                                  "value": {
+                                    "type": "primitive",
+                                    "value": "u8"
+                                  },
+                                  "length": 20
+                                }
+                              },
+                              {
+                                "name": "P2WSH",
+                                "value": {
+                                  "type": "array",
+                                  "value": {
+                                    "type": "primitive",
+                                    "value": "u8"
+                                  },
+                                  "length": 32
+                                }
+                              },
+                              {
+                                "name": "Taproot",
+                                "value": {
+                                  "type": "array",
+                                  "value": {
+                                    "type": "primitive",
+                                    "value": "u8"
+                                  },
+                                  "length": 32
+                                }
+                              },
+                              {
+                                "name": "OtherSegwit",
+                                "value": {
+                                  "type": "struct",
+                                  "fields": {
+                                    "version": {
+                                      "type": "primitive",
+                                      "value": "u8"
+                                    },
+                                    "program": {
+                                      "type": "primitive",
+                                      "value": "Bytes"
+                                    }
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "name": "Arb",
+                          "value": {
+                            "type": "primitive",
+                            "value": "H160"
+                          }
+                        },
+                        {
+                          "name": "Sol",
+                          "value": {
+                            "type": "array",
+                            "value": {
+                              "type": "primitive",
+                              "value": "u8"
+                            },
+                            "length": 32
+                          }
+                        },
+                        {
+                          "name": "Hub",
+                          "value": {
+                            "type": "array",
+                            "value": {
+                              "type": "primitive",
+                              "value": "u8"
+                            },
+                            "length": 32
+                          }
+                        },
+                        {
+                          "name": "Tron",
+                          "value": {
+                            "type": "primitive",
+                            "value": "H160"
+                          }
+                        },
+                        {
+                          "name": "Bsc",
+                          "value": {
+                            "type": "primitive",
+                            "value": "H160"
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    },
+    "WhitelistTimelockUpdated": {
+      "type": "struct",
+      "fields": {
+        "accountId": {
+          "type": "primitive",
+          "value": "AccountId32"
+        },
+        "duration": {
+          "type": "primitive",
+          "value": "u64"
+        },
+        "effectiveAt": {
+          "type": "primitive",
+          "value": "u64"
         }
       }
     }
@@ -58375,6 +59616,13 @@
                           },
                           {
                             "name": "BscUsdt",
+                            "value": {
+                              "type": "primitive",
+                              "value": "null"
+                            }
+                          },
+                          {
+                            "name": "Cbbtc",
                             "value": {
                               "type": "primitive",
                               "value": "null"
@@ -61792,6 +63040,13 @@
                           "type": "primitive",
                           "value": "null"
                         }
+                      },
+                      {
+                        "name": "Cbbtc",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
                       }
                     ]
                   }
@@ -61957,6 +63212,13 @@
                       },
                       {
                         "name": "BscUsdt",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      },
+                      {
+                        "name": "Cbbtc",
                         "value": {
                           "type": "primitive",
                           "value": "null"
@@ -62138,6 +63400,13 @@
                           "type": "primitive",
                           "value": "null"
                         }
+                      },
+                      {
+                        "name": "Cbbtc",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
                       }
                     ]
                   }
@@ -62315,6 +63584,13 @@
                           "type": "primitive",
                           "value": "null"
                         }
+                      },
+                      {
+                        "name": "Cbbtc",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
                       }
                     ]
                   },
@@ -62464,6 +63740,13 @@
                       },
                       {
                         "name": "BscUsdt",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      },
+                      {
+                        "name": "Cbbtc",
                         "value": {
                           "type": "primitive",
                           "value": "null"
@@ -62633,6 +63916,13 @@
               },
               {
                 "name": "BscUsdt",
+                "value": {
+                  "type": "primitive",
+                  "value": "null"
+                }
+              },
+              {
+                "name": "Cbbtc",
                 "value": {
                   "type": "primitive",
                   "value": "null"
@@ -62818,6 +64108,13 @@
                           "type": "primitive",
                           "value": "null"
                         }
+                      },
+                      {
+                        "name": "Cbbtc",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
                       }
                     ]
                   },
@@ -62986,6 +64283,13 @@
                           "type": "primitive",
                           "value": "null"
                         }
+                      },
+                      {
+                        "name": "Cbbtc",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
                       }
                     ]
                   },
@@ -63150,6 +64454,13 @@
                       },
                       {
                         "name": "BscUsdt",
+                        "value": {
+                          "type": "primitive",
+                          "value": "null"
+                        }
+                      },
+                      {
+                        "name": "Cbbtc",
                         "value": {
                           "type": "primitive",
                           "value": "null"
@@ -63342,6 +64653,13 @@
                                 "type": "primitive",
                                 "value": "null"
                               }
+                            },
+                            {
+                              "name": "Cbbtc",
+                              "value": {
+                                "type": "primitive",
+                                "value": "null"
+                              }
                             }
                           ]
                         },
@@ -63512,6 +64830,13 @@
                         },
                         {
                           "name": "BscUsdt",
+                          "value": {
+                            "type": "primitive",
+                            "value": "null"
+                          }
+                        },
+                        {
+                          "name": "Cbbtc",
                           "value": {
                             "type": "primitive",
                             "value": "null"
@@ -63886,6 +65211,13 @@
                     "type": "primitive",
                     "value": "null"
                   }
+                },
+                {
+                  "name": "Cbbtc",
+                  "value": {
+                    "type": "primitive",
+                    "value": "null"
+                  }
                 }
               ]
             },
@@ -64054,6 +65386,13 @@
                 },
                 {
                   "name": "BscUsdt",
+                  "value": {
+                    "type": "primitive",
+                    "value": "null"
+                  }
+                },
+                {
+                  "name": "Cbbtc",
                   "value": {
                     "type": "primitive",
                     "value": "null"
@@ -64234,6 +65573,13 @@
                     "type": "primitive",
                     "value": "null"
                   }
+                },
+                {
+                  "name": "Cbbtc",
+                  "value": {
+                    "type": "primitive",
+                    "value": "null"
+                  }
                 }
               ]
             },
@@ -64409,6 +65755,13 @@
                 "type": "primitive",
                 "value": "null"
               }
+            },
+            {
+              "name": "Cbbtc",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
             }
           ]
         }
@@ -64567,6 +65920,13 @@
             },
             {
               "name": "BscUsdt",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "Cbbtc",
               "value": {
                 "type": "primitive",
                 "value": "null"
@@ -64782,6 +66142,13 @@
                 "type": "primitive",
                 "value": "null"
               }
+            },
+            {
+              "name": "Cbbtc",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
             }
           ]
         },
@@ -64964,6 +66331,13 @@
             },
             {
               "name": "BscUsdt",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "Cbbtc",
               "value": {
                 "type": "primitive",
                 "value": "null"
@@ -68272,6 +69646,13 @@
                           },
                           {
                             "name": "BscUsdt",
+                            "value": {
+                              "type": "primitive",
+                              "value": "null"
+                            }
+                          },
+                          {
+                            "name": "Cbbtc",
                             "value": {
                               "type": "primitive",
                               "value": "null"
@@ -74127,6 +75508,13 @@
                           },
                           {
                             "name": "BscUsdt",
+                            "value": {
+                              "type": "primitive",
+                              "value": "null"
+                            }
+                          },
+                          {
+                            "name": "Cbbtc",
                             "value": {
                               "type": "primitive",
                               "value": "null"

@@ -50,6 +50,7 @@ describe(buildChainAssetMap, () => {
           "USDT": null,
         },
         "Ethereum": {
+          "CBBTC": null,
           "ETH": null,
           "FLIP": null,
           "USDC": null,
@@ -109,6 +110,7 @@ describe(buildChainAssetMap, () => {
           "USDT": 17,
         },
         "Ethereum": {
+          "CBBTC": null,
           "ETH": 5,
           "FLIP": 6,
           "USDC": 12,
@@ -151,6 +153,7 @@ describe(buildChainBaseAssetMap, () => {
           "USDT": null,
         },
         "Ethereum": {
+          "CBBTC": null,
           "ETH": null,
           "FLIP": null,
           "USDT": null,
@@ -208,6 +211,7 @@ describe(buildChainBaseAssetMap, () => {
           "USDT": 17,
         },
         "Ethereum": {
+          "CBBTC": null,
           "ETH": 5,
           "FLIP": 6,
           "USDT": 13,

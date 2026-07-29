@@ -37,6 +37,9 @@ AssetBalances:
     - address: added (AssetBalances.RefundSkipped.address.7)
   - VaultDeficitDetected:
     - chain: added (AssetBalances.VaultDeficitDetected.chain.8)
+  - WhitelistTimelockUpdated: added
+  - WhitelistUpdateDropped: added
+  - WhitelistUpdateScheduled: added
 
 AssethubIngressEgress:
   - BatchBroadcastRequested:
@@ -79,11 +82,17 @@ Emissions:
     - egressId: added (Emissions.NetworkFeeBurned.egressId.0.8)
 
 Environment:
+  - AddedNewEthAsset:
+    - 0: added (Environment.AddedNewEthAsset.0.5)
   - BscInitialized: added
   - RuntimeSafeModeUpdated:
     - safeMode: added (Environment.RuntimeSafeModeUpdated.safeMode.2.broadcastBsc)
+  - UpdatedEthAsset:
+    - 0: added (Environment.UpdatedEthAsset.0.5)
 
 EthereumIngressEgress:
+  - AssetEgressStatusChanged:
+    - asset: added (EthereumIngressEgress.AssetEgressStatusChanged.asset.5)
   - BatchBroadcastRequested:
     - egressIds: added (EthereumIngressEgress.BatchBroadcastRequested.egressIds.0.8)
   - CcmBroadcastRequested:
@@ -91,14 +100,25 @@ EthereumIngressEgress:
   - CcmEgressInvalid:
     - egressId: added (EthereumIngressEgress.CcmEgressInvalid.egressId.0.8)
   - DepositBoosted:
+    - asset: added (EthereumIngressEgress.DepositBoosted.asset.5)
     - action: added (EthereumIngressEgress.DepositBoosted.action.4.egressId.0.8)
   - DepositFailed:
-    - details: added (EthereumIngressEgress.DepositFailed.details.1.vaultWitness.outputAsset.19)
+    - details: added (EthereumIngressEgress.DepositFailed.details.0.depositWitness.asset.5)
+  - DepositFetchesScheduled:
+    - asset: added (EthereumIngressEgress.DepositFetchesScheduled.asset.5)
   - DepositFinalised:
+    - asset: added (EthereumIngressEgress.DepositFinalised.asset.5)
     - action: added (EthereumIngressEgress.DepositFinalised.action.4.egressId.0.8)
+  - InsufficientBoostLiquidity:
+    - asset: added (EthereumIngressEgress.InsufficientBoostLiquidity.asset.5)
+  - InvalidCcmRefunded:
+    - asset: added (EthereumIngressEgress.InvalidCcmRefunded.asset.5)
+  - PalletConfigUpdated:
+    - update: added (EthereumIngressEgress.PalletConfigUpdated.update.1.asset.5)
   - TransactionRejectionFailed:
     - reason: added (EthereumIngressEgress.TransactionRejectionFailed.reason)
   - TransferFallbackRequested:
+    - asset: added (EthereumIngressEgress.TransferFallbackRequested.asset.5)
     - egressDetails: added (EthereumIngressEgress.TransferFallbackRequested.egressDetails.egressId.0.8)
 
 Flip:

@@ -37,6 +37,7 @@ export const buildChainAssetMap = <T>(
     USDT: overrides?.Usdt ?? defaultValue,
     FLIP: overrides?.Flip ?? defaultValue,
     WBTC: overrides?.Wbtc ?? defaultValue,
+    CBBTC: overrides?.Cbbtc ?? defaultValue,
   },
   Bitcoin: {
     BTC: overrides?.Btc ?? defaultValue,
@@ -75,6 +76,7 @@ export const buildChainBaseAssetMap = <T>(
     USDT: overrides?.Usdt ?? defaultValue,
     FLIP: overrides?.Flip ?? defaultValue,
     WBTC: overrides?.Wbtc ?? defaultValue,
+    CBBTC: overrides?.Cbbtc ?? defaultValue,
   },
   Bitcoin: {
     BTC: overrides?.Btc ?? defaultValue,

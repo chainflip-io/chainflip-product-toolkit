@@ -4,6 +4,22 @@ import * as base58 from '@chainflip/utils/base58';
 import { hexToBytes } from '@chainflip/utils/bytes';
 import { hexToTronAddress } from '@chainflip/utils/tron';
 
+export const simpleEnum = <U extends string, T extends readonly [U, ...U[]]>(values: T) =>
+  z.object({ __kind: z.enum(values) }).transform(({ __kind }) => __kind!);
+
+export const cfPrimitivesChainsAssetsEthAsset = simpleEnum([
+  'Eth',
+  'Flip',
+  'Usdc',
+  'Usdt',
+  'Wbtc',
+  'Cbbtc',
+]);
+
+export const hexString = z
+  .string()
+  .refine((v): v is `0x${string}` => /^0x[\da-f]*$/i.test(v), { message: 'Invalid hex string' });
+
 export const palletCfEmissionsPalletSafeMode = z.object({ emissionsSyncEnabled: z.boolean() });
 
 export const palletCfFundingPalletSafeMode = z.object({ redeemEnabled: z.boolean() });
@@ -38,9 +54,6 @@ export const palletCfTradingStrategyPalletSafeMode = z.object({
   strategyExecutionEnabled: z.boolean(),
 });
 
-export const simpleEnum = <U extends string, T extends readonly [U, ...U[]]>(values: T) =>
-  z.object({ __kind: z.enum(values) }).transform(({ __kind }) => __kind!);
-
 export const cfPrimitivesChainsAssetsAnyAsset = simpleEnum([
   'Eth',
   'Flip',
@@ -62,6 +75,7 @@ export const cfPrimitivesChainsAssetsAnyAsset = simpleEnum([
   'TrxUsdt',
   'Bnb',
   'BscUsdt',
+  'Cbbtc',
 ]);
 
 export const cfTraitsSafeModeSafeModeSet = z.discriminatedUnion('__kind', [
@@ -228,10 +242,6 @@ export const palletCfFlipPalletConfigUpdate = z.discriminatedUnion('__kind', [
   }),
   z.object({ __kind: z.literal('SetFeeRewardsActivationEpoch'), value: z.number() }),
 ]);
-
-export const hexString = z
-  .string()
-  .refine((v): v is `0x${string}` => /^0x[\da-f]*$/i.test(v), { message: 'Invalid hex string' });
 
 export const accountId = z
   .union([
@@ -465,10 +475,13 @@ export const cfChainsAddressForeignChainAddress = z.discriminatedUnion('__kind',
   z.object({ __kind: z.literal('Bsc'), value: hexString }),
 ]);
 
-export const cfChainsRefundParametersAccountOrAddress = z.discriminatedUnion('__kind', [
-  z.object({ __kind: z.literal('InternalAccount'), value: accountId }),
-  z.object({ __kind: z.literal('ExternalAddress'), value: cfChainsAddressForeignChainAddress }),
-]);
+export const cfChainsRefundParametersAccountOrAddressForeignChainAddress = z.discriminatedUnion(
+  '__kind',
+  [
+    z.object({ __kind: z.literal('InternalAccount'), value: accountId }),
+    z.object({ __kind: z.literal('ExternalAddress'), value: cfChainsAddressForeignChainAddress }),
+  ],
+);
 
 export const cfChainsCcmDepositMetadataForeignChainAddress = z.object({
   channelMetadata: cfChainsCcmChannelMetadataDecodedCcmAdditionalData,
@@ -481,7 +494,7 @@ export const cfTraitsSwappingExpiryBehaviour = z.discriminatedUnion('__kind', [
   z.object({
     __kind: z.literal('RefundIfExpires'),
     retryDuration: z.number(),
-    refundAddress: cfChainsRefundParametersAccountOrAddress,
+    refundAddress: cfChainsRefundParametersAccountOrAddressForeignChainAddress,
     refundCcmMetadata: cfChainsCcmDepositMetadataForeignChainAddress.nullish(),
   }),
 ]);
@@ -610,8 +623,6 @@ export const palletCfSwappingPalletConfigUpdate = z.discriminatedUnion('__kind',
     bps: z.number().nullish(),
   }),
 ]);
-
-export const cfPrimitivesChainsAssetsEthAsset = simpleEnum(['Eth', 'Flip', 'Usdc', 'Usdt', 'Wbtc']);
 
 export const cfChainsEvmDepositDetails = z.object({ txHashes: z.array(hexString).nullish() });
 
@@ -778,6 +789,35 @@ export const palletCfEthereumIngressEgressRefundFailureReason = z.discriminatedU
   }),
   z.object({ __kind: z.literal('SolanaCcmWithAltsNotSupported') }),
 ]);
+
+export const cfPrimitivesAccountRole = simpleEnum([
+  'Unregistered',
+  'Validator',
+  'LiquidityProvider',
+  'Broker',
+  'Operator',
+]);
+
+export const palletCfEthereumIngressEgressPalletConfigUpdateEthereum = z.discriminatedUnion(
+  '__kind',
+  [
+    z.object({ __kind: z.literal('ChannelOpeningFeeEthereum'), fee: numberOrHex }),
+    z.object({
+      __kind: z.literal('SetMinimumDepositEthereum'),
+      asset: cfPrimitivesChainsAssetsEthAsset,
+      minimumDeposit: numberOrHex,
+    }),
+    z.object({ __kind: z.literal('SetDepositChannelLifetimeEthereum'), lifetime: numberOrHex }),
+    z.object({ __kind: z.literal('SetWitnessSafetyMarginEthereum'), margin: numberOrHex }),
+    z.object({ __kind: z.literal('SetBoostDelayEthereum'), delayBlocks: z.number() }),
+    z.object({
+      __kind: z.literal('SetMaximumPreallocatedChannelsEthereum'),
+      accountRole: cfPrimitivesAccountRole,
+      numChannels: z.number(),
+    }),
+    z.object({ __kind: z.literal('SetIngressDelayEthereum'), delayBlocks: z.number() }),
+  ],
+);
 
 export const cfPrimitivesChainsAssetsDotAsset = simpleEnum(['Dot']);
 
@@ -1284,11 +1324,28 @@ export const palletCfSolanaIngressEgressRefundFailureReason = z.discriminatedUni
   z.object({ __kind: z.literal('SolanaCcmWithAltsNotSupported') }),
 ]);
 
-export const palletCfAssetBalancesPalletConfigUpdate = z.object({
-  __kind: z.literal('RefundFeeMultiple'),
-  chain: cfPrimitivesChainsForeignChain,
-  multiple: z.number().nullish(),
-});
+export const palletCfAssetBalancesPalletConfigUpdate = z.discriminatedUnion('__kind', [
+  z.object({
+    __kind: z.literal('RefundFeeMultiple'),
+    chain: cfPrimitivesChainsForeignChain,
+    multiple: z.number().nullish(),
+  }),
+  z.object({ __kind: z.literal('MaxWhitelistTimelock'), seconds: numberOrHex }),
+  z.object({ __kind: z.literal('MaxPendingWhitelistUpdates'), count: z.number() }),
+  z.object({ __kind: z.literal('MaxWhitelistEntries'), count: z.number() }),
+]);
+
+export const palletCfAssetBalancesWhitelistWhitelistChangeForeignChainAddress =
+  z.discriminatedUnion('__kind', [
+    z.object({
+      __kind: z.literal('Allow'),
+      value: cfChainsRefundParametersAccountOrAddressForeignChainAddress,
+    }),
+    z.object({
+      __kind: z.literal('Remove'),
+      value: cfChainsRefundParametersAccountOrAddressForeignChainAddress,
+    }),
+  ]);
 
 export const cfPrimitivesChainsAssetsHubAsset = simpleEnum(['HubDot', 'HubUsdt', 'HubUsdc']);
 
@@ -1803,14 +1860,6 @@ export const palletCfBscIngressEgressRefundFailureReason = z.discriminatedUnion(
     value: cfChainsExecutexSwapAndCallError,
   }),
   z.object({ __kind: z.literal('SolanaCcmWithAltsNotSupported') }),
-]);
-
-export const cfPrimitivesAccountRole = simpleEnum([
-  'Unregistered',
-  'Validator',
-  'LiquidityProvider',
-  'Broker',
-  'Operator',
 ]);
 
 export const palletCfBscIngressEgressPalletConfigUpdateBsc = z.discriminatedUnion('__kind', [
