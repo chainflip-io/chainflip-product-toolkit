@@ -24,7 +24,7 @@ export const tronAddress = z
   .string()
   .refine(isValidTronAddress, { message: 'Invalid tron address' });
 
-const chainAssetMapFactory = <Z extends z.ZodTypeAny>(parser: Z, _defaultValue: z.input<Z>) =>
+const chainAssetMapFactory = <Z extends z.ZodTypeAny>(parser: Z, defaultValue: z.input<Z>) =>
   z.object({
     Bitcoin: z.object({ BTC: parser }),
     Ethereum: z.object({
@@ -33,15 +33,18 @@ const chainAssetMapFactory = <Z extends z.ZodTypeAny>(parser: Z, _defaultValue: 
       FLIP: parser,
       USDT: parser,
       WBTC: parser,
+      CBBTC: parser.default(defaultValue), // TODO(2.3): remove default once all networks have upgraded
     }),
     Arbitrum: z.object({ ETH: parser, USDC: parser, USDT: parser }),
     Solana: z.object({ SOL: parser, USDC: parser, USDT: parser }),
     Assethub: z.object({ DOT: parser, USDC: parser, USDT: parser }),
     Tron: z.object({ TRX: parser, USDT: parser }),
-    Bsc: z.object({ BNB: parser, USDT: parser }).optional(), // TODO(2.3): remove once all networks have upgraded
+    Bsc: z
+      .object({ BNB: parser.default(defaultValue), USDT: parser.default(defaultValue) })
+      .default({ BNB: defaultValue, USDT: defaultValue }), // TODO(2.3): remove default once all networks have upgraded
   });
 
-const chainBaseAssetMapFactory = <Z extends z.ZodTypeAny>(parser: Z, _defaultValue: z.input<Z>) =>
+const chainBaseAssetMapFactory = <Z extends z.ZodTypeAny>(parser: Z, defaultValue: z.input<Z>) =>
   z.object({
     Bitcoin: z.object({ BTC: parser }),
     Ethereum: z.object({
@@ -49,15 +52,18 @@ const chainBaseAssetMapFactory = <Z extends z.ZodTypeAny>(parser: Z, _defaultVal
       FLIP: parser,
       USDT: parser,
       WBTC: parser,
+      CBBTC: parser.default(defaultValue), // TODO(2.3): remove default once all networks have upgraded
     }),
     Arbitrum: z.object({ ETH: parser, USDC: parser, USDT: parser }),
     Solana: z.object({ SOL: parser, USDC: parser, USDT: parser }),
     Assethub: z.object({ DOT: parser, USDC: parser, USDT: parser }),
     Tron: z.object({ TRX: parser, USDT: parser }),
-    Bsc: z.object({ BNB: parser, USDT: parser }).optional(), // TODO(2.3): remove once all networks have upgraded
+    Bsc: z
+      .object({ BNB: parser.default(defaultValue), USDT: parser.default(defaultValue) })
+      .default({ BNB: defaultValue, USDT: defaultValue }), // TODO(2.3): remove default once all networks have upgraded
   });
 
-const chainMapFactory = <Z extends z.ZodTypeAny>(parser: Z, _defaultValue: z.input<Z> = null) =>
+const chainMapFactory = <Z extends z.ZodTypeAny>(parser: Z, defaultValue: z.input<Z> = null) =>
   z.object({
     Bitcoin: parser,
     Ethereum: parser,
@@ -65,7 +71,7 @@ const chainMapFactory = <Z extends z.ZodTypeAny>(parser: Z, _defaultValue: z.inp
     Solana: parser,
     Assethub: parser,
     Tron: parser,
-    Bsc: parser.optional(), // TODO(2.3): remove once all networks have upgraded
+    Bsc: parser.default(defaultValue), // TODO(2.3): remove default once all networks have upgraded
   });
 
 const rpcAssetSchema = z.union([
@@ -75,6 +81,7 @@ const rpcAssetSchema = z.union([
   z.object({ chain: z.literal('Ethereum'), asset: z.literal('USDC') }),
   z.object({ chain: z.literal('Ethereum'), asset: z.literal('USDT') }),
   z.object({ chain: z.literal('Ethereum'), asset: z.literal('WBTC') }),
+  z.object({ chain: z.literal('Ethereum'), asset: z.literal('CBBTC') }),
   z.object({ chain: z.literal('Arbitrum'), asset: z.literal('ETH') }),
   z.object({ chain: z.literal('Arbitrum'), asset: z.literal('USDC') }),
   z.object({ chain: z.literal('Arbitrum'), asset: z.literal('USDT') }),

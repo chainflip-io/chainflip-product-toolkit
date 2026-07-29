@@ -184,8 +184,8 @@ importers:
   packages/rpc:
     dependencies:
       '@chainflip/utils':
-        specifier: 2.3.0-dev.3
-        version: 2.3.0-dev.3
+        specifier: 2.3.0-dev.4
+        version: 2.3.0-dev.4
       zod:
         specifier: ^3.25.75
         version: 3.25.75
@@ -307,6 +307,9 @@ packages:
 
   '@chainflip/utils@2.3.0-dev.3':
     resolution: {integrity: sha512-D0AqDlQEYW0ZXJxYyUpXj21NblUQhgygP6se8xBS6Qx+RXo2MqvMDyPyVUFTJpOpIkFXGAOhFXL2ti3iUdfdMg==}
+
+  '@chainflip/utils@2.3.0-dev.4':
+    resolution: {integrity: sha512-CFm4D9VXqBPDTkGKijC3ksIKtE5HubK7QM0ZYSdzyqENn5ITNcnDpZu0NnL2D73e+8UeqMNZEZae59EXn8qEng==}
 
   '@coral-xyz/anchor-errors@0.31.1':
     resolution: {integrity: sha512-NhNEku4F3zzUSBtrYz84FzYWm48+9OvmT1Hhnwr6GnPQry2dsEqH/ti/7ASjjpoFTWRnPXrjAIT1qM6Isop+LQ==}
@@ -3531,6 +3534,13 @@ snapshots:
       scale-ts: 1.6.1
 
   '@chainflip/utils@2.3.0-dev.3':
+    dependencies:
+      '@date-fns/utc': 2.1.1
+      '@noble/hashes': 2.2.0
+      bignumber.js: 11.1.5
+      date-fns: 4.4.0
+
+  '@chainflip/utils@2.3.0-dev.4':
     dependencies:
       '@date-fns/utc': 2.1.1
       '@noble/hashes': 2.2.0
