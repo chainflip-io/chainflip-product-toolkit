@@ -309,7 +309,7 @@ export const requestSwapParameterEncoding = z.discriminatedUnion('chain', [
   }),
   evmBrokerRequestSwapParameterEncoding.extend({
     chain: z.literal('Bsc'),
-  }), // TODO(2.3): remove once all networks have upgraded
+  }),
   z.object({
     chain: z.literal('Tron'),
     to: tronAddress,
