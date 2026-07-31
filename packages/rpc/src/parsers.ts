@@ -982,7 +982,7 @@ export const cfVaultAddresses = z
 
 export const cfAllLoans = z.array(cfLoan);
 
-const AccountRewardRole = z.enum(['unregistered', 'validator', 'operator']);
+const AccountRewardRole = z.enum(['Unregistered', 'Validator', 'Operator']);
 
 const accountReward = z.object({
   account: accountId,
@@ -990,8 +990,8 @@ const accountReward = z.object({
   bond: numberOrHex,
   reward: numberOrHex,
   role: AccountRewardRole,
-  managed_by: accountId.optional(),
-  delegated_to: accountId.optional(),
+  managed_by: accountId.nullish(),
+  delegated_to: accountId.nullish(),
 });
 export const cfRewardDistributionEstimate = z.object({
   epoch_index: numberOrHex,
