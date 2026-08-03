@@ -12,8 +12,8 @@ importers:
         specifier: ^9.39.4
         version: 9.39.4
       '@rolldown/binding-darwin-arm64':
-        specifier: 1.1.4
-        version: 1.1.4
+        specifier: 1.2.0
+        version: 1.2.0
       '@rolldown/binding-linux-x64-gnu':
         specifier: 1.1.5
         version: 1.1.5
@@ -945,12 +945,6 @@ packages:
 
   '@rolldown/binding-darwin-arm64@1.0.0-rc.16':
     resolution: {integrity: sha512-rNz0yK078yrNn3DrdgN+PKiMOW8HfQ92jQiXxwX8yW899ayV00MLVdaCNeVBhG/TbH3ouYVObo8/yrkiectkcQ==}
-    engines: {node: ^20.19.0 || >=22.12.0}
-    cpu: [arm64]
-    os: [darwin]
-
-  '@rolldown/binding-darwin-arm64@1.1.4':
-    resolution: {integrity: sha512-aUi+HBvmYb7j8krl1+qJgkG8C17fO79gk3c+jPw4S8glRFc1DTija9S3EyaTSQUm5GJXYKDAsugBEhFHH2vYiQ==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [arm64]
     os: [darwin]
@@ -4076,10 +4070,7 @@ snapshots:
   '@rolldown/binding-darwin-arm64@1.0.0-rc.16':
     optional: true
 
-  '@rolldown/binding-darwin-arm64@1.1.4': {}
-
-  '@rolldown/binding-darwin-arm64@1.2.0':
-    optional: true
+  '@rolldown/binding-darwin-arm64@1.2.0': {}
 
   '@rolldown/binding-darwin-x64@1.0.0-rc.16':
     optional: true
