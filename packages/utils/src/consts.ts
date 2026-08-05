@@ -245,6 +245,14 @@ export const brokerAliasMap: AccountAliasMap = {
     name: 'Kotova',
     twitter: '@kotova_io',
   },
+  cFMJDzkYkDNWLHwvZFF6eQofeN3zkAKgaj1Qou9juQDsJ9yGZ: {
+    name: 'MakePay.io - OM',
+    twitter: '@MakePayio',
+  },
+  cFNwdVLSqw8zBC5aXUGCDc1aeoinWvtFkMnofxYB7BhWboSiq: {
+    name: 'Ravn',
+    twitter: '@ravnexchange',
+  },
 } as const;
 
 export const lpAliasMap: AccountAliasMap = {
