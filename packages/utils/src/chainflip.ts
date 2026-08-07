@@ -499,12 +499,12 @@ export const chainflipAssetToPriceAssetMap: Record<
   HubUsdt: 'Usdt',
   Flip: null,
   HubDot: null,
-  Wbtc: 'Btc',
-  Cbbtc: 'Btc',
+  Wbtc: null,
+  Cbbtc: null,
   Trx: null,
   TrxUsdt: 'Usdt',
   Bnb: null,
-  BscUsdt: 'Usdt',
+  BscUsdt: null,
 };
 
 export function isChainflipAsset(asset: string): asset is ChainflipAsset {
