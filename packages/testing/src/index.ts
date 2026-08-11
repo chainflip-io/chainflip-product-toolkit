@@ -37,6 +37,7 @@ export const buildChainAssetMap = <T>(
     USDT: overrides?.Usdt ?? defaultValue,
     FLIP: overrides?.Flip ?? defaultValue,
     WBTC: overrides?.Wbtc ?? defaultValue,
+    CBBTC: overrides?.Cbbtc ?? defaultValue,
   },
   Bitcoin: {
     BTC: overrides?.Btc ?? defaultValue,
@@ -59,6 +60,10 @@ export const buildChainAssetMap = <T>(
   Tron: {
     TRX: overrides?.Trx ?? defaultValue,
     USDT: overrides?.TrxUsdt ?? defaultValue,
+  },
+  Bsc: {
+    BNB: overrides?.Bnb ?? defaultValue,
+    USDT: overrides?.BscUsdt ?? defaultValue,
   },
 });
 
@@ -71,6 +76,7 @@ export const buildChainBaseAssetMap = <T>(
     USDT: overrides?.Usdt ?? defaultValue,
     FLIP: overrides?.Flip ?? defaultValue,
     WBTC: overrides?.Wbtc ?? defaultValue,
+    CBBTC: overrides?.Cbbtc ?? defaultValue,
   },
   Bitcoin: {
     BTC: overrides?.Btc ?? defaultValue,
@@ -93,6 +99,10 @@ export const buildChainBaseAssetMap = <T>(
   Tron: {
     TRX: overrides?.Trx ?? defaultValue,
     USDT: overrides?.TrxUsdt ?? defaultValue,
+  },
+  Bsc: {
+    BNB: overrides?.Bnb ?? defaultValue,
+    USDT: overrides?.BscUsdt ?? defaultValue,
   },
 });
 
@@ -106,4 +116,5 @@ export const buildChainMap = <T>(
   Arbitrum: overrides?.Arbitrum ?? defaultValue,
   Assethub: overrides?.Assethub ?? defaultValue,
   Tron: overrides?.Tron ?? defaultValue,
+  Bsc: overrides?.Bsc ?? defaultValue,
 });
