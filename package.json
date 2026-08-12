@@ -37,7 +37,7 @@
     "typescript-eslint": "^8.65.0",
     "vite-tsconfig-paths": "^6.1.1",
     "vitest": "4.0.18",
-    "yargs": "^18.0.0"
+    "yargs": "^18.1.0"
   },
   "engines": {
     "node": "^20.11.0 || ^22.3.0 || ^24.13.0",
