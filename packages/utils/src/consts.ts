@@ -253,6 +253,10 @@ export const brokerAliasMap: AccountAliasMap = {
     name: 'Ravn',
     twitter: '@ravnexchange',
   },
+  cFJXSB95JsKkD7d1Brry8WxGDhGvarE9zgkdUP2Zdor4uFtKP: {
+    name: 'Allblu',
+    twitter: null,
+  },
 } as const;
 
 export const lpAliasMap: AccountAliasMap = {
