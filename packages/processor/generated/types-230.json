@@ -5649,6 +5649,22 @@
         }
       }
     },
+    "ValidatorMaxBidUpdated": {
+      "type": "struct",
+      "fields": {
+        "validator": {
+          "type": "primitive",
+          "value": "AccountId32"
+        },
+        "maxBid": {
+          "type": "option",
+          "value": {
+            "type": "primitive",
+            "value": "u128"
+          }
+        }
+      }
+    },
     "PreviousRotationStillPending": {
       "type": "primitive",
       "value": "null"
@@ -57510,8 +57526,18 @@
           "value": "u32"
         },
         "depositDetails": {
-          "type": "primitive",
-          "value": "u32"
+          "type": "struct",
+          "$name": "CfPrimitivesTxId",
+          "fields": {
+            "blockNumber": {
+              "type": "primitive",
+              "value": "u32"
+            },
+            "extrinsicIndex": {
+              "type": "primitive",
+              "value": "u32"
+            }
+          }
         },
         "ingressFee": {
           "type": "primitive",
@@ -59400,8 +59426,18 @@
                         "value": "u128"
                       },
                       "depositDetails": {
-                        "type": "primitive",
-                        "value": "u32"
+                        "type": "struct",
+                        "$name": "CfPrimitivesTxId",
+                        "fields": {
+                          "blockNumber": {
+                            "type": "primitive",
+                            "value": "u32"
+                          },
+                          "extrinsicIndex": {
+                            "type": "primitive",
+                            "value": "u32"
+                          }
+                        }
                       }
                     }
                   }
@@ -59467,8 +59503,18 @@
                         "value": "u128"
                       },
                       "depositDetails": {
-                        "type": "primitive",
-                        "value": "u32"
+                        "type": "struct",
+                        "$name": "CfPrimitivesTxId",
+                        "fields": {
+                          "blockNumber": {
+                            "type": "primitive",
+                            "value": "u32"
+                          },
+                          "extrinsicIndex": {
+                            "type": "primitive",
+                            "value": "u32"
+                          }
+                        }
                       },
                       "outputAsset": {
                         "type": "enum",
@@ -61239,8 +61285,18 @@
           }
         },
         "depositDetails": {
-          "type": "primitive",
-          "value": "u32"
+          "type": "struct",
+          "$name": "CfPrimitivesTxId",
+          "fields": {
+            "blockNumber": {
+              "type": "primitive",
+              "value": "u32"
+            },
+            "extrinsicIndex": {
+              "type": "primitive",
+              "value": "u32"
+            }
+          }
         },
         "prewitnessedDepositId": {
           "type": "primitive",
@@ -61665,8 +61721,18 @@
           "value": "u32"
         },
         "txId": {
-          "type": "primitive",
-          "value": "u32"
+          "type": "struct",
+          "$name": "CfPrimitivesTxId",
+          "fields": {
+            "blockNumber": {
+              "type": "primitive",
+              "value": "u32"
+            },
+            "extrinsicIndex": {
+              "type": "primitive",
+              "value": "u32"
+            }
+          }
         }
       }
     },
@@ -61674,8 +61740,18 @@
       "type": "struct",
       "fields": {
         "txId": {
-          "type": "primitive",
-          "value": "u32"
+          "type": "struct",
+          "$name": "CfPrimitivesTxId",
+          "fields": {
+            "blockNumber": {
+              "type": "primitive",
+              "value": "u32"
+            },
+            "extrinsicIndex": {
+              "type": "primitive",
+              "value": "u32"
+            }
+          }
         },
         "reason": {
           "type": "enum",
@@ -78800,6 +78876,101 @@
                     "root": {
                       "type": "primitive",
                       "value": "u64"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  },
+  "AssethubElections": {
+    "CorruptStorage": {
+      "type": "primitive",
+      "value": "null"
+    },
+    "Uninitialized": {
+      "type": "primitive",
+      "value": "null"
+    },
+    "AllVotesCleared": {
+      "type": "primitive",
+      "value": "null"
+    },
+    "AllVotesNotCleared": {
+      "type": "primitive",
+      "value": "null"
+    },
+    "UnknownElection": {
+      "type": "tuple",
+      "values": [
+        {
+          "type": "primitive",
+          "value": "u64"
+        },
+        {
+          "type": "enum",
+          "$name": "palletCfElectionsElectoralSystemsCompositeTuple5ImplsCompositeElectionIdentifierExtra",
+          "values": [
+            {
+              "name": "A",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "B",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "C",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "D",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "EE",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "ElectoralEvent": {
+      "type": "enum",
+      "$name": "stateChainRuntimeChainflipWitnessingAssethubElectionsAssethubElectoralEvents",
+      "values": [
+        {
+          "name": "ReorgDetected",
+          "value": {
+            "type": "struct",
+            "fields": {
+              "reorgedBlocks": {
+                "type": "range",
+                "value": {
+                  "type": "struct",
+                  "$name": "CfChainsWitnessPeriodBlockWitnessRangeAssethub",
+                  "fields": {
+                    "root": {
+                      "type": "primitive",
+                      "value": "u32"
                     }
                   }
                 }

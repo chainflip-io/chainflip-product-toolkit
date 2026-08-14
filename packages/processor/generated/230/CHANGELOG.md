@@ -1,4 +1,5 @@
 New or removed pallets:
+  AssethubElections: added
   BscBroadcaster: added
   BscChainTracking: added
   BscElections: added
@@ -49,13 +50,18 @@ AssethubIngressEgress:
   - CcmEgressInvalid:
     - egressId: added (AssethubIngressEgress.CcmEgressInvalid.egressId.0.8)
   - DepositBoosted:
+    - depositDetails: added (AssethubIngressEgress.DepositBoosted.depositDetails)
     - action: added (AssethubIngressEgress.DepositBoosted.action.4.egressId.0.8)
   - DepositFailed:
-    - details: added (AssethubIngressEgress.DepositFailed.details.1.vaultWitness.outputAsset.19)
+    - details: added (AssethubIngressEgress.DepositFailed.details.0.depositWitness.depositDetails)
   - DepositFinalised:
+    - depositDetails: added (AssethubIngressEgress.DepositFinalised.depositDetails)
     - action: added (AssethubIngressEgress.DepositFinalised.action.4.egressId.0.8)
+  - TransactionRejectedByBroker:
+    - txId: added (AssethubIngressEgress.TransactionRejectedByBroker.txId)
   - TransactionRejectionFailed:
     - reason: added (AssethubIngressEgress.TransactionRejectionFailed.reason)
+    - txId: added (AssethubIngressEgress.TransactionRejectionFailed.txId)
   - TransferFallbackRequested:
     - egressDetails: added (AssethubIngressEgress.TransferFallbackRequested.egressDetails.egressId.0.8)
 
@@ -328,5 +334,6 @@ TronIngressEgress:
     - egressDetails: added (TronIngressEgress.TransferFallbackRequested.egressDetails.egressId.0.8)
 
 Validator:
+  - ValidatorMaxBidUpdated: added
   - WitnessingTaskRestarted:
     - task: added (Validator.WitnessingTaskRestarted.task.7)
