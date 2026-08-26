@@ -978,6 +978,22 @@ export const validatorAccount2: z.input<typeof validator> = {
   asset_balances: emptyChainAssetMap,
 };
 
+// pre-2.3 nodes do not return `bid` or `max_bid` at all
+// TODO(2.3): remove once all networks have upgraded
+export const validatorAccountPre23: z.input<typeof validator> = validatorAccount;
+
+export const validatorAccountPost23WithBids: z.input<typeof validator> = {
+  ...validatorAccount,
+  bid: '0x2fa71622a7b77fdf4d10',
+  max_bid: '0x35670aa54a62ccedacab',
+};
+
+export const validatorAccountPost23NullBids: z.input<typeof validator> = {
+  ...validatorAccount,
+  bid: null,
+  max_bid: null,
+};
+
 const delegator1: z.input<typeof unregistered> = {
   account_id: DELEGATOR_ACCOUNT_ID,
   flip_balance: '0x3635c9adc5dea00000',

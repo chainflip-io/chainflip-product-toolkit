@@ -44,6 +44,9 @@ import {
   safeModeStatuses,
   tradingStrategies,
   tradingStrategiesLimits,
+  validatorAccountPost23NullBids,
+  validatorAccountPost23WithBids,
+  validatorAccountPre23,
 } from './fixtures';
 
 describe('parsers', () => {
@@ -3001,6 +3004,31 @@ describe('parsers', () => {
       const result = cfAccountInfo.parse(liquidityProviderAccount);
 
       expect(result).toMatchSnapshot();
+    });
+
+    // TODO(2.3): remove once all networks return `bid` and `max_bid`
+    it('parses a pre-2.3 cfAccountInfo for a validator without bid and max_bid', () => {
+      const result = cfAccountInfo.parse(validatorAccountPre23);
+
+      expect(result.role).toEqual('validator');
+      expect(result).not.toHaveProperty('bid');
+      expect(result).not.toHaveProperty('max_bid');
+    });
+
+    it('parses a post-2.3 cfAccountInfo for a validator with a bid and max_bid', () => {
+      const result = cfAccountInfo.parse(validatorAccountPost23WithBids);
+
+      expect(result).toMatchObject({
+        role: 'validator',
+        bid: 225033425976807428934928n,
+        max_bid: 252186205332783022058667n,
+      });
+    });
+
+    it('parses a post-2.3 cfAccountInfo for a validator with a null bid and max_bid', () => {
+      const result = cfAccountInfo.parse(validatorAccountPost23NullBids);
+
+      expect(result).toMatchObject({ role: 'validator', bid: null, max_bid: null });
     });
   });
 
