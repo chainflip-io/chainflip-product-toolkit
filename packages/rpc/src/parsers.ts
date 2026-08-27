@@ -433,8 +433,10 @@ export const validator = z.object({
   is_qualified: z.boolean(),
   is_online: z.boolean(),
   is_bidding: z.boolean(),
-  apy_bp: z.number().nullable(),
+  apy_bp: z.number().nullable(), // TODO(FLIP2.1): remove this before FLIP 2.1 goes live
   operator: accountId.optional(),
+  bid: numberOrHex.optional().nullable(), // TODO(2.3): remove (only) optional once all networks have upgraded
+  max_bid: numberOrHex.optional().nullable(), // TODO(2.3): remove (only) optional once all networks have upgraded
 });
 
 export const cfAccountInfo = z
