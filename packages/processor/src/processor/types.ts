@@ -89,16 +89,6 @@ export interface IndexerStore {
   ): Promise<Block[]>;
 }
 
-export interface Logger {
-  info(message: string, data?: Record<string, unknown>): void;
-  error(message: string, data?: Record<string, unknown>): void;
-  customError(
-    message: string,
-    data: Record<string, unknown>,
-    extraData?: Record<string, unknown>,
-  ): void;
-}
-
 export type EventInfo<P extends ProcessorStore<any, any>> = ReturnType<P['getEventInfo']>;
 export type ExtrinsicInfo<P extends ProcessorStore<any, any>> = ReturnType<P['getExtrinsicInfo']>;
 

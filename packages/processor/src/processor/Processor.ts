@@ -1,6 +1,7 @@
 import { average, sum } from '@chainflip/utils/math';
 import assert from 'assert';
 import { setTimeout as sleep } from 'timers/promises';
+import { type Logger } from 'winston';
 import HandlerMap from './HandlerMap';
 import {
   type Block,
@@ -10,7 +11,6 @@ import {
   type ExtrinsicInfo,
   type IndexerExtrinsic,
   type IndexerStore,
-  type Logger,
   type ProcessorOptions,
   type ProcessorStore,
   type State,
@@ -154,9 +154,7 @@ export default class Processor<P extends ProcessorStore<unknown, unknown>, I ext
       if (this.handledEvents.has(event.name)) {
         const handler = this.getEventHandler(event.name, block.specId);
         if (!handler) {
-          this.logger.customError('processBlock error: Error routing event to a handler', {
-            alertCode: 'EventHandlerError',
-          });
+          this.logger.error('processBlock error: Error routing event to a handler');
           continue;
         }
         try {
@@ -173,17 +171,13 @@ export default class Processor<P extends ProcessorStore<unknown, unknown>, I ext
             extrinsicInfo,
           });
         } catch (error) {
-          this.logger.customError(
-            `processBlock error: Error handling event ${event.name}`,
-            { alertCode: 'EventHandlerError' },
-            {
-              error,
-              eventName: event.name,
-              indexInBlock: event.indexInBlock,
-              blockHeight: block.height,
-              specId: block.specId,
-            },
-          );
+          this.logger.error('processBlock error: Error handling event', {
+            error,
+            eventName: event.name,
+            indexInBlock: event.indexInBlock,
+            blockHeight: block.height,
+            specId: block.specId,
+          });
           throw error;
         }
       }
