@@ -171,7 +171,7 @@ export default class Processor<P extends ProcessorStore<unknown, unknown>, I ext
             extrinsicInfo,
           });
         } catch (error) {
-          this.logger.error(`processBlock error: Error handling event ${event.name}`, {
+          this.logger.error('processBlock error: Error handling event', {
             error,
             eventName: event.name,
             indexInBlock: event.indexInBlock,
