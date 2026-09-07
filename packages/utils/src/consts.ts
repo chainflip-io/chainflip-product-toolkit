@@ -264,7 +264,7 @@ export const brokerAliasMap: AccountAliasMap = {
   cFLU48uwzQUDXd6XAg1EZnEK9tfYEAE8SwyGJ7aC23GcktCJV: {
     name: 'Portage',
     twitter: null,
-  }
+  },
 } as const;
 
 export const lpAliasMap: AccountAliasMap = {
