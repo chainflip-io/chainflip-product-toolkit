@@ -35,6 +35,7 @@ export const palletCfLpPalletSafeMode = z.object({
   depositEnabled: z.boolean(),
   withdrawalEnabled: z.boolean(),
   internalSwapsEnabled: z.boolean(),
+  flipToOnChainBalanceEnabled: z.boolean(),
 });
 
 export const palletCfValidatorPalletSafeMode = z.object({
@@ -280,6 +281,7 @@ export const cfTraitsFundingSource = z.discriminatedUnion('__kind', [
     channelId: numberOrHex.nullish(),
     asset: cfPrimitivesChainsAssetsAnyAsset,
   }),
+  z.object({ __kind: z.literal('FreeBalance') }),
 ]);
 
 export const cfPrimitivesWitnessingTaskName = simpleEnum([
@@ -304,7 +306,10 @@ export const palletCfTokenholderGovernanceProposal = z.discriminatedUnion('__kin
 export const stateChainRuntimeChainflipOffencesOffence = z.discriminatedUnion('__kind', [
   z.object({ __kind: z.literal('ParticipateSigningFailed') }),
   z.object({ __kind: z.literal('ParticipateKeygenFailed') }),
-  z.object({ __kind: z.literal('FailedToBroadcastTransaction') }),
+  z.object({
+    __kind: z.literal('FailedToBroadcastTransaction'),
+    value: cfPrimitivesChainsForeignChain,
+  }),
   z.object({ __kind: z.literal('MissedAuthorshipSlot') }),
   z.object({ __kind: z.literal('MissedHeartbeat') }),
   z.object({ __kind: z.literal('GrandpaEquivocation') }),
