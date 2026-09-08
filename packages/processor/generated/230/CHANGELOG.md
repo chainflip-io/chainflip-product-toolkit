@@ -134,7 +134,7 @@ Flip:
 
 Funding:
   - Funded:
-    - source: added (Funding.Funded.source.2.asset.19)
+    - source: added (Funding.Funded.source.3)
 
 LendingPools:
   - BoostFundsAdded:
@@ -191,6 +191,7 @@ LiquidityProvider:
     - destinationAddress: added (LiquidityProvider.AssetBalancePurged.destinationAddress.7)
   - AssetTransferred:
     - asset: added (LiquidityProvider.AssetTransferred.asset.19)
+  - FlipTransferredToOnChainBalance: added
   - LiquidityDepositAddressReady:
     - asset: added (LiquidityProvider.LiquidityDepositAddressReady.asset.19)
     - depositAddress: added (LiquidityProvider.LiquidityDepositAddressReady.depositAddress.7)
@@ -222,9 +223,9 @@ PolkadotIngressEgress:
 
 Reputation:
   - OffencePenalty:
-    - offence: added (Reputation.OffencePenalty.offence.8.8)
+    - offence: added (Reputation.OffencePenalty.offence.2)
   - PenaltyUpdated:
-    - offence: added (Reputation.PenaltyUpdated.offence.8.8)
+    - offence: added (Reputation.PenaltyUpdated.offence.2)
 
 SolanaIngressEgress:
   - BatchBroadcastRequested:

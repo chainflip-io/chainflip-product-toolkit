@@ -1167,6 +1167,10 @@
                       "internalSwapsEnabled": {
                         "type": "primitive",
                         "value": "bool"
+                      },
+                      "flipToOnChainBalanceEnabled": {
+                        "type": "primitive",
+                        "value": "bool"
                       }
                     }
                   },
@@ -3482,6 +3486,13 @@
                     ]
                   }
                 }
+              }
+            },
+            {
+              "name": "FreeBalance",
+              "value": {
+                "type": "primitive",
+                "value": "null"
               }
             }
           ]
@@ -7361,8 +7372,73 @@
             {
               "name": "FailedToBroadcastTransaction",
               "value": {
-                "type": "primitive",
-                "value": "null"
+                "type": "enum",
+                "$name": "cfPrimitivesChainsForeignChain",
+                "values": [
+                  {
+                    "name": "__Unused0",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  },
+                  {
+                    "name": "Ethereum",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  },
+                  {
+                    "name": "Polkadot",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  },
+                  {
+                    "name": "Bitcoin",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  },
+                  {
+                    "name": "Arbitrum",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  },
+                  {
+                    "name": "Solana",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  },
+                  {
+                    "name": "Assethub",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  },
+                  {
+                    "name": "Tron",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  },
+                  {
+                    "name": "Bsc",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  }
+                ]
               }
             },
             {
@@ -7526,8 +7602,73 @@
             {
               "name": "FailedToBroadcastTransaction",
               "value": {
-                "type": "primitive",
-                "value": "null"
+                "type": "enum",
+                "$name": "cfPrimitivesChainsForeignChain",
+                "values": [
+                  {
+                    "name": "__Unused0",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  },
+                  {
+                    "name": "Ethereum",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  },
+                  {
+                    "name": "Polkadot",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  },
+                  {
+                    "name": "Bitcoin",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  },
+                  {
+                    "name": "Arbitrum",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  },
+                  {
+                    "name": "Solana",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  },
+                  {
+                    "name": "Assethub",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  },
+                  {
+                    "name": "Tron",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  },
+                  {
+                    "name": "Bsc",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  }
+                ]
               }
             },
             {
@@ -21717,6 +21858,19 @@
               }
             }
           ]
+        }
+      }
+    },
+    "FlipTransferredToOnChainBalance": {
+      "type": "struct",
+      "fields": {
+        "accountId": {
+          "type": "primitive",
+          "value": "AccountId32"
+        },
+        "amount": {
+          "type": "primitive",
+          "value": "u128"
         }
       }
     }
