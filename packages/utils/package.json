@@ -36,7 +36,7 @@
   },
   "dependencies": {
     "@date-fns/utc": "^2.1.1",
-    "@noble/hashes": "^2.2.0",
+    "@noble/hashes": "^2.3.0",
     "bignumber.js": "^11.1.5",
     "date-fns": "4.4.0"
   },
