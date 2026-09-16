@@ -91,6 +91,10 @@ export const brokerAliasMap: AccountAliasMap = {
     name: 'InstaSwap',
     twitter: '@instaswap_io',
   },
+  cFJpiCj7FXSdhvM61J1NgMKeZr9cm3WfUWSahKAfSwgL4oZpW: {
+    name: 'InstaSwap',
+    twitter: '@instaswap_io',
+  },
   cFK6mYjpajcwPDZ7JUsac8XUoVSJnhjL43ZMZW7YoN8HE4dD8: {
     name: 'ShapeShift',
     twitter: '@ShapeShift',
