@@ -36,7 +36,7 @@
   "dependencies": {
     "@chainflip/utils": "2.3.0-dev.4",
     "bignumber.js": "^11.1.5",
-    "ioredis": "^5.11.1",
+    "ioredis": "^6.0.0",
     "zod": "^3.25.75"
   }
 }
