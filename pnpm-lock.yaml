@@ -219,8 +219,8 @@ importers:
   packages/solana:
     dependencies:
       '@chainflip/scale':
-        specifier: 2.3.0-dev.1
-        version: 2.3.0-dev.1
+        specifier: 2.3.1
+        version: 2.3.1
       '@chainflip/utils':
         specifier: 2.3.3
         version: 2.3.3
@@ -305,8 +305,8 @@ packages:
   '@chainflip/rpc@2.3.2':
     resolution: {integrity: sha512-sf8fbYNqv72Mla4nEj3uSeSkjmzKo7Qw+787C7vgXg6eL8exzSLxWnOkcYB+G9xOitsmDZtJNVyDEqh2XV+WzQ==}
 
-  '@chainflip/scale@2.3.0-dev.1':
-    resolution: {integrity: sha512-Qk1agHOt075QQ3QUtytEaiGe4fs210+4LgReLUCA+6hGvR4HbGRvM8xkuACExENLen+61A/114YK2w1O2hCvFQ==}
+  '@chainflip/scale@2.3.1':
+    resolution: {integrity: sha512-n9cLSfWCbzFlc9boXISn7fXjL60AVRG700h7rnANxdcIFdE6M2hCK5qCoMM6yMriY/1yUeVzp4tc8MUzNVyYUg==}
 
   '@chainflip/utils@2.3.0-dev.4':
     resolution: {integrity: sha512-CFm4D9VXqBPDTkGKijC3ksIKtE5HubK7QM0ZYSdzyqENn5ITNcnDpZu0NnL2D73e+8UeqMNZEZae59EXn8qEng==}
@@ -3550,9 +3550,9 @@ snapshots:
       '@chainflip/utils': 2.3.0-dev.4
       zod: 3.25.75
 
-  '@chainflip/scale@2.3.0-dev.1':
+  '@chainflip/scale@2.3.1':
     dependencies:
-      '@chainflip/utils': 2.3.0-dev.4
+      '@chainflip/utils': 2.3.3
       scale-ts: 1.6.1
 
   '@chainflip/utils@2.3.0-dev.4':
