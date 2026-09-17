@@ -78,8 +78,8 @@ importers:
   packages/bitcoin:
     dependencies:
       '@chainflip/utils':
-        specifier: 2.3.0-dev.4
-        version: 2.3.0-dev.4
+        specifier: 2.3.3
+        version: 2.3.3
       bignumber.js:
         specifier: ^11.1.5
         version: 11.1.5
@@ -96,11 +96,11 @@ importers:
   packages/chainspec:
     devDependencies:
       '@chainflip/rpc':
-        specifier: 2.3.0-dev.4
-        version: 2.3.0-dev.4
+        specifier: 2.3.2
+        version: 2.3.2
       '@chainflip/utils':
-        specifier: 2.3.0-dev.4
-        version: 2.3.0-dev.4
+        specifier: 2.3.3
+        version: 2.3.3
       '@polkadot/types':
         specifier: ^16.5.6
         version: 16.5.6
@@ -114,8 +114,8 @@ importers:
   packages/delegation:
     dependencies:
       '@chainflip/utils':
-        specifier: 2.3.0-dev.4
-        version: 2.3.0-dev.4
+        specifier: 2.3.3
+        version: 2.3.3
       scale-ts:
         specifier: ^1.6.1
         version: 1.6.1
@@ -144,8 +144,8 @@ importers:
   packages/extrinsics:
     devDependencies:
       '@chainflip/utils':
-        specifier: 2.3.0-dev.4
-        version: 2.3.0-dev.4
+        specifier: 2.3.3
+        version: 2.3.3
       '@polkadot/types':
         specifier: ^16.5.6
         version: 16.5.6
@@ -153,11 +153,11 @@ importers:
   packages/processor:
     dependencies:
       '@chainflip/rpc':
-        specifier: 2.3.0-dev.4
-        version: 2.3.0-dev.4
+        specifier: 2.3.2
+        version: 2.3.2
       '@chainflip/utils':
-        specifier: 2.3.0-dev.4
-        version: 2.3.0-dev.4
+        specifier: 2.3.3
+        version: 2.3.3
       zod:
         specifier: ^3.25.75
         version: 3.25.75
@@ -172,8 +172,8 @@ importers:
   packages/redis:
     dependencies:
       '@chainflip/utils':
-        specifier: 2.3.0-dev.4
-        version: 2.3.0-dev.4
+        specifier: 2.3.3
+        version: 2.3.3
       bignumber.js:
         specifier: ^11.1.5
         version: 11.1.5
@@ -206,8 +206,8 @@ importers:
   packages/scale:
     dependencies:
       '@chainflip/utils':
-        specifier: 2.3.0-dev.4
-        version: 2.3.0-dev.4
+        specifier: 2.3.3
+        version: 2.3.3
       scale-ts:
         specifier: ^1.6.1
         version: 1.6.1
@@ -222,8 +222,8 @@ importers:
         specifier: 2.3.0-dev.1
         version: 2.3.0-dev.1
       '@chainflip/utils':
-        specifier: 2.3.0-dev.4
-        version: 2.3.0-dev.4
+        specifier: 2.3.3
+        version: 2.3.3
       '@coral-xyz/anchor':
         specifier: ^0.32.1
         version: 0.32.1(bufferutil@4.0.9)(typescript@5.9.3)(utf-8-validate@5.0.10)
@@ -247,8 +247,8 @@ importers:
   packages/testing:
     dependencies:
       '@chainflip/utils':
-        specifier: 2.3.0-dev.4
-        version: 2.3.0-dev.4
+        specifier: 2.3.3
+        version: 2.3.3
       vitest:
         specifier: 4.0.18
         version: 4.0.18(@types/node@26.4.0)(@vitest/ui@4.0.18)(tsx@4.23.12)(yaml@2.9.0)
@@ -302,8 +302,8 @@ packages:
     resolution: {integrity: sha512-6zABk/ECA/QYSCQ1NGiVwwbQerUCZ+TQbp64Q3AgmfNvurHH0j8TtXa1qbShXA6qqkpAj4V5W8pP6mLe1mcMqA==}
     engines: {node: '>=18'}
 
-  '@chainflip/rpc@2.3.0-dev.4':
-    resolution: {integrity: sha512-YfMWjJGRYfdDUM+GDFsnlWWSfxCvFb0WxwR9kij89RdgTlV+CUMuZjcNA/ENrKWEnz6gShMMJaeJm3hURwBmiw==}
+  '@chainflip/rpc@2.3.2':
+    resolution: {integrity: sha512-sf8fbYNqv72Mla4nEj3uSeSkjmzKo7Qw+787C7vgXg6eL8exzSLxWnOkcYB+G9xOitsmDZtJNVyDEqh2XV+WzQ==}
 
   '@chainflip/scale@2.3.0-dev.1':
     resolution: {integrity: sha512-Qk1agHOt075QQ3QUtytEaiGe4fs210+4LgReLUCA+6hGvR4HbGRvM8xkuACExENLen+61A/114YK2w1O2hCvFQ==}
@@ -3545,7 +3545,7 @@ snapshots:
 
   '@bcoe/v8-coverage@1.0.2': {}
 
-  '@chainflip/rpc@2.3.0-dev.4':
+  '@chainflip/rpc@2.3.2':
     dependencies:
       '@chainflip/utils': 2.3.0-dev.4
       zod: 3.25.75
