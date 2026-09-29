@@ -273,6 +273,10 @@ export const brokerAliasMap: AccountAliasMap = {
     name: 'Xgram',
     twitter: null,
   },
+  cFJFanfys1ue9nnbq6srcd9o9w2pWWyqfG9R1rXu8shJBKBQn: {
+    name: 'EldoSwap',
+    twitter: null,
+  },
 } as const;
 
 export const lpAliasMap: AccountAliasMap = {
