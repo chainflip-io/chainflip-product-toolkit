@@ -32,7 +32,7 @@
     "prettier": "^3.9.6",
     "syncpack": "^15.3.3",
     "tsdown": "^0.22.14",
-    "tsx": "^4.23.12",
+    "tsx": "^4.23.13",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.68.0",
     "vite-tsconfig-paths": "^6.1.1",
