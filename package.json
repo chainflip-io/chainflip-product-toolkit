@@ -29,7 +29,7 @@
     "husky": "^9.1.7",
     "lint-staged": "^17.5.1",
     "micromatch": "^4.0.8",
-    "prettier": "^3.9.6",
+    "prettier": "^3.9.8",
     "syncpack": "^15.3.3",
     "tsdown": "^0.22.14",
     "tsx": "^4.23.13",
