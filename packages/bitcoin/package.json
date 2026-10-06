@@ -37,7 +37,7 @@
   "dependencies": {
     "@chainflip/utils": "2.3.3",
     "bignumber.js": "^11.1.5",
-    "bitcoinjs-lib": "7.0.1",
+    "bitcoinjs-lib": "7.0.2",
     "scale-ts": "^1.6.1",
     "zod": "^3.25.75"
   }
