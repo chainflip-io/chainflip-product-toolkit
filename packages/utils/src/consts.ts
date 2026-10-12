@@ -277,6 +277,10 @@ export const brokerAliasMap: AccountAliasMap = {
     name: 'EldoSwap',
     twitter: null,
   },
+  cFPN2ZL5YmHRBcfWvEFoKbGKFFVJR3nN95ym714GCPkASbNiX: {
+    name: 'Shieldz Swap',
+    twitter: '@shieldzcash',
+  },
 } as const;
 
 export const lpAliasMap: AccountAliasMap = {
