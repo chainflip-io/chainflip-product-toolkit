@@ -1,4 +1,3 @@
-import { reverseBytes } from '@chainflip/utils/bytes';
 import {
   getInternalAsset,
   type ChainflipChain,
@@ -36,7 +35,7 @@ const jsonString = z.string().transform((value) => JSON.parse(value) as unknown)
 
 const bitcoinDeposit = z
   .object({
-    tx_id: hexString.transform((value) => reverseBytes(value).slice(2)),
+    tx_id: hexString.transform((value) => value.slice(2)),
     vout: z.number().int(),
   })
   .transform((obj) => ({ ...obj, type: 'Bitcoin' as const }));

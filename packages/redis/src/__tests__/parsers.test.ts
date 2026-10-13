@@ -72,7 +72,7 @@ describe('depositSchema', () => {
       asset: 'Btc',
       deposit_chain_block_height: 4909710,
       deposit_details: {
-        tx_id: '8b7c674d563c4b7ceea9ea84fc2a1dfc1a302ecd2a7ef9fc5f04b9601594df66',
+        tx_id: '66df941560b9045ffcf97e2acd2e301afc1d2afc84eaa9ee7c4b3c564d677c8b',
         vout: 0,
         type: 'Bitcoin',
       },
