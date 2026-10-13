@@ -15,7 +15,7 @@
   },
   "devDependencies": {
     "@chainflip/utils": "2.3.3",
-    "@polkadot/types": "^16.5.6"
+    "@polkadot/types": "^17.0.1"
   },
   "files": [
     "dist"
