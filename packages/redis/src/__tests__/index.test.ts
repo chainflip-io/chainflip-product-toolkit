@@ -178,7 +178,7 @@ describe(RedisClient, () => {
             "asset": "Btc",
             "deposit_chain_block_height": 1234,
             "tx_refs": [
-              "3412",
+              "1234",
             ],
           },
         ]
