@@ -285,8 +285,19 @@ describe(findVaultSwapData, () => {
     ).toMatchSnapshot();
   });
 
-  it('throws parse errors', async () => {
+  it('returns null for JSON-RPC 2.0 responses with an unexpected transaction shape', async () => {
     mockFetch([{ id: 1, jsonrpc: '2.0', result: {} }]);
+
+    expect(
+      await findVaultSwapData(
+        'https://bitcoin.rpc',
+        '77a4dcda118d8cd4e537616effeac741ff60dbdb7af0b7f2f54a3a15c0556239',
+      ),
+    ).toBeNull();
+  });
+
+  it('throws parse errors', async () => {
+    mockFetch([{ id: 1, jsonrpc: '2.0', result: {}, error: 'oops' }]);
 
     await expect(
       findVaultSwapData(
@@ -312,11 +323,11 @@ describe(findVaultSwapData, () => {
                 {
                   "code": "invalid_type",
                   "expected": "object",
-                  "received": "undefined",
+                  "received": "string",
                   "path": [
                     "error"
                   ],
-                  "message": "Required"
+                  "message": "Expected object, received string"
                 }
               ],
               "name": "ZodError"
@@ -326,11 +337,11 @@ describe(findVaultSwapData, () => {
                 {
                   "code": "invalid_type",
                   "expected": "null",
-                  "received": "undefined",
+                  "received": "string",
                   "path": [
                     "error"
                   ],
-                  "message": "Required"
+                  "message": "Expected null, received string"
                 }
               ],
               "name": "ZodError"
