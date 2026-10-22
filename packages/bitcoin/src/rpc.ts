@@ -54,7 +54,6 @@ const responseSchemas = {
   getblock: blockSchema,
 } as const;
 
-// bitcoin core >= v28 omits `error` on success and `result` on failure for JSON-RPC 2.0 requests
 const rpcResponse = z.union([
   z.object({
     result: z.null().optional(),
