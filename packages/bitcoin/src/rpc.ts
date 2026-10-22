@@ -55,8 +55,11 @@ const responseSchemas = {
 } as const;
 
 const rpcResponse = z.union([
-  z.object({ result: z.null(), error: z.object({ code: z.number(), message: z.string() }) }),
-  z.object({ result: z.unknown(), error: z.null() }),
+  z.object({
+    result: z.null().optional(),
+    error: z.object({ code: z.number(), message: z.string() }),
+  }),
+  z.object({ result: z.unknown(), error: z.null().optional() }),
 ]);
 
 export const makeRequest = async <T extends keyof RpcRequest & keyof typeof responseSchemas>(
