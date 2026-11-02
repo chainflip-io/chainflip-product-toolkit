@@ -285,6 +285,10 @@ export const brokerAliasMap: AccountAliasMap = {
     name: 'CrossEarn',
     twitter: null,
   },
+  cFLdjxFLht55wU1TN4SPWYbXLYicuwFscTAtEchCJsS86De1B: {
+    name: 'depouch',
+    twitter: '@depouch',
+  },
 } as const;
 
 export const lpAliasMap: AccountAliasMap = {
