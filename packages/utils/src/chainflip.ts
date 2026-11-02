@@ -246,14 +246,14 @@ export const chainConstants = {
     assets: ['SOL', 'USDC', 'USDT'],
     gasAsset: 'Sol',
     addressType: 'Sol',
-    blockTimeSeconds: 0.8,
+    blockTimeSeconds: 0.2,
   },
   Assethub: {
     chainflipAssets: ['HubDot', 'HubUsdt', 'HubUsdc'],
     assets: ['DOT', 'USDT', 'USDC'],
     gasAsset: 'HubDot',
     addressType: 'Hub',
-    blockTimeSeconds: 3,
+    blockTimeSeconds: 2,
   },
   Tron: {
     chainflipAssets: ['Trx', 'TrxUsdt'],
