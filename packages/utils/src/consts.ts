@@ -289,6 +289,10 @@ export const brokerAliasMap: AccountAliasMap = {
     name: 'depouch',
     twitter: '@depouch',
   },
+  cFLEx1vooz7BN5HCA4pVuobg9SixmhEGuGirHddWWLKYyLT3u: {
+    name: 'Quantron.one',
+    twitter: null,
+  },
 } as const;
 
 export const lpAliasMap: AccountAliasMap = {
