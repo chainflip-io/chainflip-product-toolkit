@@ -124,7 +124,7 @@ const fetchTransfers = async (
 
     const transactions = await conn.getTransactions(
       sigs.map((s) => s.signature),
-      { maxSupportedTransactionVersion: 0 },
+      { maxSupportedTransactionVersion: 1 },
     );
 
     results.push(
@@ -292,7 +292,7 @@ export const findVaultSwapData = async (
 
   const tx = await connection.getParsedTransaction(signature, {
     commitment: 'confirmed',
-    maxSupportedTransactionVersion: 0,
+    maxSupportedTransactionVersion: 1,
   });
 
   if (!tx) return null;

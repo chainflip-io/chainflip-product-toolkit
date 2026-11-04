@@ -28,6 +28,7 @@ import simple from './fixtures/simple.json';
 import solusdc from './fixtures/solusdc.json';
 import solusdc2 from './fixtures/solusdc2.json';
 import { swapNative } from './fixtures/swapNative';
+import swapNativeV1 from './fixtures/swapNativeV1.json';
 import swapTokenDevnet from './fixtures/swapTokenDevnet.json';
 import unsorted from './fixtures/unsorted.json';
 import vaultSwapCcmRefund from './fixtures/vaultSwapCcmRefund.json';
@@ -486,6 +487,22 @@ describe(findVaultSwapData, () => {
         },
       }
     `);
+  });
+
+  it('gets the vault swap data for version 1 transactions', async () => {
+    const mock = mockFetchWithResponses([swapNativeV1]);
+
+    const data = await findVaultSwapData(
+      'https://solana.rpc',
+      '4zJVjnK6wkL1axZ1DDjyZkxj6HsbnjwKM7EKBuTYABsofYVT44B1zt13oNuYTnoJNRuKbk2MFAN5w9MZc5DcwuEb',
+    );
+
+    const body = JSON.parse(mock.mock.calls[0][1]!.body as string) as {
+      params: [string, { maxSupportedTransactionVersion: number }];
+    };
+    expect(body.params[1].maxSupportedTransactionVersion).toBe(1);
+    expect(data).toMatchObject({ depositChainBlockHeight: 464976586, inputAsset: 'Sol' });
+    expect(data).toMatchSnapshot();
   });
 
   it('handles null tx response', async () => {
