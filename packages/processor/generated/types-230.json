@@ -2630,6 +2630,1403 @@
     "BscInitialized": {
       "type": "primitive",
       "value": "null"
+    },
+    "ElectionInstanceVotesRejected": {
+      "type": "struct",
+      "fields": {
+        "instance": {
+          "type": "enum",
+          "$name": "cfTraitsElectionsElectionInstance",
+          "values": [
+            {
+              "name": "Generic",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "Chain",
+              "value": {
+                "type": "enum",
+                "$name": "cfPrimitivesChainsForeignChain",
+                "values": [
+                  {
+                    "name": "__Unused0",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  },
+                  {
+                    "name": "Ethereum",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  },
+                  {
+                    "name": "Polkadot",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  },
+                  {
+                    "name": "Bitcoin",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  },
+                  {
+                    "name": "Arbitrum",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  },
+                  {
+                    "name": "Solana",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  },
+                  {
+                    "name": "Assethub",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  },
+                  {
+                    "name": "Tron",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  },
+                  {
+                    "name": "Bsc",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "error": {
+          "type": "enum",
+          "$name": "spRuntimeDispatchError",
+          "values": [
+            {
+              "name": "Other",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "CannotLookup",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "BadOrigin",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "Module",
+              "value": {
+                "type": "struct",
+                "$name": "SpRuntimeModuleError",
+                "fields": {
+                  "index": {
+                    "type": "primitive",
+                    "value": "u8"
+                  },
+                  "error": {
+                    "type": "array",
+                    "value": {
+                      "type": "primitive",
+                      "value": "u8"
+                    },
+                    "length": 4
+                  }
+                }
+              }
+            },
+            {
+              "name": "ConsumerRemaining",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "NoProviders",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "TooManyConsumers",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "Token",
+              "value": {
+                "type": "enum",
+                "$name": "spRuntimeTokenError",
+                "values": [
+                  {
+                    "name": "FundsUnavailable",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  },
+                  {
+                    "name": "OnlyProvider",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  },
+                  {
+                    "name": "BelowMinimum",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  },
+                  {
+                    "name": "CannotCreate",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  },
+                  {
+                    "name": "UnknownAsset",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  },
+                  {
+                    "name": "Frozen",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  },
+                  {
+                    "name": "Unsupported",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  },
+                  {
+                    "name": "CannotCreateHold",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  },
+                  {
+                    "name": "NotExpendable",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  },
+                  {
+                    "name": "Blocked",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Arithmetic",
+              "value": {
+                "type": "enum",
+                "$name": "spArithmeticArithmeticError",
+                "values": [
+                  {
+                    "name": "Underflow",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  },
+                  {
+                    "name": "Overflow",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  },
+                  {
+                    "name": "DivisionByZero",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Transactional",
+              "value": {
+                "type": "enum",
+                "$name": "spRuntimeTransactionalError",
+                "values": [
+                  {
+                    "name": "LimitReached",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  },
+                  {
+                    "name": "NoLayer",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Exhausted",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "Corruption",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "Unavailable",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "RootNotAllowed",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "Trie",
+              "value": {
+                "type": "enum",
+                "$name": "spRuntimeProvingTrieTrieError",
+                "values": [
+                  {
+                    "name": "InvalidStateRoot",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  },
+                  {
+                    "name": "IncompleteDatabase",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  },
+                  {
+                    "name": "ValueAtIncompleteKey",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  },
+                  {
+                    "name": "DecoderError",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  },
+                  {
+                    "name": "InvalidHash",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  },
+                  {
+                    "name": "DuplicateKey",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  },
+                  {
+                    "name": "ExtraneousNode",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  },
+                  {
+                    "name": "ExtraneousValue",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  },
+                  {
+                    "name": "ExtraneousHashReference",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  },
+                  {
+                    "name": "InvalidChildReference",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  },
+                  {
+                    "name": "ValueMismatch",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  },
+                  {
+                    "name": "IncompleteProof",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  },
+                  {
+                    "name": "RootMismatch",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  },
+                  {
+                    "name": "DecodeError",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    },
+    "PalletConfigUpdated": {
+      "type": "struct",
+      "fields": {
+        "update": {
+          "type": "enum",
+          "$name": "palletCfEnvironmentPalletConfigUpdate",
+          "values": [
+            {
+              "name": "ElectionVoteBatching",
+              "value": {
+                "type": "struct",
+                "fields": {
+                  "disabled": {
+                    "type": "primitive",
+                    "value": "bool"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "FailedDepositRecovered": {
+      "type": "struct",
+      "fields": {
+        "broker": {
+          "type": "primitive",
+          "value": "AccountId32"
+        },
+        "recoveryAccount": {
+          "type": "primitive",
+          "value": "AccountId32"
+        },
+        "asset": {
+          "type": "enum",
+          "$name": "cfPrimitivesChainsAssetsAnyAsset",
+          "values": [
+            {
+              "name": "__Unused0",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "Eth",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "Flip",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "Usdc",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "Dot",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "Btc",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "ArbEth",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "ArbUsdc",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "Usdt",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "Sol",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "SolUsdc",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "HubDot",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "HubUsdt",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "HubUsdc",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "Wbtc",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "ArbUsdt",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "SolUsdt",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "Trx",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "TrxUsdt",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "Bnb",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "BscUsdt",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "Cbbtc",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            }
+          ]
+        },
+        "amount": {
+          "type": "primitive",
+          "value": "u128"
+        },
+        "outcome": {
+          "type": "enum",
+          "$name": "cfTraitsFailedDepositRecoveryOutcome",
+          "values": [
+            {
+              "name": "Egressed",
+              "value": {
+                "type": "struct",
+                "fields": {
+                  "egressId": {
+                    "type": "tuple",
+                    "values": [
+                      {
+                        "type": "enum",
+                        "$name": "cfPrimitivesChainsForeignChain",
+                        "values": [
+                          {
+                            "name": "__Unused0",
+                            "value": {
+                              "type": "primitive",
+                              "value": "null"
+                            }
+                          },
+                          {
+                            "name": "Ethereum",
+                            "value": {
+                              "type": "primitive",
+                              "value": "null"
+                            }
+                          },
+                          {
+                            "name": "Polkadot",
+                            "value": {
+                              "type": "primitive",
+                              "value": "null"
+                            }
+                          },
+                          {
+                            "name": "Bitcoin",
+                            "value": {
+                              "type": "primitive",
+                              "value": "null"
+                            }
+                          },
+                          {
+                            "name": "Arbitrum",
+                            "value": {
+                              "type": "primitive",
+                              "value": "null"
+                            }
+                          },
+                          {
+                            "name": "Solana",
+                            "value": {
+                              "type": "primitive",
+                              "value": "null"
+                            }
+                          },
+                          {
+                            "name": "Assethub",
+                            "value": {
+                              "type": "primitive",
+                              "value": "null"
+                            }
+                          },
+                          {
+                            "name": "Tron",
+                            "value": {
+                              "type": "primitive",
+                              "value": "null"
+                            }
+                          },
+                          {
+                            "name": "Bsc",
+                            "value": {
+                              "type": "primitive",
+                              "value": "null"
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "type": "primitive",
+                        "value": "u64"
+                      }
+                    ]
+                  },
+                  "destination": {
+                    "type": "enum",
+                    "$name": "cfChainsAddressForeignChainAddress",
+                    "values": [
+                      {
+                        "name": "Eth",
+                        "value": {
+                          "type": "primitive",
+                          "value": "H160"
+                        }
+                      },
+                      {
+                        "name": "Dot",
+                        "value": {
+                          "type": "array",
+                          "value": {
+                            "type": "primitive",
+                            "value": "u8"
+                          },
+                          "length": 32
+                        }
+                      },
+                      {
+                        "name": "Btc",
+                        "value": {
+                          "type": "enum",
+                          "$name": "cfChainsBtcScriptPubkey",
+                          "values": [
+                            {
+                              "name": "P2PKH",
+                              "value": {
+                                "type": "array",
+                                "value": {
+                                  "type": "primitive",
+                                  "value": "u8"
+                                },
+                                "length": 20
+                              }
+                            },
+                            {
+                              "name": "P2SH",
+                              "value": {
+                                "type": "array",
+                                "value": {
+                                  "type": "primitive",
+                                  "value": "u8"
+                                },
+                                "length": 20
+                              }
+                            },
+                            {
+                              "name": "P2WPKH",
+                              "value": {
+                                "type": "array",
+                                "value": {
+                                  "type": "primitive",
+                                  "value": "u8"
+                                },
+                                "length": 20
+                              }
+                            },
+                            {
+                              "name": "P2WSH",
+                              "value": {
+                                "type": "array",
+                                "value": {
+                                  "type": "primitive",
+                                  "value": "u8"
+                                },
+                                "length": 32
+                              }
+                            },
+                            {
+                              "name": "Taproot",
+                              "value": {
+                                "type": "array",
+                                "value": {
+                                  "type": "primitive",
+                                  "value": "u8"
+                                },
+                                "length": 32
+                              }
+                            },
+                            {
+                              "name": "OtherSegwit",
+                              "value": {
+                                "type": "struct",
+                                "fields": {
+                                  "version": {
+                                    "type": "primitive",
+                                    "value": "u8"
+                                  },
+                                  "program": {
+                                    "type": "primitive",
+                                    "value": "Bytes"
+                                  }
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "name": "Arb",
+                        "value": {
+                          "type": "primitive",
+                          "value": "H160"
+                        }
+                      },
+                      {
+                        "name": "Sol",
+                        "value": {
+                          "type": "array",
+                          "value": {
+                            "type": "primitive",
+                            "value": "u8"
+                          },
+                          "length": 32
+                        }
+                      },
+                      {
+                        "name": "Hub",
+                        "value": {
+                          "type": "array",
+                          "value": {
+                            "type": "primitive",
+                            "value": "u8"
+                          },
+                          "length": 32
+                        }
+                      },
+                      {
+                        "name": "Tron",
+                        "value": {
+                          "type": "primitive",
+                          "value": "H160"
+                        }
+                      },
+                      {
+                        "name": "Bsc",
+                        "value": {
+                          "type": "primitive",
+                          "value": "H160"
+                        }
+                      }
+                    ]
+                  },
+                  "egressAmount": {
+                    "type": "primitive",
+                    "value": "u128"
+                  },
+                  "feeWithheld": {
+                    "type": "primitive",
+                    "value": "u128"
+                  }
+                }
+              }
+            },
+            {
+              "name": "Credited",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            }
+          ]
+        },
+        "reference": {
+          "type": "primitive",
+          "value": "Bytes"
+        }
+      }
+    },
+    "FailedDepositRecoveryFailed": {
+      "type": "struct",
+      "fields": {
+        "broker": {
+          "type": "primitive",
+          "value": "AccountId32"
+        },
+        "asset": {
+          "type": "enum",
+          "$name": "cfPrimitivesChainsAssetsAnyAsset",
+          "values": [
+            {
+              "name": "__Unused0",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "Eth",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "Flip",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "Usdc",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "Dot",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "Btc",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "ArbEth",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "ArbUsdc",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "Usdt",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "Sol",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "SolUsdc",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "HubDot",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "HubUsdt",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "HubUsdc",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "Wbtc",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "ArbUsdt",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "SolUsdt",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "Trx",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "TrxUsdt",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "Bnb",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "BscUsdt",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "Cbbtc",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            }
+          ]
+        },
+        "amount": {
+          "type": "primitive",
+          "value": "u128"
+        },
+        "reference": {
+          "type": "primitive",
+          "value": "Bytes"
+        },
+        "error": {
+          "type": "enum",
+          "$name": "spRuntimeDispatchError",
+          "values": [
+            {
+              "name": "Other",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "CannotLookup",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "BadOrigin",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "Module",
+              "value": {
+                "type": "struct",
+                "$name": "SpRuntimeModuleError",
+                "fields": {
+                  "index": {
+                    "type": "primitive",
+                    "value": "u8"
+                  },
+                  "error": {
+                    "type": "array",
+                    "value": {
+                      "type": "primitive",
+                      "value": "u8"
+                    },
+                    "length": 4
+                  }
+                }
+              }
+            },
+            {
+              "name": "ConsumerRemaining",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "NoProviders",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "TooManyConsumers",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "Token",
+              "value": {
+                "type": "enum",
+                "$name": "spRuntimeTokenError",
+                "values": [
+                  {
+                    "name": "FundsUnavailable",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  },
+                  {
+                    "name": "OnlyProvider",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  },
+                  {
+                    "name": "BelowMinimum",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  },
+                  {
+                    "name": "CannotCreate",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  },
+                  {
+                    "name": "UnknownAsset",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  },
+                  {
+                    "name": "Frozen",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  },
+                  {
+                    "name": "Unsupported",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  },
+                  {
+                    "name": "CannotCreateHold",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  },
+                  {
+                    "name": "NotExpendable",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  },
+                  {
+                    "name": "Blocked",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Arithmetic",
+              "value": {
+                "type": "enum",
+                "$name": "spArithmeticArithmeticError",
+                "values": [
+                  {
+                    "name": "Underflow",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  },
+                  {
+                    "name": "Overflow",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  },
+                  {
+                    "name": "DivisionByZero",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Transactional",
+              "value": {
+                "type": "enum",
+                "$name": "spRuntimeTransactionalError",
+                "values": [
+                  {
+                    "name": "LimitReached",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  },
+                  {
+                    "name": "NoLayer",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Exhausted",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "Corruption",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "Unavailable",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "RootNotAllowed",
+              "value": {
+                "type": "primitive",
+                "value": "null"
+              }
+            },
+            {
+              "name": "Trie",
+              "value": {
+                "type": "enum",
+                "$name": "spRuntimeProvingTrieTrieError",
+                "values": [
+                  {
+                    "name": "InvalidStateRoot",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  },
+                  {
+                    "name": "IncompleteDatabase",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  },
+                  {
+                    "name": "ValueAtIncompleteKey",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  },
+                  {
+                    "name": "DecoderError",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  },
+                  {
+                    "name": "InvalidHash",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  },
+                  {
+                    "name": "DuplicateKey",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  },
+                  {
+                    "name": "ExtraneousNode",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  },
+                  {
+                    "name": "ExtraneousValue",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  },
+                  {
+                    "name": "ExtraneousHashReference",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  },
+                  {
+                    "name": "InvalidChildReference",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  },
+                  {
+                    "name": "ValueMismatch",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  },
+                  {
+                    "name": "IncompleteProof",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  },
+                  {
+                    "name": "RootMismatch",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  },
+                  {
+                    "name": "DecodeError",
+                    "value": {
+                      "type": "primitive",
+                      "value": "null"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
     }
   },
   "Flip": {
@@ -19984,6 +21381,19 @@
               }
             }
           ]
+        }
+      }
+    },
+    "RecoveryAccountLinked": {
+      "type": "struct",
+      "fields": {
+        "broker": {
+          "type": "primitive",
+          "value": "AccountId32"
+        },
+        "recoveryAccount": {
+          "type": "primitive",
+          "value": "AccountId32"
         }
       }
     }
@@ -42400,7 +43810,7 @@
               }
             },
             {
-              "name": "SetMinimumLimitOrderAmount",
+              "name": "SetMinimumOrderAmount",
               "value": {
                 "type": "struct",
                 "fields": {
@@ -63112,351 +64522,17 @@
           "$name": "palletCfTradingStrategyTradingStrategy",
           "values": [
             {
-              "name": "TickZeroCentered",
+              "name": "__Unused0",
               "value": {
-                "type": "struct",
-                "fields": {
-                  "spreadTick": {
-                    "type": "primitive",
-                    "value": "i32"
-                  },
-                  "baseAsset": {
-                    "type": "enum",
-                    "$name": "cfPrimitivesChainsAssetsAnyAsset",
-                    "values": [
-                      {
-                        "name": "__Unused0",
-                        "value": {
-                          "type": "primitive",
-                          "value": "null"
-                        }
-                      },
-                      {
-                        "name": "Eth",
-                        "value": {
-                          "type": "primitive",
-                          "value": "null"
-                        }
-                      },
-                      {
-                        "name": "Flip",
-                        "value": {
-                          "type": "primitive",
-                          "value": "null"
-                        }
-                      },
-                      {
-                        "name": "Usdc",
-                        "value": {
-                          "type": "primitive",
-                          "value": "null"
-                        }
-                      },
-                      {
-                        "name": "Dot",
-                        "value": {
-                          "type": "primitive",
-                          "value": "null"
-                        }
-                      },
-                      {
-                        "name": "Btc",
-                        "value": {
-                          "type": "primitive",
-                          "value": "null"
-                        }
-                      },
-                      {
-                        "name": "ArbEth",
-                        "value": {
-                          "type": "primitive",
-                          "value": "null"
-                        }
-                      },
-                      {
-                        "name": "ArbUsdc",
-                        "value": {
-                          "type": "primitive",
-                          "value": "null"
-                        }
-                      },
-                      {
-                        "name": "Usdt",
-                        "value": {
-                          "type": "primitive",
-                          "value": "null"
-                        }
-                      },
-                      {
-                        "name": "Sol",
-                        "value": {
-                          "type": "primitive",
-                          "value": "null"
-                        }
-                      },
-                      {
-                        "name": "SolUsdc",
-                        "value": {
-                          "type": "primitive",
-                          "value": "null"
-                        }
-                      },
-                      {
-                        "name": "HubDot",
-                        "value": {
-                          "type": "primitive",
-                          "value": "null"
-                        }
-                      },
-                      {
-                        "name": "HubUsdt",
-                        "value": {
-                          "type": "primitive",
-                          "value": "null"
-                        }
-                      },
-                      {
-                        "name": "HubUsdc",
-                        "value": {
-                          "type": "primitive",
-                          "value": "null"
-                        }
-                      },
-                      {
-                        "name": "Wbtc",
-                        "value": {
-                          "type": "primitive",
-                          "value": "null"
-                        }
-                      },
-                      {
-                        "name": "ArbUsdt",
-                        "value": {
-                          "type": "primitive",
-                          "value": "null"
-                        }
-                      },
-                      {
-                        "name": "SolUsdt",
-                        "value": {
-                          "type": "primitive",
-                          "value": "null"
-                        }
-                      },
-                      {
-                        "name": "Trx",
-                        "value": {
-                          "type": "primitive",
-                          "value": "null"
-                        }
-                      },
-                      {
-                        "name": "TrxUsdt",
-                        "value": {
-                          "type": "primitive",
-                          "value": "null"
-                        }
-                      },
-                      {
-                        "name": "Bnb",
-                        "value": {
-                          "type": "primitive",
-                          "value": "null"
-                        }
-                      },
-                      {
-                        "name": "BscUsdt",
-                        "value": {
-                          "type": "primitive",
-                          "value": "null"
-                        }
-                      },
-                      {
-                        "name": "Cbbtc",
-                        "value": {
-                          "type": "primitive",
-                          "value": "null"
-                        }
-                      }
-                    ]
-                  }
-                }
+                "type": "primitive",
+                "value": "null"
               }
             },
             {
-              "name": "SimpleBuySell",
+              "name": "__Unused1",
               "value": {
-                "type": "struct",
-                "fields": {
-                  "buyTick": {
-                    "type": "primitive",
-                    "value": "i32"
-                  },
-                  "sellTick": {
-                    "type": "primitive",
-                    "value": "i32"
-                  },
-                  "baseAsset": {
-                    "type": "enum",
-                    "$name": "cfPrimitivesChainsAssetsAnyAsset",
-                    "values": [
-                      {
-                        "name": "__Unused0",
-                        "value": {
-                          "type": "primitive",
-                          "value": "null"
-                        }
-                      },
-                      {
-                        "name": "Eth",
-                        "value": {
-                          "type": "primitive",
-                          "value": "null"
-                        }
-                      },
-                      {
-                        "name": "Flip",
-                        "value": {
-                          "type": "primitive",
-                          "value": "null"
-                        }
-                      },
-                      {
-                        "name": "Usdc",
-                        "value": {
-                          "type": "primitive",
-                          "value": "null"
-                        }
-                      },
-                      {
-                        "name": "Dot",
-                        "value": {
-                          "type": "primitive",
-                          "value": "null"
-                        }
-                      },
-                      {
-                        "name": "Btc",
-                        "value": {
-                          "type": "primitive",
-                          "value": "null"
-                        }
-                      },
-                      {
-                        "name": "ArbEth",
-                        "value": {
-                          "type": "primitive",
-                          "value": "null"
-                        }
-                      },
-                      {
-                        "name": "ArbUsdc",
-                        "value": {
-                          "type": "primitive",
-                          "value": "null"
-                        }
-                      },
-                      {
-                        "name": "Usdt",
-                        "value": {
-                          "type": "primitive",
-                          "value": "null"
-                        }
-                      },
-                      {
-                        "name": "Sol",
-                        "value": {
-                          "type": "primitive",
-                          "value": "null"
-                        }
-                      },
-                      {
-                        "name": "SolUsdc",
-                        "value": {
-                          "type": "primitive",
-                          "value": "null"
-                        }
-                      },
-                      {
-                        "name": "HubDot",
-                        "value": {
-                          "type": "primitive",
-                          "value": "null"
-                        }
-                      },
-                      {
-                        "name": "HubUsdt",
-                        "value": {
-                          "type": "primitive",
-                          "value": "null"
-                        }
-                      },
-                      {
-                        "name": "HubUsdc",
-                        "value": {
-                          "type": "primitive",
-                          "value": "null"
-                        }
-                      },
-                      {
-                        "name": "Wbtc",
-                        "value": {
-                          "type": "primitive",
-                          "value": "null"
-                        }
-                      },
-                      {
-                        "name": "ArbUsdt",
-                        "value": {
-                          "type": "primitive",
-                          "value": "null"
-                        }
-                      },
-                      {
-                        "name": "SolUsdt",
-                        "value": {
-                          "type": "primitive",
-                          "value": "null"
-                        }
-                      },
-                      {
-                        "name": "Trx",
-                        "value": {
-                          "type": "primitive",
-                          "value": "null"
-                        }
-                      },
-                      {
-                        "name": "TrxUsdt",
-                        "value": {
-                          "type": "primitive",
-                          "value": "null"
-                        }
-                      },
-                      {
-                        "name": "Bnb",
-                        "value": {
-                          "type": "primitive",
-                          "value": "null"
-                        }
-                      },
-                      {
-                        "name": "BscUsdt",
-                        "value": {
-                          "type": "primitive",
-                          "value": "null"
-                        }
-                      },
-                      {
-                        "name": "Cbbtc",
-                        "value": {
-                          "type": "primitive",
-                          "value": "null"
-                        }
-                      }
-                    ]
-                  }
-                }
+                "type": "primitive",
+                "value": "null"
               }
             },
             {

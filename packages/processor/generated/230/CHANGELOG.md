@@ -91,6 +91,10 @@ Environment:
   - AddedNewEthAsset:
     - 0: added (Environment.AddedNewEthAsset.0.5)
   - BscInitialized: added
+  - ElectionInstanceVotesRejected: added
+  - FailedDepositRecovered: added
+  - FailedDepositRecoveryFailed: added
+  - PalletConfigUpdated: added
   - RuntimeSafeModeUpdated:
     - safeMode: added (Environment.RuntimeSafeModeUpdated.safeMode.2.broadcastBsc)
   - UpdatedEthAsset:
@@ -257,6 +261,7 @@ Swapping:
   - FlipTransferToGatewaySkipped: added
   - PalletConfigUpdated:
     - update: added (Swapping.PalletConfigUpdated.update.0.asset.19)
+  - RecoveryAccountLinked: added
   - RefundEgressIgnored:
     - asset: added (Swapping.RefundEgressIgnored.asset.19)
   - RefundEgressScheduled:
@@ -314,7 +319,7 @@ TradingStrategy:
   - PalletConfigUpdated:
     - update: added (TradingStrategy.PalletConfigUpdated.update.0.asset.19)
   - StrategyDeployed:
-    - strategy: added (TradingStrategy.StrategyDeployed.strategy.0.baseAsset.19)
+    - strategy: changed (TradingStrategy.StrategyDeployed.strategy.0.name)
 
 TronIngressEgress:
   - BatchBroadcastRequested:
