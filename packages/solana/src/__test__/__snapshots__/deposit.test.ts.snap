@@ -1,5 +1,30 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
+exports[`findVaultSwapData > gets the vault swap data for version 1 transactions 1`] = `
+{
+  "affiliateFees": [],
+  "amount": 404556758n,
+  "brokerFee": {
+    "account": "cFKpid38PmmZ8V81AHaZAhHzzpRbsf7Xw5PYt5ajTXAUvHoTQ",
+    "commissionBps": 10,
+  },
+  "ccmDepositMetadata": null,
+  "dcaParams": null,
+  "depositChainBlockHeight": 464976586,
+  "destinationAddress": "bc1p7qwdk76uzt7fjvpa6vkmkug7ep024f58uc05qe3upgadq456dp3s6yljy3",
+  "inputAsset": "Sol",
+  "maxBoostFee": 0,
+  "outputAsset": "Btc",
+  "refundParams": {
+    "maxOraclePriceSlippage": 100,
+    "minPrice": 32350984905540540659926487303145636n,
+    "refundAddress": "CWqHByx93jjXdGTdL5iycSzAwawtWJBG3bvfvYwcnReE",
+    "refundCcmMetadata": null,
+    "retryDuration": 100,
+  },
+}
+`;
+
 exports[`findVaultSwapData > handles swap native for ArbEth on devnet 1`] = `
 {
   "affiliateFees": [],
