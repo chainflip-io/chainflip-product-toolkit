@@ -29,13 +29,27 @@ export const smartContractAliasMap = {
 };
 
 export const brokerAliasMap: AccountAliasMap = {
-  cFLRQDfEdmnv6d2XfHJNRBQHi4fruPMReLSfvB8WWD2ENbqj7: {
-    name: 'Chainflip Swapping',
-    twitter: '@Chainflip',
+  cFPF5ckNqZLDJPQ46TLziGD88nzkpcmx4rW8hSRX7nJMfFLRU: {
+    name: '7.Exchange',
+    twitter: '@7exchangeDeFi',
   },
-  cFJySAo3RbrtKWWb9J86jqnfTjpDCXAQ4bcJR9kt6S37i7eey: {
-    name: 'swap.chainflip.io',
-    twitter: '@Chainflip',
+  cFNoff1DeVqMhAM53DqQK3KJWuh7QaAthHv8uYU5aMchwaCGo: { name: 'Aetheria', twitter: '@Aetheria_App' },
+  cFJXSB95JsKkD7d1Brry8WxGDhGvarE9zgkdUP2Zdor4uFtKP: {
+    name: 'Allblu',
+    twitter: null,
+  },
+  cFMbRyKPPQCUFUnkro1fTXpjgezXCR85H1dUT16D4eWWiU8bw: { name: 'Asgardex', twitter: '@asgardex' },
+  cFNDRBnuiDk9eUCFqwno6iubBTesGcfhDGq8CkoKgonjsFCgX: { name: 'Asgardex', twitter: '@asgardex' },
+  cFNdyY1j7jKqgJPLg6UH1aaA4N3s9S52Zyxo8nATYxkovtHUr: { name: 'Babylon', twitter: '@bAPElon' },
+  cFNXP6GCSVcHAWfoEBsWTQAXQs3nCxnw8EsSxz6KAernHRpAf: {
+    name: 'Binance Web3 Wallet',
+    twitter: '@BinanceWallet',
+  },
+  cFL5wdCvCpPn7iKTgBCAbaxTv7VZjZ1sgeuWtjn4ST8t7AYBG: { name: 'BiorLabs', twitter: '@BiorLabs' },
+  cFJsX7ECMDciU1Ce6VTmNz5TwgkiTMC3j9XVqmbf3eaxSyjXs: { name: 'BitArch', twitter: '@Bit_Arch' },
+  cFPDEjR88FyRi7V5NDatoMAyMCczgiyoXwiJA4LZLrR7e6RW4: {
+    name: 'Bitget',
+    twitter: '@BitgetWallet',
   },
   cFN1AfNQBEBCkuNAV37WWw34bCAdiW5e5sHTY4LaaRWiBSh7B: {
     name: 'BlockSwap',
@@ -45,92 +59,6 @@ export const brokerAliasMap: AccountAliasMap = {
     name: 'Broker as a Service',
     twitter: '@chainflipbaas',
   },
-  cFLuWQcabsKpegned1ka3Qad6cTATzpgwLYZK8U5spmkG9MEf: {
-    name: 'THORWallet',
-    twitter: '@THORWalletDEX',
-  },
-  cFJjZKzA5rUTb9qkZMGfec7piCpiAQKr15B4nALzriMGQL8BE: { name: 'THORSwap', twitter: '@THORSwap' },
-  cFLdvBS9Gq9iqB8Zdb5cmnWgmhqvEojQYGMBquDz7xRiSvsJV: { name: 'THORSwap UI', twitter: '@THORSwap' },
-  cFJWWedhJmnsk3P9jEmCfbmgmg62ZpA7LT5WCpwLXEzXuRuc3: {
-    name: 'HoudiniSwap',
-    twitter: '@HoudiniSwap',
-  },
-  cFKYhAZR1ycHnXLC1PVttiAMVRK489rKhfRXPA4v9yG4WdzqP: {
-    name: 'El Dorado',
-    twitter: '@eldorado_market',
-  },
-  cFN3CjHtr3QdUymjhQPFgHzF3WiNNQy36DJxhLwet269qPWaQ: {
-    name: 'SwapBot',
-    twitter: '@DragonLabsAsia',
-  },
-  cFJsX7ECMDciU1Ce6VTmNz5TwgkiTMC3j9XVqmbf3eaxSyjXs: { name: 'BitArch', twitter: '@Bit_Arch' },
-  cFNx21kQWmr9wsqq29zWM7RpDBKv4bctudEUE6J22Hd4NUUHR: { name: 'Rango', twitter: '@RangoExchange' },
-  cFNdyY1j7jKqgJPLg6UH1aaA4N3s9S52Zyxo8nATYxkovtHUr: { name: 'Babylon', twitter: '@bAPElon' },
-  cFNmhAeG1L7f4KrbPvsZyUM8xsNmVbJ51AKv4zgHRaTrF4kBf: {
-    name: 'Monkey DEX',
-    twitter: '@monkeygodlabs',
-  },
-  cFLraJ446JFyGxmXhEwbcFQrWoWbGL3n18giQ99ktVFFP2LaJ: {
-    name: 'Talisman',
-    twitter: '@wearetalisman',
-  },
-  cFJ2BuJiZyb7WdwwZSKYHSrchscNDGAZUxePoLJJGXjGduzGa: {
-    name: 'Talisman',
-    twitter: '@wearetalisman',
-  },
-  cFN122fMqitRHRxhVnPHuGeQG1GQ5dQXb25J4FoJmn74x7Mhe: { name: 'OKX Wallet', twitter: '@okxweb3' },
-  cFMYQgx3LhxLNDEiFC5nLXp5r1ZUrXocrQDqJB1Z3mqEegT6g: {
-    name: 'SubWallet',
-    twitter: '@subwalletapp',
-  },
-  cFNKcQzbNift6adwEYbXYTrLhPotn4Kb9JFpZVJti43264Mv2: {
-    name: 'SubWallet',
-    twitter: '@subwalletapp',
-  },
-  cFMjbSKgEiUacx4pqmSMVajksRf2Vhvefm4Lc5dwJxKA6DW3E: {
-    name: 'InstaSwap',
-    twitter: '@instaswap_io',
-  },
-  cFJpiCj7FXSdhvM61J1NgMKeZr9cm3WfUWSahKAfSwgL4oZpW: {
-    name: 'InstaSwap',
-    twitter: '@instaswap_io',
-  },
-  cFK6mYjpajcwPDZ7JUsac8XUoVSJnhjL43ZMZW7YoN8HE4dD8: {
-    name: 'ShapeShift',
-    twitter: '@ShapeShift',
-  },
-  cFMeDPtPHccVYdBSJKTtCYuy7rewFNpro3xZBKaCGbSS2xhRi: {
-    name: 'ShapeShift',
-    twitter: '@ShapeShift',
-  },
-  cFNdvoAPed5iA5u8X7RoUK58zYcg5mPL2EM7BMoQBSVxwMjLL: {
-    name: 'FortunaSwap',
-    twitter: '@fortunaswapdex',
-  },
-  cFPGQVB86HRbJwHneuKF7RPvD8Lq4soQLHjw82WCB4y9as9TP: {
-    name: 'WinBit32.com',
-    twitter: '@WinBit32',
-  },
-  cFJZ15BV75iMChsXkMvCTudzLGdKkKCAgE3bPvnJjJEhi79mM: {
-    name: 'SwapperXYZ',
-    twitter: null,
-  },
-  cFLK1DxGQFef5GMvCFBXpnFa44LPTjy6EfXEeg4bSyy4YVcMR: {
-    name: 'SwapperXYZ',
-    twitter: null,
-  },
-  cFNwtr2mPhpUEB5AyJq38DqMKMkSdzaL9548hajN2DRTwh7Mq: {
-    name: 'SwapKit',
-    twitter: '@SwapKitPowered',
-  },
-  cFPDEjR88FyRi7V5NDatoMAyMCczgiyoXwiJA4LZLrR7e6RW4: {
-    name: 'Bitget',
-    twitter: '@BitgetWallet',
-  },
-  cFL4To8Uow6B1hk4dNrhWhvKpkBtnUTrVdWCEKCaXiXMMztjM: {
-    name: 'SwapKit',
-    twitter: '@SwapKitPowered',
-  },
   cFKe4xhoVd783CUTYNxMua4eVE3pSDnbvjLXVRpeq2qC9bSZi: {
     name: 'Cake Wallet',
     twitter: '@cakewallet',
@@ -139,17 +67,25 @@ export const brokerAliasMap: AccountAliasMap = {
     name: 'Cake Wallet',
     twitter: '@cakewallet',
   },
-  cFJibLYo59hWoy93d9AgGzR6NfvRywcPFN4SEzhJP2toA7Ffu: {
-    name: 'Trust Wallet',
-    twitter: '@TrustWallet',
+  cFL4UcJHwnzgkQM5ADZqFnCHYzvtHgv4rREHV3hvhrLhJEAq3: {
+    name: 'Chainflip Quick Swap',
+    twitter: null,
   },
-  cFLre1qinRDSoxnQ4sFEXRde58jkmkVMX7B2NFGkgZJ9pQLqF: {
-    name: 'Trust Wallet',
-    twitter: '@TrustWallet',
+  cFLRQDfEdmnv6d2XfHJNRBQHi4fruPMReLSfvB8WWD2ENbqj7: {
+    name: 'Chainflip Swapping',
+    twitter: '@Chainflip',
   },
-  cFL6CFZToDFaKC9M6wrBfULvjRi5UfqBNERLg57yDsqt7CnsG: {
-    name: 'Trust Wallet',
-    twitter: '@TrustWallet',
+  cFLTrurprjV8jTV1yXop6Px8bG1hk4JKV6rgvQJU9nkneDYwg: {
+    name: 'CoolWallet',
+    twitter: '@coolwallet',
+  },
+  cFKF4BktauSinuji79L8LurJr18DtDfPptAa6SK3ouy7DEidm: {
+    name: 'CrossEarn',
+    twitter: null,
+  },
+  cFLdjxFLht55wU1TN4SPWYbXLYicuwFscTAtEchCJsS86De1B: {
+    name: 'depouch',
+    twitter: '@depouch',
   },
   cFNddmecxrTKfytLwV3s7KpBjmsvFAX8xUnrXfnvd4yqtr4vC: {
     name: 'Dexifier',
@@ -163,17 +99,52 @@ export const brokerAliasMap: AccountAliasMap = {
     name: 'Dexifier',
     twitter: '@DexifierX',
   },
-  cFP82c86HiP35H7TwYziqnmUjSym3YdT3U2HwgrqN7krTyyih: {
-    name: 'Moca',
-    twitter: '@moca_app',
+  cFKYhAZR1ycHnXLC1PVttiAMVRK489rKhfRXPA4v9yG4WdzqP: {
+    name: 'El Dorado',
+    twitter: '@eldorado_market',
   },
-  cFPD5DrrsHb7Wi5nmBcFuPDcGRsWhv5Bz6vvzGqFYPFhbR3Sw: {
-    name: 'Squid',
-    twitter: '@squidrouter',
+  cFJFanfys1ue9nnbq6srcd9o9w2pWWyqfG9R1rXu8shJBKBQn: {
+    name: 'EldoSwap',
+    twitter: null,
   },
-  cFJZvt5AiEGwUiFFNxhDuLRcgC1WBR6tE7gaQQfe8dqbzoYkx: {
-    name: 'Symbiosis',
-    twitter: '@symbiosis_fi',
+  cFJqePDYKKvY3DmtTAdf53YYsSgcNb7bhcdhqcZL1zVwqo1Sm: {
+    name: 'Ellipal Wallet',
+    twitter: '@ELLIPAL',
+  },
+  cFMFYF1kEewNjc96cbfZtK2GRYteankHkFhYT1i6651JA7aMJ: {
+    name: 'Ellipal Wallet',
+    twitter: '@ELLIPAL',
+  },
+  cFLRYNHSDPYUAsPW2PL1GBVLkB4YZKQNjxyb5xTHCd6Fcx2Lv: { name: 'Evolrex', twitter: null },
+  cFNdvoAPed5iA5u8X7RoUK58zYcg5mPL2EM7BMoQBSVxwMjLL: {
+    name: 'FortunaSwap',
+    twitter: '@fortunaswapdex',
+  },
+  cFNDSNTJMRwL773EzoCLn3n2kFSvBHMhEoHDKaHdkDWUa6XVD: {
+    name: 'Gem Wallet',
+    twitter: '@GemWalletApp',
+  },
+  cFKKjjRR8fjJT5gddESWRt6t7x3rcaU2fuEfsdybZ7zucuuer: {
+    name: 'Gem Wallet',
+    twitter: '@GemWalletApp',
+  },
+  cFM5vZK5pb726fs1kPmhFt66NwhfCYY6wcPEEjRd8QtTwEgyv: { name: 'Glide', twitter: null },
+  cFJWWedhJmnsk3P9jEmCfbmgmg62ZpA7LT5WCpwLXEzXuRuc3: {
+    name: 'HoudiniSwap',
+    twitter: '@HoudiniSwap',
+  },
+  cFKPUpqYbHPbT4NqTtpvRUdNQX3g5i3YzDC1hYrCnL4ViZkXg: { name: 'Howl', twitter: '@howldotfi' },
+  cFMjbSKgEiUacx4pqmSMVajksRf2Vhvefm4Lc5dwJxKA6DW3E: {
+    name: 'InstaSwap',
+    twitter: '@instaswap_io',
+  },
+  cFJpiCj7FXSdhvM61J1NgMKeZr9cm3WfUWSahKAfSwgL4oZpW: {
+    name: 'InstaSwap',
+    twitter: '@instaswap_io',
+  },
+  cFNrE4fpkiXck6kM2PXVsu5LzL7yJ5EtTrPwW8dcbjmKLMf3D: {
+    name: 'Kotova',
+    twitter: '@kotova_io',
   },
   cFLvH2ZA3J5dsDdrDuV1Eyh9Jk6yasijtKQagGhMDKoKBU3pc: {
     name: 'LeoDex',
@@ -183,17 +154,18 @@ export const brokerAliasMap: AccountAliasMap = {
     name: 'LeoDex',
     twitter: '@leodexio',
   },
-  cFNDSNTJMRwL773EzoCLn3n2kFSvBHMhEoHDKaHdkDWUa6XVD: {
-    name: 'Gem Wallet',
-    twitter: '@GemWalletApp',
-  },
+  cFJ4fme8tqJyDs8oaFL9EpCA1fxHg2bFq4Tpuyjc6kW5aBkS9: { name: 'LeoDex', twitter: '@leodexio' },
   cFKpid38PmmZ8V81AHaZAhHzzpRbsf7Xw5PYt5ajTXAUvHoTQ: {
     name: 'Li.Fi',
     twitter: '@lifiprotocol',
   },
-  cFNXP6GCSVcHAWfoEBsWTQAXQs3nCxnw8EsSxz6KAernHRpAf: {
-    name: 'Binance Web3 Wallet',
-    twitter: '@BinanceWallet',
+  cFJt567jd8vooomo6z86sS9qenBodSYyPb6CKgqGESYJS4cFG: {
+    name: 'Makepay',
+    twitter: null,
+  },
+  cFMJDzkYkDNWLHwvZFF6eQofeN3zkAKgaj1Qou9juQDsJ9yGZ: {
+    name: 'MakePay.io - OM',
+    twitter: '@MakePayio',
   },
   cFPWhtZhoxt3FLgxAJasebmSNtVvCza1KeDEkR9pm1quCp46T: {
     name: 'MetaMask',
@@ -203,100 +175,144 @@ export const brokerAliasMap: AccountAliasMap = {
     name: 'MetaMask',
     twitter: '@MetaMask',
   },
-  cFJt567jd8vooomo6z86sS9qenBodSYyPb6CKgqGESYJS4cFG: {
-    name: 'Makepay',
-    twitter: null,
+  cFP82c86HiP35H7TwYziqnmUjSym3YdT3U2HwgrqN7krTyyih: {
+    name: 'Moca',
+    twitter: '@moca_app',
   },
-  cFPZ7XoAWHFBJy2t2t5rupQ3fvMKRyCpxDHjnmtD42XAEjxcW: { name: 'SafePal', twitter: '@SafePal' },
-  cFNqDaZ9apGKt9uXaGQGucWuizVeTms2cXq8hnYM8g7y99Cpy: { name: 'Trocador', twitter: '@TrocadorApp' },
-  cFMDwBJmeivhWdYp6wSjDUdzqDV64A4efceRYHyHWTPHfQUZX: { name: 'Xverse', twitter: '@xverse' },
-  cFJ3dosNpW1X2GniSPsUKzWMnJW7NBBcNbimUBDnxa1Cfb551: {
-    name: 'OrangeRock',
-    twitter: '@orangerock.xyz',
-  },
-  cFLTrurprjV8jTV1yXop6Px8bG1hk4JKV6rgvQJU9nkneDYwg: {
-    name: 'CoolWallet',
-    twitter: '@coolwallet',
-  },
-  cFMbRyKPPQCUFUnkro1fTXpjgezXCR85H1dUT16D4eWWiU8bw: { name: 'Asgardex', twitter: '@asgardex' },
-  cFNDRBnuiDk9eUCFqwno6iubBTesGcfhDGq8CkoKgonjsFCgX: { name: 'Asgardex', twitter: '@asgardex' },
-  cFM5vZK5pb726fs1kPmhFt66NwhfCYY6wcPEEjRd8QtTwEgyv: { name: 'Glide', twitter: null },
-  cFJqePDYKKvY3DmtTAdf53YYsSgcNb7bhcdhqcZL1zVwqo1Sm: {
-    name: 'Ellipal Wallet',
-    twitter: '@ELLIPAL',
-  },
-  cFMFYF1kEewNjc96cbfZtK2GRYteankHkFhYT1i6651JA7aMJ: {
-    name: 'Ellipal Wallet',
-    twitter: '@ELLIPAL',
-  },
-  cFLoQ3WWZCTGmh9DwaZe9e9FaMKK2mGcKfZvgmxxKfGfed7bX: {
-    name: 'Portal',
-    twitter: null,
-  },
-  cFPF5ckNqZLDJPQ46TLziGD88nzkpcmx4rW8hSRX7nJMfFLRU: {
-    name: '7.Exchange',
-    twitter: '@7exchangeDeFi',
-  },
-  cFN7zHCj66aD111jqnUDNUdPJJWh3LL8F9DMGXvZqCFNMW45G: {
-    name: 'Tangem',
-    twitter: '@Tangem',
+  cFNmhAeG1L7f4KrbPvsZyUM8xsNmVbJ51AKv4zgHRaTrF4kBf: {
+    name: 'Monkey DEX',
+    twitter: '@monkeygodlabs',
   },
   cFNaYkHTE7EXMucztVyQ2gysvvHrL3vAbJ8dUJAG6HuabeBrV: {
     name: 'Multiswap',
     twitter: '@0xMultiSwap',
   },
-  cFNrE4fpkiXck6kM2PXVsu5LzL7yJ5EtTrPwW8dcbjmKLMf3D: {
-    name: 'Kotova',
-    twitter: '@kotova_io',
+  cFN122fMqitRHRxhVnPHuGeQG1GQ5dQXb25J4FoJmn74x7Mhe: { name: 'OKX Wallet', twitter: '@okxweb3' },
+  cFJ3dosNpW1X2GniSPsUKzWMnJW7NBBcNbimUBDnxa1Cfb551: {
+    name: 'OrangeRock',
+    twitter: '@orangerock.xyz',
   },
-  cFMJDzkYkDNWLHwvZFF6eQofeN3zkAKgaj1Qou9juQDsJ9yGZ: {
-    name: 'MakePay.io - OM',
-    twitter: '@MakePayio',
-  },
-  cFNwdVLSqw8zBC5aXUGCDc1aeoinWvtFkMnofxYB7BhWboSiq: {
-    name: 'Ravn',
-    twitter: '@ravnexchange',
-  },
-  cFJXSB95JsKkD7d1Brry8WxGDhGvarE9zgkdUP2Zdor4uFtKP: {
-    name: 'Allblu',
-    twitter: null,
-  },
-  cFLTzujZfsG2mdaQ4MJRZ36uD4Y2U5y7sLhEccS7N2gfqQPqj: {
-    name: 'Vultisig',
-    twitter: '@vultisig',
-  },
+  cFLHh2gi9CUc6WvbjSQjuihuDr4p9vECzdfcN1eNKPtDBr84n: { name: 'Origamix', twitter: null },
   cFLU48uwzQUDXd6XAg1EZnEK9tfYEAE8SwyGJ7aC23GcktCJV: {
     name: 'Portage',
     twitter: null,
   },
-  cFLNpyKb8xpBvi9dVXY6wVioLBzM5tGVXTqoWJm3Xxs1gZoJq: {
-    name: 'Xgram',
+  cFLoQ3WWZCTGmh9DwaZe9e9FaMKK2mGcKfZvgmxxKfGfed7bX: {
+    name: 'Portal',
     twitter: null,
-  },
-  cFJFanfys1ue9nnbq6srcd9o9w2pWWyqfG9R1rXu8shJBKBQn: {
-    name: 'EldoSwap',
-    twitter: null,
-  },
-  cFPN2ZL5YmHRBcfWvEFoKbGKFFVJR3nN95ym714GCPkASbNiX: {
-    name: 'Shieldz Swap',
-    twitter: '@shieldzcash',
-  },
-  cFKF4BktauSinuji79L8LurJr18DtDfPptAa6SK3ouy7DEidm: {
-    name: 'CrossEarn',
-    twitter: null,
-  },
-  cFLdjxFLht55wU1TN4SPWYbXLYicuwFscTAtEchCJsS86De1B: {
-    name: 'depouch',
-    twitter: '@depouch',
   },
   cFLEx1vooz7BN5HCA4pVuobg9SixmhEGuGirHddWWLKYyLT3u: {
     name: 'Quantron.one',
     twitter: null,
   },
+  cFNx21kQWmr9wsqq29zWM7RpDBKv4bctudEUE6J22Hd4NUUHR: { name: 'Rango', twitter: '@RangoExchange' },
+  cFNwdVLSqw8zBC5aXUGCDc1aeoinWvtFkMnofxYB7BhWboSiq: {
+    name: 'Ravn',
+    twitter: '@ravnexchange',
+  },
+  cFPZ7XoAWHFBJy2t2t5rupQ3fvMKRyCpxDHjnmtD42XAEjxcW: { name: 'SafePal', twitter: '@SafePal' },
+  cFK6mYjpajcwPDZ7JUsac8XUoVSJnhjL43ZMZW7YoN8HE4dD8: {
+    name: 'ShapeShift',
+    twitter: '@ShapeShift',
+  },
+  cFMeDPtPHccVYdBSJKTtCYuy7rewFNpro3xZBKaCGbSS2xhRi: {
+    name: 'ShapeShift',
+    twitter: '@ShapeShift',
+  },
+  cFPN2ZL5YmHRBcfWvEFoKbGKFFVJR3nN95ym714GCPkASbNiX: {
+    name: 'Shieldz Swap',
+    twitter: '@shieldzcash',
+  },
+  cFPD5DrrsHb7Wi5nmBcFuPDcGRsWhv5Bz6vvzGqFYPFhbR3Sw: {
+    name: 'Squid',
+    twitter: '@squidrouter',
+  },
+  cFMYQgx3LhxLNDEiFC5nLXp5r1ZUrXocrQDqJB1Z3mqEegT6g: {
+    name: 'SubWallet',
+    twitter: '@subwalletapp',
+  },
+  cFNKcQzbNift6adwEYbXYTrLhPotn4Kb9JFpZVJti43264Mv2: {
+    name: 'SubWallet',
+    twitter: '@subwalletapp',
+  },
+  cFJySAo3RbrtKWWb9J86jqnfTjpDCXAQ4bcJR9kt6S37i7eey: {
+    name: 'swap.chainflip.io',
+    twitter: '@Chainflip',
+  },
+  cFN3CjHtr3QdUymjhQPFgHzF3WiNNQy36DJxhLwet269qPWaQ: {
+    name: 'SwapBot',
+    twitter: '@DragonLabsAsia',
+  },
+  cFLwKmuUTZqF8HgZcwjrYeSSeEKrZEw1cL8Ua7RM6WS6QKqKE: { name: 'SwapDesk', twitter: '@Swap_Desk' },
+  cFNwtr2mPhpUEB5AyJq38DqMKMkSdzaL9548hajN2DRTwh7Mq: {
+    name: 'SwapKit',
+    twitter: '@SwapKitPowered',
+  },
+  cFL4To8Uow6B1hk4dNrhWhvKpkBtnUTrVdWCEKCaXiXMMztjM: {
+    name: 'SwapKit',
+    twitter: '@SwapKitPowered',
+  },
+  cFJZ15BV75iMChsXkMvCTudzLGdKkKCAgE3bPvnJjJEhi79mM: {
+    name: 'SwapperXYZ',
+    twitter: null,
+  },
+  cFLK1DxGQFef5GMvCFBXpnFa44LPTjy6EfXEeg4bSyy4YVcMR: {
+    name: 'SwapperXYZ',
+    twitter: null,
+  },
+  cFJZvt5AiEGwUiFFNxhDuLRcgC1WBR6tE7gaQQfe8dqbzoYkx: {
+    name: 'Symbiosis',
+    twitter: '@symbiosis_fi',
+  },
+  cFLraJ446JFyGxmXhEwbcFQrWoWbGL3n18giQ99ktVFFP2LaJ: {
+    name: 'Talisman',
+    twitter: '@wearetalisman',
+  },
+  cFJ2BuJiZyb7WdwwZSKYHSrchscNDGAZUxePoLJJGXjGduzGa: {
+    name: 'Talisman',
+    twitter: '@wearetalisman',
+  },
+  cFN7zHCj66aD111jqnUDNUdPJJWh3LL8F9DMGXvZqCFNMW45G: {
+    name: 'Tangem',
+    twitter: '@Tangem',
+  },
+  cFJjZKzA5rUTb9qkZMGfec7piCpiAQKr15B4nALzriMGQL8BE: { name: 'THORSwap', twitter: '@THORSwap' },
+  cFLdvBS9Gq9iqB8Zdb5cmnWgmhqvEojQYGMBquDz7xRiSvsJV: { name: 'THORSwap UI', twitter: '@THORSwap' },
+  cFLuWQcabsKpegned1ka3Qad6cTATzpgwLYZK8U5spmkG9MEf: {
+    name: 'THORWallet',
+    twitter: '@THORWalletDEX',
+  },
   cFJz59ZZaiaJyfZsjsQTW48MfnnUsvKLkKRBYzsaudw5AUaP4: {
     name: 'Trezor',
     twitter: '@Trezor',
   },
+  cFNqDaZ9apGKt9uXaGQGucWuizVeTms2cXq8hnYM8g7y99Cpy: { name: 'Trocador', twitter: '@TrocadorApp' },
+  cFJibLYo59hWoy93d9AgGzR6NfvRywcPFN4SEzhJP2toA7Ffu: {
+    name: 'Trust Wallet',
+    twitter: '@TrustWallet',
+  },
+  cFLre1qinRDSoxnQ4sFEXRde58jkmkVMX7B2NFGkgZJ9pQLqF: {
+    name: 'Trust Wallet',
+    twitter: '@TrustWallet',
+  },
+  cFL6CFZToDFaKC9M6wrBfULvjRi5UfqBNERLg57yDsqt7CnsG: {
+    name: 'Trust Wallet',
+    twitter: '@TrustWallet',
+  },
+  cFLTzujZfsG2mdaQ4MJRZ36uD4Y2U5y7sLhEccS7N2gfqQPqj: {
+    name: 'Vultisig',
+    twitter: '@vultisig',
+  },
+  cFKxx2SdSkCyVrVtisXmYkvzz1XqHKnBJ9ko6oSn4mYw3T7pn: { name: 'WAGMI', twitter: '@wagmidotglobal' },
+  cFPGQVB86HRbJwHneuKF7RPvD8Lq4soQLHjw82WCB4y9as9TP: {
+    name: 'WinBit32.com',
+    twitter: '@WinBit32',
+  },
+  cFLNpyKb8xpBvi9dVXY6wVioLBzM5tGVXTqoWJm3Xxs1gZoJq: {
+    name: 'Xgram',
+    twitter: null,
+  },
+  cFMDwBJmeivhWdYp6wSjDUdzqDV64A4efceRYHyHWTPHfQUZX: { name: 'Xverse', twitter: '@xverse' },
 } as const;
 
 export const lpAliasMap: AccountAliasMap = {
