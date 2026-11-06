@@ -293,6 +293,10 @@ export const brokerAliasMap: AccountAliasMap = {
     name: 'Quantron.one',
     twitter: null,
   },
+  cFJz59ZZaiaJyfZsjsQTW48MfnnUsvKLkKRBYzsaudw5AUaP4: {
+    name: 'Trezor',
+    twitter: '@Trezor',
+  },
 } as const;
 
 export const lpAliasMap: AccountAliasMap = {
