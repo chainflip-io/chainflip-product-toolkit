@@ -148,7 +148,7 @@ export const vaultDepositSchema = jsonString.pipe(
     ccm_deposit_metadata: z
       .object({
         channel_metadata: z.object({
-          ccm_additional_data: z.any(),
+          ccm_additional_data: z.any().optional(),
           message: z.string(),
           gas_budget: z
             .union([numericString, hexString])
