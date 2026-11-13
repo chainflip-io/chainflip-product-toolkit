@@ -20,10 +20,10 @@ describe('depositSchema', () => {
       [ZodError: [
         {
           "code": "custom",
-          "message": "Invalid asset and chain : INVALID_ASSET on Ethereum",
           "path": [
             "asset"
-          ]
+          ],
+          "message": "Invalid asset and chain : INVALID_ASSET on Ethereum"
         }
       ]]
     `);

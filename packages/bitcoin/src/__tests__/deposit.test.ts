@@ -308,44 +308,35 @@ describe(findVaultSwapData, () => {
       [ZodError: [
         {
           "code": "invalid_union",
-          "unionErrors": [
-            {
-              "issues": [
-                {
-                  "code": "invalid_type",
-                  "expected": "null",
-                  "received": "object",
-                  "path": [
-                    "result"
-                  ],
-                  "message": "Expected null, received object"
-                },
-                {
-                  "code": "invalid_type",
-                  "expected": "object",
-                  "received": "string",
-                  "path": [
-                    "error"
-                  ],
-                  "message": "Expected object, received string"
-                }
-              ],
-              "name": "ZodError"
-            },
-            {
-              "issues": [
-                {
-                  "code": "invalid_type",
-                  "expected": "null",
-                  "received": "string",
-                  "path": [
-                    "error"
-                  ],
-                  "message": "Expected null, received string"
-                }
-              ],
-              "name": "ZodError"
-            }
+          "errors": [
+            [
+              {
+                "expected": "null",
+                "code": "invalid_type",
+                "path": [
+                  "result"
+                ],
+                "message": "Invalid input: expected null, received object"
+              },
+              {
+                "expected": "object",
+                "code": "invalid_type",
+                "path": [
+                  "error"
+                ],
+                "message": "Invalid input: expected object, received string"
+              }
+            ],
+            [
+              {
+                "expected": "null",
+                "code": "invalid_type",
+                "path": [
+                  "error"
+                ],
+                "message": "Invalid input: expected null, received string"
+              }
+            ]
           ],
           "path": [],
           "message": "Invalid input"

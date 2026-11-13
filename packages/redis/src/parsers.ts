@@ -18,7 +18,12 @@ const uncheckedAssetAndChain = z.object({
 const assetAndChain = uncheckedAssetAndChain
   .refine(
     (value): value is AssetAndChain => isValidAssetAndChain(value as UncheckedAssetAndChain),
-    (value) => ({ message: `Invalid asset and chain : ${value.asset} on ${value.chain}` }),
+    {
+      error: (issue) => {
+        const value = issue.input as UncheckedAssetAndChain;
+        return `Invalid asset and chain : ${value.asset} on ${value.chain}`;
+      },
+    },
   )
   .transform((value) => getInternalAsset(value));
 
@@ -26,10 +31,11 @@ const numericString = z.string().regex(/^[0-9]+$/);
 const hexString = z.string().refine((v): v is `0x${string}` => /^0x[0-9a-f]*$/i.test(v));
 const u128 = z.union([z.number(), numericString, hexString]).transform((arg) => BigInt(arg));
 
-const chainflipAddress = z.string().refine(
-  (address) => ss58.decode(address).ss58Format === CHAINFLIP_SS58_PREFIX,
-  (address) => ({ message: `${address} is not a valid Chainflip address` }),
-);
+const chainflipAddress = z
+  .string()
+  .refine((address) => ss58.decode(address).ss58Format === CHAINFLIP_SS58_PREFIX, {
+    error: (issue) => `${issue.input as string} is not a valid Chainflip address`,
+  });
 
 const jsonString = z.string().transform((value) => JSON.parse(value) as unknown);
 
@@ -103,7 +109,7 @@ export const broadcastParsers = {
       })
       .transform(({ hash }) => hash),
   }),
-} as const satisfies Record<Exclude<ChainflipChain, 'Solana'>, z.ZodTypeAny>;
+} as const satisfies Record<Exclude<ChainflipChain, 'Solana'>, z.ZodType>;
 
 const accountFee = z
   .object({
@@ -142,7 +148,7 @@ export const vaultDepositSchema = jsonString.pipe(
     ccm_deposit_metadata: z
       .object({
         channel_metadata: z.object({
-          ccm_additional_data: z.any(),
+          ccm_additional_data: z.any().optional(),
           message: z.string(),
           gas_budget: z
             .union([numericString, hexString])

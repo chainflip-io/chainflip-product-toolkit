@@ -11,10 +11,7 @@ import { tryDecodeCfParams } from './scale';
 
 const entries = Object.entries as <T>(o: T) => [keyof T, T[keyof T]][];
 
-const bnSchema = z
-  .any()
-  .refine((arg) => BN.isBN(arg))
-  .transform((bn) => BigInt(bn.toString()));
+const bnSchema = z.custom<BN>((arg) => BN.isBN(arg)).transform((bn) => BigInt(bn.toString()));
 
 const swapParams = z
   .object({
