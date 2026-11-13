@@ -330,7 +330,7 @@ export const rpcResult = {
   cf_all_loans: cfAllLoans,
   cf_all_account_infos: cfAllAccountInfos,
   cf_reward_distribution_estimate: cfRewardDistributionEstimate,
-} as const satisfies { [K in keyof RpcRequest]: z.ZodTypeAny };
+} as const satisfies { [K in keyof RpcRequest]: z.ZodType };
 
 export type RpcMethod = keyof RpcRequest;
 

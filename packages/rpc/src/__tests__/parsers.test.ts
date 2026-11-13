@@ -44,9 +44,8 @@ import {
   safeModeStatuses,
   tradingStrategies,
   tradingStrategiesLimits,
-  validatorAccountPost23NullBids,
-  validatorAccountPost23WithBids,
-  validatorAccountPre23,
+  validatorAccount,
+  validatorAccountWithMaxBid,
 } from './fixtures';
 
 describe('parsers', () => {
@@ -57,11 +56,6 @@ describe('parsers', () => {
   });
 
   describe('chainAssetMapFactory', () => {
-    // TODO(2.3): remove once all networks emit CBBTC and the default is dropped
-    it('defaults Ethereum CBBTC for nodes that do not emit it yet', () => {
-      expect(lpTotalBalances.parse(emptyChainAssetMap).Ethereum.CBBTC).toBe(0n);
-    });
-
     it('parses Ethereum CBBTC when the node emits it', () => {
       expect(
         lpTotalBalances.parse({
@@ -166,6 +160,7 @@ describe('parsers', () => {
               USDC: '0x0',
               USDT: '0x0',
               WBTC: '0x0',
+              CBBTC: '0x0',
             },
             Polkadot: {
               DOT: '0xbc28f20',
@@ -192,6 +187,7 @@ describe('parsers', () => {
               TRX: '0x0',
               USDT: '0x0',
             },
+            Bsc: { BNB: '0x574b457d400', USDT: '0x150e' },
           },
           egress_fees: {
             Ethereum: {
@@ -200,6 +196,7 @@ describe('parsers', () => {
               USDC: '0x0',
               USDT: '0x0',
               WBTC: '0x0',
+              CBBTC: '0x0',
             },
             Polkadot: {
               DOT: '0xbc4d910',
@@ -226,6 +223,7 @@ describe('parsers', () => {
               TRX: '0x0',
               USDT: '0x0',
             },
+            Bsc: { BNB: '0x74645ca7000', USDT: '0x1765' },
           },
           witness_safety_margins: {
             Arbitrum: 1,
@@ -235,6 +233,7 @@ describe('parsers', () => {
             Polkadot: null,
             Assethub: null,
             Tron: null,
+            Bsc: 1,
           },
           egress_dust_limits: {
             Ethereum: {
@@ -243,6 +242,7 @@ describe('parsers', () => {
               USDC: '0x1',
               USDT: '0x1',
               WBTC: '0x1',
+              CBBTC: '0x1',
             },
             Polkadot: {
               DOT: '0x1',
@@ -269,6 +269,7 @@ describe('parsers', () => {
               TRX: '0x1',
               USDT: '0x1',
             },
+            Bsc: { BNB: '0x1', USDT: '0x1' },
           },
           channel_opening_fees: {
             Ethereum: '0x0',
@@ -278,6 +279,7 @@ describe('parsers', () => {
             Solana: '0x0',
             Assethub: '0x0',
             Tron: '0x0',
+            Bsc: '0x0',
           },
           ingress_delays: {
             Ethereum: 0,
@@ -287,6 +289,7 @@ describe('parsers', () => {
             Solana: 10,
             Assethub: 0,
             Tron: 0,
+            Bsc: 0,
           },
           boost_delays: {
             Ethereum: 0,
@@ -296,6 +299,7 @@ describe('parsers', () => {
             Solana: 0,
             Assethub: 0,
             Tron: 0,
+            Bsc: 0,
           },
           boost_minimum_add_funds_amounts: {
             Ethereum: {
@@ -304,6 +308,7 @@ describe('parsers', () => {
               USDC: '0x1',
               USDT: '0x1',
               WBTC: '0x1',
+              CBBTC: '0x1',
             },
             Polkadot: {
               DOT: '0x1',
@@ -330,6 +335,7 @@ describe('parsers', () => {
               TRX: '0x1',
               USDT: '0x1',
             },
+            Bsc: { BNB: '0x1', USDT: '0x1' },
           },
         },
         swapping: {
@@ -340,6 +346,7 @@ describe('parsers', () => {
               USDC: null,
               USDT: null,
               WBTC: null,
+              CBBTC: null,
             },
             Polkadot: {
               DOT: null,
@@ -366,6 +373,7 @@ describe('parsers', () => {
               TRX: null,
               USDT: null,
             },
+            Bsc: { BNB: null, USDT: null },
           },
           network_fee_hundredth_pips: 1000,
           swap_retry_delay_blocks: 5,
@@ -378,6 +386,7 @@ describe('parsers', () => {
               USDC: '0x3b9aca00',
               USDT: '0x3b9aca00',
               WBTC: '0x1e8480',
+              CBBTC: '0x1e8480',
             },
             Polkadot: {
               DOT: '0x1d1a94a2000',
@@ -404,6 +413,7 @@ describe('parsers', () => {
               TRX: '0x0',
               USDT: '0x0',
             },
+            Bsc: { BNB: '0x2c68af0bb140000', USDT: '0x3b9aca00' },
           },
           network_fees: {
             regular_network_fee: {
@@ -418,6 +428,7 @@ describe('parsers', () => {
                   USDC: 0,
                   USDT: 0,
                   WBTC: 0,
+                  CBBTC: 0,
                 },
                 Polkadot: {
                   DOT: 0,
@@ -444,6 +455,7 @@ describe('parsers', () => {
                   TRX: 0,
                   USDT: 0,
                 },
+                Bsc: { BNB: 0, USDT: 0 },
               },
             },
             internal_swap_network_fee: {
@@ -458,6 +470,7 @@ describe('parsers', () => {
                   USDC: 0,
                   USDT: 0,
                   WBTC: 0,
+                  CBBTC: 0,
                 },
                 Polkadot: {
                   DOT: 0,
@@ -484,6 +497,7 @@ describe('parsers', () => {
                   TRX: 0,
                   USDT: 0,
                 },
+                Bsc: { BNB: 0, USDT: 0 },
               },
             },
           },
@@ -495,6 +509,7 @@ describe('parsers', () => {
               USDC: null,
               USDT: 10000,
               WBTC: 10000,
+              CBBTC: 10000,
             },
             Polkadot: {
               DOT: null,
@@ -521,6 +536,7 @@ describe('parsers', () => {
               TRX: null,
               USDT: 10000,
             },
+            Bsc: { BNB: 10000, USDT: 10000 },
           },
         },
         funding: {
@@ -604,6 +620,30 @@ describe('parsers', () => {
                 },
               },
               WBTC: {
+                limit_order_fee_hundredth_pips: 20,
+                range_order_fee_hundredth_pips: 20,
+                range_order_total_fees_earned: {
+                  base: '0x8961',
+                  quote: '0xda0f22',
+                },
+                limit_order_total_fees_earned: {
+                  base: '0x0',
+                  quote: '0xac0c',
+                },
+                range_total_swap_inputs: {
+                  base: '0x68cedbea',
+                  quote: '0xa65ccd0506',
+                },
+                limit_total_swap_inputs: {
+                  base: '0x0',
+                  quote: '0x8341e381',
+                },
+                quote_asset: {
+                  chain: 'Ethereum',
+                  asset: 'USDC',
+                },
+              },
+              CBBTC: {
                 limit_order_fee_hundredth_pips: 20,
                 range_order_fee_hundredth_pips: 20,
                 range_order_total_fees_earned: {
@@ -883,6 +923,56 @@ describe('parsers', () => {
               TRX: null,
               USDT: null,
             },
+            Bsc: {
+              BNB: {
+                limit_order_fee_hundredth_pips: 20,
+                range_order_fee_hundredth_pips: 20,
+                range_order_total_fees_earned: {
+                  base: '0x1a96a7c9901240',
+                  quote: '0x210230',
+                },
+                limit_order_total_fees_earned: {
+                  base: '0x0',
+                  quote: '0x0',
+                },
+                range_total_swap_inputs: {
+                  base: '0x1448f64c4ff15c61c0',
+                  quote: '0x192ecd80a2',
+                },
+                limit_total_swap_inputs: {
+                  base: '0x0',
+                  quote: '0x0',
+                },
+                quote_asset: {
+                  chain: 'Ethereum',
+                  asset: 'USDC',
+                },
+              },
+              USDT: {
+                limit_order_fee_hundredth_pips: 20,
+                range_order_fee_hundredth_pips: 20,
+                range_order_total_fees_earned: {
+                  base: '0xaa9c1',
+                  quote: '0x1b1d4b',
+                },
+                limit_order_total_fees_earned: {
+                  base: '0x0',
+                  quote: '0x0',
+                },
+                range_total_swap_inputs: {
+                  base: '0x8228e1e3c',
+                  quote: '0x14afa63498',
+                },
+                limit_total_swap_inputs: {
+                  base: '0x0',
+                  quote: '0x0',
+                },
+                quote_asset: {
+                  chain: 'Ethereum',
+                  asset: 'USDC',
+                },
+              },
+            },
           },
         },
       });
@@ -917,11 +1007,11 @@ describe('parsers', () => {
                 "BTC": 11000n,
               },
               "Bsc": {
-                "BNB": null,
-                "USDT": null,
+                "BNB": 1n,
+                "USDT": 1n,
               },
               "Ethereum": {
-                "CBBTC": null,
+                "CBBTC": 1n,
                 "ETH": 1n,
                 "FLIP": 1n,
                 "USDC": 1n,
@@ -962,11 +1052,11 @@ describe('parsers', () => {
                 "BTC": 179n,
               },
               "Bsc": {
-                "BNB": null,
-                "USDT": null,
+                "BNB": 7998400000000n,
+                "USDT": 5989n,
               },
               "Ethereum": {
-                "CBBTC": null,
+                "CBBTC": 0n,
                 "ETH": 490000n,
                 "FLIP": 53930633n,
                 "USDC": 0n,
@@ -1007,11 +1097,11 @@ describe('parsers', () => {
                 "BTC": 79n,
               },
               "Bsc": {
-                "BNB": null,
-                "USDT": null,
+                "BNB": 5998800000000n,
+                "USDT": 5390n,
               },
               "Ethereum": {
-                "CBBTC": null,
+                "CBBTC": 0n,
                 "ETH": 350000n,
                 "FLIP": 47938341n,
                 "USDC": 0n,
@@ -1079,11 +1169,11 @@ describe('parsers', () => {
                 "BTC": 600n,
               },
               "Bsc": {
-                "BNB": 0n,
-                "USDT": 0n,
+                "BNB": 1n,
+                "USDT": 1n,
               },
               "Ethereum": {
-                "CBBTC": 0n,
+                "CBBTC": 1n,
                 "ETH": 1n,
                 "FLIP": 1n,
                 "USDC": 1n,
@@ -1104,7 +1194,7 @@ describe('parsers', () => {
               "Arbitrum": 1,
               "Assethub": null,
               "Bitcoin": 2,
-              "Bsc": null,
+              "Bsc": 1,
               "Ethereum": 2,
               "Solana": 1,
               "Tron": null,
@@ -1288,7 +1378,7 @@ describe('parsers', () => {
               },
               "Bsc": {
                 "BNB": {
-                  "limit_order_fee_hundredth_pips": 0,
+                  "limit_order_fee_hundredth_pips": 20,
                   "limit_order_total_fees_earned": {
                     "base": 0n,
                     "quote": 0n,
@@ -1301,18 +1391,18 @@ describe('parsers', () => {
                     "asset": "USDC",
                     "chain": "Ethereum",
                   },
-                  "range_order_fee_hundredth_pips": 0,
+                  "range_order_fee_hundredth_pips": 20,
                   "range_order_total_fees_earned": {
-                    "base": 0n,
-                    "quote": 0n,
+                    "base": 7483996779844160n,
+                    "quote": 2163248n,
                   },
                   "range_total_swap_inputs": {
-                    "base": 0n,
-                    "quote": 0n,
+                    "base": 374192354995428155840n,
+                    "quote": 108159402146n,
                   },
                 },
                 "USDT": {
-                  "limit_order_fee_hundredth_pips": 0,
+                  "limit_order_fee_hundredth_pips": 20,
                   "limit_order_total_fees_earned": {
                     "base": 0n,
                     "quote": 0n,
@@ -1325,40 +1415,40 @@ describe('parsers', () => {
                     "asset": "USDC",
                     "chain": "Ethereum",
                   },
-                  "range_order_fee_hundredth_pips": 0,
+                  "range_order_fee_hundredth_pips": 20,
                   "range_order_total_fees_earned": {
-                    "base": 0n,
-                    "quote": 0n,
+                    "base": 698817n,
+                    "quote": 1776971n,
                   },
                   "range_total_swap_inputs": {
-                    "base": 0n,
-                    "quote": 0n,
+                    "base": 34939477564n,
+                    "quote": 88846251160n,
                   },
                 },
               },
               "Ethereum": {
                 "CBBTC": {
-                  "limit_order_fee_hundredth_pips": 0,
+                  "limit_order_fee_hundredth_pips": 20,
                   "limit_order_total_fees_earned": {
                     "base": 0n,
-                    "quote": 0n,
+                    "quote": 44044n,
                   },
                   "limit_total_swap_inputs": {
                     "base": 0n,
-                    "quote": 0n,
+                    "quote": 2202133377n,
                   },
                   "quote_asset": {
                     "asset": "USDC",
                     "chain": "Ethereum",
                   },
-                  "range_order_fee_hundredth_pips": 0,
+                  "range_order_fee_hundredth_pips": 20,
                   "range_order_total_fees_earned": {
-                    "base": 0n,
-                    "quote": 0n,
+                    "base": 35169n,
+                    "quote": 14290722n,
                   },
                   "range_total_swap_inputs": {
-                    "base": 0n,
-                    "quote": 0n,
+                    "base": 1758387178n,
+                    "quote": 714521511174n,
                   },
                 },
                 "ETH": {
@@ -1600,11 +1690,11 @@ describe('parsers', () => {
                 "BTC": 10000,
               },
               "Bsc": {
-                "BNB": null,
-                "USDT": null,
+                "BNB": 10000,
+                "USDT": 10000,
               },
               "Ethereum": {
-                "CBBTC": null,
+                "CBBTC": 10000,
                 "ETH": 10000,
                 "FLIP": null,
                 "USDC": null,
@@ -1674,11 +1764,11 @@ describe('parsers', () => {
                 "BTC": 2000000n,
               },
               "Bsc": {
-                "BNB": null,
-                "USDT": null,
+                "BNB": 200000000000000000n,
+                "USDT": 1000000000n,
               },
               "Ethereum": {
-                "CBBTC": null,
+                "CBBTC": 2000000n,
                 "ETH": 200000000000000000n,
                 "FLIP": 1000000000000000000000n,
                 "USDC": 1000000000n,
@@ -1799,6 +1889,7 @@ describe('parsers', () => {
             USDC: '0x0',
             USDT: '0x0',
             WBTC: '0x0',
+            CBBTC: '0x0',
           },
           Polkadot: {
             DOT: '0x0',
@@ -1825,6 +1916,7 @@ describe('parsers', () => {
             TRX: '0x0',
             USDT: '0x0',
           },
+          Bsc: { BNB: '0x0', USDT: '0x0' },
         },
         ingress_fees: {
           Ethereum: {
@@ -1833,6 +1925,7 @@ describe('parsers', () => {
             USDC: '0x5498',
             USDT: '0x54a2',
             WBTC: '0x20',
+            CBBTC: '0x20',
           },
           Polkadot: {
             DOT: '0xbc28f20',
@@ -1859,6 +1952,7 @@ describe('parsers', () => {
             TRX: '0x0',
             USDT: '0x0',
           },
+          Bsc: { BNB: '0x117c2a669d8', USDT: '0xe28' },
         },
         egress_fees: {
           Ethereum: {
@@ -1867,6 +1961,7 @@ describe('parsers', () => {
             USDC: '0x5f2b',
             USDT: '0x5f36',
             WBTC: '0x24',
+            CBBTC: '0x24',
           },
           Polkadot: {
             DOT: '0xbc4d910',
@@ -1893,6 +1988,7 @@ describe('parsers', () => {
             TRX: '0x0',
             USDT: '0x0',
           },
+          Bsc: { BNB: '0x17503888d20', USDT: '0xfbb' },
         },
         witness_safety_margins: {
           Polkadot: null,
@@ -1902,6 +1998,7 @@ describe('parsers', () => {
           Solana: null,
           Assethub: null,
           Tron: null,
+          Bsc: 1,
         },
         egress_dust_limits: {
           Ethereum: {
@@ -1910,6 +2007,7 @@ describe('parsers', () => {
             USDC: '0x1',
             USDT: '0x1',
             WBTC: '0x1',
+            CBBTC: '0x1',
           },
           Polkadot: {
             DOT: '0x1',
@@ -1936,6 +2034,7 @@ describe('parsers', () => {
             TRX: '0x1',
             USDT: '0x1',
           },
+          Bsc: { BNB: '0x1', USDT: '0x1' },
         },
         channel_opening_fees: {
           Arbitrum: '0x0',
@@ -1945,6 +2044,7 @@ describe('parsers', () => {
           Solana: '0x0',
           Assethub: '0x0',
           Tron: '0x0',
+          Bsc: '0x0',
         },
         ingress_delays: {
           Bitcoin: 0,
@@ -1954,6 +2054,7 @@ describe('parsers', () => {
           Ethereum: 0,
           Arbitrum: 0,
           Tron: 0,
+          Bsc: 0,
         },
         boost_delays: {
           Arbitrum: 0,
@@ -1963,6 +2064,7 @@ describe('parsers', () => {
           Ethereum: 0,
           Solana: 0,
           Tron: 0,
+          Bsc: 0,
         },
         boost_minimum_add_funds_amounts: {
           Ethereum: {
@@ -1971,6 +2073,7 @@ describe('parsers', () => {
             USDC: '0x1',
             USDT: '0x1',
             WBTC: '0x1',
+            CBBTC: '0x1',
           },
           Polkadot: {
             DOT: '0x1',
@@ -1997,6 +2100,7 @@ describe('parsers', () => {
             TRX: '0x1',
             USDT: '0x1',
           },
+          Bsc: { BNB: '0x1', USDT: '0x1' },
         },
       });
       expect(result).toMatchInlineSnapshot(`
@@ -2025,11 +2129,11 @@ describe('parsers', () => {
               "BTC": 11000n,
             },
             "Bsc": {
-              "BNB": null,
-              "USDT": null,
+              "BNB": 1n,
+              "USDT": 1n,
             },
             "Ethereum": {
-              "CBBTC": null,
+              "CBBTC": 1n,
               "ETH": 1n,
               "FLIP": 1n,
               "USDC": 1n,
@@ -2070,11 +2174,11 @@ describe('parsers', () => {
               "BTC": 264n,
             },
             "Bsc": {
-              "BNB": null,
-              "USDT": null,
+              "BNB": 1602082082080n,
+              "USDT": 4027n,
             },
             "Ethereum": {
-              "CBBTC": null,
+              "CBBTC": 36n,
               "ETH": 9427760180170n,
               "FLIP": 9763436083064319n,
               "USDC": 24363n,
@@ -2115,11 +2219,11 @@ describe('parsers', () => {
               "BTC": 117n,
             },
             "Bsc": {
-              "BNB": null,
-              "USDT": null,
+              "BNB": 1201561561560n,
+              "USDT": 3624n,
             },
             "Ethereum": {
-              "CBBTC": null,
+              "CBBTC": 32n,
               "ETH": 6734114414407n,
               "FLIP": 8678609851612727n,
               "USDC": 21656n,
@@ -2187,11 +2291,11 @@ describe('parsers', () => {
               "BTC": 600n,
             },
             "Bsc": {
-              "BNB": 0n,
-              "USDT": 0n,
+              "BNB": 1n,
+              "USDT": 1n,
             },
             "Ethereum": {
-              "CBBTC": 0n,
+              "CBBTC": 1n,
               "ETH": 1n,
               "FLIP": 1n,
               "USDC": 1n,
@@ -2212,7 +2316,7 @@ describe('parsers', () => {
             "Arbitrum": 1,
             "Assethub": null,
             "Bitcoin": 5,
-            "Bsc": null,
+            "Bsc": 1,
             "Ethereum": 2,
             "Solana": null,
             "Tron": null,
@@ -2232,6 +2336,7 @@ describe('parsers', () => {
             USDC: null,
             USDT: null,
             WBTC: null,
+            CBBTC: null,
           },
           Polkadot: {
             DOT: null,
@@ -2258,6 +2363,7 @@ describe('parsers', () => {
             TRX: null,
             USDT: null,
           },
+          Bsc: { BNB: null, USDT: null },
         },
         network_fee_hundredth_pips: 1000,
         swap_retry_delay_blocks: 5,
@@ -2270,6 +2376,7 @@ describe('parsers', () => {
             USDC: '0x3b9aca00',
             USDT: '0x3b9aca00',
             WBTC: '0x1e8480',
+            CBBTC: '0x1e8480',
           },
           Polkadot: {
             DOT: '0x1d1a94a2000',
@@ -2296,6 +2403,7 @@ describe('parsers', () => {
             TRX: '0x0',
             USDT: '0x0',
           },
+          Bsc: { BNB: '0x2c68af0bb140000', USDT: '0x3b9aca00' },
         },
         network_fees: {
           regular_network_fee: {
@@ -2310,6 +2418,7 @@ describe('parsers', () => {
                 USDC: 0,
                 USDT: 0,
                 WBTC: 0,
+                CBBTC: 0,
               },
               Polkadot: {
                 DOT: 0,
@@ -2336,6 +2445,7 @@ describe('parsers', () => {
                 TRX: 0,
                 USDT: 0,
               },
+              Bsc: { BNB: 0, USDT: 0 },
             },
           },
           internal_swap_network_fee: {
@@ -2350,6 +2460,7 @@ describe('parsers', () => {
                 USDC: 0,
                 USDT: 0,
                 WBTC: 0,
+                CBBTC: 0,
               },
               Polkadot: {
                 DOT: 0,
@@ -2376,6 +2487,7 @@ describe('parsers', () => {
                 TRX: 0,
                 USDT: 0,
               },
+              Bsc: { BNB: 0, USDT: 0 },
             },
           },
         },
@@ -2387,6 +2499,7 @@ describe('parsers', () => {
             USDC: null,
             USDT: 10000,
             WBTC: 10000,
+            CBBTC: 10000,
           },
           Polkadot: {
             DOT: null,
@@ -2413,6 +2526,7 @@ describe('parsers', () => {
             TRX: null,
             USDT: 10000,
           },
+          Bsc: { BNB: 10000, USDT: 10000 },
         },
       });
     });
@@ -2496,6 +2610,30 @@ describe('parsers', () => {
               },
             },
             WBTC: {
+              limit_order_fee_hundredth_pips: 20,
+              range_order_fee_hundredth_pips: 20,
+              range_order_total_fees_earned: {
+                base: '0x70',
+                quote: '0x91aa0',
+              },
+              limit_order_total_fees_earned: {
+                base: '0xab',
+                quote: '0x49a9a',
+              },
+              range_total_swap_inputs: {
+                base: '0x5356ca',
+                quote: '0x6f212e4ff',
+              },
+              limit_total_swap_inputs: {
+                base: '0x7fb017',
+                quote: '0x3832ba417',
+              },
+              quote_asset: {
+                chain: 'Ethereum',
+                asset: 'USDC',
+              },
+            },
+            CBBTC: {
               limit_order_fee_hundredth_pips: 20,
               range_order_fee_hundredth_pips: 20,
               range_order_total_fees_earned: {
@@ -2798,6 +2936,56 @@ describe('parsers', () => {
             TRX: null,
             USDT: null,
           },
+          Bsc: {
+            BNB: {
+              limit_order_fee_hundredth_pips: 20,
+              range_order_fee_hundredth_pips: 20,
+              range_order_total_fees_earned: {
+                base: '0xf3288bb9446',
+                quote: '0x5ef8b',
+              },
+              limit_order_total_fees_earned: {
+                base: '0x0',
+                quote: '0x0',
+              },
+              range_total_swap_inputs: {
+                base: '0xb982ebf13d4139a',
+                quote: '0x487437e83',
+              },
+              limit_total_swap_inputs: {
+                base: '0x0',
+                quote: '0x0',
+              },
+              quote_asset: {
+                chain: 'Ethereum',
+                asset: 'USDC',
+              },
+            },
+            USDT: {
+              limit_order_fee_hundredth_pips: 20,
+              range_order_fee_hundredth_pips: 20,
+              range_order_total_fees_earned: {
+                base: '0x18da0',
+                quote: '0xe9203',
+              },
+              limit_order_total_fees_earned: {
+                base: '0x0',
+                quote: '0x0',
+              },
+              range_total_swap_inputs: {
+                base: '0x12f561efa',
+                quote: '0xb1db4cae8',
+              },
+              limit_total_swap_inputs: {
+                base: '0x0',
+                quote: '0x0',
+              },
+              quote_asset: {
+                chain: 'Ethereum',
+                asset: 'USDC',
+              },
+            },
+          },
         },
       });
 
@@ -2808,13 +2996,14 @@ describe('parsers', () => {
     it('uses default fee info when fee is null', () => {
       const result = cfPoolsEnvironment.parse({
         fees: {
-          Ethereum: { ETH: null, FLIP: null, USDC: null, USDT: null, WBTC: null },
+          Ethereum: { ETH: null, FLIP: null, USDC: null, USDT: null, WBTC: null, CBBTC: null },
           Polkadot: { DOT: null },
           Bitcoin: { BTC: null },
           Arbitrum: { ETH: null, USDC: null, USDT: null },
           Solana: { SOL: null, USDC: null, USDT: null },
           Assethub: { DOT: null, USDC: null, USDT: null },
           Tron: { TRX: null, USDT: null },
+          Bsc: { BNB: null, USDT: null },
         },
       });
 
@@ -3006,17 +3195,8 @@ describe('parsers', () => {
       expect(result).toMatchSnapshot();
     });
 
-    // TODO(2.3): remove once all networks return `bid` and `max_bid`
-    it('parses a pre-2.3 cfAccountInfo for a validator without bid and max_bid', () => {
-      const result = cfAccountInfo.parse(validatorAccountPre23);
-
-      expect(result.role).toEqual('validator');
-      expect(result).not.toHaveProperty('bid');
-      expect(result).not.toHaveProperty('max_bid');
-    });
-
-    it('parses a post-2.3 cfAccountInfo for a validator with a bid and max_bid', () => {
-      const result = cfAccountInfo.parse(validatorAccountPost23WithBids);
+    it('parses a cfAccountInfo for a validator with a bid and max_bid', () => {
+      const result = cfAccountInfo.parse(validatorAccountWithMaxBid);
 
       expect(result).toMatchObject({
         role: 'validator',
@@ -3025,10 +3205,22 @@ describe('parsers', () => {
       });
     });
 
-    it('parses a post-2.3 cfAccountInfo for a validator with a null bid and max_bid', () => {
-      const result = cfAccountInfo.parse(validatorAccountPost23NullBids);
+    it('parses a cfAccountInfo for a validator without a max_bid', () => {
+      const result = cfAccountInfo.parse(validatorAccount);
 
-      expect(result).toMatchObject({ role: 'validator', bid: null, max_bid: null });
+      expect(result).toMatchObject({
+        role: 'validator',
+        bid: 252186205332783022058667n,
+        max_bid: null,
+      });
+    });
+
+    it.each([
+      ['a null bid', { ...validatorAccount, bid: null }],
+      ['a missing bid', { ...validatorAccount, bid: undefined }],
+      ['a missing max_bid', { ...validatorAccount, max_bid: undefined }],
+    ])('rejects a validator cfAccountInfo with %s', (_, account) => {
+      expect(() => cfAccountInfo.parse(account)).toThrow();
     });
   });
 
@@ -3292,6 +3484,10 @@ describe('parsers', () => {
             "egress_witnessing_enabled": true,
             "retry_enabled": true,
           },
+          "broadcast_bsc": {
+            "egress_witnessing_enabled": true,
+            "retry_enabled": true,
+          },
           "broadcast_ethereum": {
             "egress_witnessing_enabled": true,
             "retry_enabled": true,
@@ -3307,6 +3503,9 @@ describe('parsers', () => {
           "broadcast_tron": {
             "egress_witnessing_enabled": true,
             "retry_enabled": true,
+          },
+          "bsc_elections": {
+            "key_manager_witnessing": true,
           },
           "elections_generic": {
             "oracle_price_elections": true,
@@ -3335,6 +3534,12 @@ describe('parsers', () => {
             "vault_deposit_witnessing_enabled": true,
           },
           "ingress_egress_bitcoin": {
+            "boost_deposits_enabled": true,
+            "deposit_channel_creation_enabled": true,
+            "deposit_channel_witnessing_enabled": true,
+            "vault_deposit_witnessing_enabled": true,
+          },
+          "ingress_egress_bsc": {
             "boost_deposits_enabled": true,
             "deposit_channel_creation_enabled": true,
             "deposit_channel_witnessing_enabled": true,
@@ -3840,6 +4045,7 @@ describe('parsers', () => {
                 "USDT": 0n,
               },
             },
+            "bid": 252186205332783022058667n,
             "bond": 225033425976807428934928n,
             "bound_redeem_address": "0x9a449133c6a8b4e117840b69e2a1d43634f562d3",
             "estimated_redeemable_balance": 0n,
@@ -3854,6 +4060,7 @@ describe('parsers', () => {
               198,
             ],
             "last_heartbeat": 2930096,
+            "max_bid": null,
             "reputation_points": 2880,
             "restricted_balances": {},
             "role": "validator",
@@ -3897,6 +4104,7 @@ describe('parsers', () => {
                 "USDT": 0n,
               },
             },
+            "bid": 252186205332783022058667n,
             "bond": 225033425976807428934928n,
             "bound_redeem_address": "0x9a449133c6a8b4e117840b69e2a1d43634f562d3",
             "estimated_redeemable_balance": 0n,
@@ -3911,6 +4119,7 @@ describe('parsers', () => {
               198,
             ],
             "last_heartbeat": 2930096,
+            "max_bid": null,
             "operator": "cFM7AjUFjqtrRStbEuNRYzEpjAqKEWP3om8FydieAhbqpqRKz",
             "reputation_points": 2880,
             "restricted_balances": {},
@@ -4138,7 +4347,7 @@ describe('parsers', () => {
                 "USDT": 0n,
               },
               "Ethereum": {
-                "CBBTC": 0n,
+                "CBBTC": 12369718n,
                 "ETH": 1485755635703031110n,
                 "FLIP": 39432662616362382590n,
                 "USDC": 1922285993n,
@@ -4218,7 +4427,7 @@ describe('parsers', () => {
                 "USDT": 0n,
               },
               "Ethereum": {
-                "CBBTC": 0n,
+                "CBBTC": 12369718n,
                 "ETH": 1485755635703031110n,
                 "FLIP": 39432662616362382590n,
                 "USDC": 1922285993n,

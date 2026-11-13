@@ -3,7 +3,7 @@ import type { Block, IndexerEvent, ProcessorStore, Semver } from './types';
 
 export default abstract class EventHandler<
   T extends ProcessorStore<any, any>,
-  Z extends z.ZodTypeAny,
+  Z extends z.ZodType,
 > {
   protected abstract readonly eventName: string;
   protected abstract readonly spec: Semver;
@@ -33,7 +33,6 @@ export default abstract class EventHandler<
     eventInfo: Awaited<ReturnType<T['getEventInfo']>>;
     extrinsicInfo?: Awaited<ReturnType<T['getExtrinsicInfo']>> | undefined;
   }): Promise<void> {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     return this.handle({ ...args, args: this.parser.parse(args.event.args) });
   }
 }

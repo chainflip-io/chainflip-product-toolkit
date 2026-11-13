@@ -111,5 +111,5 @@ export const makeRequest = async <T extends keyof RpcRequest & keyof typeof resp
     throw parseResult.error;
   }
 
-  return parseResult.data;
+  return parseResult.data as z.output<(typeof responseSchemas)[T]>;
 };

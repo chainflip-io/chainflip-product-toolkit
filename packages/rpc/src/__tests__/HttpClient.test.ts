@@ -1337,14 +1337,13 @@ describe(HttpClient, () => {
         `
         [ZodError: [
           {
-            "code": "invalid_type",
             "expected": "string",
-            "received": "null",
+            "code": "invalid_type",
             "path": [
               0,
               1
             ],
-            "message": "Expected string, received null"
+            "message": "Invalid input: expected string, received null"
           }
         ]]
       `,

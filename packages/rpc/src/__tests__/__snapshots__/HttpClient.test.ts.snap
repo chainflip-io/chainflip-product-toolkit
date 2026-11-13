@@ -67,7 +67,7 @@ exports[`HttpClient > with server > gets broker account info 1`] = `
       "USDT": 0n,
     },
     "Ethereum": {
-      "CBBTC": 0n,
+      "CBBTC": 12369718n,
       "ETH": 1485755635703031110n,
       "FLIP": 39432662616362382590n,
       "USDC": 1922285993n,
@@ -150,7 +150,7 @@ exports[`HttpClient > with server > gets broker account info 2 1`] = `
       "USDT": 0n,
     },
     "Ethereum": {
-      "CBBTC": 0n,
+      "CBBTC": 12369718n,
       "ETH": 1485755635703031110n,
       "FLIP": 39432662616362382590n,
       "USDC": 1922285993n,
@@ -606,6 +606,7 @@ exports[`HttpClient > with server > gets validator account info 1`] = `
       "USDT": 0n,
     },
   },
+  "bid": 252186205332783022058667n,
   "bond": 225033425976807428934928n,
   "bound_redeem_address": "0x9a449133c6a8b4e117840b69e2a1d43634f562d3",
   "estimated_redeemable_balance": 0n,
@@ -620,6 +621,7 @@ exports[`HttpClient > with server > gets validator account info 1`] = `
     198,
   ],
   "last_heartbeat": 2930096,
+  "max_bid": null,
   "reputation_points": 2880,
   "restricted_balances": {},
   "role": "validator",
@@ -666,6 +668,7 @@ exports[`HttpClient > with server > gets validator account info with an operator
       "USDT": 0n,
     },
   },
+  "bid": 252186205332783022058667n,
   "bond": 225033425976807428934928n,
   "bound_redeem_address": "0x9a449133c6a8b4e117840b69e2a1d43634f562d3",
   "estimated_redeemable_balance": 0n,
@@ -680,6 +683,7 @@ exports[`HttpClient > with server > gets validator account info with an operator
     198,
   ],
   "last_heartbeat": 2930096,
+  "max_bid": null,
   "operator": "cFM7AjUFjqtrRStbEuNRYzEpjAqKEWP3om8FydieAhbqpqRKz",
   "reputation_points": 2880,
   "restricted_balances": {},
@@ -728,6 +732,7 @@ exports[`HttpClient > with server > handles cf_all_account_infos 1`] = `
         "USDT": 0n,
       },
     },
+    "bid": 252186205332783022058667n,
     "bond": 225033425976807428934928n,
     "bound_redeem_address": "0x9a449133c6a8b4e117840b69e2a1d43634f562d3",
     "estimated_redeemable_balance": 0n,
@@ -742,6 +747,7 @@ exports[`HttpClient > with server > handles cf_all_account_infos 1`] = `
       198,
     ],
     "last_heartbeat": 2930096,
+    "max_bid": null,
     "reputation_points": 2880,
     "restricted_balances": {},
     "role": "validator",
@@ -785,6 +791,7 @@ exports[`HttpClient > with server > handles cf_all_account_infos 1`] = `
         "USDT": 0n,
       },
     },
+    "bid": 252186205332783022058667n,
     "bond": 225033425976807428934928n,
     "bound_redeem_address": "0x9a449133c6a8b4e117840b69e2a1d43634f562d3",
     "estimated_redeemable_balance": 0n,
@@ -799,6 +806,7 @@ exports[`HttpClient > with server > handles cf_all_account_infos 1`] = `
       198,
     ],
     "last_heartbeat": 2930096,
+    "max_bid": null,
     "operator": "cFM7AjUFjqtrRStbEuNRYzEpjAqKEWP3om8FydieAhbqpqRKz",
     "reputation_points": 2880,
     "restricted_balances": {},
@@ -1026,7 +1034,7 @@ exports[`HttpClient > with server > handles cf_all_account_infos 1`] = `
         "USDT": 0n,
       },
       "Ethereum": {
-        "CBBTC": 0n,
+        "CBBTC": 12369718n,
         "ETH": 1485755635703031110n,
         "FLIP": 39432662616362382590n,
         "USDC": 1922285993n,
@@ -1106,7 +1114,7 @@ exports[`HttpClient > with server > handles cf_all_account_infos 1`] = `
         "USDT": 0n,
       },
       "Ethereum": {
-        "CBBTC": 0n,
+        "CBBTC": 12369718n,
         "ETH": 1485755635703031110n,
         "FLIP": 39432662616362382590n,
         "USDC": 1922285993n,
@@ -1445,11 +1453,11 @@ exports[`HttpClient > with server > handles cf_environment 1`] = `
         "BTC": 11000n,
       },
       "Bsc": {
-        "BNB": null,
-        "USDT": null,
+        "BNB": 1n,
+        "USDT": 1n,
       },
       "Ethereum": {
-        "CBBTC": null,
+        "CBBTC": 1n,
         "ETH": 1n,
         "FLIP": 1n,
         "USDC": 1n,
@@ -1490,11 +1498,11 @@ exports[`HttpClient > with server > handles cf_environment 1`] = `
         "BTC": 176n,
       },
       "Bsc": {
-        "BNB": null,
-        "USDT": null,
+        "BNB": 7998400000000n,
+        "USDT": 9985n,
       },
       "Ethereum": {
-        "CBBTC": null,
+        "CBBTC": 0n,
         "ETH": 490000n,
         "FLIP": 0n,
         "USDC": 0n,
@@ -1535,11 +1543,11 @@ exports[`HttpClient > with server > handles cf_environment 1`] = `
         "BTC": 78n,
       },
       "Bsc": {
-        "BNB": null,
-        "USDT": null,
+        "BNB": 5998800000000n,
+        "USDT": 8987n,
       },
       "Ethereum": {
-        "CBBTC": null,
+        "CBBTC": 0n,
         "ETH": 350000n,
         "FLIP": 0n,
         "USDC": 0n,
@@ -1607,11 +1615,11 @@ exports[`HttpClient > with server > handles cf_environment 1`] = `
         "BTC": 600n,
       },
       "Bsc": {
-        "BNB": 0n,
-        "USDT": 0n,
+        "BNB": 1n,
+        "USDT": 1n,
       },
       "Ethereum": {
-        "CBBTC": 0n,
+        "CBBTC": 1n,
         "ETH": 1n,
         "FLIP": 1n,
         "USDC": 1n,
@@ -1632,7 +1640,7 @@ exports[`HttpClient > with server > handles cf_environment 1`] = `
       "Arbitrum": 1,
       "Assethub": null,
       "Bitcoin": 2,
-      "Bsc": null,
+      "Bsc": 1,
       "Ethereum": 2,
       "Solana": 1,
       "Tron": null,
@@ -1816,7 +1824,7 @@ exports[`HttpClient > with server > handles cf_environment 1`] = `
       },
       "Bsc": {
         "BNB": {
-          "limit_order_fee_hundredth_pips": 0,
+          "limit_order_fee_hundredth_pips": 20,
           "limit_order_total_fees_earned": {
             "base": 0n,
             "quote": 0n,
@@ -1829,7 +1837,7 @@ exports[`HttpClient > with server > handles cf_environment 1`] = `
             "asset": "USDC",
             "chain": "Ethereum",
           },
-          "range_order_fee_hundredth_pips": 0,
+          "range_order_fee_hundredth_pips": 20,
           "range_order_total_fees_earned": {
             "base": 0n,
             "quote": 0n,
@@ -1840,7 +1848,7 @@ exports[`HttpClient > with server > handles cf_environment 1`] = `
           },
         },
         "USDT": {
-          "limit_order_fee_hundredth_pips": 0,
+          "limit_order_fee_hundredth_pips": 20,
           "limit_order_total_fees_earned": {
             "base": 0n,
             "quote": 0n,
@@ -1853,7 +1861,7 @@ exports[`HttpClient > with server > handles cf_environment 1`] = `
             "asset": "USDC",
             "chain": "Ethereum",
           },
-          "range_order_fee_hundredth_pips": 0,
+          "range_order_fee_hundredth_pips": 20,
           "range_order_total_fees_earned": {
             "base": 0n,
             "quote": 0n,
@@ -1866,7 +1874,7 @@ exports[`HttpClient > with server > handles cf_environment 1`] = `
       },
       "Ethereum": {
         "CBBTC": {
-          "limit_order_fee_hundredth_pips": 0,
+          "limit_order_fee_hundredth_pips": 20,
           "limit_order_total_fees_earned": {
             "base": 0n,
             "quote": 0n,
@@ -1879,14 +1887,14 @@ exports[`HttpClient > with server > handles cf_environment 1`] = `
             "asset": "USDC",
             "chain": "Ethereum",
           },
-          "range_order_fee_hundredth_pips": 0,
+          "range_order_fee_hundredth_pips": 20,
           "range_order_total_fees_earned": {
-            "base": 0n,
-            "quote": 0n,
+            "base": 180n,
+            "quote": 19996n,
           },
           "range_total_swap_inputs": {
-            "base": 0n,
-            "quote": 0n,
+            "base": 8996618n,
+            "quote": 999734320n,
           },
         },
         "ETH": {
@@ -2128,11 +2136,11 @@ exports[`HttpClient > with server > handles cf_environment 1`] = `
         "BTC": 10000,
       },
       "Bsc": {
-        "BNB": null,
-        "USDT": null,
+        "BNB": 10000,
+        "USDT": 10000,
       },
       "Ethereum": {
-        "CBBTC": null,
+        "CBBTC": 10000,
         "ETH": 10000,
         "FLIP": null,
         "USDC": null,
@@ -2202,11 +2210,11 @@ exports[`HttpClient > with server > handles cf_environment 1`] = `
         "BTC": 2000000n,
       },
       "Bsc": {
-        "BNB": null,
-        "USDT": null,
+        "BNB": 200000000000000000n,
+        "USDT": 1000000000n,
       },
       "Ethereum": {
-        "CBBTC": null,
+        "CBBTC": 2000000n,
         "ETH": 200000000000000000n,
         "FLIP": 1000000000000000000000n,
         "USDC": 1000000000n,
@@ -2510,7 +2518,7 @@ exports[`HttpClient > with server > handles cf_get_trading_strategy_limits 1`] =
     },
     "Bsc": {
       "BNB": null,
-      "USDT": null,
+      "USDT": 10000000,
     },
     "Ethereum": {
       "CBBTC": null,
@@ -2546,7 +2554,7 @@ exports[`HttpClient > with server > handles cf_get_trading_strategy_limits 1`] =
     },
     "Bsc": {
       "BNB": null,
-      "USDT": null,
+      "USDT": 20000000000,
     },
     "Ethereum": {
       "CBBTC": null,
@@ -2608,11 +2616,11 @@ exports[`HttpClient > with server > handles cf_ingress_egress_environment 1`] = 
       "BTC": 11000n,
     },
     "Bsc": {
-      "BNB": null,
-      "USDT": null,
+      "BNB": 1n,
+      "USDT": 1n,
     },
     "Ethereum": {
-      "CBBTC": null,
+      "CBBTC": 1n,
       "ETH": 1n,
       "FLIP": 1n,
       "USDC": 1n,
@@ -2653,11 +2661,11 @@ exports[`HttpClient > with server > handles cf_ingress_egress_environment 1`] = 
       "BTC": 176n,
     },
     "Bsc": {
-      "BNB": null,
-      "USDT": null,
+      "BNB": 7998400000000n,
+      "USDT": 9985n,
     },
     "Ethereum": {
-      "CBBTC": null,
+      "CBBTC": 0n,
       "ETH": 490000n,
       "FLIP": 0n,
       "USDC": 0n,
@@ -2698,11 +2706,11 @@ exports[`HttpClient > with server > handles cf_ingress_egress_environment 1`] = 
       "BTC": 78n,
     },
     "Bsc": {
-      "BNB": null,
-      "USDT": null,
+      "BNB": 5998800000000n,
+      "USDT": 8987n,
     },
     "Ethereum": {
-      "CBBTC": null,
+      "CBBTC": 0n,
       "ETH": 350000n,
       "FLIP": 0n,
       "USDC": 0n,
@@ -2770,11 +2778,11 @@ exports[`HttpClient > with server > handles cf_ingress_egress_environment 1`] = 
       "BTC": 600n,
     },
     "Bsc": {
-      "BNB": 0n,
-      "USDT": 0n,
+      "BNB": 1n,
+      "USDT": 1n,
     },
     "Ethereum": {
-      "CBBTC": 0n,
+      "CBBTC": 1n,
       "ETH": 1n,
       "FLIP": 1n,
       "USDC": 1n,
@@ -2795,7 +2803,7 @@ exports[`HttpClient > with server > handles cf_ingress_egress_environment 1`] = 
     "Arbitrum": 1,
     "Assethub": null,
     "Bitcoin": 2,
-    "Bsc": null,
+    "Bsc": 1,
     "Ethereum": 2,
     "Solana": 1,
     "Tron": null,
@@ -3050,6 +3058,10 @@ exports[`HttpClient > with server > handles cf_safe_mode_statuses 1`] = `
     "egress_witnessing_enabled": true,
     "retry_enabled": true,
   },
+  "broadcast_bsc": {
+    "egress_witnessing_enabled": true,
+    "retry_enabled": true,
+  },
   "broadcast_ethereum": {
     "egress_witnessing_enabled": true,
     "retry_enabled": true,
@@ -3065,6 +3077,9 @@ exports[`HttpClient > with server > handles cf_safe_mode_statuses 1`] = `
   "broadcast_tron": {
     "egress_witnessing_enabled": true,
     "retry_enabled": true,
+  },
+  "bsc_elections": {
+    "key_manager_witnessing": true,
   },
   "elections_generic": {
     "oracle_price_elections": true,
@@ -3093,6 +3108,12 @@ exports[`HttpClient > with server > handles cf_safe_mode_statuses 1`] = `
     "vault_deposit_witnessing_enabled": true,
   },
   "ingress_egress_bitcoin": {
+    "boost_deposits_enabled": true,
+    "deposit_channel_creation_enabled": true,
+    "deposit_channel_witnessing_enabled": true,
+    "vault_deposit_witnessing_enabled": true,
+  },
+  "ingress_egress_bsc": {
     "boost_deposits_enabled": true,
     "deposit_channel_creation_enabled": true,
     "deposit_channel_witnessing_enabled": true,
@@ -3443,11 +3464,11 @@ exports[`HttpClient > with server > handles cf_swapping_environment 1`] = `
       "BTC": 10000,
     },
     "Bsc": {
-      "BNB": null,
-      "USDT": null,
+      "BNB": 10000,
+      "USDT": 10000,
     },
     "Ethereum": {
-      "CBBTC": null,
+      "CBBTC": 10000,
       "ETH": 10000,
       "FLIP": null,
       "USDC": null,
@@ -3517,11 +3538,11 @@ exports[`HttpClient > with server > handles cf_swapping_environment 1`] = `
       "BTC": 2000000n,
     },
     "Bsc": {
-      "BNB": null,
-      "USDT": null,
+      "BNB": 200000000000000000n,
+      "USDT": 1000000000n,
     },
     "Ethereum": {
-      "CBBTC": null,
+      "CBBTC": 2000000n,
       "ETH": 200000000000000000n,
       "FLIP": 1000000000000000000000n,
       "USDC": 1000000000n,
