@@ -96,8 +96,8 @@ importers:
   packages/chainspec:
     devDependencies:
       '@chainflip/rpc':
-        specifier: 2.3.2
-        version: 2.3.2
+        specifier: 2.3.4
+        version: 2.3.4
       '@chainflip/utils':
         specifier: 2.3.3
         version: 2.3.3
@@ -153,8 +153,8 @@ importers:
   packages/processor:
     dependencies:
       '@chainflip/rpc':
-        specifier: 2.3.2
-        version: 2.3.2
+        specifier: 2.3.4
+        version: 2.3.4
       '@chainflip/utils':
         specifier: 2.3.3
         version: 2.3.3
@@ -302,14 +302,11 @@ packages:
     resolution: {integrity: sha512-6zABk/ECA/QYSCQ1NGiVwwbQerUCZ+TQbp64Q3AgmfNvurHH0j8TtXa1qbShXA6qqkpAj4V5W8pP6mLe1mcMqA==}
     engines: {node: '>=18'}
 
-  '@chainflip/rpc@2.3.2':
-    resolution: {integrity: sha512-sf8fbYNqv72Mla4nEj3uSeSkjmzKo7Qw+787C7vgXg6eL8exzSLxWnOkcYB+G9xOitsmDZtJNVyDEqh2XV+WzQ==}
+  '@chainflip/rpc@2.3.4':
+    resolution: {integrity: sha512-MjjfESIGRctgawP/dECAPwHArx0Vj3yHtRHE+LwUTXqvyy4JiToRsdLWTECvKyAkjWB1dL7h+CjYO/ddZHsudg==}
 
   '@chainflip/scale@2.3.1':
     resolution: {integrity: sha512-n9cLSfWCbzFlc9boXISn7fXjL60AVRG700h7rnANxdcIFdE6M2hCK5qCoMM6yMriY/1yUeVzp4tc8MUzNVyYUg==}
-
-  '@chainflip/utils@2.3.0-dev.4':
-    resolution: {integrity: sha512-CFm4D9VXqBPDTkGKijC3ksIKtE5HubK7QM0ZYSdzyqENn5ITNcnDpZu0NnL2D73e+8UeqMNZEZae59EXn8qEng==}
 
   '@chainflip/utils@2.3.3':
     resolution: {integrity: sha512-Syz0In/6b3CTni/8UHcFI5vtx7+PJinvRo30/BuhW+PeVmk4JT9exrhG4zqhVGYbihuhbwU0v8TSy14l4gMR8g==}
@@ -3531,9 +3528,6 @@ packages:
   yuku-parser@0.8.1:
     resolution: {integrity: sha512-YvUz2jdFMIq0QjN8LmI32ox+RBCn3l8VToAXVQ5QFfLTxSxmGZS6JP80ptePEju+CpeTdINLmUm7Ewodzh1QnQ==}
 
-  zod@3.25.75:
-    resolution: {integrity: sha512-OhpzAmVzabPOL6C3A3gpAifqr9MqihV/Msx3gor2b2kviCgcb+HM9SEOpMWwwNp9MRunWnhtAKUoo0AHhjyPPg==}
-
   zod@4.6.7:
     resolution: {integrity: sha512-g8W2D2kU6a8untc053fX1uVBKzM7yqAxW/3zwk83+6RyF2+SKOuV+c0wBDhUwzV1PaGapmZH+rmcUzPf+3CGwg==}
 
@@ -3558,22 +3552,15 @@ snapshots:
 
   '@bcoe/v8-coverage@1.0.2': {}
 
-  '@chainflip/rpc@2.3.2':
+  '@chainflip/rpc@2.3.4':
     dependencies:
-      '@chainflip/utils': 2.3.0-dev.4
-      zod: 3.25.75
+      '@chainflip/utils': 2.3.3
+      zod: 4.6.7
 
   '@chainflip/scale@2.3.1':
     dependencies:
       '@chainflip/utils': 2.3.3
       scale-ts: 1.6.1
-
-  '@chainflip/utils@2.3.0-dev.4':
-    dependencies:
-      '@date-fns/utc': 2.1.1
-      '@noble/hashes': 2.4.0
-      bignumber.js: 11.1.5
-      date-fns: 4.4.0
 
   '@chainflip/utils@2.3.3':
     dependencies:
@@ -6902,7 +6889,5 @@ snapshots:
       '@yuku-parser/binding-linux-x64-musl': 0.8.1
       '@yuku-parser/binding-win32-arm64': 0.8.1
       '@yuku-parser/binding-win32-x64': 0.8.1
-
-  zod@3.25.75: {}
 
   zod@4.6.7: {}
