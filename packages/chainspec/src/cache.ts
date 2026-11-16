@@ -6,6 +6,7 @@ import * as path from 'path';
 import { z } from 'zod';
 
 const cacheSchema = z.record(
+  z.string(),
   z.object({
     hash: z.string(),
     network: z.enum(['mainnet', 'perseverance', 'sisyphos', 'backspin', 'localnet']),

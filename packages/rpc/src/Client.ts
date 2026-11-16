@@ -113,7 +113,11 @@ export default abstract class Client {
     }
     const deferred = deferredPromise<RpcResult<T>>();
     const body = this.formatRequest(method, params);
-    this.requestMap.set(body.id, { deferred, body, method });
+    this.requestMap.set(body.id, {
+      deferred: deferred as unknown as DeferredPromise<RpcResult<RpcMethod>>,
+      body,
+      method,
+    });
     if (!this.timer) {
       this.timer = setTimeout(() => {
         this.timer = null;

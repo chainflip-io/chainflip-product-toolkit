@@ -24,7 +24,7 @@ export const tronAddress = z
   .string()
   .refine(isValidTronAddress, { message: 'Invalid tron address' });
 
-const chainAssetMapFactory = <Z extends z.ZodTypeAny>(parser: Z, defaultValue: z.input<Z>) =>
+const chainAssetMapFactory = <Z extends z.ZodType>(parser: Z, _defaultValue: z.input<Z>) =>
   z.object({
     Bitcoin: z.object({ BTC: parser }),
     Ethereum: z.object({
@@ -33,18 +33,16 @@ const chainAssetMapFactory = <Z extends z.ZodTypeAny>(parser: Z, defaultValue: z
       FLIP: parser,
       USDT: parser,
       WBTC: parser,
-      CBBTC: parser.default(defaultValue), // TODO(2.3): remove default once all networks have upgraded
+      CBBTC: parser,
     }),
     Arbitrum: z.object({ ETH: parser, USDC: parser, USDT: parser }),
     Solana: z.object({ SOL: parser, USDC: parser, USDT: parser }),
     Assethub: z.object({ DOT: parser, USDC: parser, USDT: parser }),
     Tron: z.object({ TRX: parser, USDT: parser }),
-    Bsc: z
-      .object({ BNB: parser.default(defaultValue), USDT: parser.default(defaultValue) })
-      .default({ BNB: defaultValue, USDT: defaultValue }), // TODO(2.3): remove default once all networks have upgraded
+    Bsc: z.object({ BNB: parser, USDT: parser }),
   });
 
-const chainBaseAssetMapFactory = <Z extends z.ZodTypeAny>(parser: Z, defaultValue: z.input<Z>) =>
+const chainBaseAssetMapFactory = <Z extends z.ZodType>(parser: Z, _defaultValue: z.input<Z>) =>
   z.object({
     Bitcoin: z.object({ BTC: parser }),
     Ethereum: z.object({
@@ -52,18 +50,16 @@ const chainBaseAssetMapFactory = <Z extends z.ZodTypeAny>(parser: Z, defaultValu
       FLIP: parser,
       USDT: parser,
       WBTC: parser,
-      CBBTC: parser.default(defaultValue), // TODO(2.3): remove default once all networks have upgraded
+      CBBTC: parser,
     }),
     Arbitrum: z.object({ ETH: parser, USDC: parser, USDT: parser }),
     Solana: z.object({ SOL: parser, USDC: parser, USDT: parser }),
     Assethub: z.object({ DOT: parser, USDC: parser, USDT: parser }),
     Tron: z.object({ TRX: parser, USDT: parser }),
-    Bsc: z
-      .object({ BNB: parser.default(defaultValue), USDT: parser.default(defaultValue) })
-      .default({ BNB: defaultValue, USDT: defaultValue }), // TODO(2.3): remove default once all networks have upgraded
+    Bsc: z.object({ BNB: parser, USDT: parser }),
   });
 
-const chainMapFactory = <Z extends z.ZodTypeAny>(parser: Z, defaultValue: z.input<Z> = null) =>
+const chainMapFactory = <Z extends z.ZodType>(parser: Z, _defaultValue: z.input<Z>) =>
   z.object({
     Bitcoin: parser,
     Ethereum: parser,
@@ -71,7 +67,7 @@ const chainMapFactory = <Z extends z.ZodTypeAny>(parser: Z, defaultValue: z.inpu
     Solana: parser,
     Assethub: parser,
     Tron: parser,
-    Bsc: parser.default(defaultValue), // TODO(2.3): remove default once all networks have upgraded
+    Bsc: parser,
   });
 
 const rpcAssetSchema = z.union([
@@ -435,8 +431,8 @@ export const validator = z.object({
   is_bidding: z.boolean(),
   apy_bp: z.number().nullable(), // TODO(FLIP2.1): remove this before FLIP 2.1 goes live
   operator: accountId.optional(),
-  bid: numberOrHex.optional().nullable(), // TODO(2.3): remove (only) optional once all networks have upgraded
-  max_bid: numberOrHex.optional().nullable(), // TODO(2.3): remove (only) optional once all networks have upgraded
+  bid: numberOrHex,
+  max_bid: numberOrHex.nullable(),
 });
 
 export const cfAccountInfo = z
@@ -568,7 +564,7 @@ export const cfFailedCallEvm = z.object({
   data: z.string(),
 });
 
-const range = <Z extends z.ZodTypeAny>(parser: Z) => z.tuple([parser, parser]);
+const range = <Z extends z.ZodType>(parser: Z) => z.tuple([parser, parser]);
 
 export const cfAuctionState = z
   .object({
@@ -761,7 +757,7 @@ export const cfSafeModeStatuses = z.object({
   broadcast_solana: broadcastPalletSafeModeStatuses,
   broadcast_assethub: broadcastPalletSafeModeStatuses,
   broadcast_tron: broadcastPalletSafeModeStatuses,
-  broadcast_bsc: broadcastPalletSafeModeStatuses.optional(), // TODO(2.3): remove once all networks have upgraded
+  broadcast_bsc: broadcastPalletSafeModeStatuses,
   ingress_egress_ethereum: ingressEgressPalletSafeModeStatuses,
   ingress_egress_bitcoin: ingressEgressPalletSafeModeStatuses,
   ingress_egress_polkadot: ingressEgressPalletSafeModeStatuses,
@@ -769,7 +765,7 @@ export const cfSafeModeStatuses = z.object({
   ingress_egress_solana: ingressEgressPalletSafeModeStatuses,
   ingress_egress_assethub: ingressEgressPalletSafeModeStatuses,
   ingress_egress_tron: ingressEgressPalletSafeModeStatuses,
-  ingress_egress_bsc: ingressEgressPalletSafeModeStatuses.optional(), // TODO(2.3): remove once all networks have upgraded
+  ingress_egress_bsc: ingressEgressPalletSafeModeStatuses,
   witnesser: z.enum(['CodeRed', 'CodeGreen', 'CodeAmber']),
   ethereum_elections: z.object({
     state_chain_gateway_witnessing: z.boolean(),
@@ -779,11 +775,9 @@ export const cfSafeModeStatuses = z.object({
   arbitrum_elections: z.object({
     key_manager_witnessing: z.boolean(),
   }),
-  bsc_elections: z
-    .object({
-      key_manager_witnessing: z.boolean(),
-    })
-    .optional(), // TODO(2.3): remove once all networks have upgraded
+  bsc_elections: z.object({
+    key_manager_witnessing: z.boolean(),
+  }),
   elections_generic: z.object({
     oracle_price_elections: z.boolean(),
   }),
