@@ -1,13 +1,13 @@
 {
   "name": "@chainflip/processor",
-  "version": "2.3.4",
+  "version": "2.3.5",
   "description": "",
   "type": "module",
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@chainflip/rpc": "2.3.2",
+    "@chainflip/rpc": "2.3.4",
     "@chainflip/utils": "2.3.3",
     "zod": "^4.6.7"
   },
