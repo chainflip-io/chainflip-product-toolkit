@@ -5,3 +5,10 @@ packages:
 minimumReleaseAge: 20160 # in minutes
 minimumReleaseAgeExclude:
   - '@chainflip/*'
+
+ignoreWorkspaceRootCheck: true
+
+allowBuilds:
+  bufferutil: false
+  esbuild: false
+  utf-8-validate: false
