@@ -1000,7 +1000,13 @@ export const cfVaultAddresses = z
 
 export const cfAllLoans = z.array(cfLoan);
 
-const AccountRewardRole = z.enum(['Unregistered', 'Validator', 'Operator']);
+const AccountRewardRole = z.enum([
+  'Unregistered',
+  'Validator',
+  'LiquidityProvider',
+  'Broker',
+  'Operator',
+]);
 
 const accountReward = z.object({
   account: accountId,

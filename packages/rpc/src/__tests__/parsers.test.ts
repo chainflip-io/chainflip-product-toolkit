@@ -4595,5 +4595,14 @@ describe('parsers', () => {
         }
       `);
     });
+
+    it.each(['LiquidityProvider', 'Broker'])('parses a delegator registered as a %s', (role) => {
+      const estimate = {
+        ...rewardDistributionEstimate,
+        reward_pool: [{ ...rewardDistributionEstimate.reward_pool[2], role }],
+      };
+
+      expect(cfRewardDistributionEstimate.parse(estimate).reward_pool[0].role).toBe(role);
+    });
   });
 });
