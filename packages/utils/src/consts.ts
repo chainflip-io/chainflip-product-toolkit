@@ -129,6 +129,10 @@ export const brokerAliasMap: AccountAliasMap = {
     twitter: '@GemWalletApp',
   },
   cFM5vZK5pb726fs1kPmhFt66NwhfCYY6wcPEEjRd8QtTwEgyv: { name: 'Glide', twitter: null },
+  cFMp2CxTTQFvcPVo7bGTE6rH1wsfVYupk64B29QYxQQwCURay: {
+    name: 'Highway',
+    twitter: '@hway_protocol',
+  },
   cFJWWedhJmnsk3P9jEmCfbmgmg62ZpA7LT5WCpwLXEzXuRuc3: {
     name: 'HoudiniSwap',
     twitter: '@HoudiniSwap',
